@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`팝업 컴포넌트 matches snapshot 1`] = `
+<div>
+  <button
+    className="sc-bdVaJa iUpyeI"
+    onClick={[Function]}
+  >
+    &lt;-
+  </button>
+</div>
+`;

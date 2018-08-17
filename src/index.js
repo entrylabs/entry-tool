@@ -16,13 +16,32 @@ class EntryTool extends EventEmitter {
     }
 
     initialize({ isShow, type, data, props }) {
+        console.log(props);
+        this._data = data;
+        this._props = props;
         this.module = this.getModule(type);
-        this.data = data;
-        this.props = props;
         this.store = configureStore();
         if (isShow) {
             this.show();
         }
+    }
+
+    set data(data) {
+        this._data = data;
+        this.render();
+    }
+
+    get data() {
+        return this.data;
+    }
+
+    set props(props) {
+        this._props = props;
+        this.render();
+    }
+
+    get props() {
+        return this.props;
     }
 
     getModule(type) {
@@ -33,20 +52,39 @@ class EntryTool extends EventEmitter {
         }
     }
 
-    show(props) {
+    show(props, data) {
+        if (props) {
+            this.props = props;
+        }
+        if (data) {
+            this.data = data;
+        }
         this.store.dispatch(visibleAction(true));
     }
 
-    hide(props) {
+    hide(props, data) {
+        if (props) {
+            this.props = props;
+        }
+        if (data) {
+            this.data = data;
+        }
         this.store.dispatch(visibleAction(false));
     }
 
-    async render({ props = {}, data = {} } = {}) {
+    remove() {
+        document.body.removeChild(this.container);
+        this._data = undefined;
+        this._props = undefined;
+        this.container = undefined;
+    }
+
+    async render() {
         const { default: Module } = await this.module;
         ReactDOM.render(
             <Provider store={this.store}>
                 <App>
-                    <Module {...this.props} {...props} />
+                    <Module {...this._props} />
                 </App>
             </Provider>,
             this.container

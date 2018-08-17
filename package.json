@@ -23,6 +23,9 @@
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.10",
     "@storybook/addon-links": "^3.4.10",
-    "@storybook/react": "^3.4.10"
+    "@storybook/react": "^3.4.10",
+    "enzyme": "^3.4.2",
+    "enzyme-adapter-react-16": "^1.2.0",
+    "react-test-renderer": "^16.4.2"
   }
 }
