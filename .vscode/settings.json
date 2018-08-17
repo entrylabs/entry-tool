@@ -1,6 +1,0 @@
-{
-    "editor.formatOnSave": true,
-    "[yaml]": {
-        "editor.formatOnSave": false
-    }
-}
