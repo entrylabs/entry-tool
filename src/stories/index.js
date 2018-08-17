@@ -8,7 +8,6 @@ const store = configureStore();
 export default function Provider({ story }) {
     return <ReduxProvider store={store}>{story}</ReduxProvider>;
 }
-console.log(Popup);
 storiesOf('Popup', module)
     .addDecorator((story) => <Provider story={story()} />)
     .add('기본팝업', () => <Popup />);

@@ -23,7 +23,6 @@ class Popup extends Component {
 
     close = () => {
         const { visibleAction } = this.props;
-        console.log(visibleAction);
         visibleAction(false);
     };
 
