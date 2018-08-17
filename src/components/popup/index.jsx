@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { visibilityAction } from '../../actions';
+import { visibleAction } from '../../actions';
 
 const BackButton = styled.button`
     background: white;
@@ -22,9 +22,9 @@ class Popup extends Component {
     }
 
     close = () => {
-        const { visibilityAction } = this.props;
-        console.log(visibilityAction);
-        visibilityAction(false);
+        const { visibleAction } = this.props;
+        console.log(visibleAction);
+        visibleAction(false);
     };
 
     render() {
@@ -41,7 +41,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    visibilityAction: (visibility) => dispatch(visibilityAction(visibility)),
+    visibleAction: (visible) => dispatch(visibleAction(visible)),
 });
 
 export default connect(

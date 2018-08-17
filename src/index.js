@@ -4,19 +4,20 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './App';
 import configureStore from './store';
-import { visibilityAction } from './actions';
+import { visibleAction } from './actions';
 
 class EntryTool extends EventEmitter {
     constructor(...args) {
         super();
-        this.initialize(...args);
         this.container = document.createElement('div');
         document.body.appendChild(this.container);
+        this.initialize(...args);
+        this.render();
     }
 
-    initialize({ option = {}, props = {} } = {}) {
-        const { isShow, type } = option;
+    initialize({ isShow, type, data, props }) {
         this.module = this.getModule(type);
+        this.data = data;
         this.props = props;
         this.store = configureStore();
         if (isShow) {
@@ -33,11 +34,14 @@ class EntryTool extends EventEmitter {
     }
 
     show(props) {
-        this.store.dispatch(visibilityAction(true));
-        this.render(props);
+        this.store.dispatch(visibleAction(true));
     }
 
-    async render({ props = {} } = {}) {
+    hide(props) {
+        this.store.dispatch(visibleAction(false));
+    }
+
+    async render({ props = {}, data = {} } = {}) {
         const { default: Module } = await this.module;
         ReactDOM.render(
             <Provider store={this.store}>

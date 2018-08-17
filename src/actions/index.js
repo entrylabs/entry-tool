@@ -1,6 +1,6 @@
-export const visibilityAction = (visibility) => (dispatch) => {
+export const visibleAction = (visible) => (dispatch) => {
     dispatch({
-        type: 'VISIBILITY',
-        data: visibility,
+        type: 'VISIBLE',
+        data: visible,
     });
 };
