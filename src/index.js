@@ -15,7 +15,7 @@ class EntryTool extends EventEmitter {
         this.render();
     }
 
-    initialize({ isShow, type, data, props }) {
+    initialize({ isShow, type, data, props } = {}) {
         this._data = data;
         this._props = props;
         this.module = this.getModule(type);
