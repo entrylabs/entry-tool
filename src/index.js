@@ -31,7 +31,7 @@ class EntryTool extends EventEmitter {
     }
 
     get data() {
-        return this.data;
+        return this._data;
     }
 
     set props(props) {
@@ -40,7 +40,7 @@ class EntryTool extends EventEmitter {
     }
 
     get props() {
-        return this.props;
+        return this._props;
     }
 
     getModule(type) {

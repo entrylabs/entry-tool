@@ -1,6 +1,16 @@
 {
     "name": "entry-tool",
     "version": "0.1.0",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/entrylabs/entry-tool.git"
+    },
+    "bugs": {
+        "url": "https://github.com/entrylabs/entry-tool/issues"
+    },
+    "homepage": "https://playentry.org",
+    "keywords": ["entry"],
     "main": "src/index.js",
     "dependencies": {
         "autoprefixer": "7.1.6",
