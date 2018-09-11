@@ -1,7 +1,7 @@
 stages:
   - name: test
     if: type = pull_request
-  - name: deploy
+  - name: npm release
     if: branch = master
 language:
   - node_js
@@ -20,8 +20,8 @@ jobs:
     - stage: test
       install: yarn
       script: yarn test
-    - stage: deploy
-      before_deploy:
+    - stage: npm release
+      script: 
         - yarn
         - yarn install
       deploy: 
