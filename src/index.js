@@ -6,7 +6,7 @@ import App from './App';
 import configureStore from './store';
 import { visibleAction } from './actions';
 
-class EntryTool extends EventEmitter {
+export default class EntryTool extends EventEmitter {
     constructor(...args) {
         super();
         this.container = document.createElement('div');
@@ -59,6 +59,7 @@ class EntryTool extends EventEmitter {
             this.data = data;
         }
         this.store.dispatch(visibleAction(true));
+        return this;
     }
 
     hide(props, data) {
@@ -69,6 +70,7 @@ class EntryTool extends EventEmitter {
             this.data = data;
         }
         this.store.dispatch(visibleAction(false));
+        return this;
     }
 
     remove() {
@@ -89,9 +91,4 @@ class EntryTool extends EventEmitter {
             this.container
         );
     }
-}
-
-module.export = EntryTool;
-if (window) {
-    window.EntryTool = EntryTool;
 }

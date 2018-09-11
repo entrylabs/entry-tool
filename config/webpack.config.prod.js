@@ -64,6 +64,8 @@ module.exports = {
         // There will be one main bundle, and one file per asynchronous chunk.
         // We don't currently advertise code splitting but Webpack supports it.
         filename: 'entry-tool.js',
+        library: 'entry-tool',
+        libraryTarget: 'umd',
         chunkFilename: '[name].[chunkhash:8].chunk.js',
         // We inferred the "public path" (such as / or /my-project) from homepage.
         publicPath: publicPath,
