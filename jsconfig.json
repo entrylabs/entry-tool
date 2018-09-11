@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "ES6"
+    },
+    "exclude": [
+        "node_modules",
+        "**/node_modules/*",
+        "public/lib",
+        "public/uploads",
+        "public/uploads2",
+        "public2",
+        "ssl",
+        "socket",
+        "static",
+        "test"
+    ]
+}

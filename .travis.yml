@@ -21,7 +21,7 @@ jobs:
       install: yarn
       script: yarn test
     - stage: npm release
-      script: 
+      before_deploy: 
         - yarn
         - yarn install
       deploy: 
@@ -31,7 +31,7 @@ jobs:
         skip_cleanup: true
         tag: next
         on:
-          tags: true
+          branch: master
       notifications:
         email: false
         slack:
