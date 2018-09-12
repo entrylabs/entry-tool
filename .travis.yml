@@ -2,7 +2,7 @@ stages:
   - name: test
     if: type = pull_request
   - name: npm release
-    if: branch = master
+    if: branch = production
 language:
   - node_js
 node_js:
@@ -30,7 +30,7 @@ jobs:
         api_key: $NPM_TOKEN
         skip_cleanup: true
         on:
-          branch: master
+          branch: production
       notifications:
         email: false
         slack:
