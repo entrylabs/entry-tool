@@ -72,6 +72,9 @@ typings/
 /scripts
 /public
 /src
+.storybook
+.vscode
+.config
 
 # misc
 .DS_Store

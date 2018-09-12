@@ -23,7 +23,7 @@ jobs:
     - stage: npm release
       before_deploy: 
         - yarn
-        - yarn install
+        - yarn build
       deploy: 
         provider: npm
         email: "entrydev@nts-corp.com"
