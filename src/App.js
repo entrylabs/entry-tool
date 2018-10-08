@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 class App extends Component {
     render() {
-        const { children, visible } = this.props;
-        return <div>{visible && children} </div>;
+        const { children, visible, type } = this.props;
+        return <div type={type}>{visible && children} </div>;
     }
 }
 

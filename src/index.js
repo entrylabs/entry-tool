@@ -28,6 +28,7 @@ export default class EntryTool extends EventEmitter {
     initialize({ isShow, type, data, props } = {}) {
         this._data = data;
         this._props = props;
+        this._type = type;
         this.module = this.getModule(type);
         this.store = configureStore();
         if (isShow) {
@@ -51,6 +52,10 @@ export default class EntryTool extends EventEmitter {
 
     get props() {
         return this._props;
+    }
+
+    get type() {
+        return this._type;
     }
 
     getModule(type) {
@@ -95,11 +100,11 @@ export default class EntryTool extends EventEmitter {
     async render() {
         const { default: Module } = await this.module;
         ReactDOM.render(
-            <Provider store={this.store}>
-                <App>
-                    <Module {...this._props} />
-                </App>
-            </Provider>,
+            <App type={this.type}>
+                <Provider store={this.store}>
+                    <Module {...this._props} a={this.type} />
+                </Provider>
+            </App>,
             this.container
         );
     }

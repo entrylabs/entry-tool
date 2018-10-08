@@ -42,7 +42,10 @@
 <script>
   window.onload = function () {
     var EntryTool = window['entry-tool'];
-    var popup = new EntryTool.default();
+    var colorPicker = new EntryTool.default({
+      type: 'colorPicker'
+    });
+    console.log(colorPicker);
   };
 </script>
 
