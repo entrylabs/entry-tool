@@ -156,7 +156,7 @@ module.exports = {
                     // In production, we use a plugin to extract that CSS to a file, but
                     // in development "style" loader enables hot editing of CSS.
                     {
-                        test: /\.css$/,
+                        test: /\.(css|scss)$/,
                         use: [
                             require.resolve('style-loader'),
                             {
@@ -181,10 +181,12 @@ module.exports = {
                                                 'not ie < 9', // React doesn't support IE8 anyway
                                             ],
                                             flexbox: 'no-2009',
+                                            remove: false
                                         }),
                                     ],
                                 },
                             },
+                            require.resolve('sass-loader'),
                         ],
                     },
                     // "file" loader makes sure those assets get served by WebpackDevServer.
