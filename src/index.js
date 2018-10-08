@@ -6,13 +6,23 @@ import App from './App';
 import configureStore from './store';
 import { visibleAction } from './actions';
 
+var instance = null;
 export default class EntryTool extends EventEmitter {
     constructor(...args) {
         super();
+        const { parent = document.body } = args[0] || {};
         this.container = document.createElement('div');
-        document.body.appendChild(this.container);
+        parent.appendChild(this.container);
         this.initialize(...args);
         this.render();
+    }
+
+    static getInstance(option) {
+        if (!instance) {
+            instance = new EntryTool(option);
+        }
+
+        return instance;
     }
 
     initialize({ isShow, type, data, props } = {}) {
@@ -45,6 +55,8 @@ export default class EntryTool extends EventEmitter {
 
     getModule(type) {
         switch (type) {
+            case 'colorPicker':
+                return import('./components/picker/color');
             case 'popup':
             default:
                 return import('./components/popup');
