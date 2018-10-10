@@ -10,9 +10,8 @@ var instance = null;
 export default class EntryTool extends EventEmitter {
     constructor(...args) {
         super();
-        const { parent = document.body } = args[0] || {};
-        this.container = document.createElement('div');
-        parent.appendChild(this.container);
+        const { container = document.body } = args[0] || {};
+        this.container = container;
         this.initialize(...args);
         this.render();
     }
@@ -58,12 +57,20 @@ export default class EntryTool extends EventEmitter {
         return this._type;
     }
 
+    getData(key) {
+        const state = this.store.getState();
+        const reducer = state[`${this.reducerType}Reducer`];
+        return reducer[key] || reducer;
+    }
+
     getModule(type) {
         switch (type) {
             case 'colorPicker':
+                this.reducerType = 'picker';
                 return import('./components/picker/color');
             case 'popup':
             default:
+                this.reducerType = 'popup';
                 return import('./components/popup');
         }
     }
@@ -100,11 +107,11 @@ export default class EntryTool extends EventEmitter {
     async render() {
         const { default: Module } = await this.module;
         ReactDOM.render(
-            <App type={this.type}>
-                <Provider store={this.store}>
-                    <Module {...this._props} a={this.type} />
-                </Provider>
-            </App>,
+            <Provider store={this.store} type={this.type}>
+                <App className={this.type}>
+                    <Module {...Object.assign({}, this._props, this._data)} eventEmitter={this} />
+                </App>
+            </Provider>,
             this.container
         );
     }

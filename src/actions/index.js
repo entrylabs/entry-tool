@@ -4,3 +4,10 @@ export const visibleAction = (visible) => (dispatch) => {
         data: visible,
     });
 };
+
+export const ColorPickAction = (color) => (dispatch) => {
+    dispatch({
+        type: 'COLOR_PICK',
+        data: color,
+    });
+};

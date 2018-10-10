@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import chroma from 'chroma-js';
 import { Object } from 'core-js';
+import { ColorPickAction } from '../../actions';
+import slider_handle from '../../styles/slider_handle.svg';
 
-const Hue = styled.div`
+const Slider = styled.div`
     background: white;
     color: palevioletred;
     font-size: 1em;
@@ -12,40 +14,41 @@ const Hue = styled.div`
     padding: 0.25em 1em;
     border: 2px solid palevioletred;
     border-radius: 3px;
+    position: relative;
 `;
-const Saturation = styled.div`
-    background: white;
-    color: palevioletred;
-    font-size: 1em;
-    margin: 1em;
-    padding: 0.25em 1em;
-    border: 2px solid palevioletred;
-    border-radius: 3px;
-`;
-const Value = styled.div`
-    background: white;
-    color: palevioletred;
-    font-size: 1em;
-    margin: 1em;
-    padding: 0.25em 1em;
-    border: 2px solid palevioletred;
-    border-radius: 3px;
-`;
-const HueBackground = styled.div`
-    width: 200px;
-    height: 30px;
+const Hue = styled(Slider)``;
+const Saturation = styled(Slider)``;
+const Value = styled(Slider)``;
+const SliderBackground = styled.div`
+    width: 206px;
+    height: 28px;
+    border-radius: 16px;
 `;
 const InputNumber = styled.input`
-    width: 200px;
-    height: 30px;
+    width: 48px;
+    height: 28px;
+    border-radius: 16px;
+    border: solid 1px #e2e2e2;
+`;
+const SliderHandle = styled.span`
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    background-image: url(${slider_handle});
+    position: absolute;
+    left: 15px;
+    top: 32px;
+    cursor: pointer;
+    transform: ${(props) => `translate(${props.x}px, 0px);`};
 `;
 const Result = styled.div`
     width: 50px;
     height: 50px;
 `;
 
-function setHsv({ red, green, blue }) {
-    let [hue, saturation, brightness] = chroma(red, green, blue).hsv();
+function getColorByHsv({ red, green, blue }) {
+    const color = chroma(red, green, blue);
+    let [hue, saturation, brightness] = color.hsv();
     if (isNaN(hue)) {
         hue = 0;
     }
@@ -56,11 +59,13 @@ function setHsv({ red, green, blue }) {
         hue: Math.round(hue / 3.6),
         saturation: Math.round(saturation * 100),
         brightness: Math.round(brightness * 100),
+        color: color.hex(),
     };
 }
 
-function setRGB({ hue, saturation, brightness }) {
-    const [red, green, blue] = chroma.hsv(hue * 3.6, saturation / 100, brightness / 100).rgb();
+function getColorByRGB({ hue, saturation, brightness }) {
+    const color = chroma.hsv(hue * 3.6, saturation / 100, brightness / 100);
+    const [red, green, blue] = color.rgb();
     return {
         red,
         green,
@@ -68,7 +73,27 @@ function setRGB({ hue, saturation, brightness }) {
         hue,
         saturation,
         brightness,
+        color: color.hex(),
     };
+}
+
+function getColorByHex(hex) {
+    const color = chroma(hex);
+    const [red, green, blue] = color.rgb();
+    const [hue, saturation, brightness] = color.hsv();
+    return {
+        red,
+        green,
+        blue,
+        hue: Math.round(hue / 3.6),
+        saturation: Math.round(saturation * 100),
+        brightness: Math.round(brightness * 100),
+        color: hex,
+    };
+}
+
+function scaleRatioX(value) {
+    return Math.round(value * 1.8);
 }
 
 class ColorPicker extends Component {
@@ -79,7 +104,16 @@ class ColorPicker extends Component {
         red: 255,
         green: 0,
         blue: 0,
+        color: '#ff0000',
     };
+    constructor(props) {
+        super(props);
+        const { color, ColorPickAction } = props;
+        if (color) {
+            this.state = getColorByHex(color);
+            ColorPickAction(this.state.color);
+        }
+    }
     hueGradient() {
         return {
             background: `linear-gradient(
@@ -167,21 +201,43 @@ class ColorPicker extends Component {
     }
 
     handleChangeHsv(type, target) {
+        const { ColorPickAction } = this.props;
         let { value = 0 } = target;
         value = parseInt(value, 10);
         this.setState((state) => {
             const hsv = Object.assign({}, state, { [type]: value });
-            return setRGB(hsv);
+            const nextState = getColorByRGB(hsv);
+            ColorPickAction(nextState.color);
+            return nextState;
         });
     }
 
     handleChangeRGB(type, target) {
+        const { ColorPickAction } = this.props;
         let { value = 0 } = target;
         value = parseInt(value, 10);
         this.setState((state) => {
             const rgb = Object.assign({}, state, { [type]: value });
-            return setHsv(rgb);
+            const nextState = getColorByHsv(rgb);
+            ColorPickAction(nextState.color);
+            return nextState;
         });
+    }
+
+    componentDidMount() {
+        document.addEventListener('mousemove', ({ target }) => {
+            if (target.canMove) {
+            }
+        });
+        document.addEventListener('mouseup', ({ target }) => {
+            if (this.refs.indexOf(target) > -1) {
+                delete target.canMove;
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener();
     }
 
     render() {
@@ -198,7 +254,31 @@ class ColorPicker extends Component {
                             this.handleChangeHsv('hue', target);
                         }}
                     />
-                    <HueBackground style={this.hueGradient()} />
+                    <SliderHandle
+                        innerRef={(node) => (this.hueSlider = node)}
+                        x={scaleRatioX(hue)}
+                        onMouseDown={(e) => {
+                            e.target.canMove = true;
+                            e.target.startPageX = e.pageX - hue * 1.8;
+                        }}
+                        onMouseMove={({ pageX, target }) => {
+                            if (target.canMove) {
+                                target.value = (pageX - target.startPageX) / 1.8;
+                                console.log(
+                                    pageX,
+                                    target.startPageX,
+                                    target.value,
+                                    pageX - target.startPageX
+                                );
+                                this.handleChangeHsv('hue', target);
+                            }
+                        }}
+                        onMouseUp={({ target }) => {
+                            target.canMove = false;
+                            console.log('onMouseUp', target.canMove);
+                        }}
+                    />
+                    <SliderBackground style={this.hueGradient()} />
                 </Hue>
                 <Saturation>
                     <InputNumber
@@ -210,7 +290,8 @@ class ColorPicker extends Component {
                             this.handleChangeHsv('saturation', target);
                         }}
                     />
-                    <HueBackground style={this.saturationGradient()} />
+                    <SliderHandle x={scaleRatioX(saturation)} />
+                    <SliderBackground style={this.saturationGradient()} />
                 </Saturation>
                 <Value>
                     <InputNumber
@@ -222,7 +303,8 @@ class ColorPicker extends Component {
                             this.handleChangeHsv('brightness', target);
                         }}
                     />
-                    <HueBackground style={this.brightnessGradient()} />
+                    <SliderHandle x={scaleRatioX(brightness)} />
+                    <SliderBackground style={this.brightnessGradient()} />
                 </Value>
                 <Result style={this.resultBackground()} />
                 {this.makeRGBInput()}
@@ -235,10 +317,13 @@ class ColorPicker extends Component {
 //     // ...state,
 // });
 
-// const mapDispatchToProps = (dispatch) => ({
-//     // visibleAction: (visible) => dispatch(visibleAction(visible)),
-// });
+const mapDispatchToProps = (dispatch) => ({
+    ColorPickAction: (visible) => dispatch(ColorPickAction(visible)),
+});
 
-export default connect()(ColorPicker);
+export default connect(
+    undefined,
+    mapDispatchToProps
+)(ColorPicker);
 // mapStateToProps,
 // mapDispatchToProps
