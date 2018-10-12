@@ -10,4 +10,4 @@ export default function Provider({ story }) {
 }
 storiesOf('Popup', module)
     .addDecorator((story) => <Provider story={story()} />)
-    .add('기본팝업', () => <Popup />);
+    .add('전체팝업', () => <Popup />);
