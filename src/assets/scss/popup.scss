@@ -37,7 +37,7 @@
         }
         .section_navi .list li {
             float: left;
-            overlow: hidden;
+            overflow: hidden;
             width: 146px;
             height: 40px;
             margin-left: 6px;
@@ -53,7 +53,8 @@
             color: #728997;
             text-align: center;
             letter-spacing: -0.3px;
-            line-height: 40px;
+            line-height: 42px;
+            outline: 0;
         }
         .section_navi .list .on,
         .section_navi .list li:hover {
@@ -162,9 +163,9 @@
         }
         .section_cont .sub_menu a.on,
         .section_cont .sub_menu a:hover {
-            border-color: #8aa3b2;
-            background-color: #8aa3b2;
-            color: #fff;
+            border-color: #4f80ff;
+            background-color: #fff;
+            color: #4f80ff;
         }
         // 오브젝트 선택 리스트 
         .section_cont .obj_list_box {
@@ -650,14 +651,7 @@
             color: #fff;
         }
 
-
         // 소리 오브젝트
-        .section_cont .sound_list_box .sub_menu a.on,
-        .section_cont .sound_list_box .sub_menu a:hover {
-            border-color: #4f80ff;
-            background-color: #fff;
-            color: #4f80ff;
-        }
         .section_cont .sound_list_box .scroll_box {
             margin-top: 16px;
             padding: 0 22px;
