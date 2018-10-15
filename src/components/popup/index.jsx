@@ -3,15 +3,9 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { visibleAction } from '../../actions';
 import '../../assets/scss/popup.scss';
-<<<<<<< HEAD
 
 import Navigation from './Navigation';
 import SelectWithSideBar from './Contents/SelectWithSideBar';
-=======
-import Navigation from './Navigation';
-import SelectWithSideBar from './Contents/SelectWithSideBar';
-
->>>>>>> [#9239] 팝업 컴포넌트별로 나누기.
 import FileUpload from './Contents/FileUpload';
 import WriteBox from './Contents/WriteBox';
 import Draw from './Contents/Draw';
@@ -37,7 +31,6 @@ class Sprite extends Component {
     };
 
     setContent = function() {
-<<<<<<< HEAD
         const list = this.props.options.navigations;
         const defaultNav = <Navigation list={list} search={false}/>;
         let selected = this.props.popupReducer.navigation || Object.keys(list)[0];
@@ -45,14 +38,6 @@ class Sprite extends Component {
             select: {
                 view: <SelectWithSideBar sidebar={this.props.options.sidebar}/>,
                 nav: <Navigation list={list} search={true}/>,
-=======
-        const selected = Object.keys(this.props.options.navigations)[0];
-        const defaultNav = <Navigation list={this.props.options.navigations} search={false}/>;
-        const contents = {
-            select: {
-                view: <SelectWithSideBar sidebar={this.props.options.sidebar}/>,
-                nav: <Navigation list={this.props.options.navigations} search={true}/>,
->>>>>>> [#9239] 팝업 컴포넌트별로 나누기.
             },
             upload: {
                 view: <FileUpload/>,
@@ -68,10 +53,6 @@ class Sprite extends Component {
                 nav: true,
             },
         };
-<<<<<<< HEAD
-=======
-
->>>>>>> [#9239] 팝업 컴포넌트별로 나누기.
         return (
             <div>
                 {contents[selected].nav || defaultNav}
