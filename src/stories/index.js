@@ -14,8 +14,10 @@ export default function Provider({ story }) {
 storiesOf('Popup', module)
     .addDecorator((story) => <Provider story={story()} />)
     .add('전체', () => <Sample />)
-    .add('스프라이트', () => <Popup options={POPUP_TYPE.SPRITE}/>)
+    .add('확장블록', () => <Popup options={POPUP_TYPE.EXPANSION}/>)
     .add('소리', () => <Popup options={POPUP_TYPE.SOUND}/>)
-    .add('확장블록', () => <Popup options={POPUP_TYPE.EXPANSION}/>);
+    .add('스프라이트', () => <Popup options={POPUP_TYPE.SPRITE}/>);
+
+
 
 

@@ -16,13 +16,46 @@ export const POPUP_TYPE = {
         },
         sidebar : {
             entrybot : {
-                name : "엔트리 봇"
+                name : "엔트리 봇",
+                sub : {
+                    all : { name : "전체" }
+                }
             },
             human : {
-                name : "사람"
+                name : "사람",
+                sub : {
+                    all : { name : "전체" }
+                }
             },
             animal : {
-                name : "동물"
+                name : "동물",
+                sub : {
+                    all : { name : "전체" },
+                    sky : { name : "하늘" },
+                    ground : { name : "땅" },
+                    water : { name : "물" },
+                    etc : { name : "가타" }
+                }
+            },
+            plant : {
+                name : "식물",
+                sub : {
+                    all : { name : "전체" },
+                    flower : { name : "꽃" },
+                    grass : { name : "풀" },
+                    tree : { name : "나무" },
+                    etc : { name : "가타" }
+                }
+            },
+            vehicle : {
+                name : "탈것",
+                sub : {
+                    all : { name : "전체" },
+                    sky : { name : "하늘" },
+                    ground : { name : "땅" },
+                    water : { name : "물" },
+                    etc : { name : "가타" }
+                }
             }
         }
     },
