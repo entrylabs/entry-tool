@@ -4,7 +4,7 @@ export const POPUP_TYPE = {
             select : {
                 name : "오브젝트 선택"
             },
-            upload : {
+            file : {
                 name : "파일 올리기"
             },
             draw : {
@@ -16,46 +16,13 @@ export const POPUP_TYPE = {
         },
         sidebar : {
             entrybot : {
-                name : "엔트리 봇",
-                sub : {
-                    all : { name : "전체" }
-                }
+                name : "엔트리 봇"
             },
             human : {
-                name : "사람",
-                sub : {
-                    all : { name : "전체" }
-                }
+                name : "사람"
             },
             animal : {
-                name : "동물",
-                sub : {
-                    all : { name : "전체" },
-                    sky : { name : "하늘" },
-                    ground : { name : "땅" },
-                    water : { name : "물" },
-                    etc : { name : "가타" }
-                }
-            },
-            plant : {
-                name : "식물",
-                sub : {
-                    all : { name : "전체" },
-                    flower : { name : "꽃" },
-                    grass : { name : "풀" },
-                    tree : { name : "나무" },
-                    etc : { name : "가타" }
-                }
-            },
-            vehicle : {
-                name : "탈것",
-                sub : {
-                    all : { name : "전체" },
-                    sky : { name : "하늘" },
-                    ground : { name : "땅" },
-                    water : { name : "물" },
-                    etc : { name : "가타" }
-                }
+                name : "동물"
             }
         }
     },
@@ -64,7 +31,7 @@ export const POPUP_TYPE = {
             select : {
                 name : "소리 선택"
             },
-            upload : {
+            file : {
                 name : "파일 올리기"
             }
         },

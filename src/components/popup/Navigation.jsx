@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { POPUP_COMMON, updateCommonData } from '../../actions';
+import { visibleAction } from '../../actions';
+
 
 class Navigation extends Component {
     constructor(props) {
@@ -8,25 +9,23 @@ class Navigation extends Component {
 
         this.getList = this.getList.bind(this);
         this.drawSearchBox = this.drawSearchBox.bind(this);
-        this.onNavigationCliecked = this.onNavigationCliecked.bind(this);
+        this.selectNav = this.selectNav.bind(this);
     }
 
-    onNavigationCliecked(e) {
+    selectNav(e) {
         e.preventDefault();
-        this.props.updateNavigation(e.currentTarget.getAttribute("data-key"));
+        console.log(e);
+
+        console.log('hello', this);
     }
 
     getList() {
         const list = this.props.list;
-        const navigation = this.props.popupReducer.navigation;
         if (!list) {
             return null;
         }
-        return Object.keys(list).map((item, index) => {
-            if(navigation == item ||!navigation && index == 0){
-                return <li key={item} className="on" onClick={this.onNavigationCliecked} data-key={item}><a href="#">{list[item].name}</a></li>;
-            }
-            return <li key={item} onClick={this.onNavigationCliecked} data-key={item}><a href="#">{list[item].name}</a></li>;
+        return Object.keys(list).map(item => {
+            return <li key={item} onClick={this.selectNav}><a href="#">{list[item].name}</a></li>;
         });
     }
 
@@ -63,7 +62,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    updateNavigation: (navigation) => dispatch(updateCommonData(POPUP_COMMON, {navigation})),
+    visibleAction: (visible) => dispatch(visibleAction(visible)),
 });
 
 export default connect(
