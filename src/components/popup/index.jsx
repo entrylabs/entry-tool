@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { visibleAction } from '../../actions';
 import '../../assets/scss/popup.scss';
+
 import Navigation from './Navigation';
 import SelectWithSideBar from './Contents/SelectWithSideBar';
-
 import FileUpload from './Contents/FileUpload';
 import WriteBox from './Contents/WriteBox';
 import Draw from './Contents/Draw';
@@ -31,12 +31,13 @@ class Sprite extends Component {
     };
 
     setContent = function() {
-        const selected = Object.keys(this.props.options.navigations)[0];
-        const defaultNav = <Navigation list={this.props.options.navigations} search={false}/>;
+        const list = this.props.options.navigations;
+        const defaultNav = <Navigation list={list} search={false}/>;
+        let selected = this.props.popupReducer.navigation || Object.keys(list)[0];
         const contents = {
             select: {
                 view: <SelectWithSideBar sidebar={this.props.options.sidebar}/>,
-                nav: <Navigation list={this.props.options.navigations} search={true}/>,
+                nav: <Navigation list={list} search={true}/>,
             },
             upload: {
                 view: <FileUpload/>,
@@ -52,7 +53,6 @@ class Sprite extends Component {
                 nav: true,
             },
         };
-
         return (
             <div>
                 {contents[selected].nav || defaultNav}

@@ -4,7 +4,7 @@ export const POPUP_TYPE = {
             select : {
                 name : "오브젝트 선택"
             },
-            file : {
+            upload : {
                 name : "파일 올리기"
             },
             draw : {
@@ -31,7 +31,7 @@ export const POPUP_TYPE = {
             select : {
                 name : "소리 선택"
             },
-            file : {
+            upload : {
                 name : "파일 올리기"
             }
         },
