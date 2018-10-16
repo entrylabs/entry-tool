@@ -119,5 +119,8 @@
     },
     "eslintConfig": {
         "extends": "react-app"
+    },
+    "dependencies": {
+        "lodash": "^4.17.11"
     }
 }
