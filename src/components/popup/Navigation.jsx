@@ -1,32 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { POPUP_COMMON, updateCommonData } from '../../actions';
+import { CommonUtils } from '../../utils/Common';
 
 class Navigation extends Component {
     constructor(props) {
         super(props);
 
-        this.getList = this.getList.bind(this);
+        this.drawNavigation = this.drawNavigation.bind(this);
         this.drawSearchBox = this.drawSearchBox.bind(this);
-        this.onNavigationCliecked = this.onNavigationCliecked.bind(this);
     }
 
-    onNavigationCliecked(e) {
-        e.preventDefault();
-        this.props.updateNavigation(e.currentTarget.getAttribute("data-key"));
-    }
-
-    getList() {
+    drawNavigation() {
         const list = this.props.list;
-        const navigation = this.props.popupReducer.navigation;
-        if (!list) {
-            return null;
-        }
+        const navigation = this.props.selected;
         return Object.keys(list).map((item, index) => {
-            if(navigation == item ||!navigation && index == 0){
-                return <li key={item} className="on" onClick={this.onNavigationCliecked} data-key={item}><a href="#">{list[item].name}</a></li>;
-            }
-            return <li key={item} onClick={this.onNavigationCliecked} data-key={item}><a href="#">{list[item].name}</a></li>;
+            return (
+                <li key={item}
+                    className={CommonUtils.toggleClass(navigation == item || !navigation && index == 0, 'on')}
+                    onClick={this.props.onClicked} data-key={item}>
+                    <a href="#">{list[item].name}</a>
+                </li>
+            );
         });
     }
 
@@ -49,7 +43,7 @@ class Navigation extends Component {
         return (
             <div className="section_navi">
                 <ul className="list">
-                    {this.getList()}
+                    {this.drawNavigation()}
                 </ul>
                 {this.drawSearchBox()}
             </div>
@@ -62,11 +56,7 @@ const mapStateToProps = (state) => ({
     ...state,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    updateNavigation: (navigation) => dispatch(updateCommonData(POPUP_COMMON, {navigation})),
-});
-
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    null,
 )(Navigation);

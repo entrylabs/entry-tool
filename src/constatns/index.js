@@ -1,87 +1,116 @@
+export const api = {
+    base: 'http://localhost:4000',
+};
+
 export const POPUP_TYPE = {
-    SPRITE : {
-        navigations : {
-            select : {
-                name : "오브젝트 선택"
+    sprite: {
+        navigations: {
+            select: {
+                name: '오브젝트 선택',
             },
-            upload : {
-                name : "파일 올리기"
+            upload: {
+                name: '파일 올리기',
             },
-            draw : {
-                name : "그리기"
+            draw: {
+                name: '그리기',
             },
-            write : {
-                name : "글 상자"
-            }
+            write: {
+                name: '글 상자',
+            },
         },
-        sidebar : {
-            entrybot : {
-                name : "엔트리 봇",
-                sub : {
-                    all : { name : "전체" }
-                }
+        sidebar: {
+            entrybot_friends: {
+                name: '엔트리 봇',
+                sub: {
+                    all: { name: '전체' },
+                },
             },
-            human : {
-                name : "사람",
-                sub : {
-                    all : { name : "전체" }
-                }
+            people: {
+                name: '사람',
+                sub: {
+                    all: { name: '전체' },
+                },
             },
-            animal : {
-                name : "동물",
-                sub : {
-                    all : { name : "전체" },
-                    sky : { name : "하늘" },
-                    ground : { name : "땅" },
-                    water : { name : "물" },
-                    etc : { name : "가타" }
-                }
+            animal: {
+                name: '동물',
+                sub: {
+                    all: { name: '전체' },
+                    animal_flying: { name: '하늘' },
+                    animal_land: { name: '땅' },
+                    animal_water: { name: '물' },
+                    animal_others: { name: '기타' },
+                },
             },
-            plant : {
-                name : "식물",
-                sub : {
-                    all : { name : "전체" },
-                    flower : { name : "꽃" },
-                    grass : { name : "풀" },
-                    tree : { name : "나무" },
-                    etc : { name : "가타" }
-                }
+            plant: {
+                name: '식물',
+                sub: {
+                    all: { name: '전체' },
+                    plant_flower: { name: '꽃' },
+                    plant_grass: { name: '풀' },
+                    plant_tree: { name: '나무' },
+                    plant_others: { name: '기타' },
+                },
             },
-            vehicle : {
-                name : "탈것",
-                sub : {
-                    all : { name : "전체" },
-                    sky : { name : "하늘" },
-                    ground : { name : "땅" },
-                    water : { name : "물" },
-                    etc : { name : "가타" }
-                }
-            }
-        }
-    },
-    SOUND : {
-        navigations : {
-            select : {
-                name : "소리 선택"
+            vehicles: {
+                name: '탈것',
+                sub: {
+                    all: { name: '전체' },
+                    vehicles_flying: { name: '하늘' },
+                    vehicles_land: { name: '땅' },
+                    vehicles_water: { name: '물' },
+                    vehicles_others: { name: '기타' },
+                },
             },
-            upload : {
-                name : "파일 올리기"
-            }
         },
-        sidebar : {
-            human : {
-                name : "사람"
-            },
-            nature : {
-                name : "자연"
-            }
-        }
     },
-    EXPANSION : {
-        navigations : {
-            expansion : {
-                name : "확장 블록"
-            }
-        }
-    }
-}
+    sound: {
+        navigations: {
+            select: {
+                name: '소리 선택',
+            },
+            upload: {
+                name: '파일 올리기',
+            },
+        },
+        sidebar: {
+            사람: {
+                name: '사람',
+                sub: {
+                    all: { name: '전체' },
+                },
+            },
+            자연: {
+                name: '자연',
+                sub: {
+                    all: { name: '전체' },
+                },
+            },
+        },
+    },
+    expansion: {
+        navigations: {
+            expansion: {
+                name: '확장 블록',
+            },
+        },
+        data: [
+            {
+                name: 'translate',
+                imageName: 'papago.png',
+                title: {
+                    'ko': '번역',
+                    'en': 'translate',
+                },
+            },
+            {
+                name: 'festival',
+                imageName: 'festival.png',
+                title: {
+                    'ko': '행사',
+                    'en': 'festival',
+                },
+            },
+        ],
+    },
+};
+

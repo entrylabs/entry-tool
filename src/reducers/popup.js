@@ -1,13 +1,18 @@
-import { POPUP_COMMON } from '../actions';
-import { assign } from 'lodash';
-export default function popupReducer(state = {}, action) {
+import { FETCH_ITEM, APPLY_SELECTED_LIST } from '../actions';
+
+const INITIAL_STATE = {
+    selected: [],
+};
+export default function popupReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
         case 'CLOSE':
             return {
                 result: action.payload,
             };
-        case POPUP_COMMON:
-            return assign({}, state, action.data);
+        case FETCH_ITEM:
+            return { ...state, ...action.data };
+        case APPLY_SELECTED_LIST:
+            return Object.assign({}, { ...state, selected: action.selected });
         default:
             return state;
     }
