@@ -64,7 +64,10 @@
     &.on {
         background-image: url(../images/btn_pop_font_paint_on.png);
     }
-    
+}
+input[type="checkbox"]:checked + .imbtn_pop_checked:before {
+    background: url(../images/ico_pop_checked.png) no-repeat;
+    background-size: 22px auto;
 }
 
 .imico_pop_caution {
@@ -78,4 +81,9 @@
 .imico_pop_sound_thmb:before {
     background: url(../images/ico_pop_sound_thmb.png) no-repeat;
     background-size: 64px auto;
+}
+
+.imico_entrylogo {
+    background: url(../images/ico_pop_entrylogo.png) no-repeat;
+    background-size: 138px auto;
 }
