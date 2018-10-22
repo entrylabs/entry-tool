@@ -444,18 +444,7 @@
             width: 112px;
             height: 112px;
             border-radius: 50%;
-        }
-        .section_cont .img_caution_box .thmb:before {
-            display: inline-block;
-            width: 1px;
-            height: 100%;
-            margin-left: -1px;
-            vertical-align: middle;
-            content: '';
-        }
-        .section_cont .img_caution_box .thmb img {
-            max-width: 100%;
-            vertical-align: middle;
+            font-size: 0;
         }
         .section_cont .img_caution_box .dsc_box {
             float: left;
@@ -516,52 +505,34 @@
             height: 568px;
         }
         .section_cont .write_box .write_set {
+            position: relative;
             padding: 8px 16px;
             background-color: #f9f9f9;
             border: 1px solid #e2e2e2;
+            z-index: 10;
         }
         .section_cont .write_box .write_set:after {
             display: block;
             clear: both;
             content: '';
         }
-        .section_cont .write_box .write_set .select_box {
-            position: relative;
+        .section_cont .write_box .write_set .pop_selectbox {
             float: left;
             width: 168px;
-            height: 40px;
         }
-        .section_cont .write_box .write_set .select_box .select {
-            display: block;
-            overflow: hidden;
-            padding: 0 16px;
-            height: 38px;
-            border: 1px solid #e2e2e2;
-            background-color: #fff;
-            border-radius: 4px;
-            font-weight: 600;
-            color: #555;
-            white-space: nowrap;
-            line-height: 40px;
+        .section_cont .write_box .write_set .pop_selectbox .tooltip_inner {
+            max-height: 282px;
+            overflow: visible;
+            overflow-y: auto;
         }
-        .section_cont .write_box .write_set .select_box .select:after {
-            display: inline-block;
-            width: 8px;
-            height: 6px;
-            margin-left: 9px;
-            vertical-align: middle;
-            content: '';
-        }
-        .section_cont .write_box .write_set .select_box .layer_box {
-            display: none;
-        }
+
         .section_cont .write_box .write_set .font_style_box {
             position: relative;
             float: left;
             padding-left: 30px;
             font-size: 0;
         }
-        .section_cont .write_box .write_set .font_style_box a {
+        .section_cont .write_box .write_set .font_style_box .style_link {
             display: inline-block;
             overflow: hidden;
             width: 38px;
@@ -574,16 +545,20 @@
         .section_cont .write_box .write_set .write_type_box {
             float: left;
             overflow: hidden;
-            width: 208px;
-            height: 38px;
+            border-radius: 4px;
+            width: 207px;
+            height: 40px;
             margin-left: 40px;
             background-color: #fff;
-            border: 1px solid #e2e2e2;
             font-size: 0;
         }
         .section_cont .write_box .write_set .write_type_box a {
             display: inline-block;
-            width: 104px;
+            position: relative;
+            width: 102px;
+            height: 38px;
+            border: 1px solid #e2e2e2;
+            border-radius: 4px 0 0 4px;
             font-size: 14px;
             font-weight: 600;
             color: #979797;
@@ -593,10 +568,12 @@
         }
         .section_cont .write_box .write_set .write_type_box a + a {
             margin-left: -1px;
-            border-left: 1px solid #e2e2e2;
+            border-radius: 0 4px 4px 0;
         }
         .section_cont .write_box .write_set .write_type_box .on {
             color: #4f80ff;
+            border-color: #4f80ff;
+            z-index: 10;
         }
         .section_cont .write_box .input_box {
             padding: 40px 38px 0;
@@ -955,7 +932,27 @@
             width: 312px;
             margin: 40px auto 0;
         }
-        .login_cont .input_box .pop_inpt_text + .pop_inpt_text {
+        .login_cont .input_box .pop_selectbox .select_link {
+            margin-top: 8px;
+        }
+        .login_cont .input_box .tooltip_box {
+            top: 80px;
+        }
+        .login_cont .input_box .tooltip_inner {
+            max-height: 250px;
+            overflow: visible;
+            overflow-y: auto;
+        }
+        .login_cont .input_box .pop_inpt_text .email_dsc {
+            margin-top: 11px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #4f80ff;
+            letter-spacing: -0.2px;
+            line-height: 11px;
+        }
+        .login_cont .input_box .pop_inpt_text + .pop_inpt_text,
+        .login_cont .input_box .pop_inpt_text + .pop_selectbox {
             margin-top: 40px;
         }
         .login_cont .pop_btn_box {
@@ -964,10 +961,40 @@
         .login_cont .pop_btn_box a {
             margin: 0 10px;
         }
+        .result_cont {
+            padding: 80px 0 135px;
+            text-align: center;
+            color: #2c313d;
+            letter-spacing: -0.4px;
+            line-height: 20px;
+        }
+        .result_cont:before {
+            display: block;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto;
+            content: '';
+        }
+        .result_cont .result_tit {
+            display: block;
+            padding-top: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: -0.4px;
+        }
+        .result_cont .result_dsc {
+            padding-top: 10px;
+        }
+        .result_cont .result_tit + .pop_btn_box {
+            padding: 92px 0 0;
+        }
+        .result_cont .result_dsc + .pop_btn_box {
+            padding: 38px 0 0;
+        }
+        
     }
 
-
-    // 공통 스타일
+    // 공통 버튼 스타일
     .pop_btn_box {
         padding: 16px 0;
         text-align: center;
@@ -984,6 +1011,7 @@
             font-size: 14px;
             font-weight: 600;
             color: #4f80ff;
+            vertical-align: top;
             line-height: 48px;
         }
         a.active {
@@ -991,14 +1019,19 @@
             color: #fff;
         }
     }
+    //공통 인풋 라벨
+    .inpt_label {
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 600;
+        color: #2c313d;
+        .chk_point {
+            color: #4f80ff;       
+        }
+    }
+    // 공통 체크박스
     .pop_checkbox {
         display: inline-block;
-        label {
-            display: inline-block;
-            font-size: 16px;
-            font-weight: 600;
-            color: #2c313d;
-        }
         label:before {
             display: inline-block;
             width: 22px;
@@ -1016,17 +1049,9 @@
             color: #4f80ff;       
         }
     }
+    // 공통 인풋박스
     .pop_inpt_text {
         display: block;
-        label {
-            display: inline-block;
-            font-size: 16px;
-            font-weight: 600;
-            color: #2c313d;
-        }
-        .chk_point {
-            color: #4f80ff;       
-        }
         input {
             overflow: hidden;
             width: 100%;
@@ -1051,5 +1076,207 @@
             color: #979797;
         }
     }
+    
+    //공통 셀렉트 박스
+    .pop_selectbox {
+        position: relative;
+        .select_link {
+            display: block;
+            position: relative;
+            width: 134px;
+            height: 38px;
+            padding: 0 16px;
+            border: 1px solid #e2e2e2;
+            background-color: #fff;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #555;
+            letter-spacing: -0.3px;
+            line-height: 40px;
+        }
+        .select_link:after {
+            @include PositionRT(absolute, 16px, 50%);
+            width: 8px;
+            height: 6px;
+            margin-top: -3px;
+            vertical-align: top;
+            content: '';
+        }
+        & + .pop_selectbox {
+            margin-top: 40px;
+        }
+        & + .on {
+            z-index: 10;
+        }
+        & + .pop_inpt_text {
+            margin-top: 40px;
+        } 
+    }
+    .pop_selectbox .tooltip_box {
+        display: none;
+    }
+    .pop_selectbox.on .tooltip_box {
+        display: block;
+        z-index: 10;
+    }
 
+    // 공통 툴팁 박스
+    .tooltip_box {
+        @include PositionLT(absolute, 0, 53px);
+        width: 166px;
+        background-color: #fff;
+        border: 1px solid #e2e2e2;
+        border-radius: 2px;
+        visibility: visible;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+        .tooltip_inner {
+            overflow: hidden;
+            border-radius: 2px;
+        }
+        .arr {
+            @include PositionLB(absolute, 50%, 100%);
+            overflow: hidden;
+            width: 32px;
+            height: 16px;
+            margin-left: -16px;
+        }
+        .arr i {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 14px;
+            height: 14px;
+            background-color: #fff; 
+            border: 1px solid #e2e2e2;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+            transform:translate(-50%, 50%) rotate(45deg);
+        }
+        .arr.free {
+            margin-left: 0;
+        }
+        .select_list {
+            padding: 0 8px;
+
+        }
+        .select_list .list_item {
+            border-top: 1px solid #f2f2f2;
+        }
+        .select_list .list_item:first-child {
+            border-top-color: #fff;
+        }
+        .select_list .list_link {
+            display: block;
+            overflow: hidden;
+            height: 15px;
+            padding: 17px 0 14px 7px;
+            font-weight: 600;
+            color: #2c313d;
+            letter-spacing: 0;
+            line-height: 15px;
+        }
+        &.up .arr {
+            bottom: auto;
+            top: 100%;
+        }
+        &.up .arr i {
+            transform:translate(-50%, -50%) rotate(45deg);
+        }
+    }
+    //컬러 피커 
+    .tooltip_box.color_picker {
+        font-size: 14px;
+        width: 396px;
+        left: 192px;
+        .tooltip_inner {
+            padding: 16px;
+        }
+        .color_box {
+            float: left;
+            margin: 10px 20px 0 8px;
+        }
+        .color_box .color {
+            display: block;
+            position: relative;
+            width: 54px;
+            height: 54px;
+            border-radius: 6px;
+            border: 1px solid #e2e2e2;
+        }
+        .color_box .color:before {
+            @include PositionRB(absolute, 4px, 4px);
+            width: 16px;
+            height: 16px;
+            background-color: #fff;
+            border-radius: 50%;
+            content: '';
+        }
+        .color_box .color_list {
+            padding-top: 4px;
+        }
+        .color_box .color_list .item {
+            margin-top: 16px;
+            height: 28px;
+        }
+        .color_box .color_list .item label,
+        .color_graph .graph_list .item label {
+            font-weight: 600;
+            color: #2c313d;
+            padding-right: 8px;
+            vertical-align: middle;
+        }
+        .color_box .color_list .item input[type="text"],
+        .color_graph .graph_list .item input[type="text"] {
+            width: 48px;
+            height: 28px;
+            border: 1px solid #e2e2e2;
+            box-sizing: border-box;
+            outline: 0;
+            border-radius: 16px;
+            color: #2c313d;
+            font-weight: 600;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .color_box .color_list .item input[type="text"]:focus,
+        .color_graph .graph_list .item input[type="text"]:focus {
+            border: 2px solid #4f80ff;
+        }
+        .color_graph {
+            float: left;
+            width: 205px;
+            height: 216px;
+            padding-left: 26px;
+            border-left: 1px solid #f2f2f2;
+        }
+        .color_graph .graph_list .item {
+            margin-top: 13px;
+        }
+        .color_graph .graph_list .item:first-child {
+            margin-top: 0;
+        }
+        .color_graph .graph_list .graph_box {
+            position: relative;
+            margin-top: 10px;
+            height: 26px;
+        }
+        .color_graph .graph_list .graph_box .bar {
+            overflow: hidden;            
+            height: 24px;
+            border: 1px solid #e2e2e2;
+            border-radius: 26px;
+        }
+        .color_graph .graph_list .graph_box .slider {
+            @include PositionLT(absolute, 0, 50%);
+            width: 28px;
+            height: 28px;
+            margin-top: -14px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .color_graph .graph_list .graph_box .slider.on {
+            width: 38px;
+            height: 38px;
+            margin-top: -19px;
+        }
+    }
 }

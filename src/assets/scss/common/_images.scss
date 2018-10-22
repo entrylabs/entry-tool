@@ -65,6 +65,15 @@
         background-image: url(../images/btn_pop_font_paint_on.png);
     }
 }
+.btn_pop_color_slide {
+    background: url(../images/btn_pop_color_slide.png) no-repeat;
+    background-size: 28px auto;
+    &.on {
+        background-image: url(../images/btn_pop_color_slide_on.png);
+        background-size: 38px auto;
+    }
+}
+
 input[type="checkbox"]:checked + .imbtn_pop_checked:before {
     background: url(../images/ico_pop_checked.png) no-repeat;
     background-size: 22px auto;
@@ -74,8 +83,12 @@ input[type="checkbox"]:checked + .imbtn_pop_checked:before {
     background: url(../images/ico_pop_caution.png) no-repeat;
     background-size: 16px auto;
 }
-.imico_pop_select_arr:after {
-    background: url(../images/ico_pop_select_arr.png) no-repeat;
+.imico_pop_select_arr_down:after {
+    background: url(../images/ico_pop_select_arr_down.png) no-repeat;
+    background-size: 8px auto;
+}
+.imico_pop_select_arr_up:after {
+    background: url(../images/ico_pop_select_arr_down.png) no-repeat;
     background-size: 8px auto;
 }
 .imico_pop_sound_thmb:before {
@@ -86,4 +99,16 @@ input[type="checkbox"]:checked + .imbtn_pop_checked:before {
 .imico_entrylogo {
     background: url(../images/ico_pop_entrylogo.png) no-repeat;
     background-size: 138px auto;
+}
+.imico_signup:before {
+    background: url(../images/ico_pop_signup.png) no-repeat;
+    background-size: 160px auto;
+}
+.imico_warning {
+    background: url(../images/ico_pop_warning.png) no-repeat;
+    background-size: 112px auto;
+}
+.imico_pop_circle_check:before {
+    background: url(../images/ico_pop_circle_check.png) no-repeat;
+    background-size: 16px auto;
 }
