@@ -19,11 +19,14 @@ class SideBar extends Component {
     drawSideBar() {
         const list = this.props.sidebar;
         const sidebar = this.props.popupReducer.sidebar;
+        if(!list) {
+            return "";
+        }
         return Object.keys(list).map((item, index) => {
             return (
                 <li key={item} data-key={item} onClick={this.onSidebarCliecked}
-                    className={CommonUtils.toggleClass(sidebar == item || !sidebar && index == 0, 'on')}>
-                    <a href="#">{list[item].name}</a>
+                    className={CommonUtils.toggleClass((sidebar === item || !sidebar) && index === 0, 'on')}>
+                    <a href="#NULL">{list[item].name}</a>
                 </li>
             );
         });
