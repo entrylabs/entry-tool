@@ -13,12 +13,15 @@ class Navigation extends Component {
     drawNavigation() {
         const list = this.props.list;
         const navigation = this.props.selected;
+        if(!list) {
+            return "";
+        }
         return Object.keys(list).map((item, index) => {
             return (
                 <li key={item}
-                    className={CommonUtils.toggleClass(navigation == item || !navigation && index == 0, 'on')}
+                    className={CommonUtils.toggleClass((navigation === item || !navigation) && index === 0, 'on')}
                     onClick={this.props.onClicked} data-key={item}>
-                    <a href="#">{list[item].name}</a>
+                    <a href="#NULL">{list[item].name}</a>
                 </li>
             );
         });

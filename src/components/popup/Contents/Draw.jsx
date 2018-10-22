@@ -17,7 +17,7 @@ class Draw extends Component {
                             그리기 화면으로 이동하시겠습니까?
                         </p>
                         <div className="pop_btn_box">
-                            <a href="#" className="active">이동하기</a>
+                            <a href="#NULL" className="active">이동하기</a>
                         </div>
                     </div>
                 </div>

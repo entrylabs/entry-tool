@@ -4,12 +4,8 @@ import SideBar from './SideBar';
 import BigICON from './BigICON';
 
 class Select extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     renderContent() {
-        if (this.props.type == 'sidebar') {
+        if (this.props.type === 'sidebar') {
             return <SideBar data={this.props.data} sidebar={this.props.sidebar}/>;
         } else {
             return <BigICON data={this.props.data}/>;

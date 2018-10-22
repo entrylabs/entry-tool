@@ -42,7 +42,7 @@ class WriteBox extends Component {
     }
 
     drawWriteBox() {
-        if (this.state.writeType == 'one') {
+        if (this.state.writeType === 'one') {
             return this.oneLine();
         } else {
             return this.multiLine();
@@ -61,7 +61,7 @@ class WriteBox extends Component {
             const effect = this.state.effects[key];
             let className = 'imbtn_pop_font_' + key + ' ' + CommonUtils.toggleClass(effect.apply, 'on');
             return (
-                <a href="#" key={key} className={className} data-effect={key} title={effect.text}>
+                <a href="#NULL" key={key} className={className} data-effect={key} title={effect.text}>
                     <span className="blind">글자 {effect.text}</span>
                 </a>
             );
@@ -97,22 +97,22 @@ class WriteBox extends Component {
                     <div className="write_box">
                         <div className="write_set">
                             <div className="select_box">
-                                <a href="#" className="select imico_pop_select_arr" title="글꼴">
+                                <a href="#NULL" className="select imico_pop_select_arr" title="글꼴">
                                     NanumGothicOTF
                                 </a>
                                 <div className="layer_box">
                                     <ul className="list">
                                         <li>
-                                            <a href="#" className="list_lnk">
+                                            <a href="#NULL" className="list_lnk">
                                                 Gothic
                                             </a>
-                                            <a href="#" className="list_lnk">
+                                            <a href="#NULL" className="list_lnk">
                                                 Gothic
                                             </a>
-                                            <a href="#" className="list_lnk">
+                                            <a href="#NULL" className="list_lnk">
                                                 Gothic
                                             </a>
-                                            <a href="#" className="list_lnk">
+                                            <a href="#NULL" className="list_lnk">
                                                 Gothic
                                             </a>
                                         </li>
@@ -123,9 +123,9 @@ class WriteBox extends Component {
                                 {this.drawEffects()}
                             </div>
                             <div className="write_type_box" onClick={this.changeWriteType}>
-                                <a href="#" className={CommonUtils.toggleClass(this.state.writeType === 'one', 'on')}
+                                <a href="#NULL" className={CommonUtils.toggleClass(this.state.writeType === 'one', 'on')}
                                    data-type="one">한줄쓰기</a>
-                                <a href="#" className={CommonUtils.toggleClass(this.state.writeType === 'multi', 'on')}
+                                <a href="#NULL" className={CommonUtils.toggleClass(this.state.writeType === 'multi', 'on')}
                                    data-type="multi">여러 줄 쓰기</a>
                             </div>
                         </div>
@@ -133,8 +133,8 @@ class WriteBox extends Component {
                     </div>
                 </div>
                 <div className="pop_btn_box">
-                    <a href="#">취소</a>
-                    <a href="#" className="active">추가하기</a>
+                    <a href="#NULL">취소</a>
+                    <a href="#NULL" className="active">추가하기</a>
                 </div>
             </div>
         );

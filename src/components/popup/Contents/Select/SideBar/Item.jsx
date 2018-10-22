@@ -12,7 +12,7 @@ class Item extends Component {
     }
 
     drawImage() {
-        if (this.props.popupReducer.type && this.props.popupReducer.type == 'sound') {
+        if (this.props.popupReducer.type && this.props.popupReducer.type === 'sound') {
             return <div className="thmb imico_pop_sound_thmb">&nbsp;</div>;
         }
         return (
@@ -23,7 +23,7 @@ class Item extends Component {
     }
 
     getSelectedIndex() {
-        return this.props.popupReducer.selected.findIndex(element => element._id == this.props.item._id);
+        return this.props.popupReducer.selected.findIndex(element => element._id === this.props.item._id);
     }
 
     itemClicked(e) {
@@ -42,7 +42,7 @@ class Item extends Component {
     render() {
         return (
             <li onClick={this.itemClicked} className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, 'on')}>
-                <a href="#" className="link">
+                <a href="#NULL" className="link">
                     {this.drawImage()}
                     <em className="sjt">{this.props.item.name}</em>
                 </a>

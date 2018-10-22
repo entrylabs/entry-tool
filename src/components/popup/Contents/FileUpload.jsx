@@ -21,7 +21,7 @@ class FileUpload extends Component {
                             <ul className="obj_list">
                                 {/* [D] 오브젝트 링크가 클릭되면 li에 on  추가 */}
                                 <li>
-                                    <a href="#" className="link">
+                                    <a href="#NULL" className="link">
                                         <div className="thmb">
                                             <img
                                                 src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -31,150 +31,10 @@ class FileUpload extends Component {
                                     </a>
                                 </li>
                                 <li className="on">
-                                    <a href="#" className="link">
+                                    <a href="#NULL" className="link">
                                         <div className="thmb">
                                             <img
                                                 src="https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg"
-                                                alt=""/>
-                                        </div>
-                                        <em className="sjt">오브젝트</em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="link">
-                                        <div className="thmb">
-                                            <img
-                                                src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
-                                                alt=""/>
-                                        </div>
-                                        <em className="sjt">오브젝트</em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="link">
-                                        <div className="thmb">
-                                            <img
-                                                src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
-                                                alt=""/>
-                                        </div>
-                                        <em className="sjt">오브젝트 말줄임 추가 akdjalkdjakljd</em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="link">
-                                        <div className="thmb">
-                                            <img
-                                                src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
-                                                alt=""/>
-                                        </div>
-                                        <em className="sjt">오브젝트</em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="link">
-                                        <div className="thmb">
-                                            <img
-                                                src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
-                                                alt=""/>
-                                        </div>
-                                        <em className="sjt">오브젝트</em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="link">
-                                        <div className="thmb">
-                                            <img
-                                                src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
-                                                alt=""/>
-                                        </div>
-                                        <em className="sjt">오브젝트</em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="link">
-                                        <div className="thmb">
-                                            <img
-                                                src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
-                                                alt=""/>
-                                        </div>
-                                        <em className="sjt">오브젝트</em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="link">
-                                        <div className="thmb">
-                                            <img
-                                                src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
-                                                alt=""/>
-                                        </div>
-                                        <em className="sjt">오브젝트</em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="link">
-                                        <div className="thmb">
-                                            <img
-                                                src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
-                                                alt=""/>
-                                        </div>
-                                        <em className="sjt">오브젝트</em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="link">
-                                        <div className="thmb">
-                                            <img
-                                                src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
-                                                alt=""/>
-                                        </div>
-                                        <em className="sjt">오브젝트</em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="link">
-                                        <div className="thmb">
-                                            <img
-                                                src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
-                                                alt=""/>
-                                        </div>
-                                        <em className="sjt">오브젝트</em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="link">
-                                        <div className="thmb">
-                                            <img
-                                                src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
-                                                alt=""/>
-                                        </div>
-                                        <em className="sjt">오브젝트</em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="link">
-                                        <div className="thmb">
-                                            <img
-                                                src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
-                                                alt=""/>
-                                        </div>
-                                        <em className="sjt">오브젝트</em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="link">
-                                        <div className="thmb">
-                                            <img
-                                                src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
-                                                alt=""/>
-                                        </div>
-                                        <em className="sjt">오브젝트</em>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="link">
-                                        <div className="thmb">
-                                            <img
-                                                src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
                                                 alt=""/>
                                         </div>
                                         <em className="sjt">오브젝트</em>
@@ -204,8 +64,8 @@ class FileUpload extends Component {
                     </div>
                 </div>
                 <div className="pop_btn_box">
-                    <a href="#">취소</a>
-                    <a href="#" className="active">추가하기</a>
+                    <a href="#NULL">취소</a>
+                    <a href="#NULL" className="active">추가하기</a>
                 </div>
             </div>
         );

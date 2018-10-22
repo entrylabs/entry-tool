@@ -13,7 +13,7 @@ export const visibleAction = (visible) => (dispatch) => {
 };
 
 export function fetchItems(type, category = null, subMenu = undefined) {
-    if (subMenu == 'all') {
+    if (subMenu === 'all') {
         subMenu = '';
     }
     const url = [api.base, 'api', type, 'browse/default', category, subMenu].join('/');

@@ -23,14 +23,14 @@ class Item extends Component {
     }
 
     getSelectedIndex() {
-        return this.props.popupReducer.selected.findIndex(element => element.name == this.props.item.name);
+        return this.props.popupReducer.selected.findIndex(element => element.name === this.props.item.name);
     }
 
     render() {
-        const { item, ...props } = this.props;
+        const { item } = this.props;
         return (
             <li onClick={this.onItemClicked} className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, 'on')}>
-                <a href="#" className="link">
+                <a href="#NULL" className="link">
                     <div className="thmb"
                          style={{ backgroundImage: 'url(\'https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg\')' }}>&nbsp;</div>
                     <div className="inner_box">

@@ -3,10 +3,6 @@ import Item from './Item';
 import { connect } from 'react-redux';
 
 class Index extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     drawItems() {
         return this.props.data.map(item => <Item key={item.name} item={item}/>);
     }
@@ -25,8 +21,8 @@ class Index extends Component {
                     </div>
                 </div>
                 <div className="pop_btn_box">
-                    <a href="#">취소</a>
-                    <a href="#" className="active">추가하기</a>
+                    <a href="#NULL">취소</a>
+                    <a href="#NULL" className="active">추가하기</a>
                 </div>
             </div>
         );

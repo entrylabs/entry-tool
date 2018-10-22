@@ -12,10 +12,13 @@ class SubMenu extends Component {
     }
 
     drawSubMenu() {
+        if(!this.props.menus) {
+            return "";
+        }
         return Object.keys(this.props.menus).map((key, index) => {
             const item = this.props.menus[key];
             const subMenu = this.props.popupReducer.subMenu;
-            return <a href="#" className={CommonUtils.toggleClass(subMenu == key || !subMenu && index == 0, 'on')} key={item.name} data-key={key}>{item.name}</a>;
+            return <a href="#NULL" className={CommonUtils.toggleClass((subMenu === key || !subMenu) && index === 0, 'on')} key={item.name} data-key={key}>{item.name}</a>;
         });
     }
 

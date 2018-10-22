@@ -25,7 +25,7 @@ class CustomSlide extends Component {
                     {TYPE_MAP[type].imageContent(item)}
                 </div>
                 <em className="sjt">{item.name}</em>
-                <a href="#" className="btn_del imbtn_pop_chk_del" data-key={item._id}>
+                <a href="#NULL" className="btn_del imbtn_pop_chk_del" data-key={item._id}>
                     <span className="blind">삭제</span>
                 </a>
             </li>);
@@ -36,7 +36,7 @@ function Arrow(props) {
     const { type, className, style, onClick } = props;
     let customClass = null;
     let text = '';
-    if (type == 'prev') {
+    if (type === 'prev') {
         customClass = 'btn_prev imbtn_pop_sel_prev ';
         text = '이전';
     } else {
@@ -44,7 +44,7 @@ function Arrow(props) {
         text = '다음';
     }
     return (
-        <a href="#" className={customClass + className} style={{ ...style }} onClick={onClick}>
+        <a href="#NULL" className={customClass + className} style={{ ...style }} onClick={onClick}>
             <span className="blind">{text}</span>
         </a>
     );
@@ -61,7 +61,7 @@ class Selected extends Component {
         e.preventDefault();
         const key = e.target.getAttribute('data-key');
         if (key) {
-            const selected = CommonUtils.remove(this.props.popupReducer.selected, (element) => element._id == key);
+            const selected = CommonUtils.remove(this.props.popupReducer.selected, (element) => element._id === key);
             this.props.applySelected(selected);
         }
     }

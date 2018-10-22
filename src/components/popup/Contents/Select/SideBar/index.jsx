@@ -25,8 +25,11 @@ class Index extends Component {
     }
 
     getMenus() {
+        if(!this.props.sidebar) {
+            return null;
+        }
         const subTitle = this.props.popupReducer.sidebar;
-        if (this.props.sidebar[subTitle]) {
+        if (subTitle && this.props.sidebar[subTitle]) {
             return this.props.sidebar[subTitle].sub;
         }
         return this.props.sidebar[Object.keys(this.props.sidebar)[0]].sub;
@@ -51,8 +54,8 @@ class Index extends Component {
                     <Selected/>
                 </div>
                 <div className="pop_btn_box">
-                    <a href="#">취소</a>
-                    <a href="#" className="active">추가하기</a>
+                    <a href="#NULL">취소</a>
+                    <a href="#NULL" className="active">추가하기</a>
                 </div>
             </div>
         );
