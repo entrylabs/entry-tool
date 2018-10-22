@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { applySelected } from '../../../../../actions';
 import { CommonUtils } from '../../../../../utils/Common';
+import Slider from "react-slick";
 
 const TYPE_MAP = {
     sound: {
@@ -20,7 +21,7 @@ class CustomSlide extends Component {
     render() {
         const { item, type, ...props } = this.props;
         return (
-            <li className="li" {...props}>
+            <div className="select_item" {...props} >
                 <div className={TYPE_MAP[type].imageClass}>
                     {TYPE_MAP[type].imageContent(item)}
                 </div>
@@ -28,7 +29,7 @@ class CustomSlide extends Component {
                 <a href="#NULL" className="btn_del imbtn_pop_chk_del" data-key={item._id}>
                     <span className="blind">삭제</span>
                 </a>
-            </li>);
+            </div>);
     }
 }
 
@@ -44,9 +45,9 @@ function Arrow(props) {
         text = '다음';
     }
     return (
-        <a href="#NULL" className={customClass + className} style={{ ...style }} onClick={onClick}>
+        <div className={customClass + className} style={{ ...style }} onClick={onClick}>
             <span className="blind">{text}</span>
-        </a>
+        </div>
     );
 }
 
@@ -69,15 +70,23 @@ class Selected extends Component {
     render() {
         const type = this.props.popupReducer.type || 'sound';
         const selected = this.props.popupReducer.selected || [];
+        const settings = {
+            dots: false,
+            infinite: false,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            className:"select_list",
+            variableWidth: true,
+            nextArrow: <Arrow type="next" />,
+            prevArrow: <Arrow type="prev" />
+        };
 
         return (
-            <div className={TYPE_MAP[type].wrapClass}>
+            <div className={TYPE_MAP[type].wrapClass} onClick={this.itemClicked}>
                 <strong className="tit">전체 ({selected.length})</strong>
-                <ul className="obj_list" onClick={this.itemClicked} style={{ width: selected.length * 112 + 'px' }}>
-                    {selected.map((item, index) => <CustomSlide key={index} item={item} type={type}/>)}
-                </ul>
-                <Arrow type="prev"/>
-                <Arrow type="next"/>
+                <Slider {...settings}>
+                    {selected.map((item, index) => <CustomSlide key={index} item={item} type={type} style={{width:100}}/>)}
+                </Slider>
             </div>
         );
     }

@@ -213,6 +213,87 @@
             left: auto;
             right: 0;
         }
+        .section_cont .cont_sel_box .select_list {
+            overflow: hidden;
+        }
+        .section_cont .cont_sel_box .select_list .btn_del {
+            @include PositionRT(absolute, 6px, 6px);
+            display: none;
+            width: 24px;
+            height: 24px;
+            z-index: 20;
+        }
+        .section_cont .cont_sel_box .select_list .select_item {
+            float: left;
+            overflow: hidden;
+            position: relative;
+            width: 100px;
+            height: 120px;
+            margin-left: 12px;
+            background-color: #fff;
+            border-radius: 6px;
+            outline:none;
+        }
+        .section_cont .cont_sel_box .select_list .select_item:hover:after {
+            border: 2px solid #4f80ff;
+        }
+        .section_cont .cont_sel_box .select_list .select_item:hover .sjt {
+            background-color: #4f80ff;
+            color: #fff;
+        }
+        .section_cont .cont_sel_box .select_list .select_item:hover .btn_del {
+            display: block;
+        }
+        .section_cont .cont_sel_box .select_list .select_item:after {
+            @include PositionLRTB(absolute, 0, 0, 0, 0);
+            border: 1px solid #d6e9f4;
+            border-radius: 6px;
+            z-index: 10;
+            content: '';
+        }
+        .section_cont .cont_sel_box .select_list .select_item:first-child {
+            margin-left: 0;
+        }
+        .section_cont .cont_sel_box .select_list .select_item .thmb {
+            overflow: hidden;
+            width: 100px;
+            height: 90px;
+            font-size: 0;
+            text-align: center;
+        }
+        .section_cont .cont_sel_box .select_list .select_item .thmb:before {
+            display: inline-block;
+            width: 1px;
+            height: 100%;
+            vertical-align: middle;
+            content: '';
+        }
+        .section_cont .cont_sel_box .select_list .select_item .thmb img {
+            max-height: 81.8181%;
+            vertical-align: middle;
+            margin-left: -1px;
+        }
+        .section_cont .cont_sel_box .select_list .select_item .sjt {
+            display: block;
+            overflow: hidden;
+            height: 30px;
+            padding: 0 6px;
+            background-color: #d6e9f4;
+            font-size: 12px;
+            font-weight: 600;
+            color: #606c73;
+            text-align: center;
+            letter-spacing: -0.3px;
+            line-height: 32px;
+        }
+        .section_cont .cont_sel_box .select_list .slick-slide { display: inline-block; margin-left: 12px;}
+        .section_cont .cont_sel_box .select_list .slick-slide:first-child {  margin-left: 0;}
+
+
+
+
+
+
         .section_cont .cont_sel_box .obj_list li {
             position: relative;
             width: 100px;
@@ -269,6 +350,7 @@
             height: 44px;
             margin-top: -22px;
             z-index: 30;
+            cursor: pointer;
         }
         .section_cont .cont_sel_box .btn_next {
             @include PositionRT(absolute, 22px, 50%);
@@ -276,12 +358,15 @@
             height: 44px;
             margin-top: -22px;
             z-index: 30;
+            cursor: pointer;
         }
-        .section_cont .sound_type .obj_list .thmb {
+        .section_cont .sound_type .obj_list .thmb,
+        .section_cont .sound_type .select_list .select_item .thmb {
             position: relative;
             background-color: #ebf8ff;
         }
-        .section_cont .sound_type .obj_list .thmb:before {
+        .section_cont .sound_type .obj_list .thmb:before,
+        .section_cont .sound_type .select_list .select_item .thmb:before {
             @include PositionLT(absolute, 50%, 50%);
             width: 64px;
             height: 64px;
@@ -393,7 +478,7 @@
 
         }
 
-        // 그리기 
+        // 그리기
         .section_cont .draw_box {
             padding: 144px 0 204px;
         }
@@ -601,7 +686,7 @@
             border: 1px solid #d6e9f4;
             border-radius: 6px;
             content: '';
-            
+
         }
         .section_cont .extend_block .list .thmb {
             height: 168px;
@@ -671,7 +756,7 @@
             height: 64px;
             margin: -32px 0 0 -32px;
         }
-        
+
 
         // 공통 오브젝트 리스트
         .section_cont .obj_list {
@@ -718,7 +803,7 @@
             vertical-align: middle;
             content: '';
         }
-        
+
         .section_cont .obj_list .sjt {
             display: block;
             overflow: hidden;
@@ -742,6 +827,151 @@
             color: #fff;
         }
     }
+
+    // 로그인 팝업
+    .login_area {
+        .login_header {
+            padding: 40px 0 40px;
+            text-align: center;
+            background-color: #ecf8ff;
+        }
+        .login_header .tit {
+            display: inline-block;
+            width: 138px;
+            height: 28px;
+            vertical-align: top;
+        }
+        .login_header .dsc {
+            margin: 20px 0 -8px;
+            color: #2c313d;
+            letter-spacing: -0.3px;
+            line-height: 18px;
+        }
+        .login_header .pop_btn_box {
+            padding: 38px 0 0;
+            margin-bottom: -16px;
+        }
+        .login_header .pop_btn_box a {
+            min-width: 96px;
+            border-width: 2px;
+            border-radius: 6px;
+            margin: 0 10px;
+        }
+        .login_cont {
+            padding-top: 32px;
+            width: 568px;
+            margin: 0 auto;
+        }
+        .login_cont .depth_list {
+            position: relative;
+            font-size: 0;
+            text-align: center;
+            letter-spacing: -0.3px;
+        }
+        .login_cont .depth_list span {
+            display: inline-block;
+            position: relative;
+            width: 30px;
+            height: 30px;
+            margin-left: 22px;
+            background-color: #fff;
+            border: 1px solid #979797;
+            border-radius: 50%;
+            font-size: 14px;
+            font-weight: 600;
+            color: #979797;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 32px;
+        }
+        .login_cont .depth_list span:before {
+            @include PositionLT(absolute, -22px, 50%);
+            width: 22px;
+            height: 1px;
+            border-top: 1px dashed #979797;
+            content: '';
+        }
+        .login_cont .depth_list span:first-child {
+            margin-left: 0;
+        }
+        .login_cont .depth_list span:first-child:before {
+            display: none;
+        }
+        .login_cont .depth_list .on {
+            width: 36px;
+            height: 36px;
+            border: 3px solid #ffe8b2;
+            background-color: #ffb500;
+            font-size: 20px;
+            color: #fff;
+            line-height: 39px;
+        }
+        .login_cont .depth_list .on + span {
+            margin-left: 17px;
+        }
+        .login_cont .depth_list .on + span:before {
+            width: 17px;
+            left: -17px;
+        }
+        .login_cont .depth_list .on + .on {
+            margin-left: 12px;
+        }
+        .login_cont .depth_list .on + .on:before {
+            width: 12px;
+            left: -15px;
+            border-top: 1px solid #ffb500;
+        }
+        .login_cont .cont_tit {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: normal;
+            color: #2c313d;
+            text-align: center;
+            line-height: 26px;
+        }
+        .login_cont .agree_box {
+            margin-top: 40px;
+        }
+        .login_cont .agree_box .round_box {
+            overflow-y: auto;
+            height: 110px;
+            margin-top: 14px;
+            padding: 24px 16px;
+            border: 1px solid #e2e2e2;
+            border-radius: 6px;
+            color: #2c313d;
+            letter-spacing: -0.3px;
+            word-break: break-all;
+        }
+        .login_cont .agree_box .round_box h4 {
+            margin: 20px 0 8px;
+            font-weight: 600;
+            line-height: 15px;
+        }
+        .login_cont .agree_box .round_box h4:first-child {
+            margin-top: 0;
+        }
+        .login_cont .agree_box .round_box p {
+            font-size: 12px;
+            line-height: 18px;
+        }
+        .login_cont .input_box {
+            width: 312px;
+            margin: 40px auto 0;
+        }
+        .login_cont .input_box .pop_inpt_text + .pop_inpt_text {
+            margin-top: 40px;
+        }
+        .login_cont .pop_btn_box {
+            padding: 40px 0 80px;
+        }
+        .login_cont .pop_btn_box a {
+            margin: 0 10px;
+        }
+    }
+
+
+    // 공통 스타일
     .pop_btn_box {
         padding: 16px 0;
         text-align: center;
@@ -765,4 +995,65 @@
             color: #fff;
         }
     }
+    .pop_checkbox {
+        display: inline-block;
+        label {
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c313d;
+        }
+        label:before {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            margin-right: 8px;
+            border: 1px solid #4f80ff;
+            border-radius: 6px;
+            vertical-align: middle;
+            content: '';
+        }
+        .text {
+            vertical-align: middle;
+        }
+        .chk_point {
+            color: #4f80ff;
+        }
+    }
+    .pop_inpt_text {
+        display: block;
+        label {
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c313d;
+        }
+        .chk_point {
+            color: #4f80ff;
+        }
+        input {
+            overflow: hidden;
+            width: 100%;
+            height: 40px;
+            padding: 0 16px;
+            margin-top: 8px;
+            border: 1px solid #e2e2e2;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-weight: 600;
+            color: #2c313d;
+            letter-spacing: -0.3px;
+            line-height: 41px;
+        }
+        input::placeholder,
+        input::-webkit-input-placeholder,
+        input::-moz-placeholder,
+        input:-ms-input-placeholder,
+        input:-moz-placeholder
+        {
+            font-weight: 600;
+            color: #979797;
+        }
+    }
+
 }
