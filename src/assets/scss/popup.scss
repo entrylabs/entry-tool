@@ -232,6 +232,14 @@
             margin-left: 12px;
             background-color: #fff;
             border-radius: 6px;
+            outline: none;
+        }
+        .section_cont .cont_sel_box .select_list .slick-slide { 
+            display: inline-block; 
+            margin-left: 12px;
+        }
+        .section_cont .cont_sel_box .select_list .slick-slide:first-child { 
+            margin-left: 0;
         }
         .section_cont .cont_sel_box .select_list .select_item:hover:after {
             border: 2px solid #4f80ff;
@@ -348,6 +356,7 @@
             height: 44px;
             margin-top: -22px;
             z-index: 30;
+            cursor: pointer;
         }
         .section_cont .cont_sel_box .btn_next {
             @include PositionRT(absolute, 22px, 50%);
@@ -355,6 +364,7 @@
             height: 44px;
             margin-top: -22px;
             z-index: 30;
+            cursor: pointer;
         }
         .section_cont .sound_type .obj_list .thmb,
         .section_cont .sound_type .select_list .select_item .thmb {
