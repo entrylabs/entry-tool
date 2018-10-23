@@ -60,7 +60,7 @@ class WriteBox extends Component {
     drawEffects() {
         return Object.keys(this.state.effects).map((key) => {
             const effect = this.state.effects[key];
-            let className = Styles['imbtn_pop_font_' + key] + ' ' + CommonUtils.toggleClass(effect.apply, Styles.on);
+            let className = Styles.style_link + " " + Styles['imbtn_pop_font_' + key] + ' ' + CommonUtils.toggleClass(effect.apply, Styles.on);
             return (
                 <a href="#NULL" key={key} className={className} data-effect={key} title={effect.text}>
                     <span className="blind">글자 {effect.text}</span>
@@ -97,37 +97,60 @@ class WriteBox extends Component {
                 <div className={Styles.cont_box}>
                     <div className={Styles.write_box}>
                         <div className={Styles.write_set}>
-                            <div className={Styles.select_box}>
-                                <a href="#NULL" className={Styles.select + " " + Styles.imico_pop_select_arr} title="글꼴">
+                            {/* [D] 링크가 클릭되면 pop_selectbox클래스에 on 클래스 추가  */}
+                            <div className={`${Styles.pop_selectbox} ${Styles.on}`}>
+                                <a href="#" className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`} title="글꼴">
                                     NanumGothicOTF
                                 </a>
-                                <div className={Styles.layer_box}>
-                                    <ul className="list">
-                                        <li>
-                                            <a href="#NULL" className={Styles.list_lnk}>
-                                                Gothic
-                                            </a>
-                                            <a href="#NULL" className={Styles.list_lnk}>
-                                                Gothic
-                                            </a>
-                                            <a href="#NULL" className={Styles.list_lnk}>
-                                                Gothic
-                                            </a>
-                                            <a href="#NULL" className={Styles.list_lnk}>
-                                                Gothic
-                                            </a>
-                                        </li>
-                                    </ul>
+                                {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                {/* 툴팁 화살표 위치를 변경하려면 arr 요소에서 margin-left:0;left: 원하는 값 으로 style이 정의 되어야 합니다. */}
+                                <div className={Styles.tooltip_box}>
+                                    <div className={Styles.tooltip_inner}>
+                                        <ul className={Styles.select_list}>
+                                            <li className={Styles.list_item}>
+                                                <a href="#" className={Styles.list_link}>
+                                                    바탕체
+                                                </a>
+                                            </li>
+                                            <li className={Styles.list_item}>
+                                                <a href="#" className={Styles.list_link}>
+                                                    명조체
+                                                </a>
+                                            </li>
+                                            <li className={Styles.list_item}>
+                                                <a href="#" className={Styles.list_link}>
+                                                    고딕체
+                                                </a>
+                                            </li>
+                                            <li className={Styles.list_item}>
+                                                <a href="#" className={Styles.list_link}>
+                                                    필기체
+                                                </a>
+                                            </li>
+                                            <li className={Styles.list_item}>
+                                                <a href="#" className={Styles.list_link}>
+                                                    한라산체
+                                                </a>
+                                            </li>
+                                            <li className={Styles.list_item}>
+                                                <a href="#" className={Styles.list_link}>
+                                                    코딩고딕체
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <span className={Styles.arr}><i></i></span>
                                 </div>
                             </div>
+
                             <div className={Styles.font_style_box} onClick={this.applyEffect}>
+                                {/* 링크가 클릭되면 on 클래스 토글 */}
                                 {this.drawEffects()}
                             </div>
                             <div className={Styles.write_type_box} onClick={this.changeWriteType}>
-                                <a href="#NULL" className={CommonUtils.toggleClass(this.state.writeType === 'one', Styles.on)}
-                                   data-type="one">한줄쓰기</a>
-                                <a href="#NULL" className={CommonUtils.toggleClass(this.state.writeType === 'multi', Styles.on)}
-                                   data-type="multi">여러 줄 쓰기</a>
+                                {/* 링크가 클릭되면 on 클래스 토글 */}
+                                <a href="#" className={CommonUtils.toggleClass(this.state.writeType === 'one', Styles.on)} data-type="one">한줄쓰기</a>
+                                <a href="#" className={CommonUtils.toggleClass(this.state.writeType === 'multi', Styles.on)} data-type="multi">여러 줄 쓰기</a>
                             </div>
                         </div>
                         {this.drawWriteBox()}
@@ -169,12 +192,12 @@ class WriteBox extends Component {
     oneLine() {
         return (
             <div className={Styles.input_box}>
-                <div className={Styles.input_inner} onFocus={this.initInput}>
+                <div className={Styles.input_inner}>
                     {/* input에 포커스가 가거나 글자가 들어가면 label을 display: none 처리 해주세요 */}
                     <label htmlFor="inpt">
                         글상자의 내용을 입력하세요.
                     </label>
-                    <input type="text" id="inpt" name="inpt"/>
+                    <input type="text" id="inpt" name="inpt" />
                 </div>
                 <ul className={Styles.list}>
                     <li>

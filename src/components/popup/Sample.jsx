@@ -25,6 +25,306 @@ class Sample extends Component {
     render() {
         return (
             <div>
+                {/* 툴팁  - 이메일이 없는 경우 */}
+                <div className="popup_wrap">
+                    <header className="pop_header">
+                        <h1>공통 툴팁</h1>
+                        <button onClick={this.close} className="btn_back imbtn_pop_back">
+                            <span className="blind">뒤로가기</span>
+                        </button>
+                    </header>
+                    <section className="pop_content login_area">
+                        <section className="login_header">
+                            <h2 className="tit imico_entrylogo">
+                                <span className="blind">entry</span>
+                            </h2>
+                            <p className="dsc">
+                                소프트웨어의 첫걸음,<br />
+                                엔트리에 오신 것을 환영 합니다.
+                            </p>
+                        </section>
+                        {/* 마크업 확인용 더미 스타일 입니다. */}
+                        <section style={{ position: 'relative', height: '400px' }}>
+                            {/* 툴팁의 가로값은 tooltip_box에서 style로 적용하면 됩니다. */}
+                            <div className="tooltip_box" style={{ width: '360px' }}>
+                                {/* padding은 마크업 확인용 더미 스타일 입니다. */}
+                                <div className="tooltip_inner" style={{ padding: '10px' }}>
+                                    기본 툴팁은 화살표가 가운데에 존재.<br /><br />
+                                    툴팁의 넓이값은 tooltip_box에서 style: width <br />
+                                    위치는 left, top 값으로 위치 조정. <br />
+                                    tooltip_inner는 각각 ui 스타일에 맞게 css 분기용 임.
+                                </div>
+                                <span className="arr"><i></i></span>
+                            </div>
+
+                            <div className="tooltip_box" style={{ width: '400px', left: '400px' }}>
+                                {/* 마크업 확인용 더미 스타일 입니다. */}
+                                <div className="tooltip_inner" style={{ padding: '10px' }}>
+                                    화살표 위치 변경은 <br />
+                                    arr 클래스에 free 클래스 추가, <br />
+                                    style= "left: 값" 으로 조정
+                                </div>
+                                <span className="arr free" style={{ left: '20px' }}><i></i></span>
+                            </div>
+
+                            <div className="tooltip_box up" style={{ width: '400px', left: '0', top: '200px' }}>
+                                {/* padding은 마크업 확인용 더미 스타일 입니다. */}
+                                <div className="tooltip_inner" style={{ padding: '10px' }}>
+                                    위쪽 화살표는 tooltip_box에 up 클래스 추가<br />
+                                    나머지 위치 조정은 동일함.
+                                </div>
+                                <span className="arr"><i></i></span>
+                            </div>
+
+                            <div className="tooltip_box up" style={{ width: '400px', left: '500px', top: '200px' }}>
+                                {/* padding은 마크업 확인용 더미 스타일 입니다. */}
+                                <div className="tooltip_inner" style={{ padding: '10px', backgroundColor: 'orange' }}>
+                                    배경색은 backgroundColor 값으로 조정 <br />
+                                    배경색 변경은 arr 안에 있는 i 요소에도 동일하게 적용해야함.
+                                </div>
+                                <span className="arr"><i style={{ backgroundColor: 'orange' }}></i></span>
+                            </div>
+                        </section>
+                    </section>
+                </div>
+
+                {/* 회원가입 팝업5 - 이메일이 없는 경우 */}
+                <div className="popup_wrap">
+                    <header className="pop_header">
+                        <h1>회원가입</h1>
+                        <button onClick={this.close} className="btn_back imbtn_pop_back">
+                            <span className="blind">뒤로가기</span>
+                        </button>
+                    </header>
+                    <section className="pop_content login_area">
+                        <section className="login_header">
+                            <h2 className="tit imico_entrylogo">
+                                <span className="blind">entry</span>
+                            </h2>
+                            <p className="dsc">
+                                소프트웨어의 첫걸음,<br />
+                                엔트리에 오신 것을 환영 합니다.
+                            </p>
+                        </section>
+                        <section className="result_cont imico_signup">
+                            <strong className="result_tit">
+                                회원가입이 완료되었습니다.
+                            </strong>
+                            <div className="pop_btn_box">
+                                <a href="#" className="active">확인</a>
+                            </div>
+                        </section>
+                    </section>
+                </div>
+
+                {/* 회원가입 팝업4 - 이메일이 있는 경우 */}
+                <div className="popup_wrap">
+                    <header className="pop_header">
+                        <h1>회원가입</h1>
+                        <button onClick={this.close} className="btn_back imbtn_pop_back">
+                            <span className="blind">뒤로가기</span>
+                        </button>
+                    </header>
+                    <section className="pop_content login_area">
+                        <section className="login_header">
+                            <h2 className="tit imico_entrylogo">
+                                <span className="blind">entry</span>
+                            </h2>
+                            <p className="dsc">
+                                소프트웨어의 첫걸음,<br />
+                                엔트리에 오신 것을 환영 합니다.
+                            </p>
+                        </section>
+                        <section className="result_cont imico_signup">
+                            <strong className="result_tit">
+                                회원가입이 완료되었습니다.
+                            </strong>
+                            <p className="result_dsc">
+                                입력된 이메일 주소로 인증 메일이 발송되었습니다. <br />
+                                이메일 주소를 인증해주세요.
+                            </p>
+                            <div className="pop_btn_box">
+                                <a href="#" className="active">확인</a>
+                            </div>
+                        </section>
+                    </section>
+                </div>
+
+                {/* 회원가입 팝업3 */}
+                <div className="popup_wrap">
+                    <header className="pop_header">
+                        <h1>회원가입</h1>
+                        <button onClick={this.close} className="btn_back imbtn_pop_back">
+                            <span className="blind">뒤로가기</span>
+                        </button>
+                    </header>
+                    <section className="pop_content login_area">
+                        <section className="login_header">
+                            <h2 className="tit imico_entrylogo">
+                                <span className="blind">entry</span>
+                            </h2>
+                            <p className="dsc">
+                                소프트웨어의 첫걸음,<br />
+                                엔트리에 오신 것을 환영 합니다.
+                            </p>
+                        </section>
+                        <section className="login_cont">
+                            <div className="depth_list">
+                                <span className="on">1</span>
+                                <span className="on">2</span>
+                                {/* [D] 최종 단계에 있을 곳에 <em className="blind">단계</em> 찍어주세요  */}
+                                <span className="on">3<em className="blind">단계</em></span>
+                            </div>
+                            <h3 className="cont_tit">개인정보 입력</h3>
+                            <div className="input_box">
+                                {/* [D] 링크가 클릭되면 pop_selectbox클래스에 on 클래스 추가  */}
+                                <div className="pop_selectbox">
+                                    <em className="inpt_label">
+                                        학년 <em className="chk_point">(필수)</em>
+                                    </em>
+                                    <a href="#" className="select_link imico_pop_select_arr_down">
+                                        학년을 선택하세요.
+                                    </a>
+                                    {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                    {/* 툴팁 화살표 위치를 변경하려면 arr 요소에서 margin-left:0;left: 원하는 값 으로 style이 정의 되어야 합니다. */}
+                                    <div className="tooltip_box">
+                                        <div className="tooltip_inner">
+                                            <ul className="select_list">
+                                                <li className="list_item">
+                                                    <a href="#" className="list_link">
+                                                        초등 1학년
+                                                    </a>
+                                                </li>
+                                                <li className="list_item">
+                                                    <a href="#" className="list_link">
+                                                        초등 2학년
+                                                    </a>
+                                                </li>
+                                                <li className="list_item">
+                                                    <a href="#" className="list_link">
+                                                        초등 3학년
+                                                    </a>
+                                                </li>
+                                                <li className="list_item">
+                                                    <a href="#" className="list_link">
+                                                        초등 4학년
+                                                    </a>
+                                                </li>
+                                                <li className="list_item">
+                                                    <a href="#" className="list_link">
+                                                        초등 5학년
+                                                    </a>
+                                                </li>
+                                                <li className="list_item">
+                                                    <a href="#" className="list_link">
+                                                        초등 6학년
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <span className="arr"><i></i></span>
+                                    </div>
+                                </div>
+
+                                <div className="pop_selectbox on">
+                                    <em className="inpt_label">
+                                        성별 <em className="chk_point">(필수)</em>
+                                    </em>
+                                    <a href="#" className="select_link imico_pop_select_arr_down">
+                                        성별을 선택하세요.
+                                    </a>
+                                    {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                    <div className="tooltip_box">
+                                        <div className="tooltip_inner">
+                                            <ul className="select_list">
+                                                <li className="list_item">
+                                                    <a href="#" className="list_link">
+                                                        남자
+                                                    </a>
+                                                </li>
+                                                <li className="list_item">
+                                                    <a href="#" className="list_link">
+                                                        여자
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <span className="arr"><i></i></span>
+                                    </div>
+                                </div>
+
+                                <div className="pop_inpt_text">
+                                    <label htmlFor="inpt_email" className="inpt_label">
+                                        이메일 <em className="chk_point">(선택)</em>
+                                    </label>
+                                    <input type="text" id="inpt_email" name="inpt_email" placeholder="이메일 주소를 입력하세요." />
+                                    <p className="email_dsc">
+                                        * 비밀번호를 잊은 경우 이메일로 비밀번호를 찾을 수 있습니다.
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="pop_btn_box">
+                                <a href="#">이전</a>
+                                <a href="#" className="active">다음</a>
+                            </div>
+                        </section>
+                    </section>
+                </div>
+
+                {/* 회원가입 팝업2 */}
+                <div className="popup_wrap">
+                    <header className="pop_header">
+                        <h1>회원가입</h1>
+                        <button onClick={this.close} className="btn_back imbtn_pop_back">
+                            <span className="blind">뒤로가기</span>
+                        </button>
+                    </header>
+                    <section className="pop_content login_area">
+                        <section className="login_header">
+                            <h2 className="tit imico_entrylogo">
+                                <span className="blind">entry</span>
+                            </h2>
+                            <p className="dsc">
+                                소프트웨어의 첫걸음,<br />
+                                엔트리에 오신 것을 환영 합니다.
+                            </p>
+                        </section>
+                        <section className="login_cont">
+                            <div className="depth_list">
+                                <span className="on">1</span>
+                                {/* [D] 최종 단계에 있을 곳에 <em className="blind">단계</em> 찍어주세요  */}
+                                <span className="on">2<em className="blind">단계</em></span>
+                                <span>3</span>
+                            </div>
+                            <h3 className="cont_tit">아이디, 비밀번호 입력</h3>
+                            <div className="input_box">
+                                <div className="pop_inpt_text">
+                                    <label htmlFor="inpt_id" className="inpt_label">
+                                        아이디 입력 <em className="chk_point">(필수)</em>
+                                    </label>
+                                    <input type="text" id="inpt_id" name="inpt_id" placeholder="4~20자의 영문 대 소문자, 숫자를 사용하세요." />
+                                </div>
+                                <div className="pop_inpt_text">
+                                    <label htmlFor="inpt_pw1" className="inpt_label">
+                                        비밀번호 입력 <em className="chk_point">(필수)</em>
+                                    </label>
+                                    <input type="password" id="inpt_pw1" name="inpt_pw1" placeholder="5~20자의 영문 대 소문자, 숫자를 사용하세요." />
+                                </div>
+                                <div className="pop_inpt_text">
+                                    <label htmlFor="inpt_pw2" className="inpt_label">
+                                        비밀번호 확인 <em className="chk_point">(필수)</em>
+                                    </label>
+                                    <input type="password" id="inpt_pw2" name="inpt_pw2" placeholder="비밀번호를 한번 더 입력하세요." />
+                                </div>
+
+                            </div>
+                            <div className="pop_btn_box">
+                                <a href="#">이전</a>
+                                <a href="#" className="active">다음</a>
+                            </div>
+                        </section>
+                    </section>
+                </div>
                 {/* 회원가입 팝업1 */}
                 <div className={Styles.popup_wrap}>
                     <header className={Styles.pop_header}>
@@ -992,48 +1292,71 @@ class Sample extends Component {
                             <div className={Styles.cont_box}>
                                 <div className={Styles.write_box}>
                                     <div className={Styles.write_set}>
-                                        <div className={Styles.select_box}>
-                                            <a href="#" className={`${Styles.select} ${Styles.imico_pop_select_arr}`} title="글꼴">
+                                        {/* [D] 링크가 클릭되면 pop_selectbox클래스에 on 클래스 추가  */}
+                                        <div className={`${Styles.pop_selectbox} ${Styles.on}`}>
+                                            <a href="#" className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`} title="글꼴">
                                                 NanumGothicOTF
                                             </a>
-                                            <div className={Styles.layer_box}>
-                                                <ul className={Styles.list}>
-                                                    <li>
-                                                        <a href="#" className={Styles.list_lnk}>
-                                                            Gothic
-                                                        </a>
-                                                        <a href="#" className={Styles.list_lnk}>
-                                                            Gothic
-                                                        </a>
-                                                        <a href="#" className={Styles.list_lnk}>
-                                                            Gothic
-                                                        </a>
-                                                        <a href="#" className={Styles.list_lnk}>
-                                                            Gothic
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                                            {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                            {/* 툴팁 화살표 위치를 변경하려면 arr 요소에서 margin-left:0;left: 원하는 값 으로 style이 정의 되어야 합니다. */}
+                                            <div className={Styles.tooltip_box}>
+                                                <div className={Styles.tooltip_inner}>
+                                                    <ul className={Styles.select_list}>
+                                                        <li className={Styles.list_item}>
+                                                            <a href="#" className={Styles.list_link}>
+                                                                바탕체
+                                                            </a>
+                                                        </li>
+                                                        <li className={Styles.list_item}>
+                                                            <a href="#" className={Styles.list_link}>
+                                                                명조체
+                                                            </a>
+                                                        </li>
+                                                        <li className={Styles.list_item}>
+                                                            <a href="#" className={Styles.list_link}>
+                                                                고딕체
+                                                            </a>
+                                                        </li>
+                                                        <li className={Styles.list_item}>
+                                                            <a href="#" className={Styles.list_link}>
+                                                                필기체
+                                                            </a>
+                                                        </li>
+                                                        <li className={Styles.list_item}>
+                                                            <a href="#" className={Styles.list_link}>
+                                                                한라산체
+                                                            </a>
+                                                        </li>
+                                                        <li className={Styles.list_item}>
+                                                            <a href="#" className={Styles.list_link}>
+                                                                코딩고딕체
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <span className={Styles.arr}><i></i></span>
                                             </div>
                                         </div>
+
                                         <div className={Styles.font_style_box}>
                                             {/* 링크가 클릭되면 on 클래스 토글 */}
-                                            <a href="#" className={Styles.imbtn_pop_font_bold} title="굵게">
-                                                <span className="blind">글자 굵게</span>
+                                            <a href="#" className={`${Styles.style_link} ${Styles.imbtn_pop_font_bold} ${Styles.on}`} title="굵게">
+                                                <span className={Styles.blind}>글자 굵게</span>
                                             </a>
-                                            <a href="#" className={Styles.imbtn_pop_font_underline} title="밑줄">
-                                                <span className="blind">글자 밑줄</span>
+                                            <a href="#" className={`${Styles.style_link} ${Styles.imbtn_pop_font_underline}`} title="밑줄">
+                                                <span className={Styles.blind}>글자 밑줄</span>
                                             </a>
-                                            <a href="#" className={Styles.imbtn_pop_font_italic} title="기울임">
-                                                <span className="blind">글자 기울기</span>
+                                            <a href="#" className={`${Styles.style_link} ${Styles.imbtn_pop_font_italic}`} title="기울임">
+                                                <span className={Styles.blind}>글자 기울기</span>
                                             </a>
-                                            <a href="#" className={Styles.imbtn_pop_font_through} title="취소선">
-                                                <span className="blind">글자 취소선</span>
+                                            <a href="#" className={`${Styles.style_link} ${Styles.imbtn_pop_font_through}`} title="취소선">
+                                                <span className={Styles.blind}>글자 취소선</span>
                                             </a>
-                                            <a href="#" className={Styles.imbtn_pop_font_color} title="글자색">
-                                                <span className="blind">글자 색</span>
+                                            <a href="#" className={`${Styles.style_link} ${Styles.imbtn_pop_font_color}`} title="글자색">
+                                                <span className={Styles.blind}>글자 색</span>
                                             </a>
-                                            <a href="#" className={Styles.imbtn_pop_font_paint} title="배경색">
-                                                <span className="blind">글자 배경색</span>
+                                            <a href="#" className={`${Styles.style_link} ${Styles.imbtn_pop_font_paint}`} title="배경색">
+                                                <span className={Styles.blind}>글자 배경색</span>
                                             </a>
                                         </div>
                                         <div className={Styles.write_type_box}>
@@ -1060,10 +1383,6 @@ class Sample extends Component {
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
-                            <div className={Styles.pop_btn_box}>
-                                <a href="#">취소</a>
-                                <a href="#" className={Styles.active}>추가하기</a>
                             </div>
                         </div>
                     </section>
