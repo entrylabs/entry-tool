@@ -916,23 +916,23 @@ class Sample extends Component {
                 </div>
 
                 {/* 그리기 팝업 */}
-                <div className="popup_wrap">
-                    <header className="pop_header">
+                <div className={Styles.popup_wrap}>
+                    <header className={Styles.pop_header}>
                         <h1>오브젝트 추가하기</h1>
-                        <button onClick={this.close} className="btn_back imbtn_pop_back">
-                            <span className="blind">뒤로가기</span>
+                        <button onClick={this.close} className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}>
+                            <span className={Styles.blind}>뒤로가기</span>
                         </button>
                     </header>
-                    <section className="pop_content">
-                        <div className="section_navi">
-                            <ul className="list">
+                    <section className={Styles.pop_content}>
+                        <div className={Styles.section_navi}>
+                            <ul className={Styles.list}>
                                 <li>
                                     <a href="#">오브젝트 선택</a>
                                 </li>
                                 <li>
                                     <a href="#">파일 올리기</a>
                                 </li>
-                                <li className="on">
+                                <li className={Styles.on}>
                                     <a href="#">그리기</a>
                                 </li>
                                 <li>
@@ -940,20 +940,20 @@ class Sample extends Component {
                                 </li>
                             </ul>
                         </div>
-                        <div className="section_cont">
+                        <div className={Styles.section_cont}>
                             {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                            <h2 className="blind">그리기</h2>
-                            <div className="cont_box">
-                                <div className="draw_box">
-                                    <div className="thmb">
+                            <h2 className={Styles.blind}>그리기</h2>
+                            <div className={Styles.cont_box}>
+                                <div className={Styles.draw_box}>
+                                    <div className={Styles.thmb}>
                                         <img src="https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg" alt="" />
                                     </div>
-                                    <p className="draw_dsc">
+                                    <p className={Styles.draw_dsc}>
                                         그림을 그려 오브젝트로 저장할 수 있습니다.<br />
                                         그리기 화면으로 이동하시겠습니까?
                                     </p>
-                                    <div className="pop_btn_box">
-                                        <a href="#" className="active">이동하기</a>
+                                    <div className={Styles.pop_btn_box}>
+                                        <a href="#" className={Styles.active}>이동하기</a>
                                     </div>
                                 </div>
                             </div>
@@ -962,16 +962,16 @@ class Sample extends Component {
                 </div>
 
                 {/* 짧은 글상자 팝업 */}
-                <div className="popup_wrap">
-                    <header className="pop_header">
+                <div className={Styles.popup_wrap}>
+                    <header className={Styles.pop_header}>
                         <h1>오브젝트 추가하기</h1>
-                        <button onClick={this.close} className="btn_back imbtn_pop_back">
-                            <span className="blind">뒤로가기</span>
+                        <button onClick={this.close} className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}>
+                            <span className={Styles.blind}>뒤로가기</span>
                         </button>
                     </header>
-                    <section className="pop_content">
-                        <div className="section_navi">
-                            <ul className="list">
+                    <section className={Styles.pop_content}>
+                        <div className={Styles.section_navi}>
+                            <ul className={Styles.list}>
                                 <li>
                                     <a href="#">오브젝트 선택</a>
                                 </li>
@@ -981,76 +981,76 @@ class Sample extends Component {
                                 <li>
                                     <a href="#">그리기</a>
                                 </li>
-                                <li className="on">
+                                <li className={Styles.on}>
                                     <a href="#">글상자</a>
                                 </li>
                             </ul>
                         </div>
-                        <div className="section_cont">
+                        <div className={Styles.section_cont}>
                             {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                            <h2 className="blind">글상자</h2>
-                            <div className="cont_box">
-                                <div className="write_box">
-                                    <div className="write_set">
-                                        <div className="select_box">
-                                            <a href="#" className="select imico_pop_select_arr" title="글꼴">
+                            <h2 className={Styles.blind}>글상자</h2>
+                            <div className={Styles.cont_box}>
+                                <div className={Styles.write_box}>
+                                    <div className={Styles.write_set}>
+                                        <div className={Styles.select_box}>
+                                            <a href="#" className={`${Styles.select} ${Styles.imico_pop_select_arr}`} title="글꼴">
                                                 NanumGothicOTF
                                             </a>
-                                            <div className="layer_box">
-                                                <ul className="list">
+                                            <div className={Styles.layer_box}>
+                                                <ul className={Styles.list}>
                                                     <li>
-                                                        <a href="#" className="list_lnk">
+                                                        <a href="#" className={Styles.list_lnk}>
                                                             Gothic
                                                         </a>
-                                                        <a href="#" className="list_lnk">
+                                                        <a href="#" className={Styles.list_lnk}>
                                                             Gothic
                                                         </a>
-                                                        <a href="#" className="list_lnk">
+                                                        <a href="#" className={Styles.list_lnk}>
                                                             Gothic
                                                         </a>
-                                                        <a href="#" className="list_lnk">
+                                                        <a href="#" className={Styles.list_lnk}>
                                                             Gothic
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div className="font_style_box">
+                                        <div className={Styles.font_style_box}>
                                             {/* 링크가 클릭되면 on 클래스 토글 */}
-                                            <a href="#" className="imbtn_pop_font_bold on" title="굵게">
+                                            <a href="#" className={Styles.imbtn_pop_font_bold} title="굵게">
                                                 <span className="blind">글자 굵게</span>
                                             </a>
-                                            <a href="#" className="imbtn_pop_font_underline" title="밑줄">
+                                            <a href="#" className={Styles.imbtn_pop_font_underline} title="밑줄">
                                                 <span className="blind">글자 밑줄</span>
                                             </a>
-                                            <a href="#" className="imbtn_pop_font_italic" title="기울임">
+                                            <a href="#" className={Styles.imbtn_pop_font_italic} title="기울임">
                                                 <span className="blind">글자 기울기</span>
                                             </a>
-                                            <a href="#" className="imbtn_pop_font_through" title="취소선">
+                                            <a href="#" className={Styles.imbtn_pop_font_through} title="취소선">
                                                 <span className="blind">글자 취소선</span>
                                             </a>
-                                            <a href="#" className="imbtn_pop_font_color" title="글자색">
+                                            <a href="#" className={Styles.imbtn_pop_font_color} title="글자색">
                                                 <span className="blind">글자 색</span>
                                             </a>
-                                            <a href="#" className="imbtn_pop_font_paint" title="배경색">
+                                            <a href="#" className={Styles.imbtn_pop_font_paint} title="배경색">
                                                 <span className="blind">글자 배경색</span>
                                             </a>
                                         </div>
-                                        <div className="write_type_box">
+                                        <div className={Styles.write_type_box}>
                                             {/* 링크가 클릭되면 on 클래스 토글 */}
-                                            <a href="#" className="on">한줄쓰기</a>
+                                            <a href="#" className={Styles.on}>한줄쓰기</a>
                                             <a href="#">여러 줄 쓰기</a>
                                         </div>
                                     </div>
-                                    <div className="input_box">
-                                        <div className="input_inner">
+                                    <div className={Styles.input_box}>
+                                        <div className={Styles.input_inner}>
                                             {/* input에 포커스가 가거나 글자가 들어가면 label을 display: none 처리 해주세요 */}
                                             <label htmlFor="inpt">
                                                 글상자의 내용을 입력하세요.
                                             </label>
                                             <input type="text" id="inpt" name="inpt" />
                                         </div>
-                                        <ul className="list">
+                                        <ul className={Styles.list}>
                                             <li>
                                                 내용을 한 줄로만 작성할 수 있습니다.
                                             </li>
@@ -1061,9 +1061,9 @@ class Sample extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="pop_btn_box">
+                            <div className={Styles.pop_btn_box}>
                                 <a href="#">취소</a>
-                                <a href="#" className="active">추가하기</a>
+                                <a href="#" className={Styles.active}>추가하기</a>
                             </div>
                         </div>
                     </section>

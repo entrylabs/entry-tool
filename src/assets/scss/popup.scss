@@ -234,11 +234,11 @@
             border-radius: 6px;
             outline: none;
         }
-        .section_cont .cont_sel_box .select_list .slick-slide { 
-            display: inline-block; 
+        .section_cont .cont_sel_box .select_list .slick-slide {
+            display: inline-block;
             margin-left: 12px;
         }
-        .section_cont .cont_sel_box .select_list .slick-slide:first-child { 
+        .section_cont .cont_sel_box .select_list .slick-slide:first-child {
             margin-left: 0;
         }
         .section_cont .cont_sel_box .select_list .select_item:hover:after {
@@ -333,7 +333,7 @@
         }
         .section_cont .cont_sel_box .obj_list .thmb img {
             max-height:81.8181%;
-            
+
         }
         .section_cont .cont_sel_box .obj_list a {
             height: 120px;
@@ -669,7 +669,7 @@
             border: 1px solid #d6e9f4;
             border-radius: 6px;
             content: '';
-            
+
         }
         .section_cont .extend_block .list .thmb {
             height: 168px;
@@ -739,7 +739,7 @@
             height: 64px;
             margin: -32px 0 0 -32px;
         }
-        
+
 
         // 공통 오브젝트 리스트
         .section_cont .obj_list {
@@ -786,7 +786,7 @@
             vertical-align: middle;
             content: '';
         }
-        
+
         .section_cont .obj_list .sjt {
             display: block;
             overflow: hidden;
@@ -1001,7 +1001,7 @@
         .result_cont .result_dsc + .pop_btn_box {
             padding: 38px 0 0;
         }
-        
+
     }
 
     // 공통 버튼 스타일
@@ -1036,7 +1036,7 @@
         font-weight: 600;
         color: #2c313d;
         .chk_point {
-            color: #4f80ff;       
+            color: #4f80ff;
         }
     }
     // 공통 체크박스
@@ -1056,7 +1056,7 @@
             vertical-align: middle;
         }
         .chk_point {
-            color: #4f80ff;       
+            color: #4f80ff;
         }
     }
     // 공통 인풋박스
@@ -1080,13 +1080,13 @@
         input::-webkit-input-placeholder,
         input::-moz-placeholder,
         input:-ms-input-placeholder,
-        input:-moz-placeholder 
-         {
+        input:-moz-placeholder
+        {
             font-weight: 600;
             color: #979797;
         }
     }
-    
+
     //공통 셀렉트 박스
     .pop_selectbox {
         position: relative;
@@ -1120,7 +1120,7 @@
         }
         & + .pop_inpt_text {
             margin-top: 40px;
-        } 
+        }
     }
     .pop_selectbox .tooltip_box {
         display: none;
@@ -1156,7 +1156,7 @@
             top: 0;
             width: 14px;
             height: 14px;
-            background-color: #fff; 
+            background-color: #fff;
             border: 1px solid #e2e2e2;
             box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
             transform:translate(-50%, 50%) rotate(45deg);
@@ -1270,7 +1270,7 @@
             height: 26px;
         }
         .color_graph .graph_list .graph_box .bar {
-            overflow: hidden;            
+            overflow: hidden;
             height: 24px;
             border: 1px solid #e2e2e2;
             border-radius: 26px;
