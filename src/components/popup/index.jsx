@@ -1,19 +1,31 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { visibleAction } from '../../actions';
-import '../../assets/scss/popup.scss';
+import { fetchItems, applySelected, visibleAction } from '../../actions';
+import Styles from '../../assets/scss/popup.scss';
 
 import Navigation from './Navigation';
-import SelectWithSideBar from './Contents/SelectWithSideBar';
+import Select from './Contents/Select';
 import FileUpload from './Contents/FileUpload';
 import WriteBox from './Contents/WriteBox';
 import Draw from './Contents/Draw';
-import SelectBig from './Contents/SelectBig';
+import { POPUP_TYPE } from '../../constatns';
 
 class Sprite extends Component {
     constructor(props) {
         super(props);
+        this.options = POPUP_TYPE[this.props.type];
+        this.state = {
+            navigation: Object.keys(this.options.navigations || [])[0],
+        };
+
+        this.onNavigationClicked = this.onNavigationClicked.bind(this);
+    }
+
+    componentWillMount() {
+        if (!this.options.data) {
+            this.props.fetchItems(this.props.type, Object.keys(this.options.sidebar || [])[0]);
+        }
+        this.props.applySelected([]);
     }
 
     componentDidMount() {
@@ -30,14 +42,24 @@ class Sprite extends Component {
         visibleAction(false);
     };
 
+    onNavigationClicked(e) {
+        e.preventDefault();
+        this.setState({ navigation: e.currentTarget.getAttribute('data-key') });
+    }
+
     setContent = function() {
-        const list = this.props.options.navigations;
-        const defaultNav = <Navigation list={list} search={false}/>;
-        let selected = this.props.popupReducer.navigation || Object.keys(list)[0];
+        const navSettings = {
+            list: this.options.navigations,
+            selected: this.state.navigation,
+            onClicked: this.onNavigationClicked,
+            search: false,
+        };
+        const data = this.options.data || this.props.popupReducer.data || [];
+        const defaultNavigation = <Navigation {...navSettings}/>;
         const contents = {
             select: {
-                view: <SelectWithSideBar sidebar={this.props.options.sidebar}/>,
-                nav: <Navigation list={list} search={true}/>,
+                view: <Select type={'sidebar'} sidebar={this.options.sidebar} data={data}/>,
+                nav: <Navigation {...navSettings} search={true}/>,
             },
             upload: {
                 view: <FileUpload/>,
@@ -49,14 +71,15 @@ class Sprite extends Component {
                 view: <WriteBox/>,
             },
             expansion: {
-                view: <SelectBig/>,
+                view: <Select type={'bigicon'} data={data}/>,
                 nav: true,
             },
         };
+
         return (
             <div>
-                {contents[selected].nav || defaultNav}
-                {contents[selected].view}
+                {contents[navSettings.selected].nav || defaultNavigation}
+                {contents[navSettings.selected].view}
             </div>
         );
     };
@@ -64,14 +87,14 @@ class Sprite extends Component {
     render() {
         return (
             <div>
-                <div className="popup_wrap">
-                    <header className="pop_header">
+                <div className={Styles.popup_wrap}>
+                    <header className={Styles.pop_header}>
                         <h1>오브젝트 추가하기</h1>
-                        <button onClick={this.close} className="btn_back imbtn_pop_back">
-                            <span className="blind">뒤로가기</span>
+                        <button onClick={this.close} className={Styles.btn_back + " " +Styles.imbtn_pop_back}>
+                            <span className={Styles.blind}>뒤로가기</span>
                         </button>
                     </header>
-                    <section className="pop_content">
+                    <section className={Styles.pop_content}>
                         {this.setContent()}
                     </section>
                 </div>
@@ -86,6 +109,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     visibleAction: (visible) => dispatch(visibleAction(visible)),
+    fetchItems: (type, category, subMenu) => dispatch(fetchItems(type, category, subMenu)),
+    applySelected: (list) => dispatch(applySelected(list)),
 });
 
 export default connect(

@@ -121,6 +121,8 @@
         "extends": "react-app"
     },
     "dependencies": {
-        "lodash": "^4.17.11"
+        "axios": "^0.18.0",
+        "lodash": "^4.17.11",
+        "react-slick": "^0.23.2"
     }
 }

@@ -1,44 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { POPUP_COMMON, updateCommonData } from '../../actions';
+import { CommonUtils } from '../../utils/Common';
+import Styles from '../../assets/scss/popup.scss';
 
 class Navigation extends Component {
     constructor(props) {
         super(props);
 
-        this.getList = this.getList.bind(this);
+        this.drawNavigation = this.drawNavigation.bind(this);
         this.drawSearchBox = this.drawSearchBox.bind(this);
-        this.onNavigationCliecked = this.onNavigationCliecked.bind(this);
     }
 
-    onNavigationCliecked(e) {
-        e.preventDefault();
-        this.props.updateNavigation(e.currentTarget.getAttribute("data-key"));
-    }
-
-    getList() {
+    drawNavigation() {
         const list = this.props.list;
-        const navigation = this.props.popupReducer.navigation;
-        if (!list) {
-            return null;
+        const navigation = this.props.selected;
+        if(!list) {
+            return "";
         }
         return Object.keys(list).map((item, index) => {
-            if(navigation == item ||!navigation && index == 0){
-                return <li key={item} className="on" onClick={this.onNavigationCliecked} data-key={item}><a href="#">{list[item].name}</a></li>;
-            }
-            return <li key={item} onClick={this.onNavigationCliecked} data-key={item}><a href="#">{list[item].name}</a></li>;
+            return (
+                <li key={item}
+                    className={CommonUtils.toggleClass(navigation === item || (!navigation && index === 0), Styles.on)}
+                    onClick={this.props.onClicked} data-key={item}>
+                    <a href="#NULL">{list[item].name}</a>
+                </li>
+            );
         });
     }
 
     drawSearchBox() {
         if (this.props.search) {
             return (
-                <div className="srch_box">
+                <div className={Styles.srch_box}>
                     <label htmlFor="srch">
                         <input type="text" id="srch" name=""/>
                     </label>
-                    <button type="button" className="btn_srch imbtn_pop_srch">
-                        <span className="blind">검색</span>
+                    <button type="button" className={`${Styles.btn_srch} ${Styles.imbtn_pop_srch}`}>
+                        <span className={Styles.blind}>검색</span>
                     </button>
                 </div>
             );
@@ -47,9 +45,9 @@ class Navigation extends Component {
 
     render() {
         return (
-            <div className="section_navi">
-                <ul className="list">
-                    {this.getList()}
+            <div className={Styles.section_navi}>
+                <ul className={Styles.list}>
+                    {this.drawNavigation()}
                 </ul>
                 {this.drawSearchBox()}
             </div>
@@ -62,11 +60,7 @@ const mapStateToProps = (state) => ({
     ...state,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    updateNavigation: (navigation) => dispatch(updateCommonData(POPUP_COMMON, {navigation})),
-});
-
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    null,
 )(Navigation);
