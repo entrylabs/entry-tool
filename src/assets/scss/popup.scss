@@ -56,12 +56,10 @@
             line-height: 42px;
             outline: 0;
         }
-        .section_navi .list .on,
-        .section_navi .list li:hover {
+        .section_navi .list .on {
             background-color: #4f80ff;
         }
-        .section_navi .list .on a,
-        .section_navi .list li:hover a {
+        .section_navi .list .on a {
             color: #fff;
         }
         .section_navi .srch_box {
@@ -121,13 +119,11 @@
             letter-spacing: -0.3px;
             line-height: 49px;
         }
-        .section_cont .menu_list li:hover,
         .section_cont .menu_list .on {
             border-color: #4f80ff;
             background-color: #4f80ff;
             z-index: 10;
         }
-        .section_cont .menu_list li:hover a,
         .section_cont .menu_list .on a {
             color: #fff;
         }
@@ -161,8 +157,7 @@
             letter-spacing: -0.3px;
             line-height: 26px;
         }
-        .section_cont .sub_menu a.on,
-        .section_cont .sub_menu a:hover {
+        .section_cont .sub_menu a.on {
             border-color: #4f80ff;
             background-color: #fff;
             color: #4f80ff;
@@ -939,7 +934,7 @@
             line-height: 18px;
         }
         .login_cont .input_box {
-            width: 312px;
+            width: 314px;
             margin: 40px auto 0;
         }
         .login_cont .input_box .pop_selectbox .select_link {
@@ -955,7 +950,7 @@
         }
         .login_cont .input_box .pop_inpt_text .email_dsc {
             margin-top: 11px;
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 600;
             color: #4f80ff;
             letter-spacing: -0.2px;
@@ -969,7 +964,7 @@
             padding: 40px 0 80px;
         }
         .login_cont .pop_btn_box a {
-            margin: 0 10px;
+            margin: 0 11px;
         }
         .result_cont {
             padding: 80px 0 135px;
@@ -1226,6 +1221,10 @@
         .color_box .color_list .item {
             margin-top: 16px;
             height: 28px;
+        }
+        .color_box .color_list .item label {
+            display: inline-block;
+            width: 48px;
         }
         .color_box .color_list .item label,
         .color_graph .graph_list .item label {

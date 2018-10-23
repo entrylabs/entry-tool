@@ -536,8 +536,8 @@ class Popup extends Component {
                             </div>
                             <div className="agree_box">
                                 <span className="pop_checkbox">
-                                    <input type="checkbox" id="agree_chk" name="agree_chk" className="blind" />
-                                    <label htmlFor="agree_chk" className="inpt_label imbtn_pop_checked">
+                                    <input type="checkbox" id="agree_chk2" name="agree_chk2" className="blind" />
+                                    <label htmlFor="agree_chk2" className="inpt_label imbtn_pop_checked">
                                         <span className="text">
                                             개인정보 수집 및 이용동의 <em className="chk_point">(필수)</em>
                                         </span>
@@ -1304,7 +1304,7 @@ class Popup extends Component {
                                         </div>
                                         <div className="write_type_box">
                                             {/* 링크가 클릭되면 on 클래스 토글 */}
-                                            <a href="#" className="on">한줄쓰기</a>
+                                            <a href="#" className="on">한 줄 쓰기</a>
                                             <a href="#">여러 줄 쓰기</a>
                                         </div>
                                     </div>
@@ -1511,7 +1511,7 @@ class Popup extends Component {
                                         </div>
                                         <div className="write_type_box">
                                             {/* 링크가 클릭되면 on 클래스 토글 */}
-                                            <a href="#">한줄쓰기</a>
+                                            <a href="#">한 줄 쓰기</a>
                                             <a href="#" className="on">여러 줄 쓰기</a>
                                         </div>
                                     </div>
@@ -2174,7 +2174,7 @@ class Popup extends Component {
                                                     아래와 같은 그림은 이용약관 및 관련 법률에 의해 제재를 받으실 수 있습니다.
                                                 </strong>
                                                 <p className="dsc">
-                                                    폭력적이고 잔인한 그림<br />
+                                                    폭력적이고 잔인줄 그림<br />
                                                     선정적인 신체 노출 그림<br />
                                                     불쾌감을 주거나 혐오감을 일으키는 그림
                                                 </p>
