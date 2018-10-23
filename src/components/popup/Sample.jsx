@@ -538,8 +538,8 @@ class Sample extends Component {
                             </div>
                             <div className={Styles.agree_box}>
                                 <span className={Styles.pop_checkbox}>
-                                    <input type="checkbox" id="agree_chk" name="agree_chk" className={Styles.blind} />
-                                    <label htmlFor="agree_chk" className={Styles.imbtn_pop_checked}>
+                                    <input type="checkbox" id="agree_chk2" name="agree_chk2" className={Styles.blind} />
+                                    <label htmlFor="agree_chk2" className={Styles.imbtn_pop_checked}>
                                         <span className="text">
                                             개인정보 수집 및 이용동의 <em className={Styles.chk_point}>(필수)</em>
                                         </span>
@@ -1361,7 +1361,7 @@ class Sample extends Component {
                                         </div>
                                         <div className={Styles.write_type_box}>
                                             {/* 링크가 클릭되면 on 클래스 토글 */}
-                                            <a href="#" className={Styles.on}>한줄쓰기</a>
+                                            <a href="#" className={Styles.on}>한 줄 쓰기</a>
                                             <a href="#">여러 줄 쓰기</a>
                                         </div>
                                     </div>
@@ -1465,7 +1465,7 @@ class Sample extends Component {
                                         </div>
                                         <div className="write_type_box">
                                             {/* 링크가 클릭되면 on 클래스 토글 */}
-                                            <a href="#">한줄쓰기</a>
+                                            <a href="#">한 줄 쓰기</a>
                                             <a href="#" className="on">여러 줄 쓰기</a>
                                         </div>
                                     </div>
