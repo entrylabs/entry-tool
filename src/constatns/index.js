@@ -1,7 +1,3 @@
-export const api = {
-    base: 'http://localhost:4000',
-};
-
 export const POPUP_TYPE = {
     sprite: {
         navigations: {

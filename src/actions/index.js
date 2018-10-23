@@ -16,7 +16,7 @@ export function fetchItems(type, category = null, subMenu = undefined) {
     if (subMenu === 'all') {
         subMenu = '';
     }
-    const url = [api.base, 'api', type, 'browse/default', category, subMenu].join('/');
+    const url = ['api', type, 'browse/default', category, subMenu].join('/');
 
     let promise = _.memoize(url => {
         return axios.get(url);
