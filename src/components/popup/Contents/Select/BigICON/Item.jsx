@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { applySelected } from '../../../../../actions';
 import { CommonUtils } from '../../../../../utils/Common';
+import Styles from '../../../../../assets/scss/popup.scss'
 
 class Item extends Component {
     constructor(props) {
@@ -29,13 +30,13 @@ class Item extends Component {
     render() {
         const { item } = this.props;
         return (
-            <li onClick={this.onItemClicked} className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, 'on')}>
-                <a href="#NULL" className="link">
-                    <div className="thmb"
+            <li onClick={this.onItemClicked} className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}>
+                <a href="#NULL" className={Styles.link}>
+                    <div className={Styles.thmb}
                          style={{ backgroundImage: 'url(\'https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg\')' }}>&nbsp;</div>
-                    <div className="inner_box">
-                        <strong className="sjt">{item.title.ko}</strong>
-                        <p className="dsc">
+                    <div className={Styles.inner_box}>
+                        <strong className={Styles.sjt}>{item.title.ko}</strong>
+                        <p className={Styles.dsc}>
                             버스번호, 노선별 경유 정류소,<br/>
                             첫차/막차 시간 등 시내버스 노선과<br/>
                             관련된 블록들의 모음

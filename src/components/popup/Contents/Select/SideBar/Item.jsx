@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { applySelected } from '../../../../../actions';
 import { CommonUtils } from '../../../../../utils/Common';
+import Styles from '../../../../../assets/scss/popup.scss'
 
 class Item extends Component {
     constructor(props) {
@@ -13,10 +14,10 @@ class Item extends Component {
 
     drawImage() {
         if (this.props.popupReducer.type && this.props.popupReducer.type === 'sound') {
-            return <div className="thmb imico_pop_sound_thmb">&nbsp;</div>;
+            return <div className={`${Styles.thmb} ${Styles.imico_pop_sound_thmb}`}>&nbsp;</div>;
         }
         return (
-            <div className="thmb">
+            <div className={Styles.thmb}>
                 <img src={CommonUtils.createImageUrl(this.props.item.pictures[0].filename)} alt=""/>
             </div>
         );
@@ -41,10 +42,10 @@ class Item extends Component {
 
     render() {
         return (
-            <li onClick={this.itemClicked} className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, 'on')}>
-                <a href="#NULL" className="link">
+            <li onClick={this.itemClicked} className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}>
+                <a href="#NULL" className={Styles.link}>
                     {this.drawImage()}
-                    <em className="sjt">{this.props.item.name}</em>
+                    <em className={Styles.sjt}>{this.props.item.name}</em>
                 </a>
             </li>
         );

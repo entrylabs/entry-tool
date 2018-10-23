@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchItems } from '../../../../../actions';
 import { CommonUtils } from '../../../../../utils/Common';
+import Styles from '../../../../../assets/scss/popup.scss'
 
 class SubMenu extends Component {
     constructor(props) {
@@ -18,7 +19,7 @@ class SubMenu extends Component {
         return Object.keys(this.props.menus).map((key, index) => {
             const item = this.props.menus[key];
             const subMenu = this.props.popupReducer.subMenu;
-            return <a href="#NULL" className={CommonUtils.toggleClass((subMenu === key || !subMenu) && index === 0, 'on')} key={item.name} data-key={key}>{item.name}</a>;
+            return <a href="#NULL" className={CommonUtils.toggleClass(subMenu === key || (!subMenu && index === 0), Styles.on)} key={item.name} data-key={key}>{item.name}</a>;
         });
     }
 
@@ -30,8 +31,8 @@ class SubMenu extends Component {
 
     render() {
         return (
-            <div className="sub_menu">
-                <div className="menu_inner" onClick={this.onSubMenuSelected}>
+            <div className={Styles.sub_menu}>
+                <div className={Styles.menu_inner} onClick={this.onSubMenuSelected}>
                     {this.drawSubMenu()}
                 </div>
             </div>

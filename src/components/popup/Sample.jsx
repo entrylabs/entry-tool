@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { visibleAction } from '../../actions';
-import '../../assets/scss/popup.scss';
+import Styles from '../../assets/scss/popup.scss';
+
 class Sample extends Component {
+    constructor(props) {
+        super(props);
+
+    }
     componentDidMount() {
         window.onpopstate = this.close;
         window.history.pushState({}, 'popup');
+
     }
     componentWillUnmount() {
         window.removeEventListener('onpopstate', this.close, false);
@@ -20,44 +26,44 @@ class Sample extends Component {
         return (
             <div>
                 {/* 회원가입 팝업1 */}
-                <div className="popup_wrap">
-                    <header className="pop_header">
+                <div className={Styles.popup_wrap}>
+                    <header className={Styles.pop_header}>
                         <h1>회원가입</h1>
-                        <button onClick={this.close} className="btn_back imbtn_pop_back">
-                            <span className="blind">뒤로가기</span>
+                        <button onClick={this.close} className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}>
+                            <span className={Styles.blind}>뒤로가기</span>
                         </button>
                     </header>
-                    <section className="pop_content login_area">
-                        <section className="login_header">
-                            <h2 className="tit imico_entrylogo">
-                                <span className="blind">entry</span>
+                    <section className={`${Styles.pop_content} ${Styles.login_area}`}>
+                        <section className={Styles.login_header}>
+                            <h2 className={`${Styles.tit} ${Styles.imico_entrylogo}`}>
+                                <span className={Styles.blind}>entry</span>
                             </h2>
-                            <p className="dsc">
+                            <p className={Styles.dsc}>
                                 소프트웨어의 첫걸음,<br />
                                 엔트리에 오신 것을 환영 합니다.
                             </p>
-                            <div className="pop_btn_box">
+                            <div className={Styles.pop_btn_box}>
                                 <a href="#">학생</a>
-                                <a href="#" className="active">선생님</a>
+                                <a href="#" className={Styles.active}>선생님</a>
                             </div>
                         </section>
-                        <section className="login_cont">
-                            <div className="depth_list">
-                                <span className="on">1<em className="blind">단계</em></span>
+                        <section className={Styles.login_cont}>
+                            <div className={Styles.depth_list}>
+                                <span className={Styles.on}>1<em className={Styles.blind}>단계</em></span>
                                 <span>2</span>
                                 <span>3</span>
                             </div>
-                            <h3 className="cont_tit">약관 동의</h3>
-                            <div className="agree_box">
-                                <span className="pop_checkbox">
-                                    <input type="checkbox" id="agree_chk" name="agree_chk" className="blind" />
-                                    <label htmlFor="agree_chk" className="imbtn_pop_checked">
-                                        <span className="text">
-                                            이용약관 동의 <em className="chk_point">(필수)</em>
+                            <h3 className={Styles.cont_tit}>약관 동의</h3>
+                            <div className={Styles.agree_box}>
+                                <span className={Styles.pop_checkbox}>
+                                    <input type="checkbox" id="agree_chk" name="agree_chk" className={Styles.blind} />
+                                    <label htmlFor="agree_chk" className={Styles.imbtn_pop_checked}>
+                                        <span className={Styles.text}>
+                                            이용약관 동의 <em className={Styles.chk_point}>(필수)</em>
                                         </span>
                                     </label>
                                 </span>
-                                <div className="round_box">
+                                <div className={Styles.round_box}>
                                     <h4>제 1조. 목적</h4>
                                     <p>
                                         이 약관은 재단법인 커넥트가 제공하는 엔트리 및 엔트리와 관련 제반 서비스의 이용과 관련하여 회사와 회원과의 권리, 의무 및 책임사항,  기타 필요한 사항을 규정함을 목적으로 합니다.
@@ -230,16 +236,16 @@ class Sample extends Component {
                                     </p>
                                 </div>
                             </div>
-                            <div className="agree_box">
-                                <span className="pop_checkbox">
-                                    <input type="checkbox" id="agree_chk" name="agree_chk" className="blind" />
-                                    <label htmlFor="agree_chk" className="imbtn_pop_checked">
+                            <div className={Styles.agree_box}>
+                                <span className={Styles.pop_checkbox}>
+                                    <input type="checkbox" id="agree_chk" name="agree_chk" className={Styles.blind} />
+                                    <label htmlFor="agree_chk" className={Styles.imbtn_pop_checked}>
                                         <span className="text">
-                                            개인정보 수집 및 이용동의 <em className="chk_point">(필수)</em>
+                                            개인정보 수집 및 이용동의 <em className={Styles.chk_point}>(필수)</em>
                                         </span>
                                     </label>
                                 </span>
-                                <div className="round_box">
+                                <div className={Styles.round_box}>
                                     <h4>개인정보 수집 및  이용에 대한 안내</h4>
                                     <p>
                                         재단법인커넥트(이하 "커넥트")는 개인정보보호법, 정보통신망 이용촉진 및 정보보호 등에 관한 법률, 통신비밀보호법, 전기통신사업법 등 개인정보처리자가 준수하여야 할 관련 법령상의 개인정보보호 규정을 준수하며, 관련 법령에 의거한 개인정보처리방침을 정하여 정보주체의 권익 보호에 최선을 다하고 있습니다. 본 개인정보처리방침은 "커넥트"를 통하여 정보주체가 제공하는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보 보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.<br />
@@ -330,63 +336,63 @@ class Sample extends Component {
                                     </p>
                                 </div>
                             </div>
-                            <div className="pop_btn_box">
-                                <a href="#" className="active">다음</a>
+                            <div className={Styles.pop_btn_box}>
+                                <a href="#" className={Styles.active}>다음</a>
                             </div>
                         </section>
                     </section>
                 </div>
 
                 {/* 회원가입 팝업2 */}
-                <div className="popup_wrap">
-                    <header className="pop_header">
+                <div className={Styles.popup_wrap}>
+                    <header className={Styles.pop_header}>
                         <h1>회원가입</h1>
-                        <button onClick={this.close} className="btn_back imbtn_pop_back">
-                            <span className="blind">뒤로가기</span>
+                        <button onClick={this.close} className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}>
+                            <span className={Styles.blind}>뒤로가기</span>
                         </button>
                     </header>
-                    <section className="pop_content login_area">
-                        <section className="login_header">
-                            <h2 className="tit imico_entrylogo">
-                                <span className="blind">entry</span>
+                    <section className={`${Styles.pop_content} ${Styles.login_area}`}>
+                        <section className={Styles.login_header}>
+                            <h2 className={`${Styles.tit} ${Styles.imico_entrylogo}`}>
+                                <span className={Styles.blind}>entry</span>
                             </h2>
-                            <p className="dsc">
+                            <p className={Styles.dsc}>
                                 소프트웨어의 첫걸음,<br />
                                 엔트리에 오신 것을 환영 합니다.
                             </p>
                         </section>
-                        <section className="login_cont">
-                            <div className="depth_list">
-                                <span className="on">1</span>
+                        <section className={Styles.login_cont}>
+                            <div className={Styles.depth_list}>
+                                <span className={Styles.on}>1</span>
                                 {/* [D] 최종 단계에 있을 곳에 <em className="blind">단계</em> 찍어주세요  */}
-                                <span className="on">2<em className="blind">단계</em></span>
+                                <span className={Styles.on}>2<em className={Styles.blind}>단계</em></span>
                                 <span>3</span>
                             </div>
-                            <h3 className="cont_tit">아이디, 비밀번호 입력</h3>
-                            <div className="input_box">
-                                <span className="pop_inpt_text">
-                                    <label htmlFor="inpt_id">
-                                        아이디 입력 <em className="chk_point">(필수)</em>
+                            <h3 className={Styles.cont_tit}>아이디, 비밀번호 입력</h3>
+                            <div className={Styles.input_box}>
+                                <span className={Styles.pop_inpt_text}>
+                                    <label htmlFor={Styles.inpt_id}>
+                                        아이디 입력 <em className={Styles.chk_point}>(필수)</em>
                                     </label>
                                     <input type="text" id="inpt_id" name="inpt_id" placeholder="4~20자의 영문 대 소문자, 숫자를 사용하세요." />
                                 </span>
-                                <span className="pop_inpt_text">
+                                <span className={Styles.pop_inpt_text}>
                                     <label htmlFor="inpt_pw1">
-                                        비밀번호 입력 <em className="chk_point">(필수)</em>
+                                        비밀번호 입력 <em className={Styles.chk_point}>(필수)</em>
                                     </label>
                                     <input type="password" id="inpt_pw1" name="inpt_pw1" placeholder="5~20자의 영문 대 소문자, 숫자를 사용하세요." />
                                 </span>
-                                <span className="pop_inpt_text">
+                                <span className={Styles.pop_inpt_text}>
                                     <label htmlFor="inpt_pw2">
-                                        비밀번호 확인 <em className="chk_point">(필수)</em>
+                                        비밀번호 확인 <em className={Styles.chk_point}>(필수)</em>
                                     </label>
                                     <input type="password" id="inpt_pw2" name="inpt_pw2" placeholder="비밀번호를 한번 더 입력하세요." />
                                 </span>
 
                             </div>
-                            <div className="pop_btn_box">
+                            <div className={Styles.pop_btn_box}>
                                 <a href="#">이전</a>
-                                <a href="#" className="active">다음</a>
+                                <a href="#" className={Styles.active}>다음</a>
                             </div>
                         </section>
                     </section>

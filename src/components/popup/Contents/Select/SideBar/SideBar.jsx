@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchItems } from '../../../../../actions/index';
 import { CommonUtils } from '../../../../../utils/Common';
+import Styles from '../../../../../assets/scss/popup.scss'
 
 class SideBar extends Component {
     constructor(props) {
@@ -25,7 +26,7 @@ class SideBar extends Component {
         return Object.keys(list).map((item, index) => {
             return (
                 <li key={item} data-key={item} onClick={this.onSidebarCliecked}
-                    className={CommonUtils.toggleClass((sidebar === item || !sidebar) && index === 0, 'on')}>
+                    className={CommonUtils.toggleClass(sidebar === item || (!sidebar && index === 0), Styles.on)}>
                     <a href="#NULL">{list[item].name}</a>
                 </li>
             );
@@ -35,8 +36,8 @@ class SideBar extends Component {
     render() {
         return (
             <div>
-                <h2 className="blind">오브젝트 선택</h2>
-                <ul className="menu_list">
+                <h2 className={Styles.blind}>오브젝트 선택</h2>
+                <ul className={Styles.menu_list}>
                     {this.drawSideBar()}
                 </ul>
             </div>

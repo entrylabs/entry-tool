@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CommonUtils } from '../../../utils/Common';
+import Styles from '../../../assets/scss/popup.scss';
 
 class WriteBox extends Component {
     constructor(props) {
@@ -59,7 +60,7 @@ class WriteBox extends Component {
     drawEffects() {
         return Object.keys(this.state.effects).map((key) => {
             const effect = this.state.effects[key];
-            let className = 'imbtn_pop_font_' + key + ' ' + CommonUtils.toggleClass(effect.apply, 'on');
+            let className = Styles['imbtn_pop_font_' + key] + ' ' + CommonUtils.toggleClass(effect.apply, Styles.on);
             return (
                 <a href="#NULL" key={key} className={className} data-effect={key} title={effect.text}>
                     <span className="blind">글자 {effect.text}</span>
@@ -85,56 +86,56 @@ class WriteBox extends Component {
 
     initInput(e) {
         e.preventDefault();
-        document.querySelectorAll('.input_inner label')[0].style.display = 'none';
+        document.querySelectorAll(Styles.input_inner + " label")[0].style.display = 'none';
     }
 
     render() {
         return (
-            <div className="section_cont">
+            <div className={Styles.section_cont}>
                 {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                <h2 className="blind">글상자</h2>
-                <div className="cont_box">
-                    <div className="write_box">
-                        <div className="write_set">
-                            <div className="select_box">
-                                <a href="#NULL" className="select imico_pop_select_arr" title="글꼴">
+                <h2 className={Styles.blind}>글상자</h2>
+                <div className={Styles.cont_box}>
+                    <div className={Styles.write_box}>
+                        <div className={Styles.write_set}>
+                            <div className={Styles.select_box}>
+                                <a href="#NULL" className={Styles.select + " " + Styles.imico_pop_select_arr} title="글꼴">
                                     NanumGothicOTF
                                 </a>
-                                <div className="layer_box">
+                                <div className={Styles.layer_box}>
                                     <ul className="list">
                                         <li>
-                                            <a href="#NULL" className="list_lnk">
+                                            <a href="#NULL" className={Styles.list_lnk}>
                                                 Gothic
                                             </a>
-                                            <a href="#NULL" className="list_lnk">
+                                            <a href="#NULL" className={Styles.list_lnk}>
                                                 Gothic
                                             </a>
-                                            <a href="#NULL" className="list_lnk">
+                                            <a href="#NULL" className={Styles.list_lnk}>
                                                 Gothic
                                             </a>
-                                            <a href="#NULL" className="list_lnk">
+                                            <a href="#NULL" className={Styles.list_lnk}>
                                                 Gothic
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div className="font_style_box" onClick={this.applyEffect}>
+                            <div className={Styles.font_style_box} onClick={this.applyEffect}>
                                 {this.drawEffects()}
                             </div>
-                            <div className="write_type_box" onClick={this.changeWriteType}>
-                                <a href="#NULL" className={CommonUtils.toggleClass(this.state.writeType === 'one', 'on')}
+                            <div className={Styles.write_type_box} onClick={this.changeWriteType}>
+                                <a href="#NULL" className={CommonUtils.toggleClass(this.state.writeType === 'one', Styles.on)}
                                    data-type="one">한줄쓰기</a>
-                                <a href="#NULL" className={CommonUtils.toggleClass(this.state.writeType === 'multi', 'on')}
+                                <a href="#NULL" className={CommonUtils.toggleClass(this.state.writeType === 'multi', Styles.on)}
                                    data-type="multi">여러 줄 쓰기</a>
                             </div>
                         </div>
                         {this.drawWriteBox()}
                     </div>
                 </div>
-                <div className="pop_btn_box">
+                <div className={Styles.pop_btn_box}>
                     <a href="#NULL">취소</a>
-                    <a href="#NULL" className="active">추가하기</a>
+                    <a href="#NULL" className={Styles.active}>추가하기</a>
                 </div>
             </div>
         );
@@ -142,15 +143,15 @@ class WriteBox extends Component {
 
     multiLine() {
         return (
-            <div className="input_box">
-                <div className="input_inner" style={{ height: 228 + 'px' }} onFocus={this.initInput}>
+            <div className={Styles.input_box}>
+                <div className={Styles.input_inner} style={{ height: 228 + 'px' }} onFocus={this.initInput}>
                     {/* input에 포커스가 가거나 글자가 들어가면 label을 display: none 처리 해주세요 */}
                     <label htmlFor="textarea">
                         글상자의 내용을 입력하세요.
                     </label>
                     <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
                 </div>
-                <ul className="list">
+                <ul className={Styles.list}>
                     <li>
                         내용 작성 시 엔터키로 줄바꿈을 할 수 있습니다.
                     </li>
@@ -167,15 +168,15 @@ class WriteBox extends Component {
 
     oneLine() {
         return (
-            <div className="input_box">
-                <div className="input_inner" onFocus={this.initInput}>
+            <div className={Styles.input_box}>
+                <div className={Styles.input_inner} onFocus={this.initInput}>
                     {/* input에 포커스가 가거나 글자가 들어가면 label을 display: none 처리 해주세요 */}
                     <label htmlFor="inpt">
                         글상자의 내용을 입력하세요.
                     </label>
                     <input type="text" id="inpt" name="inpt"/>
                 </div>
-                <ul className="list">
+                <ul className={Styles.list}>
                     <li>
                         내용을 한 줄로만 작성할 수 있습니다.
                     </li>

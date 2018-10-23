@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CommonUtils } from '../../utils/Common';
+import Styles from '../../assets/scss/popup.scss';
 
 class Navigation extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class Navigation extends Component {
         return Object.keys(list).map((item, index) => {
             return (
                 <li key={item}
-                    className={CommonUtils.toggleClass((navigation === item || !navigation) && index === 0, 'on')}
+                    className={CommonUtils.toggleClass(navigation === item || (!navigation && index === 0), Styles.on)}
                     onClick={this.props.onClicked} data-key={item}>
                     <a href="#NULL">{list[item].name}</a>
                 </li>
@@ -30,12 +31,12 @@ class Navigation extends Component {
     drawSearchBox() {
         if (this.props.search) {
             return (
-                <div className="srch_box">
+                <div className={Styles.srch_box}>
                     <label htmlFor="srch">
                         <input type="text" id="srch" name=""/>
                     </label>
-                    <button type="button" className="btn_srch imbtn_pop_srch">
-                        <span className="blind">검색</span>
+                    <button type="button" className={`${Styles.btn_srch} ${Styles.imbtn_pop_srch}`}>
+                        <span className={Styles.blind}>검색</span>
                     </button>
                 </div>
             );
@@ -44,8 +45,8 @@ class Navigation extends Component {
 
     render() {
         return (
-            <div className="section_navi">
-                <ul className="list">
+            <div className={Styles.section_navi}>
+                <ul className={Styles.list}>
                     {this.drawNavigation()}
                 </ul>
                 {this.drawSearchBox()}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchItems, applySelected, visibleAction } from '../../actions';
-import '../../assets/scss/popup.scss';
+import Styles from '../../assets/scss/popup.scss';
 
 import Navigation from './Navigation';
 import Select from './Contents/Select';
@@ -87,14 +87,14 @@ class Sprite extends Component {
     render() {
         return (
             <div>
-                <div className="popup_wrap">
-                    <header className="pop_header">
+                <div className={Styles.popup_wrap}>
+                    <header className={Styles.pop_header}>
                         <h1>오브젝트 추가하기</h1>
-                        <button onClick={this.close} className="btn_back imbtn_pop_back">
-                            <span className="blind">뒤로가기</span>
+                        <button onClick={this.close} className={Styles.btn_back + " " +Styles.imbtn_pop_back}>
+                            <span className={Styles.blind}>뒤로가기</span>
                         </button>
                     </header>
-                    <section className="pop_content">
+                    <section className={Styles.pop_content}>
                         {this.setContent()}
                     </section>
                 </div>

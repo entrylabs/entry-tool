@@ -4,6 +4,7 @@ import Item from './Item';
 import SideBar from './SideBar';
 import SubMenu from './SubMenu';
 import Selected from './Selected';
+import Styles from '../../../../../assets/scss/popup.scss'
 
 class Index extends Component {
     constructor(props) {
@@ -11,8 +12,8 @@ class Index extends Component {
 
         this.stats = {
             listBoxName: {
-                'sound': 'sound_list_box',
-                'sprite': 'obj_list_box',
+                'sound': Styles.sound_list_box,
+                'sprite': Styles.obj_list_box,
             },
         };
 
@@ -37,25 +38,25 @@ class Index extends Component {
 
     render() {
         return (
-            <div className="section_cont">
+            <div className={Styles.section_cont}>
                 <SideBar sidebar={this.props.sidebar}/>
 
-                <div className="cont_box">
+                <div className={Styles.cont_box}>
                     {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                    <h3 className="blind">동물</h3>
+                    <h3 className={Styles.blind}>동물</h3>
                     <div className={this.stats.listBoxName[this.props.popupReducer.type]}>
                         <SubMenu menus={this.getMenus()}/>
-                        <div className="scroll_box">
-                            <ul className="obj_list">
+                        <div className={Styles.scroll_box}>
+                            <ul className={Styles.obj_list}>
                                 {this.drawItems()}
                             </ul>
                         </div>
                     </div>
                     <Selected/>
                 </div>
-                <div className="pop_btn_box">
+                <div className={Styles.pop_btn_box}>
                     <a href="#NULL">취소</a>
-                    <a href="#NULL" className="active">추가하기</a>
+                    <a href="#NULL" className={Styles.active}>추가하기</a>
                 </div>
             </div>
         );
