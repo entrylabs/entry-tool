@@ -6,7 +6,7 @@ export const CommonUtils = {
         return "";
     },
     createImageUrl : (id) => {
-        return `https://playentry.org/uploads/${id.substring(0, 2)}/${id.substring(2, 4)}/thumb/${id}.png`;
+        return `/uploads/${id.substring(0, 2)}/${id.substring(2, 4)}/thumb/${id}.png`;
     },
     remove : (array, callback) => {
         const arr = [...array];

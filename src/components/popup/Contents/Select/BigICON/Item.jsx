@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { applySelected } from '../../../../../actions';
+import { applySelected, visibleAction } from '../../../../../actions';
 import { CommonUtils } from '../../../../../utils/Common';
 import Styles from '../../../../../assets/scss/popup.scss'
 
@@ -9,6 +9,7 @@ class Item extends Component {
         super(props);
 
         this.onItemClicked = this.onItemClicked.bind(this);
+        this.onItemDBClicked = this.onItemDBClicked.bind(this);
     }
 
     onItemClicked(e) {
@@ -23,6 +24,14 @@ class Item extends Component {
         this.props.applySelected(selected);
     }
 
+    onItemDBClicked(e) {
+        e.preventDefault();
+        let item = this.props.item;
+        item.id = window.Entry.generateHash();
+        window.Entry.playground.addExpansionBlock(item, true, true);
+        this.props.visibleAction(false);
+    }
+
     getSelectedIndex() {
         return this.props.popupReducer.selected.findIndex(element => element.name === this.props.item.name);
     }
@@ -30,16 +39,13 @@ class Item extends Component {
     render() {
         const { item } = this.props;
         return (
-            <li onClick={this.onItemClicked} className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}>
+            <li onClick={this.onItemClicked} onDoubleClick={this.onItemDBClicked} className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}>
                 <a href="#NULL" className={Styles.link}>
-                    <div className={Styles.thmb}
-                         style={{ backgroundImage: 'url(\'https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg\')' }}>&nbsp;</div>
+                    <div className={Styles.thmb} style={{ backgroundImage: `url("/lib/entryjs/images/hardware/${item.imageName}")`}}>&nbsp;</div>
                     <div className={Styles.inner_box}>
                         <strong className={Styles.sjt}>{item.title.ko}</strong>
                         <p className={Styles.dsc}>
-                            버스번호, 노선별 경유 정류소,<br/>
-                            첫차/막차 시간 등 시내버스 노선과<br/>
-                            관련된 블록들의 모음
+                            {item.description}
                         </p>
                     </div>
                 </a>
@@ -53,6 +59,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    visibleAction: (visible) => dispatch(visibleAction(visible)),
     applySelected: (list) => dispatch(applySelected(list)),
 });
 

@@ -3,6 +3,34 @@ import { connect } from 'react-redux';
 import Styles from '../../../assets/scss/popup.scss';
 
 class Draw extends Component {
+    onMoveBtnClicked(e) {
+        e.preventDefault();
+        const object = {
+            id: window.Entry.generateHash(),
+            objectType: 'sprite',
+            sprite : {
+                name : window.Lang.Workspace.new_object + (window.Entry.container.getAllObjects().length + 1),
+                pictures : [
+                    {
+                        dimension: {
+                            width: 960,
+                            height: 540,
+                        },
+                        fileurl: window.Entry.mediaFilePath + '_1x1.png',
+                        name: window.Lang.Workspace.new_picture,
+                        type: '_system_',
+                    }
+                ],
+                sounds : [],
+                category : {
+                    main : "new"
+                }
+            }
+        };
+        window.Entry.container.addObject(object, 0);
+        window.Entry.playground.changeViewMode('picture');
+    }
+
     render() {
         return (
             <div className={Styles.section_cont}>
@@ -18,7 +46,7 @@ class Draw extends Component {
                             그리기 화면으로 이동하시겠습니까?
                         </p>
                         <div className={Styles.pop_btn_box}>
-                            <a href="#NULL" className={Styles.active}>이동하기</a>
+                            <a href="#NULL" className={Styles.active} onClick={this.onMoveBtnClicked}>이동하기</a>
                         </div>
                     </div>
                 </div>

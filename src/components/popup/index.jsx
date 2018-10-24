@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchItems, applySelected, visibleAction } from '../../actions';
+import { fetchItems, initState, visibleAction } from '../../actions';
 import Styles from '../../assets/scss/popup.scss';
 
 import Navigation from './Navigation';
@@ -14,6 +14,9 @@ class Sprite extends Component {
     constructor(props) {
         super(props);
         this.options = POPUP_TYPE[this.props.type];
+        if(this.props.data) {
+            this.options.data = this.props.data;
+        }
         this.state = {
             navigation: Object.keys(this.options.navigations || [])[0],
         };
@@ -25,7 +28,8 @@ class Sprite extends Component {
         if (!this.options.data) {
             this.props.fetchItems(this.props.type, Object.keys(this.options.sidebar || [])[0]);
         }
-        this.props.applySelected([]);
+        this.props.initState();
+
     }
 
     componentDidMount() {
@@ -110,7 +114,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     visibleAction: (visible) => dispatch(visibleAction(visible)),
     fetchItems: (type, category, subMenu) => dispatch(fetchItems(type, category, subMenu)),
-    applySelected: (list) => dispatch(applySelected(list)),
+    initState: () => dispatch(initState()),
 });
 
 export default connect(
