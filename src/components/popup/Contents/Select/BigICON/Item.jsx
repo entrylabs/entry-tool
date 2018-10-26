@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { applySelected, visibleAction } from '../../../../../actions';
+import { applySelected } from '../../../../../actions/popup';
 import { CommonUtils } from '../../../../../utils/Common';
 import Styles from '../../../../../assets/scss/popup.scss'
+import { triggerEvent } from '../../../../../actions';
 
 class Item extends Component {
     constructor(props) {
         super(props);
 
         this.onItemClicked = this.onItemClicked.bind(this);
-        this.onItemDBClicked = this.onItemDBClicked.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     onItemClicked(e) {
@@ -24,12 +25,8 @@ class Item extends Component {
         this.props.applySelected(selected);
     }
 
-    onItemDBClicked(e) {
-        e.preventDefault();
-        let item = this.props.item;
-        item.id = window.Entry.generateHash();
-        window.Entry.playground.addExpansionBlock(item, true, true);
-        this.props.visibleAction(false);
+    handleClick(data) {
+        this.props.triggerEvent(data);
     }
 
     getSelectedIndex() {
@@ -39,9 +36,9 @@ class Item extends Component {
     render() {
         const { item } = this.props;
         return (
-            <li onClick={this.onItemClicked} onDoubleClick={this.onItemDBClicked} className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}>
+            <li onClick={this.onItemClicked} onDoubleClick={e=> this.handleClick({item : this.props.item})} className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}>
                 <a href="#NULL" className={Styles.link}>
-                    <div className={Styles.thmb} style={{ backgroundImage: `url("/lib/entryjs/images/hardware/${item.imageName}")`}}>&nbsp;</div>
+                    <div className={Styles.thmb} style={{ backgroundImage: `url("http://playentry.org/lib/entryjs/images/hardware/${item.imageName}")`, backgroundSize:"65%", backgroundRepeat:"no-repeat"}}>&nbsp;</div>
                     <div className={Styles.inner_box}>
                         <strong className={Styles.sjt}>{item.title.ko}</strong>
                         <p className={Styles.dsc}>
@@ -59,8 +56,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    visibleAction: (visible) => dispatch(visibleAction(visible)),
+    //visibleAction: (visible) => dispatch(visibleAction(visible)),
     applySelected: (list) => dispatch(applySelected(list)),
+    triggerEvent: (data) => dispatch(triggerEvent("select", data)),
 });
 
 export default connect(

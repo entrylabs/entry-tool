@@ -1,33 +1,22 @@
 import React, { Component } from 'react';
 import Item from './Item';
 import { connect } from 'react-redux';
-import Styles from '../../../../../assets/scss/popup.scss'
-import { visibleAction } from '../../../../../actions';
+import Styles from '../../../../../assets/scss/popup.scss';
+import { triggerEvent } from '../../../../../actions/index';
 
 class Index extends Component {
     constructor(props) {
         super(props);
 
-        this.onSubmitBtnClicked = this.onSubmitBtnClicked.bind(this);
-        this.onCancelBtnClicekd = this.onCancelBtnClicekd.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     drawItems() {
         return this.props.data.map(item => <Item key={item.name} item={item}/>);
     }
 
-    onSubmitBtnClicked(e) {
-        e.preventDefault();
-        const selected = this.props.popupReducer.selected;
-        selected.forEach(function(item) {
-            item.id = window.Entry.generateHash();
-            window.Entry.playground.addExpansionBlock(item, true, true);
-        });
-        this.props.visibleAction(false);
-    }
-
-    onCancelBtnClicekd(e) {
-        e.preventDefault();
-        this.props.visibleAction(false);
+    handleSubmit(event, data) {
+        this.props.triggerEvent( event, data );
     }
 
     render() {
@@ -44,8 +33,8 @@ class Index extends Component {
                     </div>
                 </div>
                 <div className={Styles.pop_btn_box}>
-                    <a href="#NULL" onClick={this.onCancelBtnClicekd}>취소</a>
-                    <a href="#NULL" className={Styles.active} onClick={this.onSubmitBtnClicked}>추가하기</a>
+                    <a href="#NULL" onClick={e => this.handleSubmit('close')}>취소</a>
+                    <a href="#NULL" className={Styles.active} onClick={e => this.handleSubmit('submit', { selected: this.props.popupReducer.selected })}>추가하기</a>
                 </div>
             </div>
         );
@@ -57,7 +46,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    visibleAction: (visible) => dispatch(visibleAction(visible)),
+    triggerEvent: (event, data) => dispatch(triggerEvent(event, data)),
 });
 
 export default connect(

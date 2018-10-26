@@ -5,7 +5,7 @@ import SideBar from './SideBar';
 import SubMenu from './SubMenu';
 import Selected from './Selected';
 import Styles from '../../../../../assets/scss/popup.scss'
-import { applySelected, fetchItems, visibleAction } from '../../../../../actions';
+import { triggerEvent } from '../../../../../actions';
 
 class Index extends Component {
     constructor(props) {
@@ -20,8 +20,7 @@ class Index extends Component {
 
         this.drawItems = this.drawItems.bind(this);
         this.getMenus = this.getMenus.bind(this);
-        this.onAddItemClicked = this.onAddItemClicked.bind(this);
-        this.onCancelBtnClicked = this.onCancelBtnClicked.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     drawItems() {
@@ -39,36 +38,8 @@ class Index extends Component {
         return this.props.sidebar[Object.keys(this.props.sidebar)[0]].sub;
     }
 
-    onAddItemClicked(e) {
-        e.preventDefault();
-        const selected = this.props.popupReducer.selected;
-        switch(this.props.popupReducer.type) {
-            case "sprite":
-                selected.forEach(function(item) {
-                    var object = {
-                        id: window.Entry.generateHash(),
-                        objectType: 'sprite',
-                        sprite: item // 스프라이트 정보
-                    };
-                    object = window.Entry.container.addObject(object, 0);
-                });
-                break;
-            case "sound":
-                selected.forEach(function(item) {
-                    item.id = window.Entry.generateHash();
-                    window.Entry.playground.addSound(item, true);
-                });
-                break;
-            default:
-                break;
-        }
-        window.createjs.Sound.stop();
-        this.props.visibleAction(false);
-    }
-
-    onCancelBtnClicked(e) {
-        e.preventDefault();
-        this.props.visibleAction(false);
+    handleSubmit(event, data) {
+        this.props.triggerEvent( event, data );
     }
 
     render() {
@@ -90,8 +61,8 @@ class Index extends Component {
                     <Selected/>
                 </div>
                 <div className={Styles.pop_btn_box}>
-                    <a href="#NULL" onClick={this.onCancelBtnClicked}>취소</a>
-                    <a href="#NULL" className={Styles.active} onClick={this.onAddItemClicked}>추가하기</a>
+                    <a href="#NULL" onClick={e => this.handleSubmit('close')}>취소</a>
+                    <a href="#NULL" className={Styles.active} onClick={e => this.handleSubmit('submit', { selected: this.props.popupReducer.selected })}>추가하기</a>
                 </div>
             </div>
         );
@@ -103,7 +74,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    visibleAction: (visible) => dispatch(visibleAction(visible)),
+    triggerEvent: (event, data) => dispatch(triggerEvent(event, data)),
 });
 
 export default connect(

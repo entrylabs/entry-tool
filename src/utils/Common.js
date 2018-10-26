@@ -6,7 +6,7 @@ export const CommonUtils = {
         return "";
     },
     createImageUrl : (id) => {
-        return `/uploads/${id.substring(0, 2)}/${id.substring(2, 4)}/thumb/${id}.png`;
+        return `http://playentry.org/uploads/${id.substring(0, 2)}/${id.substring(2, 4)}/thumb/${id}.png`;
     },
     remove : (array, callback) => {
         const arr = [...array];
@@ -15,5 +15,8 @@ export const CommonUtils = {
             arr.splice(index, 1);
         }
         return arr;
+    },
+    generateHash : () => {
+        return ('0000' + (Math.random()*Math.pow(36,4) << 0).toString(36)).substr(-4);
     }
 }

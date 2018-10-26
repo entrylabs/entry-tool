@@ -1,34 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Styles from '../../../assets/scss/popup.scss';
+import { triggerEvent } from '../../../actions';
 
 class Draw extends Component {
-    onMoveBtnClicked(e) {
-        e.preventDefault();
-        const object = {
-            id: window.Entry.generateHash(),
-            objectType: 'sprite',
-            sprite : {
-                name : window.Lang.Workspace.new_object + (window.Entry.container.getAllObjects().length + 1),
-                pictures : [
-                    {
-                        dimension: {
-                            width: 960,
-                            height: 540,
-                        },
-                        fileurl: window.Entry.mediaFilePath + '_1x1.png',
-                        name: window.Lang.Workspace.new_picture,
-                        type: '_system_',
-                    }
-                ],
-                sounds : [],
-                category : {
-                    main : "new"
-                }
-            }
-        };
-        window.Entry.container.addObject(object, 0);
-        window.Entry.playground.changeViewMode('picture');
+    constructor(props) {
+        super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(data) {
+        this.props.triggerEvent(data);
     }
 
     render() {
@@ -46,7 +28,7 @@ class Draw extends Component {
                             그리기 화면으로 이동하시겠습니까?
                         </p>
                         <div className={Styles.pop_btn_box}>
-                            <a href="#NULL" className={Styles.active} onClick={this.onMoveBtnClicked}>이동하기</a>
+                            <a href="#NULL" className={Styles.active} onClick={e => this.handleSubmit()}>이동하기</a>
                         </div>
                     </div>
                 </div>
@@ -55,7 +37,11 @@ class Draw extends Component {
     }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+    triggerEvent: (data) => dispatch(triggerEvent('draw', data)),
+});
+
 export default connect(
     null,
-    null,
+    mapDispatchToProps,
 )(Draw);

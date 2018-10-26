@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { applySelected, visibleAction } from '../../../../../actions';
+import { applySelected } from '../../../../../actions/popup';
 import { CommonUtils } from '../../../../../utils/Common';
 import Styles from '../../../../../assets/scss/popup.scss';
+import { triggerEvent } from '../../../../../actions';
 
 class Item extends Component {
     constructor(props) {
@@ -10,7 +11,6 @@ class Item extends Component {
 
         this.drawImage = this.drawImage.bind(this);
         this.onItemClicked = this.onItemClicked.bind(this);
-        this.onItemDBClicked = this.onItemDBClicked.bind(this);
     }
 
     drawImage() {
@@ -34,47 +34,25 @@ class Item extends Component {
         const index = this.getSelectedIndex();
         if (index >= 0) {
             selected.splice(index, 1);
-            if (this.props.popupReducer.type == 'sound') {
-                window.createjs.Sound.stop();
-            }
+            this.props.triggerEvent('itemoff', null, false);
         } else {
             selected.push(this.props.item);
-            if (this.props.popupReducer.type == 'sound') {
-                window.createjs.Sound.play(this.props.item._id);
-            }
+            this.props.triggerEvent('itemon', { id: this.props.item._id }, false);
         }
 
         this.props.applySelected(selected);
     }
 
-    onItemDBClicked(e) {
-        e.preventDefault();
-        switch (this.props.popupReducer.type) {
-            case 'sprite':
-                let object = {
-                    id: window.Entry.generateHash(),
-                    objectType: 'sprite',
-                    sprite: this.props.item, // 스프라이트 정보
-                };
-                window.Entry.container.addObject(object, 0);
-                break;
-            case 'sound':
-                let item = {
-                    id: window.Entry.generateHash(),
-                    ...this.props.item,
-                };
-                window.Entry.playground.addSound(item, true);
-                break;
-            default:
-                break;
-        }
-        window.createjs.Sound.stop();
-        this.props.visibleAction(false);
+    handleDbClick(event, data) {
+        this.props.applySelected([]);
+        this.props.triggerEvent(event, data, true);
     }
 
     render() {
         return (
-            <li onClick={this.onItemClicked} onDoubleClick={this.onItemDBClicked} className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}>
+            <li onClick={this.onItemClicked}
+                onDoubleClick={e => this.handleDbClick('select', { item: this.props.item })}
+                className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}>
                 <a href="#NULL" className={Styles.link}>
                     {this.drawImage()}
                     <em className={Styles.sjt}>{this.props.item.name}</em>
@@ -89,8 +67,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    visibleAction: (visible) => dispatch(visibleAction(visible)),
     applySelected: (list) => dispatch(applySelected(list)),
+    triggerEvent: (event, data, hide) => dispatch(triggerEvent(event, data, hide)),
 });
 
 export default connect(

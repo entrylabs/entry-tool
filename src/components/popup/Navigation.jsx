@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CommonUtils } from '../../utils/Common';
 import Styles from '../../assets/scss/popup.scss';
-import { searchItem } from '../../actions';
+import { searchItem } from '../../actions/popup';
 
 class Navigation extends Component {
     constructor(props) {

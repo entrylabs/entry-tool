@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CommonUtils } from '../../../utils/Common';
 import Styles from '../../../assets/scss/popup.scss';
-import { applySelected, fetchItems, visibleAction } from '../../../actions';
-import { WRITE_BOX } from '../../../constatns';
+import { triggerEvent } from '../../../actions';
 
 class FontElement extends Component {
     constructor(props) {
@@ -20,7 +19,7 @@ class FontElement extends Component {
     render() {
         return (
             <li className={Styles.list_item} onClick={this.fontClicked}>
-                <a href="#" className={Styles.list_link}>
+                <a href="#NULL" className={Styles.list_link}>
                     {this.props.font.name}
                 </a>
             </li>);
@@ -34,9 +33,9 @@ class WriteBox extends Component {
         this.state = {
             writeType: 'one',
             fontBoxOpen: false,
-            effects: WRITE_BOX.EFFECTS,
-            fonts: WRITE_BOX.FONTS,
-            font: WRITE_BOX.FONTS[0],
+            effects: this.props.fontOption.EFFECTS,
+            fonts: this.props.fontOption.FONTS,
+            font: this.props.fontOption.FONTS[0],
             textAreaActive: false,
             text: '',
         };
@@ -47,7 +46,6 @@ class WriteBox extends Component {
         this.onFontBoxClicked = this.onFontBoxClicked.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
         this.onInputBlur = this.onInputBlur.bind(this);
-        this.onCancelBtnClicked = this.onCancelBtnClicked.bind(this);
         this.onSubmitBtnClicked = this.onSubmitBtnClicked.bind(this);
     }
 
@@ -100,7 +98,7 @@ class WriteBox extends Component {
 
     onInputBlur(e) {
         e.preventDefault();
-        if (e.currentTarget.lastElementChild.value == '') {
+        if (e.currentTarget.lastElementChild.value === '') {
             this.setState({ textAreaActive: false });
         }
         this.setState({ text: e.currentTarget.lastElementChild.value });
@@ -116,39 +114,14 @@ class WriteBox extends Component {
         this.setState({ fontBoxOpen: false });
     }
 
-    onCancelBtnClicked(e) {
-        e.preventDefault();
-        this.props.visibleAction(false);
-    }
-
     onSubmitBtnClicked(e) {
         e.preventDefault();
         let effects = {};
         Object.keys(this.state.effects).forEach(name => {
             effects[name] = this.state.effects[name].apply
-        })
+        });
 
-        var text = this.state.text || window.Lang.Blocks.TEXT;
-        var object = {
-            id: window.Entry.generateHash(),
-            name: text,//Lang.Workspace.textbox,
-            text: text,
-            options: {
-                font: this.state.font,
-                bold: false,
-                underLine: false,
-                italic: false,
-                strike: false,
-                colour: '#000000',
-                background: '#ffffff',
-                lineBreak: false,
-                ...effects
-            },
-            objectType: 'textBox',
-            sprite: {sounds:[], pictures:[]}
-        };
-        window.Entry.container.addObject(object, 0);
-        this.props.visibleAction(false);
+        this.props.triggerEvent('write', { text: this.state.text, effects: effects, font: this.state.font, writeType: this.state.writeType});
     }
 
     render() {
@@ -160,10 +133,8 @@ class WriteBox extends Component {
                     <div className={Styles.write_box}>
                         <div className={Styles.write_set}>
                             {/* [D] 링크가 클릭되면 pop_selectbox클래스에 on 클래스 추가  */}
-                            <div
-                                className={`${Styles.pop_selectbox}  ${CommonUtils.toggleClass(this.state.fontBoxOpen, Styles.on)}`}>
-                                <a href="#" className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}
-                                   onClick={this.onFontBoxClicked} title="글꼴">
+                            <div className={`${Styles.pop_selectbox}  ${CommonUtils.toggleClass(this.state.fontBoxOpen, Styles.on)}`}>
+                                <a href="#NULL" className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`} onClick={this.onFontBoxClicked} title="글꼴">
                                     {this.state.font.name}
                                 </a>
                                 {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
@@ -184,19 +155,15 @@ class WriteBox extends Component {
                             </div>
                             <div className={Styles.write_type_box} onClick={this.onWriteTypeChangeBtnClicked}>
                                 {/* 링크가 클릭되면 on 클래스 토글 */}
-                                <a href="#"
-                                   className={CommonUtils.toggleClass(this.state.writeType === 'one', Styles.on)}
-                                   data-type="one">한줄쓰기</a>
-                                <a href="#"
-                                   className={CommonUtils.toggleClass(this.state.writeType === 'multi', Styles.on)}
-                                   data-type="multi">여러 줄 쓰기</a>
+                                <a href="#NULL" className={CommonUtils.toggleClass(this.state.writeType === 'one', Styles.on)} data-type="one">한줄쓰기</a>
+                                <a href="#NULL" className={CommonUtils.toggleClass(this.state.writeType === 'multi', Styles.on)} data-type="multi">여러 줄 쓰기</a>
                             </div>
                         </div>
                         {this.drawWriteBox()}
                     </div>
                 </div>
                 <div className={Styles.pop_btn_box}>
-                    <a href="#NULL" onClick={this.onCancelBtnClicked}>취소</a>
+                    <a href="#NULL" onClick={e => this.props.triggerEvent("close", null, true)}>취소</a>
                     <a href="#NULL" className={Styles.active} onClick={this.onSubmitBtnClicked}>추가하기</a>
                 </div>
             </div>
@@ -271,7 +238,7 @@ class WriteBox extends Component {
 
 
 const mapDispatchToProps = (dispatch) => ({
-    visibleAction: (visible) => dispatch(visibleAction(visible)),
+    triggerEvent: (event, data) => dispatch(triggerEvent(event, data)),
 });
 
 export default connect(

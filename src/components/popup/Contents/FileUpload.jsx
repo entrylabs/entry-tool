@@ -2,31 +2,62 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import Styles from '../../../assets/scss/popup.scss';
-import { uploadItem, visibleAction } from '../../../actions';
+import { uploadItem } from '../../../actions/popup';
+
 import { CommonUtils } from '../../../utils/Common';
+import { triggerEvent } from '../../../actions';
+
+
+class Item extends Component {
+    constructor(props){
+        super(props);
+
+        this.onClickItem = this.onClickItem.bind(this);
+
+    }
+
+    onClickItem(e) {
+        e.preventDefault();
+        this.props.clickHandler(this.props.item);
+    }
+
+    render() {
+        return (
+            <li className={CommonUtils.toggleClass(this.props.selected, Styles.on)}>
+                <a href="#NULL" className={Styles.link} onClick={this.onClickItem}>
+                    <div className={Styles.thmb}>
+                        <img src={CommonUtils.createImageUrl(this.props.item.filename)} alt=""/>
+                    </div>
+                    <em className={Styles.sjt}>{this.props.item.name}</em>
+                </a>
+            </li>);
+    }
+}
+
 
 class FileUpload extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            isUploading : false
+            isUploading : false,
+            selected : []
         }
 
         this.onAddItemChanged = this.onAddItemChanged.bind(this);
         this.checkFIleType = this.checkFIleType.bind(this);
+        this.onItemClick = this.onItemClick.bind(this);
         this.onApplyItemClicked = this.onApplyItemClicked.bind(this);
-        this.onCancelBtnClicked = this.onCancelBtnClicked.bind(this);
     }
 
     isValidFiles(files) {
         if (!files) {
-            //window.entrylms.alert(window.Lang.Menus.file_required);
+            this.props.triggerEvent("uploadFail", {messageParent:"Menus", message: "file_required"}, false);
             return false;
         }
 
         if (files.length > 10) {
-            //window.entrylms.alert(window.Lang.Menus.file_upload_max_count);
+            this.props.triggerEvent("uploadFail", {messageParent:"Menus", message: "file_upload_max_count"}, false);
             return false;
         }
 
@@ -44,16 +75,14 @@ class FileUpload extends Component {
         const isAudio = file.name.toLowerCase().indexOf('.mp3');
 
         if (file.size > 1024 * 1024 * 10) {
-            //window.entrylms.alert(window.Lang.Menus.file_upload_max_size);
-            console.log("maxsize")
+            this.props.triggerEvent("uploadFail", {messageParent:"Menus", message: "file_upload_max_size"}, false);
             return false;
         }
 
         switch(this.props.popupReducer.type) {
             case "sprite":
                 if (!isObject && (!isImage || isGif)) {
-                    //window.entrylms.alert(window.Lang.Workspace.upload_not_supported_file_msg);
-                    console.log("uploadnotsupport")
+                    this.props.triggerEvent("uploadFail", {messageParent:"Workspace", message: "upload_not_supported_file_msg"}, false);
                     return false;
                 }
 
@@ -121,43 +150,28 @@ class FileUpload extends Component {
 
     onApplyItemClicked(e) {
         e.preventDefault();
-        this.props.popupReducer.uploads.forEach(function(item, index, array) {
-            if (!item.id) {
-                item.id = window.Entry.generateHash();
-            }
-            var object = {
-                id: window.Entry.generateHash(),
-                objectType: 'sprite',
-                sprite: {
-                    name: item.name,
-                    pictures: [item],
-                    sounds: [],
-                    category: {}
-                }
-            };
-            window.Entry.container.addObject(object, 0);
-        });
-        window.createjs.Sound.stop();
-        this.props.visibleAction(false);
+        this.props.triggerEvent("uploads", {uploads : this.state.selected}, true);
     }
 
-    onCancelBtnClicked(e) {
-        e.preventDefault();
-        this.props.visibleAction(false);
+    getSelectedIndex(item) {
+        return this.state.selected.findIndex(element => element._id === item._id);
+    }
+
+    onItemClick(item) {
+        const index = this.getSelectedIndex(item);
+        let selected = this.state.selected;
+        if(index >= 0) {
+            selected.splice(index, 1);
+        }else {
+            selected.push(item);
+        }
+
+        this.setState({selected});
     }
 
     drawItems() {
         return this.props.popupReducer.uploads.map((item) => {
-            return (
-                <li key={item._id}>
-                    <a href="#NULL" className={Styles.link}>
-                        <div className={Styles.thmb}>
-                            <img src={CommonUtils.createImageUrl(item.filename)} alt=""/>
-                        </div>
-                        <em className={Styles.sjt}>{item.name}</em>
-                    </a>
-                </li>
-            )
+            return <Item key={item._id} item={item} clickHandler={this.onItemClick} selected={this.getSelectedIndex(item) >= 0}/>;
         })
     }
 
@@ -202,7 +216,7 @@ class FileUpload extends Component {
                     </div>
                 </div>
                 <div className={Styles.pop_btn_box}>
-                    <a href="#NULL" onClick={this.onCancelBtnClicked}>취소</a>
+                    <a href="#NULL" onClick={e => this.props.triggerEvent("close", null, true)}>취소</a>
                     <a href="#NULL" className={Styles.active} onClick={this.onApplyItemClicked}>추가하기</a>
                 </div>
             </div>
@@ -215,7 +229,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    visibleAction: (visible) => dispatch(visibleAction(visible)),
+    triggerEvent: (event, data, hidden) => dispatch(triggerEvent(event, data, hidden)),
     uploadItem: (type, formData) => dispatch(uploadItem(type, formData))
 });
 

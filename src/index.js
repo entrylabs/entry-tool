@@ -4,24 +4,34 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './App';
 import configureStore from './store';
-import { visibleAction } from './actions';
+import { visibleAction } from './actions/index';
+
 
 export default class EntryTool extends EventEmitter {
     constructor(...args) {
         super();
-        this.container = document.createElement('div');
-        document.body.appendChild(this.container);
         this.initialize(...args);
         this.render();
     }
 
-    initialize({ isShow, type, data, props } = {}) {
+    initialize({ container, target, isShow = true, type, data, props } = {}) {
+        if (!target) {
+            target = document.body;
+        }
+        if (!container) {
+            container = document.createElement('div');
+        }
+        this.container = container;
+        target.appendChild(container);
         this._data = data;
         this._props = props;
         this.module = this.getModule(type);
-        this.store = configureStore();
+        this.store = configureStore({}, this);
+
         if (isShow) {
             this.show();
+        } else {
+            this.hide();
         }
     }
 
@@ -88,7 +98,7 @@ export default class EntryTool extends EventEmitter {
                     <Module {...this._props} />
                 </App>
             </Provider>,
-            this.container
+            this.container,
         );
     }
 }
