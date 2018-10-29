@@ -22,7 +22,7 @@ class Item extends Component {
         }
         return (
             <div className={Styles.thmb}>
-                <img src={CommonUtils.createImageUrl(this.props.reducer.baseUrl, this.props.item.filename)} alt=""/>
+                <img src={this.props.item.fileurl || CommonUtils.createImageUrl(this.props.reducer.baseUrl, this.props.item.filename)} alt=""/>
             </div>
         );
     }
