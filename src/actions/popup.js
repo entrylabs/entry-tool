@@ -116,6 +116,7 @@ export function uploadItem(baseUrl, type, formData, header) {
                 type: UPLOAD_ITEM,
                 data: {
                     data: httpOption.successCallback(response),
+                    objType: type
                 },
             }))
             .catch((response) => dispatch({

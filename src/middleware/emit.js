@@ -26,12 +26,12 @@ export default class EmitMiddleware {
                 }
                 case UPLOAD_ITEM:
                 case FETCH_ITEM:
+                    action.data.objType = action.objType;
                     this.emitter.emit('loaded', action.data.data);
                     break;
                 case TRIGGER_EVENT: {
                     this.emitter.emit(action.event, action.data);
                     if(action.hide) {
-                        console.log("hide");
                         this.emitter.emit('hide');
                     }
                     break;

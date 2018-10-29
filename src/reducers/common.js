@@ -7,13 +7,7 @@ const initState = {
 export default (state = initState, action) => {
     switch (action.type) {
         case VISIBLE:
-            console.log(action.data);
-            console.log("action", action.data);
-            const test = { ...state, visible: action.data };
-            console.log("tset", test);
-            const test2 = Object.assign({}, test);
-            console.log("test2", test2);
-            return test2;
+            return Object.assign({}, { ...state, visible: action.data });;
         case CLICK_BUTTON: {
             const status = action.data.status;
             return Object.assign({}, state, { status });

@@ -20,11 +20,10 @@ class Sprite extends Component {
             ...this.props
         };
 
-        if(this.options.write) {
-            this.options.navigation = {
-                ...this.options.navigation,
-                write: { name: '글 상자', },
-            }
+        if(this.props.write) {
+            this.options.navigations.write = { name: '글 상자' }
+        }else {
+            delete this.options.navigations.write
         }
 
         this.state = {
