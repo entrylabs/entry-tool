@@ -1,6 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
-import { api } from '../constatns';
+import {CommonUtils} from '../utils/Common'
 
 export const FETCH_ITEM = 'FETCH_ITEM';
 export const UPLOAD_ITEM = 'UPLOAD_ITEM';
@@ -11,22 +11,14 @@ export const API_FAIL = 'API_FAIL';
 const uploadOptions = {
     sprite: {
         method: 'POST',
-        url: api.base + '/api/picture/upload',
-        headers: {
-            'Content-Type': undefined, // important
-            //'csrf-token': window.Global.csrfToken(),
-        },
+        url: '/api/picture/upload',
         successCallback: function(response) {
             return response.data;
         },
     },
     object: {
         method: 'PUT',
-        url: api.base + '/api/importObject',
-        headers: {
-            'Content-Type': undefined, // important
-            //'csrf-token': window.Global.csrfToken(),
-        },
+        url: '/api/importObject',
         successCallback: function(response) {
             return response.data.map(item => {
                 return item.objects.map(object => {
@@ -36,7 +28,7 @@ const uploadOptions = {
                             text: object.text,
                             objectType: object.objectType,
                             options: object.entity || {},
-                            _id: window.Entry.generateHash(),
+                            _id: CommonUtils.generateHash(),
                             fileurl: '/img/assets/text_icon.png',
                         };
                     }
@@ -50,58 +42,33 @@ const uploadOptions = {
     },
     sound: {
         method: 'POST',
-        url: api.base + '/api/sound/upload',
+        url: '/api/sound/upload',
         contentType: false,
         processData: false,
-        headers: {
-            'Content-Type': undefined, // important
-            //'csrf-token': window.Global.csrfToken(),
-        },
         successCallback: function(response) {
-            return response.data.map(item => {
-                var path = '/uploads/' + item.filename.substring(0, 2) + '/' + item.filename.substring(2, 4) + '/' + item.filename + item.ext;
-                window.Entry.soundQueue.loadFile({
-                    id: item._id,
-                    src: path,
-                    type: window.createjs.LoadQueue.SOUND,
-                });
-
-                return item;
-            });
+            return response.data;
         },
     },
 };
 
-export const initState = () => (dispatch) => {
+export const initState = (data) => (dispatch) => {
     dispatch({
         type: INIT_STATE,
+        data: data
     });
 };
 
-export function fetchItems(type, category = null, subMenu = undefined) {
+export function fetchItems(baseUrl, type, category = null, subMenu = undefined) {
     if (subMenu === 'all') {
         subMenu = '';
     }
-    const url = [api.base, 'api', type, 'browse/default', category, subMenu].join('/');
-
+    const url = [baseUrl, 'api', type, 'browse/default', category, subMenu].join('/');
     let promise = _.memoize(url => {
         return axios.get(url);
     });
     return (dispatch) => {
         promise(url)
             .then((response) => {
-                if (type === 'sound') {
-                    response.data.forEach(sound => {
-                        const fileName = sound.filename;
-                        const path = '/uploads/' + fileName.substring(0, 2) + '/' + fileName.substring(2, 4) + '/' + fileName + sound.ext;
-                        window.Entry.soundQueue.loadFile({
-                            id: sound._id,
-                            src: path,
-                            type: window.createjs.LoadQueue.SOUND,
-                        });
-                    });
-
-                }
                 return dispatch({
                     type: FETCH_ITEM,
                     data: {
@@ -119,8 +86,8 @@ export function fetchItems(type, category = null, subMenu = undefined) {
     };
 }
 
-export function searchItem(type, query) {
-    const url = `${api.base}/api/${type}/search/${query}`;
+export function searchItem(baseUrl, type, query) {
+    const url = `${baseUrl}/api/${type}/search/${query}`;
 
     let promise = _.memoize(url => {
         return axios.get(url);
@@ -140,14 +107,15 @@ export function searchItem(type, query) {
     };
 }
 
-export function uploadItem(type, formData) {
-    let httpOption = { ...uploadOptions[type], data: formData };
+export function uploadItem(baseUrl, type, formData, header) {
+    let httpOption = { ...uploadOptions[type], data: formData, header : header };
+    httpOption.url = baseUrl + httpOption.url;
     return (dispatch) => {
         axios(httpOption)
             .then((response) => dispatch({
                 type: UPLOAD_ITEM,
                 data: {
-                    uploads: httpOption.successCallback(response),
+                    data: httpOption.successCallback(response),
                 },
             }))
             .catch((response) => dispatch({

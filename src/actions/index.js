@@ -7,7 +7,7 @@ export function clickButton(data) {
 }
 
 export function triggerEvent(event, data, hide=true) {
-    return { type: TRIGGER_EVENT, event: event, hide, data };
+    return { type: TRIGGER_EVENT, event, hide, data };
 }
 
 export const visibleAction = (visible) => (dispatch) => {

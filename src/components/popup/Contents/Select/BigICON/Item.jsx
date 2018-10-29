@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { applySelected } from '../../../../../actions/popup';
 import { CommonUtils } from '../../../../../utils/Common';
 import Styles from '../../../../../assets/scss/popup.scss'
-import { triggerEvent } from '../../../../../actions';
+import { visibleAction, triggerEvent } from '../../../../../actions';
 
 class Item extends Component {
     constructor(props) {
@@ -27,6 +27,7 @@ class Item extends Component {
 
     handleClick(data) {
         this.props.triggerEvent(data);
+        this.props.visibleAction(false);
     }
 
     getSelectedIndex() {
@@ -56,7 +57,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    //visibleAction: (visible) => dispatch(visibleAction(visible)),
+    visibleAction: (visible) => dispatch(visibleAction(visible)),
     applySelected: (list) => dispatch(applySelected(list)),
     triggerEvent: (data) => dispatch(triggerEvent("select", data)),
 });

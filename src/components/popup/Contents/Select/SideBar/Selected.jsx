@@ -14,7 +14,7 @@ const TYPE_MAP = {
     sprite: {
         wrapClass: Styles.cont_sel_box,
         imageClass: Styles.thmb,
-        imageContent: (item) => <img src={CommonUtils.createImageUrl(item.pictures[0].filename)} alt=""/>,
+        imageContent: (base, item) => <img src={CommonUtils.createImageUrl(base, item.pictures[0].filename)} alt=""/>,
     },
 };
 
@@ -24,7 +24,7 @@ class CustomSlide extends Component {
         return (
             <div className={Styles.select_item} {...props} >
                 <div className={TYPE_MAP[type].imageClass}>
-                    {TYPE_MAP[type].imageContent(item)}
+                    {TYPE_MAP[type].imageContent(this.props.url, item)}
                 </div>
                 <em className={Styles.sjt}>{item.name}</em>
                 <a href="#NULL" className={`${Styles.btn_del} ${Styles.imbtn_pop_chk_del}`} data-key={item._id}>
@@ -89,7 +89,7 @@ class Selected extends Component {
                 {this.container}
                 <strong className={Styles.tit}>전체 ({selected.length})</strong>
                 <Slider {...settings}>
-                    {selected.map((item, index) => <CustomSlide key={index} item={item} type={type} style={{ width: 100 }}/>)}
+                    {selected.map((item, index) => <CustomSlide key={index} item={item} type={type} style={{ width: 100 }} url={this.props.popupReducer.baseUrl}/>)}
                 </Slider>
             </div>
         );

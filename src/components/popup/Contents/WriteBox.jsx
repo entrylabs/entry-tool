@@ -115,7 +115,6 @@ class WriteBox extends Component {
     }
 
     onSubmitBtnClicked(e) {
-        e.preventDefault();
         let effects = {};
         Object.keys(this.state.effects).forEach(name => {
             effects[name] = this.state.effects[name].apply

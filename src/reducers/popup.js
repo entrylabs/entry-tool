@@ -11,11 +11,11 @@ export default function popupReducer(state = INITIAL_STATE, action) {
                 result: action.payload,
             };
         case INIT_STATE:
-            return { ...state, selected: [], uploads: [] };
+            return { ...state, ...action.data, selected: [], uploads: [] };
         case FETCH_ITEM:
             return { ...state, ...action.data };
         case UPLOAD_ITEM:
-            return { ...state, uploads: [...state.uploads, ...action.data.uploads].flat() };
+            return { ...state, uploads: [...state.uploads, ...action.data.data].flat() };
         case APPLY_SELECTED_LIST:
             return Object.assign({}, { ...state, selected: action.selected });
         default:

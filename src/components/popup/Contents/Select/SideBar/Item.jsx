@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { applySelected } from '../../../../../actions/popup';
 import { CommonUtils } from '../../../../../utils/Common';
 import Styles from '../../../../../assets/scss/popup.scss';
-import { triggerEvent } from '../../../../../actions';
+import { triggerEvent, visibleAction } from '../../../../../actions';
 
 class Item extends Component {
     constructor(props) {
@@ -19,7 +19,7 @@ class Item extends Component {
         }
         return (
             <div className={Styles.thmb}>
-                <img src={CommonUtils.createImageUrl(this.props.item.pictures[0].filename)} alt=""/>
+                <img src={CommonUtils.createImageUrl(this.props.popupReducer.baseUrl, this.props.item.pictures[0].filename)} alt=""/>
             </div>
         );
     }
@@ -46,6 +46,7 @@ class Item extends Component {
     handleDbClick(event, data) {
         this.props.applySelected([]);
         this.props.triggerEvent(event, data, true);
+        this.props.visibleAction(false);
     }
 
     render() {
@@ -67,6 +68,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    visibleAction: (visible) => dispatch(visibleAction(visible)),
     applySelected: (list) => dispatch(applySelected(list)),
     triggerEvent: (event, data, hide) => dispatch(triggerEvent(event, data, hide)),
 });

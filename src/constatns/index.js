@@ -1,13 +1,3 @@
-export const api = {
-    base: 'http://local.playentry.org',
-};
-
-export const compStatusTypes = {
-    ENABLED: 'ENABLED',
-    DISABLED: 'DISABLED',
-    HIDDEN: 'HIDDEN',
-};
-
 export const DEFAULT_OPTIONS = {
     WRITE_BOX: {
         FONTS: [{
@@ -97,10 +87,7 @@ export const DEFAULT_OPTIONS = {
                 },
                 draw: {
                     name: '그리기',
-                },
-                write: {
-                    name: '글 상자',
-                },
+                }
             },
             sidebar: {
                 entrybot_friends: {

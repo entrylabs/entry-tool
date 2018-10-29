@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchItems, initState } from '../../actions/popup';
-import { visibleAction } from '../../actions/index'
+import { visibleAction } from '../../actions/index';
 import Styles from '../../assets/scss/popup.scss';
 
 import Navigation from './Navigation';
@@ -20,6 +20,13 @@ class Sprite extends Component {
             ...this.props
         };
 
+        if(this.options.write) {
+            this.options.navigation = {
+                ...this.options.navigation,
+                write: { name: '글 상자', },
+            }
+        }
+
         this.state = {
             navigation: Object.keys(this.options.navigations || [])[0],
         };
@@ -29,11 +36,11 @@ class Sprite extends Component {
     }
 
     componentWillMount() {
+        const url = this.props.url || "http://local.playentry.org";
         if (!this.options.data) {
-            this.props.fetchItems(this.props.type, Object.keys(this.options.sidebar || [])[0]);
+            this.props.fetchItems(url, this.props.type, Object.keys(this.options.sidebar || [])[0]);
         }
-        this.props.initState();
-
+        this.props.initState({ baseUrl : url });
     }
 
     componentDidMount() {
@@ -117,8 +124,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     visibleAction: (visible) => dispatch(visibleAction(visible)),
-    fetchItems: (type, category, subMenu) => dispatch(fetchItems(type, category, subMenu)),
-    initState: () => dispatch(initState()),
+    fetchItems: (baseUrl, type, category, subMenu) => dispatch(fetchItems(baseUrl, type, category, subMenu)),
+    initState: (data) => dispatch(initState(data)),
 });
 
 export default connect(
