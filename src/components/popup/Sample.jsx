@@ -6,7 +6,7 @@ import Styles from '../../assets/scss/popup.scss';
 class Sample extends Component {
     constructor(props) {
         super(props);
-    }
+    
     componentDidMount() {
         window.onpopstate = this.close;
         window.history.pushState({}, 'popup');
@@ -2265,7 +2265,7 @@ class Sample extends Component {
                                                                             width="100%"
                                                                             style={{
                                                                                 maxHeight:
-                                                                                100 + '%',
+                                                                                    100 + '%',
                                                                             }}
                                                                         />
                                                                     </div>
@@ -2296,7 +2296,7 @@ class Sample extends Component {
                                                                             width="100%"
                                                                             style={{
                                                                                 maxHeight:
-                                                                                100 + '%',
+                                                                                    100 + '%',
                                                                             }}
                                                                         />
                                                                     </div>
@@ -2327,7 +2327,7 @@ class Sample extends Component {
                                                                             width="100%"
                                                                             style={{
                                                                                 maxHeight:
-                                                                                100 + '%',
+                                                                                    100 + '%',
                                                                             }}
                                                                         />
                                                                     </div>
