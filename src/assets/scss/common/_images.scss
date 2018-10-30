@@ -1,0 +1,114 @@
+//팝업 뒤로 가기
+.imbtn_pop_back {
+    background: url(../images/btn_pop_back.png) no-repeat;
+    background-size: 40px auto;
+}
+.imbtn_pop_srch {
+    background: url(../images/btn_pop_srch.png) no-repeat;
+    background-size: 21px auto;
+}
+.imbtn_pop_chk_del {
+    background: url(../images/btn_pop_chk_del.png) no-repeat;
+    background-size: 24px auto;
+}
+.imbtn_pop_sel_prev {
+    background: url(../images/btn_pop_sel_prev.png) no-repeat;
+    background-size: 44px auto;
+}
+.imbtn_pop_sel_next {
+    background: url(../images/btn_pop_sel_next.png) no-repeat;
+    background-size: 44px auto;
+}
+.imbtn_pop_upload:before {
+    background: url(../images/btn_pop_upload.png) no-repeat;
+    background-size: 64px auto;
+}
+.imbtn_pop_font_bold {
+    background: url(../images/btn_pop_font_bold.png) no-repeat;
+    background-size: 38px auto;
+    &.on {
+        background-image: url(../images/btn_pop_font_bold_on.png);
+    }
+}
+.imbtn_pop_font_underline {
+    background: url(../images/btn_pop_font_underline.png) no-repeat;
+    background-size: 38px auto;
+    &.on {
+        background-image: url(../images/btn_pop_font_underline_on.png);
+    }
+}
+.imbtn_pop_font_italic {
+    background: url(../images/btn_pop_font_italic.png) no-repeat;
+    background-size: 38px auto;
+    &.on {
+        background-image: url(../images/btn_pop_font_italic_on.png);
+    }
+}
+.imbtn_pop_font_through {
+    background: url(../images/btn_pop_font_through.png) no-repeat;
+    background-size: 38px auto;
+    &.on {
+        background-image: url(../images/btn_pop_font_through_on.png);
+    }
+}
+.imbtn_pop_font_color {
+    background: url(../images/btn_pop_font_color.png) no-repeat;
+    background-size: 38px auto;
+    &.on {
+        background-image: url(../images/btn_pop_font_color_on.png);
+    }
+}
+.imbtn_pop_font_paint {
+    background: url(../images/btn_pop_font_paint.png) no-repeat;
+    background-size: 38px auto;
+    &.on {
+        background-image: url(../images/btn_pop_font_paint_on.png);
+    }
+}
+.btn_pop_color_slide {
+    background: url(../images/btn_pop_color_slide.png) no-repeat;
+    background-size: 28px auto;
+    &.on {
+        background-image: url(../images/btn_pop_color_slide_on.png);
+        background-size: 38px auto;
+    }
+}
+
+input[type="checkbox"]:checked + .imbtn_pop_checked:before {
+    background: url(../images/ico_pop_checked.png) no-repeat;
+    background-size: 22px auto;
+}
+
+.imico_pop_caution {
+    background: url(../images/ico_pop_caution.png) no-repeat;
+    background-size: 16px auto;
+}
+.imico_pop_select_arr_down:after {
+    background: url(../images/ico_pop_select_arr_down.png) no-repeat;
+    background-size: 8px auto;
+}
+.imico_pop_select_arr_up:after {
+    background: url(../images/ico_pop_select_arr_down.png) no-repeat;
+    background-size: 8px auto;
+}
+.imico_pop_sound_thmb:before {
+    background: url(../images/ico_pop_sound_thmb.png) no-repeat;
+    background-size: 64px auto;
+}
+
+.imico_entrylogo {
+    background: url(../images/ico_pop_entrylogo.png) no-repeat;
+    background-size: 138px auto;
+}
+.imico_signup:before {
+    background: url(../images/ico_pop_signup.png) no-repeat;
+    background-size: 160px auto;
+}
+.imico_warning {
+    background: url(../images/ico_pop_warning.png) no-repeat;
+    background-size: 112px auto;
+}
+.imico_pop_circle_check:before {
+    background: url(../images/ico_pop_circle_check.png) no-repeat;
+    background-size: 16px auto;
+}

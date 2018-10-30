@@ -54,6 +54,7 @@
         "fs-extra": "3.0.1",
         "html-webpack-plugin": "2.29.0",
         "jest": "20.0.4",
+        "node-sass": "^4.9.3",
         "object-assign": "4.1.1",
         "postcss-flexbugs-fixes": "3.2.0",
         "postcss-loader": "2.0.8",
@@ -68,6 +69,7 @@
         "redux-thunk": "^2.3.0",
         "resolve": "1.6.0",
         "rimraf": "^2.6.2",
+        "sass-loader": "^7.1.0",
         "style-loader": "0.19.0",
         "styled-components": "^3.4.2",
         "sw-precache-webpack-plugin": "0.11.4",
@@ -120,6 +122,9 @@
         "extends": "react-app"
     },
     "dependencies": {
-        "chroma-js": "^1.4.0"
+        "chroma-js": "^1.4.0",
+        "axios": "^0.18.0",
+        "lodash": "^4.17.11",
+        "react-slick": "^0.23.2"
     }
 }
