@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { applySelected } from '../../../../../actions';
+import { applySelected } from '../../../../../actions/popup';
 import { CommonUtils } from '../../../../../utils/Common';
-import Styles from '../../../../../assets/scss/popup.scss'
+import Styles from '../../../../../assets/scss/popup.scss';
+import { triggerEvent, visibleAction } from '../../../../../actions';
 
 class Item extends Component {
     constructor(props) {
         super(props);
 
         this.drawImage = this.drawImage.bind(this);
-        this.itemClicked = this.itemClicked.bind(this);
+        this.onItemClicked = this.onItemClicked.bind(this);
     }
 
     drawImage() {
@@ -18,7 +19,7 @@ class Item extends Component {
         }
         return (
             <div className={Styles.thmb}>
-                <img src={CommonUtils.createImageUrl(this.props.item.pictures[0].filename)} alt=""/>
+                <img src={CommonUtils.createImageUrl(this.props.popupReducer.baseUrl, this.props.item.pictures[0].filename)} alt=""/>
             </div>
         );
     }
@@ -27,22 +28,32 @@ class Item extends Component {
         return this.props.popupReducer.selected.findIndex(element => element._id === this.props.item._id);
     }
 
-    itemClicked(e) {
+    onItemClicked(e) {
         e.preventDefault();
         const selected = this.props.popupReducer.selected;
         const index = this.getSelectedIndex();
         if (index >= 0) {
             selected.splice(index, 1);
+            this.props.triggerEvent('itemoff', null, false);
         } else {
             selected.push(this.props.item);
+            this.props.triggerEvent('itemon', { id: this.props.item._id }, false);
         }
 
         this.props.applySelected(selected);
     }
 
+    handleDbClick(event, data) {
+        this.props.applySelected([]);
+        this.props.triggerEvent(event, data, true);
+        this.props.visibleAction(false);
+    }
+
     render() {
         return (
-            <li onClick={this.itemClicked} className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}>
+            <li onClick={this.onItemClicked}
+                onDoubleClick={e => this.handleDbClick('select', { item: this.props.item })}
+                className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}>
                 <a href="#NULL" className={Styles.link}>
                     {this.drawImage()}
                     <em className={Styles.sjt}>{this.props.item.name}</em>
@@ -57,7 +68,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    visibleAction: (visible) => dispatch(visibleAction(visible)),
     applySelected: (list) => dispatch(applySelected(list)),
+    triggerEvent: (event, data, hide) => dispatch(triggerEvent(event, data, hide)),
 });
 
 export default connect(
