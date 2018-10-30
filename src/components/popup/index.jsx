@@ -16,14 +16,14 @@ class Sprite extends Component {
         super(props);
         this.options = {
             ...DEFAULT_OPTIONS.POPUP_TYPE[this.props.type],
-            writeBoxOption : DEFAULT_OPTIONS.WRITE_BOX,
-            ...this.props
+            writeBoxOption: DEFAULT_OPTIONS.WRITE_BOX,
+            ...this.props,
         };
 
-        if(this.props.write) {
-            this.options.navigations.write = { name: '글 상자' }
-        }else {
-            delete this.options.navigations.write
+        if (this.props.write) {
+            this.options.navigations.write = { name: '글 상자' };
+        } else {
+            delete this.options.navigations.write;
         }
 
         this.state = {
@@ -35,11 +35,11 @@ class Sprite extends Component {
     }
 
     componentWillMount() {
-        const url = this.props.url || "http://local.playentry.org";
+        const url = this.props.url || 'http://local.playentry.org';
         if (!this.options.data) {
             this.props.fetchItems(url, this.props.type, Object.keys(this.options.sidebar || [])[0]);
         }
-        this.props.initState({ baseUrl : url });
+        this.props.initState({ baseUrl: url });
     }
 
     componentDidMount() {
@@ -69,23 +69,23 @@ class Sprite extends Component {
             search: false,
         };
         const data = this.options.data || this.props.popupReducer.data || [];
-        const defaultNavigation = <Navigation {...navSettings}/>;
+        const defaultNavigation = <Navigation {...navSettings} />;
         const contents = {
             select: {
-                view: <Select type={'sidebar'} sidebar={this.options.sidebar} data={data}/>,
-                nav: <Navigation {...navSettings} search={true}/>,
+                view: <Select type={'sidebar'} sidebar={this.options.sidebar} data={data} />,
+                nav: <Navigation {...navSettings} search={true} />,
             },
             upload: {
-                view: <FileUpload/>,
+                view: <FileUpload />,
             },
             draw: {
-                view: <Draw/>,
+                view: <Draw />,
             },
             write: {
-                view: <WriteBox fontOption={ this.options.writeBoxOption }/>,
+                view: <WriteBox fontOption={this.options.writeBoxOption} />,
             },
             expansion: {
-                view: <Select type={'bigicon'} data={data}/>,
+                view: <Select type={'bigicon'} data={data} />,
                 nav: true,
             },
         };
@@ -104,13 +104,14 @@ class Sprite extends Component {
                 <div className={Styles.popup_wrap}>
                     <header className={Styles.pop_header}>
                         <h1>오브젝트 추가하기</h1>
-                        <button onClick={this.close} className={Styles.btn_back + ' ' + Styles.imbtn_pop_back}>
+                        <button
+                            onClick={this.close}
+                            className={Styles.btn_back + ' ' + Styles.imbtn_pop_back}
+                        >
                             <span className={Styles.blind}>뒤로가기</span>
                         </button>
                     </header>
-                    <section className={Styles.pop_content}>
-                        {this.setContent()}
-                    </section>
+                    <section className={Styles.pop_content}>{this.setContent()}</section>
                 </div>
             </div>
         );
@@ -123,11 +124,12 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     visibleAction: (visible) => dispatch(visibleAction(visible)),
-    fetchItems: (baseUrl, type, category, subMenu) => dispatch(fetchItems(baseUrl, type, category, subMenu)),
+    fetchItems: (baseUrl, type, category, subMenu) =>
+        dispatch(fetchItems(baseUrl, type, category, subMenu)),
     initState: (data) => dispatch(initState(data)),
 });
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(Sprite);
