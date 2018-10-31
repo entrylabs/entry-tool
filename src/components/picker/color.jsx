@@ -1,51 +1,7 @@
-import React, { Component, Fragment } from 'react';
-import styled from 'styled-components';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
 import chroma from 'chroma-js';
 import { Object } from 'core-js';
-import { ColorPickAction } from '../../actions';
-import slider_handle from '../../styles/slider_handle.svg';
 import Styles from '../../assets/scss/popup.scss';
-
-const Slider = styled.div`
-    background: white;
-    color: palevioletred;
-    font-size: 1em;
-    margin: 1em;
-    padding: 0.25em 1em;
-    border: 2px solid palevioletred;
-    border-radius: 3px;
-    position: relative;
-`;
-const Hue = styled(Slider)``;
-const Saturation = styled(Slider)``;
-const Value = styled(Slider)``;
-const SliderBackground = styled.div`
-    width: 206px;
-    height: 28px;
-    border-radius: 16px;
-`;
-const InputNumber = styled.input`
-    width: 48px;
-    height: 28px;
-    border-radius: 16px;
-    border: solid 1px #e2e2e2;
-`;
-const SliderHandle = styled.span`
-    width: 28px;
-    height: 28px;
-    display: inline-block;
-    background-image: url(${slider_handle});
-    position: absolute;
-    left: 15px;
-    top: 32px;
-    cursor: pointer;
-    transform: ${(props) => `translate(${props.x}px, 0px);`};
-`;
-const Result = styled.div`
-    width: 50px;
-    height: 50px;
-`;
 
 function getColorByHsv({ red, green, blue }) {
     const color = chroma(red, green, blue);
@@ -94,7 +50,6 @@ function getColorByHex(hex) {
 }
 
 function scaleRatioX(value) {
-    console.log(value);
     return Math.round(value * 1.77);
 }
 
@@ -167,40 +122,6 @@ class ColorPicker extends Component {
             background: chroma.hsv(hueValue, saturation / 100, brightness / 100).css(),
         };
     }
-    makeRGBInput() {
-        const { red, green, blue } = this.state;
-        return (
-            <Fragment>
-                <InputNumber
-                    value={red}
-                    type="number"
-                    min="0"
-                    max="255"
-                    onChange={({ target }) => {
-                        this.handleChangeRGB('red', target);
-                    }}
-                />
-                <InputNumber
-                    value={green}
-                    type="number"
-                    min="0"
-                    max="255"
-                    onChange={({ target }) => {
-                        this.handleChangeRGB('green', target);
-                    }}
-                />
-                <InputNumber
-                    value={blue}
-                    type="number"
-                    min="0"
-                    max="255"
-                    onChange={({ target }) => {
-                        this.handleChangeRGB('blue', target);
-                    }}
-                />
-            </Fragment>
-        );
-    }
 
     handleChangeHsv(type, value) {
         const { ColorPickAction } = this.props;
@@ -233,7 +154,6 @@ class ColorPicker extends Component {
         }
     };
     up = () => {
-        console.log(this);
         this.canMoveCapture = false;
         this.setState(() => {
             return {
@@ -267,7 +187,6 @@ class ColorPicker extends Component {
 
     render() {
         const { hue, saturation, brightness, red, green, blue, isActiveSlider } = this.state;
-        console.log(red, green, blue);
         return (
             <div className={Styles.popup_wrap}>
                 {/* 컬러피커 툴팁 */}
@@ -443,17 +362,4 @@ class ColorPicker extends Component {
     }
 }
 
-// const mapStateToProps = (state) => ({
-//     // ...state,
-// });
-
-const mapDispatchToProps = (dispatch) => ({
-    ColorPickAction: (visible) => dispatch(ColorPickAction(visible)),
-});
-
-export default connect(
-    undefined,
-    mapDispatchToProps
-)(ColorPicker);
-// mapStateToProps,
-// mapDispatchToProps
+export default ColorPicker;
