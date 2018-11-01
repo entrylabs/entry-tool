@@ -1967,7 +1967,7 @@ class Sample extends Component {
                                             <em className={Styles.sjt}>소리명</em>
                                         </a>
                                     </li>
-                                    
+
                                 </ul>
                             </div>
 
@@ -1980,7 +1980,7 @@ class Sample extends Component {
                     </div>
                 </div>
 
-                {/* 회원가입 팝업1 */ }
+                {/* 회원가입 팝업1 */}
                 <div className={Styles.popup_wrap}>
                     <header className={Styles.pop_header}>
                         <h1>회원가입</h1>
@@ -2298,7 +2298,7 @@ class Sample extends Component {
                     </section>
                 </div>
 
-                {/* 회원가입 팝업2 */ }
+                {/* 회원가입 팝업2 */}
                 <div className={Styles.popup_wrap} hidden>
                     <header className={Styles.pop_header}>
                         <h1>회원가입</h1>
@@ -2353,7 +2353,7 @@ class Sample extends Component {
                     </section>
                 </div>
 
-                {/* 회원가입 팝업3 */ }
+                {/* 회원가입 팝업3 */}
                 <div className={Styles.popup_wrap} hidden>
                     <header className={Styles.pop_header}>
                         <h1>회원가입</h1>
@@ -2475,7 +2475,7 @@ class Sample extends Component {
                     </section>
                 </div>
 
-                {/* 회원가입 팝업4 - 이메일이 있는 경우 */ }
+                {/* 회원가입 팝업4 - 이메일이 있는 경우 */}
                 <div className={Styles.popup_wrap} hidden>
                     <header className={Styles.pop_header}>
                         <h1>회원가입</h1>
@@ -2508,7 +2508,7 @@ class Sample extends Component {
                     </section>
                 </div>
 
-                {/* 회원가입 팝업5 - 이메일이 없는 경우 */ }
+                {/* 회원가입 팝업5 - 이메일이 없는 경우 */}
                 <div className={Styles.popup_wrap} hidden>
                     <header className={Styles.pop_header}>
                         <h1>회원가입</h1>
@@ -2538,7 +2538,7 @@ class Sample extends Component {
                 </div>
 
 
-                {/* 툴팁  - 이메일이 없는 경우 */ }
+                {/* 툴팁  - 이메일이 없는 경우 */}
                 <div className={Styles.popup_wrap}>
                     <header className={Styles.pop_header}>
                         <h1>공통 툴팁</h1>
@@ -2557,7 +2557,7 @@ class Sample extends Component {
                             </p>
                         </section>
                         {/* 마크업 확인용 더미 스타일 입니다. */}
-                        <section style={{ position: 'relative', height: '400px' }}>
+                        <section style={{ position: 'relative', height: '800px' }}>
                             {/* 툴팁의 가로값은 tooltip_box에서 style로 적용하면 됩니다. */}
                             <div className={Styles.tooltip_box} style={{ width: '360px' }}>
                                 {/* padding은 마크업 확인용 더미 스타일 입니다. */}
@@ -2597,9 +2597,87 @@ class Sample extends Component {
                                 </div>
                                 <span className={Styles.arr}><i style={{ backgroundColor: 'orange' }}></i></span>
                             </div>
+
+                            {/* 컬러피커 툴팁 */}
+                            <div className={`${Styles.tooltip_box} ${Styles.color_picker}`} style={{ left: '0', top: '300px' }}>
+                                <div className={Styles.tooltip_inner}>
+                                    <div className={Styles.color_box}>
+                                        {/* 하단 RGB 색상값을 style로 넣어주세요 */}
+                                        {/* RGB면  backgroundColor:rgb(0, 0, 0) */}
+                                        {/* 색상, 채도, 명도 값이면 backgroundColor:hsl(0, 0%, 0%) */}
+                                        <span className={`${Styles.color} ${Styles.imico_pop_circle_check}`} style={{ backgroundColor: 'hsl(290, 100%, 50%)' }}>
+                                            &nbsp;
+                                                    </span>
+                                        <ul className={Styles.color_list}>
+                                            <li className={Styles.item}>
+                                                <label htmlFor="red">빨강(R)</label>
+                                                <input type="text" id="red" name="red" />
+                                                <div className={Styles.graph}>
+                                                </div>
+                                            </li>
+                                            <li className={Styles.item}>
+                                                <label htmlFor="green">녹색(G)</label>
+                                                <input type="text" id="green" name="green" />
+                                            </li>
+                                            <li className={Styles.item}>
+                                                <label htmlFor="blue">파랑(B)</label>
+                                                <input type="text" id="blue" name="blue" />
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                    <div className={Styles.color_graph}>
+                                        <ul className={Styles.graph_list}>
+                                            <li className={Styles.item}>
+                                                <label htmlFor="hue">색상</label>
+                                                <input type="text" id="hue" name="hue" />
+                                                <div className={Styles.graph_box}>
+                                                    {/* 그래프 slider가 선택되면 on 클래스 추가 */}
+                                                    {/* slider 이동할 수 있도록  left값 조절 해주세요 */}
+                                                    <span className={`${Styles.slider} ${Styles.btn_pop_color_slide} ${Styles.on}`} style={{ left: 10 + 'px' }}>&nbsp;</span>
+                                                    <div className={Styles.bar}>
+                                                        {/* 더미용 이미지 입니다. 나중에 여기에 이미지 or svg 넣어주세요 */}
+                                                        <img src="https://cdn.tutsplus.com/active/uploads/legacy/tuts/008_colorPicker/Tutorial/8.jpg" width="100%" style={{ maxHeight: 100 + '%' }} />
+                                                    </div>
+                                                </div>
+
+                                            </li>
+                                            <li className={Styles.item}>
+                                                <label htmlFor="saturation">채도</label>
+                                                <input type="text" id="saturation" name="saturation" />
+                                                <div className={Styles.graph_box}>
+                                                    {/* 그래프 slider가 선택되면 on 클래스 추가 */}
+                                                    {/* slider 이동할 수 있도록  left값 조절 해주세요 */}
+                                                    <span className={`${Styles.slider} ${Styles.btn_pop_color_slide} ${Styles.on}`} style={{ left: 100 + 'px' }}>&nbsp;</span>
+                                                    <div className={Styles.bar}>
+                                                        {/* 더미용 이미지 입니다. 나중에 여기에 이미지 or svg 넣어주세요 */}
+                                                        <img src="https://cdn.tutsplus.com/active/uploads/legacy/tuts/008_colorPicker/Tutorial/8.jpg" width="100%" style={{ maxHeight: 100 + '%' }} />
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li className={Styles.item}>
+                                                <label htmlFor="saturation">명도</label>
+                                                <input type="text" id="lightness" name="lightness" />
+                                                <div className={Styles.graph_box}>
+                                                    {/* 그래프 slider가 선택되면 on 클래스 추가 */}
+                                                    {/* slider 이동할 수 있도록  left값 조절 해주세요 */}
+                                                    <span className={`${Styles.slider} ${Styles.btn_pop_color_slide} ${Styles.on}`} style={{ left: 0 + 'px' }}>&nbsp;</span>
+                                                    <div className={Styles.bar}>
+                                                        {/* 더미용 이미지 입니다. 나중에 여기에 이미지 or svg 넣어주세요 */}
+                                                        <img src="https://cdn.tutsplus.com/active/uploads/legacy/tuts/008_colorPicker/Tutorial/8.jpg" width="100%" style={{ maxHeight: 100 + '%' }} />
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                {/* left 값 조절로 화살표 위치 잡을 수 있습니다. */}
+                                <span className="arr free" style={{ left: 101 + 'px' }}><i></i></span>
+                            </div>
+
                         </section>
                     </section>
-                </div>
+                </div >
 
             </div >
         );
