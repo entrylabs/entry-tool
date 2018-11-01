@@ -171,6 +171,14 @@ class ColorPicker extends Component {
         document.removeEventListener('mouseup', this.up);
     }
 
+    getSnapshotBeforeUpdate() {
+        console.log('getSnapshotBeforeUpdate', this.colorPicker.getBoundingClientRect());
+    }
+
+    componentDidUpdate() {
+        console.log('componentDidUpdate', this.colorPicker.getBoundingClientRect());
+    }
+
     handleSliderMouseDown(e, type) {
         const { nativeEvent = {} } = e;
         const { clientX } = nativeEvent;
@@ -185,10 +193,27 @@ class ColorPicker extends Component {
         });
     }
 
+    alignPosition() {
+        const { parentRect } = this.props;
+        console.log(parentRect, this.colorPicker);
+        return {
+            transform: `translate3d(0, 0, 0)`,
+        };
+    }
+
     render() {
+        console.log('render');
+        const { className } = this.props;
         const { hue, saturation, brightness, red, green, blue, isActiveSlider } = this.state;
         return (
-            <div className={Styles.popup_wrap}>
+            <div
+                ref={(dom) => {
+                    console.log(dom);
+                    this.colorPicker = dom;
+                }}
+                className={`${Styles.popup_wrap} ${className}`}
+                style={this.alignPosition()}
+            >
                 {/* 컬러피커 툴팁 */}
                 <div className={`${Styles.tooltip_box} ${Styles.color_picker} ${Styles.up}`}>
                     <div className={`${Styles.tooltip_inner}`}>

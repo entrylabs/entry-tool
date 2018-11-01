@@ -19,6 +19,7 @@
         "build": "node scripts/build.js",
         "comp": "node scripts/comp.js",
         "watch": "node scripts/watch.js",
+        "cpw": "node scripts/compWatch.js",
         "test": "node scripts/test.js --env=jsdom",
         "storybook": "start-storybook -p 9009 -s public",
         "build-storybook": "build-storybook -s public"

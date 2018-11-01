@@ -1113,7 +1113,7 @@
 
     // 공통 툴팁 박스
     .tooltip_box {
-        @include PositionLT(absolute, 0, 53px);
+        @include PositionLT(absolute, 0, 0);
         width: 166px;
         background-color: #fff;
         border: 1px solid #e2e2e2;
@@ -1177,7 +1177,6 @@
         user-select: none;
         font-size: 14px;
         width: 396px;
-        left: 192px;
         .tooltip_inner {
             padding: 16px;
         }
