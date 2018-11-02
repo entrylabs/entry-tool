@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import chroma from 'chroma-js';
 import { Object } from 'core-js';
 import Styles from '../../assets/scss/popup.scss';
+import { debounce } from 'lodash';
+// import { EFAULT } from 'constants';
 
 function getColorByHsv({ red, green, blue }) {
     const color = chroma(red, green, blue);
@@ -37,7 +39,10 @@ function getColorByRGB({ hue, saturation, brightness }) {
 function getColorByHex(hex) {
     const color = chroma(hex);
     const [red, green, blue] = color.rgb();
-    const [hue, saturation, brightness] = color.hsv();
+    let [hue, saturation, brightness] = color.hsv();
+    hue = hue || 0;
+    saturation = saturation || 0;
+    brightness = brightness || 0;
     return {
         red,
         green,
@@ -49,11 +54,35 @@ function getColorByHex(hex) {
     };
 }
 
-function scaleRatioX(value) {
+function setScaleRatioX(value) {
     return Math.round(value * 1.77);
 }
 
 class ColorPicker extends Component {
+    get SCALE_RATIO_X() {
+        return 1.77;
+    }
+
+    get PICKER_WIDTH() {
+        return 398;
+    }
+
+    get PICKER_WIDTH_MARGIN() {
+        return 25;
+    }
+
+    get MAX_ARROW_POSITION() {
+        return 366;
+    }
+
+    get PICKER_HEIGHT() {
+        return 248;
+    }
+
+    get SLIDER_SIZE() {
+        return 28;
+    }
+
     state = {
         hue: 0,
         saturation: 100,
@@ -62,6 +91,7 @@ class ColorPicker extends Component {
         green: 0,
         blue: 0,
         color: '#ff0000',
+        arrowLeft: this.MAX_ARROW_POSITION / 2,
     };
     constructor(props) {
         super(props);
@@ -145,15 +175,17 @@ class ColorPicker extends Component {
             return nextState;
         });
     }
-    move = (e) => {
+
+    handleSliderMove = (e) => {
         if (this.canMoveCapture) {
             const { clientX } = e;
-            let result = (clientX - this.sliderStartX) / 1.8 + this.sliderValue;
+            let result = (clientX - this.sliderStartX) / this.SCALE_RATIO_X + this.sliderValue;
             result = Math.round(Math.max(Math.min(result, 100), 0));
             this.handleChangeHsv(this.sliderType, result);
         }
     };
-    up = () => {
+
+    handleSliderUp = () => {
         this.canMoveCapture = false;
         this.setState(() => {
             return {
@@ -161,22 +193,29 @@ class ColorPicker extends Component {
             };
         });
     };
+    handleWindowResize = debounce(() => {
+        this.alignPosition();
+    }, 300);
+
+    handleSliderBarClick(e, type) {
+        const { clientX, target } = e;
+        const { left = 0 } = target.getBoundingClientRect() || {};
+        let result = (clientX - left - this.SLIDER_SIZE / 2) / this.SCALE_RATIO_X;
+        result = Math.round(Math.max(Math.min(result, 100), 0));
+        this.handleChangeHsv(type, result);
+    }
+
     componentDidMount() {
-        document.addEventListener('mousemove', this.move);
-        document.addEventListener('mouseup', this.up);
+        document.addEventListener('mousemove', this.handleSliderMove);
+        document.addEventListener('mouseup', this.handleSliderUp);
+        window.addEventListener('resize', this.handleWindowResize);
+        this.alignPosition();
     }
 
     componentWillUnmount() {
-        document.removeEventListener('mousemove', this.move);
-        document.removeEventListener('mouseup', this.up);
-    }
-
-    getSnapshotBeforeUpdate() {
-        console.log('getSnapshotBeforeUpdate', this.colorPicker.getBoundingClientRect());
-    }
-
-    componentDidUpdate() {
-        console.log('componentDidUpdate', this.colorPicker.getBoundingClientRect());
+        document.removeEventListener('mousemove', this.handleSliderMove);
+        document.removeEventListener('mouseup', this.handleSliderUp);
+        window.removeEventListener('resize', this.handleWindowResize);
     }
 
     handleSliderMouseDown(e, type) {
@@ -194,36 +233,81 @@ class ColorPicker extends Component {
     }
 
     alignPosition() {
-        const { parentRect } = this.props;
-        console.log(parentRect, this.colorPicker);
+        const { innerHeight, innerWidth } = window;
+        const [transX, transY] = this.getTranslate3d(this.colorPicker);
+        const thisRect = this.colorPicker.getBoundingClientRect();
+        let { left, top } = thisRect;
+        // console.log(top, transY, innerHeight);
+        left += this.PICKER_WIDTH + this.PICKER_WIDTH_MARGIN - transX;
+        top += -transY;
+        const x = left > innerWidth ? left - innerWidth : 0;
+        const y = top > innerHeight ? top - innerHeight : 0;
+        const arrowLeft = Math.max(
+            Math.min(x + this.MAX_ARROW_POSITION / 2, this.MAX_ARROW_POSITION),
+            0
+        );
+        this.setState(() => {
+            return {
+                arrowLeft,
+                transform: `translate3d(-${x}px, -${y}px, 0)`,
+            };
+        });
+    }
+
+    getTranslate3d(el) {
+        var values = el.style.transform.split(/\w+\(|\);?/);
+        if (!values[1] || !values[1].length) {
+            return [0, 0, 0];
+        }
+        return values[1].split(/,\s?/g).map((value) => {
+            return parseInt(value, 10);
+        });
+    }
+
+    makeColorPickerStyle() {
+        const { positionDom, marginRect } = this.props;
+        const { transform } = this.state;
+        const parentRect = positionDom ? positionDom.getBoundingClientRect() : {};
+        const { marginLeft = 0, marginTop = 0 } = marginRect;
+        let { left = 0, top = 0 } = parentRect;
+        left -= this.PICKER_WIDTH / 2 + marginLeft;
+        top -= this.PICKER_HEIGHT + marginTop;
         return {
-            transform: `translate3d(0, 0, 0)`,
+            left,
+            top,
+            transform,
+            position: 'fixed',
+            transition: 'all ease .3s',
         };
     }
 
     render() {
-        console.log('render');
         const { className } = this.props;
-        const { hue, saturation, brightness, red, green, blue, isActiveSlider } = this.state;
+        const {
+            hue,
+            saturation,
+            brightness,
+            red,
+            green,
+            blue,
+            isActiveSlider,
+            arrowLeft,
+        } = this.state;
         return (
             <div
                 ref={(dom) => {
-                    console.log(dom);
                     this.colorPicker = dom;
                 }}
                 className={`${Styles.popup_wrap} ${className}`}
-                style={this.alignPosition()}
+                style={this.makeColorPickerStyle()}
             >
-                {/* 컬러피커 툴팁 */}
                 <div className={`${Styles.tooltip_box} ${Styles.color_picker} ${Styles.up}`}>
                     <div className={`${Styles.tooltip_inner}`}>
                         <div className={`${Styles.color_box}`}>
                             <span
                                 className={`${Styles.color} ${Styles.imico_pop_circle_check}`}
                                 style={this.resultBackground()}
-                            >
-                                &nbsp;
-                            </span>
+                            />
                             <ul className={`${Styles.color_list}`}>
                                 <li className={`${Styles.item}`}>
                                     <label htmlFor="red">빨강(R)</label>
@@ -287,8 +371,6 @@ class ColorPicker extends Component {
                                         name="hue"
                                     />
                                     <div className={`${Styles.graph_box}`}>
-                                        {/* 그래프 slider가 선택되면 on 클래스 추가 */}
-                                        {/* slider 이동할 수 있도록  left값 조절 해주세요 */}
                                         <span
                                             className={`${Styles.slider} ${
                                                 Styles.btn_pop_color_slide
@@ -296,13 +378,14 @@ class ColorPicker extends Component {
                                             onMouseDown={(e) => {
                                                 this.handleSliderMouseDown(e, 'hue');
                                             }}
-                                            style={{ left: scaleRatioX(hue) + 'px' }}
-                                        >
-                                            &nbsp;
-                                        </span>
+                                            style={{ left: setScaleRatioX(hue) + 'px' }}
+                                        />
                                         <div
                                             className={`${Styles.bar}`}
                                             style={this.hueGradient()}
+                                            onClick={(e) => {
+                                                this.handleSliderBarClick(e, 'hue');
+                                            }}
                                         />
                                     </div>
                                 </li>
@@ -321,8 +404,6 @@ class ColorPicker extends Component {
                                         name="saturation"
                                     />
                                     <div className={`${Styles.graph_box}`}>
-                                        {/* 그래프 slider가 선택되면 on 클래스 추가 */}
-                                        {/* slider 이동할 수 있도록  left값 조절 해주세요 */}
                                         <span
                                             className={`${Styles.slider} ${
                                                 Styles.btn_pop_color_slide
@@ -330,13 +411,14 @@ class ColorPicker extends Component {
                                             onMouseDown={(e) => {
                                                 this.handleSliderMouseDown(e, 'saturation');
                                             }}
-                                            style={{ left: scaleRatioX(saturation) + 'px' }}
-                                        >
-                                            &nbsp;
-                                        </span>
+                                            style={{ left: setScaleRatioX(saturation) + 'px' }}
+                                        />
                                         <div
                                             className={`${Styles.bar}`}
                                             style={this.saturationGradient()}
+                                            onClick={(e) => {
+                                                this.handleSliderBarClick(e, 'saturation');
+                                            }}
                                         />
                                     </div>
                                 </li>
@@ -355,8 +437,6 @@ class ColorPicker extends Component {
                                         name="lightness"
                                     />
                                     <div className={`${Styles.graph_box}`}>
-                                        {/* 그래프 slider가 선택되면 on 클래스 추가 */}
-                                        {/* slider 이동할 수 있도록  left값 조절 해주세요 */}
                                         <span
                                             className={`${Styles.slider} ${
                                                 Styles.btn_pop_color_slide
@@ -364,13 +444,14 @@ class ColorPicker extends Component {
                                             onMouseDown={(e) => {
                                                 this.handleSliderMouseDown(e, 'brightness');
                                             }}
-                                            style={{ left: scaleRatioX(brightness) + 'px' }}
-                                        >
-                                            &nbsp;
-                                        </span>
+                                            style={{ left: setScaleRatioX(brightness) + 'px' }}
+                                        />
                                         <div
                                             className={`${Styles.bar}`}
                                             style={this.brightnessGradient()}
+                                            onClick={(e) => {
+                                                this.handleSliderBarClick(e, 'brightness');
+                                            }}
                                         />
                                     </div>
                                 </li>
@@ -378,7 +459,10 @@ class ColorPicker extends Component {
                         </div>
                     </div>
                     {/* left 값 조절로 화살표 위치 잡을 수 있습니다. */}
-                    <span className={`${Styles.arr} ${Styles.free}`} style={{ left: 101 + 'px' }}>
+                    <span
+                        className={`${Styles.arr} ${Styles.free}`}
+                        style={{ left: arrowLeft + 'px' }}
+                    >
                         <i />
                     </span>
                 </div>
