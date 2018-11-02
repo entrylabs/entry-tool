@@ -6,7 +6,7 @@ import Styles from '../../assets/scss/popup.scss';
 class Sample extends Component {
     constructor(props) {
         super(props);
-    }
+    
     componentDidMount() {
         window.onpopstate = this.close;
         window.history.pushState({}, 'popup');
@@ -1912,7 +1912,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.select_link} ${
                                                     Styles.imico_pop_select_arr_down
-                                                }`}
+                                                    }`}
                                                 title="글꼴"
                                             >
                                                 NanumGothicOTF
@@ -1984,7 +1984,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_bold
-                                                } ${Styles.on}`}
+                                                    } ${Styles.on}`}
                                                 title="굵게"
                                             >
                                                 <span className={Styles.blind}>글자 굵게</span>
@@ -1993,7 +1993,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_underline
-                                                }`}
+                                                    }`}
                                                 title="밑줄"
                                             >
                                                 <span className={Styles.blind}>글자 밑줄</span>
@@ -2002,7 +2002,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_italic
-                                                }`}
+                                                    }`}
                                                 title="기울임"
                                             >
                                                 <span className={Styles.blind}>글자 기울기</span>
@@ -2011,7 +2011,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_through
-                                                }`}
+                                                    }`}
                                                 title="취소선"
                                             >
                                                 <span className={Styles.blind}>글자 취소선</span>
@@ -2020,7 +2020,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_color
-                                                }`}
+                                                    }`}
                                                 title="글자색"
                                             >
                                                 <span className={Styles.blind}>글자 색</span>
@@ -2029,7 +2029,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_paint
-                                                }`}
+                                                    }`}
                                                 title="배경색"
                                             >
                                                 <span className={Styles.blind}>글자 배경색</span>
