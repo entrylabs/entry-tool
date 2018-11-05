@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Styles from '../../../assets/scss/popup.scss';
+import { triggerEvent } from '../../../actions';
 
 class Draw extends Component {
+    constructor(props) {
+        super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(data) {
+        this.props.triggerEvent(data);
+    }
+
     render() {
         return (
             <div className={Styles.section_cont}>
@@ -18,7 +28,7 @@ class Draw extends Component {
                             그리기 화면으로 이동하시겠습니까?
                         </p>
                         <div className={Styles.pop_btn_box}>
-                            <a href="#NULL" className={Styles.active}>이동하기</a>
+                            <a href="#NULL" className={Styles.active} onClick={e => this.handleSubmit()}>이동하기</a>
                         </div>
                     </div>
                 </div>
@@ -27,7 +37,11 @@ class Draw extends Component {
     }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+    triggerEvent: (data) => dispatch(triggerEvent('draw', data)),
+});
+
 export default connect(
     null,
-    null,
+    mapDispatchToProps,
 )(Draw);

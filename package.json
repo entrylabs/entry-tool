@@ -17,6 +17,9 @@
     "scripts": {
         "start": "node scripts/start.js",
         "build": "node scripts/build.js",
+        "comp": "node scripts/comp.js",
+        "dev": "node scripts/watch.js",
+        "devc": "node scripts/compWatch.js",
         "test": "node scripts/test.js --env=jsdom",
         "storybook": "start-storybook -p 9009 -s public",
         "build-storybook": "build-storybook -s public"
@@ -122,7 +125,9 @@
     },
     "dependencies": {
         "axios": "^0.18.0",
+        "chroma-js": "^1.4.0",
         "lodash": "^4.17.11",
+        "react-outside-click-handler": "^1.2.2",
         "react-slick": "^0.23.2"
     }
 }

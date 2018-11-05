@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchItems, applySelected, visibleAction } from '../../actions';
+import { fetchItems, initState } from '../../actions/popup';
+import { visibleAction } from '../../actions/index';
 import Styles from '../../assets/scss/popup.scss';
 
 import Navigation from './Navigation';
@@ -8,24 +9,37 @@ import Select from './Contents/Select';
 import FileUpload from './Contents/FileUpload';
 import WriteBox from './Contents/WriteBox';
 import Draw from './Contents/Draw';
-import { POPUP_TYPE } from '../../constatns';
+import { DEFAULT_OPTIONS } from '../../constatns';
 
 class Sprite extends Component {
     constructor(props) {
         super(props);
-        this.options = POPUP_TYPE[this.props.type];
+        this.options = {
+            ...DEFAULT_OPTIONS.POPUP_TYPE[this.props.type],
+            writeBoxOption: DEFAULT_OPTIONS.WRITE_BOX,
+            ...this.props,
+        };
+
+        if (this.props.write) {
+            this.options.navigations.write = { name: '글 상자' };
+        } else {
+            delete this.options.navigations.write;
+        }
+
         this.state = {
             navigation: Object.keys(this.options.navigations || [])[0],
         };
 
+        //this.props.visibleAction(false)
         this.onNavigationClicked = this.onNavigationClicked.bind(this);
     }
 
     componentWillMount() {
+        const url = this.props.url || 'http://local.playentry.org';
         if (!this.options.data) {
-            this.props.fetchItems(this.props.type, Object.keys(this.options.sidebar || [])[0]);
+            this.props.fetchItems(url, this.props.type, Object.keys(this.options.sidebar || [])[0]);
         }
-        this.props.applySelected([]);
+        this.props.initState({ baseUrl: url });
     }
 
     componentDidMount() {
@@ -55,23 +69,23 @@ class Sprite extends Component {
             search: false,
         };
         const data = this.options.data || this.props.popupReducer.data || [];
-        const defaultNavigation = <Navigation {...navSettings}/>;
+        const defaultNavigation = <Navigation {...navSettings} />;
         const contents = {
             select: {
-                view: <Select type={'sidebar'} sidebar={this.options.sidebar} data={data}/>,
-                nav: <Navigation {...navSettings} search={true}/>,
+                view: <Select type={'sidebar'} sidebar={this.options.sidebar} data={data} />,
+                nav: <Navigation {...navSettings} search={true} />,
             },
             upload: {
-                view: <FileUpload/>,
+                view: <FileUpload />,
             },
             draw: {
-                view: <Draw/>,
+                view: <Draw />,
             },
             write: {
-                view: <WriteBox/>,
+                view: <WriteBox fontOption={this.options.writeBoxOption} />,
             },
             expansion: {
-                view: <Select type={'bigicon'} data={data}/>,
+                view: <Select type={'bigicon'} data={data} />,
                 nav: true,
             },
         };
@@ -90,13 +104,14 @@ class Sprite extends Component {
                 <div className={Styles.popup_wrap}>
                     <header className={Styles.pop_header}>
                         <h1>오브젝트 추가하기</h1>
-                        <button onClick={this.close} className={Styles.btn_back + " " +Styles.imbtn_pop_back}>
+                        <button
+                            onClick={this.close}
+                            className={Styles.btn_back + ' ' + Styles.imbtn_pop_back}
+                        >
                             <span className={Styles.blind}>뒤로가기</span>
                         </button>
                     </header>
-                    <section className={Styles.pop_content}>
-                        {this.setContent()}
-                    </section>
+                    <section className={Styles.pop_content}>{this.setContent()}</section>
                 </div>
             </div>
         );
@@ -109,11 +124,12 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     visibleAction: (visible) => dispatch(visibleAction(visible)),
-    fetchItems: (type, category, subMenu) => dispatch(fetchItems(type, category, subMenu)),
-    applySelected: (list) => dispatch(applySelected(list)),
+    fetchItems: (baseUrl, type, category, subMenu) =>
+        dispatch(fetchItems(baseUrl, type, category, subMenu)),
+    initState: (data) => dispatch(initState(data)),
 });
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(Sprite);
