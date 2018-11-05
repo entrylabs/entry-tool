@@ -6,12 +6,20 @@ import App from './App';
 import configureStore from './store';
 import { visibleAction } from './actions/index';
 
-
+var instance = null;
 export default class EntryTool extends EventEmitter {
     constructor(...args) {
         super();
         this.initialize(...args);
         this.render();
+    }
+
+    static getInstance(option) {
+        if (!instance) {
+            instance = new EntryTool(option);
+        }
+
+        return instance;
     }
 
     initialize({ container, target, isShow = true, type, data, props } = {}) {
@@ -25,6 +33,7 @@ export default class EntryTool extends EventEmitter {
         target.appendChild(container);
         this._data = data;
         this._props = props;
+        this._type = type;
         this.module = this.getModule(type);
         this.store = configureStore({}, this);
 
@@ -53,10 +62,24 @@ export default class EntryTool extends EventEmitter {
         return this._props;
     }
 
+    get type() {
+        return this._type;
+    }
+
+    getData(key) {
+        const state = this.store.getState();
+        const reducer = state[`${this.reducerType}Reducer`];
+        return reducer[key] || reducer;
+    }
+
     getModule(type) {
         switch (type) {
+            case 'colorPicker':
+                this.reducerType = 'picker';
+                return import('./components/picker/colorContainer');
             case 'popup':
             default:
+                this.reducerType = 'popup';
                 return import('./components/popup');
         }
     }
@@ -93,12 +116,12 @@ export default class EntryTool extends EventEmitter {
     async render() {
         const { default: Module } = await this.module;
         ReactDOM.render(
-            <Provider store={this.store}>
-                <App>
-                    <Module {...this._props} />
+            <Provider store={this.store} type={this.type}>
+                <App className={this.type}>
+                    <Module {...Object.assign({}, this._props, this._data)} eventEmitter={this} />
                 </App>
             </Provider>,
-            this.container,
+            this.container
         );
     }
 }
