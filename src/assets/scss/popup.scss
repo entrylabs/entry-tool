@@ -1263,6 +1263,7 @@
     }
     .color_box {
         float: left;
+        position: relative;
         margin: 10px 20px 0 8px;
     }
     .color_box .color {
@@ -1275,9 +1276,10 @@
     }
     .color_box .color:before {
         @include PositionRB(absolute, 4px, 4px);
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
         background-color: #fff;
+        border: 1px solid #e2e2e2;
         border-radius: 50%;
         content: '';
     }
@@ -1319,6 +1321,25 @@
     .color_box .color_list .item input[type="number"]:focus,
     .color_graph .graph_list .item input[type="number"]:focus {
         border: 2px solid #4f80ff;
+    }
+    .color_box .color_list .item.disabled label,
+    .color_graph .graph_list .item.disabled label {
+        color: #979797;
+    }
+    .color_box .color_list .item.disabled input[type="text"]:focus,
+    .color_graph .graph_list .item.disabled input[type="text"]:focus,
+    .color_box .color_list .item.disabled input[type="number"]:focus,
+    .color_graph .graph_list .item.disabled input[type="number"]:focus {
+        border: 1px solid #e2e2e2;
+    }
+    .color_box .btn_picker {
+        @include PositionLT (absolute, 65px, 20px);
+        overflow: hidden;
+        font-size: 1px;
+        color: transparent;
+        text-indent: -10px;
+        width: 36px;
+        height: 36px;
     }
     .color_graph {
         float: left;
