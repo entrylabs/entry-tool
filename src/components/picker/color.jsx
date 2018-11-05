@@ -3,6 +3,7 @@ import chroma from 'chroma-js';
 import { Object } from 'core-js';
 import Styles from '../../assets/scss/popup.scss';
 import { debounce } from 'lodash';
+import OutsideClickHandler from 'react-outside-click-handler';
 // import { EFAULT } from 'constants';
 
 function getColorByHsv({ red, green, blue }) {
@@ -267,6 +268,7 @@ class ColorPicker extends Component {
     makeColorPickerStyle() {
         const { positionDom, marginRect } = this.props;
         const { transform } = this.state;
+        console.log(positionDom);
         const parentRect = positionDom ? positionDom.getBoundingClientRect() : {};
         const { marginLeft = 0, marginTop = 0 } = marginRect;
         let { left = 0, top = 0 } = parentRect;
@@ -282,7 +284,7 @@ class ColorPicker extends Component {
     }
 
     render() {
-        const { className } = this.props;
+        const { className, onClick, onOutsideClick } = this.props;
         const {
             hue,
             saturation,
@@ -294,179 +296,190 @@ class ColorPicker extends Component {
             arrowLeft,
         } = this.state;
         return (
-            <div
-                ref={(dom) => {
-                    this.colorPicker = dom;
-                }}
-                className={`${Styles.popup_wrap} ${className}`}
-                style={this.makeColorPickerStyle()}
-            >
-                <div className={`${Styles.tooltip_box} ${Styles.color_picker} ${Styles.up}`}>
-                    <div className={`${Styles.tooltip_inner}`}>
-                        <div className={`${Styles.color_box}`}>
-                            <span
-                                className={`${Styles.color} ${Styles.imico_pop_circle_check}`}
-                                style={this.resultBackground()}
-                            />
-                            <ul className={`${Styles.color_list}`}>
-                                <li className={`${Styles.item}`}>
-                                    <label htmlFor="red">빨강(R)</label>
-                                    <input
-                                        value={red}
-                                        type="number"
-                                        min="0"
-                                        max="255"
-                                        onChange={({ target }) => {
-                                            this.handleChangeRGB('red', target);
-                                        }}
-                                        id="red"
-                                        name="red"
-                                    />
-                                    <div className={`${Styles.graph}`} />
-                                </li>
-                                <li className={`${Styles.item}`}>
-                                    <label htmlFor="green">녹색(G)</label>
-                                    <input
-                                        value={green}
-                                        type="number"
-                                        min="0"
-                                        max="255"
-                                        onChange={({ target }) => {
-                                            this.handleChangeRGB('green', target);
-                                        }}
-                                        id="green"
-                                        name="green"
-                                    />
-                                </li>
-                                <li className={`${Styles.item}`}>
-                                    <label htmlFor="blue">파랑(B)</label>
-                                    <input
-                                        value={blue}
-                                        type="number"
-                                        min="0"
-                                        max="255"
-                                        onChange={({ target }) => {
-                                            this.handleChangeRGB('blue', target);
-                                        }}
-                                        id="blue"
-                                        name="blue"
-                                    />
-                                </li>
-                            </ul>
+            <OutsideClickHandler onOutsideClick={onOutsideClick}>
+                <div
+                    ref={(dom) => {
+                        this.colorPicker = dom;
+                    }}
+                    className={`${Styles.popup_wrap} ${className}`}
+                    style={this.makeColorPickerStyle()}
+                    onClick={onClick}
+                >
+                    <div className={`${Styles.tooltip_box} ${Styles.color_picker} ${Styles.up}`}>
+                        <div className={`${Styles.tooltip_inner}`}>
+                            <div className={`${Styles.color_box}`}>
+                                <span
+                                    className={`${Styles.color} ${Styles.imico_pop_circle_check}`}
+                                    style={this.resultBackground()}
+                                />
+                                <ul className={`${Styles.color_list}`}>
+                                    <li className={`${Styles.item}`}>
+                                        <label htmlFor="red">빨강(R)</label>
+                                        <input
+                                            value={red}
+                                            type="number"
+                                            min="0"
+                                            max="255"
+                                            onChange={({ target }) => {
+                                                this.handleChangeRGB('red', target);
+                                            }}
+                                            id="red"
+                                            name="red"
+                                        />
+                                        <div className={`${Styles.graph}`} />
+                                    </li>
+                                    <li className={`${Styles.item}`}>
+                                        <label htmlFor="green">녹색(G)</label>
+                                        <input
+                                            value={green}
+                                            type="number"
+                                            min="0"
+                                            max="255"
+                                            onChange={({ target }) => {
+                                                this.handleChangeRGB('green', target);
+                                            }}
+                                            id="green"
+                                            name="green"
+                                        />
+                                    </li>
+                                    <li className={`${Styles.item}`}>
+                                        <label htmlFor="blue">파랑(B)</label>
+                                        <input
+                                            value={blue}
+                                            type="number"
+                                            min="0"
+                                            max="255"
+                                            onChange={({ target }) => {
+                                                this.handleChangeRGB('blue', target);
+                                            }}
+                                            id="blue"
+                                            name="blue"
+                                        />
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className={`${Styles.color_graph}`}>
+                                <ul className={`${Styles.graph_list}`}>
+                                    <li className={`${Styles.item}`}>
+                                        <label htmlFor="hue">색상</label>
+                                        <input
+                                            value={hue}
+                                            type="number"
+                                            min="0"
+                                            max="100"
+                                            onChange={({ target }) => {
+                                                const { value = 0 } = target;
+                                                this.handleChangeHsv('hue', value);
+                                            }}
+                                            id="hue"
+                                            name="hue"
+                                        />
+                                        <div className={`${Styles.graph_box}`}>
+                                            <span
+                                                className={`${Styles.slider} ${
+                                                    Styles.btn_pop_color_slide
+                                                } ${isActiveSlider === 'hue' ? Styles.on : ''}`}
+                                                onMouseDown={(e) => {
+                                                    this.handleSliderMouseDown(e, 'hue');
+                                                }}
+                                                style={{ left: setScaleRatioX(hue) + 'px' }}
+                                            />
+                                            <div
+                                                className={`${Styles.bar}`}
+                                                style={this.hueGradient()}
+                                                onMouseDown={(e) => {
+                                                    this.handleSliderBarClick(e, 'hue');
+                                                }}
+                                            />
+                                        </div>
+                                    </li>
+                                    <li className={`${Styles.item}`}>
+                                        <label htmlFor="saturation">채도</label>
+                                        <input
+                                            value={saturation}
+                                            type="number"
+                                            min="0"
+                                            max="100"
+                                            onChange={({ target }) => {
+                                                const { value = 0 } = target;
+                                                this.handleChangeHsv('saturation', value);
+                                            }}
+                                            id="saturation"
+                                            name="saturation"
+                                        />
+                                        <div className={`${Styles.graph_box}`}>
+                                            <span
+                                                className={`${Styles.slider} ${
+                                                    Styles.btn_pop_color_slide
+                                                } ${
+                                                    isActiveSlider === 'saturation' ? Styles.on : ''
+                                                }`}
+                                                onMouseDown={(e) => {
+                                                    this.handleSliderMouseDown(e, 'saturation');
+                                                }}
+                                                style={{
+                                                    left: setScaleRatioX(saturation) + 'px',
+                                                }}
+                                            />
+                                            <div
+                                                className={`${Styles.bar}`}
+                                                style={this.saturationGradient()}
+                                                onMouseDown={(e) => {
+                                                    this.handleSliderBarClick(e, 'saturation');
+                                                }}
+                                            />
+                                        </div>
+                                    </li>
+                                    <li className={`${Styles.item}`}>
+                                        <label htmlFor="saturation">명도</label>
+                                        <input
+                                            value={brightness}
+                                            type="number"
+                                            min="0"
+                                            max="100"
+                                            onChange={({ target }) => {
+                                                const { value = 0 } = target;
+                                                this.handleChangeHsv('brightness', value);
+                                            }}
+                                            id="lightness"
+                                            name="lightness"
+                                        />
+                                        <div className={`${Styles.graph_box}`}>
+                                            <span
+                                                className={`${Styles.slider} ${
+                                                    Styles.btn_pop_color_slide
+                                                } ${
+                                                    isActiveSlider === 'brightness' ? Styles.on : ''
+                                                }`}
+                                                onMouseDown={(e) => {
+                                                    this.handleSliderMouseDown(e, 'brightness');
+                                                }}
+                                                style={{
+                                                    left: setScaleRatioX(brightness) + 'px',
+                                                }}
+                                            />
+                                            <div
+                                                className={`${Styles.bar}`}
+                                                style={this.brightnessGradient()}
+                                                onMouseDown={(e) => {
+                                                    this.handleSliderBarClick(e, 'brightness');
+                                                }}
+                                            />
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div className={`${Styles.color_graph}`}>
-                            <ul className={`${Styles.graph_list}`}>
-                                <li className={`${Styles.item}`}>
-                                    <label htmlFor="hue">색상</label>
-                                    <input
-                                        value={hue}
-                                        type="number"
-                                        min="0"
-                                        max="100"
-                                        onChange={({ target }) => {
-                                            const { value = 0 } = target;
-                                            this.handleChangeHsv('hue', value);
-                                        }}
-                                        id="hue"
-                                        name="hue"
-                                    />
-                                    <div className={`${Styles.graph_box}`}>
-                                        <span
-                                            className={`${Styles.slider} ${
-                                                Styles.btn_pop_color_slide
-                                            } ${isActiveSlider === 'hue' ? Styles.on : ''}`}
-                                            onMouseDown={(e) => {
-                                                this.handleSliderMouseDown(e, 'hue');
-                                            }}
-                                            style={{ left: setScaleRatioX(hue) + 'px' }}
-                                        />
-                                        <div
-                                            className={`${Styles.bar}`}
-                                            style={this.hueGradient()}
-                                            onClick={(e) => {
-                                                this.handleSliderBarClick(e, 'hue');
-                                            }}
-                                        />
-                                    </div>
-                                </li>
-                                <li className={`${Styles.item}`}>
-                                    <label htmlFor="saturation">채도</label>
-                                    <input
-                                        value={saturation}
-                                        type="number"
-                                        min="0"
-                                        max="100"
-                                        onChange={({ target }) => {
-                                            const { value = 0 } = target;
-                                            this.handleChangeHsv('saturation', value);
-                                        }}
-                                        id="saturation"
-                                        name="saturation"
-                                    />
-                                    <div className={`${Styles.graph_box}`}>
-                                        <span
-                                            className={`${Styles.slider} ${
-                                                Styles.btn_pop_color_slide
-                                            } ${isActiveSlider === 'saturation' ? Styles.on : ''}`}
-                                            onMouseDown={(e) => {
-                                                this.handleSliderMouseDown(e, 'saturation');
-                                            }}
-                                            style={{ left: setScaleRatioX(saturation) + 'px' }}
-                                        />
-                                        <div
-                                            className={`${Styles.bar}`}
-                                            style={this.saturationGradient()}
-                                            onClick={(e) => {
-                                                this.handleSliderBarClick(e, 'saturation');
-                                            }}
-                                        />
-                                    </div>
-                                </li>
-                                <li className={`${Styles.item}`}>
-                                    <label htmlFor="saturation">명도</label>
-                                    <input
-                                        value={brightness}
-                                        type="number"
-                                        min="0"
-                                        max="100"
-                                        onChange={({ target }) => {
-                                            const { value = 0 } = target;
-                                            this.handleChangeHsv('brightness', value);
-                                        }}
-                                        id="lightness"
-                                        name="lightness"
-                                    />
-                                    <div className={`${Styles.graph_box}`}>
-                                        <span
-                                            className={`${Styles.slider} ${
-                                                Styles.btn_pop_color_slide
-                                            } ${isActiveSlider === 'brightness' ? Styles.on : ''}`}
-                                            onMouseDown={(e) => {
-                                                this.handleSliderMouseDown(e, 'brightness');
-                                            }}
-                                            style={{ left: setScaleRatioX(brightness) + 'px' }}
-                                        />
-                                        <div
-                                            className={`${Styles.bar}`}
-                                            style={this.brightnessGradient()}
-                                            onClick={(e) => {
-                                                this.handleSliderBarClick(e, 'brightness');
-                                            }}
-                                        />
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                        {/* left 값 조절로 화살표 위치 잡을 수 있습니다. */}
+                        <span
+                            className={`${Styles.arr} ${Styles.free}`}
+                            style={{ left: arrowLeft + 'px' }}
+                        >
+                            <i />
+                        </span>
                     </div>
-                    {/* left 값 조절로 화살표 위치 잡을 수 있습니다. */}
-                    <span
-                        className={`${Styles.arr} ${Styles.free}`}
-                        style={{ left: arrowLeft + 'px' }}
-                    >
-                        <i />
-                    </span>
                 </div>
-            </div>
+            </OutsideClickHandler>
         );
     }
 }
