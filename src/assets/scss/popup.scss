@@ -5,8 +5,14 @@
 @import 'common/variables';
 
 .popup_wrap {
-    // min-width: 1024px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-width: 1024px;
     background-color: #fff;
+    z-index: 1000;
     .pop_header {
         position: relative;
         padding-left: 72px;
@@ -26,91 +32,90 @@
             vertical-align: top;
         }
     }
+    .section_navi {
+        position: relative;
+        padding: 12px 16px;
+    }
+    .section_navi .list {
+        overflow: hidden;
+    }
+    .section_navi .list li {
+        float: left;
+        overflow: hidden;
+        width: 146px;
+        height: 40px;
+        margin-left: 6px;
+        border-radius: 4px;
+        background-color: #d6e9f4;
+    }
+    .section_navi .list li:first-child {
+        margin-left: 0;
+    }
+    .section_navi .list a {
+        display: block;
+        height: 40px;
+        color: #728997;
+        text-align: center;
+        letter-spacing: -0.3px;
+        line-height: 42px;
+        outline: 0;
+    }
+    .section_navi .list .on {
+        background-color: #4f80ff;
+    }
+    .section_navi .list .on a {
+        color: #fff;
+    }
+    .section_navi .srch_box {
+        @include PositionRT(absolute, 16px, 12px);
+        overflow: hidden;
+        width: 137px;
+        height: 38px;
+        padding: 0 45px 0 12px;
+        border: 1px solid #4f80ff;
+        border-radius: 38px;
+    }
+    .section_navi .srch_box input[type="text"] {
+        width: 100%;
+        height: 38px;
+        border: 0;
+        outline: 0;
+    }
+    .section_navi .srch_box .btn_srch {
+        @include PositionRT(absolute, 12px, 9px);
+        width: 21px;
+        height: 21px;
+        vertical-align: top;
+    }
+    
+    
     .pop_content {
+        display: flex;
+        flex: 1;
+        overflow: hidden;
+        min-height: 567px;
         background-color: #fff;
-        .section_navi {
-            position: relative;
-            padding: 12px 16px;
-        }
-        .section_navi .list {
-            overflow: hidden;
-        }
-        .section_navi .list li {
-            float: left;
-            overflow: hidden;
+        .menu_list {
             width: 146px;
-            height: 40px;
-            margin-left: 6px;
-            border-radius: 4px;
-            background-color: #d6e9f4;
-        }
-        .section_navi .list li:first-child {
-            margin-left: 0;
-        }
-        .section_navi .list a {
-            display: block;
-            height: 40px;
-            color: #728997;
-            text-align: center;
-            letter-spacing: -0.3px;
-            line-height: 42px;
-            outline: 0;
-        }
-        .section_navi .list .on {
-            background-color: #4f80ff;
-        }
-        .section_navi .list .on a {
-            color: #fff;
-        }
-        .section_navi .srch_box {
-            @include PositionRT(absolute, 16px, 12px);
-            overflow: hidden;
-            width: 137px;
-            height: 38px;
-            padding: 0 45px 0 12px;
-            border: 1px solid #4f80ff;
-            border-radius: 38px;
-        }
-        .section_navi .srch_box input[type='text'] {
-            width: 100%;
-            height: 38px;
-            border: 0;
-            outline: 0;
-        }
-        .section_navi .srch_box .btn_srch {
-            @include PositionRT(absolute, 12px, 9px);
-            width: 21px;
-            height: 21px;
-            vertical-align: top;
-        }
-        .section_cont {
-            overflow: hidden;
-        }
-        .section_cont .scroll_box {
-            overflow-y: auto;
-            height: 300px;
-        }
-        .section_cont .menu_list {
-            float: left;
-            width: 146px;
+            flex: none;
             margin: 0 8px 0 16px;
             border-radius: 6px;
         }
-        .section_cont .menu_list li {
+        .menu_list li {
             position: relative;
             overflow: hidden;
             height: 46px;
             border: 1px solid #aac5d5;
             margin-top: -1px;
         }
-        .section_cont .menu_list li:first-child {
+        .menu_list li:first-child {
             border-radius: 6px 6px 0 0;
             margin-top: 0;
         }
-        .section_cont .menu_list li:last-child {
+        .menu_list li:last-child {
             border-radius: 0 0 6px 6px;
         }
-        .section_cont .menu_list a {
+        .menu_list a {
             display: block;
             height: 46px;
             font-weight: 600;
@@ -119,21 +124,24 @@
             letter-spacing: -0.3px;
             line-height: 49px;
         }
-        .section_cont .menu_list .on {
+        .menu_list .on {
             border-color: #4f80ff;
             background-color: #4f80ff;
             z-index: 10;
         }
-        .section_cont .menu_list .on a {
+        .menu_list .on a {
             color: #fff;
         }
-        .section_cont .cont_box {
+        .section_cont {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
             overflow: hidden;
             background-color: #ecf8ff;
             border-radius: 6px;
         }
         .section_cont .sub_menu {
-            padding: 8px 22px 0;
+            padding: 8px 22px 16px;
         }
         .section_cont .sub_menu .menu_inner {
             overflow: hidden;
@@ -162,23 +170,22 @@
             background-color: #fff;
             color: #4f80ff;
         }
-        // 오브젝트 선택 리스트
-        .section_cont .obj_list_box {
+        .section_cont .list_area {
+            flex: 1;
             position: relative;
-            overflow: hidden;
+            padding-left: 22px;
+            overflow: auto;
         }
-        .section_cont .obj_list_box .scroll_box {
-            margin-top: 16px;
-            padding: 0 22px;
-        }
-        .section_cont .obj_list_box .obj_list {
+
+        // 오브젝트 선택 리스트
+        .section_cont .list_area .obj_list {
             margin: -12px 0 0 -18px;
         }
         // 전체 선택 오브젝트 리스트
         .section_cont .cont_sel_box {
             position: relative;
             overflow: hidden;
-            margin-top: 31px;
+            margin-top: 33px;
             padding-left: 82px;
             height: 176px;
             background-color: #c4dfef;
@@ -210,6 +217,7 @@
         }
         .section_cont .cont_sel_box .select_list {
             overflow: hidden;
+            white-space: nowrap;
         }
         .section_cont .cont_sel_box .select_list .btn_del {
             @include PositionRT(absolute, 6px, 6px);
@@ -219,7 +227,7 @@
             z-index: 20;
         }
         .section_cont .cont_sel_box .select_list .select_item {
-            float: left;
+            display: inline-block;
             overflow: hidden;
             position: relative;
             width: 100px;
@@ -366,62 +374,6 @@
             height: 64px;
             margin: -32px 0 0 -32px;
         }
-        // 파일 올리기 리스트
-        .section_cont .file_add_list_box {
-            position: relative;
-            overflow: hidden;
-        }
-        .section_cont .file_add_list_box .caution {
-            margin: 24px 16px 0;
-            padding-top: 1px;
-            padding-left: 22px;
-            color: #000;
-            letter-spacing: -0.3px;
-            line-height: 16px;
-        }
-        .section_cont .file_add_list_box .scroll_box {
-            position: relative;
-            padding: 0 20px;
-            margin: 23px 0 60px;
-        }
-        .section_cont .file_add_list_box .file_add_box {
-            @include PositionLT(absolute, 38px, 0);
-        }
-        .section_cont .file_add_list_box .file_add_box .upload {
-            display: block;
-            position: relative;
-            overflow: hidden;
-            width: 118px;
-            height: 142px;
-            border: 1px solid #8aa3b2;
-            border-radius: 8px;
-            background-color: #aac5d5;
-            font-weight: 600;
-            color: #fff;
-            letter-spacing: -0.3px;
-            text-align: center;
-            cursor: pointer;
-            z-index: 10;
-        }
-        .section_cont .file_add_list_box .file_add_box .upload:before {
-            display: block;
-            width: 64px;
-            height: 64px;
-            margin: 24px auto 16px;
-            content: '';
-        }
-        .section_cont .file_add_list_box .file_add_box input[type='file'] {
-            @include PositionLT(absolute, 0, 0);
-            width: 118px;
-            height: 142px;
-            opacity: 0;
-        }
-        .section_cont .file_add_list_box .obj_list {
-            margin-top: -12px;
-        }
-        .section_cont .file_add_list_box .obj_list li:first-child {
-            margin-left: 156px;
-        }
 
         // 이미지 등록 경고
         .section_cont .img_caution_box {
@@ -469,18 +421,6 @@
             height: 160px;
             margin: 0 auto;
             border-radius: 50%;
-        }
-        .section_cont .draw_box .thmb:before {
-            display: inline-block;
-            width: 1px;
-            height: 100%;
-            margin-left: -1px;
-            background-color: #d8d8d8;
-            vertical-align: middle;
-            content: '';
-        }
-        .section_cont .draw_box .thmb img {
-            max-width: 100%;
         }
         .section_cont .draw_box .draw_dsc {
             margin-top: 24px;
@@ -622,89 +562,12 @@
             color: #979797;
             letter-spacing: -0.3px;
         }
-
-        // 확장 블록 불러오기
-        .section_cont .extend_block {
-            padding: 40px 0;
-        }
-        .section_cont .extend_block .scroll_box {
-            height: 632px;
-            padding-left: 72px;
-        }
-        .section_cont .extend_block .list {
-            overflow: hidden;
-            margin: -32px 0 0 -44px;
-        }
-        .section_cont .extend_block .list li {
-            float: left;
-            overflow: hidden;
-            margin: 32px 0 0 44px;
-            background-color: #fff;
-            border-radius: 6px;
-        }
-        .section_cont .extend_block .list .link {
-            display: block;
-            overflow: hidden;
-            position: relative;
-            width: 264px;
-            height: 300px;
-            border-radius: 6px;
-        }
-        .section_cont .extend_block .list .link:after {
-            @include PositionLRTB(absolute, 0, 0, 0, 0);
-            border: 1px solid #d6e9f4;
-            border-radius: 6px;
-            content: '';
-        }
-        .section_cont .extend_block .list .thmb {
-            height: 168px;
-            text-align: center;
-            background-color: #d6e9f4;
-            background-position: 50% 50%;
-            background-size: cover;
-        }
-        .section_cont .extend_block .list .thmb:before {
-            display: inline-block;
-            width: 1px;
-            height: 100%;
-            vertical-align: middle;
-            content: '';
-        }
-        .section_cont .extend_block .list .thmb img {
-            max-height: 100%;
-            margin-left: -1px;
-            vertical-align: middle;
-        }
-        .section_cont .extend_block .list .inner_box {
-            padding: 20px 16px 0;
-            color: #000;
-        }
-        .section_cont .extend_block .list .inner_box .sjt {
-            font-size: 22px;
-            letter-spacing: -0.8px;
-        }
-        .section_cont .extend_block .list .inner_box .dsc {
-            display: block;
-            display: -webkit-box;
-            overflow: hidden;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 3;
-            max-height: 66px;
-            margin-top: 10px;
-            letter-spacing: -0.5px;
-            line-height: 22px;
-        }
-        .section_cont .extend_block .list .on {
-            background-color: #4f80ff;
-        }
-        .section_cont .extend_block .list .on .link:after {
-            border: 2px solid #4f80ff;
-        }
-        .section_cont .extend_block .list .on .inner_box {
-            color: #fff;
-        }
-
+      
         // 소리 오브젝트
+        .section_cont .sound_list_box {
+            flex: 1;
+            overflow: auto;
+        }
         .section_cont .sound_list_box .scroll_box {
             margin-top: 16px;
             padding: 0 22px;
@@ -794,9 +657,160 @@
             color: #fff;
         }
     }
+    // 파일 올리기 리스트
+    .file_add_list_content {
+        .caution {
+            margin: 24px 16px 0;
+            padding-top: 1px;
+            padding-left: 22px;
+            color: #000;
+            letter-spacing: -0.3px;
+            line-height: 16px;
+        }
+        .caution + .list_area {
+            flex: 1;
+            padding: 0 38px;
+            margin: 23px 0 0;
+            overflow: auto;
+        }
+        .caution + .sound_type {
+            padding: 0 38px 23px;            
+        }
+        .list_area + .img_caution_box {
+            margin-top: 60px;
+        }
+        .file_add_box {
+            @include PositionLT(absolute,38px, 0);
+        }
+        .file_add_box input[type="file"] {
+            @include PositionLT(absolute, 0, 0);
+            width: 118px;
+            height: 142px;
+            opacity: 0;
+        }
+        .upload {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            width: 118px;
+            height: 142px;
+            border: 1px solid #8aa3b2;
+            border-radius: 8px;
+            background-color: #aac5d5;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: -0.3px;
+            text-align: center;
+            cursor:pointer;
+            z-index: 10;
+        }
+        .upload:before {
+            display: block;
+            width: 64px;
+            height: 64px;
+            margin: 24px auto 16px;
+            content: '';
+        }
+        .obj_list {
+            margin-left: 0;
+        }
+        .obj_list li:first-child {
+            margin-left: 156px;
+        }
+    }
+    .file_add_list_box .obj_list li:first-child {
+        margin-left: 156px;
+    }
+
+    // 확장 블록 불러오기
+    .extend_content {
+        overflow: auto;
+    }
+    .extend_content .section_cont {
+        overflow: auto;
+        padding-left: 72px;
+    }
+    .extend_content .extend_block {
+        margin: 40px 0;
+    }
+    .extend_content .extend_block .list {
+        overflow: hidden;
+        margin: -32px 0 0 -44px;
+    }
+    .extend_content .extend_block .list li {
+        float: left;
+        overflow: hidden;
+        margin: 32px 0 0 44px;
+        background-color: #fff;
+        border-radius: 6px;
+    }
+    .extend_content .extend_block .list .link {
+        display: block;
+        overflow: hidden;
+        position: relative;
+        width: 264px;
+        height: 300px;
+        border-radius: 6px;
+    }
+    .extend_content .extend_block .list .link:after {
+        @include PositionLRTB(absolute, 0, 0, 0, 0);
+        border: 1px solid #d6e9f4;
+        border-radius: 6px;
+        content: '';
+
+    }
+    .extend_content .extend_block .list .thmb {
+        height: 168px;
+        text-align: center;
+        background-color: #d6e9f4;
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    .extend_content .extend_block .list .thmb:before {
+        display: inline-block;
+        width: 1px;
+        height: 100%;
+        vertical-align: middle;
+        content: '';
+    }
+    .extend_content .extend_block .list .thmb img {
+        max-height: 100%;
+        margin-left: -1px;
+        vertical-align: middle;
+    }
+    .extend_content .extend_block .list .inner_box {
+        padding: 20px 16px 0;
+        color: #000;
+    }
+    .extend_content .extend_block .list .inner_box .sjt {
+        font-size: 22px;
+        letter-spacing: -0.8px;
+    }
+    .extend_content .extend_block .list .inner_box .dsc {
+        display: block;
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        max-height: 66px;
+        margin-top: 10px;
+        letter-spacing: -0.5px;
+        line-height: 22px;
+    }
+    .extend_content .extend_block .list .on {
+        background-color: #4f80ff;
+    }
+    .extend_content .extend_block .list .on .link:after {
+        border: 2px solid #4f80ff;
+    }
+    .extend_content .extend_block .list .on .inner_box {
+        color: #fff;
+    }
 
     // 로그인 팝업
     .login_area {
+        flex-direction: column;
+        overflow: auto;
         .login_header {
             padding: 40px 0 40px;
             text-align: center;
@@ -896,6 +910,9 @@
             text-align: center;
             line-height: 26px;
         }
+        .login_cont .cont_tit + .input_box {
+            margin-top: 40px;
+        }
         .login_cont .agree_box {
             margin-top: 40px;
         }
@@ -924,7 +941,7 @@
         }
         .login_cont .input_box {
             width: 314px;
-            margin: 40px auto 0;
+            margin: 30px auto 0;
         }
         .login_cont .input_box .pop_selectbox .select_link {
             margin-top: 8px;
@@ -938,16 +955,31 @@
             overflow-y: auto;
         }
         .login_cont .input_box .pop_inpt_text .email_dsc {
-            margin-top: 11px;
+            margin-top: 8px;
             font-size: 12px;
             font-weight: 600;
             color: #4f80ff;
             letter-spacing: -0.2px;
-            line-height: 11px;
+            line-height: 14px;
         }
         .login_cont .input_box .pop_inpt_text + .pop_inpt_text,
         .login_cont .input_box .pop_inpt_text + .pop_selectbox {
             margin-top: 40px;
+        }
+        .login_cont .input_box .login_chk_box {
+            margin-top: 16px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .login_cont .input_box .login_chk_box .text {
+            display: inline-block;
+            margin-top: 1px;
+        }
+        .login_cont .input_box .login_chk_box .pop_checkbox + .pop_checkbox {
+            margin-left: 40px;
+        }
+        .login_cont .input_box .login_chk_box .error_dsc {
+            margin-top: 16px;
         }
         .login_cont .pop_btn_box {
             padding: 40px 0 80px;
@@ -984,6 +1016,34 @@
         }
         .result_cont .result_dsc + .pop_btn_box {
             padding: 38px 0 0;
+        }
+        .find_log {
+            border-top: 1px solid #f2f2f2;
+            margin: 0 24px;
+            padding-top: 32px;
+            font-size: 0;
+            text-align: center;
+        }
+        .find_log a {
+            display: inline-block;
+            height: 24px;
+            margin: 0 10px;
+            padding: 0 16px;
+            border: 1px solid #aac5d5;
+            border-radius: 13px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #8aa3b2;
+            text-align: center;
+            line-height: 26px;
+        }
+        .error_dsc {
+            margin-top: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #f00;
+            letter-spacing: -0.3px;
+            line-height: 14px;
         }
     }
 
@@ -1045,7 +1105,8 @@
     // 공통 인풋박스
     .pop_inpt_text {
         display: block;
-        input {
+        input[type="text"],
+        input[type="password"] {
             overflow: hidden;
             width: 100%;
             height: 40px;
@@ -1053,6 +1114,7 @@
             margin-top: 8px;
             border: 1px solid #e2e2e2;
             border-radius: 4px;
+            outline: 0;
             box-sizing: border-box;
             font-weight: 600;
             color: #2c313d;
@@ -1066,6 +1128,11 @@
         input:-moz-placeholder {
             font-weight: 600;
             color: #979797;
+        }
+        &.error input[type="text"], 
+        &.error input[type="password"] {
+            border-color: #f00;
+            color: #f00;
         }
     }
     //공통 셀렉트 박스
@@ -1102,6 +1169,9 @@
         & + .pop_inpt_text {
             margin-top: 40px;
         }
+        &.error .select_link {
+            border-color: #f00;
+        }
     }
     .pop_selectbox .tooltip_box {
         display: none;
@@ -1110,172 +1180,174 @@
         display: block;
         z-index: 10;
     }
+}
 
-    // 공통 툴팁 박스
-    .tooltip_box {
-        @include PositionLT(absolute, 0, 0);
-        width: 166px;
+
+// 공통 툴팁 박스
+.tooltip_box {
+    @include PositionLT(absolute, 0, 0);
+    width: 166px;
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 6px;
+    visibility: visible;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+    .tooltip_inner {
+        overflow: hidden;
+        border-radius: 2px;
+    }
+    .arr {
+        @include PositionLB(absolute, 50%, 100%);
+        overflow: hidden;
+        width: 32px;
+        height: 16px;
+        margin-left: -16px;
+    }
+    .arr i {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: 14px;
+        height: 14px;
         background-color: #fff;
         border: 1px solid #e2e2e2;
-        border-radius: 6px;
-        visibility: visible;
         box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
-        .tooltip_inner {
-            overflow: hidden;
-            border-radius: 2px;
-        }
-        .arr {
-            @include PositionLB(absolute, 50%, 100%);
-            overflow: hidden;
-            width: 32px;
-            height: 16px;
-            margin-left: -16px;
-        }
-        .arr i {
-            position: absolute;
-            left: 50%;
-            top: 0;
-            width: 14px;
-            height: 14px;
-            background-color: #fff;
-            border: 1px solid #e2e2e2;
-            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
-            transform: translate(-50%, 50%) rotate(45deg);
-        }
-        .arr.free {
-            margin-left: 0;
-        }
-        .select_list {
-            padding: 0 8px;
-        }
-        .select_list .list_item {
-            border-top: 1px solid #f2f2f2;
-        }
-        .select_list .list_item:first-child {
-            border-top-color: #fff;
-        }
-        .select_list .list_link {
-            display: block;
-            overflow: hidden;
-            height: 15px;
-            padding: 17px 0 14px 7px;
-            font-weight: 600;
-            color: #2c313d;
-            letter-spacing: 0;
-            line-height: 15px;
-        }
-        &.up .arr {
-            bottom: auto;
-            top: 100%;
-        }
-        &.up .arr i {
-            transform: translate(-50%, -50%) rotate(45deg);
-        }
+        transform:translate(-50%, 50%) rotate(45deg);
     }
-    //컬러 피커
-    .tooltip_box.color_picker {
-        user-select: none;
-        font-size: 14px;
-        width: 396px;
-        .tooltip_inner {
-            padding: 16px;
-        }
-        .color_box {
-            float: left;
-            margin: 10px 20px 0 8px;
-        }
-        .color_box .color {
-            display: block;
-            position: relative;
-            width: 54px;
-            height: 54px;
-            border-radius: 6px;
-            border: 1px solid #e2e2e2;
-        }
-        .color_box .color:before {
-            @include PositionRB(absolute, 4px, 4px);
-            width: 16px;
-            height: 16px;
-            background-color: #fff;
-            border-radius: 50%;
-            content: '';
-        }
-        .color_box .color_list {
-            padding-top: 4px;
-        }
-        .color_box .color_list .item {
-            margin-top: 16px;
-            height: 28px;
-        }
-        .color_box .color_list .item label {
-            display: inline-block;
-            width: 48px;
-        }
-        .color_box .color_list .item label,
-        .color_graph .graph_list .item label {
-            font-weight: 600;
-            color: #2c313d;
-            padding-right: 8px;
-            vertical-align: middle;
-        }
-        .color_box .color_list .item input[type='text'],
-        .color_graph .graph_list .item input[type='text'],
-        .color_box .color_list .item input[type='number'],
-        .color_graph .graph_list .item input[type='number'] {
-            width: 48px;
-            height: 28px;
-            border: 1px solid #e2e2e2;
-            box-sizing: border-box;
-            outline: 0;
-            border-radius: 16px;
-            color: #2c313d;
-            font-weight: 600;
-            text-align: center;
-            vertical-align: middle;
-        }
-        .color_box .color_list .item input[type='text']:focus,
-        .color_graph .graph_list .item input[type='text']:focus,
-        .color_box .color_list .item input[type='number']:focus,
-        .color_graph .graph_list .item input[type='number']:focus {
-            border: 2px solid #4f80ff;
-        }
-        .color_graph {
-            float: left;
-            width: 205px;
-            height: 216px;
-            padding-left: 26px;
-            border-left: 1px solid #f2f2f2;
-        }
-        .color_graph .graph_list .item {
-            margin-top: 13px;
-        }
-        .color_graph .graph_list .item:first-child {
-            margin-top: 0;
-        }
-        .color_graph .graph_list .graph_box {
-            position: relative;
-            margin-top: 10px;
-            height: 26px;
-        }
-        .color_graph .graph_list .graph_box .bar {
-            overflow: hidden;
-            height: 24px;
-            border: 1px solid #e2e2e2;
-            border-radius: 26px;
-        }
-        .color_graph .graph_list .graph_box .slider {
-            @include PositionLT(absolute, 0, 50%);
-            width: 28px;
-            height: 28px;
-            margin-top: -14px;
-            cursor: pointer;
-            z-index: 10;
-        }
-        .color_graph .graph_list .graph_box .slider.on {
-            width: 38px;
-            height: 38px;
-            margin-top: -19px;
-            margin-left: -5px;
-        }
+    .arr.free {
+        margin-left: 0;
+    }
+    .select_list {
+        padding: 0 8px;
+
+    }
+    .select_list .list_item {
+        border-top: 1px solid #f2f2f2;
+    }
+    .select_list .list_item:first-child {
+        border-top-color: #fff;
+    }
+    .select_list .list_link {
+        display: block;
+        overflow: hidden;
+        height: 15px;
+        padding: 17px 0 14px 7px;
+        font-weight: 600;
+        color: #2c313d;
+        letter-spacing: 0;
+        line-height: 15px;
+    }
+    &.up .arr {
+        bottom: auto;
+        top: 100%;
+    }
+    &.up .arr i {
+        transform:translate(-50%, -50%) rotate(45deg);
+    }
+}
+//컬러 피커
+.tooltip_box.color_picker {
+    user-select: none;
+    font-size: 14px;
+    width: 396px;
+    .tooltip_inner {
+        padding: 16px;
+    }
+    .color_box {
+        float: left;
+        margin: 10px 20px 0 8px;
+    }
+    .color_box .color {
+        display: block;
+        position: relative;
+        width: 54px;
+        height: 54px;
+        border-radius: 6px;
+        border: 1px solid #e2e2e2;
+    }
+    .color_box .color:before {
+        @include PositionRB(absolute, 4px, 4px);
+        width: 16px;
+        height: 16px;
+        background-color: #fff;
+        border-radius: 50%;
+        content: '';
+    }
+    .color_box .color_list {
+        padding-top: 4px;
+    }
+    .color_box .color_list .item {
+        margin-top: 16px;
+        height: 28px;
+    }
+    .color_box .color_list .item label {
+        display: inline-block;
+        width: 48px;
+    }
+    .color_box .color_list .item label,
+    .color_graph .graph_list .item label {
+        font-weight: 600;
+        color: #2c313d;
+        padding-right: 8px;
+        vertical-align: middle;
+    }
+    .color_box .color_list .item input[type="text"],
+    .color_graph .graph_list .item input[type="text"],
+    .color_box .color_list .item input[type="number"],
+    .color_graph .graph_list .item input[type="number"] {
+        width: 48px;
+        height: 28px;
+        border: 1px solid #e2e2e2;
+        box-sizing: border-box;
+        outline: 0;
+        border-radius: 16px;
+        color: #2c313d;
+        font-weight: 600;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .color_box .color_list .item input[type="text"]:focus,
+    .color_graph .graph_list .item input[type="text"]:focus,
+    .color_box .color_list .item input[type="number"]:focus,
+    .color_graph .graph_list .item input[type="number"]:focus {
+        border: 2px solid #4f80ff;
+    }
+    .color_graph {
+        float: left;
+        width: 205px;
+        height: 216px;
+        padding-left: 26px;
+        border-left: 1px solid #f2f2f2;
+    }
+    .color_graph .graph_list .item {
+        margin-top: 13px;
+    }
+    .color_graph .graph_list .item:first-child {
+        margin-top: 0;
+    }
+    .color_graph .graph_list .graph_box {
+        position: relative;
+        margin-top: 10px;
+        height: 26px;
+    }
+    .color_graph .graph_list .graph_box .bar {
+        overflow: hidden;
+        height: 24px;
+        border: 1px solid #e2e2e2;
+        border-radius: 26px;
+    }
+    .color_graph .graph_list .graph_box .slider {
+        @include PositionLT(absolute, 0, 50%);
+        width: 28px;
+        height: 28px;
+        margin-top: -14px;
+        cursor: pointer;
+        z-index: 10;
+    }
+    .color_graph .graph_list .graph_box .slider.on {
+        width: 38px;
+        height: 38px;
+        margin-top: -19px;
+        margin-left: -5px;
     }
 }
