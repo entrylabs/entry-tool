@@ -2190,6 +2190,10 @@ class Sample extends Component {
                                         <a href="#">이전 이용약관 보기 (2014년 4월 15일 - 2015년 11월 19일 적용)</a>
                                     </p>
                                 </div>
+                                {/* 이용약관에 동의하지 않았을때 문구 */}
+                                <p className={Styles.error_dsc}>
+                                    * 이용약관에 동의해주세요.
+                                </p>
                             </div>
                             <div className={Styles.agree_box}>
                                 <span className={Styles.pop_checkbox}>
@@ -2290,6 +2294,10 @@ class Sample extends Component {
                                         - 시행일자: 2017년 10월 29일
                                     </p>
                                 </div>
+                                {/* 이용약관에 동의하지 않았을때 문구 */}
+                                <p className={Styles.error_dsc}>
+                                    * 개인정보 수집 및 이용에 대한 안내에 동의해주세요.
+                                </p>
                             </div>
                             <div className={Styles.pop_btn_box}>
                                 <a href="#" className={Styles.active}>다음</a>
@@ -2299,7 +2307,7 @@ class Sample extends Component {
                 </div>
 
                 {/* 회원가입 팝업2 */}
-                <div className={Styles.popup_wrap} hidden>
+                <div className={Styles.popup_wrap}>
                     <header className={Styles.pop_header}>
                         <h1>회원가입</h1>
                         <button onClick={this.close} className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}>
@@ -2329,7 +2337,7 @@ class Sample extends Component {
                                     <label htmlFor="inpt_id" className={Styles.inpt_label}>
                                         아이디 입력 <em className={Styles.chk_point}>(필수)</em>
                                     </label>
-                                    <input type={Styles.text} id="inpt_id" name="inpt_id" placeholder="4~20자의 영문 대 소문자, 숫자를 사용하세요." />
+                                    <input type="text" id="inpt_id" name="inpt_id" placeholder="4~20자의 영문 대 소문자, 숫자를 사용하세요." />
                                 </div>
                                 <div className={Styles.pop_inpt_text}>
                                     <label htmlFor="inpt_pw1" className={Styles.inpt_label}>
@@ -2344,6 +2352,36 @@ class Sample extends Component {
                                     <input type="password" id="inpt_pw2" name="inpt_pw2" placeholder="비밀번호를 한번 더 입력하세요." />
                                 </div>
 
+                                {/* error 문구 */}
+                                {/* error 문구 일때 error 클래스 추가 */}
+                                <div className={`${Styles.pop_inpt_text} ${Styles.error}`}>
+                                    <label htmlFor="inpt_id" className={Styles.inpt_label}>
+                                        아이디 입력 <em className={Styles.chk_point}>(필수)</em>
+                                    </label>
+                                    <input type="text" id="inpt_id" name="inpt_id" />
+                                    <p className={Styles.error_dsc}>
+                                        * 4~20자의 영문/숫자를 조합하여 아이디를 입력하세요.
+                                    </p>
+                                </div>
+                                <div className={`${Styles.pop_inpt_text} ${Styles.error}`}>
+                                    <label htmlFor="inpt_pw1" className={Styles.inpt_label}>
+                                        비밀번호 입력 <em className={Styles.chk_point}>(필수)</em>
+                                    </label>
+                                    <input type="password" id="inpt_pw1" name="inpt_pw1" />
+                                    <p className={Styles.error_dsc}>
+                                        * 5~10자의 영문/숫자를 조합하여 비밀번호를 입력하세요.
+                                    </p>
+                                </div>
+                                <div className={`${Styles.pop_inpt_text} ${Styles.error}`}>
+                                    <label htmlFor="inpt_pw2" className={Styles.inpt_label}>
+                                        비밀번호 확인 <em className={Styles.chk_point}>(필수)</em>
+                                    </label>
+                                    <input type="password" id="inpt_pw2" name="inpt_pw2" />
+                                    <p className={Styles.error_dsc}>
+                                        * 같은 비밀번호를 입력해 주세요.
+                                    </p>
+                                </div>
+
                             </div>
                             <div className={Styles.pop_btn_box}>
                                 <a href="#">이전</a>
@@ -2354,7 +2392,7 @@ class Sample extends Component {
                 </div>
 
                 {/* 회원가입 팝업3 */}
-                <div className={Styles.popup_wrap} hidden>
+                <div className={Styles.popup_wrap}>
                     <header className={Styles.pop_header}>
                         <h1>회원가입</h1>
                         <button onClick={this.close} className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}>
@@ -2461,12 +2499,50 @@ class Sample extends Component {
                                     <label htmlFor="inpt_email" className={Styles.inpt_label}>
                                         이메일 <em className={Styles.chk_point}>(선택)</em>
                                     </label>
-                                    <input type={Styles.text} id="inpt_email" name="inpt_email" placeholder="이메일 주소를 입력하세요." />
+                                    <input type="text" id="inpt_email" name="inpt_email" placeholder="이메일 주소를 입력하세요." />
+                                    <p className={Styles.email_dsc}>
+                                        * 비밀번호를 잊은 경우 이메일로 비밀번호를 찾을 수 있습니다.
+                                    </p>
+                                </div>
+
+
+                                {/* error 문구 */}
+                                {/* error 문구가 뜨면 error 클래스 추가 */}
+                                <div className={`${Styles.pop_selectbox} ${Styles.error}`}>
+                                    <em className={Styles.inpt_label}>
+                                        학년 <em className={Styles.chk_point}>(필수)</em>
+                                    </em>
+                                    <a href="#" className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}>
+                                        학년을 선택하세요.
+                                    </a>
+                                    {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                    {/* 툴팁 화살표 위치를 변경하려면 arr 요소에서 margin-left:0;left: 원하는 값 으로 style이 정의 되어야 합니다. */}
+                                    <p className={Styles.error_dsc}>* 학년을 선택해주세요.</p>
+                                </div>
+                                {/* [D] 링크가 클릭되면 on 클래스 추가 해주세요 */}
+                                {/* error 문구가 뜨면 error 클래스 추가 */}
+                                <div className={`${Styles.pop_selectbox} ${Styles.error}`}>
+                                    <em className={Styles.inpt_label}>
+                                        성별 <em className={Styles.chk_point}>(필수)</em>
+                                    </em>
+                                    {/* [D] on 클래스가 들어오면  imico_pop_select_arr_up 으로 바꿔주세요 */}
+                                    <a href="#" className={`${Styles.select_link} ${Styles.imico_pop_select_arr_up}`}>
+                                        성별을 선택하세요.
+                                    </a>
+                                    <p className={Styles.error_dsc}>* 성별을 선택해주세요.</p>
+                                </div>
+                                <div className={Styles.pop_inpt_text}>
+                                    <label htmlFor="inpt_email" className={Styles.inpt_label}>
+                                        이메일 <em className={Styles.chk_point}>(선택)</em>
+                                    </label>
+                                    <input type="text" id="inpt_email" name="inpt_email" placeholder="이메일 주소를 입력하세요." />
                                     <p className={Styles.email_dsc}>
                                         * 비밀번호를 잊은 경우 이메일로 비밀번호를 찾을 수 있습니다.
                                     </p>
                                 </div>
                             </div>
+
+
                             <div className={Styles.pop_btn_box}>
                                 <a href="#">이전</a>
                                 <a href="#" className={Styles.active}>다음</a>
@@ -2476,7 +2552,7 @@ class Sample extends Component {
                 </div>
 
                 {/* 회원가입 팝업4 - 이메일이 있는 경우 */}
-                <div className={Styles.popup_wrap} hidden>
+                <div className={Styles.popup_wrap}>
                     <header className={Styles.pop_header}>
                         <h1>회원가입</h1>
                         <button onClick={this.close} className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}>
@@ -2509,7 +2585,7 @@ class Sample extends Component {
                 </div>
 
                 {/* 회원가입 팝업5 - 이메일이 없는 경우 */}
-                <div className={Styles.popup_wrap} hidden>
+                <div className={Styles.popup_wrap}>
                     <header className={Styles.pop_header}>
                         <h1>회원가입</h1>
                         <button onClick={this.close} className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}>
@@ -2537,8 +2613,104 @@ class Sample extends Component {
                     </section>
                 </div>
 
+                {/* 로그인 */}
+                <div className={Styles.popup_wrap}>
+                    <header className={Styles.pop_header}>
+                        <h1>회원가입</h1>
+                        <button onClick={this.close} className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}>
+                            <span className={Styles.blind}>뒤로가기</span>
+                        </button>
+                    </header>
+                    <section className={`${Styles.pop_content} ${Styles.login_area}`}>
+                        <section className={Styles.login_header}>
+                            <h2 className={`${Styles.tit} ${Styles.imico_entrylogo}`}>
+                                <span className={Styles.blind}>entry</span>
+                            </h2>
+                        </section>
+                        <section className={Styles.login_cont}>
+                            <div className={Styles.input_box}>
+                                {/* 로그인 default */}
+                                <div className={Styles.pop_inpt_text}>
+                                    <label htmlFor="inpt_id" className={Styles.inpt_label}>
+                                        아이디 입력 <em className={Styles.chk_point}>(필수)</em>
+                                    </label>
+                                    <input type="text" id="inpt_id" name="inpt_id" placeholder="4~20자의 영문 대 소문자, 숫자를 사용하세요." />
+                                </div>
+                                <div className={Styles.pop_inpt_text}>
+                                    <label htmlFor="inpt_pw1" className={Styles.inpt_label}>
+                                        비밀번호 입력 <em className={Styles.chk_point}>(필수)</em>
+                                    </label>
+                                    <input type="password" id="inpt_pw1" name="inpt_pw1" placeholder="5~20자의 영문 대 소문자, 숫자를 사용하세요." />
+                                    <div className={Styles.login_chk_box}>
+                                        <span className={Styles.pop_checkbox}>
+                                            <input type="checkbox" id="login_id" name="login_id" className={Styles.blind} />
+                                            <label htmlFor="login_id" className={Styles.imbtn_pop_checked}>
+                                                <span className={Styles.text}>
+                                                    아이디 저장
+                                                </span>
+                                            </label>
+                                        </span>
+                                        <span className={Styles.pop_checkbox}>
+                                            <input type="checkbox" id="login_auto" name="login_auto" className={Styles.blind} />
+                                            <label htmlFor="login_auto" className={Styles.imbtn_pop_checked}>
+                                                <span className={Styles.text}>
+                                                    자동 로그인
+                                                </span>
+                                            </label>
+                                        </span>
+                                    </div>
+                                </div>
 
-                {/* 툴팁  - 이메일이 없는 경우 */}
+                                {/* 로그인 문자 실패 */}
+                                {/* 에러일 경우 error 클래스 추가 */}
+                                <div className={`${Styles.pop_inpt_text} ${Styles.error}`}>
+                                    <label htmlFor="inpt_id" className={Styles.inpt_label}>
+                                        아이디 입력 <em className={Styles.chk_point}>(필수)</em>
+                                    </label>
+                                    <input type="text" id="inpt_id" name="inpt_id" />
+                                </div>
+                                {/* 에러일 경우 error 클래스 추가 */}
+                                <div className={`${Styles.pop_inpt_text} ${Styles.error}`}>
+                                    <label htmlFor="inpt_pw1" className={Styles.inpt_label}>
+                                        비밀번호 입력 <em className={Styles.chk_point}>(필수)</em>
+                                    </label>
+                                    <input type="password" id="inpt_pw1" name="inpt_pw1" />
+                                    <div className={Styles.login_chk_box}>
+                                        <span className={Styles.pop_checkbox}>
+                                            <input type="checkbox" id="login_id" name="login_id" className={Styles.blind} />
+                                            <label htmlFor="login_id" className={Styles.imbtn_pop_checked}>
+                                                <span className={Styles.text}>
+                                                    아이디 저장
+                                                </span>
+                                            </label>
+                                        </span>
+                                        <span className={Styles.pop_checkbox}>
+                                            <input type="checkbox" id="login_auto" name="login_auto" className={Styles.blind} />
+                                            <label htmlFor="login_auto" className={Styles.imbtn_pop_checked}>
+                                                <span className={Styles.text}>
+                                                    자동 로그인
+                                                </span>
+                                            </label>
+                                        </span>
+                                        <p className={Styles.error_dsc}>
+                                            * 아이디 또는 비밀번호를 잘못 입력하셨습니다.
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div className={Styles.pop_btn_box}>
+                                <a href="#" className={Styles.active}>로그인</a>
+                            </div>
+                        </section>
+                        <div className={Styles.find_log}>
+                            <a href="#">아이디, 비밀번호 찾기</a>
+                            <a href="#">회원가입하기</a>
+                        </div>
+                    </section>
+                </div>
+
+                {/* 툴팁  */}
                 <div className={Styles.popup_wrap}>
                     <header className={Styles.pop_header}>
                         <h1>공통 툴팁</h1>
@@ -2672,12 +2844,12 @@ class Sample extends Component {
                                     </div>
                                 </div>
                                 {/* left 값 조절로 화살표 위치 잡을 수 있습니다. */}
-                                <span className="arr free" style={{ left: 101 + 'px' }}><i></i></span>
+                                <span className={`${Styles.arr} ${Styles.free}`} style={{ left: 101 + 'px' }}><i></i></span>
                             </div>
 
                         </section>
                     </section>
-                </div >
+                </div>
 
             </div >
         );
