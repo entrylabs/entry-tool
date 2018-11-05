@@ -234,7 +234,8 @@ class ColorPicker extends Component {
     }
 
     alignPosition() {
-        const { innerHeight, innerWidth } = window;
+        const { containerDom = window } = this.props;
+        const { innerHeight, innerWidth } = containerDom;
         const [transX, transY] = this.getTranslate3d(this.colorPicker);
         const thisRect = this.colorPicker.getBoundingClientRect();
         let { left, top } = thisRect;
@@ -265,26 +266,42 @@ class ColorPicker extends Component {
         });
     }
 
-    makeColorPickerStyle() {
-        const { positionDom, marginRect } = this.props;
+    getColorPickerStyle() {
+        const { positionDom, marginRect = {}, parentRect, containerDom = window } = this.props;
+        const { innerHeight } = containerDom;
         const { transform } = this.state;
-        console.log(positionDom);
-        const parentRect = positionDom ? positionDom.getBoundingClientRect() : {};
-        const { marginLeft = 0, marginTop = 0 } = marginRect;
-        let { left = 0, top = 0 } = parentRect;
-        left -= this.PICKER_WIDTH / 2 + marginLeft;
-        top -= this.PICKER_HEIGHT + marginTop;
+        let rect = {};
+        if (parentRect) {
+            rect = parentRect;
+        } else {
+            rect = positionDom ? positionDom.getBoundingClientRect() : {};
+        }
+        const { left: marginLeft = 0, top: marginTop = 0 } = marginRect;
+        let { top = 0, width = 0, height = 0, left = 0 } = rect;
+
+        const isUp = innerHeight - top - height / 2 < innerHeight / 2;
+        if (isUp) {
+            top -= marginTop + this.PICKER_HEIGHT + height / 2 + 2;
+        } else {
+            top += marginTop + height + 2;
+        }
+        console.log(top);
+        left -= marginLeft + this.PICKER_WIDTH / 2 - width / 2;
+
         return {
-            left,
-            top,
-            transform,
-            position: 'fixed',
-            transition: 'all ease .3s',
+            isUp,
+            style: {
+                left,
+                top,
+                transform,
+                position: 'fixed',
+                transition: 'all ease .3s',
+            },
         };
     }
 
     render() {
-        const { className, onClick, onOutsideClick } = this.props;
+        const { className, onClick, onOutsideClick = () => {} } = this.props;
         const {
             hue,
             saturation,
@@ -295,6 +312,7 @@ class ColorPicker extends Component {
             isActiveSlider,
             arrowLeft,
         } = this.state;
+        const colorPickerStyle = this.getColorPickerStyle();
         return (
             <OutsideClickHandler onOutsideClick={onOutsideClick}>
                 <div
@@ -302,10 +320,14 @@ class ColorPicker extends Component {
                         this.colorPicker = dom;
                     }}
                     className={`${Styles.popup_wrap} ${className}`}
-                    style={this.makeColorPickerStyle()}
+                    style={colorPickerStyle.style}
                     onClick={onClick}
                 >
-                    <div className={`${Styles.tooltip_box} ${Styles.color_picker} ${Styles.up}`}>
+                    <div
+                        className={`${Styles.tooltip_box} ${Styles.color_picker} ${
+                            colorPickerStyle.isUp ? Styles.up : ''
+                        }`}
+                    >
                         <div className={`${Styles.tooltip_inner}`}>
                             <div className={`${Styles.color_box}`}>
                                 <span

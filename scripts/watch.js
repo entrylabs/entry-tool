@@ -1,55 +1,35 @@
-process.env.NODE_ENV = 'production';
-process.env.PUBLIC_URL = '/lib/entryjs/node_modules/entry-tool/dist';
+'use strict';
+
+// Do this as the first thing so that any code reading it knows the right env.
+process.env.BABEL_ENV = 'development';
+process.env.NODE_ENV = 'development';
+process.env.GENERATE_SOURCEMAP = 'true';
+
+// Makes the script crash on unhandled rejections instead of silently
+// ignoring them. In the future, promise rejections that are not handled will
+// terminate the Node.js process with a non-zero exit code.
+process.on('unhandledRejection', (err) => {
+    throw err;
+});
+
+// Ensure environment variables are read.
+require('../config/env');
 
 const fs = require('fs-extra');
-const paths = require('../config/paths');
 const webpack = require('webpack');
-const config = require('../config/webpack.config.prod.js');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
-const getClientEnvironment = require('../config/env');
+const config = require('../config/webpack.config.watch');
+const paths = require('../config/paths');
+const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 
-const cssFilename = 'static/css/[name].[contenthash:8].css';
+// Warn and crash if required files are missing
+if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
+    process.exit(1);
+}
 
-// removes react-dev-utils/webpackHotDevClient.js at first in the array
-// removes react-dev-utils/webpackHotDevClient.js
 config.entry = config.entry.filter((entry) => !entry.includes('webpackHotDevClient'));
 config.output.path = paths.appBuild;
 paths.publicUrl = paths.appBuild + '/';
 config.output.publicPath = paths.servedPath;
-const publicUrl = config.output.publicPath.slice(0, -1);
-const env = getClientEnvironment(publicUrl);
-config.plugins = [
-    new InterpolateHtmlPlugin(env.raw),
-    new HtmlWebpackPlugin({
-        inject: true,
-        template: paths.appHtml,
-        minify: {
-            removeComments: true,
-            collapseWhitespace: true,
-            removeRedundantAttributes: true,
-            useShortDoctype: true,
-            removeEmptyAttributes: true,
-            removeStyleLinkTypeAttributes: true,
-            keepClosingSlash: true,
-            minifyJS: true,
-            minifyCSS: true,
-            minifyURLs: true,
-        },
-    }),
-    new webpack.DefinePlugin(env.stringified), // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
-    new ExtractTextPlugin({
-        filename: cssFilename,
-    }),
-    // Generate a manifest file which contains a mapping of all asset filenames
-    // to their corresponding output file so that tools can pick it up without
-    // having to parse `index.html`.
-    new ManifestPlugin({
-        fileName: 'asset-manifest.json',
-    }),
-];
 
 webpack(config).watch({}, (err, stats) => {
     if (err) {

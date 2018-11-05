@@ -16,8 +16,8 @@
     "main": "./dist/entry-tool",
     "scripts": {
         "start": "node scripts/start.js",
-        "build": "node scripts/build.js",
-        "comp": "node scripts/comp.js",
+        "dist": "node scripts/build.js",
+        "distc": "node scripts/comp.js",
         "dev": "node scripts/watch.js",
         "devc": "node scripts/compWatch.js",
         "test": "node scripts/test.js --env=jsdom",

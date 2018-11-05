@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { ColorPickAction } from '../../actions';
 import ColorPicker from './color';
 
-class ColorPickerWrapper extends Component {
+class ColorPickerContainer extends Component {
     render() {
         return <ColorPicker {...this.props} />;
     }
@@ -20,6 +20,6 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     undefined,
     mapDispatchToProps
-)(ColorPickerWrapper);
+)(ColorPickerContainer);
 // mapStateToProps,
 // mapDispatchToProps
