@@ -125,47 +125,58 @@ class WriteBox extends Component {
 
     render() {
         return (
-            <div className={Styles.section_cont}>
-                {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                <h2 className={Styles.blind}>글상자</h2>
-                <div className={Styles.cont_box}>
-                    <div className={Styles.write_box}>
-                        <div className={Styles.write_set}>
-                            {/* [D] 링크가 클릭되면 pop_selectbox클래스에 on 클래스 추가  */}
-                            <div className={`${Styles.pop_selectbox}  ${CommonUtils.toggleClass(this.state.fontBoxOpen, Styles.on)}`}>
-                                <a href="#NULL" className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`} onClick={this.onFontBoxClicked} title="글꼴">
-                                    {this.state.font.name}
-                                </a>
-                                {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
-                                {/* 툴팁 화살표 위치를 변경하려면 arr 요소에서 margin-left:0;left: 원하는 값 으로 style이 정의 되어야 합니다. */}
-                                <div className={Styles.tooltip_box}>
-                                    <div className={Styles.tooltip_inner}>
-                                        <ul className={Styles.select_list}>
-                                            {this.drawFonts()}
-                                        </ul>
+            <React.Fragment>
+                <section className={Styles.pop_content}>
+                    <div className={Styles.section_cont}>
+                        {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
+                        <h2 className={Styles.blind}>글상자</h2>
+                        <div className={Styles.cont_box}>
+                            <div className={Styles.write_box}>
+                                <div className={Styles.write_set}>
+                                    {/* [D] 링크가 클릭되면 pop_selectbox클래스에 on 클래스 추가  */}
+                                    <div
+                                        className={`${Styles.pop_selectbox}  ${CommonUtils.toggleClass(this.state.fontBoxOpen, Styles.on)}`}>
+                                        <a href="#NULL"
+                                           className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}
+                                           onClick={this.onFontBoxClicked} title="글꼴">
+                                            {this.state.font.name}
+                                        </a>
+                                        {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                        {/* 툴팁 화살표 위치를 변경하려면 arr 요소에서 margin-left:0;left: 원하는 값 으로 style이 정의 되어야 합니다. */}
+                                        <div className={Styles.tooltip_box}>
+                                            <div className={Styles.tooltip_inner}>
+                                                <ul className={Styles.select_list}>
+                                                    {this.drawFonts()}
+                                                </ul>
+                                            </div>
+                                            <span className={Styles.arr}><i></i></span>
+                                        </div>
                                     </div>
-                                    <span className={Styles.arr}><i></i></span>
-                                </div>
-                            </div>
 
-                            <div className={Styles.font_style_box} onClick={this.onEffectBtnClicked}>
-                                {/* 링크가 클릭되면 on 클래스 토글 */}
-                                {this.drawEffects()}
-                            </div>
-                            <div className={Styles.write_type_box} onClick={this.onWriteTypeChangeBtnClicked}>
-                                {/* 링크가 클릭되면 on 클래스 토글 */}
-                                <a href="#NULL" className={CommonUtils.toggleClass(this.state.writeType === 'one', Styles.on)} data-type="one">한줄쓰기</a>
-                                <a href="#NULL" className={CommonUtils.toggleClass(this.state.writeType === 'multi', Styles.on)} data-type="multi">여러 줄 쓰기</a>
+                                    <div className={Styles.font_style_box} onClick={this.onEffectBtnClicked}>
+                                        {/* 링크가 클릭되면 on 클래스 토글 */}
+                                        {this.drawEffects()}
+                                    </div>
+                                    <div className={Styles.write_type_box} onClick={this.onWriteTypeChangeBtnClicked}>
+                                        {/* 링크가 클릭되면 on 클래스 토글 */}
+                                        <a href="#NULL"
+                                           className={CommonUtils.toggleClass(this.state.writeType === 'one', Styles.on)}
+                                           data-type="one">한줄쓰기</a>
+                                        <a href="#NULL"
+                                           className={CommonUtils.toggleClass(this.state.writeType === 'multi', Styles.on)}
+                                           data-type="multi">여러 줄 쓰기</a>
+                                    </div>
+                                </div>
+                                {this.drawWriteBox()}
                             </div>
                         </div>
-                        {this.drawWriteBox()}
                     </div>
-                </div>
+                </section>
                 <div className={Styles.pop_btn_box}>
-                    <a href="#NULL" onClick={e => this.props.triggerEvent("close", null, true)}>취소</a>
+                    <a href="#NULL" onClick={e => this.props.triggerEvent('close', null, true)}>취소</a>
                     <a href="#NULL" className={Styles.active} onClick={this.onSubmitBtnClicked}>추가하기</a>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 
@@ -216,19 +227,14 @@ class WriteBox extends Component {
             <div className={Styles.input_box}>
                 <div className={Styles.input_inner} onFocus={this.onInputFocus} onBlur={this.onInputBlur}>
                     {/* input에 포커스가 가거나 글자가 들어가면 label을 display: none 처리 해주세요 */}
-                    <label htmlFor="inpt"
-                           style={{ display: CommonUtils.toggleClass(this.state.textAreaActive, 'none') }}>
+                    <label htmlFor="inpt" style={{ display: CommonUtils.toggleClass(this.state.textAreaActive, 'none') }}>
                         글상자의 내용을 입력하세요.
                     </label>
                     <input type="text" id="inpt" name="inpt" defaultValue={this.state.text}  style={this.getFontStyle()}/>
                 </div>
                 <ul className={Styles.list}>
-                    <li>
-                        내용을 한 줄로만 작성할 수 있습니다.
-                    </li>
-                    <li>
-                        새로운 글자가 추가되면 글상자의 좌우 길이가 길어집니다.
-                    </li>
+                    <li>내용을 한 줄로만 작성할 수 있습니다.</li>
+                    <li>새로운 글자가 추가되면 글상자의 좌우 길이가 길어집니다.</li>
                 </ul>
             </div>
         );

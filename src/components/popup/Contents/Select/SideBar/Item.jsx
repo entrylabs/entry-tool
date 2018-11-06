@@ -51,9 +51,7 @@ class Item extends Component {
 
     render() {
         return (
-            <li onClick={this.onItemClicked}
-                onDoubleClick={e => this.handleDbClick('select', { item: this.props.item })}
-                className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}>
+            <li onClick={this.onItemClicked} onDoubleClick={e => this.handleDbClick('select', { item: this.props.item })} className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}>
                 <a href="#NULL" className={Styles.link}>
                     {this.drawImage()}
                     <em className={Styles.sjt}>{this.props.item.name}</em>

@@ -4,19 +4,13 @@ import Item from './Item';
 import SideBar from './SideBar';
 import SubMenu from './SubMenu';
 import Selected from './Selected';
-import Styles from '../../../../../assets/scss/popup.scss'
+import Styles from '../../../../../assets/scss/popup.scss';
+import Foot from './foot';
 import { triggerEvent } from '../../../../../actions';
 
 class Index extends Component {
     constructor(props) {
         super(props);
-
-        this.stats = {
-            listBoxName: {
-                'sound': Styles.sound_list_box,
-                'sprite': Styles.obj_list_box,
-            },
-        };
 
         this.drawItems = this.drawItems.bind(this);
         this.getMenus = this.getMenus.bind(this);
@@ -42,29 +36,41 @@ class Index extends Component {
         this.props.triggerEvent( event, data );
     }
 
+    drawListBox() {
+        const listBox = (
+            <React.Fragment>
+                <div className={Styles.list_area}>
+                    <ul className={Styles.obj_list}>
+                        {this.drawItems()}
+                    </ul>
+                </div>
+            </React.Fragment>
+        )
+        if(this.props.popupReducer.type == "sound") {
+            return (
+                <div className={Styles.sound_list_box}>
+                    {listBox}
+                </div>
+            )
+        }
+
+        return listBox;
+    }
+
     render() {
         return (
-            <div className={Styles.section_cont}>
-                <SideBar sidebar={this.props.sidebar}/>
-
-                <div className={Styles.cont_box}>
-                    {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                    <h3 className={Styles.blind}>동물</h3>
-                    <div className={this.stats.listBoxName[this.props.popupReducer.type]}>
+            <React.Fragment>
+                <div className={Styles.pop_content}>
+                    <h2 className={Styles.blind}>오브젝트 선택</h2>
+                    <SideBar sidebar={this.props.sidebar}/>
+                    <div className={Styles.section_cont}>
                         <SubMenu menus={this.getMenus()}/>
-                        <div className={Styles.scroll_box}>
-                            <ul className={Styles.obj_list}>
-                                {this.drawItems()}
-                            </ul>
-                        </div>
+                        {this.drawListBox()}
+                        <Selected/>
                     </div>
-                    <Selected/>
                 </div>
-                <div className={Styles.pop_btn_box}>
-                    <a href="#NULL" onClick={e => this.handleSubmit('close')}>취소</a>
-                    <a href="#NULL" className={Styles.active} onClick={e => this.handleSubmit('submit', { selected: this.props.popupReducer.selected })}>추가하기</a>
-                </div>
-            </div>
+                <Foot/>
+            </React.Fragment>
         );
     }
 }

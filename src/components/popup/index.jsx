@@ -91,10 +91,10 @@ class Sprite extends Component {
         };
 
         return (
-            <div>
+            <React.Fragment>
                 {contents[navSettings.selected].nav || defaultNavigation}
                 {contents[navSettings.selected].view}
-            </div>
+            </React.Fragment>
         );
     };
 
@@ -104,14 +104,11 @@ class Sprite extends Component {
                 <div className={Styles.popup_wrap}>
                     <header className={Styles.pop_header}>
                         <h1>오브젝트 추가하기</h1>
-                        <button
-                            onClick={this.close}
-                            className={Styles.btn_back + ' ' + Styles.imbtn_pop_back}
-                        >
+                        <button onClick={this.close} className={Styles.btn_back + ' ' + Styles.imbtn_pop_back}>
                             <span className={Styles.blind}>뒤로가기</span>
                         </button>
                     </header>
-                    <section className={Styles.pop_content}>{this.setContent()}</section>
+                    {this.setContent()}
                 </div>
             </div>
         );
