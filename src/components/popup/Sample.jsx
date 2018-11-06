@@ -2729,7 +2729,7 @@ class Sample extends Component {
                             </p>
                         </section>
                         {/* 마크업 확인용 더미 스타일 입니다. */}
-                        <section style={{ position: 'relative', height: '800px' }}>
+                        <section style={{ position: 'relative', height: '3000px' }}>
                             {/* 툴팁의 가로값은 tooltip_box에서 style로 적용하면 됩니다. */}
                             <div className={Styles.tooltip_box} style={{ width: '360px' }}>
                                 {/* padding은 마크업 확인용 더미 스타일 입니다. */}
@@ -2752,16 +2752,16 @@ class Sample extends Component {
                                 <span className={`${Styles.arr} ${Styles.free}`} style={{ left: '20px' }}><i></i></span>
                             </div>
 
-                            <div className={`${Styles.tooltip_box} ${Styles.up}`} style={{ width: '400px', left: '0', top: '200px' }}>
+                            <div className={`${Styles.tooltip_box} ${Styles.down}`} style={{ width: '400px', left: '0', top: '200px' }}>
                                 {/* padding은 마크업 확인용 더미 스타일 입니다. */}
                                 <div className={Styles.tooltip_inner} style={{ padding: '10px' }}>
-                                    위쪽 화살표는 tooltip_box에 up 클래스 추가<br />
+                                    아래쪽 화살표는 tooltip_box에 down 클래스 추가<br />
                                     나머지 위치 조정은 동일함.
                                 </div>
                                 <span className={Styles.arr}><i></i></span>
                             </div>
 
-                            <div className={`${Styles.tooltip_box} ${Styles.up}`} style={{ width: '400px', left: '500px', top: '200px' }}>
+                            <div className={`${Styles.tooltip_box} ${Styles.down}`} style={{ width: '400px', left: '420px', top: '200px' }}>
                                 {/* padding은 마크업 확인용 더미 스타일 입니다. */}
                                 <div className={Styles.tooltip_inner} style={{ padding: '10px', backgroundColor: 'orange' }}>
                                     배경색은 backgroundColor 값으로 조정 <br />
@@ -2938,6 +2938,76 @@ class Sample extends Component {
                                 </div>
                                 {/* left 값 조절로 화살표 위치 잡을 수 있습니다. */}
                                 <span className={`${Styles.arr} ${Styles.free}`} style={{ left: 101 + 'px' }}><i></i></span>
+                            </div>
+
+                            {/* 타임 툴팁 */}
+                            <div className={`${Styles.tooltip_box} ${Styles.clock_box}`} style={{ left: '860px', top: '0' }}>
+                                <div className={Styles.tooltip_inner}>
+                                    <div className={Styles.clock_board}>
+                                        <div className={Styles.clock} style={{ background: 'orange' }} >
+                                            이곳에 시계를 놔주세요.<br />
+                                            개발 해주실때 style 제거 해주세요.
+                                        </div>
+                                    </div>
+                                    <div className={Styles.time_board}>
+                                        <a href="#" className={Styles.btn_cnt}>7</a>
+                                        <a href="#" className={Styles.btn_cnt}>8</a>
+                                        <a href="#" className={Styles.btn_cnt}>9</a>
+                                        <a href="#" className={Styles.btn_cnt}>4</a>
+                                        <a href="#" className={Styles.btn_cnt}>5</a>
+                                        <a href="#" className={Styles.btn_cnt}>6</a>
+                                        <a href="#" className={Styles.btn_cnt}>1</a>
+                                        <a href="#" className={Styles.btn_cnt}>2</a>
+                                        <a href="#" className={Styles.btn_cnt}>3</a>
+                                        <a href="#" className={Styles.btn_cnt}>-</a>
+                                        <a href="#" className={Styles.btn_cnt}>0</a>
+                                        <a href="#" className={Styles.btn_cnt}>.</a>
+                                        <a href="#" className={`${Styles.btn_cnt} ${Styles.btn_del} ${Styles.imico_pop_key_del}`}>
+                                            <span className={Styles.blind}> 지우기</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                {/* left 값 조절로 화살표 위치 잡을 수 있습니다. */}
+                                <span className={Styles.arr}><i></i></span>
+                            </div>
+
+                            {/* 타임 툴팁 - 시계만 있는 경우 */}
+                            <div className={`${Styles.tooltip_box} ${Styles.clock_only}`} style={{ left: '860px', top: '330px' }}>
+                                <div className={Styles.tooltip_inner}>
+                                    <div className={Styles.clock_board}>
+                                        <div className={Styles.clock} style={{ background: 'orange' }} >
+                                            이곳에 시계를 놔주세요.<br />
+                                            개발 해주실때 style 제거 해주세요.
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* left 값 조절로 화살표 위치 잡을 수 있습니다. */}
+                                <span className={Styles.arr}><i></i></span>
+                            </div>
+
+                            {/* 타임 툴팁 - 패드만 있는 경우 */}
+                            <div className={`${Styles.tooltip_box} ${Styles.pad_only}`} style={{ left: '1080px', top: '330px' }}>
+                                <div className={Styles.tooltip_inner}>
+                                    <div className={Styles.time_board}>
+                                        <a href="#" className={Styles.btn_cnt}>7</a>
+                                        <a href="#" className={Styles.btn_cnt}>8</a>
+                                        <a href="#" className={Styles.btn_cnt}>9</a>
+                                        <a href="#" className={Styles.btn_cnt}>4</a>
+                                        <a href="#" className={Styles.btn_cnt}>5</a>
+                                        <a href="#" className={Styles.btn_cnt}>6</a>
+                                        <a href="#" className={Styles.btn_cnt}>1</a>
+                                        <a href="#" className={Styles.btn_cnt}>2</a>
+                                        <a href="#" className={Styles.btn_cnt}>3</a>
+                                        <a href="#" className={Styles.btn_cnt}>-</a>
+                                        <a href="#" className={Styles.btn_cnt}>0</a>
+                                        <a href="#" className={Styles.btn_cnt}>.</a>
+                                        <a href="#" className={`${Styles.btn_cnt} ${Styles.btn_del} ${Styles.imico_pop_key_del}`}>
+                                            <span className={Styles.blind}> 지우기</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                {/* left 값 조절로 화살표 위치 잡을 수 있습니다. */}
+                                <span className={Styles.arr}><i></i></span>
                             </div>
 
                         </section>
