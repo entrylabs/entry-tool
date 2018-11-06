@@ -1203,7 +1203,7 @@
     .arr i {
         position: absolute;
         left: 50%;
-        top: 0;
+        top: 2px;
         width: 14px;
         height: 14px;
         background-color: #fff;
@@ -1238,14 +1238,22 @@
         top: 100%;
     }
     &.up .arr i {
+        top: 0px;
         transform: translate(-50%, -50%) rotate(45deg);
     }
 }
 //컬러 피커
 .tooltip_box.color_picker {
+    * {
+        box-sizing: content-box;
+    }
     user-select: none;
+    z-index: 251;
     font-size: 14px;
-    width: 396px;
+    width: 398px;
+    position: fixed;
+    transition: all ease 0.3s;
+
     .tooltip_inner {
         padding: 16px;
     }
