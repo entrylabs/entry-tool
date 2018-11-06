@@ -1,8 +1,8 @@
 @charset "UTF-8";
-@import "common/reset";
-@import "common/mixin";
-@import "common/images";
-@import "common/variables";
+@import 'common/reset';
+@import 'common/mixin';
+@import 'common/images';
+@import 'common/variables';
 
 .popup_wrap {
     position: absolute;
@@ -95,7 +95,6 @@
         overflow: hidden;
         min-height: 567px;
         background-color: #fff;
-        
         .menu_list {
             width: 146px;
             flex: none;
@@ -208,7 +207,7 @@
             @include PositionLT(absolute, 0, 0);
             width: 82px;
             height: 176px;
-            background-color: rgba(196,223,239,0.95);
+            background-color: rgba(196, 223, 239, 0.95);
             z-index: 20;
             content: '';
         }
@@ -236,8 +235,8 @@
             margin-left: 12px;
             background-color: #fff;
             border-radius: 6px;
-            outline: none;
         }
+        outline: none;
         .section_cont .cont_sel_box .select_list .slick-slide {
             display: inline-block;
             margin-left: 12px;
@@ -330,8 +329,7 @@
             height: 90px;
         }
         .section_cont .cont_sel_box .obj_list .thmb img {
-            max-height:81.8181%;
-
+            max-height: 81.8181%;
         }
         .section_cont .cont_sel_box .obj_list a {
             height: 120px;
@@ -376,7 +374,6 @@
             height: 64px;
             margin: -32px 0 0 -32px;
         }
-    
 
         // 이미지 등록 경고
         .section_cont .img_caution_box {
@@ -412,8 +409,6 @@
         .section_cont .img_caution_box .dsc_box .dsc {
             margin-top: 14px;
             line-height: 18px;
-
-
         }
 
         // 그리기
@@ -535,7 +530,7 @@
             background-color: #555;
             margin: 6px 8px 0 0;
             vertical-align: top;
-            content:'';
+            content: '';
         }
         .section_cont .write_box .input_inner {
             position: relative;
@@ -546,7 +541,7 @@
             border: 1px solid #e2e2e2;
             border-radius: 4px;
         }
-        .section_cont .write_box .input_inner input[type="text"] {
+        .section_cont .write_box .input_inner input[type='text'] {
             width: 100%;
             border: 0;
             line-height: 40px;
@@ -567,7 +562,7 @@
             color: #979797;
             letter-spacing: -0.3px;
         }
-
+      
         // 소리 오브젝트
         .section_cont .sound_list_box {
             flex: 1;
@@ -592,7 +587,6 @@
             height: 64px;
             margin: -32px 0 0 -32px;
         }
-
 
         // 공통 오브젝트 리스트
         .section_cont .obj_list {
@@ -1131,8 +1125,7 @@
         input::-webkit-input-placeholder,
         input::-moz-placeholder,
         input:-ms-input-placeholder,
-        input:-moz-placeholder
-        {
+        input:-moz-placeholder {
             font-weight: 600;
             color: #979797;
         }
@@ -1142,7 +1135,6 @@
             color: #f00;
         }
     }
-
     //공통 셀렉트 박스
     .pop_selectbox {
         position: relative;
@@ -1475,7 +1467,6 @@
         }
     }
 }
-
 // 타임박스 - 패드만 있는 경우
 .tooltip_box.pad_only {
     width: 216px;

@@ -5,6 +5,7 @@ import SideBar from './SideBar';
 import SubMenu from './SubMenu';
 import Selected from './Selected';
 import Styles from '../../../../../assets/scss/popup.scss'
+import { triggerEvent } from '../../../../../actions';
 
 class Index extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class Index extends Component {
 
         this.drawItems = this.drawItems.bind(this);
         this.getMenus = this.getMenus.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     drawItems() {
@@ -34,6 +36,10 @@ class Index extends Component {
             return this.props.sidebar[subTitle].sub;
         }
         return this.props.sidebar[Object.keys(this.props.sidebar)[0]].sub;
+    }
+
+    handleSubmit(event, data) {
+        this.props.triggerEvent( event, data );
     }
 
     render() {
@@ -55,8 +61,8 @@ class Index extends Component {
                     <Selected/>
                 </div>
                 <div className={Styles.pop_btn_box}>
-                    <a href="#NULL">취소</a>
-                    <a href="#NULL" className={Styles.active}>추가하기</a>
+                    <a href="#NULL" onClick={e => this.handleSubmit('close')}>취소</a>
+                    <a href="#NULL" className={Styles.active} onClick={e => this.handleSubmit('submit', { selected: this.props.popupReducer.selected })}>추가하기</a>
                 </div>
             </div>
         );
@@ -67,8 +73,12 @@ const mapStateToProps = (state) => ({
     ...state,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+    triggerEvent: (event, data) => dispatch(triggerEvent(event, data)),
+});
+
 export default connect(
     mapStateToProps,
-    null,
+    mapDispatchToProps,
 )(Index);
 

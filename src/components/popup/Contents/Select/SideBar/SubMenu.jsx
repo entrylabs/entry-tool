@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchItems } from '../../../../../actions';
+import { fetchItems } from '../../../../../actions/popup';
 import { CommonUtils } from '../../../../../utils/Common';
 import Styles from '../../../../../assets/scss/popup.scss'
 
@@ -26,7 +26,7 @@ class SubMenu extends Component {
     onSubMenuSelected(e) {
         e.preventDefault();
         const key = e.target.getAttribute('data-key');
-        this.props.fetchItems(this.props.popupReducer.type, this.props.popupReducer.sidebar, key);
+        this.props.fetchItems(this.props.popupReducer.baseUrl, this.props.popupReducer.type, this.props.popupReducer.sidebar, key);
     }
 
     render() {
@@ -45,7 +45,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchItems: (type, category, subMenu) => dispatch(fetchItems(type, category, subMenu)),
+    fetchItems: (baseUrl, type, category, subMenu) => dispatch(fetchItems(baseUrl, type, category, subMenu)),
 });
 
 export default connect(
