@@ -1495,6 +1495,8 @@
         font-size: 0;
     }
     .time_board .btn_cnt {
+      user-select: none;
+      cursor: pointer;
         display: inline-block;
         width: 56px;
         margin-right: 8px;
