@@ -1330,6 +1330,7 @@
         margin-top: 0;
     }
     .color_graph .graph_list .graph_box {
+        touch-action: none;
         position: relative;
         margin-top: 10px;
         height: 26px;

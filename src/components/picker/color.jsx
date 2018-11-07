@@ -3,9 +3,9 @@ import chroma from 'chroma-js';
 import { Object } from 'core-js';
 import Styles from '../../assets/scss/popup.scss';
 import { debounce } from 'lodash';
-import OutsideClickHandler from 'react-outside-click-handler';
 import { pure } from 'recompose';
 import { isEqual } from 'lodash';
+import OutsideClick from '../common/outsideClick';
 
 function getColorByHsv({ red, green, blue }) {
     const color = chroma(red, green, blue);
@@ -60,6 +60,24 @@ function setScaleRatioX(value) {
     return Math.round(value * 1.77);
 }
 
+function getRangeValue(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+}
+
+function getClassifyEvent(e) {
+    let event = null;
+    if (window.TouchEvent && e instanceof window.TouchEvent) {
+        event = e.changedTouches[0];
+    } else {
+        event = e;
+    }
+    return event;
+}
+
+function handleTouchPreventDefault(e) {
+    e.preventDefault();
+}
+
 class ColorPicker extends Component {
     get SCALE_RATIO_X() {
         return 1.77;
@@ -101,11 +119,11 @@ class ColorPicker extends Component {
     };
     constructor(props) {
         super(props);
-        const { color, ColorPickAction } = props;
+        const { color, onChangeColorPicker } = props;
         let state = {};
         if (color) {
             Object.assign(state, getColorByHex(color));
-            ColorPickAction(this.state.color);
+            onChangeColorPicker(state.color);
         }
         Object.assign(state, this.getDefaultColorPickerStyle());
         this.state = state;
@@ -163,38 +181,45 @@ class ColorPicker extends Component {
     }
 
     handleChangeHsv(type, value) {
-        const { ColorPickAction } = this.props;
-        value = parseInt(value, 10);
-        this.setState((state) => {
-            const hsv = Object.assign({}, state, { [type]: value });
-            const nextState = getColorByRGB(hsv);
-            ColorPickAction(nextState.color);
-            return nextState;
-        });
+        const { onChangeColorPicker } = this.props;
+        value = getRangeValue(parseInt(value, 10), 0, 100);
+        if (!isNaN(value)) {
+            this.setState((state) => {
+                const hsv = Object.assign({}, state, { [type]: value });
+                const nextState = getColorByRGB(hsv);
+                onChangeColorPicker(nextState.color);
+                return nextState;
+            });
+        }
     }
 
     handleChangeRGB(type, target) {
-        const { ColorPickAction } = this.props;
+        const { onChangeColorPicker } = this.props;
         let { value = 0 } = target;
-        value = parseInt(value, 10);
-        this.setState((state) => {
-            const rgb = Object.assign({}, state, { [type]: value });
-            const nextState = getColorByHsv(rgb);
-            ColorPickAction(nextState.color);
-            return nextState;
-        });
+        value = getRangeValue(parseInt(value, 10), 0, 255);
+        if (!isNaN(value)) {
+            this.setState((state) => {
+                const rgb = Object.assign({}, state, { [type]: value });
+                const nextState = getColorByHsv(rgb);
+                onChangeColorPicker(nextState.color);
+                return nextState;
+            });
+        }
     }
 
     handleSliderMove = (e) => {
         if (this.canMoveCapture) {
-            const { clientX } = e;
+            e.preventDefault();
+            let event = getClassifyEvent(e);
+            const { clientX } = event;
             let result = (clientX - this.sliderStartX) / this.SCALE_RATIO_X + this.sliderValue;
-            result = Math.round(Math.max(Math.min(result, 100), 0));
+            result = Math.round(getRangeValue(result, 0, 100));
             this.handleChangeHsv(this.sliderType, result);
         }
     };
 
     handleSliderUp = () => {
+        document.removeEventListener('touchmove', handleTouchPreventDefault);
         this.canMoveCapture = false;
         this.setState(() => {
             return {
@@ -202,6 +227,7 @@ class ColorPicker extends Component {
             };
         });
     };
+
     handleWindowResize = debounce(() => {
         this.alignPosition();
     }, 300);
@@ -217,6 +243,8 @@ class ColorPicker extends Component {
     componentDidMount() {
         document.addEventListener('mousemove', this.handleSliderMove);
         document.addEventListener('mouseup', this.handleSliderUp);
+        document.addEventListener('touchmove', this.handleSliderMove, { passive: false });
+        document.addEventListener('touchend', this.handleSliderUp);
         window.addEventListener('resize', this.handleWindowResize);
         this.alignPosition();
     }
@@ -224,6 +252,8 @@ class ColorPicker extends Component {
     componentWillUnmount() {
         document.removeEventListener('mousemove', this.handleSliderMove);
         document.removeEventListener('mouseup', this.handleSliderUp);
+        document.removeEventListener('touchmove', this.handleSliderMove);
+        document.removeEventListener('touchend', this.handleSliderUp);
         window.removeEventListener('resize', this.handleWindowResize);
     }
 
@@ -233,7 +263,8 @@ class ColorPicker extends Component {
 
     handleSliderMouseDown(e, type) {
         const { nativeEvent = {} } = e;
-        const { clientX } = nativeEvent;
+        const { clientX } = getClassifyEvent(nativeEvent);
+        document.addEventListener('touchmove', handleTouchPreventDefault, { passive: false });
         this.canMoveCapture = true;
         this.sliderStartX = clientX;
         this.sliderType = type;
@@ -330,9 +361,9 @@ class ColorPicker extends Component {
         };
     }
 
-    alignPosition() {
+    alignPosition(updateState) {
         this.setState(() => {
-            return this.getAlignPosition();
+            return Object.assign(this.getAlignPosition(), updateState);
         });
     }
 
@@ -360,7 +391,7 @@ class ColorPicker extends Component {
     }
 
     render() {
-        const { className, onClick, onOutsideClick = () => {} } = this.props;
+        const { className, onClick, onOutsideClick } = this.props;
         const {
             hue,
             saturation,
@@ -368,13 +399,21 @@ class ColorPicker extends Component {
             red,
             green,
             blue,
+            color,
             isActiveSlider,
             arrowLeft,
             isUpStyle,
             colorPickerStyle,
         } = this.state;
         return (
-            <OutsideClickHandler onOutsideClick={onOutsideClick}>
+            <OutsideClick
+                onOutsideClick={() => {
+                    if (onOutsideClick) {
+                        onOutsideClick(color);
+                    }
+                }}
+                eventTypes={['mouseup', 'touchend']}
+            >
                 <div
                     ref={(dom) => {
                         this.colorPicker = dom;
@@ -454,12 +493,15 @@ class ColorPicker extends Component {
                                         id="hue"
                                         name="hue"
                                     />
-                                    <div className={`${Styles.graph_box}`}>
+                                    <div className={`${Styles.graph_box}`} touch-action="none">
                                         <span
                                             className={`${Styles.slider} ${
                                                 Styles.btn_pop_color_slide
                                             } ${isActiveSlider === 'hue' ? Styles.on : ''}`}
                                             onMouseDown={(e) => {
+                                                this.handleSliderMouseDown(e, 'hue');
+                                            }}
+                                            onTouchStart={(e) => {
                                                 this.handleSliderMouseDown(e, 'hue');
                                             }}
                                             style={{ left: setScaleRatioX(hue) + 'px' }}
@@ -468,6 +510,9 @@ class ColorPicker extends Component {
                                             className={`${Styles.bar}`}
                                             style={this.hueGradient()}
                                             onMouseDown={(e) => {
+                                                this.handleSliderBarClick(e, 'hue');
+                                            }}
+                                            onTouchStart={(e) => {
                                                 this.handleSliderBarClick(e, 'hue');
                                             }}
                                         />
@@ -487,12 +532,15 @@ class ColorPicker extends Component {
                                         id="saturation"
                                         name="saturation"
                                     />
-                                    <div className={`${Styles.graph_box}`}>
+                                    <div className={`${Styles.graph_box}`} touch-action="none">
                                         <span
                                             className={`${Styles.slider} ${
                                                 Styles.btn_pop_color_slide
                                             } ${isActiveSlider === 'saturation' ? Styles.on : ''}`}
                                             onMouseDown={(e) => {
+                                                this.handleSliderMouseDown(e, 'saturation');
+                                            }}
+                                            onTouchStart={(e) => {
                                                 this.handleSliderMouseDown(e, 'saturation');
                                             }}
                                             style={{
@@ -503,6 +551,9 @@ class ColorPicker extends Component {
                                             className={`${Styles.bar}`}
                                             style={this.saturationGradient()}
                                             onMouseDown={(e) => {
+                                                this.handleSliderBarClick(e, 'saturation');
+                                            }}
+                                            onTouchStart={(e) => {
                                                 this.handleSliderBarClick(e, 'saturation');
                                             }}
                                         />
@@ -522,12 +573,15 @@ class ColorPicker extends Component {
                                         id="lightness"
                                         name="lightness"
                                     />
-                                    <div className={`${Styles.graph_box}`}>
+                                    <div className={`${Styles.graph_box}`} touch-action="none">
                                         <span
                                             className={`${Styles.slider} ${
                                                 Styles.btn_pop_color_slide
                                             } ${isActiveSlider === 'brightness' ? Styles.on : ''}`}
                                             onMouseDown={(e) => {
+                                                this.handleSliderMouseDown(e, 'brightness');
+                                            }}
+                                            onTouchStart={(e) => {
                                                 this.handleSliderMouseDown(e, 'brightness');
                                             }}
                                             style={{
@@ -538,6 +592,9 @@ class ColorPicker extends Component {
                                             className={`${Styles.bar}`}
                                             style={this.brightnessGradient()}
                                             onMouseDown={(e) => {
+                                                this.handleSliderBarClick(e, 'brightness');
+                                            }}
+                                            onTouchStart={(e) => {
                                                 this.handleSliderBarClick(e, 'brightness');
                                             }}
                                         />
@@ -553,7 +610,7 @@ class ColorPicker extends Component {
                         <i />
                     </span>
                 </div>
-            </OutsideClickHandler>
+            </OutsideClick>
         );
     }
 }

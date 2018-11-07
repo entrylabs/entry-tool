@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ColorPickAction } from '../../actions';
+import { onChangeColorPicker } from '../../actions/picker';
 import ColorPicker from './color';
 
 class ColorPickerContainer extends Component {
@@ -14,7 +14,7 @@ class ColorPickerContainer extends Component {
 // });
 
 const mapDispatchToProps = (dispatch) => ({
-    ColorPickAction: (visible) => dispatch(ColorPickAction(visible)),
+    onChangeColorPicker: (visible) => dispatch(onChangeColorPicker(visible)),
 });
 
 export default connect(
