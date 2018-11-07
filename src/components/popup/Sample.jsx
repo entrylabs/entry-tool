@@ -7,6 +7,7 @@ class Sample extends Component {
     constructor(props) {
         super(props);
     }
+
     componentDidMount() {
         window.onpopstate = this.close;
         window.history.pushState({}, 'popup');
