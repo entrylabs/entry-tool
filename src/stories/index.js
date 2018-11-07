@@ -8,6 +8,8 @@ import Sample from '../components/popup/Sample';
 import Popup from '../components/popup';
 import ColorPicker from '../components/picker/color';
 
+import { action } from '@storybook/addon-actions';
+
 import configureStore from '../store';
 const store = configureStore();
 
@@ -27,4 +29,4 @@ storiesOf('Popup', module)
 
 storiesOf('Picker', module)
     .addDecorator((story) => <Provider story={story()} />)
-    .add('컬러픽커', () => <ColorPicker color="#FF0000" />);
+    .add('컬러피커', () => <ColorPicker color="#FF0000" onChangeColorPicker={action} />);
