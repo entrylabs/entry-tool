@@ -1,24 +1,38 @@
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'development';
 process.env.PUBLIC_URL = '/lib/entryjs/node_modules/entry-tool/dist';
 
 const fs = require('fs-extra');
 const paths = require('../config/paths');
 const webpack = require('webpack');
 const config = require('../config/webpack.config.component');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
 const getClientEnvironment = require('../config/env');
+const publicUrl = '';
+const env = getClientEnvironment(publicUrl);
 
-const cssFilename = 'static/css/[name].[contenthash:8].css';
-
-// removes react-dev-utils/webpackHotDevClient.js at first in the array
-// removes react-dev-utils/webpackHotDevClient.js
 config.entry = config.entry.filter((entry) => !entry.includes('webpackHotDevClient'));
 config.output.path = paths.componentBuild;
 paths.publicUrl = paths.componentBuild + '/';
 config.output.publicPath = paths.servedPath;
+
+config.bail = undefined;
+config.plugins = [
+    new webpack.DefinePlugin(env.stringified),
+    new webpack.optimize.UglifyJsPlugin({
+        sourceMap: true,
+        cache: true,
+        parallel: true,
+        compress: {
+            warnings: false,
+            dead_code: true,
+            unused: true,
+        },
+        mangle: false,
+        output: {
+            beautify: true,
+        },
+    }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+];
 
 webpack(config).watch({}, (err, stats) => {
     if (err) {

@@ -75,7 +75,7 @@
         border: 1px solid #4f80ff;
         border-radius: 38px;
     }
-    .section_navi .srch_box input[type="text"] {
+    .section_navi .srch_box input[type='text'] {
         width: 100%;
         height: 38px;
         border: 0;
@@ -87,8 +87,7 @@
         height: 21px;
         vertical-align: top;
     }
-    
-    
+
     .pop_content {
         display: flex;
         flex: 1;
@@ -562,7 +561,7 @@
             color: #979797;
             letter-spacing: -0.3px;
         }
-      
+
         // 소리 오브젝트
         .section_cont .sound_list_box {
             flex: 1;
@@ -674,15 +673,15 @@
             overflow: auto;
         }
         .caution + .sound_type {
-            padding: 0 38px 23px;            
+            padding: 0 38px 23px;
         }
         .list_area + .img_caution_box {
             margin-top: 60px;
         }
         .file_add_box {
-            @include PositionLT(absolute,38px, 0);
+            @include PositionLT(absolute, 38px, 0);
         }
-        .file_add_box input[type="file"] {
+        .file_add_box input[type='file'] {
             @include PositionLT(absolute, 0, 0);
             width: 118px;
             height: 142px;
@@ -701,7 +700,7 @@
             color: #fff;
             letter-spacing: -0.3px;
             text-align: center;
-            cursor:pointer;
+            cursor: pointer;
             z-index: 10;
         }
         .upload:before {
@@ -757,7 +756,6 @@
         border: 1px solid #d6e9f4;
         border-radius: 6px;
         content: '';
-
     }
     .extend_content .extend_block .list .thmb {
         height: 168px;
@@ -1105,8 +1103,8 @@
     // 공통 인풋박스
     .pop_inpt_text {
         display: block;
-        input[type="text"],
-        input[type="password"] {
+        input[type='text'],
+        input[type='password'] {
             overflow: hidden;
             width: 100%;
             height: 40px;
@@ -1129,8 +1127,8 @@
             font-weight: 600;
             color: #979797;
         }
-        &.error input[type="text"], 
-        &.error input[type="password"] {
+        &.error input[type='text'],
+        &.error input[type='password'] {
             border-color: #f00;
             color: #f00;
         }
@@ -1182,7 +1180,6 @@
     }
 }
 
-
 // 공통 툴팁 박스
 .tooltip_box {
     @include PositionLT(absolute, 0, 0);
@@ -1206,20 +1203,19 @@
     .arr i {
         position: absolute;
         left: 50%;
-        top: 0;
+        top: 2px;
         width: 14px;
         height: 14px;
         background-color: #fff;
         border: 1px solid #e2e2e2;
         box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
-        transform:translate(-50%, 50%) rotate(45deg);
+        transform: translate(-50%, 50%) rotate(45deg);
     }
     .arr.free {
         margin-left: 0;
     }
     .select_list {
         padding: 0 8px;
-
     }
     .select_list .list_item {
         border-top: 1px solid #f2f2f2;
@@ -1242,14 +1238,22 @@
         top: 100%;
     }
     &.up .arr i {
-        transform:translate(-50%, -50%) rotate(45deg);
+        top: 0px;
+        transform: translate(-50%, -50%) rotate(45deg);
     }
 }
 //컬러 피커
 .tooltip_box.color_picker {
+    * {
+        box-sizing: content-box;
+    }
     user-select: none;
+    z-index: 251;
     font-size: 14px;
-    width: 396px;
+    width: 398px;
+    position: fixed;
+    transition: all ease 0.3s;
+
     .tooltip_inner {
         padding: 16px;
     }
@@ -1291,10 +1295,10 @@
         padding-right: 8px;
         vertical-align: middle;
     }
-    .color_box .color_list .item input[type="text"],
-    .color_graph .graph_list .item input[type="text"],
-    .color_box .color_list .item input[type="number"],
-    .color_graph .graph_list .item input[type="number"] {
+    .color_box .color_list .item input[type='text'],
+    .color_graph .graph_list .item input[type='text'],
+    .color_box .color_list .item input[type='number'],
+    .color_graph .graph_list .item input[type='number'] {
         width: 48px;
         height: 28px;
         border: 1px solid #e2e2e2;
@@ -1306,10 +1310,10 @@
         text-align: center;
         vertical-align: middle;
     }
-    .color_box .color_list .item input[type="text"]:focus,
-    .color_graph .graph_list .item input[type="text"]:focus,
-    .color_box .color_list .item input[type="number"]:focus,
-    .color_graph .graph_list .item input[type="number"]:focus {
+    .color_box .color_list .item input[type='text']:focus,
+    .color_graph .graph_list .item input[type='text']:focus,
+    .color_box .color_list .item input[type='number']:focus,
+    .color_graph .graph_list .item input[type='number']:focus {
         border: 2px solid #4f80ff;
     }
     .color_graph {
@@ -1326,6 +1330,7 @@
         margin-top: 0;
     }
     .color_graph .graph_list .graph_box {
+        touch-action: none;
         position: relative;
         margin-top: 10px;
         height: 26px;

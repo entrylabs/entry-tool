@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ColorPickAction } from '../../actions';
+import { onChangeColorPicker } from '../../actions/picker';
 import ColorPicker from './color';
 
-class ColorPickerWrapper extends Component {
+class ColorPickerContainer extends Component {
     render() {
         return <ColorPicker {...this.props} />;
     }
@@ -14,12 +14,12 @@ class ColorPickerWrapper extends Component {
 // });
 
 const mapDispatchToProps = (dispatch) => ({
-    ColorPickAction: (visible) => dispatch(ColorPickAction(visible)),
+    onChangeColorPicker: (visible) => dispatch(onChangeColorPicker(visible)),
 });
 
 export default connect(
     undefined,
     mapDispatchToProps
-)(ColorPickerWrapper);
+)(ColorPickerContainer);
 // mapStateToProps,
 // mapDispatchToProps

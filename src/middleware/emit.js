@@ -1,5 +1,6 @@
-import { VISIBLE, CLICK_BUTTON, TRIGGER_EVENT, } from '../actions/index';
+import { VISIBLE, CLICK_BUTTON, TRIGGER_EVENT } from '../actions/index';
 import { API_FAIL, FETCH_ITEM, UPLOAD_ITEM } from '../actions/popup';
+import { CHANGE_COLOR_PICKER } from '../actions/picker';
 
 export default class EmitMiddleware {
     constructor(emitter) {
@@ -7,7 +8,7 @@ export default class EmitMiddleware {
     }
 
     get popupEvent() {
-        return store => next => (action) => {
+        return (store) => (next) => (action) => {
             const result = next(action);
             switch (action.type) {
                 case VISIBLE: {
@@ -31,13 +32,17 @@ export default class EmitMiddleware {
                     break;
                 case TRIGGER_EVENT: {
                     this.emitter.emit(action.event, action.data);
-                    if(action.hide) {
+                    if (action.hide) {
                         this.emitter.emit('hide');
                     }
                     break;
                 }
                 case API_FAIL: {
                     this.emitter.emit('fail', action.error);
+                    break;
+                }
+                case CHANGE_COLOR_PICKER: {
+                    this.emitter.emit('change', action.data);
                     break;
                 }
                 default: {
