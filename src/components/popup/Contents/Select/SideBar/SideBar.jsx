@@ -35,12 +35,9 @@ class SideBar extends Component {
 
     render() {
         return (
-            <div>
-                <h2 className={Styles.blind}>오브젝트 선택</h2>
-                <ul className={Styles.menu_list}>
-                    {this.drawSideBar()}
-                </ul>
-            </div>
+            <ul className={Styles.menu_list}>
+                {this.drawSideBar()}
+            </ul>
         );
     }
 }
