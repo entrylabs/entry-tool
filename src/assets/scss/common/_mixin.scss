@@ -16,6 +16,18 @@
     left: $cnt1;
     bottom: $cnt2;
 }
+@mixin PositionLTB($position, $cnt1, $cnt2, $cnt3) {
+    position: $position;
+    left: $cnt1;
+    top: $cnt2;
+    bottom: $cnt3;
+}
+@mixin PositionRTB($position, $cnt1, $cnt2, $cnt3) {
+    position: $position;
+    right: $cnt1;
+    top: $cnt2;
+    bottom: $cnt3;
+}
 @mixin PositionRB($position, $cnt1, $cnt2) {
     position: $position;
     right: $cnt1;
