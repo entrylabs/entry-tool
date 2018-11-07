@@ -29,8 +29,8 @@ export default class EntryTool extends EventEmitter {
         if (!container) {
             container = document.createElement('div');
         }
-        this.container = container;
-        target.appendChild(container);
+        this._container = container;
+        // target.appendChild(container);
         this._data = data;
         this._props = props;
         this._type = type;
@@ -51,6 +51,15 @@ export default class EntryTool extends EventEmitter {
 
     get data() {
         return this._data;
+    }
+
+    set container(container) {
+        this._container = container;
+        this.render();
+    }
+
+    get container() {
+        return this._container;
     }
 
     set props(props) {
@@ -84,6 +93,12 @@ export default class EntryTool extends EventEmitter {
         }
     }
 
+    get isShow() {
+        const { commonReducer = {} } = this.store.getState();
+        const { visible } = commonReducer;
+        return visible;
+    }
+
     show(props, data) {
         if (props) {
             this.props = props;
@@ -115,13 +130,18 @@ export default class EntryTool extends EventEmitter {
 
     async render() {
         const { default: Module } = await this.module;
-        ReactDOM.render(
-            <Provider store={this.store} type={this.type}>
-                <App className={this.type}>
-                    <Module {...Object.assign({}, this._props, this._data)} eventEmitter={this} />
-                </App>
-            </Provider>,
-            this.container
-        );
+        if (this._container) {
+            ReactDOM.render(
+                <Provider store={this.store} type={this.type}>
+                    <App className={this.type}>
+                        <Module
+                            {...Object.assign({}, this._props, this._data)}
+                            eventEmitter={this}
+                        />
+                    </App>
+                </Provider>,
+                this._container
+            );
+        }
     }
 }

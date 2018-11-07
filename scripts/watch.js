@@ -1,54 +1,41 @@
-process.env.NODE_ENV = 'production';
-process.env.PUBLIC_URL = '/lib/entryjs/node_modules/entry-tool/dist';
+process.env.BABEL_ENV = 'development';
+process.env.NODE_ENV = 'development';
+process.env.GENERATE_SOURCEMAP = 'true';
 
 const fs = require('fs-extra');
 const paths = require('../config/paths');
 const webpack = require('webpack');
-const config = require('../config/webpack.config.prod.js');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
+const config = require('../config/webpack.config.prod');
 const getClientEnvironment = require('../config/env');
+const publicUrl = '';
+const env = getClientEnvironment(publicUrl);
 
-const cssFilename = 'static/css/[name].[contenthash:8].css';
-
-// removes react-dev-utils/webpackHotDevClient.js at first in the array
-// removes react-dev-utils/webpackHotDevClient.js
 config.entry = config.entry.filter((entry) => !entry.includes('webpackHotDevClient'));
 config.output.path = paths.appBuild;
 paths.publicUrl = paths.appBuild + '/';
 config.output.publicPath = paths.servedPath;
-const publicUrl = config.output.publicPath.slice(0, -1);
-const env = getClientEnvironment(publicUrl);
+
+config.bail = undefined;
 config.plugins = [
-    new InterpolateHtmlPlugin(env.raw),
-    new HtmlWebpackPlugin({
-        inject: true,
-        template: paths.appHtml,
-        minify: {
-            removeComments: true,
-            collapseWhitespace: true,
-            removeRedundantAttributes: true,
-            useShortDoctype: true,
-            removeEmptyAttributes: true,
-            removeStyleLinkTypeAttributes: true,
-            keepClosingSlash: true,
-            minifyJS: true,
-            minifyCSS: true,
-            minifyURLs: true,
+    new webpack.DefinePlugin(env.stringified),
+    new webpack.optimize.LimitChunkCountPlugin({
+        maxChunks: 1,
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+        sourceMap: true,
+        cache: true,
+        parallel: true,
+        compress: {
+            warnings: false,
+            dead_code: true,
+            unused: true,
+        },
+        mangle: false,
+        output: {
+            beautify: true,
         },
     }),
-    new webpack.DefinePlugin(env.stringified), // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
-    new ExtractTextPlugin({
-        filename: cssFilename,
-    }),
-    // Generate a manifest file which contains a mapping of all asset filenames
-    // to their corresponding output file so that tools can pick it up without
-    // having to parse `index.html`.
-    new ManifestPlugin({
-        fileName: 'asset-manifest.json',
-    }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 ];
 
 webpack(config).watch({}, (err, stats) => {
