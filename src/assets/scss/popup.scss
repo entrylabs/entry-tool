@@ -754,10 +754,6 @@
         border: 1px solid #d6e9f4;
         border-radius: 6px;
         content: '';
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/issue/9122-2
     }
     .extend_content .extend_block .list .thmb {
         height: 168px;
@@ -1181,10 +1177,6 @@
         z-index: 10;
     }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/issue/9122-2
 
 // 공통 툴팁 박스
 .tooltip_box {
@@ -1252,7 +1244,7 @@
         top: 100%;
     }
     &.down .arr i {
-        transform:translate(-50%, -50%) rotate(45deg);
+        transform: translate(-50%, -50%) rotate(45deg);
     }
 }
 //컬러 피커
@@ -1325,29 +1317,29 @@
         text-align: center;
         vertical-align: middle;
     }
-    .color_box .color_list .item input[type="text"]:focus,
-    .color_graph .graph_list .item input[type="text"]:focus,
-    .color_box .color_list .item input[type="number"]:focus,
-    .color_graph .graph_list .item input[type="number"]:focus {
+    .color_box .color_list .item input[type='text']:focus,
+    .color_graph .graph_list .item input[type='text']:focus,
+    .color_box .color_list .item input[type='number']:focus,
+    .color_graph .graph_list .item input[type='number']:focus {
         border: 2px solid #4f80ff;
     }
     .color_box .color_list .item.disabled label,
     .color_graph .graph_list .item.disabled label {
         color: #979797;
     }
-    .color_box .color_list .item.disabled input[type="text"],
-    .color_graph .graph_list .item.disabled input[type="text"],
-    .color_box .color_list .item.disabled input[type="number"],
-    .color_graph .graph_list .item.disabled input[type="number"], 
-    .color_box .color_list .item.disabled input[type="text"]:focus,
-    .color_graph .graph_list .item.disabled input[type="text"]:focus,
-    .color_box .color_list .item.disabled input[type="number"]:focus,
-    .color_graph .graph_list .item.disabled input[type="number"]:focus {
+    .color_box .color_list .item.disabled input[type='text'],
+    .color_graph .graph_list .item.disabled input[type='text'],
+    .color_box .color_list .item.disabled input[type='number'],
+    .color_graph .graph_list .item.disabled input[type='number'],
+    .color_box .color_list .item.disabled input[type='text']:focus,
+    .color_graph .graph_list .item.disabled input[type='text']:focus,
+    .color_box .color_list .item.disabled input[type='number']:focus,
+    .color_graph .graph_list .item.disabled input[type='number']:focus {
         border: 1px solid #e2e2e2;
         color: #979797;
     }
     .color_box .btn_picker {
-        @include PositionLT (absolute, 65px, 20px);
+        @include PositionLT(absolute, 65px, 20px);
         overflow: hidden;
         font-size: 1px;
         color: transparent;
@@ -1411,10 +1403,10 @@
         border-color: #bfd8e6;
     }
     .clock_board {
-        @include PositionLTB(absolute,14px, 16px, 10px);
+        @include PositionLTB(absolute, 14px, 16px, 10px);
         width: 160px;
         .clock {
-            @include PositionLT(absolute,50%, 50%,);
+            @include PositionLT(absolute, 50%, 50%);
             margin: -80px 0 0 -80px;
             width: 160px;
             height: 160px;
@@ -1443,7 +1435,7 @@
     .time_board .btn_cnt:nth-child(3n) {
         margin-right: 0;
     }
-    .time_board .btn_cnt:nth-child(n+4) {
+    .time_board .btn_cnt:nth-child(n + 4) {
         margin-top: 8px;
     }
     .time_board .btn_del {
@@ -1478,7 +1470,7 @@
         position: relative;
         height: 150px;
         .clock {
-            @include PositionLT(absolute,50%, 50%,);
+            @include PositionLT(absolute, 50%, 50%);
             margin: -75px 0 0 -75px;
             width: 150px;
             height: 150px;
@@ -1520,7 +1512,7 @@
     .time_board .btn_cnt:nth-child(3n) {
         margin-right: 0;
     }
-    .time_board .btn_cnt:nth-child(n+4) {
+    .time_board .btn_cnt:nth-child(n + 4) {
         margin-top: 8px;
     }
     .time_board .btn_cnt.btn_del {
