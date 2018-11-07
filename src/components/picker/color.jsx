@@ -123,7 +123,9 @@ class ColorPicker extends Component {
         let state = {};
         if (color) {
             Object.assign(state, getColorByHex(color));
-            onChangeColorPicker(state.color);
+            if (onChangeColorPicker) {
+                onChangeColorPicker(state.color);
+            }
         }
         Object.assign(state, this.getDefaultColorPickerStyle());
         this.state = state;
@@ -187,7 +189,9 @@ class ColorPicker extends Component {
             this.setState((state) => {
                 const hsv = Object.assign({}, state, { [type]: value });
                 const nextState = getColorByRGB(hsv);
-                onChangeColorPicker(nextState.color);
+                if (onChangeColorPicker) {
+                    onChangeColorPicker(nextState.color);
+                }
                 return nextState;
             });
         }
@@ -201,7 +205,9 @@ class ColorPicker extends Component {
             this.setState((state) => {
                 const rgb = Object.assign({}, state, { [type]: value });
                 const nextState = getColorByHsv(rgb);
-                onChangeColorPicker(nextState.color);
+                if (onChangeColorPicker) {
+                    onChangeColorPicker(nextState.color);
+                }
                 return nextState;
             });
         }

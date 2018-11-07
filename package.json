@@ -21,8 +21,8 @@
         "dev": "node scripts/watch.js",
         "devc": "node scripts/compWatch.js",
         "test": "node scripts/test.js --env=jsdom",
-        "storybook": "start-storybook -p 9009 -s public",
-        "build-storybook": "build-storybook -s public"
+        "storybook": "start-storybook -p 9009",
+        "build-storybook": "build-storybook"
     },
     "devDependencies": {
         "@storybook/addon-actions": "^3.4.10",

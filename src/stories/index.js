@@ -6,7 +6,7 @@ import Tooltips from '../components/popup/Contents/Tooltips';
 import Join from '../components/popup/Contents/Join/Join';
 import Sample from '../components/popup/Sample';
 import Popup from '../components/popup';
-
+import ColorPicker from '../components/picker/color';
 
 import configureStore from '../store';
 const store = configureStore();
@@ -18,13 +18,13 @@ export default function Provider({ story }) {
 storiesOf('Popup', module)
     .addDecorator((story) => <Provider story={story()} />)
     .add('전체', () => <Sample />)
-    .add('툴팁', () => <Tooltips/>)
-    .add('확장블록', () => <Popup type="expansion"/>)
-    .add('소리', () => <Popup type="sound"/>)
-    .add('스프라이트', () => <Popup type="sprite"/>)
-    .add('로그인', () => <Login/>)
-    .add('회원가입', () => <Join/>);
+    .add('툴팁', () => <Tooltips />)
+    .add('확장블록', () => <Popup type="expansion" />)
+    .add('소리', () => <Popup type="sound" />)
+    .add('스프라이트', () => <Popup type="sprite" />)
+    .add('로그인', () => <Login />)
+    .add('회원가입', () => <Join />);
 
-
-
-
+storiesOf('Picker', module)
+    .addDecorator((story) => <Provider story={story()} />)
+    .add('컬러픽커', () => <ColorPicker color="#FF0000" />);
