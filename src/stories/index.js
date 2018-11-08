@@ -32,7 +32,7 @@ storiesOf('Popup', module)
 storiesOf('Picker', module)
     .addDecorator((story) => <Provider story={story()} />)
     .add('컬러피커', () => <ColorPicker color="#FF0000" onChangeColorPicker={action} />)
-.add('숫자패드', () => <NumberPad
-    onButtonPressed={action('onButtonPressed')}
-    onBackButtonPressed={action('onBackButtonPressed')}
-/>);
+    .add('숫자패드', () => <NumberPad
+        onButtonPressed={action('onButtonPressed')}
+        onBackButtonPressed={action('onBackButtonPressed')}
+    />);

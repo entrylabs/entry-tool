@@ -138,7 +138,7 @@
 			}
 		],
 		"array-element-newline": [
-			"error",
+			"warn",
 			{
 				"multiline": true,
 				"minItems": 4
