@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import App from './App';
 import configureStore from './store';
 import { visibleAction } from './actions/index';
-import numberPadContainer from './components/keyboard/numberPadContainer';
 
 var instance = null;
 export default class EntryTool extends EventEmitter {
@@ -87,9 +86,9 @@ export default class EntryTool extends EventEmitter {
             case 'colorPicker':
                 this.reducerType = 'picker';
                 return import('./components/picker/colorContainer');
-            case 'numberPad':
+            case 'numberWidget':
                 this.reducerType = 'common';
-                return import('./components/keyboard/numberPadContainer');
+                return import('./components/widget/numberContainer');
             case 'popup':
             default:
                 this.reducerType = 'popup';

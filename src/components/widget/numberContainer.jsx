@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { clickButton } from '../../actions';
-import NumberPad from './numberPad';
+import Number from './number';
 
-class numberPadContainer extends Component {
+class numberContainer extends Component {
     render() {
-        return <NumberPad {...this.props} />;
+        return <Number {...this.props} />;
     }
 }
 
@@ -17,4 +17,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     undefined,
     mapDispatchToProps,
-)(numberPadContainer);
+)(numberContainer);

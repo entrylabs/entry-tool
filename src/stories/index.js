@@ -7,7 +7,7 @@ import Join from '../components/popup/Contents/Join/Join';
 import Sample from '../components/popup/Sample';
 import Popup from '../components/popup';
 import ColorPicker from '../components/picker/color';
-import NumberPad from '../components/keyboard/numberPad';
+import Number from '../components/widget/number';
 
 import { action } from '@storybook/addon-actions';
 
@@ -31,8 +31,11 @@ storiesOf('Popup', module)
 
 storiesOf('Picker', module)
     .addDecorator((story) => <Provider story={story()} />)
-    .add('컬러피커', () => <ColorPicker color="#FF0000" onChangeColorPicker={action} />)
-    .add('숫자패드', () => <NumberPad
+.add('컬러피커', () => <ColorPicker color="#FF0000" onChangeColorPicker={action}/>);
+
+storiesOf('Widget', module)
+.addDecorator((story) => <Provider story={story()}/>)
+.add('숫자', () => <Number
         onButtonPressed={action('onButtonPressed')}
         onBackButtonPressed={action('onBackButtonPressed')}
     />);
