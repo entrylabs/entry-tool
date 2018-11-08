@@ -31,11 +31,11 @@ storiesOf('Popup', module)
 
 storiesOf('Picker', module)
     .addDecorator((story) => <Provider story={story()} />)
-.add('컬러피커', () => <ColorPicker color="#FF0000" onChangeColorPicker={action}/>);
+    .add('컬러피커', () => <ColorPicker color="#FF0000" onChangeColorPicker={action}/>);
 
 storiesOf('Widget', module)
-.addDecorator((story) => <Provider story={story()}/>)
-.add('숫자', () => <Number
+    .addDecorator((story) => <Provider story={story()}/>)
+    .add('숫자', () => <Number
         onButtonPressed={action('onButtonPressed')}
         onBackButtonPressed={action('onBackButtonPressed')}
     />);
