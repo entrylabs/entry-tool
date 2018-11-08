@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SideBar from './SideBar';
 import BigICON from './BigICON';
-import { triggerEvent } from '../../../../actions';
-import { fetchItems } from '../../../../actions/popup';
 
 class Select extends Component {
     renderContent() {

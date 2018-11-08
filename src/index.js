@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import App from './App';
 import configureStore from './store';
 import { visibleAction } from './actions/index';
-import { JoinPageMoveAction } from './actions/join';
 import axios from 'axios';
 
 var instance = null;
