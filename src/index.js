@@ -25,14 +25,14 @@ export default class EntryTool extends EventEmitter {
 
     initialize({ container, target, isShow = true, type, data, props, url } = {}) {
         if (!target) {
-            this._target = document.body;
+            target = document.body;
         }
         if (!container) {
             container = document.createElement('div');
         }
 
         this._container = container;
-
+        target.appendChild(this._container);
         this._data = data;
         this._props = props;
         this._type = type;
@@ -93,7 +93,6 @@ export default class EntryTool extends EventEmitter {
                 this.reducerType = 'picker';
                 return import('./components/picker/colorContainer');
             case 'popup':
-                this._target.appendChild(this._container);
             default:
                 this.reducerType = 'popup';
                 return import('./components/popup');
