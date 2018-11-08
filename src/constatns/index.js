@@ -64,14 +64,14 @@ export const DEFAULT_OPTIONS = {
                 text: '글자색',
                 apply: false,
                 css: {
-                    'color': '#FF0000',
+                    'color': '#000000',
                 },
             },
-            paint: {
+            backgroundColor: {
                 text: '배경색',
                 apply: false,
                 css: {
-                    'backgroundColor': '#d1d1d1',
+                    'backgroundColor': '#ffffff',
                 },
             },
         },

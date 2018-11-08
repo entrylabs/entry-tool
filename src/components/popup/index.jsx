@@ -21,15 +21,27 @@ class Sprite extends Component {
             writeBoxOption: DEFAULT_OPTIONS.WRITE_BOX,
             ...this.props,
         };
-
-        if (this.props.write) {
-            this.options.navigations.write = { name: '글 상자' };
-        }
+        this.options.navigations = this.initNavigations();
 
         this.state = {
-            navigation: Object.keys(this.options.navigations || [])[0],
+            navigation: Object.keys(this.options.navigations)[0],
         };
         this.onNavigationClicked = this.onNavigationClicked.bind(this);
+    }
+
+    initNavigations() {
+        let navigation = this.options.navigations;
+        if(!navigation) {
+            return [];
+        }
+
+        if (this.props.write) {
+            navigation.write = { name: '글 상자' };
+        }else {
+            delete navigation.write;
+        }
+
+        return navigation;
     }
 
     componentDidMount() {

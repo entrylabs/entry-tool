@@ -19,6 +19,12 @@ const FIELDS = {
         subType: 'password',
         placeholder: '5~20자의 영문 대 소문자, 숫자를 사용하세요.',
         label: '비밀번호 입력',
+        onKeyDown: (e, cb) => {
+            if (e.key === 'Enter' && e.shiftKey === false) {
+                e.preventDefault();
+                cb();
+            }
+        }
     },
 };
 
@@ -62,7 +68,7 @@ class LoginForm extends Component {
     }
 
     renderField(fieldConfig) {
-        const { meta, input, id } = fieldConfig;
+        const { meta, input, id, enterCallback } = fieldConfig;
         const name = input.name;
         const field = FIELDS[name];
         return (
@@ -70,7 +76,7 @@ class LoginForm extends Component {
                 <label htmlFor={name} className={Styles.inpt_label}>
                     {field.label} <em className={Styles.chk_point}>(필수)</em>
                 </label>
-                <field.type {...input} type={field.subType} id={id} placeholder={field.placeholder}/>
+                <field.type {...input} type={field.subType} id={id} placeholder={field.placeholder} onKeyDown={(e) =>{field.onKeyDown(e, enterCallback)}}/>
             </div>
         );
     };
@@ -92,8 +98,9 @@ class LoginForm extends Component {
                         </h2>
                     </section>
                     <section className={Styles.login_cont}>
+                        <form>
                         <div className={Styles.input_box}>
-                            {Object.keys(FIELDS).map(name => <Field id={name} name={name} key={name} component={this.renderField}/>)}
+                            {Object.keys(FIELDS).map(name => <Field id={name} name={name} key={name} component={this.renderField} enterCallback={handleSubmit(props => this.onSubmit(props))}/>)}
                         </div>
                         <div className={Styles.input_box} style={{ marginTop: '0px' }}>
                             <div className={Styles.login_chk_box}>
@@ -115,6 +122,7 @@ class LoginForm extends Component {
                         <div className={Styles.pop_btn_box}>
                             <a href="#NULL" className={Styles.active} onClick={handleSubmit(props => this.onSubmit(props))}>로그인</a>
                         </div>
+                        </form>
                     </section>
                     <div className={Styles.find_log}>
                         <a href="#NULL" onClick={e => this.triggerLink(e, "findPassword")}>아이디, 비밀번호 찾기</a>

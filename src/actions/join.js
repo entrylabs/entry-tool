@@ -18,11 +18,10 @@ export const JoinAction = (data) => (dispatch) => {
         ...data
     });
 };
+
 export function SubmitAction(data) {
-    console.log("post", data);
     return (dispatch) => {
         axios.post("/usr", data).then((response) => {
-            console.log("post", response);
             return dispatch({
                 type: REGIST_USER,
                 page: 3,

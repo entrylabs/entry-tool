@@ -52,7 +52,7 @@ const FIELDS = {
         required: true,
         syncValidate: [{
             condition: (values, name) => {
-                return values.inpt_pw1 !== values.inpt_pw2;
+                return values.password !== values.password2;
             },
             message: '* 같은 비밀번호를 입력해 주세요.',
         }],

@@ -85,7 +85,6 @@ class InfoForm extends Component {
         this.props.setForm(values);
         const data = { ...this.props.joinReducer, ...values };
         this.props.SubmitAction(data);
-        console.log('submitted', data);
     }
 
     renderField(fieldConfig) {
