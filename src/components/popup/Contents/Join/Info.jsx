@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import Styles from '../../../../assets/scss/popup.scss';
 import { JoinAction, JoinPageMoveAction, SubmitAction } from '../../../../actions/join';
-import { CommonUtils } from '../../../../utils/Common';
+import { CommonUtils, FormAsyncException } from '../../../../utils/Common';
 import axios from 'axios';
 
 const FIELDS = {
@@ -60,7 +60,7 @@ const FIELDS = {
             const url = `/api/checkEmailDup/${values.email}`;
             return axios.get(url).then((response) => {
                 if (response.data.isExist !== 'empty') {
-                    throw { email: '이미 존재하는 이메일 입니다.' };
+                    throw FormAsyncException({ email: '이미 존재하는 이메일 입니다.' });
                 }
             });
         },

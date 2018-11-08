@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import Styles from '../../../../assets/scss/popup.scss';
 import { JoinAction, JoinPageMoveAction } from '../../../../actions/join';
-import { CommonUtils } from '../../../../utils/Common';
+import { CommonUtils, FormAsyncException } from '../../../../utils/Common';
 import axios from 'axios';
 
 const FIELDS = {
@@ -25,7 +25,7 @@ const FIELDS = {
             const url = `/api/checkUserName/${values.username}`;
             return axios.get(url).then((response) => {
                 if (response.data.isExist !== 'empty') {
-                    throw { username: '이미 존재하는 아이디 입니다.' };
+                    throw new FormAsyncException({ username: '이미 존재하는 아이디 입니다.' });
                 }
             });
         },

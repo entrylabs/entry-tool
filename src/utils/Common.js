@@ -20,3 +20,9 @@ export const CommonUtils = {
         return ('0000' + (Math.random() * Math.pow(36, 4) << 0).toString(36)).substr(-4);
     }
 };
+
+export function FormAsyncException(obj) {
+    Object.keys(obj).forEach(key => {
+       this[key] =obj[key];
+    });
+}
