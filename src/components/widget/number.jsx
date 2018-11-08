@@ -15,14 +15,14 @@ const numberList = [
 
 class Number extends Component {
     get MAX_ARROW_POSITION() {
-        return 184; // width - innerPadding * 2
+        return 184; // WIDGET_HEIGHT - WIDGET_MARGIN
     }
 
-    get PICKER_WIDTH() {
+    get WIDGET_WIDTH() {
         return 216;
     }
 
-    get PICKER_HEIGHT() {
+    get WIDGET_HEIGHT() {
         return 304;
     }
 
@@ -30,19 +30,24 @@ class Number extends Component {
         return 9;
     }
 
-    get PICKER_WIDTH_MARGIN() {
+    get WIDGET_MARGIN() {
         return 32;
     }
 
     constructor(props) {
         super(props);
 
-        const state = {
+        const { left, top, isUpStyle } = this.getWidgetPosition();
+        this.state = {
             arrowLeft: this.MAX_ARROW_POSITION / 2,
+            isUpStyle,
+            colorPickerStyle: {
+                left,
+                top,
+                transform: 'translate3d(0px, 0px, 0',
+            },
         };
-        Object.assign(state, this.getDefaultColorPickerStyle());
 
-        this.state = state;
         this._makeNumberButtons.bind(this);
     };
 
@@ -63,51 +68,31 @@ class Number extends Component {
         this.setState(() => Object.assign(this.getAlignPosition(), updateState));
     }
 
-    getDefaultColorPickerStyle() {
-        const { left, top, isUpStyle } = this.getColorPickerPosition();
-        return {
-            isUpStyle,
-            arrowLeft: 92,
-            colorPickerStyle: {
-                left,
-                top,
-                transform: `translate3d(0px, 0px, 0)`,
-            },
-        };
-    }
-
     getAlignPosition() {
-        const { boundrayDom } = this.props;
-        const { top, left, isUpStyle } = this.getColorPickerPosition();
+        const { top, left, isUpStyle } = this.getWidgetPosition();
 
-        let boundrayRect = {};
-        if (boundrayDom) {
-            boundrayRect = boundrayDom.getBoundingClientRect();
-        } else {
-            boundrayRect = {
-                top: 0,
-                left: 0,
-                right: window.innerWidth || 0,
-                bottom: window.innerHeight || 0,
-            };
-        }
+        const boundaryRect = {
+            top: 0,
+            left: 0,
+            right: window.innerWidth || 0,
+            bottom: window.innerHeight || 0,
+        };
 
-        const numberWidgetRect = this.numberWidget.getBoundingClientRect();
-        const { width, height } = numberWidgetRect;
+        const { width, height } = this.numberWidget.getBoundingClientRect();
         const bottom = top + height;
         const right = left + width;
         let x = 0;
         let y = 0;
         // 상하좌우 범위 계산
-        if (left < boundrayRect.left) {
-            x = boundrayRect.left + this.PICKER_WIDTH_MARGIN - left;
-        } else if (right > boundrayRect.right) {
-            x = boundrayRect.right - right - this.PICKER_WIDTH_MARGIN;
+        if (left < boundaryRect.left) {
+            x = boundaryRect.left + this.WIDGET_MARGIN - left;
+        } else if (right > boundaryRect.right) {
+            x = boundaryRect.right - right - this.WIDGET_MARGIN;
         }
-        if (top < boundrayRect.top) {
-            y = top - boundrayRect.top + this.PICKER_WIDTH_MARGIN;
-        } else if (bottom > boundrayRect.bottom) {
-            y = boundrayRect.bottom - bottom - this.PICKER_WIDTH_MARGIN;
+        if (top < boundaryRect.top) {
+            y = top - boundaryRect.top + this.WIDGET_MARGIN;
+        } else if (bottom > boundaryRect.bottom) {
+            y = boundaryRect.bottom - bottom - this.WIDGET_MARGIN;
         }
         const arrowLeft = Math.max(
             Math.min(this.MAX_ARROW_POSITION / 2 - x, this.MAX_ARROW_POSITION),
@@ -135,17 +120,10 @@ class Number extends Component {
         ));
     }
 
-    getColorPickerPosition() {
-        const { positionDom, marginRect = {}, positionRect, boundrayDom: boundaryDom } = this.props;
+    getWidgetPosition() {
+        const { positionDom, marginRect = {}, positionRect } = this.props;
 
-        let boundaryHeight = 0;
-        if (boundaryDom) {
-            const { top = 0 } = boundaryDom.getBoundingClientRect();
-            boundaryHeight = boundaryDom.clientHeight + top;
-        } else {
-            boundaryHeight = window.innerHeight || 0;
-        }
-
+        const boundaryHeight = window.innerHeight || 0;
         let rect = {};
         if (positionRect) {
             rect = positionRect;
@@ -157,10 +135,10 @@ class Number extends Component {
         const { width = 0, height = 0 } = rect;
         const { x: marginX = 0, y: marginY = 0 } = marginRect;
 
-        left -= this.PICKER_WIDTH / 2 - width / 2 - marginX;
+        left -= this.WIDGET_WIDTH / 2 - width / 2 - marginX;
         const isUpStyle = boundaryHeight - top - height / 2 < boundaryHeight / 2;
         if (isUpStyle) {
-            top -= this.PICKER_HEIGHT + (this.ARROW_HEIGHT + 2) - marginY;
+            top -= this.WIDGET_HEIGHT + (this.ARROW_HEIGHT + 2) - marginY;
         } else {
             top += this.ARROW_HEIGHT + height + 2 + marginY;
         }
@@ -206,7 +184,6 @@ class Number extends Component {
                             </a>
                         </div>
                     </div>
-                    {/* left 값 조절로 화살표 위치 잡을 수 있습니다. */}
                     <span
                         className={`${Styles.arr} ${Styles.free}`}
                         style={{ left: `${arrowLeft}px` }}
