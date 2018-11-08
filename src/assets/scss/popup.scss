@@ -1481,6 +1481,8 @@
 .tooltip_box.pad_only {
     width: 216px;
     border-color: #bfd8e6;
+    transition: all ease 0.3s;
+    z-index: 9999;
     .tooltip_inner {
         overflow: hidden;
         padding: 16px;

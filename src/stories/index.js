@@ -38,4 +38,5 @@ storiesOf('Widget', module)
     .add('숫자', () => <Number
         onButtonPressed={action('onButtonPressed')}
         onBackButtonPressed={action('onBackButtonPressed')}
+        onOutsideClick={action('onOutsideClick')}
     />);

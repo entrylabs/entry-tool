@@ -15,16 +15,45 @@ const numberList = [
 
 class Number extends Component {
     get MAX_ARROW_POSITION() {
-        return 184; // .time_board width
+        return 184; // width - innerPadding * 2
+    }
+
+    get PICKER_WIDTH() {
+        return 216;
+    }
+
+    get PICKER_HEIGHT() {
+        return 304;
+    }
+
+    get ARROW_HEIGHT() {
+        return 9;
+    }
+
+    get PICKER_WIDTH_MARGIN() {
+        return 32;
     }
 
     constructor(props) {
         super(props);
-        this.state = {
+
+        const state = {
             arrowLeft: this.MAX_ARROW_POSITION / 2,
         };
+        Object.assign(state, this.getDefaultColorPickerStyle());
+
+        this.state = state;
         this._makeNumberButtons.bind(this);
     };
+
+    componentDidMount() {
+        window.addEventListener('resize', this.handleWindowResize);
+        this.alignPosition();
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handleWindowResize);
+    }
 
     handleWindowResize = debounce(() => {
         this.alignPosition();
@@ -32,6 +61,19 @@ class Number extends Component {
 
     alignPosition(updateState) {
         this.setState(() => Object.assign(this.getAlignPosition(), updateState));
+    }
+
+    getDefaultColorPickerStyle() {
+        const { left, top, isUpStyle } = this.getColorPickerPosition();
+        return {
+            isUpStyle,
+            arrowLeft: 92,
+            colorPickerStyle: {
+                left,
+                top,
+                transform: `translate3d(0px, 0px, 0)`,
+            },
+        };
     }
 
     getAlignPosition() {
@@ -50,13 +92,12 @@ class Number extends Component {
             };
         }
 
-        const colorPickerRect = this.colorPicker.getBoundingClientRect();
-        const { width, height } = colorPickerRect;
+        const numberWidgetRect = this.numberWidget.getBoundingClientRect();
+        const { width, height } = numberWidgetRect;
         const bottom = top + height;
         const right = left + width;
         let x = 0;
         let y = 0;
-
         // 상하좌우 범위 계산
         if (left < boundrayRect.left) {
             x = boundrayRect.left + this.PICKER_WIDTH_MARGIN - left;
@@ -132,7 +173,7 @@ class Number extends Component {
 
     render() {
         const { onOutsideClick, onBackButtonPressed } = this.props;
-        const { arrowLeft } = this.state;
+        const { arrowLeft, isUpStyle, colorPickerStyle } = this.state;
 
         return (
             <OutsideClick
@@ -144,7 +185,13 @@ class Number extends Component {
                 eventTypes={['mouseup', 'touchend']}
             >
                 <div
-                    className={`${Styles.tooltip_box} ${Styles.pad_only} ${Styles.up}`}
+                    ref={(dom) => {
+                        this.numberWidget = dom;
+                    }}
+                    style={colorPickerStyle}
+                    className={`${Styles.tooltip_box} ${Styles.pad_only} ${
+                        isUpStyle ? Styles.up : ''
+                    }`}
                 >
                     <div className={Styles.tooltip_inner}>
                         <div className={Styles.time_board}>
