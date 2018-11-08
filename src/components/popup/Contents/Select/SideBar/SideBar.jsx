@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchItems } from '../../../../../actions/popup';
 import { CommonUtils } from '../../../../../utils/Common';
-import Styles from '../../../../../assets/scss/popup.scss'
+import Styles from '../../../../../assets/scss/popup.scss';
 
 class SideBar extends Component {
     constructor(props) {
@@ -14,14 +14,14 @@ class SideBar extends Component {
 
     onSidebarCliecked(e) {
         e.preventDefault();
-        this.props.fetchItems(this.props.popupReducer.baseUrl, this.props.popupReducer.type, e.currentTarget.getAttribute('data-key'));
+        this.props.fetchItems(this.props.type, e.currentTarget.getAttribute('data-key'));
     }
 
     drawSideBar() {
         const list = this.props.sidebar;
         const sidebar = this.props.popupReducer.sidebar;
-        if(!list) {
-            return "";
+        if (!list) {
+            return '';
         }
         return Object.keys(list).map((item, index) => {
             return (
@@ -48,7 +48,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchItems: (baseUrl, type, category, subMenu) => dispatch(fetchItems(baseUrl, type, category, subMenu)),
+    fetchItems: (type, category, subMenu) => dispatch(fetchItems(type, category, subMenu)),
 });
 
 export default connect(

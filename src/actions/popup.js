@@ -58,11 +58,11 @@ export const initState = (data) => (dispatch) => {
     });
 };
 
-export function fetchItems(baseUrl, type, category = null, subMenu = undefined) {
+export function fetchItems(type, category = null, subMenu = undefined) {
     if (subMenu === 'all') {
         subMenu = '';
     }
-    const url = [baseUrl, 'api', type, 'browse/default', category, subMenu].join('/');
+    const url = ['/api', type, 'browse/default', category, subMenu].join('/');
     let promise = _.memoize(url => {
         return axios.get(url);
     });
@@ -86,8 +86,8 @@ export function fetchItems(baseUrl, type, category = null, subMenu = undefined) 
     };
 }
 
-export function searchItem(baseUrl, type, query) {
-    const url = `${baseUrl}/api/${type}/search/${query}`;
+export function searchItem(type, query) {
+    const url = `/api/${type}/search/${query}`;
 
     let promise = _.memoize(url => {
         return axios.get(url);
@@ -107,9 +107,8 @@ export function searchItem(baseUrl, type, query) {
     };
 }
 
-export function uploadItem(baseUrl, type, formData, header) {
+export function uploadItem(type, formData, header) {
     let httpOption = { ...uploadOptions[type], data: formData, header : header };
-    httpOption.url = baseUrl + httpOption.url;
     return (dispatch) => {
         axios(httpOption)
             .then((response) => dispatch({

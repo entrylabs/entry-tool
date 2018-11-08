@@ -22,7 +22,7 @@ class Item extends Component {
         }
         return (
             <div className={Styles.thmb}>
-                <img src={this.props.item.fileurl || CommonUtils.createImageUrl(this.props.reducer.baseUrl, this.props.item.filename)} alt=""/>
+                <img src={this.props.item.fileurl || CommonUtils.createImageUrl(this.props.item.filename)} alt=""/>
             </div>
         );
     }
@@ -124,11 +124,11 @@ class FileUpload extends Component {
             'csrf-token': csrf,
         };
         if (formData.get('uploadFile0')) {
-            this.props.uploadItem(this.props.popupReducer.baseUrl, this.props.popupReducer.type, formData, headers);
+            this.props.uploadItem(this.props.popupReducer.type, formData, headers);
         }
 
         if (objectData.get('objects')) {
-            this.props.uploadItem(this.props.popupReducer.baseUrl, 'object', objectData, headers);
+            this.props.uploadItem('object', objectData, headers);
         }
     }
 
@@ -207,7 +207,7 @@ class FileUpload extends Component {
                             10MB 이하의 jpg, png, bmp 또는 eo 형식의 오브젝트를 추가할 수 있습니다.
                         </p>
 
-                        <div className={`${Styles.list_area} ${CommonUtils.toggleClass(this.props.popupReducer.type=="sound", Styles.sound_type)}`}>
+                        <div className={`${Styles.list_area} ${CommonUtils.toggleClass(this.props.popupReducer.type==="sound", Styles.sound_type)}`}>
                             <div className={Styles.file_add_box}>
                                 <label htmlFor="inpt_file" className={`${Styles.upload} ${Styles.imbtn_pop_upload}`}>파일 올리기</label>
                                 <input type="file" name="inpt_file" id="inpt_file" multiple="multiple" onChange={this.onAddItemChanged}/>
@@ -250,7 +250,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     triggerEvent: (event, data, hidden) => dispatch(triggerEvent(event, data, hidden)),
-    uploadItem: (baseUrl, type, formData, header) => dispatch(uploadItem(baseUrl, type, formData, header)),
+    uploadItem: (type, formData, header) => dispatch(uploadItem(type, formData, header)),
 });
 
 export default connect(

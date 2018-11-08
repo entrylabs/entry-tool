@@ -1,18 +1,18 @@
 import React from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
-import Login from '../components/popup/Contents/Login';
-import Tooltips from '../components/popup/Contents/Tooltips';
-import Join from '../components/popup/Contents/Join/Join';
+import Tooltips from '../components/tooltip';
 import Sample from '../components/popup/Sample';
 import Popup from '../components/popup';
 import ColorPicker from '../components/picker/color';
 
 import { action } from '@storybook/addon-actions';
+import axios from 'axios';
 
 import configureStore from '../store';
-const store = configureStore();
 
+const store = configureStore();
+axios.defaults.baseURL = "http://localhost:4000";
 export default function Provider({ story }) {
     return <ReduxProvider store={store}>{story}</ReduxProvider>;
 }
@@ -20,12 +20,13 @@ export default function Provider({ story }) {
 storiesOf('Popup', module)
     .addDecorator((story) => <Provider story={story()} />)
     .add('전체', () => <Sample />)
-    .add('툴팁', () => <Tooltips />)
-    .add('확장블록', () => <Popup type="expansion" />)
-    .add('소리', () => <Popup type="sound" />)
-    .add('스프라이트', () => <Popup type="sprite" />)
-    .add('로그인', () => <Login />)
-    .add('회원가입', () => <Join />);
+    .add('툴팁', () => <Tooltips/>)
+    .add('확장블록', () => <Popup type="expansion"/>)
+    .add('소리', () => <Popup type="sound"/>)
+    .add('오브젝트추가하기', () => <Popup type="sprite" write={true} />)
+    .add('모양추가', () => <Popup type="sprite" />)
+    .add('로그인', () => <Popup type="login" />)
+    .add('회원가입', () => <Popup type="join" />);
 
 storiesOf('Picker', module)
     .addDecorator((story) => <Provider story={story()} />)

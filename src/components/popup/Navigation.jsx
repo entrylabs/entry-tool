@@ -60,7 +60,7 @@ class Navigation extends Component {
 
     onSearchBtnClicked(e) {
         e.preventDefault();
-        this.props.searchItem(this.props.popupReducer.baseUrl, this.props.popupReducer.type, this.state.searchQuery);
+        this.props.searchItem(this.props.popupReducer.type, this.state.searchQuery);
     }
 
     render() {
@@ -81,7 +81,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    searchItem: (baseUrl, type, query) => dispatch(searchItem(baseUrl, type, query)),
+    searchItem: (type, query) => dispatch(searchItem(type, query)),
 });
 
 export default connect(

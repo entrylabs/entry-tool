@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import App from './App';
 import configureStore from './store';
 import { visibleAction } from './actions/index';
+import { JoinPageMoveAction } from './actions/join';
+import axios from 'axios';
 
 var instance = null;
 export default class EntryTool extends EventEmitter {
@@ -22,7 +24,7 @@ export default class EntryTool extends EventEmitter {
         return instance;
     }
 
-    initialize({ container, target, isShow = true, type, data, props } = {}) {
+    initialize({ container, target, isShow = true, type, data, props, url } = {}) {
         if (!target) {
             target = document.body;
         }
@@ -36,6 +38,10 @@ export default class EntryTool extends EventEmitter {
         this._type = type;
         this.module = this.getModule(type);
         this.store = configureStore({}, this);
+
+        if(url) {
+            axios.defaults.baseURL = url;
+        }
 
         if (isShow) {
             this.show();

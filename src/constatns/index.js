@@ -78,6 +78,7 @@ export const DEFAULT_OPTIONS = {
     },
     POPUP_TYPE: {
         sprite: {
+            title: "오브젝트 추가하기",
             navigations: {
                 select: {
                     name: '오브젝트 선택',
@@ -194,6 +195,7 @@ export const DEFAULT_OPTIONS = {
             },
         },
         sound: {
+            title: "소리 추가하기",
             navigations: {
                 select: {
                     name: '소리 선택',
@@ -246,11 +248,7 @@ export const DEFAULT_OPTIONS = {
             },
         },
         expansion: {
-            navigations: {
-                expansion: {
-                    name: '확장 블록',
-                },
-            },
+            title: "확장블록 추가하기",
             data: [
                 {
                     name: 'translate',
@@ -281,6 +279,12 @@ export const DEFAULT_OPTIONS = {
                 },
             ],
         },
+        join: {
+            title: "회원가입",
+        },
+        login: {
+            title: "로그인",
+        }
     },
 };
 

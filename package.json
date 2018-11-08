@@ -16,8 +16,8 @@
     "main": "./dist/entry-tool",
     "scripts": {
         "start": "node scripts/start.js",
-        "dist": "node scripts/build.js",
-        "distc": "node scripts/comp.js",
+        "build": "node scripts/build.js",
+        "comp": "node scripts/comp.js",
         "dev": "node scripts/watch.js",
         "devc": "node scripts/compWatch.js",
         "test": "node scripts/test.js --env=jsdom",
@@ -65,9 +65,8 @@
         "react": "^16.4.2",
         "react-dev-utils": "^5.0.1",
         "react-dom": "^16.4.2",
-        "react-redux": "^5.0.7",
+        "react-redux": "^5.1.0",
         "react-test-renderer": "^16.4.2",
-        "recompose": "^0.30.0",
         "redux": "^4.0.0",
         "redux-thunk": "^2.3.0",
         "resolve": "1.6.0",
@@ -128,6 +127,9 @@
         "axios": "^0.18.0",
         "chroma-js": "^1.4.0",
         "lodash": "^4.17.11",
-        "react-slick": "^0.23.2"
+        "react-cookies": "^0.1.0",
+        "react-outside-click-handler": "^1.2.2",
+        "react-slick": "^0.23.2",
+        "redux-form": "^7.4.2"
     }
 }

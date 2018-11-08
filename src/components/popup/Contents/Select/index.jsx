@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SideBar from './SideBar';
 import BigICON from './BigICON';
+import { triggerEvent } from '../../../../actions';
+import { fetchItems } from '../../../../actions/popup';
 
 class Select extends Component {
     renderContent() {
-        if (this.props.type === 'sidebar') {
-            return <SideBar data={this.props.data} sidebar={this.props.sidebar}/>;
+        if (this.props.subType === 'sidebar') {
+            return <SideBar type={this.props.type} data={this.props.data} sidebar={this.props.sidebar} t/>;
         } else {
-            return <BigICON data={this.props.data}/>;
+            return <BigICON type={this.props.type} data={this.props.data}/>;
         }
     }
 

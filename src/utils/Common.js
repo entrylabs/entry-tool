@@ -1,12 +1,12 @@
 export const CommonUtils = {
-    toggleClass: (isActive, className) => {
+    toggleClass: (isActive, className, falseClassName = "") => {
         if (isActive) {
             return className;
         }
-        return '';
+        return falseClassName;
     },
-    createImageUrl: (base, id) => {
-        return `${base}/uploads/${id.substring(0, 2)}/${id.substring(2, 4)}/thumb/${id}.png`;
+    createImageUrl: (id) => {
+        return `/uploads/${id.substring(0, 2)}/${id.substring(2, 4)}/thumb/${id}.png`;
     },
     remove: (array, callback) => {
         const arr = [...array];
