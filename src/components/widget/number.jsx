@@ -44,7 +44,7 @@ class Number extends Component {
             colorPickerStyle: {
                 left,
                 top,
-                transform: 'translate3d(0px, 0px, 0',
+                transform: 'translate3d(0px, 0px, 0)',
             },
         };
 
