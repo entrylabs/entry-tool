@@ -1148,9 +1148,6 @@
             letter-spacing: -0.3px;
             line-height: 40px;
         }
-        .select_link * {
-            box-sizing: content-box;
-        }
         .select_link:after {
             @include PositionRT(absolute, 16px, 50%);
             width: 8px;
@@ -1171,6 +1168,9 @@
         &.error .select_link {
             border-color: #f00;
         }
+    }
+    .pop_selectbox * {
+        box-sizing: content-box;
     }
     .pop_selectbox .tooltip_box {
         display: none;

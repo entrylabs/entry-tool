@@ -113,7 +113,6 @@ export default class EntryTool extends EventEmitter {
         if (data) {
             this.data = data;
         }
-        this._container.style.display = "block";
         this.store.dispatch(visibleAction(true));
         return this;
     }
@@ -125,7 +124,6 @@ export default class EntryTool extends EventEmitter {
         if (data) {
             this.data = data;
         }
-        this._container.style.display = "none";
         this.store.dispatch(visibleAction(false));
         return this;
     }
@@ -142,7 +140,7 @@ export default class EntryTool extends EventEmitter {
         if (this._container) {
             ReactDOM.render(
                 <Provider store={this.store} type={this.type}>
-                    <App className={this.type}>
+                    <App className={this.type} container={this._container}>
                         <Module
                             {...Object.assign({}, this._props, this._data)}
                             eventEmitter={this}
