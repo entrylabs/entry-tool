@@ -1533,3 +1533,76 @@
         content: '';
     }
 }
+
+//드롭다운
+.tooltip_box.dropdown {
+    * {
+        box-sizing: content-box;
+    }
+    width: 184px;
+    user-select: none;
+    z-index: 251;
+    position: fixed;
+    transition: all ease 0.3s;
+    .tooltip_inner {
+        height: 300px;
+        .item {
+            &:not(:first-child) {
+                border-top: $warmgray200 solid 1px;
+            }
+            &:not(:last-child) {
+                border-bottom: $warmgray200 solid 1px;
+            }
+            &:last-child {
+                margin-bottom: 5px;
+            }
+            padding: 17px 2px 14px 8px;
+            margin: 0 20px 0 8px;
+            font-size: 14px;
+            font-weight: bold;
+            color: $textColor;
+            cursor: pointer;
+        }
+    }
+
+    :global(.rcs-custom-scrollbar) {
+        width: 8px;
+        right: 4px;
+        opacity: 1;
+    }
+
+    :global(.rcs-inner-handle) {
+        border-radius: inherit;
+        background-color: $coolgray400;
+        border-radius: 2.5px;
+    }
+}
+
+.track_vertical {
+    position: absolute;
+    width: 8px;
+    right: 4px;
+    bottom: 4px;
+    top: 4px;
+    border-radius: 2.5px;
+}
+
+.track_horizontal {
+    position: absolute;
+    height: 8px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    border-radius: 2.5px;
+}
+
+.thumb_vertical {
+    cursor: pointer;
+    border-radius: inherit;
+    background-color: $coolgray400;
+}
+.thumb_horizontal {
+    cursor: pointer;
+    border-radius: inherit;
+    background-color: $coolgray400;
+}

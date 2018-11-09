@@ -1,4 +1,4 @@
-import { CHANGE_COLOR_PICKER } from '../actions/picker';
+import { CHANGE_COLOR_PICKER } from '@actions/picker';
 
 const initState = {
     color: '#ff0000',
