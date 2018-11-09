@@ -7,6 +7,7 @@ import Join from '../components/popup/Contents/Join/Join';
 import Sample from '../components/popup/Sample';
 import Popup from '../components/popup';
 import ColorPicker from '../components/picker/color';
+import Dropdown from '../components/widget/dropdown';
 
 import { action } from '@storybook/addon-actions';
 
@@ -27,6 +28,11 @@ storiesOf('Popup', module)
     .add('로그인', () => <Login />)
     .add('회원가입', () => <Join />);
 
-storiesOf('Picker', module)
+storiesOf('Widget', module)
     .addDecorator((story) => <Provider story={story()} />)
-    .add('컬러피커', () => <ColorPicker color="#FF0000" onChangeColorPicker={action} />);
+    .add('컬러피커', () => <ColorPicker color="#FF0000" onChangeColorPicker={action} />)
+    .add('드롭다운', () => (
+        <Dropdown
+            items={[[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9]]}
+        />
+    ));
