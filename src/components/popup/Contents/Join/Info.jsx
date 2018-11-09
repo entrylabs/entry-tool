@@ -113,6 +113,7 @@ class InfoForm extends Component {
         }
 
         const isErr = meta.touched && meta.error;
+        //TODO. 공통 셀렉트박스로 변경
         return (
             <div className={`${Styles.pop_selectbox} ${CommonUtils.toggleClass(optionState[name], Styles.on)} ${CommonUtils.toggleClass(isErr, Styles.error)}`}>
                 <em className={Styles.inpt_label}>

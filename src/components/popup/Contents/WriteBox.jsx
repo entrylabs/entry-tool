@@ -156,6 +156,7 @@ class WriteBox extends Component {
         });
     }
 
+    //TODO. 머지 이후삭제
     removeColorPicker(e) {
         const getClosest = function(elem, className) {
             for (; elem && elem !== document; elem = elem.parentNode) {
