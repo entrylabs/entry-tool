@@ -4,6 +4,7 @@ import { CommonUtils } from '../../utils/Common';
 import Styles from '../../assets/scss/popup.scss';
 import { searchItem } from '../../actions/popup';
 
+//TODO. reselct 적용
 class Navigation extends Component {
     constructor(props) {
         super(props);

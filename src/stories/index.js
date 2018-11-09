@@ -8,12 +8,12 @@ import ColorPicker from '../components/picker/color';
 import Dropdown from '../components/widget/dropdown';
 
 import { action } from '@storybook/addon-actions';
-import axios from 'axios';
+import httpService from '../config/axios';
 
 import configureStore from '../store';
 
 const store = configureStore();
-axios.defaults.baseURL = "http://localhost:4000";
+httpService.setupInterceptors("http://localhost:4000");
 export default function Provider({ story }) {
     return <ReduxProvider store={store}>{story}</ReduxProvider>;
 }
