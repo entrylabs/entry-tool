@@ -107,16 +107,6 @@ class ColorPicker extends Component {
         return 28;
     }
 
-    state = {
-        hue: 0,
-        saturation: 100,
-        brightness: 100,
-        red: 255,
-        green: 0,
-        blue: 0,
-        color: '#ff0000',
-        arrowLeft: this.MAX_ARROW_POSITION / 2,
-    };
     constructor(props) {
         super(props);
         const { color, onChangeColorPicker } = props;
@@ -418,7 +408,7 @@ class ColorPicker extends Component {
                         onOutsideClick(color);
                     }
                 }}
-                eventTypes={['mouseup', 'touchend']}
+                eventTypes={['mouseup', 'touchend', 'wheel']}
             >
                 <div
                     ref={(dom) => {

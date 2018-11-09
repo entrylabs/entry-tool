@@ -86,6 +86,9 @@ export default class EntryTool extends EventEmitter {
             case 'colorPicker':
                 this.reducerType = 'picker';
                 return import('./components/picker/colorContainer');
+            case 'dropdownWidget':
+                this.reducerType = 'widget';
+                return import('./components/widget/dropdownContainer');
             case 'popup':
             default:
                 this.reducerType = 'popup';
