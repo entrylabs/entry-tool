@@ -5,7 +5,6 @@ import Terms from './Terms';
 import Form from './Form';
 import Info from './Info';
 import Complete from './complete';
-import Styles from '../../../../assets/scss/popup.scss';
 
 class Index extends Component {
     constructor(props) {

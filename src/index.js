@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import configureStore from './store';
 import { visibleAction } from './actions/index';
-import axios from 'axios';
+import httpService from './config/axios';
 
 var instance = null;
 export default class EntryTool extends EventEmitter {
@@ -38,10 +38,7 @@ export default class EntryTool extends EventEmitter {
         this._type = type;
         this.module = this.getModule(type);
         this.store = configureStore({}, this);
-
-        if(url) {
-            axios.defaults.baseURL = url;
-        }
+        httpService.setupInterceptors(url);
 
         if (isShow) {
             this.show();
@@ -96,8 +93,8 @@ export default class EntryTool extends EventEmitter {
                 this.reducerType = 'widget';
                 return import('./components/widget/dropdownContainer');
             case 'popup':
-                this._target.appendChild(this._container);
             default:
+                this._target.appendChild(this._container);
                 this.reducerType = 'popup';
                 return import('./components/popup');
         }
