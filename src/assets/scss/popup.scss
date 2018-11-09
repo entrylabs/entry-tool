@@ -1563,7 +1563,8 @@
 
     :global(.rcs-custom-scrollbar) {
         width: 8px;
-        cursor: pointer;
+        right: 4px;
+        opacity: 1;
     }
 
     :global(.rcs-inner-handle) {
