@@ -41,12 +41,12 @@ export const CommonUtils = {
 
     // 정해진 Dom위치에 Picker 배치
     getComponentPosition: (props, options) => {
-        const { positionDom, marginRect = {}, positionRect, boundrayDom } = props;
+        const { positionDom, marginRect = {}, positionRect, boundaryDom } = props;
         const { width: componentWidth, height: componentHeight, arrowHeight } = options;
         let boundaryHeight = 0;
-        if (boundrayDom) {
-            const { top = 0 } = boundrayDom.getBoundingClientRect();
-            boundaryHeight = boundrayDom.clientHeight + top;
+        if (boundaryDom) {
+            const { top = 0 } = boundaryDom.getBoundingClientRect();
+            boundaryHeight = boundaryDom.clientHeight + top;
         } else {
             boundaryHeight = window.innerHeight || 0;
         }
@@ -75,12 +75,12 @@ export const CommonUtils = {
     },
 
     getAlignPosition: (props, component, options) => {
-        const { boundrayDom } = props;
+        const { boundaryDom } = props;
         const { top, left, isUpStyle } = CommonUtils.getComponentPosition(props, options);
         const { widthMargin = 0, maxArrowPosition, arrowWidth = 0 } = options;
         let boundrayRect = {};
-        if (boundrayDom) {
-            boundrayRect = boundrayDom.getBoundingClientRect();
+        if (boundaryDom) {
+            boundrayRect = boundaryDom.getBoundingClientRect();
         } else {
             boundrayRect = {
                 top: 0,
