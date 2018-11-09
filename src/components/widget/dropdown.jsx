@@ -56,7 +56,7 @@ class Dropdown extends Component {
         return {
             widthMargin: this.DROPDOWN_WIDTH_MARGIN,
             maxArrowPosition: this.MAX_ARROW_POSITION,
-            arrowWidht: this.ARROW_WIDTH,
+            arrowWidth: this.ARROW_WIDTH,
             arrowHeight: this.ARROW_HEIGHT,
             width: this.DROPDOWN_WIDTH,
             height: this.DROPDOWN_HEIGHT,

@@ -22,10 +22,10 @@ export const CommonUtils = {
 
     getDefaultComponentPosition(props, options) {
         const { left, top, isUpStyle } = CommonUtils.getComponentPosition(props, options);
-        const { maxArrowPosition, arrowWidht = 0 } = options;
+        const { maxArrowPosition, arrowWidth = 0 } = options;
         const arrowLeft = Math.max(
-            Math.min(maxArrowPosition / 2, maxArrowPosition - arrowWidht),
-            arrowWidht
+            Math.min(maxArrowPosition / 2, maxArrowPosition - arrowWidth),
+            arrowWidth
         );
 
         return {
@@ -77,7 +77,7 @@ export const CommonUtils = {
     getAlignPosition: (props, component, options) => {
         const { boundrayDom } = props;
         const { top, left, isUpStyle } = CommonUtils.getComponentPosition(props, options);
-        const { widthMargin = 0, maxArrowPosition, arrowWidht = 0 } = options;
+        const { widthMargin = 0, maxArrowPosition, arrowWidth = 0 } = options;
         let boundrayRect = {};
         if (boundrayDom) {
             boundrayRect = boundrayDom.getBoundingClientRect();
@@ -110,8 +110,8 @@ export const CommonUtils = {
         }
         console.log(x, y);
         const arrowLeft = Math.max(
-            Math.min(maxArrowPosition / 2 - x, maxArrowPosition - arrowWidht),
-            arrowWidht
+            Math.min(maxArrowPosition / 2 - x, maxArrowPosition - arrowWidth),
+            arrowWidth
         );
 
         return {
