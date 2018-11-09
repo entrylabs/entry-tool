@@ -125,6 +125,9 @@
         "axios": "^0.18.0",
         "chroma-js": "^1.4.0",
         "lodash": "^4.17.11",
-        "react-slick": "^0.23.2"
+        "react-cookies": "^0.1.0",
+        "react-outside-click-handler": "^1.2.2",
+        "react-slick": "^0.23.2",
+        "redux-form": "^7.4.2"
     }
 }

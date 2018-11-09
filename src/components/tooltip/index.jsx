@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Styles from '../../../assets/scss/popup.scss';
-import { triggerEvent } from '../../../actions';
+import Styles from '../../assets/scss/popup.scss';
+import { triggerEvent } from '../../actions/index';
 
-class Tooltips extends Component {
+class Index extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -331,5 +331,5 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-)(Tooltips);
+)(Index);
 

@@ -1,12 +1,12 @@
 export const CommonUtils = {
-    toggleClass: (isActive, className) => {
+    toggleClass: (isActive, className, falseClassName = "") => {
         if (isActive) {
             return className;
         }
-        return '';
+        return falseClassName;
     },
-    createImageUrl: (base, id) => {
-        return `${base}/uploads/${id.substring(0, 2)}/${id.substring(2, 4)}/thumb/${id}.png`;
+    createImageUrl: (id) => {
+        return `/uploads/${id.substring(0, 2)}/${id.substring(2, 4)}/thumb/${id}.png`;
     },
     remove: (array, callback) => {
         const arr = [...array];
@@ -17,6 +17,7 @@ export const CommonUtils = {
         return arr;
     },
     generateHash: () => {
+<<<<<<< HEAD
         return ('0000' + ((Math.random() * Math.pow(36, 4)) << 0).toString(36)).substr(-4);
     },
 
@@ -123,3 +124,14 @@ export const CommonUtils = {
         };
     },
 };
+=======
+        return ('0000' + (Math.random() * Math.pow(36, 4) << 0).toString(36)).substr(-4);
+    }
+};
+
+export function FormAsyncException(obj) {
+    Object.keys(obj).forEach(key => {
+       this[key] =obj[key];
+    });
+}
+>>>>>>> origin/issue/9401

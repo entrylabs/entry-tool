@@ -1169,6 +1169,9 @@
             border-color: #f00;
         }
     }
+    .pop_selectbox * {
+        box-sizing: content-box;
+    }
     .pop_selectbox .tooltip_box {
         display: none;
     }
@@ -1214,6 +1217,9 @@
     }
     .select_list {
         padding: 0 8px;
+    }
+    .select_list * {
+        box-sizing: content-box;
     }
     .select_list .list_item {
         border-top: 1px solid #f2f2f2;

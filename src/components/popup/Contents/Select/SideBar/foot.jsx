@@ -10,7 +10,7 @@ class Foot extends Component {
     }
 
     handleSubmit(event, data) {
-        this.props.triggerEvent( event, data );
+        this.props.triggerEvent(event, data);
     }
 
     render() {

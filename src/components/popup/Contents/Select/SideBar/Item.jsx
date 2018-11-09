@@ -19,7 +19,7 @@ class Item extends Component {
         }
         return (
             <div className={Styles.thmb}>
-                <img src={CommonUtils.createImageUrl(this.props.popupReducer.baseUrl, this.props.item.pictures[0].filename)} alt=""/>
+                <img src={CommonUtils.createImageUrl(this.props.item.pictures[0].filename)} alt=""/>
             </div>
         );
     }
@@ -51,7 +51,9 @@ class Item extends Component {
 
     render() {
         return (
-            <li onClick={this.onItemClicked} onDoubleClick={e => this.handleDbClick('select', { item: this.props.item })} className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}>
+            <li onClick={this.onItemClicked}
+                onDoubleClick={e => this.handleDbClick('select', { item: this.props.item })}
+                className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}>
                 <a href="#NULL" className={Styles.link}>
                     {this.drawImage()}
                     <em className={Styles.sjt}>{this.props.item.name}</em>

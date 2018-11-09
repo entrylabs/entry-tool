@@ -11,7 +11,7 @@ export default function popupReducer(state = INITIAL_STATE, action) {
                 result: action.payload,
             };
         case INIT_STATE:
-            return { ...state, ...action.data, selected: [], uploads: [] };
+            return { ...state, ...action.data, selected: [], uploads: [], data: [] };
         case FETCH_ITEM:
             return { ...state, ...action.data };
         case UPLOAD_ITEM:

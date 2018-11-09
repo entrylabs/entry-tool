@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import configureStore from './store';
 import { visibleAction } from './actions/index';
+import axios from 'axios';
 
 var instance = null;
 export default class EntryTool extends EventEmitter {
@@ -22,20 +23,25 @@ export default class EntryTool extends EventEmitter {
         return instance;
     }
 
-    initialize({ container, target, isShow = true, type, data, props } = {}) {
+    initialize({ container, target, isShow = true, type, data, props, url } = {}) {
         if (!target) {
             target = document.body;
         }
         if (!container) {
             container = document.createElement('div');
         }
+
         this._container = container;
-        // target.appendChild(container);
+        this._target = target;
         this._data = data;
         this._props = props;
         this._type = type;
         this.module = this.getModule(type);
         this.store = configureStore({}, this);
+
+        if(url) {
+            axios.defaults.baseURL = url;
+        }
 
         if (isShow) {
             this.show();
@@ -90,6 +96,7 @@ export default class EntryTool extends EventEmitter {
                 this.reducerType = 'widget';
                 return import('./components/widget/dropdownContainer');
             case 'popup':
+                this._target.appendChild(this._container);
             default:
                 this.reducerType = 'popup';
                 return import('./components/popup');
@@ -136,7 +143,7 @@ export default class EntryTool extends EventEmitter {
         if (this._container) {
             ReactDOM.render(
                 <Provider store={this.store} type={this.type}>
-                    <App className={this.type}>
+                    <App className={this.type} container={this._container}>
                         <Module
                             {...Object.assign({}, this._props, this._data)}
                             eventEmitter={this}

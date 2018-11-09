@@ -58,7 +58,7 @@
         background-image: url(../images/btn_pop_font_color_on.png);
     }
 }
-.imbtn_pop_font_paint {
+.imbtn_pop_font_backgroundcolor {
     background: url(../images/btn_pop_font_paint.png) no-repeat;
     background-size: 38px auto;
     &.on {
@@ -92,7 +92,7 @@ input[type='checkbox']:checked + .imbtn_pop_checked:before {
     background-size: 8px auto;
 }
 .imico_pop_select_arr_up:after {
-    background: url(../images/ico_pop_select_arr_down.png) no-repeat;
+    background: url(../images/ico_pop_select_arr_up.png) no-repeat;
     background-size: 8px auto;
 }
 .imico_pop_sound_thmb:before {
