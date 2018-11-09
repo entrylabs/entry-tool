@@ -1541,7 +1541,6 @@
     position: fixed;
     transition: all ease 0.3s;
     .tooltip_inner {
-        height: 300px;
         .item {
             &:not(:first-child) {
                 border-top: $warmgray200 solid 1px;
@@ -1559,6 +1558,10 @@
             color: $textColor;
             cursor: pointer;
         }
+
+        > .item {
+            margin-right: 8px;
+        }
     }
 
     :global(.rcs-custom-scrollbar) {
@@ -1572,33 +1575,4 @@
         background-color: $coolgray400;
         border-radius: 2.5px;
     }
-}
-
-.track_vertical {
-    position: absolute;
-    width: 8px;
-    right: 4px;
-    bottom: 4px;
-    top: 4px;
-    border-radius: 2.5px;
-}
-
-.track_horizontal {
-    position: absolute;
-    height: 8px;
-    left: 4px;
-    right: 4px;
-    bottom: 4px;
-    border-radius: 2.5px;
-}
-
-.thumb_vertical {
-    cursor: pointer;
-    border-radius: inherit;
-    background-color: $coolgray400;
-}
-.thumb_horizontal {
-    cursor: pointer;
-    border-radius: inherit;
-    background-color: $coolgray400;
 }

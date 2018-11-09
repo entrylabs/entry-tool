@@ -57,13 +57,12 @@ export const CommonUtils = {
         } else if (positionDom) {
             rect = positionDom.getBoundingClientRect();
         }
-        console.log(boundaryHeight, rect, componentWidth);
         const { x: marginX = 0, y: marginY = 0 } = marginRect;
         let { top = 0, width = 0, height = 0, left = 0 } = rect;
         left -= componentWidth / 2 - width / 2 - marginX;
         const isUpStyle = boundaryHeight - top - height / 2 < boundaryHeight / 2;
         if (isUpStyle) {
-            top -= componentHeight + (arrowHeight + 2) - marginY;
+            top -= componentHeight + (arrowHeight + 2) + marginY;
         } else {
             top += arrowHeight + height + 2 + marginY;
         }
@@ -108,7 +107,6 @@ export const CommonUtils = {
         } else if (bottom > boundrayRect.bottom) {
             y = boundrayRect.bottom - bottom - widthMargin;
         }
-        console.log(x, y);
         const arrowLeft = Math.max(
             Math.min(maxArrowPosition / 2 - x, maxArrowPosition - arrowWidht),
             arrowWidht
