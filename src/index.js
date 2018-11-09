@@ -32,7 +32,7 @@ export default class EntryTool extends EventEmitter {
         }
 
         this._container = container;
-        target.appendChild(this._container);
+        this._target = target;
         this._data = data;
         this._props = props;
         this._type = type;
@@ -93,6 +93,7 @@ export default class EntryTool extends EventEmitter {
                 this.reducerType = 'picker';
                 return import('./components/picker/colorContainer');
             case 'popup':
+                this._target.appendChild(this._container);
             default:
                 this.reducerType = 'popup';
                 return import('./components/popup');
@@ -112,6 +113,7 @@ export default class EntryTool extends EventEmitter {
         if (data) {
             this.data = data;
         }
+        this._container.style.display = "block";
         this.store.dispatch(visibleAction(true));
         return this;
     }
@@ -123,6 +125,7 @@ export default class EntryTool extends EventEmitter {
         if (data) {
             this.data = data;
         }
+        this._container.style.display = "none";
         this.store.dispatch(visibleAction(false));
         return this;
     }

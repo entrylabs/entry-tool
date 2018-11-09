@@ -71,12 +71,17 @@ class LoginForm extends Component {
         const { meta, input, id, enterCallback } = fieldConfig;
         const name = input.name;
         const field = FIELDS[name];
+        const EnterEvent = (e) => {
+            if (field.onKeyDown) {
+                field.onKeyDown(e, enterCallback);
+            }
+        };
         return (
             <div className={`${Styles.pop_inpt_text} ${CommonUtils.toggleClass(meta.touched && meta.error, Styles.error)}`} key={name}>
                 <label htmlFor={name} className={Styles.inpt_label}>
                     {field.label} <em className={Styles.chk_point}>(필수)</em>
                 </label>
-                <field.type {...input} type={field.subType} id={id} placeholder={field.placeholder} onKeyDown={(e) =>{field.onKeyDown(e, enterCallback)}}/>
+                <field.type {...input} type={field.subType} id={id} placeholder={field.placeholder} onKeyDown={EnterEvent}/>
             </div>
         );
     };

@@ -24,17 +24,7 @@ class Index extends Component {
     }
 
     render() {
-        return (
-            <div className={Styles.popup_wrap}>
-                <header className={Styles.pop_header}>
-                    <h1>회원가입</h1>
-                    <button onClick={this.close} className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}>
-                        <span className={Styles.blind}>뒤로가기</span>
-                    </button>
-                </header>
-                {this.sequence[this.props.joinReducer.page]}
-            </div>
-        );
+        return this.sequence[this.props.joinReducer.page];
     }
 }
 
