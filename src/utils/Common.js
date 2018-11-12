@@ -1,5 +1,5 @@
 export const CommonUtils = {
-    toggleClass: (isActive, className, falseClassName = "") => {
+    toggleClass: (isActive, className, falseClassName = '') => {
         if (isActive) {
             return className;
         }
@@ -17,7 +17,6 @@ export const CommonUtils = {
         return arr;
     },
     generateHash: () => {
-<<<<<<< HEAD
         return ('0000' + ((Math.random() * Math.pow(36, 4)) << 0).toString(36)).substr(-4);
     },
 
@@ -124,14 +123,9 @@ export const CommonUtils = {
         };
     },
 };
-=======
-        return ('0000' + (Math.random() * Math.pow(36, 4) << 0).toString(36)).substr(-4);
-    }
-};
 
 export function FormAsyncException(obj) {
-    Object.keys(obj).forEach(key => {
-       this[key] =obj[key];
+    Object.keys(obj).forEach((key) => {
+        this[key] = obj[key];
     });
 }
->>>>>>> origin/issue/9401
