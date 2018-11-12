@@ -15,6 +15,8 @@ const numberList = [
 
 const noop = () => {};
 
+const dummyDegree = 222;
+
 class angle extends Component {
     getPositionOptions() {
         return {
@@ -69,6 +71,8 @@ class angle extends Component {
         event.preventDefault();
         event.stopPropagation();
 
+        const { onAngleChanged = noop } = this.props;
+
         let classifiedEvent;
         if (window.TouchEvent && event instanceof window.TouchEvent) {
             classifiedEvent = event.changedTouches[0];
@@ -77,7 +81,7 @@ class angle extends Component {
         }
 
         const { clientX, clientY } = classifiedEvent;
-        console.log(this.calculateArrowDegree(clientX, clientY));
+        onAngleChanged(this.calculateArrowDegree(clientX, clientY));
     };
 
     calculateArrowDegree(mousePosX, mousePosY) {
@@ -98,6 +102,44 @@ class angle extends Component {
         return (Math.round(angleDegree / 15) * 15) % 360;
     }
 
+    makeCircleSection(degree) {
+        const refinedDegree = this.refineDegree(degree);
+        let startOffset = -90;
+        let endOffset = refinedDegree - 90;
+        let startStyle = `linear-gradient(${startOffset}deg, transparent 50%, white 50%)`;
+
+        if (refinedDegree > 180) {
+            startOffset = refinedDegree - 270;
+            endOffset = 90;
+            startStyle = `linear-gradient(${startOffset}deg, #ffb500 50%, transparent 50%)`;
+        }
+
+
+        const pieStyle = {
+            backgroundImage:
+                `${startStyle},linear-gradient(${endOffset}deg, white 50%, transparent 50%)`,
+        };
+
+        return (
+            <div
+                className={Styles.pie}
+                style={pieStyle}
+            >
+            </div>
+        );
+    }
+
+    refineDegree(degree) {
+        let refinedDegree = degree;
+        if (refinedDegree > 360) {
+            refinedDegree %= 360;
+        } else if (refinedDegree < 0) {
+            refinedDegree = (refinedDegree % 360) + 360;
+        }
+
+        return refinedDegree;
+    }
+
     addMouseMove() {
         document.addEventListener('mousemove', this.handleAngleArrowMove);
         document.addEventListener('touchmove', this.handleAngleArrowMove);
@@ -110,7 +152,7 @@ class angle extends Component {
         document.removeEventListener('touchmove', this.handleAngleArrowMove);
     }
 
-    _makeNumberButtons() {
+    makeNumberButtons() {
         const { onButtonPressed = noop } = this.props;
 
         return numberList.map((value) => (
@@ -141,20 +183,24 @@ class angle extends Component {
                     <div className={Styles.tooltip_inner}>
                         <div className={Styles.clock_board}>
                             <div
-                                className={`${Styles.clock}`}
+                                className={Styles.clock}
                                 onMouseDown={this.addMouseMove}
                                 onTouchStart={this.addMouseMove}
                                 onClick={this.handleAngleArrowMove}
                             >
+                                {this.makeCircleSection(dummyDegree)}
                                 <div
                                     ref={(dom) => (this.arrow = dom)}
                                     className={`${Styles.arrow}`}
+                                    /*style={{
+                                        transform: `rotate(${dummyDegree}deg)`,
+                                    }}*/
                                 >
                                 </div>
                             </div>
                         </div>
                         <div className={Styles.time_board}>
-                            {this._makeNumberButtons()}
+                            {this.makeNumberButtons()}
                             <a
                                 className={`${Styles.btn_cnt} ${Styles.btn_del} ${Styles.imico_pop_key_del}`}
                                 onClick={() => {

@@ -1414,10 +1414,21 @@
             height: 160px;
             background: url(../images/bg_angle_dots.png) no-repeat;
 
+            .pie {
+                width: 152px;
+                height: 152px;
+                position: absolute;
+                opacity: 0.8;
+                border-radius: 50%;
+                left: 4px;
+                top: 3px;
+                background-color: #ffb500;
+            }
+
             .arrow {
                 background: url(../images/img_angle_arrow.png) no-repeat bottom right;
                 left: 70px;
-                bottom: 18px;
+                bottom: 17px;
                 position: relative;
                 width: 20px;
                 height: 98px;
