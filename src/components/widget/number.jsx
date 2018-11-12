@@ -14,6 +14,9 @@ const numberList = [
     '-', '0', '.',
 ];
 
+const noop = () => {
+};
+
 class Number extends Component {
     getPositionOptions() {
         return {
@@ -52,7 +55,7 @@ class Number extends Component {
     }
 
     _makeNumberButtons() {
-        const { onButtonPressed } = this.props;
+        const { onButtonPressed = noop } = this.props;
 
         return numberList.map((value) => (
             <a className={Styles.btn_cnt} key={value} onClick={() => onButtonPressed(value)}>
@@ -68,9 +71,7 @@ class Number extends Component {
         return (
             <OutsideClick
                 onOutsideClick={() => {
-                    if (onOutsideClick) {
-                        onOutsideClick();
-                    }
+                    onOutsideClick();
                 }}
                 eventTypes={['mouseup', 'touchend']}
             >
