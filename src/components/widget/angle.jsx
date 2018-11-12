@@ -76,9 +76,27 @@ class angle extends Component {
             classifiedEvent = event;
         }
 
-        const { pageX, pageY } = classifiedEvent;
-        console.log(pageX, pageY);
+        const { clientX, clientY } = classifiedEvent;
+        console.log(this.calculateArrowDegree(clientX, clientY));
     };
+
+    calculateArrowDegree(mousePosX, mousePosY) {
+        const arrowRect = this.arrow.getBoundingClientRect();
+        const arrowPosX = arrowRect.left + 10; //10 = arrowDomWidth / 2
+        const arrowPosY = arrowRect.bottom - 2; // 2 는 마우스 커서 포인터를 맞추기 위한 상수
+
+        const dy = mousePosY - arrowPosY;
+        const dx = mousePosX - arrowPosX;
+
+        const angleRadian = Math.atan2(-dy, dx);
+        let angleDegree = 90 - (angleRadian * 180 / Math.PI);
+
+        if (angleDegree < 0) {
+            angleDegree += 360;
+        }
+
+        return (Math.round(angleDegree / 15) * 15) % 360;
+    }
 
     addMouseMove() {
         document.addEventListener('mousemove', this.handleAngleArrowMove);
@@ -126,8 +144,10 @@ class angle extends Component {
                                 className={`${Styles.clock}`}
                                 onMouseDown={this.addMouseMove}
                                 onTouchStart={this.addMouseMove}
+                                onClick={this.handleAngleArrowMove}
                             >
                                 <div
+                                    ref={(dom) => (this.arrow = dom)}
                                     className={`${Styles.arrow}`}
                                 >
                                 </div>

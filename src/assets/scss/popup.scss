@@ -1416,11 +1416,13 @@
 
             .arrow {
                 background: url(../images/img_angle_arrow.png) no-repeat bottom right;
-                left: 74px;
-                top: 76px;
+                left: 70px;
+                bottom: 18px;
                 position: relative;
-                width: 74px;
-                height: 76px;
+                width: 20px;
+                height: 98px;
+                object-fit: contain;
+                transform-origin: 50% 97%;
             }
         }
     }
