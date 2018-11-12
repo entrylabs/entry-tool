@@ -40,10 +40,6 @@
 			"warn",
 			"always"
 		],
-		"arrow-body-style": [
-			"warn",
-			"as-needed"
-		],
 		"no-confusing-arrow": [
 			"warn",
 			{
@@ -119,7 +115,7 @@
 			"always"
 		],
 		"radix": "warn",
-		"id-length": "warn",
+		"id-length": ["warn", {"exceptions": ["x", "y", "e"]}],
 		"camelcase": [
 			"warn",
 			{
