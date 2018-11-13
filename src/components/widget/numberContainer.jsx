@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { clickButton } from '../../actions';
 import Number from './number';
 
 class numberContainer extends Component {
@@ -9,12 +8,12 @@ class numberContainer extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+/*const mapDispatchToProps = (dispatch) => ({
     onButtonPressed: (value) => dispatch(clickButton({ event: 'buttonPressed', data: value })),
     onBackButtonPressed: () => dispatch(clickButton({ event: 'backButtonPressed' })),
-});
+});*/
 
 export default connect(
     undefined,
-    mapDispatchToProps,
+    undefined/*mapDispatchToProps*/,
 )(numberContainer);

@@ -14,9 +14,6 @@ const numberList = [
     '-', '0', '.',
 ];
 
-const noop = () => {
-};
-
 class Number extends Component {
     getPositionOptions() {
         return {
@@ -32,7 +29,8 @@ class Number extends Component {
     constructor(props) {
         super(props);
         this.state = CommonUtils.getDefaultComponentPosition(props, this.getPositionOptions());
-        this._makeNumberButtons.bind(this);
+        this.makeNumberButtons = this.makeNumberButtons.bind(this);
+        this.handleButtonClick = this.handleButtonClick.bind(this);
     };
 
     componentDidMount() {
@@ -54,18 +52,27 @@ class Number extends Component {
             updateState));
     }
 
-    _makeNumberButtons() {
-        const { onButtonPressed = noop } = this.props;
-
+    makeNumberButtons() {
         return numberList.map((value) => (
-            <a className={Styles.btn_cnt} key={value} onClick={() => onButtonPressed(value)}>
+            <a className={Styles.btn_cnt} key={value} onClick={ () => {
+                this.handleButtonClick('buttonPressed', value);
+            } }>
                 {value}
             </a>
         ));
     }
 
+    handleButtonClick(type, value) {
+        const { eventEmitter : emitter } = this.props;
+
+        console.log(this.props, type, value);
+        if (emitter) {
+            emitter.emit('click', type, value);
+        }
+    }
+
     render() {
-        const { onOutsideClick = noop, onBackButtonPressed = noop } = this.props;
+        const { onOutsideClick = () => {} } = this.props;
         const { arrowLeft, isUpStyle, componentPosition } = this.state;
 
         return (
@@ -86,12 +93,12 @@ class Number extends Component {
                 >
                     <div className={Styles.tooltip_inner}>
                         <div className={Styles.time_board}>
-                            {this._makeNumberButtons()}
+                            {this.makeNumberButtons()}
                             <a
                                 className={`${Styles.btn_cnt} ${Styles.btn_del} ${Styles.imico_pop_key_del}`}
-                                onClick={() => {
-                                    onBackButtonPressed();
-                                }}
+                                onClick={ () => {
+                                    this.handleButtonClick('backButtonPressed');
+                                } }
                             >
                                 <span className={Styles.blind}>지우기</span>
                             </a>
