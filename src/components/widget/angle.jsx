@@ -76,8 +76,8 @@ class Angle extends Component {
 
     calculateArrowDegree(mousePosX, mousePosY) {
         const clockRect = this.clockDom.getBoundingClientRect();
-        const centerPosX = clockRect.left + clockRect.width / 2 + 1;
-        const centerPosY = clockRect.top + clockRect.height / 2 + 1;
+        const centerPosX = clockRect.left + clockRect.width / 2;
+        const centerPosY = clockRect.top + clockRect.height / 2;
 
         const dy = mousePosY - centerPosY;
         const dx = mousePosX - centerPosX;
