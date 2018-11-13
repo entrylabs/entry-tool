@@ -99,6 +99,36 @@
             border: 1px solid #9ab6ff;
             background-color: #6e97ff;
         }
+        .group_inner .work_space .tooltip_box {
+            display: none;
+            font-size: 14px;
+            top: 45px;
+        }
+        .group_inner .work_space .btn_workspace_lang.on + .tooltip_box {
+            display: block;
+            width: 107px;
+            left: -32px;
+        }
+        .group_inner .work_space .btn_workspace_file.on + .tooltip_box {
+            display: block;
+            width: 164px;
+            left: -61px;
+        }
+        .group_inner .work_space .btn_workspace_save.on + .tooltip_box {
+            display: block;
+            width: 151px;
+            left: -55px;
+        }
+        .group_inner .work_space .btn_workspace_help.on + .tooltip_box {
+            display: block;
+            width: 164px;
+            left: -61px;
+        }
+        .group_inner .work_space .link_workspace_text.on + .tooltip_box {
+            display: block;
+            width: 95px;
+            left: -13px;
+        }
         .group_inner .btn_work_space:before {
             @include PositionLT(absolute, 8px, 50%);
             width: 18px;
@@ -129,7 +159,7 @@
             letter-spacing: -0.6px;
             line-height: 15px;
         }
-        .link_workspace_text .ico_workspace_practical {
+        .ico_workspace_practical {
             display: inline-block;
             overflow: hidden;
             width: 28px;
