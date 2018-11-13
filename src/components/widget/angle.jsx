@@ -15,7 +15,7 @@ const numberList = [
 
 const noop = () => {};
 
-const dummyDegree = 222;
+const dummyDegree = 90;
 
 class angle extends Component {
     getPositionOptions() {
@@ -85,12 +85,12 @@ class angle extends Component {
     };
 
     calculateArrowDegree(mousePosX, mousePosY) {
-        const arrowRect = this.arrow.getBoundingClientRect();
-        const arrowPosX = arrowRect.left + 10; //10 = arrowDomWidth / 2
-        const arrowPosY = arrowRect.bottom - 2; // 2 는 마우스 커서 포인터를 맞추기 위한 상수
+        const clockRect = this.clockDom.getBoundingClientRect();
+        const centerPosX = clockRect.left + clockRect.width / 2 + 1;
+        const centerPosY = clockRect.top + clockRect.height / 2 + 1;
 
-        const dy = mousePosY - arrowPosY;
-        const dx = mousePosX - arrowPosX;
+        const dy = mousePosY - centerPosY;
+        const dx = mousePosX - centerPosX;
 
         const angleRadian = Math.atan2(-dy, dx);
         let angleDegree = 90 - (angleRadian * 180 / Math.PI);
@@ -183,6 +183,7 @@ class angle extends Component {
                     <div className={Styles.tooltip_inner}>
                         <div className={Styles.clock_board}>
                             <div
+                                ref={(dom) => (this.clockDom = dom)}
                                 className={Styles.clock}
                                 onMouseDown={this.addMouseMove}
                                 onTouchStart={this.addMouseMove}
@@ -190,11 +191,10 @@ class angle extends Component {
                             >
                                 {this.makeCircleSection(dummyDegree)}
                                 <div
-                                    ref={(dom) => (this.arrow = dom)}
                                     className={`${Styles.arrow}`}
-                                    /*style={{
+                                    style={{
                                         transform: `rotate(${dummyDegree}deg)`,
-                                    }}*/
+                                    }}
                                 >
                                 </div>
                             </div>
