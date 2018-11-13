@@ -17,7 +17,7 @@ const noop = () => {};
 
 const dummyDegree = 90;
 
-class angle extends Component {
+class Angle extends Component {
     getPositionOptions() {
         return {
             widthMargin: 1,
@@ -163,7 +163,7 @@ class angle extends Component {
     }
 
     render() {
-        const { onOutsideClick = noop, onBackButtonPressed = noop } = this.props;
+        const { onOutsideClick = noop, onBackButtonPressed = noop, degree = 0 } = this.props;
         const { isUpStyle, arrowLeft, componentPosition } = this.state;
 
         return (
@@ -189,11 +189,11 @@ class angle extends Component {
                                 onTouchStart={this.addMouseMove}
                                 onClick={this.handleAngleArrowMove}
                             >
-                                {this.makeCircleSection(dummyDegree)}
+                                {this.makeCircleSection(degree)}
                                 <div
                                     className={`${Styles.arrow}`}
                                     style={{
-                                        transform: `rotate(${dummyDegree}deg)`,
+                                        transform: `rotate(${degree}deg)`,
                                     }}
                                 >
                                 </div>
@@ -220,4 +220,4 @@ class angle extends Component {
     }
 }
 
-export default angle;
+export default Angle;
