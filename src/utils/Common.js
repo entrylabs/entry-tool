@@ -60,7 +60,7 @@ export const CommonUtils = {
         const { x: marginX = 0, y: marginY = 0 } = marginRect;
         let { top = 0, width = 0, height = 0, left = 0 } = rect;
         left -= componentWidth / 2 - width / 2 - marginX;
-        const isUpStyle = boundaryHeight - top - height / 2 < boundaryHeight / 2;
+        const isUpStyle = top + height * 3 + componentHeight + marginY > boundaryHeight;
         if (isUpStyle) {
             top -= componentHeight + (arrowHeight + 2) + marginY;
         } else {

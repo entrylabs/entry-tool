@@ -6,13 +6,13 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const publicPath = paths.servedPath;
-const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
+const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP || false;
 const publicUrl = publicPath.slice(0, -1);
 const env = getClientEnvironment(publicUrl);
 
 module.exports = {
     bail: true,
-    devtool: shouldUseSourceMap ? 'source-map' : false,
+    devtool: shouldUseSourceMap ? shouldUseSourceMap : false,
     entry: [require.resolve('./polyfills'), paths.appIndexJs],
     output: {
         path: paths.appBuild,

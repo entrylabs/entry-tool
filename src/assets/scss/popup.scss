@@ -1280,6 +1280,7 @@
         height: 54px;
         border-radius: 6px;
         border: 1px solid #e2e2e2;
+        cursor: pointer;
     }
     .color_box .color:before {
         @include PositionRB(absolute, 4px, 4px);

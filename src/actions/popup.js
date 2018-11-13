@@ -1,6 +1,6 @@
 import axios from 'axios';
-import _ from 'lodash';
-import {CommonUtils} from '../utils/Common'
+import { memoize } from 'lodash-es';
+import { CommonUtils } from '../utils/Common';
 
 export const FETCH_ITEM = 'FETCH_ITEM';
 export const UPLOAD_ITEM = 'UPLOAD_ITEM';
@@ -20,8 +20,8 @@ const uploadOptions = {
         method: 'PUT',
         url: '/api/importObject',
         successCallback: function(response) {
-            return response.data.map(item => {
-                return item.objects.map(object => {
+            return response.data.map((item) => {
+                return item.objects.map((object) => {
                     if (object.objectType === 'textBox') {
                         object.selectedPicture = {
                             name: object.name,
@@ -36,7 +36,6 @@ const uploadOptions = {
                     object.selectedPicture.sprite = item;
                     return object.selectedPicture;
                 });
-
             });
         },
     },
@@ -54,7 +53,7 @@ const uploadOptions = {
 export const initState = (data) => (dispatch) => {
     dispatch({
         type: INIT_STATE,
-        data: data
+        data: data,
     });
 };
 
@@ -63,7 +62,7 @@ export function fetchItems(type, category = null, subMenu = undefined) {
         subMenu = '';
     }
     const url = ['/api', type, 'browse/default', category, subMenu].join('/');
-    let promise = _.memoize(url => {
+    let promise = memoize((url) => {
         return axios.get(url);
     });
     return (dispatch) => {
@@ -79,52 +78,61 @@ export function fetchItems(type, category = null, subMenu = undefined) {
                     },
                 });
             })
-            .catch((response) => dispatch({
-                type: API_FAIL,
-                error: response.error,
-            }));
+            .catch((response) =>
+                dispatch({
+                    type: API_FAIL,
+                    error: response.error,
+                })
+            );
     };
 }
 
 export function searchItem(type, query) {
     const url = `/api/${type}/search/${query}`;
 
-    let promise = _.memoize(url => {
+    let promise = memoize((url) => {
         return axios.get(url);
     });
     return (dispatch) => {
         promise(url)
-            .then((response) => dispatch({
-                type: FETCH_ITEM,
-                data: {
-                    data: response.data,
-                },
-            }))
-            .catch((response) => dispatch({
-                type: API_FAIL,
-                error: response.error,
-            }));
+            .then((response) =>
+                dispatch({
+                    type: FETCH_ITEM,
+                    data: {
+                        data: response.data,
+                    },
+                })
+            )
+            .catch((response) =>
+                dispatch({
+                    type: API_FAIL,
+                    error: response.error,
+                })
+            );
     };
 }
 
 export function uploadItem(type, formData, header) {
-    let httpOption = { ...uploadOptions[type], data: formData, header : header };
+    let httpOption = { ...uploadOptions[type], data: formData, header: header };
     return (dispatch) => {
         axios(httpOption)
-            .then((response) => dispatch({
-                type: UPLOAD_ITEM,
-                data: {
-                    data: httpOption.successCallback(response),
-                    objType: type
-                },
-            }))
-            .catch((response) => dispatch({
-                type: API_FAIL,
-                error: response.error,
-            }));
+            .then((response) =>
+                dispatch({
+                    type: UPLOAD_ITEM,
+                    data: {
+                        data: httpOption.successCallback(response),
+                        objType: type,
+                    },
+                })
+            )
+            .catch((response) =>
+                dispatch({
+                    type: API_FAIL,
+                    error: response.error,
+                })
+            );
     };
 }
-
 
 export function applySelected(list) {
     return (dispatch) => {
@@ -134,5 +142,3 @@ export function applySelected(list) {
         });
     };
 }
-
-

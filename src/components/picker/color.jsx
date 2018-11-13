@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import chroma from 'chroma-js';
 import { Object } from 'core-js';
 import Styles from '../../assets/scss/popup.scss';
-import { debounce } from 'lodash';
+import { debounce } from 'lodash-es';
 import { pure } from 'recompose';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 import OutsideClick from '../common/outsideClick';
 
 function getColorByHsv({ red, green, blue }) {
@@ -38,7 +38,27 @@ function getColorByRGB({ hue, saturation, brightness }) {
     };
 }
 
-function getColorByHex(hex) {
+function getTransparentColor() {
+    return {
+        red: 0,
+        green: 0,
+        blue: 0,
+        hue: 0,
+        saturation: 0,
+        brightness: 0,
+        color: 'transparent',
+    };
+}
+
+function getColorByHex(value) {
+    let hex = '';
+    let isTransparent = false;
+    if (value === 'transparent') {
+        hex = 'rgba(255, 0, 0, 0)';
+        isTransparent = true;
+    } else {
+        hex = value;
+    }
     const color = chroma(hex);
     const [red, green, blue] = color.rgb();
     let [hue, saturation, brightness] = color.hsv();
@@ -52,7 +72,8 @@ function getColorByHex(hex) {
         hue: Math.round(hue / 3.6),
         saturation: Math.round(saturation * 100),
         brightness: Math.round(brightness * 100),
-        color: hex,
+        color: value,
+        isTransparent: isTransparent,
     };
 }
 
@@ -77,6 +98,36 @@ function getClassifyEvent(e) {
 function handleTouchPreventDefault(e) {
     e.preventDefault();
 }
+
+const metaRgbContoller = [
+    {
+        label: '빨강(R)',
+        key: 'red',
+    },
+    {
+        label: '녹색(G)',
+        key: 'green',
+    },
+    {
+        label: '파랑(B)',
+        key: 'blue',
+    },
+];
+
+const metaHSVContoller = [
+    {
+        label: '색상',
+        key: 'hue',
+    },
+    {
+        label: '채도',
+        key: 'saturation',
+    },
+    {
+        label: '명도',
+        key: 'brightness',
+    },
+];
 
 class ColorPicker extends Component {
     get SCALE_RATIO_X() {
@@ -110,7 +161,9 @@ class ColorPicker extends Component {
     constructor(props) {
         super(props);
         const { color, onChangeColorPicker } = props;
-        let state = {};
+        let state = {
+            isTransparent: false,
+        };
         if (color) {
             Object.assign(state, getColorByHex(color));
             if (onChangeColorPicker) {
@@ -120,6 +173,17 @@ class ColorPicker extends Component {
         Object.assign(state, this.getDefaultColorPickerStyle());
         this.state = state;
     }
+
+    getGradientBackground(type) {
+        if (type === 'hue') {
+            return this.hueGradient();
+        } else if (type === 'saturation') {
+            return this.saturationGradient();
+        } else {
+            return this.brightnessGradient();
+        }
+    }
+
     hueGradient() {
         return {
             background: `linear-gradient(
@@ -227,6 +291,31 @@ class ColorPicker extends Component {
     handleWindowResize = debounce(() => {
         this.alignPosition();
     }, 300);
+
+    handleColorClick = () => {
+        const { canTransparent, onChangeColorPicker, defaultColor = '#FF0000' } = this.props;
+        if (canTransparent) {
+            this.setState(({ isTransparent, color }) => {
+                let colorValue = '';
+                let colorObj = {};
+                if (!isTransparent) {
+                    colorValue = 'transparent';
+                } else if (isTransparent && color && color !== 'transparent') {
+                    colorValue = color;
+                } else {
+                    colorValue = defaultColor;
+                    colorObj = getColorByHex(colorValue);
+                }
+                if (onChangeColorPicker) {
+                    onChangeColorPicker(colorValue);
+                }
+                return {
+                    ...colorObj,
+                    isTransparent: !isTransparent,
+                };
+            });
+        }
+    };
 
     handleSliderBarClick(e, type) {
         const { clientX, target } = e;
@@ -386,21 +475,95 @@ class ColorPicker extends Component {
         };
     }
 
+    makeHSVController() {
+        const { isTransparent, isActiveSlider } = this.state;
+        let itemClassName = isTransparent ? Styles.disabled : '';
+
+        return metaHSVContoller.map(({ key, label }) => {
+            return (
+                <li key={key} className={`${Styles.item} ${itemClassName}`}>
+                    <label htmlFor={key}>{label}</label>
+                    <input
+                        value={this.state[key]}
+                        type="number"
+                        min="0"
+                        max="100"
+                        onChange={({ target }) => {
+                            const { value = 0 } = target;
+                            this.handleChangeHsv(key, value);
+                        }}
+                        id={key}
+                        name={key}
+                        disabled={isTransparent}
+                    />
+                    <div className={`${Styles.graph_box}`} touch-action="none">
+                        <span
+                            className={`${Styles.slider} ${Styles.btn_pop_color_slide} ${
+                                isActiveSlider === key ? Styles.on : ''
+                            }`}
+                            onMouseDown={(e) => {
+                                !isTransparent && this.handleSliderMouseDown(e, key);
+                            }}
+                            onTouchStart={(e) => {
+                                !isTransparent && this.handleSliderMouseDown(e, key);
+                            }}
+                            style={{ left: setScaleRatioX(this.state[key]) + 'px' }}
+                        />
+                        <div
+                            className={`${Styles.bar}`}
+                            style={this.getGradientBackground(key)}
+                            onMouseDown={(e) => {
+                                !isTransparent && this.handleSliderBarClick(e, key);
+                            }}
+                            onTouchStart={(e) => {
+                                !isTransparent && this.handleSliderBarClick(e, key);
+                            }}
+                        />
+                    </div>
+                </li>
+            );
+        });
+    }
+    makeRGBController() {
+        const { isTransparent } = this.state;
+        let itemClassName = '';
+        if (isTransparent) {
+            itemClassName = Styles.disabled;
+        }
+
+        return metaRgbContoller.map(({ label, key }) => {
+            return (
+                <li key={key} className={`${Styles.item} ${itemClassName}`}>
+                    <label htmlFor={key}>{label}</label>
+                    <input
+                        value={this.state[key]}
+                        type="number"
+                        min="0"
+                        max="255"
+                        onChange={({ target }) => {
+                            this.handleChangeRGB(key, target);
+                        }}
+                        id={key}
+                        name={key}
+                        disabled={isTransparent}
+                    />
+                    <div className={`${Styles.graph}`} />
+                </li>
+            );
+        });
+    }
+
     render() {
-        const { className, onClick, onOutsideClick } = this.props;
-        const {
-            hue,
-            saturation,
-            brightness,
-            red,
-            green,
-            blue,
-            color,
-            isActiveSlider,
-            arrowLeft,
-            isUpStyle,
-            colorPickerStyle,
-        } = this.state;
+        const { className, onClick, onOutsideClick, onSpoidClick } = this.props;
+        const { color, arrowLeft, isUpStyle, isTransparent, colorPickerStyle } = this.state;
+        let colorClassName = '';
+        let colorBackground = null;
+        if (isTransparent) {
+            colorClassName = `${Styles.imico_pop_color_uncheck} ${Styles.imico_pop_circle_check}`;
+        } else {
+            colorClassName = Styles.imico_pop_circle_check_on;
+            colorBackground = this.resultBackground();
+        }
         return (
             <OutsideClick
                 onOutsideClick={() => {
@@ -424,179 +587,20 @@ class ColorPicker extends Component {
                     <div className={`${Styles.tooltip_inner}`}>
                         <div className={`${Styles.color_box}`}>
                             <span
-                                className={`${Styles.color} ${Styles.imico_pop_circle_check}`}
-                                style={this.resultBackground()}
+                                className={`${Styles.color} ${colorClassName}`}
+                                style={colorBackground}
+                                onClick={this.handleColorClick}
                             />
-                            <ul className={`${Styles.color_list}`}>
-                                <li className={`${Styles.item}`}>
-                                    <label htmlFor="red">빨강(R)</label>
-                                    <input
-                                        value={red}
-                                        type="number"
-                                        min="0"
-                                        max="255"
-                                        onChange={({ target }) => {
-                                            this.handleChangeRGB('red', target);
-                                        }}
-                                        id="red"
-                                        name="red"
-                                    />
-                                    <div className={`${Styles.graph}`} />
-                                </li>
-                                <li className={`${Styles.item}`}>
-                                    <label htmlFor="green">녹색(G)</label>
-                                    <input
-                                        value={green}
-                                        type="number"
-                                        min="0"
-                                        max="255"
-                                        onChange={({ target }) => {
-                                            this.handleChangeRGB('green', target);
-                                        }}
-                                        id="green"
-                                        name="green"
-                                    />
-                                </li>
-                                <li className={`${Styles.item}`}>
-                                    <label htmlFor="blue">파랑(B)</label>
-                                    <input
-                                        value={blue}
-                                        type="number"
-                                        min="0"
-                                        max="255"
-                                        onChange={({ target }) => {
-                                            this.handleChangeRGB('blue', target);
-                                        }}
-                                        id="blue"
-                                        name="blue"
-                                    />
-                                </li>
-                            </ul>
+                            <ul className={`${Styles.color_list}`}>{this.makeRGBController()}</ul>
+                            <a
+                                onClick={onSpoidClick}
+                                className={`${Styles.btn_picker} ${Styles.imbtn_picker}`}
+                            >
+                                컬러피커 열기
+                            </a>
                         </div>
                         <div className={`${Styles.color_graph}`}>
-                            <ul className={`${Styles.graph_list}`}>
-                                <li className={`${Styles.item}`}>
-                                    <label htmlFor="hue">색상</label>
-                                    <input
-                                        value={hue}
-                                        type="number"
-                                        min="0"
-                                        max="100"
-                                        onChange={({ target }) => {
-                                            const { value = 0 } = target;
-                                            this.handleChangeHsv('hue', value);
-                                        }}
-                                        id="hue"
-                                        name="hue"
-                                    />
-                                    <div className={`${Styles.graph_box}`} touch-action="none">
-                                        <span
-                                            className={`${Styles.slider} ${
-                                                Styles.btn_pop_color_slide
-                                            } ${isActiveSlider === 'hue' ? Styles.on : ''}`}
-                                            onMouseDown={(e) => {
-                                                this.handleSliderMouseDown(e, 'hue');
-                                            }}
-                                            onTouchStart={(e) => {
-                                                this.handleSliderMouseDown(e, 'hue');
-                                            }}
-                                            style={{ left: setScaleRatioX(hue) + 'px' }}
-                                        />
-                                        <div
-                                            className={`${Styles.bar}`}
-                                            style={this.hueGradient()}
-                                            onMouseDown={(e) => {
-                                                this.handleSliderBarClick(e, 'hue');
-                                            }}
-                                            onTouchStart={(e) => {
-                                                this.handleSliderBarClick(e, 'hue');
-                                            }}
-                                        />
-                                    </div>
-                                </li>
-                                <li className={`${Styles.item}`}>
-                                    <label htmlFor="saturation">채도</label>
-                                    <input
-                                        value={saturation}
-                                        type="number"
-                                        min="0"
-                                        max="100"
-                                        onChange={({ target }) => {
-                                            const { value = 0 } = target;
-                                            this.handleChangeHsv('saturation', value);
-                                        }}
-                                        id="saturation"
-                                        name="saturation"
-                                    />
-                                    <div className={`${Styles.graph_box}`} touch-action="none">
-                                        <span
-                                            className={`${Styles.slider} ${
-                                                Styles.btn_pop_color_slide
-                                            } ${isActiveSlider === 'saturation' ? Styles.on : ''}`}
-                                            onMouseDown={(e) => {
-                                                this.handleSliderMouseDown(e, 'saturation');
-                                            }}
-                                            onTouchStart={(e) => {
-                                                this.handleSliderMouseDown(e, 'saturation');
-                                            }}
-                                            style={{
-                                                left: setScaleRatioX(saturation) + 'px',
-                                            }}
-                                        />
-                                        <div
-                                            className={`${Styles.bar}`}
-                                            style={this.saturationGradient()}
-                                            onMouseDown={(e) => {
-                                                this.handleSliderBarClick(e, 'saturation');
-                                            }}
-                                            onTouchStart={(e) => {
-                                                this.handleSliderBarClick(e, 'saturation');
-                                            }}
-                                        />
-                                    </div>
-                                </li>
-                                <li className={`${Styles.item}`}>
-                                    <label htmlFor="saturation">명도</label>
-                                    <input
-                                        value={brightness}
-                                        type="number"
-                                        min="0"
-                                        max="100"
-                                        onChange={({ target }) => {
-                                            const { value = 0 } = target;
-                                            this.handleChangeHsv('brightness', value);
-                                        }}
-                                        id="lightness"
-                                        name="lightness"
-                                    />
-                                    <div className={`${Styles.graph_box}`} touch-action="none">
-                                        <span
-                                            className={`${Styles.slider} ${
-                                                Styles.btn_pop_color_slide
-                                            } ${isActiveSlider === 'brightness' ? Styles.on : ''}`}
-                                            onMouseDown={(e) => {
-                                                this.handleSliderMouseDown(e, 'brightness');
-                                            }}
-                                            onTouchStart={(e) => {
-                                                this.handleSliderMouseDown(e, 'brightness');
-                                            }}
-                                            style={{
-                                                left: setScaleRatioX(brightness) + 'px',
-                                            }}
-                                        />
-                                        <div
-                                            className={`${Styles.bar}`}
-                                            style={this.brightnessGradient()}
-                                            onMouseDown={(e) => {
-                                                this.handleSliderBarClick(e, 'brightness');
-                                            }}
-                                            onTouchStart={(e) => {
-                                                this.handleSliderBarClick(e, 'brightness');
-                                            }}
-                                        />
-                                    </div>
-                                </li>
-                            </ul>
+                            <ul className={`${Styles.graph_list}`}>{this.makeHSVController()}</ul>
                         </div>
                     </div>
                     <span

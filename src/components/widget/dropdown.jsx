@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { pure } from 'recompose';
 import Styles from '@assets/scss/popup.scss';
 import { CommonUtils } from '@utils/Common';
-import { debounce } from 'lodash';
+import { debounce } from 'lodash-es';
 import Scrollbars from '@components/common/scrollbars';
 import OutsideClick from '@components/common/outsideClick';
 

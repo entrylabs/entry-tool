@@ -1,6 +1,6 @@
 process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
-process.env.GENERATE_SOURCEMAP = 'true';
+// process.env.GENERATE_SOURCEMAP = 'inline-source-map';
 
 const fs = require('fs-extra');
 const paths = require('../config/paths');
