@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SubmissionError, Field, reduxForm } from 'redux-form';
-import Styles from '../../../assets/scss/popup.scss';
-import { triggerEvent } from '../../../actions';
-import { CommonUtils } from '../../../utils/Common';
+import Styles from '@assets/scss/popup.scss';
+import { triggerEvent } from '@actions';
+import { CommonUtils } from '@utils/Common';
 import cookie from 'react-cookies';
 import axios from 'axios';
 

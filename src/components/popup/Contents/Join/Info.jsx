@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import Styles from '../../../../assets/scss/popup.scss';
-import { JoinAction, JoinPageMoveAction, SubmitAction } from '../../../../actions/join';
-import { CommonUtils, FormAsyncException } from '../../../../utils/Common';
+import Styles from '@assets/scss/popup.scss';
+import { JoinAction, JoinPageMoveAction, SubmitAction } from '@actions/join';
+import { CommonUtils, FormAsyncException } from '@utils/Common';
 import axios from 'axios';
 
 const FIELDS = {

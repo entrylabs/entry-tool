@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { CommonUtils } from '../../../utils/Common';
-import Styles from '../../../assets/scss/popup.scss';
-import { triggerEvent } from '../../../actions';
-import ColorPicker from '../../../components/picker/color';
+import { CommonUtils } from '@utils/Common';
+import Styles from '@assets/scss/popup.scss';
+import { triggerEvent } from '@actions';
+import ColorPicker from '@components/picker/color';
 
 class FontElement extends Component {
     constructor(props) {

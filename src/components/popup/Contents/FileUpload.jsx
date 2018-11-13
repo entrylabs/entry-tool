@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { range } from 'lodash-es';
-import Styles from '../../../assets/scss/popup.scss';
-import { uploadItem } from '../../../actions/popup';
-
-import { CommonUtils } from '../../../utils/Common';
-import { triggerEvent } from '../../../actions';
+import Styles from '@assets/scss/popup.scss';
+import { uploadItem } from '@actions/popup';
+import { CommonUtils } from '@utils/Common';
+import { triggerEvent } from '@actions';
 
 class Item extends Component {
     constructor(props) {

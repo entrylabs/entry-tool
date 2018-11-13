@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { triggerEvent } from '../../../../actions';
+import { triggerEvent } from '@actions';
 import Terms from './Terms';
 import Form from './Form';
 import Info from './Info';
