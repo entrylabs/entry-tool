@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CommonUtils } from '@utils/Common';
 import { debounce } from 'lodash';
+import { pure } from 'recompose';
 import Styles from '../../assets/scss/popup.scss';
 import OutsideClick from "../common/outsideClick";
 
@@ -12,10 +13,6 @@ const numberList = [
     '1', '2', '3',
     '-', '0', '.',
 ];
-
-const noop = () => {};
-
-const dummyDegree = 90;
 
 class Angle extends Component {
     getPositionOptions() {
@@ -32,17 +29,11 @@ class Angle extends Component {
     constructor(props) {
         super(props);
 
-        const defaultState = {
-            degree: 0,
-        };
-        this.state = Object.assign(
-            defaultState,
-            CommonUtils.getDefaultComponentPosition(props, this.getPositionOptions())
-        );
-
+        this.state = CommonUtils.getDefaultComponentPosition(props, this.getPositionOptions());
         this.handleAngleArrowMove = this.handleAngleArrowMove.bind(this);
         this.removeMouseMove = this.removeMouseMove.bind(this);
         this.addMouseMove = this.addMouseMove.bind(this);
+        this.handleButtonClick = this.handleButtonClick.bind(this);
     }
 
     componentDidMount() {
@@ -69,9 +60,8 @@ class Angle extends Component {
 
     handleAngleArrowMove(event) {
         event.preventDefault();
-        event.stopPropagation();
 
-        const { onAngleChanged = noop } = this.props;
+        const { onAngleChanged = () => {} } = this.props;
 
         let classifiedEvent;
         if (window.TouchEvent && event instanceof window.TouchEvent) {
@@ -153,17 +143,25 @@ class Angle extends Component {
     }
 
     makeNumberButtons() {
-        const { onButtonPressed = noop } = this.props;
-
         return numberList.map((value) => (
-            <a className={Styles.btn_cnt} key={value} onClick={() => onButtonPressed(value)}>
+            <a className={Styles.btn_cnt} key={value} onClick={() => {
+                this.handleButtonClick('buttonPressed', value);
+            }}>
                 {value}
             </a>
         ));
     }
 
+    handleButtonClick(type, value) {
+        const { eventEmitter : emitter } = this.props;
+
+        if (emitter) {
+            emitter.emit('click', type, value);
+        }
+    }
+
     render() {
-        const { onOutsideClick = noop, onBackButtonPressed = noop, degree = 0 } = this.props;
+        const { onOutsideClick = () => {}, angle = 0 } = this.props;
         const { isUpStyle, arrowLeft, componentPosition } = this.state;
 
         return (
@@ -189,11 +187,11 @@ class Angle extends Component {
                                 onTouchStart={this.addMouseMove}
                                 onClick={this.handleAngleArrowMove}
                             >
-                                {this.makeCircleSection(degree)}
+                                {this.makeCircleSection(angle)}
                                 <div
                                     className={`${Styles.arrow}`}
                                     style={{
-                                        transform: `rotate(${degree}deg)`,
+                                        transform: `rotate(${angle}deg)`,
                                     }}
                                 >
                                 </div>
@@ -204,7 +202,7 @@ class Angle extends Component {
                             <a
                                 className={`${Styles.btn_cnt} ${Styles.btn_del} ${Styles.imico_pop_key_del}`}
                                 onClick={() => {
-                                    onBackButtonPressed();
+                                    this.handleButtonClick('backButtonPressed');
                                 }}
                             >
                                 <span className={Styles.blind}>지우기</span>
@@ -220,4 +218,4 @@ class Angle extends Component {
     }
 }
 
-export default Angle;
+export default pure(Angle);

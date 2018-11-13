@@ -45,7 +45,7 @@ export default class EntryTool extends EventEmitter {
     }
 
     set data(data) {
-        this._data = data;
+        Object.assign(this._data, data);
         this.render();
     }
 
@@ -93,7 +93,7 @@ export default class EntryTool extends EventEmitter {
                 this.reducerType = 'widget';
                 return import('./components/widget/dropdownContainer');
             case 'angleWidget':
-                this.reducerType = 'index';
+                this.reducerType = 'widget';
                 return import('./components/widget/angleContainer');
             case 'popup':
             default:

@@ -65,7 +65,6 @@ class Number extends Component {
     handleButtonClick(type, value) {
         const { eventEmitter : emitter } = this.props;
 
-        console.log(this.props, type, value);
         if (emitter) {
             emitter.emit('click', type, value);
         }
