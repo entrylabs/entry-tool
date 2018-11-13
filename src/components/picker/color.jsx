@@ -38,18 +38,6 @@ function getColorByRGB({ hue, saturation, brightness }) {
     };
 }
 
-function getTransparentColor() {
-    return {
-        red: 0,
-        green: 0,
-        blue: 0,
-        hue: 0,
-        saturation: 0,
-        brightness: 0,
-        color: 'transparent',
-    };
-}
-
 function getColorByHex(value) {
     let hex = '';
     let isTransparent = false;
