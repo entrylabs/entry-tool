@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { pure } from 'recompose';
 import Styles from '@assets/scss/popup.scss';
 import { CommonUtils } from '@utils/Common';
-import { debounce } from 'lodash';
+import { debounce } from 'lodash-es';
 import Scrollbars from '@components/common/scrollbars';
 import OutsideClick from '@components/common/outsideClick';
 
@@ -53,13 +53,16 @@ class Dropdown extends Component {
     }
 
     getPositionOptions() {
+        const { items } = this.props;
+        let { length = 1 } = items;
+        length = Math.min(length, 5);
         return {
+            height: length * 52,
             widthMargin: this.DROPDOWN_WIDTH_MARGIN,
             maxArrowPosition: this.MAX_ARROW_POSITION,
             arrowWidth: this.ARROW_WIDTH,
             arrowHeight: this.ARROW_HEIGHT,
             width: this.DROPDOWN_WIDTH,
-            height: this.DROPDOWN_HEIGHT,
         };
     }
 
@@ -88,7 +91,7 @@ class Dropdown extends Component {
     }
 
     render() {
-        const { onOutsideClick } = this.props;
+        const { onOutsideClick, items } = this.props;
         const { isUpStyle, arrowLeft, componentPosition } = this.state;
         return (
             <OutsideClick
@@ -107,8 +110,14 @@ class Dropdown extends Component {
                     }`}
                 >
                     <div className={Styles.tooltip_inner}>
-                        <Scrollbars>{this.makeDropdownItem()}</Scrollbars>
+                        {items.length <= 5 && this.makeDropdownItem()}
+                        {items.length > 5 && (
+                            <Scrollbars heightRelativeToParent="260px" className={Styles.scrollbar}>
+                                {this.makeDropdownItem()}
+                            </Scrollbars>
+                        )}
                     </div>
+
                     <span style={{ left: `${arrowLeft}px` }} className={Styles.arr}>
                         <i />
                     </span>

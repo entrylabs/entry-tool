@@ -1169,6 +1169,9 @@
             border-color: #f00;
         }
     }
+    .pop_selectbox * {
+        box-sizing: content-box;
+    }
     .pop_selectbox .tooltip_box {
         display: none;
     }
@@ -1214,6 +1217,9 @@
     }
     .select_list {
         padding: 0 8px;
+    }
+    .select_list * {
+        box-sizing: content-box;
     }
     .select_list .list_item {
         border-top: 1px solid #f2f2f2;
@@ -1274,6 +1280,7 @@
         height: 54px;
         border-radius: 6px;
         border: 1px solid #e2e2e2;
+        cursor: pointer;
     }
     .color_box .color:before {
         @include PositionRB(absolute, 4px, 4px);
@@ -1572,7 +1579,6 @@
     position: fixed;
     transition: all ease 0.3s;
     .tooltip_inner {
-        height: 300px;
         .item {
             &:not(:first-child) {
                 border-top: $warmgray200 solid 1px;
@@ -1590,6 +1596,10 @@
             color: $textColor;
             cursor: pointer;
         }
+
+        > .item {
+            margin-right: 8px;
+        }
     }
 
     :global(.rcs-custom-scrollbar) {
@@ -1603,33 +1613,4 @@
         background-color: $coolgray400;
         border-radius: 2.5px;
     }
-}
-
-.track_vertical {
-    position: absolute;
-    width: 8px;
-    right: 4px;
-    bottom: 4px;
-    top: 4px;
-    border-radius: 2.5px;
-}
-
-.track_horizontal {
-    position: absolute;
-    height: 8px;
-    left: 4px;
-    right: 4px;
-    bottom: 4px;
-    border-radius: 2.5px;
-}
-
-.thumb_vertical {
-    cursor: pointer;
-    border-radius: inherit;
-    background-color: $coolgray400;
-}
-.thumb_horizontal {
-    cursor: pointer;
-    border-radius: inherit;
-    background-color: $coolgray400;
 }

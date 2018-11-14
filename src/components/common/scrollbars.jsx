@@ -4,7 +4,7 @@ import 'react-custom-scroll/dist/customScroll.css';
 class Scrollbars extends PureComponent {
     render() {
         return (
-            <CustomScroll {...this.props} allowOuterScroll={true} heightRelativeToParent="100%">
+            <CustomScroll allowOuterScroll={true} heightRelativeToParent="100%" {...this.props}>
                 {this.props.children}
             </CustomScroll>
         );

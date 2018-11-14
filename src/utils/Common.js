@@ -1,12 +1,12 @@
 export const CommonUtils = {
-    toggleClass: (isActive, className) => {
+    toggleClass: (isActive, className, falseClassName = '') => {
         if (isActive) {
             return className;
         }
-        return '';
+        return falseClassName;
     },
-    createImageUrl: (base, id) => {
-        return `${base}/uploads/${id.substring(0, 2)}/${id.substring(2, 4)}/thumb/${id}.png`;
+    createImageUrl: (id) => {
+        return `/uploads/${id.substring(0, 2)}/${id.substring(2, 4)}/thumb/${id}.png`;
     },
     remove: (array, callback) => {
         const arr = [...array];
@@ -57,13 +57,12 @@ export const CommonUtils = {
         } else if (positionDom) {
             rect = positionDom.getBoundingClientRect();
         }
-        console.log(boundaryHeight, rect, componentWidth);
         const { x: marginX = 0, y: marginY = 0 } = marginRect;
         let { top = 0, width = 0, height = 0, left = 0 } = rect;
         left -= componentWidth / 2 - width / 2 - marginX;
-        const isUpStyle = boundaryHeight - top - height / 2 < boundaryHeight / 2;
+        const isUpStyle = top + height * 3 + componentHeight + marginY > boundaryHeight;
         if (isUpStyle) {
-            top -= componentHeight + (arrowHeight + 2) - marginY;
+            top -= componentHeight + (arrowHeight + 2) + marginY;
         } else {
             top += arrowHeight + height + 2 + marginY;
         }
@@ -78,11 +77,11 @@ export const CommonUtils = {
         const { boundaryDom } = props;
         const { top, left, isUpStyle } = CommonUtils.getComponentPosition(props, options);
         const { widthMargin = 0, maxArrowPosition, arrowWidth = 0 } = options;
-        let boundrayRect = {};
+        let boundaryRect = {};
         if (boundaryDom) {
-            boundrayRect = boundaryDom.getBoundingClientRect();
+            boundaryRect = boundaryDom.getBoundingClientRect();
         } else {
-            boundrayRect = {
+            boundaryRect = {
                 top: 0,
                 left: 0,
                 right: window.innerWidth || 0,
@@ -98,17 +97,16 @@ export const CommonUtils = {
         let y = 0;
 
         // 상하좌우 범위 계산
-        if (left < boundrayRect.left) {
-            x = boundrayRect.left + widthMargin - left;
-        } else if (right > boundrayRect.right) {
-            x = boundrayRect.right - right - widthMargin;
+        if (left < boundaryRect.left) {
+            x = boundaryRect.left + widthMargin - left;
+        } else if (right > boundaryRect.right) {
+            x = boundaryRect.right - right - widthMargin;
         }
-        if (top < boundrayRect.top) {
-            y = top - boundrayRect.top + widthMargin;
-        } else if (bottom > boundrayRect.bottom) {
-            y = boundrayRect.bottom - bottom - widthMargin;
+        if (top < boundaryRect.top) {
+            y = top - boundaryRect.top + widthMargin;
+        } else if (bottom > boundaryRect.bottom) {
+            y = boundaryRect.bottom - bottom - widthMargin;
         }
-        console.log(x, y);
         const arrowLeft = Math.max(
             Math.min(maxArrowPosition / 2 - x, maxArrowPosition - arrowWidth),
             arrowWidth
@@ -125,3 +123,10 @@ export const CommonUtils = {
         };
     },
 };
+
+
+export function FormAsyncException(obj) {
+    Object.keys(obj).forEach((key) => {
+        this[key] = obj[key];
+    });
+}

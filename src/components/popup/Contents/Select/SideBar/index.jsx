@@ -7,6 +7,7 @@ import Selected from './Selected';
 import Styles from '../../../../../assets/scss/popup.scss';
 import Foot from './foot';
 import { triggerEvent } from '../../../../../actions';
+import { fetchItems } from '../../../../../actions/popup';
 
 class Index extends Component {
     constructor(props) {
@@ -17,12 +18,18 @@ class Index extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentWillMount() {
+        if (this.props.popupReducer.data.length === 0) {
+            this.props.fetchItems(this.props.type, Object.keys(this.props.sidebar || [])[0]);
+        }
+    }
+
     drawItems() {
         return this.props.data.map(item => <Item key={item._id} item={item}/>);
     }
 
     getMenus() {
-        if(!this.props.sidebar) {
+        if (!this.props.sidebar) {
             return null;
         }
         const subTitle = this.props.popupReducer.sidebar;
@@ -33,7 +40,7 @@ class Index extends Component {
     }
 
     handleSubmit(event, data) {
-        this.props.triggerEvent( event, data );
+        this.props.triggerEvent(event, data);
     }
 
     drawListBox() {
@@ -45,13 +52,13 @@ class Index extends Component {
                     </ul>
                 </div>
             </React.Fragment>
-        )
-        if(this.props.popupReducer.type == "sound") {
+        );
+        if (this.props.type === 'sound') {
             return (
                 <div className={Styles.sound_list_box}>
                     {listBox}
                 </div>
-            )
+            );
         }
 
         return listBox;
@@ -62,7 +69,7 @@ class Index extends Component {
             <React.Fragment>
                 <div className={Styles.pop_content}>
                     <h2 className={Styles.blind}>오브젝트 선택</h2>
-                    <SideBar sidebar={this.props.sidebar}/>
+                    <SideBar type={this.props.type} sidebar={this.props.sidebar}/>
                     <div className={Styles.section_cont}>
                         <SubMenu menus={this.getMenus()}/>
                         {this.drawListBox()}
@@ -81,6 +88,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     triggerEvent: (event, data) => dispatch(triggerEvent(event, data)),
+    fetchItems: (type, category, subMenu) => dispatch(fetchItems(type, category, subMenu)),
 });
 
 export default connect(

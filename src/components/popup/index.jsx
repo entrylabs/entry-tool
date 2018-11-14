@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchItems, initState } from '../../actions/popup';
+import { initState } from '../../actions/popup';
 import { visibleAction } from '../../actions/index';
 import Styles from '../../assets/scss/popup.scss';
 
@@ -9,6 +9,8 @@ import Select from './Contents/Select';
 import FileUpload from './Contents/FileUpload';
 import WriteBox from './Contents/WriteBox';
 import Draw from './Contents/Draw';
+import Join from './Contents/Join';
+import Login from './Contents/Login';
 import { DEFAULT_OPTIONS } from '../../constatns';
 
 class Sprite extends Component {
@@ -19,27 +21,27 @@ class Sprite extends Component {
             writeBoxOption: DEFAULT_OPTIONS.WRITE_BOX,
             ...this.props,
         };
-
-        if (this.props.write) {
-            this.options.navigations.write = { name: '글 상자' };
-        } else {
-            delete this.options.navigations.write;
-        }
+        this.options.navigations = this.initNavigations();
 
         this.state = {
-            navigation: Object.keys(this.options.navigations || [])[0],
+            navigation: Object.keys(this.options.navigations)[0],
         };
-
-        //this.props.visibleAction(false)
         this.onNavigationClicked = this.onNavigationClicked.bind(this);
     }
 
-    componentWillMount() {
-        const url = this.props.url || 'http://local.playentry.org';
-        if (!this.options.data) {
-            this.props.fetchItems(url, this.props.type, Object.keys(this.options.sidebar || [])[0]);
+    initNavigations() {
+        let navigation = this.options.navigations;
+        if(!navigation) {
+            return [];
         }
-        this.props.initState({ baseUrl: url });
+
+        if (this.props.write) {
+            navigation.write = { name: '글 상자' };
+        }else {
+            delete navigation.write;
+        }
+
+        return navigation;
     }
 
     componentDidMount() {
@@ -47,6 +49,9 @@ class Sprite extends Component {
         window.history.pushState({}, 'popup');
     }
 
+    componentWillMount() {
+        this.props.initState();
+    }
     componentWillUnmount() {
         window.removeEventListener('onpopstate', this.close, false);
     }
@@ -64,7 +69,7 @@ class Sprite extends Component {
     setContent = function() {
         const navSettings = {
             list: this.options.navigations,
-            selected: this.state.navigation,
+            selected: this.state.navigation || this.props.type,
             onClicked: this.onNavigationClicked,
             search: false,
         };
@@ -72,7 +77,7 @@ class Sprite extends Component {
         const defaultNavigation = <Navigation {...navSettings} />;
         const contents = {
             select: {
-                view: <Select type={'sidebar'} sidebar={this.options.sidebar} data={data} />,
+                view: <Select type={this.props.type} subType={'sidebar'} sidebar={this.options.sidebar} data={data} />,
                 nav: <Navigation {...navSettings} search={true} />,
             },
             upload: {
@@ -86,6 +91,14 @@ class Sprite extends Component {
             },
             expansion: {
                 view: <Select type={'bigicon'} data={data} />,
+                nav: true,
+            },
+            join: {
+                view: <Join />,
+                nav: true,
+            },
+            login: {
+                view: <Login />,
                 nav: true,
             },
         };
@@ -103,7 +116,7 @@ class Sprite extends Component {
             <div>
                 <div className={Styles.popup_wrap}>
                     <header className={Styles.pop_header}>
-                        <h1>오브젝트 추가하기</h1>
+                        <h1>{this.options.title}</h1>
                         <button onClick={this.close} className={Styles.btn_back + ' ' + Styles.imbtn_pop_back}>
                             <span className={Styles.blind}>뒤로가기</span>
                         </button>
@@ -121,8 +134,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     visibleAction: (visible) => dispatch(visibleAction(visible)),
-    fetchItems: (baseUrl, type, category, subMenu) =>
-        dispatch(fetchItems(baseUrl, type, category, subMenu)),
     initState: (data) => dispatch(initState(data)),
 });
 
