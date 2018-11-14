@@ -61,7 +61,7 @@ class Angle extends Component {
     handleAngleArrowMove(event) {
         event.preventDefault();
 
-        const { onAngleChanged = () => {} } = this.props;
+        const { onChangeAngle } = this.props;
 
         let classifiedEvent;
         if (window.TouchEvent && event instanceof window.TouchEvent) {
@@ -71,7 +71,7 @@ class Angle extends Component {
         }
 
         const { clientX, clientY } = classifiedEvent;
-        onAngleChanged(this.calculateArrowDegree(clientX, clientY));
+        onChangeAngle(this.calculateArrowDegree(clientX, clientY));
     };
 
     calculateArrowDegree(mousePosX, mousePosY) {
@@ -167,7 +167,7 @@ class Angle extends Component {
         return (
             <OutsideClick
                 onOutsideClick={() => {
-                    onOutsideClick();
+                    onOutsideClick(angle);
                 }}
                 eventTypes={['mouseup', 'touchend', 'wheel']}
             >

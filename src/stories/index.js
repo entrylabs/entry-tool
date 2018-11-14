@@ -50,5 +50,5 @@ storiesOf('Widget', module)
         onButtonPressed={action('onButtonPressed')}
         onBackButtonPressed={action('onBackButtonPressed')}
         onOutsideClick={action('onOutsideClick')}
-        onAngleChanged={action('onAngleChanged')}
+        onChangeAngle={action('onChangeAngle')}
     />);

@@ -13,7 +13,7 @@ class AngleContainer extends Component {
 
 
 const mapDispatchToProps = (dispatch) => ({
-    onAngleChanged: (value) => dispatch(onChangeAngle(value)),
+    onChangeAngle: (value) => dispatch(onChangeAngle(value)),
 });
 
 export default connect(
