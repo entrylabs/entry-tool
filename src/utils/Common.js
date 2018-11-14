@@ -1,3 +1,5 @@
+import root from 'window-or-global';
+
 export const CommonUtils = {
     toggleClass: (isActive, className, falseClassName = '') => {
         if (isActive) {
@@ -48,7 +50,7 @@ export const CommonUtils = {
             const { top = 0 } = boundaryDom.getBoundingClientRect();
             boundaryHeight = boundaryDom.clientHeight + top;
         } else {
-            boundaryHeight = window.innerHeight || 0;
+            boundaryHeight = root.innerHeight || 0;
         }
 
         let rect = {};
@@ -84,8 +86,8 @@ export const CommonUtils = {
             boundaryRect = {
                 top: 0,
                 left: 0,
-                right: window.innerWidth || 0,
-                bottom: window.innerHeight || 0,
+                right: root.innerWidth || 0,
+                bottom: root.innerHeight || 0,
             };
         }
 

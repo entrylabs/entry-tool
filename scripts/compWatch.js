@@ -38,7 +38,6 @@ webpack(config).watch({}, (err, stats) => {
     if (err) {
         console.error(err);
     } else {
-        copyPublicFolder();
     }
     console.error(
         stats.toString({
@@ -47,10 +46,3 @@ webpack(config).watch({}, (err, stats) => {
         })
     );
 });
-
-function copyPublicFolder() {
-    fs.copySync(paths.appPublic, paths.componentBuild, {
-        dereference: true,
-        filter: (file) => file !== paths.appHtml,
-    });
-}
