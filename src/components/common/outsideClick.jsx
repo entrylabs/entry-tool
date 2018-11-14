@@ -16,8 +16,17 @@ class OutsideClick extends Component {
     };
     handleClickOutside = (event) => {
         const domNode = this.outsideWrapper;
+        const { outsideExcludeDom } = this.props;
+        let isExcludeCheck = false;
+        if (outsideExcludeDom) {
+            outsideExcludeDom.forEach((dom) => {
+                if (dom && dom.contains(event.target)) {
+                    isExcludeCheck = true;
+                }
+            });
+        }
 
-        if (!domNode || !domNode.contains(event.target)) {
+        if ((!domNode || !domNode.contains(event.target)) && !isExcludeCheck) {
             const { onOutsideClick } = this.props;
             if (onOutsideClick) {
                 onOutsideClick();

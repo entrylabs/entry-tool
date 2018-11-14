@@ -23,9 +23,6 @@ class Dropdown extends Component {
     get DROPDOWN_HEIGHT() {
         return 260;
     }
-    get MAX_ARROW_POSITION() {
-        return 184;
-    }
     constructor(props) {
         super(props);
         this.state = CommonUtils.getDefaultComponentPosition(props, this.getPositionOptions());
@@ -54,22 +51,30 @@ class Dropdown extends Component {
     }
 
     getPositionOptions() {
-        const { items } = this.props;
+        const { items, autoWidth, animation = true } = this.props;
         let { length = 1 } = items;
         length = Math.min(length, 5);
+        let width = this.DROPDOWN_WIDTH;
+        if (autoWidth && this.dropdown) {
+            const rect = this.dropdown.getBoundingClientRect();
+            width = rect.width;
+        }
         return {
+            animation,
+            width: width,
             height: length * 52,
             widthMargin: this.DROPDOWN_WIDTH_MARGIN,
-            maxArrowPosition: this.MAX_ARROW_POSITION,
+            maxArrowPosition: width,
             arrowWidht: this.ARROW_WIDTH,
             arrowHeight: this.ARROW_HEIGHT,
-            width: this.DROPDOWN_WIDTH,
         };
     }
 
     handleItemClick = (item) => {
         const { onSelectDropdown } = this.props;
-        onSelectDropdown(item);
+        if (onSelectDropdown) {
+            onSelectDropdown(item);
+        }
     };
     makeDropdownItem() {
         const { items } = this.props;
@@ -92,21 +97,34 @@ class Dropdown extends Component {
     }
 
     render() {
-        const { onOutsideClick, items, autoWidth } = this.props;
+        const {
+            onOutsideClick,
+            items,
+            eventTypes = ['mouseup', 'touchend', 'wheel'],
+            outsideExcludeDom,
+            autoWidth,
+            animation = true,
+        } = this.props;
         const { isUpStyle, arrowLeft, componentPosition } = this.state;
-        console.log(autoWidth, componentPosition);
+        let animationStyle = {};
+        if (!animation) {
+            animationStyle = {
+                transition: 'none',
+            };
+        }
         return (
             <OutsideClick
+                outsideExcludeDom={outsideExcludeDom}
                 onOutsideClick={() => {
                     if (onOutsideClick) {
                         onOutsideClick();
                     }
                 }}
-                eventTypes={['mouseup', 'touchend', 'wheel']}
+                eventTypes={eventTypes}
             >
                 <div
                     ref={(dom) => (this.dropdown = dom)}
-                    style={componentPosition}
+                    style={{ ...componentPosition, ...animationStyle }}
                     className={`${Styles.tooltip_box} ${Styles.dropdown} ${
                         isUpStyle ? Styles.up : ''
                     } ${autoWidth ? Styles.auto_width : ''}`}

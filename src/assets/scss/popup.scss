@@ -1193,6 +1193,14 @@
     z-index: 251;
     position: fixed;
     transition: all ease 0.3s;
+    &.auto_width {
+        width: auto;
+        .tooltip_inner {
+            .item {
+                padding-right: 8px;
+            }
+        }
+    }
     .tooltip_inner {
         .item {
             &:not(:first-child) {
