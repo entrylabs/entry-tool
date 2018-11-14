@@ -7,7 +7,7 @@ import configureStore from './store';
 import { visibleAction } from './actions/index';
 import httpService from './config/axios';
 
-var instance = null;
+let instance = null;
 export default class EntryTool extends EventEmitter {
     constructor(...args) {
         super();
