@@ -442,7 +442,7 @@ class ColorPicker extends Component {
     }
 
     getTranslate3d(el) {
-        var values = el.style.transform.split(/\w+\(|\);?/);
+        const values = el.style.transform.split(/\w+\(|\);?/);
         if (!values[1] || !values[1].length) {
             return [0, 0, 0];
         }
