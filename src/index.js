@@ -48,7 +48,7 @@ export default class EntryTool extends EventEmitter {
     }
 
     set data(data) {
-        this._data = data;
+        Object.assign(this._data, data);
         this.render();
     }
 
@@ -89,9 +89,15 @@ export default class EntryTool extends EventEmitter {
             case 'colorPicker':
                 this.reducerType = 'picker';
                 return import('./components/picker/colorContainer');
+            case 'numberWidget':
+                this.reducerType = 'common';
+                return import('./components/widget/numberContainer');
             case 'dropdownWidget':
                 this.reducerType = 'widget';
                 return import('./components/widget/dropdownContainer');
+            case 'angleWidget':
+                this.reducerType = 'widget';
+                return import('./components/widget/angleContainer');
             case 'popup':
             default:
                 this._target.appendChild(this._container);

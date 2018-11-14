@@ -24,10 +24,10 @@ export const CommonUtils = {
 
     getDefaultComponentPosition(props, options) {
         const { left, top, isUpStyle } = CommonUtils.getComponentPosition(props, options);
-        const { maxArrowPosition, arrowWidht = 0 } = options;
+        const { maxArrowPosition, arrowWidth = 0 } = options;
         const arrowLeft = Math.max(
-            Math.min(maxArrowPosition / 2, maxArrowPosition - arrowWidht),
-            arrowWidht
+            Math.min(maxArrowPosition / 2, maxArrowPosition - arrowWidth),
+            arrowWidth
         );
 
         return {
@@ -43,12 +43,12 @@ export const CommonUtils = {
 
     // 정해진 Dom위치에 Picker 배치
     getComponentPosition: (props, options) => {
-        const { positionDom, marginRect = {}, positionRect, boundrayDom } = props;
+        const { positionDom, marginRect = {}, positionRect, boundaryDom } = props;
         const { width: componentWidth, height: componentHeight, arrowHeight } = options;
         let boundaryHeight = 0;
-        if (boundrayDom) {
-            const { top = 0 } = boundrayDom.getBoundingClientRect();
-            boundaryHeight = boundrayDom.clientHeight + top;
+        if (boundaryDom) {
+            const { top = 0 } = boundaryDom.getBoundingClientRect();
+            boundaryHeight = boundaryDom.clientHeight + top;
         } else {
             boundaryHeight = root.innerHeight || 0;
         }
@@ -76,14 +76,14 @@ export const CommonUtils = {
     },
 
     getAlignPosition: (props, component, options) => {
-        const { boundrayDom } = props;
+        const { boundaryDom } = props;
         const { top, left, isUpStyle } = CommonUtils.getComponentPosition(props, options);
-        const { widthMargin = 0, maxArrowPosition, arrowWidht = 0 } = options;
-        let boundrayRect = {};
-        if (boundrayDom) {
-            boundrayRect = boundrayDom.getBoundingClientRect();
+        const { widthMargin = 0, maxArrowPosition, arrowWidth = 0 } = options;
+        let boundaryRect = {};
+        if (boundaryDom) {
+            boundaryRect = boundaryDom.getBoundingClientRect();
         } else {
-            boundrayRect = {
+            boundaryRect = {
                 top: 0,
                 left: 0,
                 right: root.innerWidth || 0,
@@ -99,19 +99,19 @@ export const CommonUtils = {
         let y = 0;
 
         // 상하좌우 범위 계산
-        if (left < boundrayRect.left) {
-            x = boundrayRect.left + widthMargin - left;
-        } else if (right > boundrayRect.right) {
-            x = boundrayRect.right - right - widthMargin;
+        if (left < boundaryRect.left) {
+            x = boundaryRect.left + widthMargin - left;
+        } else if (right > boundaryRect.right) {
+            x = boundaryRect.right - right - widthMargin;
         }
-        if (top < boundrayRect.top) {
-            y = top - boundrayRect.top + widthMargin;
-        } else if (bottom > boundrayRect.bottom) {
-            y = boundrayRect.bottom - bottom - widthMargin;
+        if (top < boundaryRect.top) {
+            y = top - boundaryRect.top + widthMargin;
+        } else if (bottom > boundaryRect.bottom) {
+            y = boundaryRect.bottom - bottom - widthMargin;
         }
         const arrowLeft = Math.max(
-            Math.min(maxArrowPosition / 2 - x, maxArrowPosition - arrowWidht),
-            arrowWidht
+            Math.min(maxArrowPosition / 2 - x, maxArrowPosition - arrowWidth),
+            arrowWidth
         );
 
         return {
@@ -125,6 +125,7 @@ export const CommonUtils = {
         };
     },
 };
+
 
 export function FormAsyncException(obj) {
     Object.keys(obj).forEach((key) => {

@@ -352,12 +352,12 @@ class ColorPicker extends Component {
 
     // 정해진 Dom위치에 Picker 배치
     getColorPickerPosition() {
-        const { positionDom, marginRect = {}, positionRect, boundrayDom } = this.props;
+        const { positionDom, marginRect = {}, positionRect, boundaryDom } = this.props;
 
         let boundaryHeight = 0;
-        if (boundrayDom) {
-            const { top = 0 } = boundrayDom.getBoundingClientRect();
-            boundaryHeight = boundrayDom.clientHeight + top;
+        if (boundaryDom) {
+            const { top = 0 } = boundaryDom.getBoundingClientRect();
+            boundaryHeight = boundaryDom.clientHeight + top;
         } else {
             boundaryHeight = root.innerHeight || 0;
         }
@@ -386,12 +386,12 @@ class ColorPicker extends Component {
     }
 
     getAlignPosition() {
-        const { boundrayDom } = this.props;
+        const { boundaryDom } = this.props;
         const { top, left, isUpStyle } = this.getColorPickerPosition();
 
         let boundrayRect = {};
-        if (boundrayDom) {
-            boundrayRect = boundrayDom.getBoundingClientRect();
+        if (boundaryDom) {
+            boundrayRect = boundaryDom.getBoundingClientRect();
         } else {
             boundrayRect = {
                 top: 0,
@@ -570,7 +570,7 @@ class ColorPicker extends Component {
                     onClick={onClick}
                     className={`${Styles.tooltip_box} ${Styles.color_picker} ${
                         isUpStyle ? Styles.up : ''
-                    } 
+                    }
                         ${className}`}
                 >
                     <div className={`${Styles.tooltip_inner}`}>

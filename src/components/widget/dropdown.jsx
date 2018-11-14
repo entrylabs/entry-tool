@@ -61,7 +61,7 @@ class Dropdown extends Component {
         }
         return {
             animation,
-            width: width,
+            width,
             height: length * 52,
             widthMargin: this.DROPDOWN_WIDTH_MARGIN,
             maxArrowPosition: width,

@@ -28,14 +28,16 @@
         background-color: #fff;
         border: 1px solid #e2e2e2;
         box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
-        transform:translate(-50%, 50%) rotate(45deg);
+        transform: translate(-50%, 50%) rotate(45deg);
     }
     .arr.free {
         margin-left: 0;
     }
     .select_list {
         padding: 0 8px;
-
+    }
+    .select_list * {
+        box-sizing: content-box;
     }
     .select_list .list_item {
         border-top: 1px solid #f2f2f2;
@@ -47,25 +49,40 @@
         display: block;
         overflow: hidden;
         height: 15px;
-        padding: 17px 4px 14px;
+        padding: 17px 0 14px 7px;
         font-weight: 600;
         color: #2c313d;
         letter-spacing: 0;
         line-height: 15px;
+    }
+    &.up .arr {
+        bottom: auto;
+        top: 100%;
+    }
+    &.up .arr i {
+        top: 0px;
+        transform: translate(-50%, -50%) rotate(45deg);
     }
     &.down .arr {
         bottom: auto;
         top: 100%;
     }
     &.down .arr i {
-        transform:translate(-50%, -50%) rotate(45deg);
+        transform: translate(-50%, -50%) rotate(45deg);
     }
 }
 //컬러 피커
 .tooltip_box.color_picker {
+    * {
+        box-sizing: content-box;
+    }
     user-select: none;
+    z-index: 251;
     font-size: 14px;
-    width: 396px;
+    width: 398px;
+    position: fixed;
+    transition: all ease 0.3s;
+
     .tooltip_inner {
         padding: 16px;
     }
@@ -81,6 +98,7 @@
         height: 54px;
         border-radius: 6px;
         border: 1px solid #e2e2e2;
+        cursor: pointer;
     }
     .color_box .color:before {
         @include PositionRB(absolute, 4px, 4px);
@@ -109,10 +127,10 @@
         padding-right: 8px;
         vertical-align: middle;
     }
-    .color_box .color_list .item input[type="text"],
-    .color_graph .graph_list .item input[type="text"],
-    .color_box .color_list .item input[type="number"],
-    .color_graph .graph_list .item input[type="number"] {
+    .color_box .color_list .item input[type='text'],
+    .color_graph .graph_list .item input[type='text'],
+    .color_box .color_list .item input[type='number'],
+    .color_graph .graph_list .item input[type='number'] {
         width: 48px;
         height: 28px;
         border: 1px solid #e2e2e2;
@@ -124,29 +142,29 @@
         text-align: center;
         vertical-align: middle;
     }
-    .color_box .color_list .item input[type="text"]:focus,
-    .color_graph .graph_list .item input[type="text"]:focus,
-    .color_box .color_list .item input[type="number"]:focus,
-    .color_graph .graph_list .item input[type="number"]:focus {
+    .color_box .color_list .item input[type='text']:focus,
+    .color_graph .graph_list .item input[type='text']:focus,
+    .color_box .color_list .item input[type='number']:focus,
+    .color_graph .graph_list .item input[type='number']:focus {
         border: 2px solid #4f80ff;
     }
     .color_box .color_list .item.disabled label,
     .color_graph .graph_list .item.disabled label {
         color: #979797;
     }
-    .color_box .color_list .item.disabled input[type="text"],
-    .color_graph .graph_list .item.disabled input[type="text"],
-    .color_box .color_list .item.disabled input[type="number"],
-    .color_graph .graph_list .item.disabled input[type="number"], 
-    .color_box .color_list .item.disabled input[type="text"]:focus,
-    .color_graph .graph_list .item.disabled input[type="text"]:focus,
-    .color_box .color_list .item.disabled input[type="number"]:focus,
-    .color_graph .graph_list .item.disabled input[type="number"]:focus {
+    .color_box .color_list .item.disabled input[type='text'],
+    .color_graph .graph_list .item.disabled input[type='text'],
+    .color_box .color_list .item.disabled input[type='number'],
+    .color_graph .graph_list .item.disabled input[type='number'],
+    .color_box .color_list .item.disabled input[type='text']:focus,
+    .color_graph .graph_list .item.disabled input[type='text']:focus,
+    .color_box .color_list .item.disabled input[type='number']:focus,
+    .color_graph .graph_list .item.disabled input[type='number']:focus {
         border: 1px solid #e2e2e2;
         color: #979797;
     }
     .color_box .btn_picker {
-        @include PositionLT (absolute, 65px, 20px);
+        @include PositionLT(absolute, 65px, 20px);
         overflow: hidden;
         font-size: 1px;
         color: transparent;
@@ -168,6 +186,7 @@
         margin-top: 0;
     }
     .color_graph .graph_list .graph_box {
+        touch-action: none;
         position: relative;
         margin-top: 10px;
         height: 26px;
@@ -198,6 +217,8 @@
 .tooltip_box.clock_box {
     width: 406px;
     border-color: #bfd8e6;
+    transition: all ease 0.3s;
+    z-index: 9999;
     .tooltip_inner {
         overflow: hidden;
         position: relative;
@@ -209,13 +230,36 @@
         border-color: #bfd8e6;
     }
     .clock_board {
-        @include PositionLTB(absolute,14px, 16px, 10px);
+        @include PositionLTB(absolute, 14px, 16px, 10px);
         width: 160px;
         .clock {
-            @include PositionLT(absolute,50%, 50%,);
+            @include PositionLT(absolute, 50%, 50%);
             margin: -80px 0 0 -80px;
             width: 160px;
             height: 160px;
+            background: url(../images/bg_angle_dots.png) no-repeat;
+
+            .pie {
+                width: 152px;
+                height: 152px;
+                position: absolute;
+                opacity: 0.8;
+                border-radius: 50%;
+                left: 4px;
+                top: 3px;
+                background-color: #ffb500;
+            }
+
+            .arrow {
+                background: url(../images/img_angle_arrow.png) no-repeat bottom right;
+                left: 70px;
+                bottom: 17px;
+                position: relative;
+                width: 20px;
+                height: 98px;
+                object-fit: contain;
+                transform-origin: 50% 97%;
+            }
         }
     }
     .time_board {
@@ -224,6 +268,8 @@
         font-size: 0;
     }
     .time_board .btn_cnt {
+        user-select: none;
+        cursor: pointer;
         display: inline-block;
         width: 56px;
         margin-right: 8px;
@@ -241,7 +287,7 @@
     .time_board .btn_cnt:nth-child(3n) {
         margin-right: 0;
     }
-    .time_board .btn_cnt:nth-child(n+4) {
+    .time_board .btn_cnt:nth-child(n + 4) {
         margin-top: 8px;
     }
     .time_board .btn_del {
@@ -276,7 +322,7 @@
         position: relative;
         height: 150px;
         .clock {
-            @include PositionLT(absolute,50%, 50%,);
+            @include PositionLT(absolute, 50%, 50%);
             margin: -75px 0 0 -75px;
             width: 150px;
             height: 150px;
@@ -287,6 +333,8 @@
 .tooltip_box.pad_only {
     width: 216px;
     border-color: #bfd8e6;
+    transition: all ease 0.3s;
+    z-index: 9999;
     .tooltip_inner {
         overflow: hidden;
         padding: 16px;
@@ -301,6 +349,8 @@
         font-size: 0;
     }
     .time_board .btn_cnt {
+        user-select: none;
+        cursor: pointer;
         display: inline-block;
         width: 56px;
         margin-right: 8px;
@@ -318,7 +368,7 @@
     .time_board .btn_cnt:nth-child(3n) {
         margin-right: 0;
     }
-    .time_board .btn_cnt:nth-child(n+4) {
+    .time_board .btn_cnt:nth-child(n + 4) {
         margin-top: 8px;
     }
     .time_board .btn_cnt.btn_del {
