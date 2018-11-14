@@ -5,6 +5,7 @@ import { CommonUtils } from '@utils/Common';
 import { debounce } from 'lodash-es';
 import Scrollbars from '@components/common/scrollbars';
 import OutsideClick from '@components/common/outsideClick';
+import root from 'window-or-global';
 
 class Dropdown extends Component {
     get DROPDOWN_WIDTH_MARGIN() {
@@ -35,12 +36,12 @@ class Dropdown extends Component {
     }, 300);
 
     componentDidMount() {
-        window.addEventListener('resize', this.handleWindowResize);
+        root.addEventListener('resize', this.handleWindowResize);
         this.alignPosition();
     }
 
     componentWillUnmount() {
-        window.removeEventListener('resize', this.handleWindowResize);
+        root.removeEventListener('resize', this.handleWindowResize);
     }
 
     alignPosition(updateState) {
@@ -91,8 +92,9 @@ class Dropdown extends Component {
     }
 
     render() {
-        const { onOutsideClick, items } = this.props;
+        const { onOutsideClick, items, autoWidth } = this.props;
         const { isUpStyle, arrowLeft, componentPosition } = this.state;
+        console.log(autoWidth, componentPosition);
         return (
             <OutsideClick
                 onOutsideClick={() => {
@@ -107,7 +109,7 @@ class Dropdown extends Component {
                     style={componentPosition}
                     className={`${Styles.tooltip_box} ${Styles.dropdown} ${
                         isUpStyle ? Styles.up : ''
-                    }`}
+                    } ${autoWidth ? Styles.auto_width : ''}`}
                 >
                     <div className={Styles.tooltip_inner}>
                         {items.length <= 5 && this.makeDropdownItem()}

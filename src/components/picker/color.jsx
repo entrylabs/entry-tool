@@ -6,6 +6,7 @@ import { debounce } from 'lodash-es';
 import { pure } from 'recompose';
 import { isEqual } from 'lodash-es';
 import OutsideClick from '../common/outsideClick';
+import root from 'window-or-global';
 
 function getColorByHsv({ red, green, blue }) {
     const color = chroma(red, green, blue);
@@ -75,7 +76,7 @@ function getRangeValue(value, min, max) {
 
 function getClassifyEvent(e) {
     let event = null;
-    if (window.TouchEvent && e instanceof window.TouchEvent) {
+    if (root.TouchEvent && e instanceof root.TouchEvent) {
         event = e.changedTouches[0];
     } else {
         event = e;
@@ -318,7 +319,7 @@ class ColorPicker extends Component {
         document.addEventListener('mouseup', this.handleSliderUp);
         document.addEventListener('touchmove', this.handleSliderMove, { passive: false });
         document.addEventListener('touchend', this.handleSliderUp);
-        window.addEventListener('resize', this.handleWindowResize);
+        root.addEventListener('resize', this.handleWindowResize);
         this.alignPosition();
     }
 
@@ -327,7 +328,7 @@ class ColorPicker extends Component {
         document.removeEventListener('mouseup', this.handleSliderUp);
         document.removeEventListener('touchmove', this.handleSliderMove);
         document.removeEventListener('touchend', this.handleSliderUp);
-        window.removeEventListener('resize', this.handleWindowResize);
+        root.removeEventListener('resize', this.handleWindowResize);
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -358,7 +359,7 @@ class ColorPicker extends Component {
             const { top = 0 } = boundrayDom.getBoundingClientRect();
             boundaryHeight = boundrayDom.clientHeight + top;
         } else {
-            boundaryHeight = window.innerHeight || 0;
+            boundaryHeight = root.innerHeight || 0;
         }
 
         let rect = {};
@@ -395,8 +396,8 @@ class ColorPicker extends Component {
             boundrayRect = {
                 top: 0,
                 left: 0,
-                right: window.innerWidth || 0,
-                bottom: window.innerHeight || 0,
+                right: root.innerWidth || 0,
+                bottom: root.innerHeight || 0,
             };
         }
 
