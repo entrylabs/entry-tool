@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { CommonUtils } from '../../utils/Common';
-import Styles from '../../assets/scss/popup.scss';
-import { searchItem } from '../../actions/popup';
+import { CommonUtils } from '@utils/Common';
+import Styles from '@assets/scss/popup.scss';
+import { searchItem } from '@actions/popup';
 
 //TODO. reselct 적용
 class Navigation extends Component {

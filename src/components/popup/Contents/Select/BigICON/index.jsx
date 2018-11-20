@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Item from './Item';
 import { connect } from 'react-redux';
-import Styles from '../../../../../assets/scss/popup.scss';
-import { triggerEvent } from '../../../../../actions/index';
+import Styles from '@assets/scss/popup.scss';
+import { triggerEvent } from '@actions/index';
 import Foot from './foot';
 
 class Index extends Component {

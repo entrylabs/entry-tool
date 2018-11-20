@@ -128,7 +128,7 @@ export const CommonUtils = {
 
 
 export function FormAsyncException(obj) {
-    Object.keys(obj).forEach((key) => {
+    Object.keys(obj).forEach(key => {
         this[key] = obj[key];
     });
 }

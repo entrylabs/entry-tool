@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import Styles from '../../../../assets/scss/popup.scss';
-import { JoinAction, JoinPageMoveAction, SubmitAction } from '../../../../actions/join';
-import { CommonUtils, FormAsyncException } from '../../../../utils/Common';
+import Styles from '@assets/scss/popup.scss';
+import { JoinAction, JoinPageMoveAction, SubmitAction } from '@actions/join';
+import { CommonUtils, FormAsyncException } from '@utils/Common';
+import Dropdown from '@components/widget/dropdown';
 import axios from 'axios';
 
 const FIELDS = {
@@ -84,6 +85,8 @@ class InfoForm extends Component {
     onSubmit(values) {
         this.props.setForm(values);
         const data = { ...this.props.joinReducer, ...values };
+        data.sex = values.sex[1];
+        data.grade = values.grade[1];
         this.props.SubmitAction(data);
     }
 
@@ -97,23 +100,24 @@ class InfoForm extends Component {
         }
     }
 
+    createDrowDown(e, name, items) {
+        e.preventDefault();
+        const dropDown = <Dropdown items={items}
+                                   positionDom={e.target}
+                                   onSelectDropdown={(value)=>{
+                                       this.props.change(name, value);
+                                       this.setState({ dropDown: null });
+                                   }}
+                                   onOutsideClick={e=>{this.setState({dropDown:null})}}/>;
+        this.setState({ dropDown });
+    }
+
     renderSelect(fieldConfig) {
         const { meta, input, id, optionState } = fieldConfig;
         const name = input.name;
         const field = FIELDS[name];
-        let placeholder = field.placeholder;
-        const setValue = (e, option) => {
-            e.preventDefault();
-            this.props.change(name, option.value);
-            this.setState({ [name]: false });
-        };
-
-        if (input.value) {
-            placeholder = field.options.find(option => option.value === input.value).name;
-        }
-
         const isErr = meta.touched && meta.error;
-        //TODO. 공통 셀렉트박스로 변경
+        const items = field.options.map(option => [option.name, option.value]);
         return (
             <div className={`${Styles.pop_selectbox} ${CommonUtils.toggleClass(optionState[name], Styles.on)} ${CommonUtils.toggleClass(isErr, Styles.error)}`}>
                 <em className={Styles.inpt_label}>
@@ -122,20 +126,12 @@ class InfoForm extends Component {
                 </em>
                 {/* [D] on 클래스가 들어오면  imico_pop_select_arr_up 으로 바꿔주세요 */}
                 <a href="#NULL" onClick={e => this.handleClick(e, () => this.setState({ [name]: !optionState[name] }))}
-                   className={`${Styles.select_link} ${CommonUtils.toggleClass(optionState.select_sex, Styles.imico_pop_select_arr_up, Styles.imico_pop_select_arr_down)}`}>
-                    {placeholder}
+                   className={`${Styles.select_link} ${CommonUtils.toggleClass(optionState.select_sex, Styles.imico_pop_select_arr_up, Styles.imico_pop_select_arr_down)}`}
+                   onClick={(e) => this.createDrowDown(e, name, items)}
+                >
+                    {input.value[0] || field.placeholder}
                 </a>
                 {isErr ? <p className={Styles.error_dsc}>{meta.error}</p> : ''}
-                {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
-                <div className={Styles.tooltip_box}>
-                    <div className={Styles.tooltip_inner}>
-                        <ul className={Styles.select_list}>
-                            {field.options.map(option => <li key={option.value} className={Styles.list_item} onClick={e => setValue(e, option)}><a href="#NULL" className={Styles.list_link}>{option.name}</a>
-                            </li>)}
-                        </ul>
-                    </div>
-                    <span className={Styles.arr}><i></i></span>
-                </div>
                 <input {...input} type="hidden" id={id}/>
             </div>
         );
@@ -180,6 +176,7 @@ class InfoForm extends Component {
                         <h3 className={Styles.cont_tit}>개인정보 입력</h3>
                         <div className={Styles.input_box}>
                             {Object.keys(FIELDS).map(name => <Field id={name} name={name} key={name} optionState={this.state} component={this.renderField}/>)}
+                            {this.state.dropDown}
                         </div>
                         <div className={Styles.pop_btn_box}>
                             <a href="#NULL" onClick={e => this.handleClick(e, () => this.props.moveTo(1))}>이전</a>

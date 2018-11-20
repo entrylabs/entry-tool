@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { applySelected } from '../../../../../actions/popup';
-import { CommonUtils } from '../../../../../utils/Common';
-import Styles from '../../../../../assets/scss/popup.scss';
-import { triggerEvent, visibleAction } from '../../../../../actions';
+import { applySelected } from '@actions/popup';
+import { CommonUtils } from '@utils/Common';
+import Styles from '@assets/scss/popup.scss';
+import { triggerEvent, visibleAction } from '@actions';
 
 class Item extends Component {
     constructor(props) {

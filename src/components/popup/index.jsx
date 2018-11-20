@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { initState } from '../../actions/popup';
-import { visibleAction } from '../../actions/index';
-import Styles from '../../assets/scss/popup.scss';
+import { initState } from '@actions/popup';
+import { visibleAction } from '@actions/index';
+import Styles from '@assets/scss/popup.scss';
 
 import Navigation from './Navigation';
 import Select from './Contents/Select';
