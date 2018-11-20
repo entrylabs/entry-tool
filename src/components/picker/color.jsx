@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import chroma from 'chroma-js';
 import { Object } from 'core-js';
 import Styles from '../../assets/scss/popup.scss';
-import { debounce } from 'lodash-es';
+import debounce from 'lodash/debounce';
 import { pure } from 'recompose';
-import { isEqual } from 'lodash-es';
+import isEqual from 'lodash/isEqual';
 import OutsideClick from '../common/outsideClick';
 import root from 'window-or-global';
 
