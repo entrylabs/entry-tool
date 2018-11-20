@@ -13,11 +13,11 @@ class Index extends Component {
     }
 
     drawItems() {
-        return this.props.data.map(item => <Item key={item.name} item={item}/>);
+        return this.props.data.map((item) => <Item key={item.name} item={item} />);
     }
 
     handleSubmit(event, data) {
-        this.props.triggerEvent( event, data );
+        this.props.triggerEvent(event, data);
     }
 
     render() {
@@ -28,9 +28,7 @@ class Index extends Component {
                         <h2 className={Styles.blind}>확장 블록 불러오기 리스트</h2>
                         <div className={Styles.cont_box}>
                             <div className={Styles.extend_block}>
-                                <ul className={Styles.list}>
-                                    {this.drawItems()}
-                                </ul>
+                                <ul className={Styles.list}>{this.drawItems()}</ul>
                             </div>
                         </div>
                     </div>
@@ -51,5 +49,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(Index);

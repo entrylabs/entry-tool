@@ -19,7 +19,7 @@ export const CommonUtils = {
         return arr;
     },
     generateHash: () => {
-        return ('0000' + ((Math.random() * Math.pow(36, 4)) << 0).toString(36)).substr(-4);
+        return `0000${((Math.random() * Math.pow(36, 4)) << 0).toString(36)}`.substr(-4);
     },
 
     getDefaultComponentPosition(props, options) {
@@ -60,7 +60,8 @@ export const CommonUtils = {
             rect = positionDom.getBoundingClientRect();
         }
         const { x: marginX = 0, y: marginY = 0 } = marginRect;
-        let { top = 0, width = 0, height = 0, left = 0 } = rect;
+        let { top = 0, left = 0 } = rect;
+        const { width = 0, height = 0 } = rect;
         left -= componentWidth / 2 - width / 2 - marginX;
         const isUpStyle = top + height * 3 + componentHeight + marginY > boundaryHeight;
         if (isUpStyle) {
@@ -92,9 +93,9 @@ export const CommonUtils = {
         }
 
         const colorPickerRect = component.getBoundingClientRect();
-        let { width, height } = colorPickerRect;
-        let bottom = top + height;
-        let right = left + width;
+        const { width, height } = colorPickerRect;
+        const bottom = top + height;
+        const right = left + width;
         let x = 0;
         let y = 0;
 
@@ -116,19 +117,18 @@ export const CommonUtils = {
 
         return {
             arrowLeft,
-            isUpStyle: isUpStyle,
+            isUpStyle,
             componentPosition: {
-                left: left,
-                top: top,
+                left,
+                top,
                 transform: `translate3d(${x}px, ${y}px, 0)`,
             },
         };
     },
 };
 
-
 export function FormAsyncException(obj) {
-    Object.keys(obj).forEach(key => {
+    Object.keys(obj).forEach((key) => {
         this[key] = obj[key];
     });
 }

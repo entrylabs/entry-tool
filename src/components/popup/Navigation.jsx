@@ -25,9 +25,15 @@ class Navigation extends Component {
         }
         return Object.keys(list).map((item, index) => {
             return (
-                <li key={item}
-                    className={CommonUtils.toggleClass(navigation === item || (!navigation && index === 0), Styles.on)}
-                    onClick={this.props.onClicked} data-key={item}>
+                <li
+                    key={item}
+                    className={CommonUtils.toggleClass(
+                        navigation === item || (!navigation && index === 0),
+                        Styles.on
+                    )}
+                    onClick={this.props.onClicked}
+                    data-key={item}
+                >
                     <a href="#NULL">{list[item].name}</a>
                 </li>
             );
@@ -40,11 +46,19 @@ class Navigation extends Component {
                 <div className={Styles.srch_box}>
                     <form onSubmit={this.onSearchBtnClicked}>
                         <label htmlFor="srch">
-                            <input type="text" id="srch" name="searchQuery" value={this.state.searchQuery}
-                                   onChange={this.handleChange}/>
+                            <input
+                                type="text"
+                                id="srch"
+                                name="searchQuery"
+                                value={this.state.searchQuery}
+                                onChange={this.handleChange}
+                            />
                         </label>
-                        <button type="button" className={`${Styles.btn_srch} ${Styles.imbtn_pop_srch}`}
-                                onClick={this.onSearchBtnClicked}>
+                        <button
+                            type="button"
+                            className={`${Styles.btn_srch} ${Styles.imbtn_pop_srch}`}
+                            onClick={this.onSearchBtnClicked}
+                        >
                             <span className={Styles.blind}>검색</span>
                         </button>
                     </form>
@@ -67,15 +81,12 @@ class Navigation extends Component {
     render() {
         return (
             <div className={Styles.section_navi}>
-                <ul className={Styles.list}>
-                    {this.drawNavigation()}
-                </ul>
+                <ul className={Styles.list}>{this.drawNavigation()}</ul>
                 {this.drawSearchBox()}
             </div>
         );
     }
 }
-
 
 const mapStateToProps = (state) => ({
     ...state,
@@ -87,5 +98,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(Navigation);

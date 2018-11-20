@@ -23,7 +23,7 @@ export function SubmitAction(data) {
     return (dispatch) => {
         axios
             .post('/usr', data)
-            .then((response) => {
+            .then(() => {
                 return dispatch({
                     type: REGIST_USER,
                     page: 3,
