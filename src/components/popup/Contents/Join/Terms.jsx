@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Styles from '../../../../assets/scss/popup.scss';
-import { JoinPageMoveAction, JoinAction } from '../../../../actions/join';
-import { CommonUtils } from '../../../../utils/Common';
+import Styles from '@assets/scss/popup.scss';
+import { JoinPageMoveAction, JoinAction } from '@actions/join';
+import { CommonUtils } from '@utils/Common';
 
 class Terms extends Component {
     constructor(props) {

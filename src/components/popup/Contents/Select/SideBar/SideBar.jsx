@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchItems } from '../../../../../actions/popup';
-import { CommonUtils } from '../../../../../utils/Common';
-import Styles from '../../../../../assets/scss/popup.scss';
+import { fetchItems } from '@actions/popup';
+import { CommonUtils } from '@utils/Common';
+import Styles from '@assets/scss/popup.scss';
 
 class SideBar extends Component {
     constructor(props) {

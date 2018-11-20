@@ -4,10 +4,10 @@ import Item from './Item';
 import SideBar from './SideBar';
 import SubMenu from './SubMenu';
 import Selected from './Selected';
-import Styles from '../../../../../assets/scss/popup.scss';
+import Styles from '@assets/scss/popup.scss';
 import Foot from './foot';
-import { triggerEvent } from '../../../../../actions';
-import { fetchItems } from '../../../../../actions/popup';
+import { triggerEvent } from '@actions';
+import { fetchItems } from '@actions/popup';
 
 class Index extends Component {
     constructor(props) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Styles from '../../../../../assets/scss/popup.scss';
-import { triggerEvent } from '../../../../../actions/index';
+import Styles from '@assets/scss/popup.scss';
+import { triggerEvent } from '@actions/index';
 
 class Foot extends Component {
     constructor(props) {
