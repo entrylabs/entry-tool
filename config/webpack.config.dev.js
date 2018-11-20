@@ -150,18 +150,20 @@ module.exports = {
                             cacheDirectory: true,
                         },
                     },
-                    // "postcss" loader applies autoprefixer to our CSS.
-                    // "css" loader resolves paths in CSS and adds assets as dependencies.
-                    // "style" loader turns CSS into JS modules that inject <style> tags.
-                    // In production, we use a plugin to extract that CSS to a file, but
-                    // in development "style" loader enables hot editing of CSS.
                     {
-                        test: /\.css$/,
+                        test: /\.(css|scss)$/,
+                        include: /node_modules(?!\/react-custom-scroll)/,
+                        use: [require.resolve('style-loader'), require.resolve('css-loader')],
+                    },
+                    {
+                        test: /\.(css|scss)$/,
+                        exclude: /node_modules(?!\/react-custom-scroll)/,
                         use: [
                             require.resolve('style-loader'),
                             {
                                 loader: require.resolve('css-loader'),
                                 options: {
+                                    modules: true,
                                     importLoaders: 1,
                                 },
                             },
@@ -181,10 +183,12 @@ module.exports = {
                                                 'not ie < 9', // React doesn't support IE8 anyway
                                             ],
                                             flexbox: 'no-2009',
+                                            remove: false,
                                         }),
                                     ],
                                 },
                             },
+                            require.resolve('sass-loader'),
                         ],
                     },
                     // "file" loader makes sure those assets get served by WebpackDevServer.

@@ -4,34 +4,65 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './App';
 import configureStore from './store';
-import { visibleAction } from './actions';
+import { visibleAction } from './actions/index';
+import httpService from './config/axios';
 
+let instance = null;
 export default class EntryTool extends EventEmitter {
     constructor(...args) {
         super();
-        this.container = document.createElement('div');
-        document.body.appendChild(this.container);
         this.initialize(...args);
         this.render();
     }
 
-    initialize({ isShow, type, data, props } = {}) {
+    static getInstance(option) {
+        if (!instance) {
+            instance = new EntryTool(option);
+        }
+
+        return instance;
+    }
+
+    initialize({ container, target, isShow = true, type, data, props, url } = {}) {
+        if (!target) {
+            target = document.body;
+        }
+        if (!container) {
+            container = document.createElement('div');
+        }
+
+        this._container = container;
+        this._target = target;
         this._data = data;
         this._props = props;
+        this._type = type;
         this.module = this.getModule(type);
-        this.store = configureStore();
+        this.store = configureStore({}, this);
+        httpService.setupInterceptors(url);
+
         if (isShow) {
             this.show();
+        } else {
+            this.hide();
         }
     }
 
     set data(data) {
-        this._data = data;
+        Object.assign(this._data, data);
         this.render();
     }
 
     get data() {
         return this._data;
+    }
+
+    set container(container) {
+        this._container = container;
+        this.render();
+    }
+
+    get container() {
+        return this._container;
     }
 
     set props(props) {
@@ -43,12 +74,42 @@ export default class EntryTool extends EventEmitter {
         return this._props;
     }
 
+    get type() {
+        return this._type;
+    }
+
+    getData(key) {
+        const state = this.store.getState();
+        const reducer = state[`${this.reducerType}Reducer`];
+        return reducer[key] || reducer;
+    }
+
     getModule(type) {
         switch (type) {
+            case 'colorPicker':
+                this.reducerType = 'picker';
+                return import('./components/picker/colorContainer');
+            case 'numberWidget':
+                this.reducerType = 'common';
+                return import('./components/widget/numberContainer');
+            case 'dropdownWidget':
+                this.reducerType = 'widget';
+                return import('./components/widget/dropdownContainer');
+            case 'angleWidget':
+                this.reducerType = 'widget';
+                return import('./components/widget/angleContainer');
             case 'popup':
             default:
+                this._target.appendChild(this._container);
+                this.reducerType = 'popup';
                 return import('./components/popup');
         }
+    }
+
+    get isShow() {
+        const { commonReducer = {} } = this.store.getState();
+        const { visible } = commonReducer;
+        return visible;
     }
 
     show(props, data) {
@@ -74,7 +135,9 @@ export default class EntryTool extends EventEmitter {
     }
 
     remove() {
-        document.body.removeChild(this.container);
+        if (document.body.contains(this.container)) {
+            document.body.removeChild(this.container);
+        }
         this._data = undefined;
         this._props = undefined;
         this.container = undefined;
@@ -82,13 +145,18 @@ export default class EntryTool extends EventEmitter {
 
     async render() {
         const { default: Module } = await this.module;
-        ReactDOM.render(
-            <Provider store={this.store}>
-                <App>
-                    <Module {...this._props} />
-                </App>
-            </Provider>,
-            this.container
-        );
+        if (this._container) {
+            ReactDOM.render(
+                <Provider store={this.store} type={this.type}>
+                    <App className={this.type} container={this._container}>
+                        <Module
+                            {...Object.assign({}, this._props, this._data)}
+                            eventEmitter={this}
+                        />
+                    </App>
+                </Provider>,
+                this._container
+            );
+        }
     }
 }
