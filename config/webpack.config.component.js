@@ -106,12 +106,12 @@ module.exports = {
                     },
                     {
                         test: /\.(css|scss)$/,
-                        include: /node_modules(?!\/react-custom-scroll)/,
+                        include: path.resolve('./node_modules/react-custom-scroll/'),
                         use: [require.resolve('style-loader'), require.resolve('css-loader')],
                     },
                     {
                         test: /\.(css|scss)$/,
-                        exclude: /node_modules(?!\/react-custom-scroll)/,
+                        exclude: path.resolve('./node_modules/react-custom-scroll/'),
                         use: [
                             require.resolve('style-loader'),
                             {
