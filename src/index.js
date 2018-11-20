@@ -135,7 +135,9 @@ export default class EntryTool extends EventEmitter {
     }
 
     remove() {
-        document.body.removeChild(this.container);
+        if (document.body.contains(this.container)) {
+            document.body.removeChild(this.container);
+        }
         this._data = undefined;
         this._props = undefined;
         this.container = undefined;
