@@ -39,22 +39,10 @@ config.plugins = [
 ];
 
 webpack(config).watch({}, (err, stats) => {
-    if (err) {
-        console.error(err);
-    } else {
-        copyPublicFolder();
-    }
-    console.error(
+    console.log(
         stats.toString({
             chunks: false,
             colors: true,
         })
     );
 });
-
-function copyPublicFolder() {
-    fs.copySync(paths.appPublic, paths.appBuild, {
-        dereference: true,
-        filter: (file) => file !== paths.appHtml,
-    });
-}

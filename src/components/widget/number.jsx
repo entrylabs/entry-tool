@@ -7,12 +7,7 @@ import { debounce } from 'lodash';
 
 /* eslint-disable jsx-a11y/anchor-is-valid*/
 /* eslint-disable array-element-newline */
-const numberList = [
-    '7', '8', '9',
-    '4', '5', '6',
-    '1', '2', '3',
-    '-', '0', '.',
-];
+const numberList = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '-', '0', '.'];
 
 class Number extends Component {
     getPositionOptions() {
@@ -31,7 +26,7 @@ class Number extends Component {
         this.state = CommonUtils.getDefaultComponentPosition(props, this.getPositionOptions());
         this.makeNumberButtons = this.makeNumberButtons.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);
-    };
+    }
 
     componentDidMount() {
         window.addEventListener('resize', this.handleWindowResize);
@@ -47,23 +42,34 @@ class Number extends Component {
     }, 300);
 
     alignPosition(updateState) {
-        this.setState(() => Object.assign(
-            CommonUtils.getAlignPosition(this.props, this.numberWidget, this.getPositionOptions()),
-            updateState));
+        this.setState(() =>
+            Object.assign(
+                CommonUtils.getAlignPosition(
+                    this.props,
+                    this.numberWidget,
+                    this.getPositionOptions()
+                ),
+                updateState
+            )
+        );
     }
 
     makeNumberButtons() {
         return numberList.map((value) => (
-            <a className={Styles.btn_cnt} key={value} onClick={ () => {
-                this.handleButtonClick('buttonPressed', value);
-            } }>
+            <a
+                className={Styles.btn_cnt}
+                key={value}
+                onClick={() => {
+                    this.handleButtonClick('buttonPressed', value);
+                }}
+            >
                 {value}
             </a>
         ));
     }
 
     handleButtonClick(type, value) {
-        const { eventEmitter : emitter } = this.props;
+        const { eventEmitter: emitter } = this.props;
 
         if (emitter) {
             emitter.emit('click', type, value);
@@ -71,15 +77,17 @@ class Number extends Component {
     }
 
     render() {
-        const { onOutsideClick = () => {} } = this.props;
+        const { onOutsideClick, eventTypes = ['mouseup', 'touchend', 'wheel'] } = this.props;
         const { arrowLeft, isUpStyle, componentPosition } = this.state;
 
         return (
             <OutsideClick
                 onOutsideClick={() => {
-                    onOutsideClick();
+                    if (onOutsideClick) {
+                        onOutsideClick();
+                    }
                 }}
-                eventTypes={['mouseup', 'touchend']}
+                eventTypes={eventTypes}
             >
                 <div
                     ref={(dom) => {
@@ -94,10 +102,12 @@ class Number extends Component {
                         <div className={Styles.time_board}>
                             {this.makeNumberButtons()}
                             <a
-                                className={`${Styles.btn_cnt} ${Styles.btn_del} ${Styles.imico_pop_key_del}`}
-                                onClick={ () => {
+                                className={`${Styles.btn_cnt} ${Styles.btn_del} ${
+                                    Styles.imico_pop_key_del
+                                }`}
+                                onClick={() => {
                                     this.handleButtonClick('backButtonPressed');
-                                } }
+                                }}
                             >
                                 <span className={Styles.blind}>지우기</span>
                             </a>
@@ -107,7 +117,7 @@ class Number extends Component {
                         className={`${Styles.arr} ${Styles.free}`}
                         style={{ left: `${arrowLeft}px` }}
                     >
-                        <i/>
+                        <i />
                     </span>
                 </div>
             </OutsideClick>

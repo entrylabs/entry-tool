@@ -23,7 +23,7 @@ module.exports = {
         path: paths.componentBuild,
         filename: 'index.js',
         libraryTarget: 'umd',
-        publicPath: publicPath,
+        publicPath,
         devtoolModuleFilenameTemplate: (info) =>
             path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/'),
     },

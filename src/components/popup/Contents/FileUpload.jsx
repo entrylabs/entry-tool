@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { range } from 'lodash-es';
+import range from 'lodash/range';
 import Styles from '@assets/scss/popup.scss';
 import { uploadItem } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';

@@ -1,6 +1,9 @@
 @charset "UTF-8";
 // 공통 툴팁 박스
 .tooltip_box {
+    * {
+        box-sizing: content-box;
+    }
     @include PositionLT(absolute, 0, 0);
     width: 166px;
     background-color: #fff;
@@ -238,6 +241,7 @@
             width: 160px;
             height: 160px;
             background: url(../images/bg_angle_dots.png) no-repeat;
+            cursor: pointer;
 
             .pie {
                 width: 152px;
