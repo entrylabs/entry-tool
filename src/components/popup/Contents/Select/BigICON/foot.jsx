@@ -10,14 +10,24 @@ class Foot extends Component {
     }
 
     handleSubmit(event, data) {
-        this.props.triggerEvent( event, data );
+        this.props.triggerEvent(event, data);
     }
 
     render() {
         return (
             <div className={Styles.pop_btn_box}>
-                <a href="#NULL" onClick={e => this.handleSubmit('close')}>취소</a>
-                <a href="#NULL" className={Styles.active} onClick={e => this.handleSubmit('submit', { selected: this.props.popupReducer.selected })}>추가하기</a>
+                <a href="#NULL" onClick={() => this.handleSubmit('close')}>
+                    취소
+                </a>
+                <a
+                    href="#NULL"
+                    className={Styles.active}
+                    onClick={() =>
+                        this.handleSubmit('submit', { selected: this.props.popupReducer.selected })
+                    }
+                >
+                    추가하기
+                </a>
             </div>
         );
     }
@@ -33,5 +43,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(Foot);

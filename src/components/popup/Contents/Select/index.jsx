@@ -6,9 +6,16 @@ import BigICON from './BigICON';
 class Select extends Component {
     renderContent() {
         if (this.props.subType === 'sidebar') {
-            return <SideBar type={this.props.type} data={this.props.data} sidebar={this.props.sidebar} t/>;
+            return (
+                <SideBar
+                    type={this.props.type}
+                    data={this.props.data}
+                    sidebar={this.props.sidebar}
+                    t
+                />
+            );
         } else {
-            return <BigICON type={this.props.type} data={this.props.data}/>;
+            return <BigICON type={this.props.type} data={this.props.data} />;
         }
     }
 
@@ -23,5 +30,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
     mapStateToProps,
-    null,
+    null
 )(Select);

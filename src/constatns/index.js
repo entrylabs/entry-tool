@@ -1,84 +1,91 @@
 export const DEFAULT_OPTIONS = {
     WRITE_BOX: {
-        FONTS: [{
-            'name': '바탕체',
-            'family': 'KoPub Batang',
-            'url': '/css/kopubbatang.css',
-            '$$hashKey': 'object:135',
-        }, {
-            'name': '명조체',
-            'family': 'Nanum Myeongjo',
-            'url': '/css/nanummyeongjo.css',
-            '$$hashKey': 'object:136',
-        }, {
-            'name': '고딕체',
-            'family': 'Nanum Gothic',
-            'url': '/css/nanumgothic.css',
-            '$$hashKey': 'object:137',
-        }, {
-            'name': '필기체',
-            'family': 'Nanum Pen Script',
-            'url': '/css/nanumpenscript.css',
-            '$$hashKey': 'object:138',
-        }, {
-            'name': '한라산체',
-            'family': 'Jeju Hallasan',
-            'url': '/css/jejuhallasan.css',
-            '$$hashKey': 'object:139',
-        }, {
-            'name': '코딩고딕체',
-            'family': 'Nanum Gothic Coding',
-            'url': '/css/nanumgothiccoding.css',
-            '$$hashKey': 'object:140',
-        }],
+        FONTS: [
+            {
+                name: '바탕체',
+                family: 'KoPub Batang',
+                url: '/css/kopubbatang.css',
+                $$hashKey: 'object:135',
+            },
+            {
+                name: '명조체',
+                family: 'Nanum Myeongjo',
+                url: '/css/nanummyeongjo.css',
+                $$hashKey: 'object:136',
+            },
+            {
+                name: '고딕체',
+                family: 'Nanum Gothic',
+                url: '/css/nanumgothic.css',
+                $$hashKey: 'object:137',
+            },
+            {
+                name: '필기체',
+                family: 'Nanum Pen Script',
+                url: '/css/nanumpenscript.css',
+                $$hashKey: 'object:138',
+            },
+            {
+                name: '한라산체',
+                family: 'Jeju Hallasan',
+                url: '/css/jejuhallasan.css',
+                $$hashKey: 'object:139',
+            },
+            {
+                name: '코딩고딕체',
+                family: 'Nanum Gothic Coding',
+                url: '/css/nanumgothiccoding.css',
+                $$hashKey: 'object:140',
+            },
+        ],
         EFFECTS: {
             bold: {
                 text: '굵게',
                 apply: false,
                 css: {
-                    'fontWeight': 'bold',
+                    fontWeight: 'bold',
                 },
             },
             underLine: {
                 text: '밑줄',
                 apply: false,
                 css: {
-                    'textDecorationLine': 'underline',
+                    textDecorationLine: 'underline',
                 },
             },
             italic: {
                 text: '기울임',
                 apply: false,
                 css: {
-                    'fontStyle': 'italic',
+                    fontStyle: 'italic',
                 },
             },
             through: {
                 text: '취소선',
                 apply: false,
                 css: {
-                    'textDecorationLine': 'line-through',
+                    textDecorationLine: 'line-through',
                 },
             },
             color: {
                 text: '글자색',
                 apply: false,
                 css: {
-                    'color': '#000000',
+                    color: '#000000',
                 },
             },
             backgroundColor: {
                 text: '배경색',
                 apply: false,
                 css: {
-                    'backgroundColor': '#ffffff',
+                    backgroundColor: '#ffffff',
                 },
             },
         },
     },
     POPUP_TYPE: {
         sprite: {
-            title: "오브젝트 추가하기",
+            title: '오브젝트 추가하기',
             navigations: {
                 select: {
                     name: '오브젝트 선택',
@@ -88,7 +95,7 @@ export const DEFAULT_OPTIONS = {
                 },
                 draw: {
                     name: '그리기',
-                }
+                },
             },
             sidebar: {
                 entrybot_friends: {
@@ -195,7 +202,7 @@ export const DEFAULT_OPTIONS = {
             },
         },
         sound: {
-            title: "소리 추가하기",
+            title: '소리 추가하기',
             navigations: {
                 select: {
                     name: '소리 선택',
@@ -209,22 +216,22 @@ export const DEFAULT_OPTIONS = {
                     name: '사람',
                     sub: {
                         all: { name: '전체' },
-                        '일상생활': { name: '일상생활' },
+                        일상생활: { name: '일상생활' },
                     },
                 },
                 자연: {
                     name: '자연',
                     sub: {
                         all: { name: '전체' },
-                        '동물': { name: '동물/곤충' },
+                        동물: { name: '동물/곤충' },
                     },
                 },
                 사물: {
                     name: '사물',
                     sub: {
                         all: { name: '전체' },
-                        '이동수단': { name: '이동수단' },
-                        '기타': { name: '기타' },
+                        이동수단: { name: '이동수단' },
+                        기타: { name: '기타' },
                     },
                 },
                 판타지: {
@@ -237,26 +244,26 @@ export const DEFAULT_OPTIONS = {
                     name: '악기',
                     sub: {
                         all: { name: '전체' },
-                        '피아노': { name: '피아노' },
-                        '마림바': { name: '마림바' },
-                        '드럼': { name: '드럼' },
-                        '장구': { name: '장구' },
-                        '효과음': { name: '효과음' },
-                        '기타타악기': { name: '기타타악기' },
+                        피아노: { name: '피아노' },
+                        마림바: { name: '마림바' },
+                        드럼: { name: '드럼' },
+                        장구: { name: '장구' },
+                        효과음: { name: '효과음' },
+                        기타타악기: { name: '기타타악기' },
                     },
                 },
             },
         },
         expansion: {
-            title: "확장블록 추가하기",
+            title: '확장블록 추가하기',
             data: [
                 {
                     name: 'translate',
                     imageName: 'papago.png',
                     description: 'weatehr',
                     title: {
-                        'ko': '번역',
-                        'en': 'translate',
+                        ko: '번역',
+                        en: 'translate',
                     },
                 },
                 {
@@ -264,8 +271,8 @@ export const DEFAULT_OPTIONS = {
                     imageName: 'festival.png',
                     description: 'weatehr',
                     title: {
-                        'ko': '행사',
-                        'en': 'festival',
+                        ko: '행사',
+                        en: 'festival',
                     },
                 },
                 {
@@ -273,18 +280,17 @@ export const DEFAULT_OPTIONS = {
                     imageName: 'weather.png',
                     description: 'weatehr',
                     title: {
-                        'ko': '날씨',
-                        'en': 'weather',
+                        ko: '날씨',
+                        en: 'weather',
                     },
                 },
             ],
         },
         join: {
-            title: "회원가입",
+            title: '회원가입',
         },
         login: {
-            title: "로그인",
-        }
+            title: '로그인',
+        },
     },
 };
-

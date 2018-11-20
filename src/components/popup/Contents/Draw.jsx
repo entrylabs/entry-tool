@@ -21,13 +21,22 @@ class Draw extends Component {
                     <h2 className={Styles.blind}>그리기</h2>
                     <div className={Styles.cont_box}>
                         <div className={Styles.draw_box}>
-                            <div className={`${Styles.thmb} ${Styles.imico_pop_draw_thmb}`}>&nbsp;</div>
+                            <div className={`${Styles.thmb} ${Styles.imico_pop_draw_thmb}`}>
+                                &nbsp;
+                            </div>
                             <p className={Styles.draw_dsc}>
-                                그림을 그려 오브젝트로 저장할 수 있습니다.<br />
+                                그림을 그려 오브젝트로 저장할 수 있습니다.
+                                <br />
                                 그리기 화면으로 이동하시겠습니까?
                             </p>
                             <div className={Styles.pop_btn_box}>
-                                <a href="#NULL" className={Styles.active} onClick={e => this.handleSubmit()}>이동하기</a>
+                                <a
+                                    href="#NULL"
+                                    className={Styles.active}
+                                    onClick={() => this.handleSubmit()}
+                                >
+                                    이동하기
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -43,5 +52,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     null,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(Draw);

@@ -14,7 +14,9 @@ const TYPE_MAP = {
     sprite: {
         wrapClass: Styles.cont_sel_box,
         imageClass: Styles.thmb,
-        imageContent: (item) => <img src={CommonUtils.createImageUrl(item.pictures[0].filename)} alt=""/>,
+        imageContent: (item) => (
+            <img src={CommonUtils.createImageUrl(item.pictures[0].filename)} alt="" />
+        ),
     },
 };
 
@@ -22,15 +24,18 @@ class CustomSlide extends Component {
     render() {
         const { item, type, ...props } = this.props;
         return (
-            <div className={Styles.select_item} {...props} >
-                <div className={TYPE_MAP[type].imageClass}>
-                    {TYPE_MAP[type].imageContent(item)}
-                </div>
+            <div className={Styles.select_item} {...props}>
+                <div className={TYPE_MAP[type].imageClass}>{TYPE_MAP[type].imageContent(item)}</div>
                 <em className={Styles.sjt}>{item.name}</em>
-                <a href="#NULL" className={`${Styles.btn_del} ${Styles.imbtn_pop_chk_del}`} data-key={item._id}>
+                <a
+                    href="#NULL"
+                    className={`${Styles.btn_del} ${Styles.imbtn_pop_chk_del}`}
+                    data-key={item._id}
+                >
                     <span className={Styles.blind}>삭제</span>
                 </a>
-            </div>);
+            </div>
+        );
     }
 }
 
@@ -56,7 +61,11 @@ class Selected extends Component {
     constructor(props) {
         super(props);
 
-        this.container = React.createElement('style', {}, '.slick-slide { display: inline-block; margin-left: 12px;} .slick-slide:first-child {  margin-left: 0;}');
+        this.container = React.createElement(
+            'style',
+            {},
+            '.slick-slide { display: inline-block; margin-left: 12px;} .slick-slide:first-child {  margin-left: 0;}'
+        );
         this.itemClicked = this.itemClicked.bind(this);
     }
 
@@ -64,7 +73,10 @@ class Selected extends Component {
         e.preventDefault();
         const key = e.target.getAttribute('data-key');
         if (key) {
-            const selected = CommonUtils.remove(this.props.popupReducer.selected, (element) => element._id === key);
+            const selected = CommonUtils.remove(
+                this.props.popupReducer.selected,
+                (element) => element._id === key
+            );
             this.props.applySelected(selected);
         }
     }
@@ -80,8 +92,8 @@ class Selected extends Component {
             className: Styles.select_list,
             variableWidth: true,
             swipeToSlide: true,
-            nextArrow: <Arrow type="next"/>,
-            prevArrow: <Arrow type="prev"/>,
+            nextArrow: <Arrow type="next" />,
+            prevArrow: <Arrow type="prev" />,
         };
 
         return (
@@ -89,7 +101,15 @@ class Selected extends Component {
                 {this.container}
                 <strong className={Styles.tit}>전체 ({selected.length})</strong>
                 <Slider {...settings}>
-                    {selected.map((item, index) => <CustomSlide key={index} item={item} type={type} style={{ width: 100 }} url={this.props.popupReducer.baseUrl}/>)}
+                    {selected.map((item, index) => (
+                        <CustomSlide
+                            key={index}
+                            item={item}
+                            type={type}
+                            style={{ width: 100 }}
+                            url={this.props.popupReducer.baseUrl}
+                        />
+                    ))}
                 </Slider>
             </div>
         );
@@ -106,5 +126,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(Selected);

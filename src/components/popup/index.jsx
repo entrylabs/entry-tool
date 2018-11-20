@@ -9,8 +9,6 @@ import Select from './Contents/Select';
 import FileUpload from './Contents/FileUpload';
 import WriteBox from './Contents/WriteBox';
 import Draw from './Contents/Draw';
-import Join from './Contents/Join';
-import Login from './Contents/Login';
 import { DEFAULT_OPTIONS } from '../../constatns';
 
 class Sprite extends Component {
@@ -30,14 +28,14 @@ class Sprite extends Component {
     }
 
     initNavigations() {
-        let navigation = this.options.navigations;
-        if(!navigation) {
+        const navigation = this.options.navigations;
+        if (!navigation) {
             return [];
         }
 
         if (this.props.write) {
             navigation.write = { name: '글 상자' };
-        }else {
+        } else {
             delete navigation.write;
         }
 
@@ -77,7 +75,14 @@ class Sprite extends Component {
         const defaultNavigation = <Navigation {...navSettings} />;
         const contents = {
             select: {
-                view: <Select type={this.props.type} subType={'sidebar'} sidebar={this.options.sidebar} data={data} />,
+                view: (
+                    <Select
+                        type={this.props.type}
+                        subType={'sidebar'}
+                        sidebar={this.options.sidebar}
+                        data={data}
+                    />
+                ),
                 nav: <Navigation {...navSettings} search={true} />,
             },
             upload: {
@@ -91,14 +96,6 @@ class Sprite extends Component {
             },
             expansion: {
                 view: <Select type={'bigicon'} data={data} />,
-                nav: true,
-            },
-            join: {
-                view: <Join />,
-                nav: true,
-            },
-            login: {
-                view: <Login />,
                 nav: true,
             },
         };
@@ -117,7 +114,10 @@ class Sprite extends Component {
                 <div className={Styles.popup_wrap}>
                     <header className={Styles.pop_header}>
                         <h1>{this.options.title}</h1>
-                        <button onClick={this.close} className={Styles.btn_back + ' ' + Styles.imbtn_pop_back}>
+                        <button
+                            onClick={this.close}
+                            className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}
+                        >
                             <span className={Styles.blind}>뒤로가기</span>
                         </button>
                     </header>
