@@ -161,11 +161,12 @@ class Angle extends Component {
     }
 
     render() {
-        const { onOutsideClick = () => {}, angle = 0 } = this.props;
+        const { onOutsideClick = () => {}, angle = 0, outsideExcludeDom } = this.props;
         const { isUpStyle, arrowLeft, componentPosition } = this.state;
 
         return (
             <OutsideClick
+                outsideExcludeDom={ outsideExcludeDom }
                 onOutsideClick={() => {
                     onOutsideClick(angle);
                 }}
