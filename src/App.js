@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 
 class App extends Component {
     render() {
-        const { children, visible } = this.props;
-        return <div>{visible && children} </div>;
+        const { children, visible, className, container } = this.props;
+        container.style.display= visible ? "block" : "none";
+
+        return <div className={className}>{visible && children} </div>;
     }
 }
 
