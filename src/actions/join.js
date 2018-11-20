@@ -15,22 +15,25 @@ export const JoinPageMoveAction = (moveTo) => (dispatch) => {
 export const JoinAction = (data) => (dispatch) => {
     dispatch({
         type: JOIN_ACTION,
-        ...data
+        ...data,
     });
 };
 
 export function SubmitAction(data) {
     return (dispatch) => {
-        axios.post("/usr", data).then((response) => {
-            return dispatch({
-                type: REGIST_USER,
-                page: 3,
-            });
-        })
-        .catch((response) => dispatch({
-            type: API_FAIL,
-            error: response.error,
-        }));
+        axios
+            .post('/usr', data)
+            .then((response) => {
+                return dispatch({
+                    type: REGIST_USER,
+                    page: 3,
+                });
+            })
+            .catch((response) =>
+                dispatch({
+                    type: API_FAIL,
+                    error: response.error,
+                })
+            );
     };
-
-};
+}

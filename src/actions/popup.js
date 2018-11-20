@@ -1,5 +1,5 @@
 import axios from 'axios';
-import memoize from 'lodash/memoize';
+import { memoize } from 'lodash-es';
 import { CommonUtils } from '../utils/Common';
 
 export const FETCH_ITEM = 'FETCH_ITEM';

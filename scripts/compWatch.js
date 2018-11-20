@@ -36,10 +36,9 @@ config.plugins = [
 
 webpack(config).watch({}, (err, stats) => {
     if (err) {
-        console.error(err);
-    } else {
+        console.log(err);
     }
-    console.error(
+    console.log(
         stats.toString({
             chunks: false,
             colors: true,

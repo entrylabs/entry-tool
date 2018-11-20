@@ -39,7 +39,7 @@ config.plugins = [
 ];
 
 webpack(config).watch({}, (err, stats) => {
-    console.error(
+    console.log(
         stats.toString({
             chunks: false,
             colors: true,
