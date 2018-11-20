@@ -24,15 +24,17 @@ export default class EntryTool extends EventEmitter {
     }
 
     initialize({ container, target, isShow = true, type, data, props, url } = {}) {
-        if (!target) {
-            target = document.body;
+        let thisTarget = target;
+        let thisContainer = container;
+        if (!thisTarget) {
+            thisTarget = document.body;
         }
-        if (!container) {
-            container = document.createElement('div');
+        if (!thisContainer) {
+            thisContainer = document.createElement('div');
         }
 
-        this._container = container;
-        this._target = target;
+        this._container = thisContainer;
+        this._target = thisTarget;
         this._data = data;
         this._props = props;
         this._type = type;

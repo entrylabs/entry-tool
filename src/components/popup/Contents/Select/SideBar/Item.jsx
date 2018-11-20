@@ -19,13 +19,18 @@ class Item extends Component {
         }
         return (
             <div className={Styles.thmb}>
-                <img src={CommonUtils.createImageUrl(this.props.item.pictures[0].filename)} alt=""/>
+                <img
+                    src={CommonUtils.createImageUrl(this.props.item.pictures[0].filename)}
+                    alt=""
+                />
             </div>
         );
     }
 
     getSelectedIndex() {
-        return this.props.popupReducer.selected.findIndex(element => element._id === this.props.item._id);
+        return this.props.popupReducer.selected.findIndex(
+            (element) => element._id === this.props.item._id
+        );
     }
 
     onItemClicked(e) {
@@ -51,9 +56,11 @@ class Item extends Component {
 
     render() {
         return (
-            <li onClick={this.onItemClicked}
-                onDoubleClick={e => this.handleDbClick('select', { item: this.props.item })}
-                className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}>
+            <li
+                onClick={this.onItemClicked}
+                onDoubleClick={() => this.handleDbClick('select', { item: this.props.item })}
+                className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}
+            >
                 <a href="#NULL" className={Styles.link}>
                     {this.drawImage()}
                     <em className={Styles.sjt}>{this.props.item.name}</em>
@@ -75,5 +82,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(Item);

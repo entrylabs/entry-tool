@@ -1,8 +1,8 @@
-import {JOIN_PAGE_MOVE, JOIN_ACTION, REGIST_USER } from '../actions/join';
+import { JOIN_PAGE_MOVE, JOIN_ACTION, REGIST_USER } from '../actions/join';
 
 const initState = {
     page: 0,
-    job: "student"
+    job: 'student',
 };
 export default (state = initState, action) => {
     switch (action.type) {

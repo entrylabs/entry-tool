@@ -12,14 +12,14 @@ const uploadOptions = {
     sprite: {
         method: 'POST',
         url: '/api/picture/upload',
-        successCallback: function(response) {
+        successCallback(response) {
             return response.data;
         },
     },
     object: {
         method: 'PUT',
         url: '/api/importObject',
-        successCallback: function(response) {
+        successCallback(response) {
             return response.data.map((item) => {
                 return item.objects.map((object) => {
                     if (object.objectType === 'textBox') {
@@ -44,7 +44,7 @@ const uploadOptions = {
         url: '/api/sound/upload',
         contentType: false,
         processData: false,
-        successCallback: function(response) {
+        successCallback(response) {
             return response.data;
         },
     },
@@ -52,17 +52,20 @@ const uploadOptions = {
 
 export const initState = (data) => (dispatch) => {
     dispatch({
+        data,
         type: INIT_STATE,
-        data: data,
     });
 };
 
 export function fetchItems(type, category = null, subMenu = undefined) {
-    if (subMenu === 'all') {
-        subMenu = '';
+    let thisSubMenu = subMenu;
+    if (thisSubMenu === 'all') {
+        thisSubMenu = '';
     }
-    const url = ['/api', type, 'browse/default', category, subMenu].join('/');
-    let promise = memoize((url) => {
+    /* eslint-disable array-element-newline */
+    /* eslint-disable array-bracket-newline */
+    const url = ['/api', type, 'browse/default', category, thisSubMenu].join('/');
+    const promise = memoize((url) => {
         return axios.get(url);
     });
     return (dispatch) => {
@@ -71,9 +74,9 @@ export function fetchItems(type, category = null, subMenu = undefined) {
                 return dispatch({
                     type: FETCH_ITEM,
                     data: {
-                        type: type,
+                        type,
                         sidebar: category,
-                        subMenu: subMenu,
+                        subMenu: thisSubMenu,
                         data: response.data,
                     },
                 });
@@ -90,7 +93,7 @@ export function fetchItems(type, category = null, subMenu = undefined) {
 export function searchItem(type, query) {
     const url = `/api/${type}/search/${query}`;
 
-    let promise = memoize((url) => {
+    const promise = memoize((url) => {
         return axios.get(url);
     });
     return (dispatch) => {
@@ -113,7 +116,7 @@ export function searchItem(type, query) {
 }
 
 export function uploadItem(type, formData, header) {
-    let httpOption = { ...uploadOptions[type], data: formData, header: header };
+    const httpOption = { ...uploadOptions[type], data: formData, header };
     return (dispatch) => {
         axios(httpOption)
             .then((response) =>

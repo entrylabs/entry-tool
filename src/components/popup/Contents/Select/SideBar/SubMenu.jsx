@@ -19,7 +19,19 @@ class SubMenu extends Component {
         return Object.keys(this.props.menus).map((key, index) => {
             const item = this.props.menus[key];
             const subMenu = this.props.popupReducer.subMenu;
-            return <a href="#NULL" className={CommonUtils.toggleClass(subMenu === key || (!subMenu && index === 0), Styles.on)} key={item.name} data-key={key}>{item.name}</a>;
+            return (
+                <a
+                    href="#NULL"
+                    className={CommonUtils.toggleClass(
+                        subMenu === key || (!subMenu && index === 0),
+                        Styles.on
+                    )}
+                    key={item.name}
+                    data-key={key}
+                >
+                    {item.name}
+                </a>
+            );
         });
     }
 
@@ -50,5 +62,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(SubMenu);

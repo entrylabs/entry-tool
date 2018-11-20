@@ -25,7 +25,7 @@ class Index extends Component {
     }
 
     drawItems() {
-        return this.props.data.map(item => <Item key={item._id} item={item}/>);
+        return this.props.data.map((item) => <Item key={item._id} item={item} />);
     }
 
     getMenus() {
@@ -47,18 +47,12 @@ class Index extends Component {
         const listBox = (
             <React.Fragment>
                 <div className={Styles.list_area}>
-                    <ul className={Styles.obj_list}>
-                        {this.drawItems()}
-                    </ul>
+                    <ul className={Styles.obj_list}>{this.drawItems()}</ul>
                 </div>
             </React.Fragment>
         );
         if (this.props.type === 'sound') {
-            return (
-                <div className={Styles.sound_list_box}>
-                    {listBox}
-                </div>
-            );
+            return <div className={Styles.sound_list_box}>{listBox}</div>;
         }
 
         return listBox;
@@ -69,14 +63,14 @@ class Index extends Component {
             <React.Fragment>
                 <div className={Styles.pop_content}>
                     <h2 className={Styles.blind}>오브젝트 선택</h2>
-                    <SideBar type={this.props.type} sidebar={this.props.sidebar}/>
+                    <SideBar type={this.props.type} sidebar={this.props.sidebar} />
                     <div className={Styles.section_cont}>
-                        <SubMenu menus={this.getMenus()}/>
+                        <SubMenu menus={this.getMenus()} />
                         {this.drawListBox()}
-                        <Selected/>
+                        <Selected />
                     </div>
                 </div>
-                <Foot/>
+                <Foot />
             </React.Fragment>
         );
     }
@@ -93,6 +87,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(Index);
-

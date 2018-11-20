@@ -10,6 +10,7 @@ import root from 'window-or-global';
 
 function getColorByHsv({ red, green, blue }) {
     const color = chroma(red, green, blue);
+    /* eslint-disable prefer-const */
     let [hue, saturation, brightness] = color.hsv();
     if (isNaN(hue)) {
         hue = 0;
@@ -58,11 +59,11 @@ function getColorByHex(value) {
         red,
         green,
         blue,
+        isTransparent,
         hue: Math.round(hue / 3.6),
         saturation: Math.round(saturation * 100),
         brightness: Math.round(brightness * 100),
         color: value,
-        isTransparent: isTransparent,
     };
 }
 
@@ -227,10 +228,11 @@ class ColorPicker extends Component {
 
     handleChangeHsv(type, value) {
         const { onChangeColorPicker } = this.props;
-        value = getRangeValue(parseInt(value, 10), 0, 100);
-        if (!isNaN(value)) {
+        let thisValue = value;
+        thisValue = getRangeValue(parseInt(thisValue, 10), 0, 100);
+        if (!isNaN(thisValue)) {
             this.setState((state) => {
-                const hsv = Object.assign({}, state, { [type]: value });
+                const hsv = Object.assign({}, state, { [type]: thisValue });
                 const nextState = getColorByRGB(hsv);
                 if (onChangeColorPicker) {
                     onChangeColorPicker(nextState.color);
@@ -426,10 +428,10 @@ class ColorPicker extends Component {
 
         return {
             arrowLeft,
-            isUpStyle: isUpStyle,
+            isUpStyle,
             colorPickerStyle: {
-                left: left,
-                top: top,
+                left,
+                top,
                 transform: `translate3d(${x}px, ${y}px, 0)`,
             },
         };
@@ -496,7 +498,7 @@ class ColorPicker extends Component {
                             onTouchStart={(e) => {
                                 !isTransparent && this.handleSliderMouseDown(e, key);
                             }}
-                            style={{ left: setScaleRatioX(this.state[key]) + 'px' }}
+                            style={{ left: `${setScaleRatioX(this.state[key])}px` }}
                         />
                         <div
                             className={`${Styles.bar}`}
@@ -582,6 +584,7 @@ class ColorPicker extends Component {
                             />
                             <ul className={`${Styles.color_list}`}>{this.makeRGBController()}</ul>
                             <a
+                                href
                                 onClick={onSpoidClick}
                                 className={`${Styles.btn_picker} ${Styles.imbtn_picker}`}
                             >

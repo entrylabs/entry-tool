@@ -156,20 +156,20 @@ class FileUpload extends Component {
         const $upload = e.currentTarget;
         const uploadFiles = $upload.files;
 
-        let formData = new FormData();
+        const formData = new FormData();
         formData.append('type', 'user');
-        let objectData = new FormData();
+        const objectData = new FormData();
 
         if (!this.isValidFiles(uploadFiles)) {
             return false;
         }
 
-        const checkFiles = range(uploadFiles.length).some((i) => {
-            const file = uploadFiles.item(i);
+        const checkFiles = range(uploadFiles.length).some((idx) => {
+            const file = uploadFiles.item(idx);
             switch (this.checkFIleType(file)) {
                 case 'sound':
                 case 'sprite':
-                    formData.append('uploadFile' + i, file);
+                    formData.append(`uploadFile${idx}`, file);
                     break;
                 case 'object':
                     objectData.append('objects', file);
@@ -187,7 +187,7 @@ class FileUpload extends Component {
         }
     }
 
-    onApplyItemClicked(e) {
+    onApplyItemClicked() {
         this.props.triggerEvent('uploads', { uploads: this.state.selected }, true);
     }
 
@@ -197,7 +197,7 @@ class FileUpload extends Component {
 
     onItemClick(item) {
         const index = this.getSelectedIndex(item);
-        let selected = this.state.selected;
+        const selected = this.state.selected;
         if (index >= 0) {
             selected.splice(index, 1);
             this.props.triggerEvent('itemoff', null, false);
@@ -284,7 +284,7 @@ class FileUpload extends Component {
                     </div>
                 </section>
                 <div className={Styles.pop_btn_box}>
-                    <a href="#NULL" onClick={(e) => this.props.triggerEvent('close', null, true)}>
+                    <a href="#NULL" onClick={() => this.props.triggerEvent('close', null, true)}>
                         취소
                     </a>
                     <a href="#NULL" className={Styles.active} onClick={this.onApplyItemClicked}>
