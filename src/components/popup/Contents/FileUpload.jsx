@@ -211,6 +211,7 @@ class FileUpload extends Component {
 
     drawItems() {
         return this.props.popupReducer.uploads.map((item) => {
+            this.state.selected.push(item);
             return (
                 <Item
                     key={item._id}
