@@ -1,5 +1,7 @@
 {
     "plugins": [
+        "@babel/plugin-transform-object-assign",
+        "@babel/plugin-proposal-class-properties",
         [
             "module-resolver",
             {
@@ -13,5 +15,5 @@
             }
         ]
     ],
-    "presets": ["react-app"]
+    "presets": ["@babel/preset-react"]
 }
