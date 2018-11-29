@@ -5,6 +5,8 @@ import Styles from '@assets/scss/progress.scss';
 class ModalProgress extends Component {
     makeProgress() {
         const { title } = this.props;
+
+        console.log('#$@!$!@%@!%!@%@!', title, Styles.progress);
         return (
             <div className={Styles.progress}>
                 <div className={Styles.title}>{title}</div>

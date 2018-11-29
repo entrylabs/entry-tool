@@ -92,10 +92,11 @@
         display: flex;
         flex: 1;
         overflow: hidden;
-        min-height: 567px;
+        // min-height: 567px;
         background-color: #fff;
         .menu_list {
             width: 146px;
+            overflow: auto;
             flex: none;
             margin: 0 8px 0 16px;
             border-radius: 6px;

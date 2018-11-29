@@ -50,6 +50,14 @@ wigetStories
             onOutsideClick={action('onOutsideClick')}
         />
     ))
+    .add('각도', () => (
+        <Angle
+            onButtonPressed={action('onButtonPressed')}
+            onBackButtonPressed={action('onBackButtonPressed')}
+            onOutsideClick={action('onOutsideClick')}
+            onChangeAngle={action('onChangeAngle')}
+        />
+    ))
     .add('컬러피커', () => <ColorPicker color="#FF0000" onChangeColorPicker={action} />)
     .add('드롭다운', () => (
         <Dropdown
@@ -71,12 +79,4 @@ wigetStories
                 }}
             />
         </div>
-    ))
-    .add('각도', () => (
-        <Angle
-            onButtonPressed={action('onButtonPressed')}
-            onBackButtonPressed={action('onBackButtonPressed')}
-            onOutsideClick={action('onOutsideClick')}
-            onChangeAngle={action('onChangeAngle')}
-        />
     ));
