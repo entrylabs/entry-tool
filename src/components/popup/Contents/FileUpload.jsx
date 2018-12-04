@@ -37,7 +37,7 @@ class Item extends Component {
 
     render() {
         return (
-            <li className={CommonUtils.toggleClass(this.props.selected, Styles.on)}>
+            <li className={CommonUtils.toggleClass(this.props.excluded, "", Styles.on)}>
                 <a href="#NULL" className={Styles.link} onClick={this.onClickItem}>
                     {this.drawImage()}
                     <em className={Styles.sjt}>{this.props.item.name}</em>
@@ -53,7 +53,7 @@ class FileUpload extends Component {
 
         this.state = {
             isUploading: false,
-            selected: [],
+            excluded: [],
         };
 
         this.onAddItemChanged = this.onAddItemChanged.bind(this);
@@ -187,26 +187,28 @@ class FileUpload extends Component {
         }
     }
 
-    onApplyItemClicked() {
-        this.props.triggerEvent('uploads', { uploads: this.state.selected }, true);
+    onApplyItemClicked(e) {
+        e.preventDefault();
+        const selected = this.props.popupReducer.uploads.filter(item => !this.state.excluded.includes(item));
+        this.props.triggerEvent('uploads', { uploads: selected }, true);
     }
 
-    getSelectedIndex(item) {
-        return this.state.selected.findIndex((element) => element._id === item._id);
+    getExcludedIndex(item) {
+        return this.state.excluded.findIndex((element) => element._id === item._id);
     }
 
     onItemClick(item) {
-        const index = this.getSelectedIndex(item);
-        const selected = this.state.selected;
+        const index = this.getExcludedIndex(item);
+        const excluded = this.state.excluded;
         if (index >= 0) {
-            selected.splice(index, 1);
+            excluded.splice(index, 1);
             this.props.triggerEvent('itemoff', null, false);
         } else {
-            selected.push(item);
+            excluded.push(item);
             this.props.triggerEvent('itemon', { id: item._id }, false);
         }
 
-        this.setState({ selected });
+        this.setState({ excluded });
     }
 
     drawItems() {
@@ -217,7 +219,7 @@ class FileUpload extends Component {
                     item={item}
                     reducer={this.props.popupReducer}
                     clickHandler={this.onItemClick}
-                    selected={this.getSelectedIndex(item) >= 0}
+                    excluded={this.getExcludedIndex(item) >= 0}
                 />
             );
         });
