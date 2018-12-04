@@ -3904,17 +3904,6 @@ entities@^1.1.1, entities@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
 
-entry-tool@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/entry-tool/-/entry-tool-0.1.6.tgz#5a83d788d1855cc1685e9955e776b7438deaa6b6"
-  dependencies:
-    axios "^0.18.0"
-    chroma-js "^1.4.0"
-    react-cookies "^0.1.0"
-    react-outside-click-handler "^1.2.2"
-    react-slick "^0.23.2"
-    redux-form "^7.4.2"
-
 enzyme-adapter-react-16@^1.2.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.5.0.tgz#50af8d76a45fe0915de932bd95d34cdca75c0be3"
