@@ -91,7 +91,7 @@ module.exports = {
                         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
                         loader: require.resolve('url-loader'),
                         options: {
-                            limit: 10000,
+                            limit: 50000,
                             name: 'static/media/[name].[hash:8].[ext]',
                         },
                     },
@@ -106,12 +106,12 @@ module.exports = {
                     },
                     {
                         test: /\.(css|scss)$/,
-                        include: /node_modules(?!\/react-custom-scroll)/,
+                        include: path.resolve('./node_modules/react-custom-scroll/'),
                         use: [require.resolve('style-loader'), require.resolve('css-loader')],
                     },
                     {
                         test: /\.(css|scss)$/,
-                        exclude: /node_modules(?!\/react-custom-scroll)/,
+                        exclude: path.resolve('./node_modules/react-custom-scroll/'),
                         use: [
                             require.resolve('style-loader'),
                             {

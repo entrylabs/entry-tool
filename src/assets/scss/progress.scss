@@ -1,0 +1,151 @@
+@charset "UTF-8";
+// @import 'common/reset';
+// @import 'common/mixin';
+// @import 'common/images';
+// @import 'common/variables';
+// @import 'common/tooltip';
+
+@keyframes blink1 {
+    24% {
+        opacity: 0;
+    }
+    36% {
+        opacity: 1;
+    }
+    64% {
+        opacity: 1;
+    }
+    76% {
+        opacity: 0;
+    }
+}
+@keyframes blink2 {
+    12% {
+        opacity: 0;
+    }
+    24% {
+        opacity: 1;
+    }
+    76% {
+        opacity: 1;
+    }
+    88% {
+        opacity: 0;
+    }
+}
+@keyframes blink3 {
+    0% {
+        opacity: 0;
+    }
+    12% {
+        opacity: 1;
+    }
+    88% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.modal_progress {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    user-select: none;
+
+    .progress {
+        width: 327px;
+        height: 327px;
+
+        .title {
+            position: absolute;
+            background: url(../images/progress/text_back.png) no-repeat;
+            width: 367px;
+            height: 90px;
+            font-size: 27px;
+            font-weight: bold;
+            line-height: 27px;
+            color: #2a7def;
+            text-align: center;
+            padding-top: 24px;
+            z-index: 10;
+            margin-left: -20px;
+            margin-top: -20px;
+        }
+
+        .background_1 {
+            position: absolute;
+            width: 327px;
+            height: 327px;
+            opacity: 0;
+            background: url(../images/progress/back1.png) no-repeat;
+            animation: blink1 ease 3s infinite;
+        }
+        .background_2 {
+            position: absolute;
+            width: 256px;
+            height: 256px;
+            margin: 35.5px;
+            opacity: 0;
+            background: url(../images/progress/back2.png) no-repeat;
+            animation: blink2 ease 3s infinite;
+        }
+        .background_3 {
+            position: absolute;
+            width: 202px;
+            height: 202px;
+            margin: 65.5px;
+            opacity: 0;
+            background: url(../images/progress/back3.png) no-repeat;
+            animation: blink3 ease 3s infinite;
+        }
+
+        .character {
+            position: absolute;
+            width: 327px;
+            height: 327px;
+            background: url(../images/progress/character.png);
+        }
+    }
+    .error {
+        position: relative;
+        background: url(../images/progress/error.png) no-repeat;
+        width: 441px;
+        height: 429px;
+        padding-top: 17px;
+
+        .title {
+            font-size: 27px;
+            font-weight: bold;
+            line-height: 35px;
+            color: #2a7def;
+            text-align: center;
+            margin-bottom: 7px;
+        }
+
+        .description {
+            font-size: 15px;
+            line-height: 20px;
+            color: #000000;
+            text-align: center;
+        }
+
+        .close {
+            position: absolute;
+            background: url(../images/progress/close.png);
+            cursor: pointer;
+            top: 16px;
+            right: 16px;
+            width: 21px;
+            height: 21px;
+        }
+    }
+}

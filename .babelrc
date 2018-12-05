@@ -1,5 +1,10 @@
 {
     "plugins": [
+        "@babel/plugin-transform-runtime",
+        "@babel/plugin-transform-regenerator",
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-transform-object-assign",
+        "@babel/plugin-proposal-class-properties",
         [
             "module-resolver",
             {
@@ -13,5 +18,15 @@
             }
         ]
     ],
-    "presets": ["react-app"]
+    "presets": [
+        "@babel/react",
+        [
+            "@babel/env",
+            {
+                "targets": {
+                    "browsers": [">0.25%", "ie >= 11"]
+                }
+            }
+        ]
+    ]
 }

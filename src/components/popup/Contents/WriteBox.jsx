@@ -5,6 +5,7 @@ import Styles from '@assets/scss/popup.scss';
 import { triggerEvent } from '@actions';
 import ColorPicker from '@components/picker/color';
 import Dropdown from '@components/widget/dropdown';
+import _ from 'lodash';
 
 /* eslint-disable array-element-newline */
 const FIELDS = {
@@ -113,7 +114,7 @@ class WriteBox extends Component {
 
         this.state = {
             writeType: 'one',
-            effects: this.props.fontOption.EFFECTS,
+            effects: _.cloneDeep(this.props.fontOption.EFFECTS),
             fonts: this.props.fontOption.FONTS,
             font: this.props.fontOption.FONTS[0],
         };
