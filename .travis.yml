@@ -1,4 +1,6 @@
 stages:
+  # - name: test
+  #   if: type = pull_request
   - name: npm release
     if: branch = production
 language:
@@ -15,6 +17,9 @@ cache:
     - $HOME/.npm
 jobs:
   include:
+    # - stage: test
+    #   install: yarn
+    #   script: yarn test
     - stage: npm release
       before_deploy: 
         - yarn
