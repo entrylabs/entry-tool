@@ -189,7 +189,7 @@ class FileUpload extends Component {
 
     onApplyItemClicked(e) {
         e.preventDefault();
-        const selected = this.props.popupReducer.uploads.filter(item => !this.state.excluded.includes(item));
+        const selected = this.props.popupReducer.uploads.filter((item) => !this.state.excluded.includes(item));
         this.props.triggerEvent('uploads', { uploads: selected }, true);
     }
 
