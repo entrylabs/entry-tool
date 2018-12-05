@@ -4798,9 +4798,365 @@ class Sample extends Component {
                                 {/* left 값 조절로 화살표 위치 잡을 수 있습니다. */}
                                 <span className={Styles.arr}><i></i></span>
                             </div>
-
                         </section>
                     </section>
+                </div>
+
+
+                {/* 나의 작품 - 나의 작품 */}
+                <div className={Styles.popup_wrap}>
+                    <header className={Styles.pop_header}>
+                        <h1>나의 작품</h1>
+                        <button
+                            onClick={this.close}
+                            className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}
+                        >
+                            <span className={Styles.blind}>뒤로가기</span>
+                        </button>
+                    </header>
+                    <div className={Styles.section_navi}>
+                        <ul className={Styles.list}>
+                            <li className={Styles.on}>
+                                <a href="#">나의 작품</a>
+                            </li>
+                            <li>
+                                <a href="#">관심 작품</a>
+                            </li>
+                            
+                        </ul>
+                        <div className={Styles.art_sel_area}>
+                            <div className={`${Styles.pop_selectbox} ${Styles.on}`}>
+                                <a
+                                    href="#"
+                                    className={`${Styles.select_link} ${
+                                        Styles.imico_pop_select_arr_down
+                                    }`}
+                                    title="모든 작품"
+                                >
+                                    모든 작품
+                                </a>
+                            </div>
+                            <div className={Styles.pop_selectbox}>
+                                <a
+                                    href="#"
+                                    className={`${Styles.select_link} ${
+                                        Styles.imico_pop_select_arr_down
+                                    }`}
+                                    title="최신순"
+                                >
+                                    최신순
+                                </a>
+                            </div>
+                            <div className={Styles.pop_selectbox}>
+                                <a
+                                    href="#"
+                                    className={`${Styles.select_link} ${
+                                        Styles.imico_pop_select_arr_down
+                                    }`}
+                                    title="전체기간"
+                                >
+                                    전체기간
+                                </a>
+                            </div>
+                            <div className={Styles.srch_box}>
+                                <label htmlFor="srch">
+                                    <input type="text" id="srch" name="" />
+                                </label>
+                                <button
+                                    type="button"
+                                    className={`${Styles.btn_srch} ${Styles.imbtn_pop_srch}`}
+                                >
+                                    <span className={Styles.blind}>검색</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <section className={`${Styles.pop_content} ${Styles.art_content}`}>
+                        <div className={Styles.section_cont}>
+                            {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
+                            <h2 className={Styles.blind}>나의 작품</h2>
+                            <strong className={Styles.list_sjt}>전체 (9999)</strong>
+                            <div className={Styles.scroll_box}>
+                                <ul className={Styles.list}>
+                                    <li>
+                                        <a href="#" className={Styles.link}>
+                                            <div className={Styles.thmb} style={{
+                                                backgroundImage:
+                                                    "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                            }}>
+                                                <div className={Styles.info_bar}>
+                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
+                                                    <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
+                                                    <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
+                                                </div>
+                                            </div>
+                                            <div className={Styles.info_box}>
+                                                <div className={Styles.user_thmb} style={{
+                                                    backgroundImage:
+                                                        "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                                }}></div>
+                                                <em className={Styles.tit}>90% 펜 스네이크 케익이 정말 맛이 있습니다.</em>
+                                                <span className={Styles.from}>
+                                                    from<em>atom 10150</em>
+                                                </span>
+                                            </div>
+                                            
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" className={Styles.link}>
+                                            <div className={Styles.thmb} style={{
+                                                backgroundImage:
+                                                    "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                            }}>
+                                                <div className={Styles.info_bar}>
+                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
+                                                    <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
+                                                    <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
+                                                </div>
+                                            </div>
+                                            <div className={Styles.info_box}>
+                                                <div className={Styles.user_thmb} style={{
+                                                    backgroundImage:
+                                                        "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                                }}></div>
+                                                <em className={Styles.tit}>90% 펜 스네이크 케익이 정말 맛이 있습니다.</em>
+                                                <span className={Styles.from}>
+                                                    from<em>atom 10150</em>
+                                                </span>
+                                            </div>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" className={Styles.link}>
+                                            <div className={Styles.thmb} style={{
+                                                backgroundImage:
+                                                    "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                            }}>
+                                                <div className={Styles.info_bar}>
+                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
+                                                    <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
+                                                    <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
+                                                </div>
+                                            </div>
+                                            <div className={Styles.info_box}>
+                                                <div className={Styles.user_thmb} style={{
+                                                    backgroundImage:
+                                                        "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                                }}></div>
+                                                <em className={Styles.tit}>90% 펜 스네이크 케익이 정말 맛이 있습니다.</em>
+                                                <span className={Styles.from}>
+                                                    from<em>atom 10150</em>
+                                                </span>
+                                            </div>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" className={Styles.link}>
+                                            <div className={Styles.thmb} style={{
+                                                backgroundImage:
+                                                    "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                            }}>
+                                                <div className={Styles.info_bar}>
+                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
+                                                    <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
+                                                    <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
+                                                </div>
+                                            </div>
+                                            <div className={Styles.info_box}>
+                                                <div className={Styles.user_thmb} style={{
+                                                    backgroundImage:
+                                                        "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                                }}></div>
+                                                <em className={Styles.tit}>90% 펜 스네이크 케익이 정말 맛이 있습니다.</em>
+                                                <span className={Styles.from}>
+                                                    from<em>atom 10150</em>
+                                                </span>
+                                            </div>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" className={Styles.link}>
+                                            <div className={Styles.thmb} style={{
+                                                backgroundImage:
+                                                    "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                            }}>
+                                                <div className={Styles.info_bar}>
+                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
+                                                    <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
+                                                    <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
+                                                </div>
+                                            </div>
+                                            <div className={Styles.info_box}>
+                                                <div className={Styles.user_thmb} style={{
+                                                    backgroundImage:
+                                                        "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                                }}></div>
+                                                <em className={Styles.tit}>90% 펜 스네이크 케익이 정말 맛이 있습니다.</em>
+                                                <span className={Styles.from}>
+                                                    from<em>atom 10150</em>
+                                                </span>
+                                            </div>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" className={Styles.link}>
+                                            <div className={Styles.thmb} style={{
+                                                backgroundImage:
+                                                    "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                            }}>
+                                                <div className={Styles.info_bar}>
+                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
+                                                    <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
+                                                    <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
+                                                </div>
+                                            </div>
+                                            <div className={Styles.info_box}>
+                                                <div className={Styles.user_thmb} style={{
+                                                    backgroundImage:
+                                                        "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                                }}></div>
+                                                <em className={Styles.tit}>90% 펜 스네이크 케익이 정말 맛이 있습니다.</em>
+                                                <span className={Styles.from}>
+                                                    from<em>atom 10150</em>
+                                                </span>
+                                            </div>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" className={Styles.link}>
+                                            <div className={Styles.thmb} style={{
+                                                backgroundImage:
+                                                    "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                            }}>
+                                                <div className={Styles.info_bar}>
+                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
+                                                    <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
+                                                    <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
+                                                </div>
+                                            </div>
+                                            <div className={Styles.info_box}>
+                                                <div className={Styles.user_thmb} style={{
+                                                    backgroundImage:
+                                                        "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                                }}></div>
+                                                <em className={Styles.tit}>90% 펜 스네이크 케익이 정말 맛이 있습니다.</em>
+                                                <span className={Styles.from}>
+                                                    from<em>atom 10150</em>
+                                                </span>
+                                            </div>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" className={Styles.link}>
+                                            <div className={Styles.thmb} style={{
+                                                backgroundImage:
+                                                    "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                            }}>
+                                                <div className={Styles.info_bar}>
+                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
+                                                    <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
+                                                    <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
+                                                </div>
+                                            </div>
+                                            <div className={Styles.info_box}>
+                                                <div className={Styles.user_thmb} style={{
+                                                    backgroundImage:
+                                                        "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                                }}></div>
+                                                <em className={Styles.tit}>90% 펜 스네이크 케익이 정말 맛이 있습니다.</em>
+                                                <span className={Styles.from}>
+                                                    from<em>atom 10150</em>
+                                                </span>
+                                            </div>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" className={Styles.link}>
+                                            <div className={Styles.thmb} style={{
+                                                backgroundImage:
+                                                    "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                            }}>
+                                                <div className={Styles.info_bar}>
+                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
+                                                    <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
+                                                    <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
+                                                </div>
+                                            </div>
+                                            <div className={Styles.info_box}>
+                                                <div className={Styles.user_thmb} style={{
+                                                    backgroundImage:
+                                                        "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                                }}></div>
+                                                <em className={Styles.tit}>90% 펜 스네이크 케익이 정말 맛이 있습니다.</em>
+                                                <span className={Styles.from}>
+                                                    from<em>atom 10150</em>
+                                                </span>
+                                            </div>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" className={Styles.link}>
+                                            <div className={Styles.thmb} style={{
+                                                backgroundImage:
+                                                    "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                            }}>
+                                                <div className={Styles.info_bar}>
+                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
+                                                    <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
+                                                    <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
+                                                </div>
+                                            </div>
+                                            <div className={Styles.info_box}>
+                                                <div className={Styles.user_thmb} style={{
+                                                    backgroundImage:
+                                                        "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                                }}></div>
+                                                <em className={Styles.tit}>90% 펜 스네이크 케익이 정말 맛이 있습니다.</em>
+                                                <span className={Styles.from}>
+                                                    from<em>atom 10150</em>
+                                                </span>
+                                            </div>
+
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <div className={Styles.pop_btn_box}>
+                        <a href="#">취소</a>
+                        <a href="#" className={Styles.active}>
+                            불러오기
+                        </a>
+                    </div>
+
+
+
+
+
+
+
+
+
                 </div>
 
             </div >

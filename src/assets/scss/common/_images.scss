@@ -133,3 +133,22 @@ input[type='checkbox']:checked + .imbtn_pop_checked:before {
     background: url(../images/ico_pop_key_del.png) no-repeat;
     background-size: 41px auto;
 }
+.imico_pop_key_del:after {
+    background: url(../images/ico_pop_key_del.png) no-repeat;
+    background-size: 41px auto;
+}
+.imico_pop_info_view:before {
+    width: 22px;
+    background: url(../images/imico_pop_info_view.png) no-repeat;
+    background-size: 22px auto;
+}
+.imico_pop_info_like:before {
+    width: 16px;
+    background: url(../images/imico_pop_info_like.png) no-repeat;
+    background-size: 16px auto;
+}
+.imico_pop_info_cmt:before {
+    width: 16px;
+    background: url(../images/imico_pop_info_cmt.png) no-repeat;
+    background-size: 16px auto;
+}
