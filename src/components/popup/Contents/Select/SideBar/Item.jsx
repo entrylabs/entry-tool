@@ -43,6 +43,7 @@ class Item extends Component {
             this.props.applySelected(selected);
         } else {
             this.props.applySelected([this.props.item]);
+            this.props.triggerEvent('itemon', { id: this.props.item._id }, false);
         }
     }
 

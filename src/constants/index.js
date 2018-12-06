@@ -248,7 +248,7 @@ export const DEFAULT_OPTIONS = {
                 multiSelect: true,
                 uploadAllowed: {
                     image: true,
-                    object: true,
+                    object: false,
                     sound: false
                 },
                 uploadNotAllowedExt: ["gif"]

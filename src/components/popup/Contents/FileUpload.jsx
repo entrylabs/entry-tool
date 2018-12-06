@@ -188,7 +188,12 @@ class FileUpload extends Component {
 
     onApplyItemClicked(e) {
         e.preventDefault();
-        const selected = this.props.popupReducer.uploads.filter(item => !this.state.excluded.includes(item));
+        let selected = [];
+        if(this.props.options.multiSelect) {
+            selected = this.props.popupReducer.uploads.filter(item => !this.state.excluded.includes(item));
+        }else {
+            selected = this.state.excluded;
+        }
         this.props.triggerEvent('uploads', { uploads: selected }, true);
     }
 
@@ -200,26 +205,34 @@ class FileUpload extends Component {
         const index = this.getExcludedIndex(item);
         const excluded = this.state.excluded;
 
-        if (index >= 0) {
-            excluded.splice(index, 1);
-            this.props.triggerEvent('itemoff', null, false);
+        if(this.props.options.multiSelect) {
+            if (index >= 0) {
+                excluded.splice(index, 1);
+                this.props.triggerEvent('itemon', { id: item._id }, false);
+            } else {
+                excluded.push(item);
+                this.props.triggerEvent('itemoff', null, false);
+            }
+            this.setState({ excluded });
         } else {
-            excluded.push(item);
+            this.setState({ excluded : [item] });
             this.props.triggerEvent('itemon', { id: item._id }, false);
         }
-
-        this.setState({ excluded });
     }
 
     drawItems() {
         return this.props.popupReducer.uploads.map((item) => {
+            let isExcluded = this.getExcludedIndex(item) >= 0;
+            if(!this.props.options.multiSelect) {
+                isExcluded = !isExcluded;
+            }
             return (
                 <Item
                     key={item._id}
                     item={item}
                     reducer={this.props.popupReducer}
                     clickHandler={this.onItemClick}
-                    excluded={this.getExcludedIndex(item) >= 0}
+                    excluded={isExcluded}
                 />
             );
         });
