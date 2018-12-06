@@ -4,13 +4,11 @@ import commonReducer from './common';
 import popupReducer from './popup';
 import pickerReducer from './picker';
 import widgetReducer from './widget';
-import joinReducer from './join';
 
 export default combineReducers({
     commonReducer,
     popupReducer,
     pickerReducer,
     widgetReducer,
-    joinReducer,
     form: formReducer,
 });

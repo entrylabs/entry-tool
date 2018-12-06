@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Styles from '@assets/scss/popup.scss';
 import { triggerEvent } from '@actions';
+import { EMIT_TYPES } from '@constants';
 
 class Draw extends Component {
     constructor(props) {
@@ -47,7 +48,7 @@ class Draw extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    triggerEvent: (data) => dispatch(triggerEvent('draw', data)),
+    triggerEvent: (data) => dispatch(triggerEvent(EMIT_TYPES.draw, data)),
 });
 
 export default connect(

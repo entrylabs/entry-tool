@@ -4,6 +4,7 @@ import { applySelected } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/scss/popup.scss';
 import { triggerEvent, visibleAction } from '@actions';
+import { makeFindSelectedById } from '@selectors';
 
 class Item extends Component {
     constructor(props) {
@@ -27,25 +28,22 @@ class Item extends Component {
         );
     }
 
-    getSelectedIndex() {
-        return this.props.popupReducer.selected.findIndex(
-            (element) => element._id === this.props.item._id
-        );
-    }
-
     onItemClicked(e) {
         e.preventDefault();
         const selected = this.props.popupReducer.selected;
-        const index = this.getSelectedIndex();
-        if (index >= 0) {
-            selected.splice(index, 1);
-            this.props.triggerEvent('itemoff', null, false);
+        const index = this.props.index;
+        if(this.props.multiSelect) {
+            if (index >= 0) {
+                selected.splice(index, 1);
+                this.props.triggerEvent('itemoff', null, false);
+            } else {
+                selected.push(this.props.item);
+                this.props.triggerEvent('itemon', { id: this.props.item._id }, false);
+            }
+            this.props.applySelected(selected);
         } else {
-            selected.push(this.props.item);
-            this.props.triggerEvent('itemon', { id: this.props.item._id }, false);
+            this.props.applySelected([this.props.item]);
         }
-
-        this.props.applySelected(selected);
     }
 
     handleDbClick(event, data) {
@@ -59,7 +57,7 @@ class Item extends Component {
             <li
                 onClick={this.onItemClicked}
                 onDoubleClick={() => this.handleDbClick('select', { item: this.props.item })}
-                className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}
+                className={CommonUtils.toggleClass(this.props.index >= 0, Styles.on)}
             >
                 <a href="#NULL" className={Styles.link}>
                     {this.drawImage()}
@@ -70,9 +68,13 @@ class Item extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    ...state,
-});
+const mapStateToProps = (state, props) => {
+    const getIndex = makeFindSelectedById(props.item._id);
+    return {
+        ...state,
+        index:  getIndex(state)
+    }
+}
 
 const mapDispatchToProps = (dispatch) => ({
     visibleAction: (visible) => dispatch(visibleAction(visible)),

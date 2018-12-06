@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchItems } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/scss/popup.scss';
+import { setUIParam } from '@actions/popup';
 
 class SideBar extends Component {
     constructor(props) {
@@ -14,7 +14,11 @@ class SideBar extends Component {
 
     onSidebarCliecked(e) {
         e.preventDefault();
-        this.props.fetchItems(this.props.type, e.currentTarget.getAttribute('data-key'));
+        this.props.setUIParam({
+            type: this.props.type,
+            sidebar: e.currentTarget.getAttribute('data-key'),
+            subMenu: 'all'
+        });
     }
 
     drawSideBar() {
@@ -48,7 +52,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchItems: (type, category, subMenu) => dispatch(fetchItems(type, category, subMenu)),
+    setUIParam: (data) => dispatch(setUIParam(data)),
 });
 
 export default connect(

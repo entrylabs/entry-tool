@@ -136,6 +136,13 @@ export default class EntryTool extends EventEmitter {
         return this;
     }
 
+    setData(data) {
+        if (data) {
+            this.data = data;
+        }
+        return this;
+    }
+
     remove() {
         if (document.body.contains(this.container)) {
             document.body.removeChild(this.container);

@@ -1,3 +1,119 @@
+export const EMIT_TYPES = {
+    submit: 'submit',
+    load: 'load',
+    search: 'search',
+    fetch: 'fetch',
+    close: 'close',
+    write: 'write',
+    draw: 'draw',
+    select: 'select'
+
+};
+
+const SPRITE_SIDEBAR = {
+    entrybot_friends: {
+        name: '엔트리 봇',
+            sub: {
+            all: { name: '전체' },
+        },
+    },
+    people: {
+        name: '사람',
+            sub: {
+            all: { name: '전체' },
+        },
+    },
+    animal: {
+        name: '동물',
+            sub: {
+            all: { name: '전체' },
+            animal_flying: { name: '하늘' },
+            animal_land: { name: '땅' },
+            animal_water: { name: '물' },
+            animal_others: { name: '기타' },
+        },
+    },
+    plant: {
+        name: '식물',
+            sub: {
+            all: { name: '전체' },
+            plant_flower: { name: '꽃' },
+            plant_grass: { name: '풀' },
+            plant_tree: { name: '나무' },
+            plant_others: { name: '기타' },
+        },
+    },
+    vehicles: {
+        name: '탈것',
+            sub: {
+            all: { name: '전체' },
+            vehicles_flying: { name: '하늘' },
+            vehicles_land: { name: '땅' },
+            vehicles_water: { name: '물' },
+            vehicles_others: { name: '기타' },
+        },
+    },
+    architect: {
+        name: '건물',
+            sub: {
+            all: { name: '전체' },
+            architect_building: { name: '건축물' },
+            architect_monument: { name: '기념물' },
+            architect_others: { name: '기타' },
+        },
+    },
+    food: {
+        name: '음식',
+            sub: {
+            all: { name: '전체' },
+            food_vegetables: { name: '과일/채소' },
+            food_meat: { name: '고기' },
+            food_drink: { name: '음료' },
+            food_others: { name: '기타' },
+        },
+    },
+    environment: {
+        name: '환경',
+            sub: {
+            all: { name: '전체' },
+            environment_nature: { name: '자연' },
+            environment_space: { name: '우주' },
+            environment_others: { name: '기타' },
+        },
+    },
+    stuff: {
+        name: '물건',
+            sub: {
+            all: { name: '전체' },
+            stuff_living: { name: '생활' },
+            stuff_hobby: { name: '취미' },
+            stuff_others: { name: '기타' },
+        },
+    },
+    fantasy: {
+        name: '판타지',
+            sub: {
+            all: { name: '전체' },
+        },
+    },
+    interface: {
+        name: '인터페이스',
+            sub: {
+            all: { name: '전체' },
+        },
+    },
+    background: {
+        name: '배경',
+            sub: {
+            all: { name: '전체' },
+            background_outdoor: { name: '실외' },
+            background_indoor: { name: '실내' },
+            background_nature: { name: '자연' },
+            background_others: { name: '기타' },
+        },
+    },
+};
+
 export const DEFAULT_OPTIONS = {
     WRITE_BOX: {
         FONTS: [
@@ -86,6 +202,30 @@ export const DEFAULT_OPTIONS = {
     POPUP_TYPE: {
         sprite: {
             title: '오브젝트 추가하기',
+            mainType: 'sprite',
+            navigations: {
+                select: {
+                    name: '오브젝트 선택',
+                },
+                upload: {
+                    name: '파일 올리기',
+                },
+                draw: {
+                    name: '그리기',
+                },
+                write: {
+                    name: '글 상자'
+                }
+            },
+            opt : {
+              search : {query: true},
+              multiSelect: true
+            },
+            sidebar: SPRITE_SIDEBAR
+        },
+        shape: {
+            title: '모양 추가하기',
+            mainType: 'sprite',
             navigations: {
                 select: {
                     name: '오브젝트 선택',
@@ -97,112 +237,31 @@ export const DEFAULT_OPTIONS = {
                     name: '그리기',
                 },
             },
-            sidebar: {
-                entrybot_friends: {
-                    name: '엔트리 봇',
-                    sub: {
-                        all: { name: '전체' },
-                    },
+            opt : {
+                search : {query: true},
+                multiSelect: true
+            },
+            sidebar: SPRITE_SIDEBAR
+        },
+        getShape: {
+            title: '모양 가져오기',
+            mainType: 'sprite',
+            navigations: {
+                select: {
+                    name: '오브젝트 선택',
                 },
-                people: {
-                    name: '사람',
-                    sub: {
-                        all: { name: '전체' },
-                    },
-                },
-                animal: {
-                    name: '동물',
-                    sub: {
-                        all: { name: '전체' },
-                        animal_flying: { name: '하늘' },
-                        animal_land: { name: '땅' },
-                        animal_water: { name: '물' },
-                        animal_others: { name: '기타' },
-                    },
-                },
-                plant: {
-                    name: '식물',
-                    sub: {
-                        all: { name: '전체' },
-                        plant_flower: { name: '꽃' },
-                        plant_grass: { name: '풀' },
-                        plant_tree: { name: '나무' },
-                        plant_others: { name: '기타' },
-                    },
-                },
-                vehicles: {
-                    name: '탈것',
-                    sub: {
-                        all: { name: '전체' },
-                        vehicles_flying: { name: '하늘' },
-                        vehicles_land: { name: '땅' },
-                        vehicles_water: { name: '물' },
-                        vehicles_others: { name: '기타' },
-                    },
-                },
-                architect: {
-                    name: '건물',
-                    sub: {
-                        all: { name: '전체' },
-                        architect_building: { name: '건축물' },
-                        architect_monument: { name: '기념물' },
-                        architect_others: { name: '기타' },
-                    },
-                },
-                food: {
-                    name: '음식',
-                    sub: {
-                        all: { name: '전체' },
-                        food_vegetables: { name: '과일/채소' },
-                        food_meat: { name: '고기' },
-                        food_drink: { name: '음료' },
-                        food_others: { name: '기타' },
-                    },
-                },
-                environment: {
-                    name: '환경',
-                    sub: {
-                        all: { name: '전체' },
-                        environment_nature: { name: '자연' },
-                        environment_space: { name: '우주' },
-                        environment_others: { name: '기타' },
-                    },
-                },
-                stuff: {
-                    name: '물건',
-                    sub: {
-                        all: { name: '전체' },
-                        stuff_living: { name: '생활' },
-                        stuff_hobby: { name: '취미' },
-                        stuff_others: { name: '기타' },
-                    },
-                },
-                fantasy: {
-                    name: '판타지',
-                    sub: {
-                        all: { name: '전체' },
-                    },
-                },
-                interface: {
-                    name: '인터페이스',
-                    sub: {
-                        all: { name: '전체' },
-                    },
-                },
-                background: {
-                    name: '배경',
-                    sub: {
-                        all: { name: '전체' },
-                        background_outdoor: { name: '실외' },
-                        background_indoor: { name: '실내' },
-                        background_nature: { name: '자연' },
-                        background_others: { name: '기타' },
-                    },
+                upload: {
+                    name: '파일 올리기',
                 },
             },
+            opt : {
+                multiSelect: false
+            },
+            sidebar: SPRITE_SIDEBAR
         },
         sound: {
             title: '소리 추가하기',
+            mainType: 'sound',
             navigations: {
                 select: {
                     name: '소리 선택',
@@ -210,6 +269,10 @@ export const DEFAULT_OPTIONS = {
                 upload: {
                     name: '파일 올리기',
                 },
+            },
+            opt : {
+                search : {query: true},
+                multiSelect: true
             },
             sidebar: {
                 사람: {
@@ -256,41 +319,18 @@ export const DEFAULT_OPTIONS = {
         },
         expansion: {
             title: '확장블록 추가하기',
-            data: [
-                {
-                    name: 'translate',
-                    imageName: 'papago.png',
-                    description: 'weatehr',
-                    title: {
-                        ko: '번역',
-                        en: 'translate',
-                    },
-                },
-                {
-                    name: 'festival',
-                    imageName: 'festival.png',
-                    description: 'weatehr',
-                    title: {
-                        ko: '행사',
-                        en: 'festival',
-                    },
-                },
-                {
-                    name: 'weather',
-                    imageName: 'weather.png',
-                    description: 'weatehr',
-                    title: {
-                        ko: '날씨',
-                        en: 'weather',
-                    },
-                },
-            ],
+            mainType: 'expansion',
         },
-        join: {
-            title: '회원가입',
-        },
-        login: {
-            title: '로그인',
-        },
+        projects: {
+            title: '나의 작품',
+            navigations: {
+                projects: {
+                    name: '나의 작품',
+                },
+                favorites: {
+                    name: '관심 작품',
+                },
+            }
+        }
     },
 };

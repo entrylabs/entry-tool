@@ -5,6 +5,7 @@ import Styles from '@assets/scss/popup.scss';
 import { triggerEvent } from '@actions';
 import ColorPicker from '@components/picker/color';
 import Dropdown from '@components/widget/dropdown';
+import { EMIT_TYPES } from '@constants';
 import _ from 'lodash';
 
 /* eslint-disable array-element-newline */
@@ -228,7 +229,7 @@ class WriteBox extends Component {
             writeType: this.state.writeType,
         };
 
-        this.props.triggerEvent('write', result);
+        this.props.triggerEvent(EMIT_TYPES.write, result);
     }
 
     render() {
@@ -311,7 +312,7 @@ class WriteBox extends Component {
                     {this.state.dropDown}
                 </section>
                 <div className={Styles.pop_btn_box}>
-                    <a href="#NULL" onClick={() => this.props.triggerEvent('close', null, true)}>
+                    <a href="#NULL" onClick={() => this.props.triggerEvent(EMIT_TYPES.close, null, true)}>
                         취소
                     </a>
                     <a href="#NULL" className={Styles.active} onClick={this.onSubmitBtnClicked}>

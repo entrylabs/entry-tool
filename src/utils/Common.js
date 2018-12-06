@@ -1,6 +1,10 @@
 import root from 'window-or-global';
 
 export const CommonUtils = {
+     getLang: (key = '') => {
+        const lang = root.Lang || {};
+        return get(lang, key) || key;
+    },
     toggleClass: (isActive, className, falseClassName = '') => {
         if (isActive) {
             return className;

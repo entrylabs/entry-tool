@@ -9,7 +9,8 @@ import Select from './Contents/Select';
 import FileUpload from './Contents/FileUpload';
 import WriteBox from './Contents/WriteBox';
 import Draw from './Contents/Draw';
-import { DEFAULT_OPTIONS } from '../../constatns';
+import Projects from './Contents/Projects';
+import { DEFAULT_OPTIONS } from '../../constants';
 
 class Sprite extends Component {
     constructor(props) {
@@ -32,13 +33,6 @@ class Sprite extends Component {
         if (!navigation) {
             return [];
         }
-
-        if (this.props.write) {
-            navigation.write = { name: '글 상자' };
-        } else {
-            delete navigation.write;
-        }
-
         return navigation;
     }
 
@@ -46,9 +40,8 @@ class Sprite extends Component {
         window.onpopstate = this.close;
         window.history.pushState({}, 'popup');
     }
-
     componentWillMount() {
-        this.props.initState();
+        this.props.initState({type: this.options.mainType});
     }
     componentWillUnmount() {
         window.removeEventListener('onpopstate', this.close, false);
@@ -69,21 +62,20 @@ class Sprite extends Component {
             list: this.options.navigations,
             selected: this.state.navigation || this.props.type,
             onClicked: this.onNavigationClicked,
-            search: false,
         };
-        const data = this.options.data || this.props.popupReducer.data || [];
         const defaultNavigation = <Navigation {...navSettings} />;
         const contents = {
             select: {
                 view: (
                     <Select
-                        type={this.props.type}
+                        type={this.options.mainType}
                         subType={'sidebar'}
                         sidebar={this.options.sidebar}
-                        data={data}
+                        data={this.props.data || []}
+                        multiSelect={this.options.opt && this.options.opt.multiSelect}
                     />
                 ),
-                nav: <Navigation {...navSettings} search={true} />,
+                nav: <Navigation {...navSettings} searchOption={this.options.opt && this.options.opt.search} hidden={{type: this.props.type}}/>,
             },
             upload: {
                 view: <FileUpload />,
@@ -95,9 +87,17 @@ class Sprite extends Component {
                 view: <WriteBox fontOption={this.options.writeBoxOption} />,
             },
             expansion: {
-                view: <Select type={'bigicon'} data={data} />,
+                view: <Select type={'bigicon'} data={this.props.data || []} />,
                 nav: true,
             },
+            projects: {
+                view: <Projects type={navSettings.selected} data={this.props.data || { data : [] }}/>,
+                nav: <Navigation {...navSettings} searchOption={{category: true, date: true, order: true, query: true}} hidden={{type: navSettings.selected}}/>,
+            },
+            favorites: {
+                view: <Projects type={navSettings.selected} data={this.props.data || []}/>,
+                nav: <Navigation {...navSettings} searchOption={{category: true, date: true, order: true, query: true}} hidden={{type: navSettings.selected}}/>,
+            }
         };
 
         return (
@@ -114,10 +114,7 @@ class Sprite extends Component {
                 <div className={Styles.popup_wrap}>
                     <header className={Styles.pop_header}>
                         <h1>{this.options.title}</h1>
-                        <button
-                            onClick={this.close}
-                            className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}
-                        >
+                        <button onClick={this.close} className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}>
                             <span className={Styles.blind}>뒤로가기</span>
                         </button>
                     </header>
