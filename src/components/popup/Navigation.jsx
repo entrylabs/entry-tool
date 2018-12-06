@@ -6,39 +6,39 @@ import { triggerEvent } from '@actions';
 import Dropdown from '@components/widget/dropdown';
 import { EMIT_TYPES } from '@constants';
 
-const category_options = [
-    ['모든 작품', null],
-    ['게임', '게임'],
-    ['애니메이션', '애니메이션'],
-    ['미디어 아트', '미디어아트'],
-    ['피지컬', '피지컬'],
-    ['기타', '기타'],
-];
-
-const sort_options = [
-    ['최신순', 'updated'],
-    ['조회순', 'visit'],
-    ['좋아요순', 'likeCnt'],
-    ['댓글순', 'comment'],
-];
-
-const period_options = [
-    ['전체 기간', null],
-    ['오늘', '1'],
-    ['최근 1주일', '7'],
-    ['최근 1개월', '30'],
-    ['최근 3개월', '90'],
-];
-
 class Navigation extends Component {
     constructor(props) {
         super(props);
 
+        this.category_options = [
+            [CommonUtils.getLang('EntryStatic.art_category_all'), null],
+            [CommonUtils.getLang('EntryStatic.art_category_game'), '게임'],
+            [CommonUtils.getLang('EntryStatic.art_category_animation'), '애니메이션'],
+            [CommonUtils.getLang('EntryStatic.art_category_media'), '미디어아트'],
+            [CommonUtils.getLang('EntryStatic.art_category_physical'), '피지컬'],
+            [CommonUtils.getLang('EntryStatic.art_category_etc'), '기타'],
+        ];
+
+        this.sort_options = [
+            [CommonUtils.getLang('EntryStatic.art_sort_updated'), 'updated'],
+            [CommonUtils.getLang('EntryStatic.art_sort_visit'), 'visit'],
+            [CommonUtils.getLang('EntryStatic.art_sort_likeCnt'), 'likeCnt'],
+            [CommonUtils.getLang('EntryStatic.art_sort_comment'), 'comment'],
+        ];
+
+        this.period_options = [
+            [CommonUtils.getLang('EntryStatic.art_period_all'), null],
+            [CommonUtils.getLang('EntryStatic.art_period_day'), '1'],
+            [CommonUtils.getLang('EntryStatic.art_period_week'), '7'],
+            [CommonUtils.getLang('EntryStatic.art_period_month'), '30'],
+            [CommonUtils.getLang('EntryStatic.art_period_three_month'), '90'],
+        ];
+
         this.state = {
             searchQuery: '',
-            category: category_options[0],
-            sort: sort_options[0],
-            period: period_options[0],
+            category: this.category_options[0],
+            sort: this.sort_options[0],
+            period: this.period_options[0],
         };
 
         this.onSearchBtnClicked = this.onSearchBtnClicked.bind(this);
@@ -63,7 +63,7 @@ class Navigation extends Component {
                     onClick={this.props.onClicked}
                     data-key={item}
                 >
-                    <a href="#NULL">{list[item].name}</a>
+                    <a href="#NULL">{CommonUtils.getLang(list[item].name)}</a>
                 </li>
             );
         });
@@ -96,19 +96,19 @@ class Navigation extends Component {
                     {this.props.searchOption.category && <div className={`${Styles.pop_selectbox} ${Styles.on}`}>
                         <a href="#" className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}
                            onClick={e => {
-                               this.onDropDownClicked(e, 'category', category_options);
+                               this.onDropDownClicked(e, 'category', this.category_options);
                            }} title="모든 작품">{this.state.category[0]}</a>
                     </div>}
                     {this.props.searchOption.order && <div className={Styles.pop_selectbox}>
                         <a href="#" className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}
                            onClick={e => {
-                               this.onDropDownClicked(e, 'sort', sort_options);
+                               this.onDropDownClicked(e, 'sort', this.sort_options);
                            }} title="최신순">{this.state.sort[0]}</a>
                     </div>}
                     {this.props.searchOption.date && <div className={Styles.pop_selectbox}>
                         <a href="#" className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}
                            onClick={e => {
-                               this.onDropDownClicked(e, 'period', period_options);
+                               this.onDropDownClicked(e, 'period', this.period_options);
                            }} title="전체기간">{this.state.period[0]}</a>
                     </div>}
                     {this.props.searchOption.query && <div className={Styles.srch_box}>

@@ -75,7 +75,7 @@ class Projects extends Component {
                     <div className={Styles.section_cont}>
                         {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
                         <h2 className={Styles.blind}>나의 작품</h2>
-                        <strong className={Styles.list_sjt}>전체 ({this.props.data.data.length})</strong>
+                        <strong className={Styles.list_sjt}>{CommonUtils.getLang("Menus.all")} ({this.props.data.data.length})</strong>
                         <div className={Styles.scroll_box}>
                             <ul className={Styles.list}>
                                 {this.drawIems()}
@@ -84,8 +84,8 @@ class Projects extends Component {
                     </div>
                 </section>
                 <div className={Styles.pop_btn_box}>
-                    <a href="#NULL" onClick={(e) => {this.triggerEvent(e, EMIT_TYPES.close, null)}}>취소</a>
-                    <a href="#" className={Styles.active} onClick={(e) => {this.triggerEvent(e, EMIT_TYPES.submit, this.state.selected)}}>불러오기</a>
+                    <a href="#NULL" onClick={(e) => {this.triggerEvent(e, EMIT_TYPES.close, null)}}>{CommonUtils.getLang("Buttons.cancel")}</a>
+                    <a href="#" className={Styles.active} onClick={(e) => {this.triggerEvent(e, EMIT_TYPES.submit, this.state.selected)}}>{CommonUtils.getLang("Menus.Load")}</a>
                 </div>
             </React.Fragment>
         );

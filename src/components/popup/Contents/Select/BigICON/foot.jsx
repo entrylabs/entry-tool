@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Styles from '@assets/scss/popup.scss';
 import { triggerEvent } from '@actions/index';
 import { EMIT_TYPES } from '@constants';
+import { CommonUtils } from '@utils/Common';
 
 class Foot extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class Foot extends Component {
         return (
             <div className={Styles.pop_btn_box}>
                 <a href="#NULL" onClick={(e) => this.handleSubmit(e, EMIT_TYPES.close)}>
-                    취소
+                    {CommonUtils.getLang("Buttons.cancel")}
                 </a>
                 <a
                     href="#NULL"
@@ -28,7 +29,7 @@ class Foot extends Component {
                         this.handleSubmit(e, EMIT_TYPES.submit, { selected: this.props.popupReducer.selected })
                     }
                 >
-                    추가하기
+                    {CommonUtils.getLang("Buttons.add")}
                 </a>
             </div>
         );

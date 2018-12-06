@@ -54,7 +54,7 @@ class Item extends Component {
                         &nbsp;
                     </div>
                     <div className={Styles.inner_box}>
-                        <strong className={Styles.sjt}>{item.title.ko}</strong>
+                        <strong className={Styles.sjt}>{item.title[CommonUtils.getLangType()]}</strong>
                         <p className={Styles.dsc}>{item.description}</p>
                     </div>
                 </a>

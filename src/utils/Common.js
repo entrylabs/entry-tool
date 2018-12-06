@@ -1,6 +1,11 @@
 import root from 'window-or-global';
+import cookies from 'react-cookies';
+import get from 'lodash/get';
 
 export const CommonUtils = {
+    getLangType: () => {
+        return cookies.load("lang");
+    },
      getLang: (key = '') => {
         const lang = root.Lang || {};
         return get(lang, key) || key;

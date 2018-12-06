@@ -29,7 +29,7 @@ class SubMenu extends Component {
                     key={item.name}
                     data-key={key}
                 >
-                    {item.name}
+                    {CommonUtils.getLang(item.name)}
                 </a>
             );
         });

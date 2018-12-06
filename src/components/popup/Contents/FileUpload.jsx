@@ -14,7 +14,7 @@ class Item extends Component {
     }
 
     drawImage() {
-        if (this.props.reducer.type && this.props.reducer.type === 'sound') {
+        if (this.props.popupReducer.type && this.props.popupReducer.type === 'sound') {
             return <div className={`${Styles.thmb} ${Styles.imico_pop_sound_thmb}`}>&nbsp;</div>;
         }
         return (
@@ -233,7 +233,8 @@ class FileUpload extends Component {
                     <h2 className={Styles.blind}>파일 올리기</h2>
                     <div className={Styles.section_cont}>
                         <p className={`${Styles.caution} ${Styles.imico_pop_caution}`}>
-                            10MB 이하의 jpg, png, bmp 또는 eo 형식의 오브젝트를 추가할 수 있습니다.
+                            {this.props.popupReducer.type == "sprite" && CommonUtils.getLang("Menus.sprite_upload_warn")}
+                            {this.props.popupReducer.type == "sound" && CommonUtils.getLang("Menus.sound_upload_warn_1")}
                         </p>
 
                         <div
@@ -247,7 +248,7 @@ class FileUpload extends Component {
                                     htmlFor="inpt_file"
                                     className={`${Styles.upload} ${Styles.imbtn_pop_upload}`}
                                 >
-                                    파일 올리기
+                                    {CommonUtils.getLang("Workspace.upload_addfile")}
                                 </label>
                                 <input
                                     type="file"
@@ -263,34 +264,33 @@ class FileUpload extends Component {
                             </ul>
                         </div>
 
-                        <div className={Styles.img_caution_box}>
+                        {this.props.popupReducer.type == "sprite" && <div className={Styles.img_caution_box}>
                             <div className={Styles.inner}>
                                 <span className={`${Styles.thmb} ${Styles.imico_warning}`}>
                                     &nbsp;
                                 </span>
                                 <div className={Styles.dsc_box}>
                                     <strong>
-                                        아래와 같은 그림은 이용약관 및 관련 법률에 의해 제재를
-                                        받으실 수 있습니다.
+                                        {CommonUtils.getLang("Menus.file_upload_desc_1")}
                                     </strong>
                                     <p className={Styles.dsc}>
-                                        폭력적이고 잔인한 그림
+                                        {CommonUtils.getLang("Menus.file_upload_desc_2")}
                                         <br />
-                                        선정적인 신체 노출 그림
+                                        {CommonUtils.getLang("Menus.file_upload_desc_3")}
                                         <br />
-                                        불쾌감을 주거나 혐오감을 일으키는 그림
+                                        {CommonUtils.getLang("Menus.file_upload_desc_4")}
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </div>}
                     </div>
                 </section>
                 <div className={Styles.pop_btn_box}>
                     <a href="#NULL" onClick={() => this.props.triggerEvent('close', null, true)}>
-                        취소
+                        {CommonUtils.getLang("Buttons.cancel")}
                     </a>
                     <a href="#NULL" className={Styles.active} onClick={this.onApplyItemClicked}>
-                        추가하기
+                        {CommonUtils.getLang("Buttons.add")}
                     </a>
                 </div>
             </React.Fragment>

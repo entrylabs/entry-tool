@@ -11,6 +11,7 @@ import WriteBox from './Contents/WriteBox';
 import Draw from './Contents/Draw';
 import Projects from './Contents/Projects';
 import { DEFAULT_OPTIONS } from '../../constants';
+import { CommonUtils } from '@utils/Common';
 
 class Sprite extends Component {
     constructor(props) {
@@ -21,6 +22,9 @@ class Sprite extends Component {
             ...this.props,
         };
         this.options.navigations = this.initNavigations();
+        if(this.props.fonts) {
+            this.options.writeBoxOption.FONTS = this.props.fonts;
+        }
 
         this.state = {
             navigation: Object.keys(this.options.navigations)[0],
@@ -113,7 +117,7 @@ class Sprite extends Component {
             <div>
                 <div className={Styles.popup_wrap}>
                     <header className={Styles.pop_header}>
-                        <h1>{this.options.title}</h1>
+                        <h1>{CommonUtils.getLang(this.options.title)}</h1>
                         <button onClick={this.close} className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}>
                             <span className={Styles.blind}>뒤로가기</span>
                         </button>

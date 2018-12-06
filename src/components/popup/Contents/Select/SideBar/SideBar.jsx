@@ -31,7 +31,7 @@ class SideBar extends Component {
             return (
                 <li key={item} data-key={item} onClick={this.onSidebarCliecked}
                     className={CommonUtils.toggleClass(sidebar === item || (!sidebar && index === 0), Styles.on)}>
-                    <a href="#NULL">{list[item].name}</a>
+                    <a href="#NULL">{CommonUtils.getLang(list[item].name)}</a>
                 </li>
             );
         });

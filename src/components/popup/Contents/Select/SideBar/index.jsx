@@ -7,6 +7,7 @@ import Selected from './Selected';
 import Styles from '@assets/scss/popup.scss';
 import Foot from './foot';
 import { triggerEvent } from '@actions';
+import { setUIParam } from '@actions/popup';
 import { EMIT_TYPES } from '@constants';
 
 class Index extends Component {
@@ -15,7 +16,10 @@ class Index extends Component {
 
         this.drawItems = this.drawItems.bind(this);
         this.getMenus = this.getMenus.bind(this);
-        this.props.triggerEvent(EMIT_TYPES.fetch, {type: this.props.popupReducer.type, sidebar: Object.keys(this.props.sidebar)[0]}, false);
+
+        const initOpt = {type: this.props.popupReducer.type, sidebar: Object.keys(this.props.sidebar)[0], subMenu: 'all'};
+        this.props.triggerEvent(EMIT_TYPES.fetch, initOpt, false);
+        this.props.setUIParam(initOpt);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -80,6 +84,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     triggerEvent: (event, data, hidden) => dispatch(triggerEvent(event, data, hidden)),
+    setUIParam: (data) => dispatch(setUIParam(data)),
 });
 
 export default connect(

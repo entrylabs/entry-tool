@@ -14,17 +14,17 @@ const FIELDS = {
         inputInnerStyle: null,
         inputType: 'input',
         descriptions: [
-            '내용을 한 줄로만 작성할 수 있습니다.',
-            '새로운 글자가 추가되면 글상자의 좌우 길이가 길어집니다.',
+            'Menus.linebreak_off_desc_2',
+            'Menus.linebreak_off_desc_3',
         ],
     },
     multi: {
         inputInnerStyle: { height: '228px' },
         inputType: 'textarea',
         descriptions: [
-            '내용 작성 시 엔터키로 줄바꿈을 할 수 있습니다.',
-            '글상자의 크기가 글자가 쓰일 수 있는 영역을 결정 합니다.',
-            '새로운 글자 추가 시 문장의 길이가 글상자의 기로 영역을 넘어가면 자동으로 줄이 바뀝니다.',
+            'Menus.linebreak_on_desc_2',
+            'Menus.linebreak_on_desc_1',
+            'Menus.linebreak_on_desc_3',
         ],
     },
 };
@@ -89,7 +89,7 @@ class Input extends Component {
                         htmlFor="inpt"
                         style={{ display: CommonUtils.toggleClass(this.state.active, 'none') }}
                     >
-                        글상자의 내용을 입력하세요.
+                        {CommonUtils.getLang("Workspace.textbox_input")}
                     </label>
                     <filed.inputType
                         type="text"
@@ -279,7 +279,7 @@ class WriteBox extends Component {
                                                 );
                                             }}
                                         >
-                                            한줄쓰기
+                                            {CommonUtils.getLang("Buttons.single_line")}
                                         </a>
                                         <a
                                             href="#NULL"
@@ -293,7 +293,7 @@ class WriteBox extends Component {
                                                 );
                                             }}
                                         >
-                                            여러 줄 쓰기
+                                            {CommonUtils.getLang("Buttons.multi_line")}
                                         </a>
                                     </div>
                                 </div>
@@ -313,10 +313,10 @@ class WriteBox extends Component {
                 </section>
                 <div className={Styles.pop_btn_box}>
                     <a href="#NULL" onClick={() => this.props.triggerEvent(EMIT_TYPES.close, null, true)}>
-                        취소
+                        {CommonUtils.getLang("Buttons.cancel")}
                     </a>
                     <a href="#NULL" className={Styles.active} onClick={this.onSubmitBtnClicked}>
-                        추가하기
+                        {CommonUtils.getLang("Buttons.apply")}
                     </a>
                 </div>
             </React.Fragment>

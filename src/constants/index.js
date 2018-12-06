@@ -12,104 +12,104 @@ export const EMIT_TYPES = {
 
 const SPRITE_SIDEBAR = {
     entrybot_friends: {
-        name: '엔트리 봇',
+        name: 'Category.entrybot_friends',
             sub: {
-            all: { name: '전체' },
+            all: { name: 'Menus.all' },
         },
     },
     people: {
-        name: '사람',
+        name: 'Category.people',
             sub: {
-            all: { name: '전체' },
+            all: { name: 'Menus.all' },
         },
     },
     animal: {
-        name: '동물',
+        name: 'Category.animal',
             sub: {
-            all: { name: '전체' },
-            animal_flying: { name: '하늘' },
-            animal_land: { name: '땅' },
-            animal_water: { name: '물' },
-            animal_others: { name: '기타' },
+            all: { name: 'Menus.all' },
+            animal_flying: { name: 'Category.animal_flying' },
+            animal_land: { name: 'Category.animal_land' },
+            animal_water: { name: 'Category.animal_water' },
+            animal_others: { name: 'Category.animal_others' },
         },
     },
     plant: {
-        name: '식물',
+        name: 'Category.plant',
             sub: {
-            all: { name: '전체' },
-            plant_flower: { name: '꽃' },
-            plant_grass: { name: '풀' },
-            plant_tree: { name: '나무' },
-            plant_others: { name: '기타' },
+            all: { name: 'Menus.all' },
+            plant_flower: { name: 'Category.plant_flower' },
+            plant_grass: { name: 'Category.plant_grass' },
+            plant_tree: { name: 'Category.plant_tree' },
+            plant_others: { name: 'Category.plant_others' },
         },
     },
     vehicles: {
-        name: '탈것',
+        name: 'Category.vehicles',
             sub: {
-            all: { name: '전체' },
-            vehicles_flying: { name: '하늘' },
-            vehicles_land: { name: '땅' },
-            vehicles_water: { name: '물' },
-            vehicles_others: { name: '기타' },
+            all: { name: 'Menus.all' },
+            vehicles_flying: { name: 'Category.vehicles_flying' },
+            vehicles_land: { name: 'Category.vehicles_land' },
+            vehicles_water: { name: 'Category.vehicles_water' },
+            vehicles_others: { name: 'Category.vehicles_others' },
         },
     },
     architect: {
-        name: '건물',
+        name: 'Category.architect',
             sub: {
-            all: { name: '전체' },
-            architect_building: { name: '건축물' },
-            architect_monument: { name: '기념물' },
-            architect_others: { name: '기타' },
+            all: { name: 'Menus.all' },
+            architect_building: { name: 'Category.architect_building' },
+            architect_monument: { name: 'Category.architect_monument' },
+            architect_others: { name: 'Category.architect_others' },
         },
     },
     food: {
-        name: '음식',
+        name: 'Category.food',
             sub: {
-            all: { name: '전체' },
-            food_vegetables: { name: '과일/채소' },
-            food_meat: { name: '고기' },
-            food_drink: { name: '음료' },
-            food_others: { name: '기타' },
+            all: { name: 'Menus.all' },
+            food_vegetables: { name: 'Category.food_vegetables' },
+            food_meat: { name: 'Category.food_meat' },
+            food_drink: { name: 'Category.food_drink' },
+            food_others: { name: 'Category.food_others' },
         },
     },
     environment: {
-        name: '환경',
+        name: 'Category.environment',
             sub: {
-            all: { name: '전체' },
-            environment_nature: { name: '자연' },
-            environment_space: { name: '우주' },
-            environment_others: { name: '기타' },
+            all: { name: 'Menus.all' },
+            environment_nature: { name: 'Category.environment_nature' },
+            environment_space: { name: 'Category.environment_space' },
+            environment_others: { name: 'Category.environment_others' },
         },
     },
     stuff: {
-        name: '물건',
+        name: 'Category.stuff',
             sub: {
-            all: { name: '전체' },
-            stuff_living: { name: '생활' },
-            stuff_hobby: { name: '취미' },
-            stuff_others: { name: '기타' },
+            all: { name: 'Menus.all' },
+            stuff_living: { name: 'Category.stuff_living' },
+            stuff_hobby: { name: 'Category.stuff_hobby' },
+            stuff_others: { name: 'Category.stuff_others' },
         },
     },
     fantasy: {
-        name: '판타지',
+        name: 'Category.fantasy',
             sub: {
-            all: { name: '전체' },
+            all: { name: 'Menus.all' },
         },
     },
     interface: {
-        name: '인터페이스',
+        name: 'Category.interface',
             sub: {
-            all: { name: '전체' },
+            all: { name: 'Menus.all' },
         },
     },
     background: {
-        name: '배경',
+        name: 'Category.background',
             sub: {
-            all: { name: '전체' },
-            background_outdoor: { name: '실외' },
-            background_indoor: { name: '실내' },
-            background_nature: { name: '자연' },
-            background_others: { name: '기타' },
+            all: { name: 'Menus.all' },
+            background_outdoor: { name: 'Category.background_outdoor' },
+            background_indoor: { name: 'Category.background_indoor' },
+            background_nature: { name: 'Category.background_nature' },
+            background_others: { name: 'Category.background_others' },
         },
     },
 };
@@ -201,20 +201,20 @@ export const DEFAULT_OPTIONS = {
     },
     POPUP_TYPE: {
         sprite: {
-            title: '오브젝트 추가하기',
+            title: 'Workspace.add_object',
             mainType: 'sprite',
             navigations: {
                 select: {
-                    name: '오브젝트 선택',
+                    name: 'Workspace.select_library',
                 },
                 upload: {
-                    name: '파일 올리기',
+                    name: 'Workspace.upload',
                 },
                 draw: {
-                    name: '그리기',
+                    name: 'Workspace.draw_new',
                 },
                 write: {
-                    name: '글 상자'
+                    name: 'Workspace.textbox'
                 }
             },
             opt : {
@@ -224,17 +224,17 @@ export const DEFAULT_OPTIONS = {
             sidebar: SPRITE_SIDEBAR
         },
         shape: {
-            title: '모양 추가하기',
+            title: 'Workspace.add_picture',
             mainType: 'sprite',
             navigations: {
                 select: {
-                    name: '오브젝트 선택',
+                    name: 'Workspace.select_library',
                 },
                 upload: {
-                    name: '파일 올리기',
+                    name: 'Workspace.upload',
                 },
                 draw: {
-                    name: '그리기',
+                    name: 'Workspace.draw_new',
                 },
             },
             opt : {
@@ -244,14 +244,14 @@ export const DEFAULT_OPTIONS = {
             sidebar: SPRITE_SIDEBAR
         },
         getShape: {
-            title: '모양 가져오기',
+            title: 'Menus.picture_import',
             mainType: 'sprite',
             navigations: {
                 select: {
-                    name: '오브젝트 선택',
+                    name: 'Workspace.select_library',
                 },
                 upload: {
-                    name: '파일 올리기',
+                    name: 'Workspace.upload',
                 },
             },
             opt : {
@@ -260,14 +260,14 @@ export const DEFAULT_OPTIONS = {
             sidebar: SPRITE_SIDEBAR
         },
         sound: {
-            title: '소리 추가하기',
+            title: 'Workspace.sound_add',
             mainType: 'sound',
             navigations: {
                 select: {
-                    name: '소리 선택',
+                    name: 'Workspace.select_sound',
                 },
                 upload: {
-                    name: '파일 올리기',
+                    name: 'Workspace.upload',
                 },
             },
             opt : {
@@ -276,59 +276,59 @@ export const DEFAULT_OPTIONS = {
             },
             sidebar: {
                 사람: {
-                    name: '사람',
+                    name: 'Menus.people',
                     sub: {
-                        all: { name: '전체' },
-                        일상생활: { name: '일상생활' },
+                        all: { name: 'Menus.all' },
+                        일상생활: { name: 'Menus.life' },
                     },
                 },
                 자연: {
-                    name: '자연',
+                    name: 'Menus.nature',
                     sub: {
-                        all: { name: '전체' },
-                        동물: { name: '동물/곤충' },
+                        all: { name: 'Menus.all' },
+                        동물: { name: 'Menus.animal_insect' },
                     },
                 },
                 사물: {
-                    name: '사물',
+                    name: 'Menus.things',
                     sub: {
-                        all: { name: '전체' },
-                        이동수단: { name: '이동수단' },
-                        기타: { name: '기타' },
+                        all: { name: 'Menus.all' },
+                        이동수단: { name: 'Menus.vehicles' },
+                        기타: { name: 'Menus.others' },
                     },
                 },
                 판타지: {
-                    name: '판타지',
+                    name: 'Menus.fantasy',
                     sub: {
-                        all: { name: '전체' },
+                        all: { name: 'Menus.all' },
                     },
                 },
                 악기: {
-                    name: '악기',
+                    name: 'Menus.instrument',
                     sub: {
-                        all: { name: '전체' },
-                        피아노: { name: '피아노' },
-                        마림바: { name: '마림바' },
-                        드럼: { name: '드럼' },
-                        장구: { name: '장구' },
-                        효과음: { name: '효과음' },
-                        기타타악기: { name: '기타타악기' },
+                        all: { name: 'Menus.all' },
+                        피아노: { name: 'Menus.piano' },
+                        마림바: { name: 'Menus.marimba' },
+                        드럼: { name: 'Menus.drum' },
+                        장구: { name: 'Menus.janggu' },
+                        효과음: { name: 'Menus.sound_effect' },
+                        기타타악기: { name: 'Menus.others_instrument' },
                     },
                 },
             },
         },
         expansion: {
-            title: '확장블록 추가하기',
+            title: 'Workspace.load_exapnsion_block',
             mainType: 'expansion',
         },
         projects: {
-            title: '나의 작품',
+            title: 'Menus.my_project',
             navigations: {
                 projects: {
-                    name: '나의 작품',
+                    name: 'Menus.my_project',
                 },
                 favorites: {
-                    name: '관심 작품',
+                    name: 'Menus.marked_project',
                 },
             }
         }
