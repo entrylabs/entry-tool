@@ -61,7 +61,7 @@ class Item extends Component {
             >
                 <a href="#NULL" className={Styles.link}>
                     {this.drawImage()}
-                    <em className={Styles.sjt}>{this.props.item.label[CommonUtils.getLangType()]}</em>
+                    <em className={Styles.sjt}>{this.props.item.label[CommonUtils.getLangType()] || this.props.item.label.en}</em>
                 </a>
             </li>
         );

@@ -26,7 +26,7 @@ class CustomSlide extends Component {
         return (
             <div className={Styles.select_item} {...props}>
                 <div className={TYPE_MAP[type].imageClass}>{TYPE_MAP[type].imageContent(item)}</div>
-                <em className={Styles.sjt}>{this.props.item.label[CommonUtils.getLangType()]}</em>
+                <em className={Styles.sjt}>{this.props.item.label[CommonUtils.getLangType()] || this.props.item.label.en}</em>
                 <a
                     href="#NULL"
                     className={`${Styles.btn_del} ${Styles.imbtn_pop_chk_del}`}

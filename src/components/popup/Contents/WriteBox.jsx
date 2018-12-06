@@ -101,7 +101,7 @@ class Input extends Component {
                 </div>
                 <ul className={Styles.list}>
                     {filed.descriptions.map((description, index) => (
-                        <li key={index}>{description}</li>
+                        <li key={index}>{CommonUtils.getLang(description)}</li>
                     ))}
                 </ul>
             </div>

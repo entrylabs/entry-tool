@@ -14,16 +14,13 @@ class Item extends Component {
     }
 
     drawImage() {
-        if (this.props.popupReducer.type && this.props.popupReducer.type === 'sound') {
+        if (this.props.reducer.type && this.props.reducer.type === 'sound') {
             return <div className={`${Styles.thmb} ${Styles.imico_pop_sound_thmb}`}>&nbsp;</div>;
         }
         return (
             <div className={Styles.thmb}>
                 <img
-                    src={
-                        this.props.item.fileurl ||
-                        CommonUtils.createImageUrl(this.props.item.filename)
-                    }
+                    src={this.props.item.fileurl || CommonUtils.createImageUrl(this.props.item.filename)}
                     alt=""
                 />
             </div>
