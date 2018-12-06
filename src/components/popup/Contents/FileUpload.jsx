@@ -102,10 +102,10 @@ class FileUpload extends Component {
         const isImage = /^image\//.test(file.type);
         const isGif = /^image\/gif/.test(file.type);
         const isObject = /\.eo$/.test(file.name);
-        const isAudio = file.name.toLowerCase().indexOf('.mp3');
+        const isAudio = file.name.toLowerCase().indexOf('.mp3') >= 0;
         const splittedNames = file.name.split('.');
         const ext = splittedNames[splittedNames.length -1];
-
+        const allowed = this.props.options.uploadAllowed;
         if (file.size > 1024 * 1024 * 10) {
             this.props.triggerEvent(
                 'uploadFail',
@@ -118,14 +118,14 @@ class FileUpload extends Component {
             return this.triggerNotSuportFileError();
         }
 
-        if (_includes(this.props.options.uploadAllowed, "sound") && isAudio) {
+        if (allowed.sound && isAudio) {
             return 'sound';
         };
 
-        if (_includes(this.props.options.uploadAllowed, "object") && isObject) {
+        if (allowed.object && isObject) {
             return 'object';
         }
-        if (_includes(this.props.options.uploadAllowed, "image") && isImage) {
+        if (allowed.image && isImage) {
             return 'image';
         }
 
@@ -225,6 +225,20 @@ class FileUpload extends Component {
         });
     }
 
+    getWarnMsg() {
+        const allowed = this.props.options.uploadAllowed;
+        if (allowed.sound) {
+            return CommonUtils.getLang("Menus.sound_upload_warn_1");
+        }
+        if (allowed.object && allowed.image) {
+            return CommonUtils.getLang("Menus.sprite_upload_warn");
+        }
+        if (!allowed.object && allowed.image) {
+            return CommonUtils.getLang("Menus.picture_upload_warn_1");
+        }
+        return "";
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -233,8 +247,7 @@ class FileUpload extends Component {
                     <h2 className={Styles.blind}>파일 올리기</h2>
                     <div className={Styles.section_cont}>
                         <p className={`${Styles.caution} ${Styles.imico_pop_caution}`}>
-                            {this.props.popupReducer.type == "sprite" && CommonUtils.getLang("Menus.sprite_upload_warn")}
-                            {this.props.popupReducer.type == "sound" && CommonUtils.getLang("Menus.sound_upload_warn_1")}
+                            {this.getWarnMsg()}
                         </p>
 
                         <div
@@ -264,7 +277,7 @@ class FileUpload extends Component {
                             </ul>
                         </div>
 
-                        {this.props.popupReducer.type == "sprite" && <div className={Styles.img_caution_box}>
+                        {this.props.options.uploadAllowed.image && <div className={Styles.img_caution_box}>
                             <div className={Styles.inner}>
                                 <span className={`${Styles.thmb} ${Styles.imico_warning}`}>
                                     &nbsp;
