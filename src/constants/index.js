@@ -219,7 +219,9 @@ export const DEFAULT_OPTIONS = {
             },
             opt : {
               search : {query: true},
-              multiSelect: true
+              multiSelect: true,
+              uploadAllowed: ["image", "object"],
+              uploadNotAllowedExt: ["gif"]
             },
             sidebar: SPRITE_SIDEBAR
         },
@@ -239,7 +241,9 @@ export const DEFAULT_OPTIONS = {
             },
             opt : {
                 search : {query: true},
-                multiSelect: true
+                multiSelect: true,
+                uploadAllowed: ["image", "object"],
+                uploadNotAllowedExt: ["gif"]
             },
             sidebar: SPRITE_SIDEBAR
         },
@@ -255,7 +259,9 @@ export const DEFAULT_OPTIONS = {
                 },
             },
             opt : {
-                multiSelect: false
+                multiSelect: false,
+                uploadAllowed: ["image"],
+                uploadNotAllowedExt: ["gif"]
             },
             sidebar: SPRITE_SIDEBAR
         },
@@ -272,7 +278,8 @@ export const DEFAULT_OPTIONS = {
             },
             opt : {
                 search : {query: true},
-                multiSelect: true
+                multiSelect: true,
+                uploadAllowed: ["sound"]
             },
             sidebar: {
                 사람: {

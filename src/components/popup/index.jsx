@@ -82,7 +82,7 @@ class Sprite extends Component {
                 nav: <Navigation {...navSettings} searchOption={this.options.opt && this.options.opt.search} hidden={{type: this.props.type}}/>,
             },
             upload: {
-                view: <FileUpload />,
+                view: <FileUpload options={this.options.opt}/>,
             },
             draw: {
                 view: <Draw />,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import range from 'lodash/range';
+import _includes from 'lodash/includes';
 import Styles from '@assets/scss/popup.scss';
 import { uploadItem } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
@@ -85,11 +86,25 @@ class FileUpload extends Component {
         return true;
     }
 
+    triggerNotSuportFileError() {
+        this.props.triggerEvent(
+            'uploadFail',
+            {
+                messageParent: 'Workspace',
+                message: 'upload_not_supported_file_msg',
+            },
+            false
+        );
+        return false;
+    }
+
     checkFIleType(file) {
         const isImage = /^image\//.test(file.type);
         const isGif = /^image\/gif/.test(file.type);
         const isObject = /\.eo$/.test(file.name);
         const isAudio = file.name.toLowerCase().indexOf('.mp3');
+        const splittedNames = file.name.split('.');
+        const ext = splittedNames[splittedNames.length -1];
 
         if (file.size > 1024 * 1024 * 10) {
             this.props.triggerEvent(
@@ -99,35 +114,22 @@ class FileUpload extends Component {
             );
             return false;
         }
-
-        switch (this.props.popupReducer.type) {
-            case 'sprite':
-                if (!isObject && (!isImage || isGif)) {
-                    this.props.triggerEvent(
-                        'uploadFail',
-                        {
-                            messageParent: 'Workspace',
-                            message: 'upload_not_supported_file_msg',
-                        },
-                        false
-                    );
-                    return false;
-                }
-
-                if (isObject) {
-                    return 'object';
-                }
-                break;
-            case 'sound':
-                if (isAudio < 0) {
-                    return false;
-                }
-                break;
-            default:
-                return false;
+        if(_includes(this.props.options.uploadNotAllowedExt, ext)) {
+            return this.triggerNotSuportFileError();
         }
 
-        return this.props.popupReducer.type;
+        if (_includes(this.props.options.uploadAllowed, "sound") && isAudio) {
+            return 'sound';
+        };
+
+        if (_includes(this.props.options.uploadAllowed, "object") && isObject) {
+            return 'object';
+        }
+        if (_includes(this.props.options.uploadAllowed, "image") && isImage) {
+            return 'image';
+        }
+
+        return this.triggerNotSuportFileError();
     }
 
     upload(formData, objectData) {
@@ -165,7 +167,7 @@ class FileUpload extends Component {
             const file = uploadFiles.item(idx);
             switch (this.checkFIleType(file)) {
                 case 'sound':
-                case 'sprite':
+                case 'image':
                     formData.append(`uploadFile${idx}`, file);
                     break;
                 case 'object':
@@ -197,6 +199,7 @@ class FileUpload extends Component {
     onItemClick(item) {
         const index = this.getExcludedIndex(item);
         const excluded = this.state.excluded;
+
         if (index >= 0) {
             excluded.splice(index, 1);
             this.props.triggerEvent('itemoff', null, false);
