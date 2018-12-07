@@ -1,5 +1,6 @@
 import root from 'window-or-global';
 import cookies from 'react-cookies';
+import { DEFAULT_OPTIONS } from '../constants/index';
 import get from 'lodash/get';
 
 export const CommonUtils = {
@@ -9,6 +10,12 @@ export const CommonUtils = {
      getLang: (key = '') => {
         const lang = root.Lang || {};
         return get(lang, key) || key;
+    },
+    getFonts: () => {
+        if(root.Entry && root.Entry.fonts) {
+            return root.Entry.fonts;
+        }
+        return DEFAULT_OPTIONS.WRITE_BOX.FONTS;
     },
     toggleClass: (isActive, className, falseClassName = '') => {
         if (isActive) {

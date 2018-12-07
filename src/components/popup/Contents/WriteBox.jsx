@@ -113,11 +113,12 @@ class WriteBox extends Component {
     constructor(props) {
         super(props);
 
+        this.fonts = CommonUtils.getFonts();
         this.state = {
             writeType: 'one',
             effects: _.cloneDeep(this.props.fontOption.EFFECTS),
-            fonts: this.props.fontOption.FONTS,
-            font: this.props.fontOption.FONTS[0],
+            fonts: this.fonts,
+            font: this.fonts[0],
         };
 
         this.onEffectBtnClicked = this.onEffectBtnClicked.bind(this);

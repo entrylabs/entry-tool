@@ -22,10 +22,6 @@ class Sprite extends Component {
             ...this.props,
         };
         this.options.navigations = this.initNavigations();
-        if(this.props.fonts) {
-            this.options.writeBoxOption.FONTS = this.props.fonts;
-        }
-
         this.state = {
             navigation: Object.keys(this.options.navigations)[0],
         };
