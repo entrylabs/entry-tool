@@ -12,8 +12,8 @@ export const CommonUtils = {
         return get(lang, key) || key;
     },
     getFonts: () => {
-        if(root.Entry && root.Entry.fonts) {
-            return root.Entry.fonts;
+        if(root.EntryStatic && root.EntryStatic.fonts) {
+            return root.EntryStatic.fonts;
         }
         return DEFAULT_OPTIONS.WRITE_BOX.FONTS;
     },
