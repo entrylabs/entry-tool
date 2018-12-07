@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Styles from '@assets/scss/popup.scss';
 import { triggerEvent } from '@actions';
+import { EMIT_TYPES } from '@constants';
+import { CommonUtils } from '@utils/Common';
 
 class Draw extends Component {
     constructor(props) {
@@ -25,9 +27,9 @@ class Draw extends Component {
                                 &nbsp;
                             </div>
                             <p className={Styles.draw_dsc}>
-                                그림을 그려 오브젝트로 저장할 수 있습니다.
+                                {CommonUtils.getLang("Menus.draw_new_ques_1")}
                                 <br />
-                                그리기 화면으로 이동하시겠습니까?
+                                {CommonUtils.getLang("Menus.draw_new_ques_2")}
                             </p>
                             <div className={Styles.pop_btn_box}>
                                 <a
@@ -35,7 +37,7 @@ class Draw extends Component {
                                     className={Styles.active}
                                     onClick={() => this.handleSubmit()}
                                 >
-                                    이동하기
+                                    {CommonUtils.getLang("Menus.draw_new_go")}
                                 </a>
                             </div>
                         </div>
@@ -47,7 +49,7 @@ class Draw extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    triggerEvent: (data) => dispatch(triggerEvent('draw', data)),
+    triggerEvent: (data) => dispatch(triggerEvent(EMIT_TYPES.draw, data)),
 });
 
 export default connect(

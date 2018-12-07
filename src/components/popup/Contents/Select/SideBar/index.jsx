@@ -7,7 +7,8 @@ import Selected from './Selected';
 import Styles from '@assets/scss/popup.scss';
 import Foot from './foot';
 import { triggerEvent } from '@actions';
-import { fetchItems } from '@actions/popup';
+import { setUIParam } from '@actions/popup';
+import { EMIT_TYPES } from '@constants';
 
 class Index extends Component {
     constructor(props) {
@@ -15,17 +16,22 @@ class Index extends Component {
 
         this.drawItems = this.drawItems.bind(this);
         this.getMenus = this.getMenus.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+
+        const initOpt = {type: this.props.popupReducer.type, sidebar: Object.keys(this.props.sidebar)[0], subMenu: 'all'};
+        this.props.triggerEvent(EMIT_TYPES.fetch, initOpt, false);
+        this.props.setUIParam(initOpt);
     }
 
-    componentWillMount() {
-        if (this.props.popupReducer.data.length === 0) {
-            this.props.fetchItems(this.props.type, Object.keys(this.props.sidebar || [])[0]);
+    componentWillReceiveProps(nextProps) {
+        const before = this.props.popupReducer;
+        const next = nextProps.popupReducer;
+        if(before.type !== next.type || before.sidebar !== next.sidebar || before.subMenu !== next.subMenu) {
+            this.props.triggerEvent(EMIT_TYPES.fetch, {type: next.type, sidebar: next.sidebar, subMenu: next.subMenu}, false);
         }
     }
 
     drawItems() {
-        return this.props.data.map((item) => <Item key={item._id} item={item} />);
+        return this.props.data.data.map((item) => <Item key={item._id} item={item} multiSelect={this.props.multiSelect}/>);
     }
 
     getMenus() {
@@ -37,10 +43,6 @@ class Index extends Component {
             return this.props.sidebar[subTitle].sub;
         }
         return this.props.sidebar[Object.keys(this.props.sidebar)[0]].sub;
-    }
-
-    handleSubmit(event, data) {
-        this.props.triggerEvent(event, data);
     }
 
     drawListBox() {
@@ -67,7 +69,7 @@ class Index extends Component {
                     <div className={Styles.section_cont}>
                         <SubMenu menus={this.getMenus()} />
                         {this.drawListBox()}
-                        <Selected />
+                        {this.props.multiSelect && <Selected />}
                     </div>
                 </div>
                 <Foot />
@@ -81,8 +83,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    triggerEvent: (event, data) => dispatch(triggerEvent(event, data)),
-    fetchItems: (type, category, subMenu) => dispatch(fetchItems(type, category, subMenu)),
+    triggerEvent: (event, data, hidden) => dispatch(triggerEvent(event, data, hidden)),
+    setUIParam: (data) => dispatch(setUIParam(data)),
 });
 
 export default connect(

@@ -854,6 +854,9 @@
             overflow: hidden;
             overflow-y: auto;
         }
+        .section_cont .scroll_box * {
+          box-sizing: content-box;
+        }
         .section_cont .list {
             overflow: hidden;
             margin: -18px 0 0 -18px;
@@ -862,6 +865,9 @@
             float: left;
             width: 304px;
             margin: 18px 0 0 18px;
+        }
+        .section_cont .list .on {
+            border: 1px solid #5096f5;
         }
         .section_cont .list .link {
             display: block;

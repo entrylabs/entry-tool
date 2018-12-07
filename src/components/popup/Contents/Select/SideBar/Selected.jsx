@@ -26,7 +26,7 @@ class CustomSlide extends Component {
         return (
             <div className={Styles.select_item} {...props}>
                 <div className={TYPE_MAP[type].imageClass}>{TYPE_MAP[type].imageContent(item)}</div>
-                <em className={Styles.sjt}>{item.name}</em>
+                <em className={Styles.sjt}>{this.props.item.label[CommonUtils.getLangType()] || this.props.item.label.en}</em>
                 <a
                     href="#NULL"
                     className={`${Styles.btn_del} ${Styles.imbtn_pop_chk_del}`}
@@ -45,10 +45,10 @@ function Arrow(props) {
     let text = '';
     if (type === 'prev') {
         customClass = `${Styles.btn_prev} ${Styles.imbtn_pop_sel_prev} ${className}`;
-        text = '이전';
+        text = 'prev';
     } else {
         customClass = `${Styles.btn_next} ${Styles.imbtn_pop_sel_next} ${className}`;
-        text = '다음';
+        text = 'next';
     }
     return (
         <div className={customClass} style={{ ...style }} onClick={onClick}>
@@ -99,7 +99,7 @@ class Selected extends Component {
         return (
             <div className={TYPE_MAP[type].wrapClass} onClick={this.itemClicked}>
                 {this.container}
-                <strong className={Styles.tit}>전체 ({selected.length})</strong>
+                <strong className={Styles.tit}>{CommonUtils.getLang("Menus.all")} ({selected.length})</strong>
                 <Slider {...settings}>
                     {selected.map((item, index) => (
                         <CustomSlide

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchItems } from '@actions/popup';
+import { setUIParam } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/scss/popup.scss';
 
@@ -29,7 +29,7 @@ class SubMenu extends Component {
                     key={item.name}
                     data-key={key}
                 >
-                    {item.name}
+                    {CommonUtils.getLang(item.name)}
                 </a>
             );
         });
@@ -38,7 +38,11 @@ class SubMenu extends Component {
     onSubMenuSelected(e) {
         e.preventDefault();
         const key = e.target.getAttribute('data-key');
-        this.props.fetchItems(this.props.popupReducer.type, this.props.popupReducer.sidebar, key);
+        this.props.setUIParam({
+            type: this.props.popupReducer.type,
+            sidebar: this.props.popupReducer.sidebar,
+            subMenu: key
+        });
     }
 
     render() {
@@ -57,7 +61,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchItems: (type, category, subMenu) => dispatch(fetchItems(type, category, subMenu)),
+    setUIParam: (type, category, subMenu) => dispatch(setUIParam(type, category, subMenu)),
 });
 
 export default connect(
