@@ -866,11 +866,16 @@
             width: 304px;
             margin: 18px 0 0 18px;
         }
-        .section_cont .list .on {
-            border: 1px solid #5096f5;
-        }
         .section_cont .list .link {
+            position: relative;
             display: block;
+
+        }
+        .section_cont .list .on .link:after {
+            @include PositionLRTB(absolute,0,0,0,0);
+            border: 2px solid #5096f5;
+            content: '';
+
         }
         .section_cont .list .thmb {
             overflow: hidden;
