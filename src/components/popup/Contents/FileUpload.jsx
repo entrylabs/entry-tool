@@ -21,7 +21,10 @@ class Item extends Component {
         return (
             <div className={Styles.thmb}>
                 <img
-                    src={this.props.item.fileurl || CommonUtils.createImageUrl(this.props.item.filename)}
+                    src={
+                        this.props.item.fileurl ||
+                        CommonUtils.createImageUrl(this.props.item.filename)
+                    }
                     alt=""
                 />
             </div>
@@ -35,7 +38,7 @@ class Item extends Component {
 
     render() {
         return (
-            <li className={CommonUtils.toggleClass(this.props.excluded, "", Styles.on)}>
+            <li className={CommonUtils.toggleClass(this.props.excluded, '', Styles.on)}>
                 <a href="#NULL" className={Styles.link} onClick={this.onClickItem}>
                     {this.drawImage()}
                     <em className={Styles.sjt}>{this.props.item.name}</em>
@@ -104,7 +107,7 @@ class FileUpload extends Component {
         const isObject = /\.eo$/.test(file.name);
         const isAudio = file.name.toLowerCase().indexOf('.mp3') >= 0;
         const splittedNames = file.name.split('.');
-        const ext = splittedNames[splittedNames.length -1];
+        const ext = splittedNames[splittedNames.length - 1];
         const allowed = this.props.options.uploadAllowed;
         if (file.size > 1024 * 1024 * 10) {
             this.props.triggerEvent(
@@ -114,13 +117,13 @@ class FileUpload extends Component {
             );
             return false;
         }
-        if(_includes(this.props.options.uploadNotAllowedExt, ext)) {
+        if (_includes(this.props.options.uploadNotAllowedExt, ext)) {
             return this.triggerNotSuportFileError();
         }
 
         if (allowed.sound && isAudio) {
             return 'sound';
-        };
+        }
 
         if (allowed.object && isObject) {
             return 'object';
@@ -189,9 +192,11 @@ class FileUpload extends Component {
     onApplyItemClicked(e) {
         e.preventDefault();
         let selected = [];
-        if(this.props.options.multiSelect) {
-            selected = this.props.popupReducer.uploads.filter(item => !this.state.excluded.includes(item));
-        }else {
+        if (this.props.options.multiSelect) {
+            selected = this.props.popupReducer.uploads.filter(
+                (item) => !this.state.excluded.includes(item)
+            );
+        } else {
             selected = this.state.excluded;
         }
         this.props.triggerEvent('uploads', { uploads: selected }, true);
@@ -205,7 +210,7 @@ class FileUpload extends Component {
         const index = this.getExcludedIndex(item);
         const excluded = this.state.excluded;
 
-        if(this.props.options.multiSelect) {
+        if (this.props.options.multiSelect) {
             if (index >= 0) {
                 excluded.splice(index, 1);
                 this.props.triggerEvent('itemon', { id: item._id }, false);
@@ -215,7 +220,7 @@ class FileUpload extends Component {
             }
             this.setState({ excluded });
         } else {
-            this.setState({ excluded : [item] });
+            this.setState({ excluded: [item] });
             this.props.triggerEvent('itemon', { id: item._id }, false);
         }
     }
@@ -223,7 +228,7 @@ class FileUpload extends Component {
     drawItems() {
         return this.props.popupReducer.uploads.map((item) => {
             let isExcluded = this.getExcludedIndex(item) >= 0;
-            if(!this.props.options.multiSelect) {
+            if (!this.props.options.multiSelect) {
                 isExcluded = !isExcluded;
             }
             return (
@@ -241,15 +246,15 @@ class FileUpload extends Component {
     getWarnMsg() {
         const allowed = this.props.options.uploadAllowed;
         if (allowed.sound) {
-            return CommonUtils.getLang("Menus.sound_upload_warn_1");
+            return CommonUtils.getLang('Menus.sound_upload_warn_1');
         }
         if (allowed.object && allowed.image) {
-            return CommonUtils.getLang("Menus.sprite_upload_warn");
+            return CommonUtils.getLang('Menus.sprite_upload_warn');
         }
         if (!allowed.object && allowed.image) {
-            return CommonUtils.getLang("Menus.picture_upload_warn_1");
+            return CommonUtils.getLang('Menus.picture_upload_warn_1');
         }
-        return "";
+        return '';
     }
 
     render() {
@@ -274,7 +279,7 @@ class FileUpload extends Component {
                                     htmlFor="inpt_file"
                                     className={`${Styles.upload} ${Styles.imbtn_pop_upload}`}
                                 >
-                                    {CommonUtils.getLang("Workspace.upload_addfile")}
+                                    {CommonUtils.getLang('Workspace.upload_addfile')}
                                 </label>
                                 <input
                                     type="file"
@@ -290,33 +295,35 @@ class FileUpload extends Component {
                             </ul>
                         </div>
 
-                        {this.props.options.uploadAllowed.image && <div className={Styles.img_caution_box}>
-                            <div className={Styles.inner}>
-                                <span className={`${Styles.thmb} ${Styles.imico_warning}`}>
-                                    &nbsp;
-                                </span>
-                                <div className={Styles.dsc_box}>
-                                    <strong>
-                                        {CommonUtils.getLang("Menus.file_upload_desc_1")}
-                                    </strong>
-                                    <p className={Styles.dsc}>
-                                        {CommonUtils.getLang("Menus.file_upload_desc_2")}
-                                        <br />
-                                        {CommonUtils.getLang("Menus.file_upload_desc_3")}
-                                        <br />
-                                        {CommonUtils.getLang("Menus.file_upload_desc_4")}
-                                    </p>
+                        {this.props.options.uploadAllowed.image && (
+                            <div className={Styles.img_caution_box}>
+                                <div className={Styles.inner}>
+                                    <span className={`${Styles.thmb} ${Styles.imico_warning}`}>
+                                        &nbsp;
+                                    </span>
+                                    <div className={Styles.dsc_box}>
+                                        <strong>
+                                            {CommonUtils.getLang('Menus.file_upload_desc_1')}
+                                        </strong>
+                                        <p className={Styles.dsc}>
+                                            {CommonUtils.getLang('Menus.file_upload_desc_2')}
+                                            <br />
+                                            {CommonUtils.getLang('Menus.file_upload_desc_3')}
+                                            <br />
+                                            {CommonUtils.getLang('Menus.file_upload_desc_4')}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>}
+                        )}
                     </div>
                 </section>
                 <div className={Styles.pop_btn_box}>
                     <a href="#NULL" onClick={() => this.props.triggerEvent('close', null, true)}>
-                        {CommonUtils.getLang("Buttons.cancel")}
+                        {CommonUtils.getLang('Buttons.cancel')}
                     </a>
                     <a href="#NULL" className={Styles.active} onClick={this.onApplyItemClicked}>
-                        {CommonUtils.getLang("Buttons.add")}
+                        {CommonUtils.getLang('Buttons.add')}
                     </a>
                 </div>
             </React.Fragment>

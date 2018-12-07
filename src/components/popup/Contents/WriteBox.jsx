@@ -6,17 +6,14 @@ import { triggerEvent } from '@actions';
 import ColorPicker from '@components/picker/color';
 import Dropdown from '@components/widget/dropdown';
 import { EMIT_TYPES } from '@constants';
-import _ from 'lodash';
+import _cloneDeep from 'lodash/cloneDeep';
 
 /* eslint-disable array-element-newline */
 const FIELDS = {
     one: {
         inputInnerStyle: null,
         inputType: 'input',
-        descriptions: [
-            'Menus.linebreak_off_desc_2',
-            'Menus.linebreak_off_desc_3',
-        ],
+        descriptions: ['Menus.linebreak_off_desc_2', 'Menus.linebreak_off_desc_3'],
     },
     multi: {
         inputInnerStyle: { height: '228px' },
@@ -89,7 +86,7 @@ class Input extends Component {
                         htmlFor="inpt"
                         style={{ display: CommonUtils.toggleClass(this.state.active, 'none') }}
                     >
-                        {CommonUtils.getLang("Workspace.textbox_input")}
+                        {CommonUtils.getLang('Workspace.textbox_input')}
                     </label>
                     <filed.inputType
                         type="text"
@@ -116,7 +113,7 @@ class WriteBox extends Component {
         this.fonts = CommonUtils.getFonts();
         this.state = {
             writeType: 'one',
-            effects: _.cloneDeep(this.props.fontOption.EFFECTS),
+            effects: _cloneDeep(this.props.fontOption.EFFECTS),
             fonts: this.fonts,
             font: this.fonts[0],
         };
@@ -280,7 +277,7 @@ class WriteBox extends Component {
                                                 );
                                             }}
                                         >
-                                            {CommonUtils.getLang("Buttons.single_line")}
+                                            {CommonUtils.getLang('Buttons.single_line')}
                                         </a>
                                         <a
                                             href="#NULL"
@@ -294,7 +291,7 @@ class WriteBox extends Component {
                                                 );
                                             }}
                                         >
-                                            {CommonUtils.getLang("Buttons.multi_line")}
+                                            {CommonUtils.getLang('Buttons.multi_line')}
                                         </a>
                                     </div>
                                 </div>
@@ -313,11 +310,14 @@ class WriteBox extends Component {
                     {this.state.dropDown}
                 </section>
                 <div className={Styles.pop_btn_box}>
-                    <a href="#NULL" onClick={() => this.props.triggerEvent(EMIT_TYPES.close, null, true)}>
-                        {CommonUtils.getLang("Buttons.cancel")}
+                    <a
+                        href="#NULL"
+                        onClick={() => this.props.triggerEvent(EMIT_TYPES.close, null, true)}
+                    >
+                        {CommonUtils.getLang('Buttons.cancel')}
                     </a>
                     <a href="#NULL" className={Styles.active} onClick={this.onSubmitBtnClicked}>
-                        {CommonUtils.getLang("Buttons.apply")}
+                        {CommonUtils.getLang('Buttons.apply')}
                     </a>
                 </div>
             </React.Fragment>
