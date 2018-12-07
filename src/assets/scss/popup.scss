@@ -64,7 +64,7 @@
         color: #728997;
         text-align: center;
         letter-spacing: -0.3px;
-        line-height: 42px;
+        line-height: 40px;
         outline: 0;
     }
     .section_navi .list .on {
@@ -81,6 +81,7 @@
         padding: 0 45px 0 12px;
         border: 1px solid #4f80ff;
         border-radius: 38px;
+        box-sizing: content-box;
     }
     .section_navi .srch_box input[type='text'] {
         width: 100%;
