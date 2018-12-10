@@ -4,6 +4,8 @@ import { applySelected } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/scss/popup.scss';
 import { visibleAction, triggerEvent } from '@actions';
+import { makeFindSelectedByName } from '@selectors';
+import { EMIT_TYPES } from '@constants';
 
 class Item extends Component {
     constructor(props) {
@@ -16,7 +18,7 @@ class Item extends Component {
     onItemClicked(e) {
         e.preventDefault();
         const selected = this.props.popupReducer.selected;
-        const index = this.getSelectedIndex();
+        const index = this.props.index;
         if (index >= 0) {
             selected.splice(index, 1);
         } else {
@@ -30,25 +32,19 @@ class Item extends Component {
         this.props.visibleAction(false);
     }
 
-    getSelectedIndex() {
-        return this.props.popupReducer.selected.findIndex(
-            (element) => element.name === this.props.item.name
-        );
-    }
-
     render() {
         const { item } = this.props;
         return (
             <li
                 onClick={this.onItemClicked}
                 onDoubleClick={() => this.handleClick({ item: this.props.item })}
-                className={CommonUtils.toggleClass(this.getSelectedIndex() >= 0, Styles.on)}
+                className={CommonUtils.toggleClass(this.props.index >= 0, Styles.on)}
             >
-                <a href="#NULL" className={Styles.link}>
+                <a href className={Styles.link}>
                     <div
                         className={Styles.thmb}
                         style={{
-                            backgroundImage: `url("http://playentry.org/lib/entryjs/images/hardware/${
+                            backgroundImage: `url("/lib/entryjs/images/hardware/${
                                 item.imageName
                             }")`,
                             backgroundSize: '65%',
@@ -58,7 +54,9 @@ class Item extends Component {
                         &nbsp;
                     </div>
                     <div className={Styles.inner_box}>
-                        <strong className={Styles.sjt}>{item.title.ko}</strong>
+                        <strong className={Styles.sjt}>
+                            {item.title[CommonUtils.getLangType()] || item.title.en}
+                        </strong>
                         <p className={Styles.dsc}>{item.description}</p>
                     </div>
                 </a>
@@ -67,14 +65,18 @@ class Item extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    ...state,
-});
+const mapStateToProps = (state, props) => {
+    const getIndex = makeFindSelectedByName(props.item.name);
+    return {
+        ...state,
+        index: getIndex(state),
+    };
+};
 
 const mapDispatchToProps = (dispatch) => ({
     visibleAction: (visible) => dispatch(visibleAction(visible)),
     applySelected: (list) => dispatch(applySelected(list)),
-    triggerEvent: (data) => dispatch(triggerEvent('select', data)),
+    triggerEvent: (data) => dispatch(triggerEvent(EMIT_TYPES.select, data)),
 });
 
 export default connect(

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import range from 'lodash/range';
+import _includes from 'lodash/includes';
 import Styles from '@assets/scss/popup.scss';
 import { uploadItem } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
@@ -37,7 +38,7 @@ class Item extends Component {
 
     render() {
         return (
-            <li className={CommonUtils.toggleClass(this.props.excluded, "", Styles.on)}>
+            <li className={CommonUtils.toggleClass(this.props.excluded, '', Styles.on)}>
                 <a href="#NULL" className={Styles.link} onClick={this.onClickItem}>
                     {this.drawImage()}
                     <em className={Styles.sjt}>{this.props.item.name}</em>
@@ -88,12 +89,26 @@ class FileUpload extends Component {
         return true;
     }
 
+    triggerNotSuportFileError() {
+        this.props.triggerEvent(
+            'uploadFail',
+            {
+                messageParent: 'Workspace',
+                message: 'upload_not_supported_file_msg',
+            },
+            false
+        );
+        return false;
+    }
+
     checkFIleType(file) {
         const isImage = /^image\//.test(file.type);
-        const isGif = /^image\/gif/.test(file.type);
+        // const isGif = /^image\/gif/.test(file.type);
         const isObject = /\.eo$/.test(file.name);
-        const isAudio = file.name.toLowerCase().indexOf('.mp3');
-
+        const isAudio = file.name.toLowerCase().indexOf('.mp3') >= 0;
+        const splittedNames = file.name.split('.');
+        const ext = splittedNames[splittedNames.length - 1];
+        const allowed = this.props.options.uploadAllowed;
         if (file.size > 1024 * 1024 * 10) {
             this.props.triggerEvent(
                 'uploadFail',
@@ -102,35 +117,22 @@ class FileUpload extends Component {
             );
             return false;
         }
-
-        switch (this.props.popupReducer.type) {
-            case 'sprite':
-                if (!isObject && (!isImage || isGif)) {
-                    this.props.triggerEvent(
-                        'uploadFail',
-                        {
-                            messageParent: 'Workspace',
-                            message: 'upload_not_supported_file_msg',
-                        },
-                        false
-                    );
-                    return false;
-                }
-
-                if (isObject) {
-                    return 'object';
-                }
-                break;
-            case 'sound':
-                if (isAudio < 0) {
-                    return false;
-                }
-                break;
-            default:
-                return false;
+        if (_includes(this.props.options.uploadNotAllowedExt, ext)) {
+            return this.triggerNotSuportFileError();
         }
 
-        return this.props.popupReducer.type;
+        if (allowed.sound && isAudio) {
+            return 'sound';
+        }
+
+        if (allowed.object && isObject) {
+            return 'object';
+        }
+        if (allowed.image && isImage) {
+            return 'image';
+        }
+
+        return this.triggerNotSuportFileError();
     }
 
     upload(formData, objectData) {
@@ -168,7 +170,7 @@ class FileUpload extends Component {
             const file = uploadFiles.item(idx);
             switch (this.checkFIleType(file)) {
                 case 'sound':
-                case 'sprite':
+                case 'image':
                     formData.append(`uploadFile${idx}`, file);
                     break;
                 case 'object':
@@ -189,7 +191,14 @@ class FileUpload extends Component {
 
     onApplyItemClicked(e) {
         e.preventDefault();
-        const selected = this.props.popupReducer.uploads.filter((item) => !this.state.excluded.includes(item));
+        let selected = [];
+        if (this.props.options.multiSelect) {
+            selected = this.props.popupReducer.uploads.filter(
+                (item) => !this.state.excluded.includes(item)
+            );
+        } else {
+            selected = this.state.excluded;
+        }
         this.props.triggerEvent('uploads', { uploads: selected }, true);
     }
 
@@ -200,29 +209,52 @@ class FileUpload extends Component {
     onItemClick(item) {
         const index = this.getExcludedIndex(item);
         const excluded = this.state.excluded;
-        if (index >= 0) {
-            excluded.splice(index, 1);
-            this.props.triggerEvent('itemoff', null, false);
+
+        if (this.props.options.multiSelect) {
+            if (index >= 0) {
+                excluded.splice(index, 1);
+                this.props.triggerEvent('itemon', { id: item._id }, false);
+            } else {
+                excluded.push(item);
+                this.props.triggerEvent('itemoff', null, false);
+            }
+            this.setState({ excluded });
         } else {
-            excluded.push(item);
+            this.setState({ excluded: [item] });
             this.props.triggerEvent('itemon', { id: item._id }, false);
         }
-
-        this.setState({ excluded });
     }
 
     drawItems() {
         return this.props.popupReducer.uploads.map((item) => {
+            let isExcluded = this.getExcludedIndex(item) >= 0;
+            if (!this.props.options.multiSelect) {
+                isExcluded = !isExcluded;
+            }
             return (
                 <Item
                     key={item._id}
                     item={item}
                     reducer={this.props.popupReducer}
                     clickHandler={this.onItemClick}
-                    excluded={this.getExcludedIndex(item) >= 0}
+                    excluded={isExcluded}
                 />
             );
         });
+    }
+
+    getWarnMsg() {
+        const allowed = this.props.options.uploadAllowed;
+        if (allowed.sound) {
+            return CommonUtils.getLang('Menus.sound_upload_warn_1');
+        }
+        if (allowed.object && allowed.image) {
+            return CommonUtils.getLang('Menus.sprite_upload_warn');
+        }
+        if (!allowed.object && allowed.image) {
+            return CommonUtils.getLang('Menus.picture_upload_warn_1');
+        }
+        return '';
     }
 
     render() {
@@ -233,7 +265,7 @@ class FileUpload extends Component {
                     <h2 className={Styles.blind}>파일 올리기</h2>
                     <div className={Styles.section_cont}>
                         <p className={`${Styles.caution} ${Styles.imico_pop_caution}`}>
-                            10MB 이하의 jpg, png, bmp 또는 eo 형식의 오브젝트를 추가할 수 있습니다.
+                            {this.getWarnMsg()}
                         </p>
 
                         <div
@@ -247,7 +279,7 @@ class FileUpload extends Component {
                                     htmlFor="inpt_file"
                                     className={`${Styles.upload} ${Styles.imbtn_pop_upload}`}
                                 >
-                                    파일 올리기
+                                    {CommonUtils.getLang('Workspace.upload_addfile')}
                                 </label>
                                 <input
                                     type="file"
@@ -263,34 +295,35 @@ class FileUpload extends Component {
                             </ul>
                         </div>
 
-                        <div className={Styles.img_caution_box}>
-                            <div className={Styles.inner}>
-                                <span className={`${Styles.thmb} ${Styles.imico_warning}`}>
-                                    &nbsp;
-                                </span>
-                                <div className={Styles.dsc_box}>
-                                    <strong>
-                                        아래와 같은 그림은 이용약관 및 관련 법률에 의해 제재를
-                                        받으실 수 있습니다.
-                                    </strong>
-                                    <p className={Styles.dsc}>
-                                        폭력적이고 잔인한 그림
-                                        <br />
-                                        선정적인 신체 노출 그림
-                                        <br />
-                                        불쾌감을 주거나 혐오감을 일으키는 그림
-                                    </p>
+                        {this.props.options.uploadAllowed.image && (
+                            <div className={Styles.img_caution_box}>
+                                <div className={Styles.inner}>
+                                    <span className={`${Styles.thmb} ${Styles.imico_warning}`}>
+                                        &nbsp;
+                                    </span>
+                                    <div className={Styles.dsc_box}>
+                                        <strong>
+                                            {CommonUtils.getLang('Menus.file_upload_desc_1')}
+                                        </strong>
+                                        <p className={Styles.dsc}>
+                                            {CommonUtils.getLang('Menus.file_upload_desc_2')}
+                                            <br />
+                                            {CommonUtils.getLang('Menus.file_upload_desc_3')}
+                                            <br />
+                                            {CommonUtils.getLang('Menus.file_upload_desc_4')}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </section>
                 <div className={Styles.pop_btn_box}>
                     <a href="#NULL" onClick={() => this.props.triggerEvent('close', null, true)}>
-                        취소
+                        {CommonUtils.getLang('Buttons.cancel')}
                     </a>
                     <a href="#NULL" className={Styles.active} onClick={this.onApplyItemClicked}>
-                        추가하기
+                        {CommonUtils.getLang('Buttons.add')}
                     </a>
                 </div>
             </React.Fragment>
