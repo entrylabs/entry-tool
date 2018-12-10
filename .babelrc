@@ -13,7 +13,9 @@
                     "@actions": "./src/actions",
                     "@assets": "./src/assets",
                     "@components": "./src/components",
-                    "@utils": "./src/utils"
+                    "@utils": "./src/utils",
+                    "@constants":"./src/constants",
+                    "@selectors":"./src/selectors"
                 }
             }
         ]

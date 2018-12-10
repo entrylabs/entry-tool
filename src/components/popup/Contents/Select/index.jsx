@@ -7,15 +7,10 @@ class Select extends Component {
     renderContent() {
         if (this.props.subType === 'sidebar') {
             return (
-                <SideBar
-                    type={this.props.type}
-                    data={this.props.data}
-                    sidebar={this.props.sidebar}
-                    t
-                />
+                <SideBar { ...this.props}/>
             );
         } else {
-            return <BigICON type={this.props.type} data={this.props.data} />;
+            return <BigICON { ...this.props}/>;
         }
     }
 

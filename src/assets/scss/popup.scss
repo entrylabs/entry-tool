@@ -64,7 +64,7 @@
         color: #728997;
         text-align: center;
         letter-spacing: -0.3px;
-        line-height: 42px;
+        line-height: 40px;
         outline: 0;
     }
     .section_navi .list .on {
@@ -81,6 +81,7 @@
         padding: 0 45px 0 12px;
         border: 1px solid #4f80ff;
         border-radius: 38px;
+        box-sizing: content-box;
     }
     .section_navi .srch_box input[type='text'] {
         width: 100%;
@@ -854,6 +855,9 @@
             overflow: hidden;
             overflow-y: auto;
         }
+        .section_cont .scroll_box * {
+          box-sizing: content-box;
+        }
         .section_cont .list {
             overflow: hidden;
             margin: -18px 0 0 -18px;
@@ -864,7 +868,15 @@
             margin: 18px 0 0 18px;
         }
         .section_cont .list .link {
+            position: relative;
             display: block;
+
+        }
+        .section_cont .list .on .link:after {
+            @include PositionLRTB(absolute,0,0,0,0);
+            border: 2px solid #5096f5;
+            content: '';
+
         }
         .section_cont .list .thmb {
             overflow: hidden;
