@@ -58,7 +58,7 @@ class Navigation extends Component {
                     key={item}
                     className={CommonUtils.toggleClass(
                         navigation === item || (!navigation && index === 0),
-                        Styles.on,
+                        Styles.on
                     )}
                     onClick={this.props.onClicked}
                     data-key={item}
@@ -93,42 +93,74 @@ class Navigation extends Component {
         if (this.props.searchOption) {
             return (
                 <form onSubmit={this.onSearchBtnClicked}>
-                    {this.props.searchOption.category && <div className={`${Styles.pop_selectbox} ${Styles.on}`}>
-                        <a href="#" className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}
-                           onClick={e => {
-                               this.onDropDownClicked(e, 'category', this.category_options);
-                           }} title="모든 작품">{this.state.category[0]}</a>
-                    </div>}
-                    {this.props.searchOption.order && <div className={Styles.pop_selectbox}>
-                        <a href="#" className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}
-                           onClick={e => {
-                               this.onDropDownClicked(e, 'sort', this.sort_options);
-                           }} title="최신순">{this.state.sort[0]}</a>
-                    </div>}
-                    {this.props.searchOption.date && <div className={Styles.pop_selectbox}>
-                        <a href="#" className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}
-                           onClick={e => {
-                               this.onDropDownClicked(e, 'period', this.period_options);
-                           }} title="전체기간">{this.state.period[0]}</a>
-                    </div>}
-                    {this.props.searchOption.query && <div className={Styles.srch_box}>
-                        <label htmlFor="srch">
-                            <input
-                                type="text"
-                                id="srch"
-                                name="searchQuery"
-                                value={this.state.searchQuery}
-                                onChange={this.handleChange}
-                            />
-                        </label>
-                        <button
-                            type="button"
-                            className={`${Styles.btn_srch} ${Styles.imbtn_pop_srch}`}
-                            onClick={this.onSearchBtnClicked}
-                        >
-                            <span className={Styles.blind}>검색</span>
-                        </button>
-                    </div>}
+                    {this.props.searchOption.category && (
+                        <div className={`${Styles.pop_selectbox} ${Styles.on}`}>
+                            <a
+                                href
+                                className={`${Styles.select_link} ${
+                                    Styles.imico_pop_select_arr_down
+                                }`}
+                                onClick={(e) => {
+                                    this.onDropDownClicked(e, 'category', this.category_options);
+                                }}
+                                title="모든 작품"
+                            >
+                                {this.state.category[0]}
+                            </a>
+                        </div>
+                    )}
+                    {this.props.searchOption.order && (
+                        <div className={Styles.pop_selectbox}>
+                            <a
+                                href
+                                className={`${Styles.select_link} ${
+                                    Styles.imico_pop_select_arr_down
+                                }`}
+                                onClick={(e) => {
+                                    this.onDropDownClicked(e, 'sort', this.sort_options);
+                                }}
+                                title="최신순"
+                            >
+                                {this.state.sort[0]}
+                            </a>
+                        </div>
+                    )}
+                    {this.props.searchOption.date && (
+                        <div className={Styles.pop_selectbox}>
+                            <a
+                                href
+                                className={`${Styles.select_link} ${
+                                    Styles.imico_pop_select_arr_down
+                                }`}
+                                onClick={(e) => {
+                                    this.onDropDownClicked(e, 'period', this.period_options);
+                                }}
+                                title="전체기간"
+                            >
+                                {this.state.period[0]}
+                            </a>
+                        </div>
+                    )}
+                    {this.props.searchOption.query && (
+                        <div className={Styles.srch_box}>
+                            <label htmlFor="srch">
+                                <input
+                                    type="text"
+                                    id="srch"
+                                    name="searchQuery"
+                                    value={this.state.searchQuery}
+                                    onChange={this.handleChange}
+                                />
+                            </label>
+                            <button
+                                type="button"
+                                className={`${Styles.btn_srch} ${Styles.imbtn_pop_srch}`}
+                                onClick={this.onSearchBtnClicked}
+                            >
+                                <span className={Styles.blind}>검색</span>
+                            </button>
+                        </div>
+                    )}
                 </form>
             );
         }
@@ -153,9 +185,9 @@ class Navigation extends Component {
         return (
             <div className={Styles.section_navi}>
                 <ul className={Styles.list}>{this.drawNavigation()}</ul>
-                {this.props.searchOption && <div className={Styles.art_sel_area}>
-                    {this.drawSearchBox()}
-                </div>}
+                {this.props.searchOption && (
+                    <div className={Styles.art_sel_area}>{this.drawSearchBox()}</div>
+                )}
                 {this.state.dropDown}
             </div>
         );
@@ -172,5 +204,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(Navigation);

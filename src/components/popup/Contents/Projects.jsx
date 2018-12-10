@@ -15,12 +15,12 @@ class Projects extends Component {
 
         this.triggerEvent = this.triggerEvent.bind(this);
         this.selectItem = this.selectItem.bind(this);
-        this.props.triggerEvent(EMIT_TYPES.fetch, {type: this.props.type}, false);
+        this.props.triggerEvent(EMIT_TYPES.fetch, { type: this.props.type }, false);
     }
 
     componentWillReceiveProps(nextProps) {
-        if(this.props.type !== nextProps.type) {
-            this.props.triggerEvent(EMIT_TYPES.fetch, {type: nextProps.type}, false);
+        if (this.props.type !== nextProps.type) {
+            this.props.triggerEvent(EMIT_TYPES.fetch, { type: nextProps.type }, false);
         }
     }
 
@@ -34,28 +34,45 @@ class Projects extends Component {
     }
 
     drawIems() {
-        let data = this.props.data.data;
-        return data.map(item => {
+        const data = this.props.data.data;
+        return data.map((item) => {
             let selected = false;
             if (this.state.selected && this.state.selected._id === item._id) {
                 selected = true;
             }
             return (
-                <li key={item._id} onClick={e => this.selectItem(e, item)}
-                    className={CommonUtils.toggleClass(selected, Styles.on)}>
-                    <a href="#" className={Styles.link}>
-                        <div className={Styles.thmb} style={{ backgroundImage: `url('${item.thumb}')` }}>
+                <li
+                    key={item._id}
+                    onClick={(e) => this.selectItem(e, item)}
+                    className={CommonUtils.toggleClass(selected, Styles.on)}
+                >
+                    <a href className={Styles.link}>
+                        <div
+                            className={Styles.thmb}
+                            style={{ backgroundImage: `url('${item.thumb}')` }}
+                        >
                             <div className={Styles.info_bar}>
                                 {`${Styles.view} ${Styles.imico_pop_info_view}`}
-                                <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>{item.visit}</span>
-                                <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>{item.likeCnt}</span>
-                                <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>{item.comment}</span>
+                                <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>
+                                    {item.visit}
+                                </span>
+                                <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>
+                                    {item.likeCnt}
+                                </span>
+                                <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>
+                                    {item.comment}
+                                </span>
                             </div>
                         </div>
                         <div className={Styles.info_box}>
-                            <div className={Styles.user_thmb} style={{ backgroundImage: `url('${item.thumb}')` }}></div>
+                            <div
+                                className={Styles.user_thmb}
+                                style={{ backgroundImage: `url('${item.thumb}')` }}
+                            />
                             <em className={Styles.tit}>{item.name}</em>
-                            <span className={Styles.from}>from<em>{item.user.username}</em></span>
+                            <span className={Styles.from}>
+                                from<em>{item.user.username}</em>
+                            </span>
                         </div>
                     </a>
                 </li>
@@ -75,17 +92,32 @@ class Projects extends Component {
                     <div className={Styles.section_cont}>
                         {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
                         <h2 className={Styles.blind}>나의 작품</h2>
-                        <strong className={Styles.list_sjt}>{CommonUtils.getLang("Menus.all")} ({this.props.data.data.length})</strong>
+                        <strong className={Styles.list_sjt}>
+                            {CommonUtils.getLang('Menus.all')} ({this.props.data.data.length})
+                        </strong>
                         <div className={Styles.scroll_box}>
-                            <ul className={Styles.list}>
-                                {this.drawIems()}
-                            </ul>
+                            <ul className={Styles.list}>{this.drawIems()}</ul>
                         </div>
                     </div>
                 </section>
                 <div className={Styles.pop_btn_box}>
-                    <a href="#NULL" onClick={(e) => {this.triggerEvent(e, EMIT_TYPES.close, null)}}>{CommonUtils.getLang("Buttons.cancel")}</a>
-                    <a href="#" className={Styles.active} onClick={(e) => {this.triggerEvent(e, EMIT_TYPES.submit, this.state.selected)}}>{CommonUtils.getLang("Menus.Load")}</a>
+                    <a
+                        href
+                        onClick={(e) => {
+                            this.triggerEvent(e, EMIT_TYPES.close, null);
+                        }}
+                    >
+                        {CommonUtils.getLang('Buttons.cancel')}
+                    </a>
+                    <a
+                        href
+                        className={Styles.active}
+                        onClick={(e) => {
+                            this.triggerEvent(e, EMIT_TYPES.submit, this.state.selected);
+                        }}
+                    >
+                        {CommonUtils.getLang('Menus.Load')}
+                    </a>
                 </div>
             </React.Fragment>
         );
@@ -98,5 +130,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     null,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(Projects);

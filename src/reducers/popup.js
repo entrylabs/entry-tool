@@ -2,8 +2,9 @@ import { UI_SELECT, APPLY_SELECTED_LIST, UPLOAD_ITEM, INIT_STATE } from '../acti
 
 const INITIAL_STATE = {
     selected: [],
-    uploads: []
+    uploads: [],
 };
+
 export default function popupReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
         case 'CLOSE':

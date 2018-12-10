@@ -103,7 +103,7 @@ class FileUpload extends Component {
 
     checkFIleType(file) {
         const isImage = /^image\//.test(file.type);
-        const isGif = /^image\/gif/.test(file.type);
+        // const isGif = /^image\/gif/.test(file.type);
         const isObject = /\.eo$/.test(file.name);
         const isAudio = file.name.toLowerCase().indexOf('.mp3') >= 0;
         const splittedNames = file.name.split('.');

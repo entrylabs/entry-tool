@@ -46,13 +46,13 @@ const uploadOptions = {
         successCallback(response) {
             return response.data;
         },
-    }
+    },
 };
 
 export const setUIParam = (data) => (dispatch) => {
     dispatch({
         type: UI_SELECT,
-        data: data
+        data,
     });
 };
 

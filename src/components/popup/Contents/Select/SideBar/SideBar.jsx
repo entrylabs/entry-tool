@@ -17,7 +17,7 @@ class SideBar extends Component {
         this.props.setUIParam({
             type: this.props.type,
             sidebar: e.currentTarget.getAttribute('data-key'),
-            subMenu: 'all'
+            subMenu: 'all',
         });
     }
 
@@ -29,8 +29,15 @@ class SideBar extends Component {
         }
         return Object.keys(list).map((item, index) => {
             return (
-                <li key={item} data-key={item} onClick={this.onSidebarCliecked}
-                    className={CommonUtils.toggleClass(sidebar === item || (!sidebar && index === 0), Styles.on)}>
+                <li
+                    key={item}
+                    data-key={item}
+                    onClick={this.onSidebarCliecked}
+                    className={CommonUtils.toggleClass(
+                        sidebar === item || (!sidebar && index === 0),
+                        Styles.on
+                    )}
+                >
                     <a href="#NULL">{CommonUtils.getLang(list[item].name)}</a>
                 </li>
             );
@@ -38,14 +45,9 @@ class SideBar extends Component {
     }
 
     render() {
-        return (
-            <ul className={Styles.menu_list}>
-                {this.drawSideBar()}
-            </ul>
-        );
+        return <ul className={Styles.menu_list}>{this.drawSideBar()}</ul>;
     }
 }
-
 
 const mapStateToProps = (state) => ({
     ...state,
@@ -57,6 +59,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(SideBar);
-

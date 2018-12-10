@@ -14,7 +14,12 @@ import { withKnobs, text, select } from '@storybook/addon-knobs';
 
 import { action } from '@storybook/addon-actions';
 import httpService from '../config/axios';
-import { PROJECTS_SAMPLE, SPRITE_SAMPLE, EXPANSION_SAMPLE, SOUND_SAMPLE } from '../constants/sample';
+import {
+    PROJECTS_SAMPLE,
+    SPRITE_SAMPLE,
+    EXPANSION_SAMPLE,
+    SOUND_SAMPLE,
+} from '../constants/sample';
 
 import configureStore from '../store';
 const store = configureStore();
@@ -27,12 +32,12 @@ storiesOf('Popup', module)
     .addDecorator((story) => <Provider story={story()} />)
     .add('전체', () => <Sample />)
     .add('툴팁', () => <Tooltips />)
-    .add('확장블록', () => <Popup type="expansion" data={EXPANSION_SAMPLE}/>)
-    .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE}/>)
-    .add('오브젝트추가하기', () => <Popup type="sprite" data={SPRITE_SAMPLE}/>)
+    .add('확장블록', () => <Popup type="expansion" data={EXPANSION_SAMPLE} />)
+    .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE} />)
+    .add('오브젝트추가하기', () => <Popup type="sprite" data={SPRITE_SAMPLE} />)
     .add('모양추가', () => <Popup type="shape" data={SPRITE_SAMPLE} />)
     .add('모양 가져오기', () => <Popup type="getShape" data={SPRITE_SAMPLE} />)
-    .add('나의 작품', () => <Popup type="projects" data={PROJECTS_SAMPLE}/>)
+    .add('나의 작품', () => <Popup type="projects" data={PROJECTS_SAMPLE} />)
     .add('gnb', () => <CommonGnb />);
 
 const progressType = {
@@ -62,7 +67,17 @@ wigetStories
     .add('컬러피커', () => <ColorPicker color="#FF0000" onChangeColorPicker={action} />)
     .add('드롭다운', () => (
         <Dropdown
-            items={[[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9]]}
+            items={[
+                [1, 1],
+                [2, 2],
+                [3, 3],
+                [4, 4],
+                [5, 5],
+                [6, 6],
+                [7, 7],
+                [8, 8],
+                [9, 9],
+            ]}
         />
     ))
     .add('로딩바', () => (

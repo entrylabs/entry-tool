@@ -4,10 +4,6 @@ import { visibleAction } from '../../actions/index';
 import Styles from '../../assets/scss/popup.scss';
 
 class Sample extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         window.onpopstate = this.close;
         window.history.pushState({}, 'popup');
