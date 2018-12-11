@@ -99,46 +99,38 @@ wigetStories
     ))
     .add('컨텍스트메뉴', () => (
         <ContextMenu
+            coordinate={{
+                x: 100,
+                y: 100,
+            }}
             items={
                 [
                     {
-                        activated: true,
-                        option: {
-                            text: 'text1',
-                            enable: true,
-                            callback() {
-                                console.log('text1 called');
-                            },
+                        text: 'text1',
+                        enable: true,
+                        callback() {
+                            console.log('text1 called');
                         },
                     },
                     {
-                        activated: true,
-                        option: {
-                            text: 'text2',
-                            enable: true,
-                            callback() {
-                                console.log('text2 called');
-                            },
+                        text: 'text2',
+                        enable: true,
+                        callback() {
+                            console.log('text2 called');
                         },
                     },
                     {
-                        activated: false,
-                        option: {
-                            text: 'invisible text',
-                            enable: true,
-                            callback() {
-                                console.log('invisible text');
-                            },
+                        text: 'invisible text',
+                        enable: true,
+                        callback() {
+                            console.log('invisible text');
                         },
                     },
                     {
-                        activated: true,
-                        option: {
-                            text: 'disabled text',
-                            enable: false,
-                            callback() {
-                                console.log('disabled');
-                            },
+                        text: 'disabled text',
+                        enable: false,
+                        callback() {
+                            console.log('disabled');
                         },
                     },
                 ]
