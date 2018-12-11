@@ -41,7 +41,7 @@ class Sprite extends Component {
         window.history.pushState({}, 'popup');
     }
     componentWillMount() {
-        this.props.initState({type: this.options.mainType});
+        this.props.initState({ type: this.options.mainType });
     }
     componentWillUnmount() {
         window.removeEventListener('onpopstate', this.close, false);
@@ -75,10 +75,16 @@ class Sprite extends Component {
                         multiSelect={this.options.opt && this.options.opt.multiSelect}
                     />
                 ),
-                nav: <Navigation {...navSettings} searchOption={this.options.opt && this.options.opt.search} hidden={{type: this.props.type}}/>,
+                nav: (
+                    <Navigation
+                        {...navSettings}
+                        searchOption={this.options.opt && this.options.opt.search}
+                        hidden={{ type: this.props.type }}
+                    />
+                ),
             },
             upload: {
-                view: <FileUpload options={this.options.opt}/>,
+                view: <FileUpload options={this.options.opt} />,
             },
             draw: {
                 view: <Draw />,
@@ -91,13 +97,27 @@ class Sprite extends Component {
                 nav: true,
             },
             projects: {
-                view: <Projects type={navSettings.selected} data={this.props.data || { data : [] }}/>,
-                nav: <Navigation {...navSettings} searchOption={{category: true, date: true, order: true, query: true}} hidden={{type: navSettings.selected}}/>,
+                view: (
+                    <Projects type={navSettings.selected} data={this.props.data || { data: [] }} />
+                ),
+                nav: (
+                    <Navigation
+                        {...navSettings}
+                        searchOption={{ category: true, date: true, order: true, query: true }}
+                        hidden={{ type: navSettings.selected }}
+                    />
+                ),
             },
             favorites: {
-                view: <Projects type={navSettings.selected} data={this.props.data || []}/>,
-                nav: <Navigation {...navSettings} searchOption={{category: true, date: true, order: true, query: true}} hidden={{type: navSettings.selected}}/>,
-            }
+                view: <Projects type={navSettings.selected} data={this.props.data || []} />,
+                nav: (
+                    <Navigation
+                        {...navSettings}
+                        searchOption={{ category: true, date: true, order: true, query: true }}
+                        hidden={{ type: navSettings.selected }}
+                    />
+                ),
+            },
         };
 
         return (
@@ -114,7 +134,10 @@ class Sprite extends Component {
                 <div className={Styles.popup_wrap}>
                     <header className={Styles.pop_header}>
                         <h1>{CommonUtils.getLang(this.options.title)}</h1>
-                        <button onClick={this.close} className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}>
+                        <button
+                            onClick={this.close}
+                            className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}
+                        >
                             <span className={Styles.blind}>뒤로가기</span>
                         </button>
                     </header>

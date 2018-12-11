@@ -5,14 +5,14 @@ import get from 'lodash/get';
 
 export const CommonUtils = {
     getLangType: () => {
-        return cookies.load("lang");
+        return cookies.load('lang');
     },
-     getLang: (key = '') => {
+    getLang: (key = '') => {
         const lang = root.Lang || {};
         return get(lang, key) || key;
     },
     getFonts: () => {
-        if(root.EntryStatic && root.EntryStatic.fonts) {
+        if (root.EntryStatic && root.EntryStatic.fonts) {
             return root.EntryStatic.fonts;
         }
         return DEFAULT_OPTIONS.WRITE_BOX.FONTS;

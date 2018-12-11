@@ -32,7 +32,7 @@ class Item extends Component {
         e.preventDefault();
         const selected = this.props.popupReducer.selected;
         const index = this.props.index;
-        if(this.props.multiSelect) {
+        if (this.props.multiSelect) {
             if (index >= 0) {
                 selected.splice(index, 1);
                 this.props.triggerEvent('itemoff', null, false);
@@ -62,7 +62,10 @@ class Item extends Component {
             >
                 <a href="#NULL" className={Styles.link}>
                     {this.drawImage()}
-                    <em className={Styles.sjt}>{this.props.item.label[CommonUtils.getLangType()] || this.props.item.label.en}</em>
+                    <em className={Styles.sjt}>
+                        {this.props.item.label[CommonUtils.getLangType()] ||
+                            this.props.item.label.en}
+                    </em>
                 </a>
             </li>
         );
@@ -73,9 +76,9 @@ const mapStateToProps = (state, props) => {
     const getIndex = makeFindSelectedById(props.item._id);
     return {
         ...state,
-        index:  getIndex(state)
-    }
-}
+        index: getIndex(state),
+    };
+};
 
 const mapDispatchToProps = (dispatch) => ({
     visibleAction: (visible) => dispatch(visibleAction(visible)),

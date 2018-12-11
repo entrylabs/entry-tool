@@ -6,26 +6,25 @@ export const EMIT_TYPES = {
     close: 'close',
     write: 'write',
     draw: 'draw',
-    select: 'select'
-
+    select: 'select',
 };
 
 const SPRITE_SIDEBAR = {
     entrybot_friends: {
         name: 'Category.entrybot_friends',
-            sub: {
+        sub: {
             all: { name: 'Menus.all' },
         },
     },
     people: {
         name: 'Category.people',
-            sub: {
+        sub: {
             all: { name: 'Menus.all' },
         },
     },
     animal: {
         name: 'Category.animal',
-            sub: {
+        sub: {
             all: { name: 'Menus.all' },
             animal_flying: { name: 'Category.animal_flying' },
             animal_land: { name: 'Category.animal_land' },
@@ -35,7 +34,7 @@ const SPRITE_SIDEBAR = {
     },
     plant: {
         name: 'Category.plant',
-            sub: {
+        sub: {
             all: { name: 'Menus.all' },
             plant_flower: { name: 'Category.plant_flower' },
             plant_grass: { name: 'Category.plant_grass' },
@@ -45,7 +44,7 @@ const SPRITE_SIDEBAR = {
     },
     vehicles: {
         name: 'Category.vehicles',
-            sub: {
+        sub: {
             all: { name: 'Menus.all' },
             vehicles_flying: { name: 'Category.vehicles_flying' },
             vehicles_land: { name: 'Category.vehicles_land' },
@@ -55,7 +54,7 @@ const SPRITE_SIDEBAR = {
     },
     architect: {
         name: 'Category.architect',
-            sub: {
+        sub: {
             all: { name: 'Menus.all' },
             architect_building: { name: 'Category.architect_building' },
             architect_monument: { name: 'Category.architect_monument' },
@@ -64,7 +63,7 @@ const SPRITE_SIDEBAR = {
     },
     food: {
         name: 'Category.food',
-            sub: {
+        sub: {
             all: { name: 'Menus.all' },
             food_vegetables: { name: 'Category.food_vegetables' },
             food_meat: { name: 'Category.food_meat' },
@@ -74,7 +73,7 @@ const SPRITE_SIDEBAR = {
     },
     environment: {
         name: 'Category.environment',
-            sub: {
+        sub: {
             all: { name: 'Menus.all' },
             environment_nature: { name: 'Category.environment_nature' },
             environment_space: { name: 'Category.environment_space' },
@@ -83,7 +82,7 @@ const SPRITE_SIDEBAR = {
     },
     stuff: {
         name: 'Category.stuff',
-            sub: {
+        sub: {
             all: { name: 'Menus.all' },
             stuff_living: { name: 'Category.stuff_living' },
             stuff_hobby: { name: 'Category.stuff_hobby' },
@@ -92,19 +91,19 @@ const SPRITE_SIDEBAR = {
     },
     fantasy: {
         name: 'Category.fantasy',
-            sub: {
+        sub: {
             all: { name: 'Menus.all' },
         },
     },
     interface: {
         name: 'Category.interface',
-            sub: {
+        sub: {
             all: { name: 'Menus.all' },
         },
     },
     background: {
         name: 'Category.background',
-            sub: {
+        sub: {
             all: { name: 'Menus.all' },
             background_outdoor: { name: 'Category.background_outdoor' },
             background_indoor: { name: 'Category.background_indoor' },
@@ -214,20 +213,20 @@ export const DEFAULT_OPTIONS = {
                     name: 'Workspace.draw_new',
                 },
                 write: {
-                    name: 'Workspace.textbox'
-                }
+                    name: 'Workspace.textbox',
+                },
             },
-            opt : {
-              search : {query: true},
-              multiSelect: true,
-              uploadAllowed: {
-                  image: true,
-                  object: true,
-                  sound: false
-              },
-              uploadNotAllowedExt: ["gif"]
+            opt: {
+                search: { query: true },
+                multiSelect: true,
+                uploadAllowed: {
+                    image: true,
+                    object: true,
+                    sound: false,
+                },
+                uploadNotAllowedExt: ['gif'],
             },
-            sidebar: SPRITE_SIDEBAR
+            sidebar: SPRITE_SIDEBAR,
         },
         shape: {
             title: 'Workspace.add_picture',
@@ -243,17 +242,17 @@ export const DEFAULT_OPTIONS = {
                     name: 'Workspace.draw_new',
                 },
             },
-            opt : {
-                search : {query: true},
+            opt: {
+                search: { query: true },
                 multiSelect: true,
                 uploadAllowed: {
                     image: true,
                     object: false,
-                    sound: false
+                    sound: false,
                 },
-                uploadNotAllowedExt: ["gif"]
+                uploadNotAllowedExt: ['gif'],
             },
-            sidebar: SPRITE_SIDEBAR
+            sidebar: SPRITE_SIDEBAR,
         },
         getShape: {
             title: 'Menus.picture_import',
@@ -266,16 +265,16 @@ export const DEFAULT_OPTIONS = {
                     name: 'Workspace.upload',
                 },
             },
-            opt : {
+            opt: {
                 multiSelect: false,
                 uploadAllowed: {
                     image: true,
                     object: false,
-                    sound: false
+                    sound: false,
                 },
-                uploadNotAllowedExt: ["gif", "eo"]
+                uploadNotAllowedExt: ['gif', 'eo'],
             },
-            sidebar: SPRITE_SIDEBAR
+            sidebar: SPRITE_SIDEBAR,
         },
         sound: {
             title: 'Workspace.sound_add',
@@ -288,14 +287,14 @@ export const DEFAULT_OPTIONS = {
                     name: 'Workspace.upload',
                 },
             },
-            opt : {
-                search : {query: true},
+            opt: {
+                search: { query: true },
                 multiSelect: true,
                 uploadAllowed: {
                     image: false,
                     object: false,
-                    sound: true
-                }
+                    sound: true,
+                },
             },
             sidebar: {
                 사람: {
@@ -353,7 +352,7 @@ export const DEFAULT_OPTIONS = {
                 favorites: {
                     name: 'Menus.marked_project',
                 },
-            }
-        }
+            },
+        },
     },
 };

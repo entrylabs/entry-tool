@@ -17,7 +17,11 @@ class Index extends Component {
         this.drawItems = this.drawItems.bind(this);
         this.getMenus = this.getMenus.bind(this);
 
-        const initOpt = {type: this.props.popupReducer.type, sidebar: Object.keys(this.props.sidebar)[0], subMenu: 'all'};
+        const initOpt = {
+            type: this.props.popupReducer.type,
+            sidebar: Object.keys(this.props.sidebar)[0],
+            subMenu: 'all',
+        };
         this.props.triggerEvent(EMIT_TYPES.fetch, initOpt, false);
         this.props.setUIParam(initOpt);
     }
@@ -25,13 +29,23 @@ class Index extends Component {
     componentWillReceiveProps(nextProps) {
         const before = this.props.popupReducer;
         const next = nextProps.popupReducer;
-        if(before.type !== next.type || before.sidebar !== next.sidebar || before.subMenu !== next.subMenu) {
-            this.props.triggerEvent(EMIT_TYPES.fetch, {type: next.type, sidebar: next.sidebar, subMenu: next.subMenu}, false);
+        if (
+            before.type !== next.type ||
+            before.sidebar !== next.sidebar ||
+            before.subMenu !== next.subMenu
+        ) {
+            this.props.triggerEvent(
+                EMIT_TYPES.fetch,
+                { type: next.type, sidebar: next.sidebar, subMenu: next.subMenu },
+                false
+            );
         }
     }
 
     drawItems() {
-        return this.props.data.data.map((item) => <Item key={item._id} item={item} multiSelect={this.props.multiSelect}/>);
+        return this.props.data.data.map((item) => (
+            <Item key={item._id} item={item} multiSelect={this.props.multiSelect} />
+        ));
     }
 
     getMenus() {

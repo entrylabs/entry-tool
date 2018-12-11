@@ -40,13 +40,13 @@ class Item extends Component {
                 onDoubleClick={() => this.handleClick({ item: this.props.item })}
                 className={CommonUtils.toggleClass(this.props.index >= 0, Styles.on)}
             >
-                <a href="#NULL" className={Styles.link}>
+                <a href className={Styles.link}>
                     <div
                         className={Styles.thmb}
                         style={{
                             backgroundImage: `url("/lib/entryjs/images/hardware/${
                                 item.imageName
-                                }")`,
+                            }")`,
                             backgroundSize: '65%',
                             backgroundRepeat: 'no-repeat',
                         }}
@@ -54,7 +54,9 @@ class Item extends Component {
                         &nbsp;
                     </div>
                     <div className={Styles.inner_box}>
-                        <strong className={Styles.sjt}>{item.title[CommonUtils.getLangType()] || item.title.en}</strong>
+                        <strong className={Styles.sjt}>
+                            {item.title[CommonUtils.getLangType()] || item.title.en}
+                        </strong>
                         <p className={Styles.dsc}>{item.description}</p>
                     </div>
                 </a>
@@ -67,9 +69,9 @@ const mapStateToProps = (state, props) => {
     const getIndex = makeFindSelectedByName(props.item.name);
     return {
         ...state,
-        index:  getIndex(state)
-    }
-}
+        index: getIndex(state),
+    };
+};
 
 const mapDispatchToProps = (dispatch) => ({
     visibleAction: (visible) => dispatch(visibleAction(visible)),
@@ -79,5 +81,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(Item);

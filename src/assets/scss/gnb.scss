@@ -35,14 +35,14 @@
             width: 160px;
             border-radius: 4px;
             border: 0;
-            box-sizing: border-box;
+            box-sizing: content-box;
             background-color: #fff;
-            padding: 7px 8px 6px;
+            padding: 6px 6px 4px;
             font-size: 12px;
             font-weight: 600;
             color: #2c313d;
             letter-spacing: -0.4px;
-            line-height: 11px;
+            line-height: 14px;
         }
         input[type="text"]::placeholder {
             color: #4f80ff;

@@ -21,7 +21,7 @@ class SubMenu extends Component {
             const subMenu = this.props.popupReducer.subMenu;
             return (
                 <a
-                    href="#NULL"
+                    href
                     className={CommonUtils.toggleClass(
                         subMenu === key || (!subMenu && index === 0),
                         Styles.on
@@ -41,7 +41,7 @@ class SubMenu extends Component {
         this.props.setUIParam({
             type: this.props.popupReducer.type,
             sidebar: this.props.popupReducer.sidebar,
-            subMenu: key
+            subMenu: key,
         });
     }
 

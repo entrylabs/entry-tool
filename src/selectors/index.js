@@ -6,7 +6,7 @@ export const makeFindSelectedByName = (name) => {
     return createSelector(
         [getSelected],
         (selected) => {
-            return selected.findIndex(item=>item.name === name);
+            return selected.findIndex((item) => item.name === name);
         }
     );
 };
@@ -15,7 +15,7 @@ export const makeFindSelectedById = (id) => {
     return createSelector(
         [getSelected],
         (selected) => {
-            return selected.findIndex(item=>item._id === id);
+            return selected.findIndex((item) => item._id === id);
         }
     );
 };
