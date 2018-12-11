@@ -196,7 +196,7 @@
             color: #8aa3b2;
             text-align: center;
             letter-spacing: -0.3px;
-            line-height: 26px;
+            line-height: 22px;
         }
         .section_cont .sub_menu a.on {
             border-color: #4f80ff;
@@ -679,7 +679,7 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             letter-spacing: -0.3px;
-            line-height: 36px;
+            line-height: 34px;
         }
         .section_cont .obj_list .on .link:after {
             border: 2px solid #4f80ff;
@@ -838,7 +838,7 @@
         color: #fff;
     }
 
-    // 나의 작품 
+    // 나의 작품
     .art_content {
         .section_cont {
             padding: 32px 0 0 38px;
@@ -1230,7 +1230,7 @@
             font-weight: 600;
             color: #4f80ff;
             vertical-align: top;
-            line-height: 48px;
+            line-height: 44px;
         }
         a.active {
             background-color: #4f80ff;
@@ -1388,6 +1388,10 @@
             cursor: pointer;
             a {
                 color: $textColor;
+            }
+            &.disabled {
+                cursor: auto;
+                color: $disabledTextColor;
             }
         }
 
