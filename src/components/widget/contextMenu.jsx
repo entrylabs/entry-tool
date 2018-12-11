@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import OutsideClick from "../common/outsideClick";
-import Scrollbars from "../common/scrollbars";
+import OutsideClick from '../common/outsideClick';
+import Scrollbars from '../common/scrollbars';
 import Styles from '@assets/scss/popup.scss';
-import { CommonUtils } from '@utils/Common';
-import root from 'window-or-global';
-import debounce from 'lodash/debounce';
-import { pure } from "recompose";
+// import { CommonUtils } from '@utils/Common';
+// import root from 'window-or-global';
+// import debounce from 'lodash/debounce';
+import { pure } from 'recompose';
 
 class ContextMenu extends Component {
-    alignPosition(coordinate) {
-    }
+    // alignPosition(coordinate) {
+    // }
 
     render() {
         const {
@@ -49,26 +49,25 @@ class ContextMenu extends Component {
     makeDropdownItem() {
         const { items, onOutsideClick } = this.props;
 
-        return items
-            .map((value, index) => {
-                const { text, enable = true, callback } = value;
-                return (
-                    <div
-                        key={index}
-                        className={`${Styles.item} ${enable ? '' : Styles.disabled}`}
-                        onClick={() => {
-                            if (enable && callback) {
-                                callback();
-                            }
-                            if (onOutsideClick) {
-                                onOutsideClick();
-                            }
-                        }}
-                    >
-                        {text}
-                    </div>
-                );
-            });
+        return items.map((value, index) => {
+            const { text, enable = true, callback } = value;
+            return (
+                <div
+                    key={index}
+                    className={`${Styles.item} ${enable ? '' : Styles.disabled}`}
+                    onClick={() => {
+                        if (enable && callback) {
+                            callback();
+                        }
+                        if (onOutsideClick) {
+                            onOutsideClick();
+                        }
+                    }}
+                >
+                    {text}
+                </div>
+            );
+        });
     }
 }
 
