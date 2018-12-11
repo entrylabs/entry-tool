@@ -35,7 +35,10 @@ class Draw extends Component {
                                 <a
                                     href="#NULL"
                                     className={Styles.active}
-                                    onClick={() => this.handleSubmit()}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        this.handleSubmit();
+                                    }}
                                 >
                                     {CommonUtils.getLang("Menus.draw_new_go")}
                                 </a>
