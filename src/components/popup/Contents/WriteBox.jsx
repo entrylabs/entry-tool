@@ -206,7 +206,8 @@ class WriteBox extends Component {
         this.setState({ dropDown });
     }
 
-    onSubmitBtnClicked() {
+    onSubmitBtnClicked(e) {
+        e.preventDefault();
         const effects = Object.keys(this.state.effects).reduce((effects, name) => {
             switch (name) {
                 case 'backgroundColor':
@@ -312,7 +313,10 @@ class WriteBox extends Component {
                 <div className={Styles.pop_btn_box}>
                     <a
                         href="#NULL"
-                        onClick={() => this.props.triggerEvent(EMIT_TYPES.close, null, true)}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            this.props.triggerEvent(EMIT_TYPES.close, null, true);
+                        }}
                     >
                         {CommonUtils.getLang('Buttons.cancel')}
                     </a>
