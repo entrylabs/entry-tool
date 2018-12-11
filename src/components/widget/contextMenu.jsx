@@ -19,7 +19,6 @@ class ContextMenu extends Component {
             eventTypes = ['mousedown', 'touchstart', 'wheel'],
         } = this.props;
         /*const { componentPosition } = this.state;*/
-        console.log(items);
         return (
             <OutsideClick
                 onOutsideClick={() => {
@@ -51,23 +50,22 @@ class ContextMenu extends Component {
         const { items, onOutsideClick } = this.props;
 
         return items
-            .filter((item) => item.activated)
             .map((value, index) => {
-                const { option } = value;
+                const { text, enable = true, callback } = value;
                 return (
                     <div
                         key={index}
-                        className={`${Styles.item} ${option.enable ? '' : Styles.disabled}`}
+                        className={`${Styles.item} ${enable ? '' : Styles.disabled}`}
                         onClick={() => {
-                            if (option.enable && option.callback) {
-                                option.callback();
+                            if (enable && callback) {
+                                callback();
                             }
                             if (onOutsideClick) {
                                 onOutsideClick();
                             }
                         }}
                     >
-                        {option.text}
+                        {text}
                     </div>
                 );
             });
