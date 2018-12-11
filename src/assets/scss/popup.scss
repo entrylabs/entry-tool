@@ -837,7 +837,7 @@
         color: #fff;
     }
 
-    // 나의 작품 
+    // 나의 작품
     .art_content {
         .section_cont {
             padding: 32px 0 0 38px;
@@ -1387,6 +1387,10 @@
             cursor: pointer;
             a {
                 color: $textColor;
+            }
+            &.disabled {
+                cursor: auto;
+                color: $disabledTextColor;
             }
         }
 

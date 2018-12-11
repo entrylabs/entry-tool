@@ -100,6 +100,9 @@ export default class EntryTool extends EventEmitter {
             case 'angleWidget':
                 this.reducerType = 'widget';
                 return import('./components/widget/angleContainer');
+            case 'contextMenu':
+                this.reducerType = 'widget';
+                return import('./components/widget/contextMenuContainer');
             case 'popup':
             default:
                 this._target.appendChild(this._container);

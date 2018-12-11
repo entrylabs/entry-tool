@@ -10,6 +10,7 @@ import Number from '../components/widget/number';
 import Dropdown from '../components/widget/dropdown';
 import ModalProgress from '../components/widget/modalProgress';
 import Angle from '../components/widget/angle';
+import ContextMenu from '../components/widget/contextMenu';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
 
 import { action } from '@storybook/addon-actions';
@@ -80,4 +81,52 @@ wigetStories
                 }}
             />
         </div>
+    ))
+    .add('컨텍스트메뉴', () => (
+        <ContextMenu
+            items={
+                [
+                    {
+                        activated: true,
+                        option: {
+                            text: 'text1',
+                            enable: true,
+                            callback() {
+                                console.log('text1 called');
+                            },
+                        },
+                    },
+                    {
+                        activated: true,
+                        option: {
+                            text: 'text2',
+                            enable: true,
+                            callback() {
+                                console.log('text2 called');
+                            },
+                        },
+                    },
+                    {
+                        activated: false,
+                        option: {
+                            text: 'invisible text',
+                            enable: true,
+                            callback() {
+                                console.log('invisible text');
+                            },
+                        },
+                    },
+                    {
+                        activated: true,
+                        option: {
+                            text: 'disabled text',
+                            enable: false,
+                            callback() {
+                                console.log('disabled');
+                            },
+                        },
+                    },
+                ]
+            }
+        />
     ));
