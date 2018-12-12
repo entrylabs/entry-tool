@@ -230,7 +230,7 @@ export const DEFAULT_OPTIONS = {
             sidebar: SPRITE_SIDEBAR,
         },
         shape: {
-            title: 'Workspace.add_picture',
+            title: 'Workspace.picture_add',
             mainType: 'sprite',
             navigations: {
                 select: {
