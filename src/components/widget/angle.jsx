@@ -4,6 +4,7 @@ import { debounce } from 'lodash';
 import { pure } from 'recompose';
 import Styles from '../../assets/scss/popup.scss';
 import OutsideClick from "../common/outsideClick";
+import root from 'window-or-global';
 
 /* eslint-disable jsx-a11y/anchor-is-valid*/
 /* eslint-disable array-element-newline */
@@ -13,6 +14,10 @@ const numberList = [
     '1', '2', '3',
     '-', '0', '.',
 ];
+
+function handleTouchPreventDefault(e) {
+    e.preventDefault();
+}
 
 class Angle extends Component {
     getPositionOptions() {
@@ -37,12 +42,12 @@ class Angle extends Component {
     }
 
     componentDidMount() {
-        window.addEventListener('resize', this.handleWindowResize);
+        root.addEventListener('resize', this.handleWindowResize);
         this.alignPosition();
     }
 
     componentWillUnmount() {
-        window.removeEventListener('resize', this.handleWindowResize);
+        root.removeEventListener('resize', this.handleWindowResize);
     }
 
     handleWindowResize = debounce(() => {
@@ -59,7 +64,6 @@ class Angle extends Component {
     }
 
     handleAngleArrowMove(event) {
-        event.preventDefault();
 
         const { onChangeAngle } = this.props;
 
@@ -131,6 +135,7 @@ class Angle extends Component {
     }
 
     addMouseMove() {
+        document.addEventListener('touchmove', handleTouchPreventDefault, { passive: false });
         document.addEventListener('mousemove', this.handleAngleArrowMove);
         document.addEventListener('touchmove', this.handleAngleArrowMove);
         document.addEventListener('mouseup', this.removeMouseMove);
@@ -138,6 +143,7 @@ class Angle extends Component {
     }
 
     removeMouseMove() {
+        document.removeEventListener('touchmove', handleTouchPreventDefault);
         document.removeEventListener('mousemove', this.handleAngleArrowMove);
         document.removeEventListener('touchmove', this.handleAngleArrowMove);
     }

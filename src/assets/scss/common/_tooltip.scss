@@ -222,6 +222,7 @@
     border-color: #bfd8e6;
     transition: all ease 0.3s;
     z-index: 9999;
+    position: fixed;
     .tooltip_inner {
         overflow: hidden;
         position: relative;
@@ -339,6 +340,7 @@
     border-color: #bfd8e6;
     transition: all ease 0.3s;
     z-index: 9999;
+    position: fixed;
     .tooltip_inner {
         overflow: hidden;
         padding: 16px;
