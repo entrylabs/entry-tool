@@ -60,13 +60,13 @@ class Item extends Component {
                 onDoubleClick={() => this.handleDbClick('select', { item: this.props.item })}
                 className={CommonUtils.toggleClass(this.props.index >= 0, Styles.on)}
             >
-                <a href="#NULL" className={Styles.link}>
+                <button className={Styles.link}>
                     {this.drawImage()}
                     <em className={Styles.sjt}>
                         {this.props.item.label[CommonUtils.getLangType()] ||
                             this.props.item.label.en}
                     </em>
-                </a>
+                </button>
             </li>
         );
     }

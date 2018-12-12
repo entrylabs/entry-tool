@@ -602,7 +602,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -619,7 +619,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -636,7 +636,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -653,7 +653,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -670,7 +670,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -687,7 +687,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -704,7 +704,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -721,7 +721,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -738,7 +738,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -755,7 +755,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -1279,7 +1279,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.select_link} ${
                                                     Styles.imico_pop_select_arr_down
-                                                }`}
+                                                    }`}
                                                 title="글꼴"
                                             >
                                                 NanumGothicOTF
@@ -1351,7 +1351,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_bold
-                                                } ${Styles.on}`}
+                                                    } ${Styles.on}`}
                                                 title="굵게"
                                             >
                                                 <span className={Styles.blind}>글자 굵게</span>
@@ -1360,7 +1360,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_underline
-                                                }`}
+                                                    }`}
                                                 title="밑줄"
                                             >
                                                 <span className={Styles.blind}>글자 밑줄</span>
@@ -1369,7 +1369,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_italic
-                                                }`}
+                                                    }`}
                                                 title="기울임"
                                             >
                                                 <span className={Styles.blind}>글자 기울기</span>
@@ -1378,7 +1378,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_through
-                                                }`}
+                                                    }`}
                                                 title="취소선"
                                             >
                                                 <span className={Styles.blind}>글자 취소선</span>
@@ -1387,7 +1387,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_color
-                                                }`}
+                                                    }`}
                                                 title="글자색"
                                             >
                                                 <span className={Styles.blind}>글자 색</span>
@@ -1396,7 +1396,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_paint
-                                                }`}
+                                                    }`}
                                                 title="배경색"
                                             >
                                                 <span className={Styles.blind}>글자 배경색</span>
@@ -1478,7 +1478,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.select_link} ${
                                                     Styles.imico_pop_select_arr_down
-                                                }`}
+                                                    }`}
                                                 title="글꼴"
                                             >
                                                 NanumGothicOTF
@@ -1550,7 +1550,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_bold
-                                                } ${Styles.on}`}
+                                                    } ${Styles.on}`}
                                                 title="굵게"
                                             >
                                                 <span className={Styles.blind}>글자 굵게</span>
@@ -1559,7 +1559,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_underline
-                                                }`}
+                                                    }`}
                                                 title="밑줄"
                                             >
                                                 <span className={Styles.blind}>글자 밑줄</span>
@@ -1568,7 +1568,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_italic
-                                                }`}
+                                                    }`}
                                                 title="기울임"
                                             >
                                                 <span className={Styles.blind}>글자 기울기</span>
@@ -1577,7 +1577,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_through
-                                                }`}
+                                                    }`}
                                                 title="취소선"
                                             >
                                                 <span className={Styles.blind}>글자 취소선</span>
@@ -1586,7 +1586,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_color
-                                                }`}
+                                                    }`}
                                                 title="글자색"
                                             >
                                                 <span className={Styles.blind}>글자 색</span>
@@ -1595,7 +1595,7 @@ class Sample extends Component {
                                                 href="#"
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_paint
-                                                }`}
+                                                    }`}
                                                 title="배경색"
                                             >
                                                 <span className={Styles.blind}>글자 배경색</span>
@@ -1999,7 +1999,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2011,7 +2011,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2023,7 +2023,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2035,7 +2035,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2047,7 +2047,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2059,7 +2059,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2071,7 +2071,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2083,7 +2083,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2095,7 +2095,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2107,7 +2107,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2119,7 +2119,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2131,7 +2131,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2143,7 +2143,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2155,7 +2155,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2167,7 +2167,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2179,7 +2179,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2191,7 +2191,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2203,7 +2203,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2215,7 +2215,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2227,7 +2227,7 @@ class Sample extends Component {
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
-                                                    }`}
+                                                        }`}
                                                 >
                                                     &nbsp;
                                                 </div>
@@ -2246,7 +2246,7 @@ class Sample extends Component {
                                         <div
                                             className={`${Styles.thmb} ${
                                                 Styles.imico_pop_sound_thmb
-                                            }`}
+                                                }`}
                                         >
                                             &nbsp;
                                         </div>
@@ -2255,7 +2255,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -2264,7 +2264,7 @@ class Sample extends Component {
                                         <div
                                             className={`${Styles.thmb} ${
                                                 Styles.imico_pop_sound_thmb
-                                            }`}
+                                                }`}
                                         >
                                             &nbsp;
                                         </div>
@@ -2273,7 +2273,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -2282,7 +2282,7 @@ class Sample extends Component {
                                         <div
                                             className={`${Styles.thmb} ${
                                                 Styles.imico_pop_sound_thmb
-                                            }`}
+                                                }`}
                                         >
                                             &nbsp;
                                         </div>
@@ -2291,7 +2291,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -2300,7 +2300,7 @@ class Sample extends Component {
                                         <div
                                             className={`${Styles.thmb} ${
                                                 Styles.imico_pop_sound_thmb
-                                            }`}
+                                                }`}
                                         >
                                             &nbsp;
                                         </div>
@@ -2309,7 +2309,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -2318,7 +2318,7 @@ class Sample extends Component {
                                         <div
                                             className={`${Styles.thmb} ${
                                                 Styles.imico_pop_sound_thmb
-                                            }`}
+                                                }`}
                                         >
                                             &nbsp;
                                         </div>
@@ -2327,7 +2327,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -2336,7 +2336,7 @@ class Sample extends Component {
                                         <div
                                             className={`${Styles.thmb} ${
                                                 Styles.imico_pop_sound_thmb
-                                            }`}
+                                                }`}
                                         >
                                             &nbsp;
                                         </div>
@@ -2345,7 +2345,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -2354,7 +2354,7 @@ class Sample extends Component {
                                         <div
                                             className={`${Styles.thmb} ${
                                                 Styles.imico_pop_sound_thmb
-                                            }`}
+                                                }`}
                                         >
                                             &nbsp;
                                         </div>
@@ -2363,7 +2363,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -2372,7 +2372,7 @@ class Sample extends Component {
                                         <div
                                             className={`${Styles.thmb} ${
                                                 Styles.imico_pop_sound_thmb
-                                            }`}
+                                                }`}
                                         >
                                             &nbsp;
                                         </div>
@@ -2381,7 +2381,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -2390,7 +2390,7 @@ class Sample extends Component {
                                         <div
                                             className={`${Styles.thmb} ${
                                                 Styles.imico_pop_sound_thmb
-                                            }`}
+                                                }`}
                                         >
                                             &nbsp;
                                         </div>
@@ -2399,7 +2399,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -2408,7 +2408,7 @@ class Sample extends Component {
                                         <div
                                             className={`${Styles.thmb} ${
                                                 Styles.imico_pop_sound_thmb
-                                            }`}
+                                                }`}
                                         >
                                             &nbsp;
                                         </div>
@@ -2417,7 +2417,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_del} ${
                                                 Styles.imbtn_pop_chk_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -2492,7 +2492,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2504,7 +2504,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2516,7 +2516,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2528,7 +2528,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2540,7 +2540,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2552,7 +2552,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2564,7 +2564,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2576,7 +2576,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2588,7 +2588,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2600,7 +2600,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2612,7 +2612,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2624,7 +2624,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2636,7 +2636,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2648,7 +2648,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2660,7 +2660,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2672,7 +2672,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2684,7 +2684,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2696,7 +2696,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2708,7 +2708,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2720,7 +2720,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2732,7 +2732,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2744,7 +2744,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2756,7 +2756,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2768,7 +2768,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2780,7 +2780,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2792,7 +2792,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2804,7 +2804,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2816,7 +2816,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2828,7 +2828,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2840,7 +2840,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2852,7 +2852,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2864,7 +2864,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2876,7 +2876,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -2888,7 +2888,7 @@ class Sample extends Component {
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
-                                                }`}
+                                                    }`}
                                             >
                                                 &nbsp;
                                             </div>
@@ -3765,7 +3765,7 @@ class Sample extends Component {
                                         href="#"
                                         className={`${Styles.select_link} ${
                                             Styles.imico_pop_select_arr_down
-                                        }`}
+                                            }`}
                                     >
                                         학년을 선택하세요.
                                     </a>
@@ -3821,7 +3821,7 @@ class Sample extends Component {
                                         href="#"
                                         className={`${Styles.select_link} ${
                                             Styles.imico_pop_select_arr_up
-                                        }`}
+                                            }`}
                                     >
                                         성별을 선택하세요.
                                     </a>
@@ -3872,7 +3872,7 @@ class Sample extends Component {
                                         href="#"
                                         className={`${Styles.select_link} ${
                                             Styles.imico_pop_select_arr_down
-                                        }`}
+                                            }`}
                                     >
                                         학년을 선택하세요.
                                     </a>
@@ -3891,7 +3891,7 @@ class Sample extends Component {
                                         href="#"
                                         className={`${Styles.select_link} ${
                                             Styles.imico_pop_select_arr_up
-                                        }`}
+                                            }`}
                                     >
                                         성별을 선택하세요.
                                     </a>
@@ -4277,7 +4277,7 @@ class Sample extends Component {
                                                     <span
                                                         className={`${Styles.slider} ${
                                                             Styles.btn_pop_color_slide
-                                                        } ${Styles.on}`}
+                                                            } ${Styles.on}`}
                                                         style={{ left: 100 + 'px' }}
                                                     >
                                                         &nbsp;
@@ -4305,7 +4305,7 @@ class Sample extends Component {
                                                     <span
                                                         className={`${Styles.slider} ${
                                                             Styles.btn_pop_color_slide
-                                                        }`}
+                                                            }`}
                                                         style={{ left: 0 + 'px' }}
                                                     >
                                                         &nbsp;
@@ -4349,7 +4349,7 @@ class Sample extends Component {
                                         <span
                                             className={`${Styles.color} ${
                                                 Styles.imico_pop_color_uncheck
-                                            } ${Styles.imico_pop_circle_check}`}
+                                                } ${Styles.imico_pop_circle_check}`}
                                         >
                                             &nbsp;
                                         </span>
@@ -4383,7 +4383,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_picker} ${
                                                 Styles.imbtn_picker
-                                            }`}
+                                                }`}
                                         >
                                             컬러피커 열기
                                         </a>
@@ -4401,7 +4401,7 @@ class Sample extends Component {
                                                     <span
                                                         className={`${Styles.slider} ${
                                                             Styles.btn_pop_color_slide
-                                                        }`}
+                                                            }`}
                                                         style={{ left: 10 + 'px' }}
                                                     >
                                                         &nbsp;
@@ -4432,7 +4432,7 @@ class Sample extends Component {
                                                     <span
                                                         className={`${Styles.slider} ${
                                                             Styles.btn_pop_color_slide
-                                                        }`}
+                                                            }`}
                                                         style={{ left: 100 + 'px' }}
                                                     >
                                                         &nbsp;
@@ -4631,7 +4631,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_cnt} ${Styles.btn_del} ${
                                                 Styles.imico_pop_key_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}> 지우기</span>
                                         </a>
@@ -4713,7 +4713,7 @@ class Sample extends Component {
                                             href="#"
                                             className={`${Styles.btn_cnt} ${Styles.btn_del} ${
                                                 Styles.imico_pop_key_del
-                                            }`}
+                                                }`}
                                         >
                                             <span className={Styles.blind}> 지우기</span>
                                         </a>
@@ -4798,7 +4798,6 @@ class Sample extends Component {
                     </section>
                 </div>
 
-
                 {/* 나의 작품 - 나의 작품 */}
                 <div className={Styles.popup_wrap}>
                     <header className={Styles.pop_header}>
@@ -4818,7 +4817,7 @@ class Sample extends Component {
                             <li>
                                 <a href="#">관심 작품</a>
                             </li>
-                            
+
                         </ul>
                         <div className={Styles.art_sel_area}>
                             <div className={`${Styles.pop_selectbox} ${Styles.on}`}>
@@ -4826,7 +4825,7 @@ class Sample extends Component {
                                     href="#"
                                     className={`${Styles.select_link} ${
                                         Styles.imico_pop_select_arr_down
-                                    }`}
+                                        }`}
                                     title="모든 작품"
                                 >
                                     모든 작품
@@ -4837,7 +4836,7 @@ class Sample extends Component {
                                     href="#"
                                     className={`${Styles.select_link} ${
                                         Styles.imico_pop_select_arr_down
-                                    }`}
+                                        }`}
                                     title="최신순"
                                 >
                                     최신순
@@ -4848,7 +4847,7 @@ class Sample extends Component {
                                     href="#"
                                     className={`${Styles.select_link} ${
                                         Styles.imico_pop_select_arr_down
-                                    }`}
+                                        }`}
                                     title="전체기간"
                                 >
                                     전체기간
@@ -4881,33 +4880,7 @@ class Sample extends Component {
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
                                             }}>
                                                 <div className={Styles.info_bar}>
-                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
-                                                    <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
-                                                    <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
-                                                    <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
-                                                </div>
-                                            </div>
-                                            <div className={Styles.info_box}>
-                                                <div className={Styles.user_thmb} style={{
-                                                    backgroundImage:
-                                                        "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
-                                                }}></div>
-                                                <em className={Styles.tit}>90% 펜 스네이크 케익이 정말 맛이 있습니다.</em>
-                                                <span className={Styles.from}>
-                                                    from<em>atom 10150</em>
-                                                </span>
-                                            </div>
-                                            
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" className={Styles.link}>
-                                            <div className={Styles.thmb} style={{
-                                                backgroundImage:
-                                                    "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
-                                            }}>
-                                                <div className={Styles.info_bar}>
-                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    {`${Styles.view} ${Styles.imico_pop_info_view}`}
                                                     <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
                                                     <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
                                                     <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
@@ -4933,7 +4906,7 @@ class Sample extends Component {
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
                                             }}>
                                                 <div className={Styles.info_bar}>
-                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    {`${Styles.view} ${Styles.imico_pop_info_view}`}
                                                     <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
                                                     <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
                                                     <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
@@ -4959,7 +4932,7 @@ class Sample extends Component {
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
                                             }}>
                                                 <div className={Styles.info_bar}>
-                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    {`${Styles.view} ${Styles.imico_pop_info_view}`}
                                                     <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
                                                     <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
                                                     <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
@@ -4985,7 +4958,7 @@ class Sample extends Component {
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
                                             }}>
                                                 <div className={Styles.info_bar}>
-                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    {`${Styles.view} ${Styles.imico_pop_info_view}`}
                                                     <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
                                                     <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
                                                     <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
@@ -5011,7 +4984,7 @@ class Sample extends Component {
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
                                             }}>
                                                 <div className={Styles.info_bar}>
-                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    {`${Styles.view} ${Styles.imico_pop_info_view}`}
                                                     <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
                                                     <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
                                                     <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
@@ -5037,7 +5010,7 @@ class Sample extends Component {
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
                                             }}>
                                                 <div className={Styles.info_bar}>
-                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    {`${Styles.view} ${Styles.imico_pop_info_view}`}
                                                     <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
                                                     <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
                                                     <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
@@ -5063,7 +5036,7 @@ class Sample extends Component {
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
                                             }}>
                                                 <div className={Styles.info_bar}>
-                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    {`${Styles.view} ${Styles.imico_pop_info_view}`}
                                                     <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
                                                     <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
                                                     <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
@@ -5089,7 +5062,7 @@ class Sample extends Component {
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
                                             }}>
                                                 <div className={Styles.info_bar}>
-                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    {`${Styles.view} ${Styles.imico_pop_info_view}`}
                                                     <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
                                                     <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
                                                     <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
@@ -5115,7 +5088,33 @@ class Sample extends Component {
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
                                             }}>
                                                 <div className={Styles.info_bar}>
-                                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    {`${Styles.view} ${Styles.imico_pop_info_view}`}
+                                                    <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
+                                                    <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
+                                                    <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
+                                                </div>
+                                            </div>
+                                            <div className={Styles.info_box}>
+                                                <div className={Styles.user_thmb} style={{
+                                                    backgroundImage:
+                                                        "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                                }}></div>
+                                                <em className={Styles.tit}>90% 펜 스네이크 케익이 정말 맛이 있습니다.</em>
+                                                <span className={Styles.from}>
+                                                    from<em>atom 10150</em>
+                                                </span>
+                                            </div>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" className={Styles.link}>
+                                            <div className={Styles.thmb} style={{
+                                                backgroundImage:
+                                                    "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
+                                            }}>
+                                                <div className={Styles.info_bar}>
+                                                    {`${Styles.view} ${Styles.imico_pop_info_view}`}
                                                     <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>9999</span>
                                                     <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>9999</span>
                                                     <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>9999</span>
@@ -5153,6 +5152,94 @@ class Sample extends Component {
 
 
 
+                </div>
+
+                {/* 나의 작품 - 나의 작품 없을 때 */}
+                <div className={Styles.popup_wrap}>
+                    <header className={Styles.pop_header}>
+                        <h1>나의 작품</h1>
+                        <button
+                            onClick={this.close}
+                            className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}
+                        >
+                            <span className={Styles.blind}>뒤로가기</span>
+                        </button>
+                    </header>
+                    <div className={Styles.section_navi}>
+                        <ul className={Styles.list}>
+                            <li className={Styles.on}>
+                                <a href="#">나의 작품</a>
+                            </li>
+                            <li>
+                                <a href="#">관심 작품</a>
+                            </li>
+
+                        </ul>
+                        <div className={Styles.art_sel_area}>
+                            <div className={`${Styles.pop_selectbox} ${Styles.on}`}>
+                                <a
+                                    href="#"
+                                    className={`${Styles.select_link} ${
+                                        Styles.imico_pop_select_arr_down
+                                        }`}
+                                    title="모든 작품"
+                                >
+                                    모든 작품
+                                </a>
+                            </div>
+                            <div className={Styles.pop_selectbox}>
+                                <a
+                                    href="#"
+                                    className={`${Styles.select_link} ${
+                                        Styles.imico_pop_select_arr_down
+                                        }`}
+                                    title="최신순"
+                                >
+                                    최신순
+                                </a>
+                            </div>
+                            <div className={Styles.pop_selectbox}>
+                                <a
+                                    href="#"
+                                    className={`${Styles.select_link} ${
+                                        Styles.imico_pop_select_arr_down
+                                        }`}
+                                    title="전체기간"
+                                >
+                                    전체기간
+                                </a>
+                            </div>
+                            <div className={Styles.srch_box}>
+                                <label htmlFor="srch">
+                                    <input type="text" id="srch" name="" />
+                                </label>
+                                <button
+                                    type="button"
+                                    className={`${Styles.btn_srch} ${Styles.imbtn_pop_srch}`}
+                                >
+                                    <span className={Styles.blind}>검색</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <section className={`${Styles.pop_content} ${Styles.art_content}`}>
+                        <div className={Styles.section_cont}>
+                            {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
+                            <h2 className={Styles.blind}>나의 작품</h2>
+                            <div className={Styles.result_box}>
+                                <div className={`${Styles.thmb} ${Styles.imico_pop_mywrite_thmb}`}>&nbsp;</div>
+                                <p className={Styles.result_dsc}>
+                                    내가 만든 작품이 없습니다.<br />
+                                    지금 작품 만들기를 시작해보세요!
+                                </p>
+                                <div className={Styles.pop_btn_box}>
+                                    <a href="#" className={Styles.active}>
+                                        작품 만들기
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
 
             </div >
