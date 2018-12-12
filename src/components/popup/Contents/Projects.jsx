@@ -85,13 +85,42 @@ class Projects extends Component {
         this.props.triggerEvent(event, data, true);
     }
 
+    emptyPage() {
+        return (
+            <section className={`${Styles.pop_content} ${Styles.art_content}`}>
+                <div className={Styles.section_cont}>
+                    {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
+                    <h2 className={Styles.blind}>{CommonUtils.getLang('Menus.my_project')}</h2>
+                    <div className={Styles.result_box}>
+                        <div className={`${Styles.thmb} ${Styles.imico_pop_mywrite_thmb}`}>&nbsp;</div>
+                        <p className={Styles.result_dsc}>
+                            {CommonUtils.getLang('Menus.no_project_1')}<br />{CommonUtils.getLang('Menus.no_project_2')}
+                        </p>
+                        <div className={Styles.pop_btn_box}>
+                            <a href="#"
+                               className={Styles.active}
+                               onClick={(e) => {
+                                this.triggerEvent(e, EMIT_TYPES.makeProject);
+                            }}>
+                                {CommonUtils.getLang('Menus.make_project')}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+    }
     render() {
+        const data = this.props.data.data;
+        if(!data || data.length === 0) {
+            return this.emptyPage();
+        }
         return (
             <React.Fragment>
                 <section className={`${Styles.pop_content} ${Styles.art_content}`}>
                     <div className={Styles.section_cont}>
                         {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                        <h2 className={Styles.blind}>나의 작품</h2>
+                        <h2 className={Styles.blind}>{CommonUtils.getLang('Menus.my_project')}</h2>
                         <strong className={Styles.list_sjt}>
                             {CommonUtils.getLang('Menus.all')} ({this.props.data.data.length})
                         </strong>
@@ -102,7 +131,7 @@ class Projects extends Component {
                 </section>
                 <div className={Styles.pop_btn_box}>
                     <a
-                        href
+                        href={"#"}
                         onClick={(e) => {
                             this.triggerEvent(e, EMIT_TYPES.close, null);
                         }}
@@ -110,7 +139,7 @@ class Projects extends Component {
                         {CommonUtils.getLang('Buttons.cancel')}
                     </a>
                     <a
-                        href
+                        href={"#"}
                         className={Styles.active}
                         onClick={(e) => {
                             this.triggerEvent(e, EMIT_TYPES.submit, this.state.selected);

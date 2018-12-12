@@ -6,7 +6,7 @@ import Foot from './foot';
 
 class Index extends Component {
     drawItems() {
-        return this.props.data.data.map((item) => <Item key={item.name} item={item}/>);
+        return this.props.data.data.map((item) => <Item key={item.name} item={item} imageBaseUrl={this.props.imageBaseUrl}/>);
     }
 
     render() {

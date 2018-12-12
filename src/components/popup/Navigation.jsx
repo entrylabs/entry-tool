@@ -96,7 +96,7 @@ class Navigation extends Component {
                     {this.props.searchOption.category && (
                         <div className={`${Styles.pop_selectbox} ${Styles.on}`}>
                             <a
-                                href
+                                href="#NULL"
                                 className={`${Styles.select_link} ${
                                     Styles.imico_pop_select_arr_down
                                 }`}
@@ -112,7 +112,7 @@ class Navigation extends Component {
                     {this.props.searchOption.order && (
                         <div className={Styles.pop_selectbox}>
                             <a
-                                href
+                                href="#NULL"
                                 className={`${Styles.select_link} ${
                                     Styles.imico_pop_select_arr_down
                                 }`}
@@ -128,7 +128,7 @@ class Navigation extends Component {
                     {this.props.searchOption.date && (
                         <div className={Styles.pop_selectbox}>
                             <a
-                                href
+                                href="#"
                                 className={`${Styles.select_link} ${
                                     Styles.imico_pop_select_arr_down
                                 }`}

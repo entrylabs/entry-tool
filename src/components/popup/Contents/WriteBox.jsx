@@ -147,6 +147,7 @@ class WriteBox extends Component {
             <ColorPicker
                 color={color}
                 positionDom={target}
+                canTransparent={false}
                 onOutsideClick={() => {
                     this.setState({ colorPicker: null });
                 }}

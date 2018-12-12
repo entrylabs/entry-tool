@@ -6,6 +6,7 @@ export const EMIT_TYPES = {
     close: 'close',
     write: 'write',
     draw: 'draw',
+    makeProject: 'makeproject',
     select: 'select',
 };
 

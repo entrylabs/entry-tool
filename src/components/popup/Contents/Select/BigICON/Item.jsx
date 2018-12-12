@@ -44,9 +44,7 @@ class Item extends Component {
                     <div
                         className={Styles.thmb}
                         style={{
-                            backgroundImage: `url("/lib/entryjs/images/hardware/${
-                                item.imageName
-                            }")`,
+                            backgroundImage: `url("${this.props.imageBaseUrl}${item.imageName}")`,
                             backgroundSize: '65%',
                             backgroundRepeat: 'no-repeat',
                         }}

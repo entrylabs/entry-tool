@@ -545,7 +545,7 @@ class ColorPicker extends Component {
     }
 
     render() {
-        const { className, onClick, onOutsideClick, onSpoidClick } = this.props;
+        const { className, onClick, onOutsideClick, onSpoidClick, canSpoide } = this.props;
         const { color, arrowLeft, isUpStyle, isTransparent, colorPickerStyle } = this.state;
         let colorClassName = '';
         let colorBackground = null;
@@ -583,13 +583,13 @@ class ColorPicker extends Component {
                                 onClick={this.handleColorClick}
                             />
                             <ul className={`${Styles.color_list}`}>{this.makeRGBController()}</ul>
-                            <a
+                            { canSpoide && <a
                                 href
                                 onClick={onSpoidClick}
                                 className={`${Styles.btn_picker} ${Styles.imbtn_picker}`}
                             >
                                 컬러피커 열기
-                            </a>
+                            </a>}
                         </div>
                         <div className={`${Styles.color_graph}`}>
                             <ul className={`${Styles.graph_list}`}>{this.makeHSVController()}</ul>
