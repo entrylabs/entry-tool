@@ -302,7 +302,6 @@ export const DEFAULT_OPTIONS = {
                     name: 'Menus.people',
                     sub: {
                         all: { name: 'Menus.all' },
-                        일상생활: { name: 'Menus.life' },
                     },
                 },
                 자연: {
@@ -310,6 +309,7 @@ export const DEFAULT_OPTIONS = {
                     sub: {
                         all: { name: 'Menus.all' },
                         동물: { name: 'Menus.animal_insect' },
+                        자연환경: { name: 'Menus.environment' },
                     },
                 },
                 사물: {
