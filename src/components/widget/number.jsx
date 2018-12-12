@@ -4,6 +4,7 @@ import Styles from '@assets/scss/popup.scss';
 import { CommonUtils } from '@utils/Common';
 import OutsideClick from '../common/outsideClick';
 import { debounce } from 'lodash';
+import root from 'window-or-global';
 
 /* eslint-disable jsx-a11y/anchor-is-valid*/
 /* eslint-disable array-element-newline */
@@ -30,12 +31,12 @@ class Number extends Component {
     }
 
     componentDidMount() {
-        window.addEventListener('resize', this.handleWindowResize);
+        root.addEventListener('resize', this.handleWindowResize);
         this.alignPosition();
     }
 
     componentWillUnmount() {
-        window.removeEventListener('resize', this.handleWindowResize);
+        root.removeEventListener('resize', this.handleWindowResize);
     }
 
     handleWindowResize = debounce(() => {
