@@ -40,7 +40,7 @@ class Item extends Component {
                 onDoubleClick={() => this.handleClick({ item: this.props.item })}
                 className={CommonUtils.toggleClass(this.props.index >= 0, Styles.on)}
             >
-                <a href className={Styles.link}>
+                <button className={Styles.link}>
                     <div
                         className={Styles.thmb}
                         style={{
@@ -59,7 +59,7 @@ class Item extends Component {
                         </strong>
                         <p className={Styles.dsc}>{item.description}</p>
                     </div>
-                </a>
+                </button>
             </li>
         );
     }

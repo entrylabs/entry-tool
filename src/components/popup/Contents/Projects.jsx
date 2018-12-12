@@ -46,7 +46,7 @@ class Projects extends Component {
                     onClick={(e) => this.selectItem(e, item)}
                     className={CommonUtils.toggleClass(selected, Styles.on)}
                 >
-                    <a href className={Styles.link}>
+                    <button className={Styles.link}>
                         <div
                             className={Styles.thmb}
                             style={{ backgroundImage: `url('${item.thumb}')` }}
@@ -74,7 +74,7 @@ class Projects extends Component {
                                 from<em>{item.user.username}</em>
                             </span>
                         </div>
-                    </a>
+                    </button>
                 </li>
             );
         });
