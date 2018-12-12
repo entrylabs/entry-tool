@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import OutsideClick from "../common/outsideClick";
-import Scrollbars from "../common/scrollbars";
+import OutsideClick from '../common/outsideClick';
+import Scrollbars from '../common/scrollbars';
 import Styles from '@assets/scss/popup.scss';
 import root from 'window-or-global';
-import { pure } from "recompose";
+import { pure } from 'recompose';
 
 class ContextMenu extends Component {
     get SCROLL_ITEM_THRESHOLD() {
@@ -93,7 +93,7 @@ class ContextMenu extends Component {
                     <div className={Styles.tooltip_inner}>
                         {items.length <= this.SCROLL_ITEM_THRESHOLD && this.makeDropdownItem()}
                         {items.length > this.SCROLL_ITEM_THRESHOLD && (
-                            <Scrollbars heightRelativeToParent="260px" className={Styles.scrollbar}>
+                            <Scrollbars heightRelativeToParent='260px' className={Styles.scrollbar}>
                                 {this.makeDropdownItem()}
                             </Scrollbars>
                         )}
