@@ -6,6 +6,10 @@
         "type": "git",
         "url": "https://github.com/entrylabs/entry-tool.git"
     },
+    "engines": {
+        "node": "8.9.x",
+        "npm": "6.x"
+    },
     "bugs": {
         "url": "https://github.com/entrylabs/entry-tool/issues"
     },
@@ -76,7 +80,7 @@
         "promise": "8.0.1",
         "raf": "3.4.0",
         "react": "^16.4.2",
-        "react-custom-scroll": "^4.0.0",
+        "react-custom-scroll": "^4.0.1",
         "react-dev-utils": "^5.0.1",
         "react-dom": "^16.4.2",
         "react-redux": "^5.0.7",
