@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { applySelected } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/scss/popup.scss';
-import { visibleAction, triggerEvent } from '@actions';
 import { makeFindSelectedByName } from '@selectors';
 import { EMIT_TYPES } from '@constants';
 
@@ -12,7 +11,6 @@ class Item extends Component {
         super(props);
 
         this.onItemClicked = this.onItemClicked.bind(this);
-        this.handleClick = this.handleClick.bind(this);
     }
 
     onItemClicked(e) {
@@ -27,17 +25,11 @@ class Item extends Component {
         this.props.applySelected(selected);
     }
 
-    handleClick(data) {
-        this.props.triggerEvent(data);
-        this.props.visibleAction(false);
-    }
-
     render() {
         const { item } = this.props;
         return (
             <li
                 onClick={this.onItemClicked}
-                onDoubleClick={() => this.handleClick({ item: this.props.item })}
                 className={CommonUtils.toggleClass(this.props.index >= 0, Styles.on)}
             >
                 <button className={Styles.link}>
@@ -72,9 +64,7 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    visibleAction: (visible) => dispatch(visibleAction(visible)),
     applySelected: (list) => dispatch(applySelected(list)),
-    triggerEvent: (data) => dispatch(triggerEvent(EMIT_TYPES.select, data)),
 });
 
 export default connect(
