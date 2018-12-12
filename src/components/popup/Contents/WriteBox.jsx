@@ -62,7 +62,7 @@ class Input extends Component {
                 if (effect.css.hasOwnProperty('textDecorationLine') && css.textDecorationLine) {
                     css.textDecorationLine = `${css.textDecorationLine} ${
                         effect.css.textDecorationLine
-                    }`;
+                        }`;
                 } else {
                     css = { ...css, ...effect.css };
                 }
@@ -77,7 +77,6 @@ class Input extends Component {
             <div className={Styles.input_box}>
                 <div
                     className={Styles.input_inner}
-                    style={filed.inputInnerStyle}
                     onFocus={(e) => handle(e, () => this.setState({ active: true }))}
                     onBlur={this.onInputBlur}
                 >
@@ -128,7 +127,7 @@ class WriteBox extends Component {
             const effect = this.state.effects[key];
             const className = `${Styles.style_link} ${
                 Styles[`imbtn_pop_font_${key.toLowerCase()}`]
-            } ${CommonUtils.toggleClass(effect.apply, Styles.on)}`;
+                } ${CommonUtils.toggleClass(effect.apply, Styles.on)}`;
             return (
                 <a
                     href="#NULL"
@@ -246,11 +245,11 @@ class WriteBox extends Component {
                                             href="#NULL"
                                             className={`${
                                                 Styles.select_link
-                                            } ${CommonUtils.toggleClass(
-                                                this.state.dropDown,
-                                                Styles.imico_pop_select_arr_up,
-                                                Styles.imico_pop_select_arr_down
-                                            )}`}
+                                                } ${CommonUtils.toggleClass(
+                                                    this.state.dropDown,
+                                                    Styles.imico_pop_select_arr_up,
+                                                    Styles.imico_pop_select_arr_down
+                                                )}`}
                                             onClick={this.onFontBoxClicked}
                                             title="글꼴"
                                         >
