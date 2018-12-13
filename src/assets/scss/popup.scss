@@ -118,7 +118,7 @@
         margin: 0 0 0 8px;
     }
     .section_navi .art_sel_area .pop_selectbox .select_link {
-        width: 78px;
+        width: 112px;
         padding: 0 16px;
     }
     .pop_content {
@@ -794,16 +794,12 @@
         border-radius: 6px;
     }
     .extend_content .extend_block .list .link {
-        display: flex;
-        flex-direction: column;
+        display: block;
         overflow: hidden;
         position: relative;
         width: 264px;
         height: 300px;
         border-radius: 6px;
-        > div {
-            width: 100%;
-        }
     }
     .extend_content .extend_block .list .link:after {
         @include PositionLRTB(absolute, 0, 0, 0, 0);
