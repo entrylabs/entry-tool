@@ -833,6 +833,7 @@
     .extend_content .extend_block .list .inner_box {
         padding: 20px 16px 0;
         color: #000;
+        height: 132px;
     }
     .extend_content .extend_block .list .inner_box .sjt {
         font-size: 22px;
@@ -891,6 +892,8 @@
         .section_cont .list .link {
             position: relative;
             display: block;
+            width: 100%;
+            text-align: left;
         }
         .section_cont .list .on .link:after {
             @include PositionLRTB(absolute, 0, 0, 0, 0);

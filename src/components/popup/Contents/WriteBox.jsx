@@ -143,11 +143,12 @@ class WriteBox extends Component {
     }
 
     createColorPicker(target, color, effects, effectName) {
+        const canTransparent = CommonUtils.toggleClass(effectName === "backgroundColor", true);
         return (
             <ColorPicker
                 color={color}
                 positionDom={target}
-                canTransparent={false}
+                canTransparent={canTransparent}
                 onOutsideClick={() => {
                     this.setState({ colorPicker: null });
                 }}

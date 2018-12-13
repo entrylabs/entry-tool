@@ -48,6 +48,8 @@ class Item extends Component {
     }
 
     render() {
+        const item = this.props.item;
+        const lang = CommonUtils.getLangType();
         return (
             <li
                 onClick={this.onItemClicked}
@@ -56,8 +58,7 @@ class Item extends Component {
                 <button className={Styles.link}>
                     {this.drawImage()}
                     <em className={Styles.sjt}>
-                        {this.props.item.label[CommonUtils.getLangType()] ||
-                            this.props.item.label.en}
+                        {item && item[lang] ? item[lang] : item.name}
                     </em>
                 </button>
             </li>

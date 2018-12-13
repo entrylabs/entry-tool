@@ -37,7 +37,6 @@ class Item extends Component {
                         className={Styles.thmb}
                         style={{
                             backgroundImage: `url("${this.props.imageBaseUrl}${item.imageName}")`,
-                            backgroundSize: '65%',
                             backgroundRepeat: 'no-repeat',
                         }}
                     >
