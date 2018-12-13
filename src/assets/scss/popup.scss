@@ -1278,6 +1278,25 @@
             background-color: #4f80ff;
             color: #fff;
         }
+        button {
+            display: inline-block;
+            min-width: 144px;
+            overflow: hidden;
+            height: 46px;
+            margin: 0 8px;
+            background-color: #fff;
+            border: 1px solid #4f80ff;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4f80ff;
+            vertical-align: top;
+            line-height: 44px;
+        }
+        button.active {
+            background-color: #4f80ff;
+            color: #fff;
+        }
     }
     //공통 인풋 라벨
     .inpt_label {
