@@ -545,10 +545,11 @@ class ColorPicker extends Component {
     }
 
     render() {
-        const { className, onClick, onOutsideClick, onSpoidClick, canSpoide } = this.props;
+        const { className, onClick, onOutsideClick, onSpoidClick, canSpoide, canTransparent } = this.props;
         const { color, arrowLeft, isUpStyle, isTransparent, colorPickerStyle } = this.state;
         let colorClassName = '';
         let colorBackground = null;
+        let transparentEnableClassName = canTransparent ? "" : Styles.disabled;
         if (isTransparent) {
             colorClassName = `${Styles.imico_pop_color_uncheck} ${Styles.imico_pop_circle_check}`;
         } else {
@@ -578,7 +579,7 @@ class ColorPicker extends Component {
                     <div className={`${Styles.tooltip_inner}`}>
                         <div className={`${Styles.color_box}`}>
                             <span
-                                className={`${Styles.color} ${colorClassName}`}
+                                className={`${Styles.color} ${colorClassName} ${transparentEnableClassName}`}
                                 style={colorBackground}
                                 onClick={this.handleColorClick}
                             />
