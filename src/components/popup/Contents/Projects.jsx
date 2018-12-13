@@ -40,6 +40,11 @@ class Projects extends Component {
             if (this.state.selected && this.state.selected._id === item._id) {
                 selected = true;
             }
+            let avatarImgUrl = '/img/assets/avatar_img.png';
+            if(item.user.avatarImage) {
+                const userId = item.user._id;
+                avatarImgUrl = '/uploads/profile/' + userId.substring(0, 2) + '/' + userId.substring(2, 4) + '/' + 'avatar_' + userId + '.png?' + new Date().getTime();
+            }
             return (
                 <li
                     key={item._id}
@@ -67,7 +72,7 @@ class Projects extends Component {
                         <div className={Styles.info_box}>
                             <div
                                 className={Styles.user_thmb}
-                                style={{ backgroundImage: `url('${item.thumb}')` }}
+                                style={{ backgroundImage: `url('${avatarImgUrl}')` }}
                             />
                             <em className={Styles.tit}>{item.name}</em>
                             <span className={Styles.from}>

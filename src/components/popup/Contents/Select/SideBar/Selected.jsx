@@ -23,11 +23,12 @@ const TYPE_MAP = {
 class CustomSlide extends Component {
     render() {
         const { item, type, ...props } = this.props;
+        const lang = CommonUtils.getLangType();
         return (
             <div className={Styles.select_item} {...props}>
                 <div className={TYPE_MAP[type].imageClass}>{TYPE_MAP[type].imageContent(item)}</div>
                 <em className={Styles.sjt}>
-                    {this.props.item.label[CommonUtils.getLangType()] || this.props.item.label.en}
+                    {item && item[lang] ? item[lang] : item.name}
                 </em>
                 <a
                     href="#NULL"

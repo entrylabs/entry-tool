@@ -888,7 +888,8 @@
         .section_cont .list .link {
             position: relative;
             display: block;
-
+            width: 100%;
+            text-align: left;
         }
         .section_cont .list .on .link:after {
             @include PositionLRTB(absolute,0,0,0,0);
