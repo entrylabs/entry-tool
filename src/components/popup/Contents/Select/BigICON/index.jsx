@@ -6,7 +6,9 @@ import Foot from './foot';
 
 class Index extends Component {
     drawItems() {
-        return this.props.data.data.map((item) => <Item key={item.name} item={item} imageBaseUrl={this.props.imageBaseUrl}/>);
+        return this.props.data.data.map((item) => (
+            <Item key={item.name} item={item} imageBaseUrl={this.props.imageBaseUrl} />
+        ));
     }
 
     render() {
@@ -22,7 +24,7 @@ class Index extends Component {
                         </div>
                     </div>
                 </section>
-                <Foot/>
+                <Foot />
             </React.Fragment>
         );
     }
@@ -34,5 +36,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
     mapStateToProps,
-    null,
+    null
 )(Index);

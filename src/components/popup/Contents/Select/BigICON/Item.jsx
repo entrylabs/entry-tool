@@ -4,7 +4,7 @@ import { applySelected } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/scss/popup.scss';
 import { makeFindSelectedByName } from '@selectors';
-import { EMIT_TYPES } from '@constants';
+// import { EMIT_TYPES } from '@constants';
 
 class Item extends Component {
     constructor(props) {

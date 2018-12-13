@@ -92,18 +92,23 @@ class Projects extends Component {
                     {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
                     <h2 className={Styles.blind}>{CommonUtils.getLang('Menus.my_project')}</h2>
                     <div className={Styles.result_box}>
-                        <div className={`${Styles.thmb} ${Styles.imico_pop_mywrite_thmb}`}>&nbsp;</div>
+                        <div className={`${Styles.thmb} ${Styles.imico_pop_mywrite_thmb}`}>
+                            &nbsp;
+                        </div>
                         <p className={Styles.result_dsc}>
-                            {CommonUtils.getLang('Menus.no_project_1')}<br />{CommonUtils.getLang('Menus.no_project_2')}
+                            {CommonUtils.getLang('Menus.no_project_1')}
+                            <br />
+                            {CommonUtils.getLang('Menus.no_project_2')}
                         </p>
                         <div className={Styles.pop_btn_box}>
-                            <a href="#"
-                               className={Styles.active}
-                               onClick={(e) => {
-                                this.triggerEvent(e, EMIT_TYPES.makeProject);
-                            }}>
+                            <button
+                                className={Styles.active}
+                                onClick={(e) => {
+                                    this.triggerEvent(e, EMIT_TYPES.makeProject);
+                                }}
+                            >
                                 {CommonUtils.getLang('Menus.make_project')}
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -112,7 +117,7 @@ class Projects extends Component {
     }
     render() {
         const data = this.props.data.data;
-        if(!data || data.length === 0) {
+        if (!data || data.length === 0) {
             return this.emptyPage();
         }
         return (
@@ -130,23 +135,21 @@ class Projects extends Component {
                     </div>
                 </section>
                 <div className={Styles.pop_btn_box}>
-                    <a
-                        href={"#"}
+                    <button
                         onClick={(e) => {
                             this.triggerEvent(e, EMIT_TYPES.close, null);
                         }}
                     >
                         {CommonUtils.getLang('Buttons.cancel')}
-                    </a>
-                    <a
-                        href={"#"}
+                    </button>
+                    <button
                         className={Styles.active}
                         onClick={(e) => {
                             this.triggerEvent(e, EMIT_TYPES.submit, this.state.selected);
                         }}
                     >
                         {CommonUtils.getLang('Menus.Load')}
-                    </a>
+                    </button>
                 </div>
             </React.Fragment>
         );

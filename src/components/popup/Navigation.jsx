@@ -127,8 +127,7 @@ class Navigation extends Component {
                     )}
                     {this.props.searchOption.date && (
                         <div className={Styles.pop_selectbox}>
-                            <a
-                                href="#"
+                            <button
                                 className={`${Styles.select_link} ${
                                     Styles.imico_pop_select_arr_down
                                 }`}
@@ -138,7 +137,7 @@ class Navigation extends Component {
                                 title="전체기간"
                             >
                                 {this.state.period[0]}
-                            </a>
+                            </button>
                         </div>
                     )}
                     {this.props.searchOption.query && (

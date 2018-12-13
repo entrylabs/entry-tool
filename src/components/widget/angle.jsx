@@ -3,16 +3,13 @@ import { CommonUtils } from '@utils/Common';
 import { debounce } from 'lodash';
 import { pure } from 'recompose';
 import Styles from '../../assets/scss/popup.scss';
-import OutsideClick from "../common/outsideClick";
+import OutsideClick from '../common/outsideClick';
 import root from 'window-or-global';
 
 /* eslint-disable jsx-a11y/anchor-is-valid*/
 /* eslint-disable array-element-newline */
 const numberList = [
-    '7', '8', '9',
-    '4', '5', '6',
-    '1', '2', '3',
-    '-', '0', '.',
+    '7', '8', '9', '4', '5', '6', '1', '2', '3', '-', '0', '.',
 ];
 
 function handleTouchPreventDefault(e) {
@@ -64,7 +61,6 @@ class Angle extends Component {
     }
 
     handleAngleArrowMove(event) {
-
         const { onChangeAngle } = this.props;
 
         let classifiedEvent;
@@ -76,7 +72,7 @@ class Angle extends Component {
 
         const { clientX, clientY } = classifiedEvent;
         onChangeAngle(this.calculateArrowDegree(clientX, clientY));
-    };
+    }
 
     calculateArrowDegree(mousePosX, mousePosY) {
         const clockRect = this.clockDom.getBoundingClientRect();
@@ -87,7 +83,7 @@ class Angle extends Component {
         const dx = mousePosX - centerPosX;
 
         const angleRadian = Math.atan2(-dy, dx);
-        let angleDegree = 90 - (angleRadian * 180 / Math.PI);
+        let angleDegree = 90 - (angleRadian * 180) / Math.PI;
 
         if (angleDegree < 0) {
             angleDegree += 360;
@@ -108,19 +104,11 @@ class Angle extends Component {
             startStyle = `linear-gradient(${startOffset}deg, #ffb500 50%, transparent 50%)`;
         }
 
-
         const pieStyle = {
-            backgroundImage:
-                `${startStyle},linear-gradient(${endOffset}deg, white 50%, transparent 50%)`,
+            backgroundImage: `${startStyle},linear-gradient(${endOffset}deg, white 50%, transparent 50%)`,
         };
 
-        return (
-            <div
-                className={Styles.pie}
-                style={pieStyle}
-            >
-            </div>
-        );
+        return <div className={Styles.pie} style={pieStyle} />;
     }
 
     refineDegree(degree) {
@@ -150,16 +138,20 @@ class Angle extends Component {
 
     makeNumberButtons() {
         return numberList.map((value) => (
-            <a className={Styles.btn_cnt} key={value} onClick={() => {
-                this.handleButtonClick('buttonPressed', value);
-            }}>
+            <a
+                className={Styles.btn_cnt}
+                key={value}
+                onClick={() => {
+                    this.handleButtonClick('buttonPressed', value);
+                }}
+            >
                 {value}
             </a>
         ));
     }
 
     handleButtonClick(type, value) {
-        const { eventEmitter : emitter } = this.props;
+        const { eventEmitter: emitter } = this.props;
 
         if (emitter) {
             emitter.emit('click', type, value);
@@ -172,7 +164,7 @@ class Angle extends Component {
 
         return (
             <OutsideClick
-                outsideExcludeDom={ outsideExcludeDom }
+                outsideExcludeDom={outsideExcludeDom}
                 onOutsideClick={() => {
                     onOutsideClick(angle);
                 }}
@@ -200,14 +192,15 @@ class Angle extends Component {
                                     style={{
                                         transform: `rotate(${angle}deg)`,
                                     }}
-                                >
-                                </div>
+                                />
                             </div>
                         </div>
                         <div className={Styles.time_board}>
                             {this.makeNumberButtons()}
                             <a
-                                className={`${Styles.btn_cnt} ${Styles.btn_del} ${Styles.imico_pop_key_del}`}
+                                className={`${Styles.btn_cnt} ${Styles.btn_del} ${
+                                    Styles.imico_pop_key_del
+                                }`}
                                 onClick={() => {
                                     this.handleButtonClick('backButtonPressed');
                                 }}
