@@ -84,6 +84,7 @@
         "react-dev-utils": "^5.0.1",
         "react-dom": "^16.4.2",
         "react-redux": "^5.0.7",
+        "react-sortable-hoc": "^0.8.4",
         "react-test-renderer": "^16.4.2",
         "recompose": "^0.30.0",
         "redux": "^4.0.0",

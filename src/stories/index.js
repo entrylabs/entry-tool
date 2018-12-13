@@ -10,6 +10,7 @@ import Number from '../components/widget/number';
 import Dropdown from '../components/widget/dropdown';
 import ModalProgress from '../components/widget/modalProgress';
 import Angle from '../components/widget/angle';
+import Sortable from '../components/widget/sortable';
 import ContextMenu from '../components/widget/contextMenu';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
 
@@ -103,37 +104,82 @@ wigetStories
                 x: 100,
                 y: 100,
             }}
-            items={
-                [
-                    {
-                        text: 'text1',
-                        enable: true,
-                        callback() {
-                            console.log('text1 called');
-                        },
+            items={[
+                {
+                    text: 'text1',
+                    enable: true,
+                    callback() {
+                        console.log('text1 called');
                     },
-                    {
-                        text: 'text2',
-                        enable: true,
-                        callback() {
-                            console.log('text2 called');
-                        },
+                },
+                {
+                    text: 'text2',
+                    enable: true,
+                    callback() {
+                        console.log('text2 called');
                     },
-                    {
-                        text: 'invisible text',
-                        enable: true,
-                        callback() {
-                            console.log('invisible text');
-                        },
+                },
+                {
+                    text: 'invisible text',
+                    enable: true,
+                    callback() {
+                        console.log('invisible text');
                     },
-                    {
-                        text: 'disabled text',
-                        enable: false,
-                        callback() {
-                            console.log('disabled');
-                        },
+                },
+                {
+                    text: 'disabled text',
+                    enable: false,
+                    callback() {
+                        console.log('disabled');
                     },
-                ]
-            }
+                },
+            ]}
+        />
+    ))
+    .add('정렬가능 리스트', () => (
+        <Sortable
+            sortableTarget={['sortableTarget']}
+            items={[
+                document.createElement('div'),
+                document.createElement('div'),
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>1<input type="text"/></div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>2</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>3</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>4</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>5</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+                '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>6</div>',
+            ]}
         />
     ));

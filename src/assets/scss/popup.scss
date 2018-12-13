@@ -794,12 +794,16 @@
         border-radius: 6px;
     }
     .extend_content .extend_block .list .link {
-        display: block;
+        display: flex;
+        flex-direction: column;
         overflow: hidden;
         position: relative;
         width: 264px;
         height: 300px;
         border-radius: 6px;
+        > div {
+            width: 100%;
+        }
     }
     .extend_content .extend_block .list .link:after {
         @include PositionLRTB(absolute, 0, 0, 0, 0);
@@ -873,7 +877,7 @@
             overflow-y: auto;
         }
         .section_cont .scroll_box * {
-          box-sizing: content-box;
+            box-sizing: content-box;
         }
         .section_cont .list {
             overflow: hidden;
@@ -887,13 +891,11 @@
         .section_cont .list .link {
             position: relative;
             display: block;
-
         }
         .section_cont .list .on .link:after {
-            @include PositionLRTB(absolute,0,0,0,0);
+            @include PositionLRTB(absolute, 0, 0, 0, 0);
             border: 2px solid #5096f5;
             content: '';
-
         }
         .section_cont .list .thmb {
             overflow: hidden;
@@ -909,8 +911,12 @@
             bottom: 0;
             height: 40px;
             font-size: 0;
-            background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
-            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
+            background: -webkit-linear-gradient(
+                top,
+                rgba(0, 0, 0, 0) 0%,
+                rgba(0, 0, 0, 1) 100%
+            ); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
         }
         .section_cont .list .info_bar span {
             display: inline-block;
@@ -956,7 +962,7 @@
             top: 0;
             bottom: 0;
             border-radius: 50%;
-            border: 1px solid rgba(0,0,0,0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
             content: '';
         }
         .section_cont .list .info_box .tit {
@@ -969,7 +975,6 @@
             white-space: nowrap;
             word-break: break-all;
             line-height: 19px;
-
         }
         .section_cont .list .info_box .from {
             display: block;
@@ -1004,7 +1009,6 @@
             text-align: center;
             line-height: 20px;
         }
-
     }
 
     // 로그인 팝업
