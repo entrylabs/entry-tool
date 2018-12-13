@@ -1395,7 +1395,8 @@
 }
 
 //드롭다운
-.tooltip_box.dropdown {
+.tooltip_box.dropdown,
+.sortable.dropdown {
     * {
         box-sizing: content-box;
     }

@@ -59,7 +59,10 @@ class Sortable extends Component {
         const { items = [] } = this.state;
         const shouldCancelStart = this.getShouldCancelStart();
         return (
-            <Scrollbars heightRelativeToParent={height} className={Styles.scrollbar}>
+            <Scrollbars
+                heightRelativeToParent={height}
+                className={`${Styles.sortable} ${Styles.scrollbar}`}
+            >
                 <SortableList
                     axis={axis}
                     lockAxis={lockAxis}
