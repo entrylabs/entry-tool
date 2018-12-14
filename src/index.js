@@ -146,6 +146,7 @@ export default class EntryTool extends EventEmitter {
         if (data) {
             this.data = data;
         }
+        this.render();
         return this;
     }
 

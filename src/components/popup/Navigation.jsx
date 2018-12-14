@@ -95,49 +95,47 @@ class Navigation extends Component {
                 <form onSubmit={this.onSearchBtnClicked}>
                     {this.props.searchOption.category && (
                         <div className={`${Styles.pop_selectbox} ${Styles.on}`}>
-                            <a
-                                href="#NULL"
+                            <div
                                 className={`${Styles.select_link} ${
                                     Styles.imico_pop_select_arr_down
-                                }`}
+                                    }`}
                                 onClick={(e) => {
                                     this.onDropDownClicked(e, 'category', this.category_options);
                                 }}
                                 title="모든 작품"
                             >
                                 {this.state.category[0]}
-                            </a>
+                            </div>
                         </div>
                     )}
                     {this.props.searchOption.order && (
                         <div className={Styles.pop_selectbox}>
-                            <a
-                                href="#NULL"
+                            <div
                                 className={`${Styles.select_link} ${
                                     Styles.imico_pop_select_arr_down
-                                }`}
+                                    }`}
                                 onClick={(e) => {
                                     this.onDropDownClicked(e, 'sort', this.sort_options);
                                 }}
                                 title="최신순"
                             >
                                 {this.state.sort[0]}
-                            </a>
+                            </div>
                         </div>
                     )}
                     {this.props.searchOption.date && (
                         <div className={Styles.pop_selectbox}>
-                            <button
+                            <div
                                 className={`${Styles.select_link} ${
                                     Styles.imico_pop_select_arr_down
-                                }`}
+                                    }`}
                                 onClick={(e) => {
                                     this.onDropDownClicked(e, 'period', this.period_options);
                                 }}
                                 title="전체기간"
                             >
                                 {this.state.period[0]}
-                            </button>
+                            </div>
                         </div>
                     )}
                     {this.props.searchOption.query && (

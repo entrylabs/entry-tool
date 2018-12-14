@@ -60,7 +60,7 @@ class Projects extends Component {
                     onClick={(e) => this.selectItem(e, item)}
                     className={CommonUtils.toggleClass(selected, Styles.on)}
                 >
-                    <button className={Styles.link}>
+                    <div className={Styles.link}>
                         <div
                             className={Styles.thmb}
                             style={{ backgroundImage: `url('${item.thumb}')` }}
@@ -89,7 +89,7 @@ class Projects extends Component {
                                 <em>{item.user.username}</em>
                             </span>
                         </div>
-                    </button>
+                    </div>
                 </li>
             );
         });

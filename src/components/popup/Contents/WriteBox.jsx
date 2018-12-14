@@ -243,8 +243,7 @@ class WriteBox extends Component {
                             <div className={Styles.write_box}>
                                 <div className={Styles.write_set}>
                                     <div className={Styles.pop_selectbox}>
-                                        <a
-                                            href="#NULL"
+                                        <div
                                             className={`${
                                                 Styles.select_link
                                             } ${CommonUtils.toggleClass(
@@ -256,7 +255,7 @@ class WriteBox extends Component {
                                             title="글꼴"
                                         >
                                             {this.state.font.name}
-                                        </a>
+                                        </div>
                                     </div>
 
                                     <div
