@@ -8,7 +8,6 @@ import Styles from '@assets/scss/popup.scss';
 
 /* eslint-disable new-cap */
 const SortableItem = SortableElement(({ value }) => {
-    console.log(value);
     if (typeof value === 'string') {
         return <div dangerouslySetInnerHTML={{ __html: value }} />;
     } else if (value instanceof HTMLElement) {
@@ -49,15 +48,11 @@ const SortableList = SortableContainer(({ items, disabled }) => {
 });
 
 class Sortable extends Component {
-    state = {
-        items: this.props.items || [],
-    };
-
     onSortEnd = ({ oldIndex, newIndex }) => {
-        console.log(oldIndex, newIndex);
-        this.setState({
-            items: arrayMove(this.state.items, oldIndex, newIndex),
-        });
+    	const { onChangeList } = this.props;
+	    if (onChangeList) {
+	    	onChangeList(oldIndex, newIndex);
+	    }
     };
 
     shouldCancelStart = (e) => {

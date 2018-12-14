@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Sortable from './sortable';
+import { onChangeSortableList } from "@actions/widget";
 
 class SortableContainer extends Component {
     render() {
@@ -8,12 +9,11 @@ class SortableContainer extends Component {
     }
 }
 
-/*const mapDispatchToProps = (dispatch) => ({
-    onButtonPressed: (value) => dispatch(clickButton({ event: 'buttonPressed', data: value })),
-    onBackButtonPressed: () => dispatch(clickButton({ event: 'backButtonPressed' })),
-});*/
+const mapDispatchToProps = (dispatch) => ({
+    onChangeList: (newIndex, oldIndex) => dispatch(onChangeSortableList(newIndex, oldIndex)),
+});
 
 export default connect(
     undefined,
-    undefined /*mapDispatchToProps*/
+    mapDispatchToProps,
 )(SortableContainer);

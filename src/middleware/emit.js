@@ -1,7 +1,7 @@
 import { VISIBLE, CLICK_BUTTON, TRIGGER_EVENT } from '@actions/index';
 import { API_FAIL, UPLOAD_ITEM } from '@actions/popup';
 import { CHANGE_COLOR_PICKER } from '@actions/picker';
-import { SELECT_DROPDOWN, CHANGED_ANGLE } from '@actions/widget';
+import { SELECT_DROPDOWN, CHANGED_ANGLE, CHANGE_SORTABLE_LIST } from '@actions/widget';
 
 export default class EmitMiddleware {
     constructor(emitter) {
@@ -42,6 +42,7 @@ export default class EmitMiddleware {
                     break;
                 }
                 case CHANGED_ANGLE:
+                case CHANGE_SORTABLE_LIST:
                 case CHANGE_COLOR_PICKER: {
                     this.emitter.emit('change', action.data);
                     break;
