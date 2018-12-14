@@ -146,6 +146,7 @@ wigetStories
             <Sortable
                 sortableTarget={['sortableTarget']}
                 items={[
+                    <div>Hello ReactDOM</div>,
                     sampleDom,
                     '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>1<input type="text"/></div>',
                     '<div style="border: 1px solid black; width: 150px; height: 40px;background:white"><div class="sortableTarget" style="border: 1px solid black; width: 30px; height: 30px;margin:5px;display:inline-block;vertical-align:middle"></div>2</div>',

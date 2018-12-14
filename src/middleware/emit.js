@@ -41,16 +41,13 @@ export default class EmitMiddleware {
                     this.emitter.emit('fail', action.error);
                     break;
                 }
+                case CHANGED_ANGLE:
                 case CHANGE_COLOR_PICKER: {
                     this.emitter.emit('change', action.data);
                     break;
                 }
                 case SELECT_DROPDOWN: {
                     this.emitter.emit('select', action.data);
-                    break;
-                }
-                case CHANGED_ANGLE: {
-                    this.emitter.emit('change', action.data);
                     break;
                 }
                 default: {
