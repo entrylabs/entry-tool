@@ -44,8 +44,15 @@ class Projects extends Component {
             if (item.user.avatarImage) {
                 const userId = item.user._id;
                 avatarImgUrl =
-                    `/uploads/profile/${userId.substring(0, 2)}/${userId.substring(2, 4)}/` +
-                    `avatar_${userId}.png?${new Date().getTime()}`;
+                    `/uploads/profile/${ 
+                        userId.substring(0, 2) 
+                    }/${ 
+                        userId.substring(2, 4) 
+                    }/` +
+                    `avatar_${ 
+                        userId 
+                    }.png?${ 
+                        new Date().getTime()}`;
             }
             return (
                 <li
