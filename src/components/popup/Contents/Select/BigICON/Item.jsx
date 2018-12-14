@@ -32,7 +32,7 @@ class Item extends Component {
                 onClick={this.onItemClicked}
                 className={CommonUtils.toggleClass(this.props.index >= 0, Styles.on)}
             >
-                <button className={Styles.link}>
+                <div className={Styles.link}>
                     <div
                         className={Styles.thmb}
                         style={{
@@ -48,7 +48,7 @@ class Item extends Component {
                         </strong>
                         <p className={Styles.dsc}>{item.description}</p>
                     </div>
-                </button>
+                </div>
             </li>
         );
     }

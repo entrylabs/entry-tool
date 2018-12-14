@@ -258,6 +258,7 @@
             width: 24px;
             height: 24px;
             z-index: 20;
+            cursor: pointer;
         }
         .section_cont .cont_sel_box .select_list .select_item {
             display: inline-block;
@@ -654,6 +655,7 @@
             position: relative;
             height: 144px;
             width: 100%;
+            cursor: pointer;
         }
         .section_cont .obj_list .link:after {
             @include PositionLRTB(absolute, 0, 0, 0, 0);
@@ -800,6 +802,7 @@
         width: 264px;
         height: 300px;
         border-radius: 6px;
+        cursor: pointer;
     }
     .extend_content .extend_block .list .link:after {
         @include PositionLRTB(absolute, 0, 0, 0, 0);
@@ -890,6 +893,7 @@
             display: block;
             width: 100%;
             text-align: left;
+            cursor: pointer;
         }
         .section_cont .list .on .link:after {
             @include PositionLRTB(absolute, 0, 0, 0, 0);
@@ -1355,6 +1359,7 @@
             color: #555;
             letter-spacing: -0.3px;
             line-height: 38px;
+            cursor: pointer;
         }
         .select_link:after {
             @include PositionRT(absolute, 16px, 50%);

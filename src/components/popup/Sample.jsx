@@ -120,7 +120,7 @@ class Sample extends Component {
                                 <ul className={Styles.obj_list}>
                                     {/* [D] 오브젝트 링크가 클릭되면 li에 on  추가 */}
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -128,10 +128,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -139,10 +139,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -150,10 +150,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -161,10 +161,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -172,10 +172,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -185,10 +185,10 @@ class Sample extends Component {
                                             <em className={Styles.sjt}>
                                                 오브젝트 말줄임 추가 akdjalkdjakljd
                                             </em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -196,10 +196,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -207,10 +207,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -218,10 +218,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -229,10 +229,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -240,10 +240,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -251,10 +251,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -262,10 +262,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -273,10 +273,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -284,10 +284,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -295,10 +295,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -306,10 +306,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -317,10 +317,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -328,10 +328,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -339,10 +339,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -350,10 +350,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -361,10 +361,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -372,10 +372,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -383,10 +383,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -394,10 +394,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -405,10 +405,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -416,10 +416,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -427,10 +427,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -438,10 +438,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -449,10 +449,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -460,10 +460,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -471,10 +471,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -482,10 +482,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -493,10 +493,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -504,10 +504,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -515,10 +515,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -526,10 +526,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -537,10 +537,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -548,10 +548,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -559,10 +559,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -570,10 +570,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -581,7 +581,7 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -833,7 +833,7 @@ class Sample extends Component {
                                 <ul className={Styles.obj_list}>
                                     {/* [D] 오브젝트 링크가 클릭되면 li에 on  추가 */}
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -841,10 +841,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -852,10 +852,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -863,10 +863,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -874,10 +874,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -885,10 +885,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -896,10 +896,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -907,10 +907,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -918,10 +918,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -929,10 +929,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -940,10 +940,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -951,10 +951,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -962,10 +962,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -973,10 +973,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -984,10 +984,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -995,10 +995,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -1006,10 +1006,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -1017,10 +1017,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -1028,10 +1028,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -1039,10 +1039,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -1050,10 +1050,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -1061,10 +1061,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -1072,10 +1072,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -1083,10 +1083,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -1094,10 +1094,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -1105,10 +1105,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -1118,10 +1118,10 @@ class Sample extends Component {
                                             <em className={Styles.sjt}>
                                                 오브젝트 말줄임 추가 akdjalkdjakljd
                                             </em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -1129,10 +1129,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -1140,10 +1140,10 @@ class Sample extends Component {
                                                 />
                                             </div>
                                             <em className={Styles.sjt}>오브젝트</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb}>
                                                 <img
                                                     src="https://playentry.org/uploads/a5/b0/thumb/a5b0f63ea21833e115fddb0b58a8658b.png"
@@ -1153,7 +1153,7 @@ class Sample extends Component {
                                             <em className={Styles.sjt}>
                                                 오브젝트 말줄임 추가 akdjalkdjakljd
                                             </em>
-                                        </a>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -1664,7 +1664,7 @@ class Sample extends Component {
                                     <ul className={Styles.list}>
                                         {/* [D] 링크가 선택되면 li 요소에 on 클래스 추가  */}
                                         <li className={Styles.on}>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={Styles.thmb}
                                                     style={{
@@ -1684,10 +1684,10 @@ class Sample extends Component {
                                                         관련된 블록들의 모음
                                                     </p>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div className={Styles.thmb}>&nbsp;</div>
                                                 <div className={Styles.inner_box}>
                                                     <strong className={Styles.sjt}>날씨</strong>
@@ -1699,10 +1699,10 @@ class Sample extends Component {
                                                         관련된 블록들의 모음 그
                                                     </p>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={Styles.thmb}
                                                     style={{
@@ -1722,10 +1722,10 @@ class Sample extends Component {
                                                         관련된 블록들의 모음
                                                     </p>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={Styles.thmb}
                                                     style={{
@@ -1745,10 +1745,10 @@ class Sample extends Component {
                                                         관련된 블록들의 모음
                                                     </p>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={Styles.thmb}
                                                     style={{
@@ -1770,10 +1770,10 @@ class Sample extends Component {
                                                         모음관련된 블록들의 모음관련된 블록들의 모음
                                                     </p>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div className={Styles.thmb}>&nbsp;</div>
                                                 <div className={Styles.inner_box}>
                                                     <strong className={Styles.sjt}>날씨</strong>
@@ -1785,10 +1785,10 @@ class Sample extends Component {
                                                         관련된 블록들의 모음 그
                                                     </p>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={Styles.thmb}
                                                     style={{
@@ -1808,10 +1808,10 @@ class Sample extends Component {
                                                         관련된 블록들의 모음
                                                     </p>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div className={Styles.thmb}>&nbsp;</div>
                                                 <div className={Styles.inner_box}>
                                                     <strong className={Styles.sjt}>날씨</strong>
@@ -1823,10 +1823,10 @@ class Sample extends Component {
                                                         관련된 블록들의 모음 그
                                                     </p>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={Styles.thmb}
                                                     style={{
@@ -1846,10 +1846,10 @@ class Sample extends Component {
                                                         관련된 블록들의 모음
                                                     </p>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={Styles.thmb}
                                                     style={{
@@ -1869,10 +1869,10 @@ class Sample extends Component {
                                                         관련된 블록들의 모음
                                                     </p>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={Styles.thmb}
                                                     style={{
@@ -1894,10 +1894,10 @@ class Sample extends Component {
                                                         모음관련된 블록들의 모음관련된 블록들의 모음
                                                     </p>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div className={Styles.thmb}>&nbsp;</div>
                                                 <div className={Styles.inner_box}>
                                                     <strong className={Styles.sjt}>날씨</strong>
@@ -1909,7 +1909,7 @@ class Sample extends Component {
                                                         관련된 블록들의 모음 그
                                                     </p>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -1995,7 +1995,7 @@ class Sample extends Component {
                                     <ul className={Styles.obj_list}>
                                         {/* [D] 오브젝트 링크가 클릭되면 li에 on  추가 */}
                                         <li className={Styles.on}>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2004,10 +2004,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2016,10 +2016,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2028,10 +2028,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2040,10 +2040,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2052,10 +2052,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2064,10 +2064,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2076,10 +2076,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2088,10 +2088,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2100,10 +2100,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2112,10 +2112,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2124,10 +2124,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2136,10 +2136,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2148,10 +2148,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2160,10 +2160,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2172,10 +2172,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2184,10 +2184,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2196,10 +2196,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2208,10 +2208,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2220,10 +2220,10 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="#" className={Styles.link}>
+                                            <div className={Styles.link}>
                                                 <div
                                                     className={`${Styles.thmb} ${
                                                         Styles.imico_pop_sound_thmb
@@ -2232,7 +2232,7 @@ class Sample extends Component {
                                                     &nbsp;
                                                 </div>
                                                 <em className={Styles.sjt}>소리명</em>
-                                            </a>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -2488,7 +2488,7 @@ class Sample extends Component {
                                 <ul className={Styles.obj_list}>
                                     {/* [D] 오브젝트 링크가 클릭되면 li에 on  추가 */}
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2497,10 +2497,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2509,10 +2509,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2521,10 +2521,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2533,10 +2533,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2545,10 +2545,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2557,10 +2557,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2569,10 +2569,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2581,10 +2581,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2593,10 +2593,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2605,10 +2605,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2617,10 +2617,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2629,10 +2629,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2641,10 +2641,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2653,10 +2653,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2665,10 +2665,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2677,10 +2677,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2689,10 +2689,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2701,10 +2701,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2713,10 +2713,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2725,10 +2725,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2737,10 +2737,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2749,10 +2749,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2761,10 +2761,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2773,10 +2773,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2785,10 +2785,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2797,10 +2797,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2809,10 +2809,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2821,10 +2821,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2833,10 +2833,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2845,10 +2845,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2857,10 +2857,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2869,10 +2869,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2881,10 +2881,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li className={Styles.on}>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div
                                                 className={`${Styles.thmb} ${
                                                     Styles.imico_pop_sound_thmb
@@ -2893,9 +2893,10 @@ class Sample extends Component {
                                                 &nbsp;
                                             </div>
                                             <em className={Styles.sjt}>소리명</em>
-                                        </a>
+                                        </div>
                                     </li>
                                 </ul>
+
                             </div>
                         </div>
                     </section>
@@ -4874,7 +4875,7 @@ class Sample extends Component {
                             <div className={Styles.scroll_box}>
                                 <ul className={Styles.list}>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb} style={{
                                                 backgroundImage:
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
@@ -4896,11 +4897,10 @@ class Sample extends Component {
                                                     from<em>atom 10150</em>
                                                 </span>
                                             </div>
-
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb} style={{
                                                 backgroundImage:
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
@@ -4922,11 +4922,10 @@ class Sample extends Component {
                                                     from<em>atom 10150</em>
                                                 </span>
                                             </div>
-
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb} style={{
                                                 backgroundImage:
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
@@ -4948,11 +4947,10 @@ class Sample extends Component {
                                                     from<em>atom 10150</em>
                                                 </span>
                                             </div>
-
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb} style={{
                                                 backgroundImage:
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
@@ -4974,11 +4972,10 @@ class Sample extends Component {
                                                     from<em>atom 10150</em>
                                                 </span>
                                             </div>
-
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb} style={{
                                                 backgroundImage:
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
@@ -5000,11 +4997,10 @@ class Sample extends Component {
                                                     from<em>atom 10150</em>
                                                 </span>
                                             </div>
-
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb} style={{
                                                 backgroundImage:
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
@@ -5026,11 +5022,10 @@ class Sample extends Component {
                                                     from<em>atom 10150</em>
                                                 </span>
                                             </div>
-
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb} style={{
                                                 backgroundImage:
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
@@ -5052,11 +5047,10 @@ class Sample extends Component {
                                                     from<em>atom 10150</em>
                                                 </span>
                                             </div>
-
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb} style={{
                                                 backgroundImage:
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
@@ -5078,11 +5072,10 @@ class Sample extends Component {
                                                     from<em>atom 10150</em>
                                                 </span>
                                             </div>
-
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb} style={{
                                                 backgroundImage:
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
@@ -5104,11 +5097,10 @@ class Sample extends Component {
                                                     from<em>atom 10150</em>
                                                 </span>
                                             </div>
-
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="#" className={Styles.link}>
+                                        <div className={Styles.link}>
                                             <div className={Styles.thmb} style={{
                                                 backgroundImage:
                                                     "url('https://media.kappamoto.com/AK-Moto/foto/BMW_F700GS%20(13-16)_lato_K.jpg')",
@@ -5130,8 +5122,7 @@ class Sample extends Component {
                                                     from<em>atom 10150</em>
                                                 </span>
                                             </div>
-
-                                        </a>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>

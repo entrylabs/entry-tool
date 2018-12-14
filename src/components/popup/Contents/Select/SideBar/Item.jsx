@@ -55,12 +55,12 @@ class Item extends Component {
                 onClick={this.onItemClicked}
                 className={CommonUtils.toggleClass(this.props.index >= 0, Styles.on)}
             >
-                <button className={Styles.link}>
+                <div className={Styles.link}>
                     {this.drawImage()}
                     <em className={Styles.sjt}>
                         {item && item[lang] ? item[lang] : item.name}
                     </em>
-                </button>
+                </div>
             </li>
         );
     }
