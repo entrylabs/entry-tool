@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _intersection from 'lodash/intersection';
+import _isPlainObject from 'lodash/isPlainObject';
 import { pure } from 'recompose';
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 import Scrollbars from '@components/common/scrollbars';
@@ -19,9 +20,15 @@ const SortableItem = SortableElement(({ value }) => {
 const SortableList = SortableContainer(({ items }) => {
     return (
         <div>
-            {items.map((value, index) => (
-                <SortableItem key={`item-${index}`} index={index} value={value} />
-            ))}
+            {items.map((value, index) => {
+                let key = `item-${index}`;
+                let item = value;
+                if (_isPlainObject(value)) {
+                    key = value.key || key;
+                    item = value.item;
+                }
+                return <SortableItem key={key} index={index} value={item}/>;
+            })}
         </div>
     );
 });
@@ -55,15 +62,17 @@ class Sortable extends Component {
     }
 
     render() {
-        const { axis = 'y', lockAxis, height } = this.props;
+        const { axis = 'y', lockAxis, height, items: items2 } = this.props;
         const { items = [] } = this.state;
         const shouldCancelStart = this.getShouldCancelStart();
+        console.log('sortable render');
+        console.log(this.props);
         return (
             <Scrollbars heightRelativeToParent={height} className={Styles.scrollbar}>
                 <SortableList
                     axis={axis}
                     lockAxis={lockAxis}
-                    items={items}
+                    items={items2}
                     onSortEnd={this.onSortEnd}
                     shouldCancelStart={shouldCancelStart}
                 />
