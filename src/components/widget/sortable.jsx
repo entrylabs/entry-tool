@@ -7,14 +7,19 @@ import Styles from '@assets/scss/popup.scss';
 
 /* eslint-disable new-cap */
 const SortableItem = SortableElement(({ value }) => {
-    console.log(value, typeof value);
-    let __html = '';
     if (typeof value === 'string') {
-        __html = value;
+        return <div dangerouslySetInnerHTML={{ __html: value }} />;
     } else if (value instanceof HTMLElement) {
-        __html = value.outerHTML;
+        return (
+            <div
+                ref={(dom) => {
+                    if (dom) {
+                        dom.appendChild(value);
+                    }
+                }}
+            />
+        );
     }
-    return <div dangerouslySetInnerHTML={{ __html }} />;
 });
 
 const SortableList = SortableContainer(({ items }) => {
