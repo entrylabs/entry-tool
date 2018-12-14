@@ -8,6 +8,7 @@ import Styles from '@assets/scss/popup.scss';
 
 /* eslint-disable new-cap */
 const SortableItem = SortableElement(({ value }) => {
+    console.log(value);
     if (typeof value === 'string') {
         return <div dangerouslySetInnerHTML={{ __html: value }} />;
     } else if (value instanceof HTMLElement) {
@@ -20,20 +21,28 @@ const SortableItem = SortableElement(({ value }) => {
                 }}
             />
         );
+    } else if (React.isValidElement(value)) {
+        return (
+            <div>
+                {value}
+            </div>
+        );
+    } else {
+        return <div/>;
     }
 });
 
-const SortableList = SortableContainer(({ items }) => {
+const SortableList = SortableContainer(({ items, disabled }) => {
     return (
         <div>
             {items.map((value, index) => {
                 let key = `item-${index}`;
                 let item = value;
-                if (_isPlainObject(value)) {
+                if (!React.isValidElement(value) && _isPlainObject(value)) {
                     key = value.key || key;
                     item = value.item;
                 }
-                return <SortableItem key={key} index={index} value={item}/>;
+                return <SortableItem key={key} index={index} value={item} disabled={disabled}/>;
             })}
         </div>
     );
@@ -45,6 +54,7 @@ class Sortable extends Component {
     };
 
     onSortEnd = ({ oldIndex, newIndex }) => {
+        console.log(oldIndex, newIndex);
         this.setState({
             items: arrayMove(this.state.items, oldIndex, newIndex),
         });
@@ -68,11 +78,8 @@ class Sortable extends Component {
     }
 
     render() {
-        const { axis = 'y', lockAxis, height, items: items2 } = this.props;
-        const { items = [] } = this.state;
+        const { axis = 'y', lockAxis, height, items:items2, disabled = false } = this.props;
         const shouldCancelStart = this.getShouldCancelStart();
-        console.log('sortable render');
-        console.log(this.props);
         return (
             <Scrollbars
                 heightRelativeToParent={height}
@@ -83,6 +90,7 @@ class Sortable extends Component {
                     lockAxis={lockAxis}
                     items={items2}
                     onSortEnd={this.onSortEnd}
+                    disabled={disabled}
                     shouldCancelStart={shouldCancelStart}
                 />
             </Scrollbars>
