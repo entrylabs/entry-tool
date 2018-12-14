@@ -5,6 +5,7 @@ import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-ho
 import Scrollbars from '@components/common/scrollbars';
 import Styles from '@assets/scss/popup.scss';
 
+/* eslint-disable new-cap */
 const SortableItem = SortableElement(({ value }) => {
     console.log(value, typeof value);
     let __html = '';
