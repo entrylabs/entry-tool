@@ -41,9 +41,18 @@ class Projects extends Component {
                 selected = true;
             }
             let avatarImgUrl = '/img/assets/avatar_img.png';
-            if(item.user.avatarImage) {
+            if (item.user.avatarImage) {
                 const userId = item.user._id;
-                avatarImgUrl = '/uploads/profile/' + userId.substring(0, 2) + '/' + userId.substring(2, 4) + '/' + 'avatar_' + userId + '.png?' + new Date().getTime();
+                avatarImgUrl =
+                    `/uploads/profile/${ 
+                        userId.substring(0, 2) 
+                    }/${ 
+                        userId.substring(2, 4) 
+                    }/` +
+                    `avatar_${ 
+                        userId 
+                    }.png?${ 
+                        new Date().getTime()}`;
             }
             return (
                 <li
@@ -76,7 +85,8 @@ class Projects extends Component {
                             />
                             <em className={Styles.tit}>{item.name}</em>
                             <span className={Styles.from}>
-                                from<em>{item.user.username}</em>
+                                from
+                                <em>{item.user.username}</em>
                             </span>
                         </div>
                     </button>

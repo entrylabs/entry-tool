@@ -6,6 +6,7 @@ import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-ho
 import Scrollbars from '@components/common/scrollbars';
 import Styles from '@assets/scss/popup.scss';
 
+/* eslint-disable new-cap */
 const SortableItem = SortableElement(({ value }) => {
     console.log(value, typeof value);
     let __html = '';
@@ -68,7 +69,10 @@ class Sortable extends Component {
         console.log('sortable render');
         console.log(this.props);
         return (
-            <Scrollbars heightRelativeToParent={height} className={Styles.scrollbar}>
+            <Scrollbars
+                heightRelativeToParent={height}
+                className={`${Styles.sortable} ${Styles.scrollbar}`}
+            >
                 <SortableList
                     axis={axis}
                     lockAxis={lockAxis}
