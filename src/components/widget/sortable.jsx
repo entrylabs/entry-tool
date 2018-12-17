@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import _intersection from 'lodash/intersection';
 import _isPlainObject from 'lodash/isPlainObject';
 import { pure } from 'recompose';
-import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import Scrollbars from '@components/common/scrollbars';
 import Styles from '@assets/scss/popup.scss';
 
