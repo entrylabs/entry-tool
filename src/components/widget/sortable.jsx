@@ -8,26 +8,24 @@ import Styles from '@assets/scss/popup.scss';
 
 /* eslint-disable new-cap */
 const SortableItem = SortableElement(({ value }) => {
-    if (typeof value === 'string') {
-        return <div dangerouslySetInnerHTML={{ __html: value }} />;
-    } else if (value instanceof HTMLElement) {
+    const { index, item } = value;
+    if (typeof item === 'string') {
+        return <div className={Styles.sortableItem} dangerouslySetInnerHTML={{ __html: item }} />;
+    } else if (item instanceof HTMLElement) {
         return (
             <div
+                className={`${Styles.sortableItem} sortableItem index-${index}`}
                 ref={(dom) => {
                     if (dom) {
-                        dom.appendChild(value);
+                        dom.appendChild(item);
                     }
                 }}
             />
         );
-    } else if (React.isValidElement(value)) {
-        return (
-            <div>
-                {value}
-            </div>
-        );
+    } else if (React.isValidElement(item)) {
+        return <div className={Styles.sortableItem}>{item}</div>;
     } else {
-        return <div/>;
+        return <div className={Styles.sortableItem} />;
     }
 });
 
@@ -41,7 +39,17 @@ const SortableList = SortableContainer(({ items, disabled }) => {
                     key = value.key || key;
                     item = value.item;
                 }
-                return <SortableItem key={key} index={index} value={item} disabled={disabled}/>;
+                return (
+                    <SortableItem
+                        key={key}
+                        index={index}
+                        value={{
+                            index,
+                            item,
+                        }}
+                        disabled={disabled}
+                    />
+                );
             })}
         </div>
     );
@@ -49,10 +57,10 @@ const SortableList = SortableContainer(({ items, disabled }) => {
 
 class Sortable extends Component {
     onSortEnd = ({ oldIndex, newIndex }) => {
-    	const { onChangeList } = this.props;
-	    if (onChangeList) {
-	    	onChangeList(oldIndex, newIndex);
-	    }
+        const { onChangeList } = this.props;
+        if (onChangeList) {
+            onChangeList(oldIndex, newIndex);
+        }
     };
 
     shouldCancelStart = (e) => {
@@ -73,21 +81,24 @@ class Sortable extends Component {
     }
 
     render() {
-        const { axis = 'y', lockAxis, height, items:items2, disabled = false } = this.props;
+        const { axis = 'y', lockAxis, height, items: items2, disabled = false } = this.props;
         const shouldCancelStart = this.getShouldCancelStart();
+        let className = Styles.sortableList;
+        if (axis === 'x') {
+            className = Styles.sortableInlineList;
+        }
         return (
-            <Scrollbars
-                heightRelativeToParent={height}
-                className={`${Styles.sortable} ${Styles.scrollbar}`}
-            >
-                <SortableList
-                    axis={axis}
-                    lockAxis={lockAxis}
-                    items={items2}
-                    onSortEnd={this.onSortEnd}
-                    disabled={disabled}
-                    shouldCancelStart={shouldCancelStart}
-                />
+            <Scrollbars heightRelativeToParent={height}>
+                <div className={`${Styles.sortable} ${className}`}>
+                    <SortableList
+                        axis={axis}
+                        lockAxis={lockAxis}
+                        items={items2}
+                        onSortEnd={this.onSortEnd}
+                        disabled={disabled}
+                        shouldCancelStart={shouldCancelStart}
+                    />
+                </div>
             </Scrollbars>
         );
     }

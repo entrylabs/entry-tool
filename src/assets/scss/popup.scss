@@ -1457,3 +1457,12 @@
         border-radius: 2.5px;
     }
 }
+
+.sortable {
+    &.sortableInlineList {
+        .sortableItem {
+            display: inline-block;
+            z-index: 10;
+        }
+    }
+}
