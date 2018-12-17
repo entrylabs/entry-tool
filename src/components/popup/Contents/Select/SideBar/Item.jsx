@@ -58,7 +58,7 @@ class Item extends Component {
                 <div className={Styles.link}>
                     {this.drawImage()}
                     <em className={Styles.sjt}>
-                        {item && item[lang] ? item[lang] : item.name}
+                        {item.label && item.label[lang] ? item.label[lang] : item.name}
                     </em>
                 </div>
             </li>

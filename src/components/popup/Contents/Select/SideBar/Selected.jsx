@@ -28,7 +28,7 @@ class CustomSlide extends Component {
             <div className={Styles.select_item} {...props}>
                 <div className={TYPE_MAP[type].imageClass}>{TYPE_MAP[type].imageContent(item)}</div>
                 <em className={Styles.sjt}>
-                    {item && item[lang] ? item[lang] : item.name}
+                    {item.label && item.label[lang] ? item.label[lang] : item.name}
                 </em>
                 <a
                     href="#NULL"
