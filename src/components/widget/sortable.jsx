@@ -8,13 +8,13 @@ import Styles from '@assets/scss/popup.scss';
 
 /* eslint-disable new-cap */
 const SortableItem = SortableElement(({ value }) => {
-    const { index, item } = value;
+    const { item } = value;
     if (typeof item === 'string') {
         return <div className={Styles.sortableItem} dangerouslySetInnerHTML={{ __html: item }} />;
     } else if (item instanceof HTMLElement) {
         return (
             <div
-                className={`${Styles.sortableItem} sortableItem index-${index}`}
+                className={`${Styles.sortableItem} sortableItem`}
                 ref={(dom) => {
                     if (dom) {
                         dom.appendChild(item);

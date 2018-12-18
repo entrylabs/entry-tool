@@ -226,9 +226,24 @@ class ColorPicker extends Component {
         };
     }
 
+    handleBlurHsv(type, value = 0) {
+        let result = value;
+        if (typeof value === 'string' && !value.length) {
+            result = 0;
+        }
+        this.handleChangeHsv(type, result);
+    }
+
     handleChangeHsv(type, value) {
+        if (typeof value === 'string' && !value.length) {
+            return this.setState(() => {
+                return {
+                    [type]: value,
+                };
+            });
+        }
         const { onChangeColorPicker } = this.props;
-        let thisValue = value;
+        let thisValue = Number(value);
         thisValue = getRangeValue(parseInt(thisValue, 10), 0, 100);
         if (!isNaN(thisValue)) {
             this.setState((state) => {
@@ -242,13 +257,28 @@ class ColorPicker extends Component {
         }
     }
 
-    handleChangeRGB(type, target) {
+    handleBlurRGB(type, value = 0) {
+        let result = value;
+        if (typeof value === 'string' && !value.length) {
+            result = 0;
+        }
+        this.handleChangeRGB(type, result);
+    }
+
+    handleChangeRGB(type, value) {
+        if (typeof value === 'string' && !value.length) {
+            return this.setState(() => {
+                return {
+                    [type]: value,
+                };
+            });
+        }
         const { onChangeColorPicker } = this.props;
-        let { value = 0 } = target;
-        value = getRangeValue(parseInt(value, 10), 0, 255);
-        if (!isNaN(value)) {
+        let thisValue = Number(value);
+        thisValue = getRangeValue(parseInt(thisValue, 10), 0, 255);
+        if (!isNaN(thisValue)) {
             this.setState((state) => {
-                const rgb = Object.assign({}, state, { [type]: value });
+                const rgb = Object.assign({}, state, { [type]: thisValue });
                 const nextState = getColorByHsv(rgb);
                 if (onChangeColorPicker) {
                     onChangeColorPicker(nextState.color);
@@ -469,19 +499,22 @@ class ColorPicker extends Component {
     makeHSVController() {
         const { isTransparent, isActiveSlider } = this.state;
         let itemClassName = isTransparent ? Styles.disabled : '';
-
         return metaHSVContoller.map(({ key, label }) => {
             return (
                 <li key={key} className={`${Styles.item} ${itemClassName}`}>
                     <label htmlFor={key}>{label}</label>
                     <input
-                        value={this.state[key]}
+                        value={String(this.state[key])}
                         type="number"
                         min="0"
                         max="100"
                         onChange={({ target }) => {
                             const { value = 0 } = target;
                             this.handleChangeHsv(key, value);
+                        }}
+                        onBlur={({ target }) => {
+                            const { value = 0 } = target;
+                            this.handleBlurHsv(key, value);
                         }}
                         id={key}
                         name={key}
@@ -527,12 +560,17 @@ class ColorPicker extends Component {
                 <li key={key} className={`${Styles.item} ${itemClassName}`}>
                     <label htmlFor={key}>{label}</label>
                     <input
-                        value={this.state[key]}
+                        value={String(this.state[key])}
                         type="number"
                         min="0"
                         max="255"
                         onChange={({ target }) => {
-                            this.handleChangeRGB(key, target);
+                            const { value } = target;
+                            this.handleChangeRGB(key, value);
+                        }}
+                        onBlur={({ target }) => {
+                            const { value } = target;
+                            this.handleBlurRGB(key, value);
                         }}
                         id={key}
                         name={key}

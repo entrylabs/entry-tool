@@ -98,7 +98,7 @@ class Navigation extends Component {
                             <div
                                 className={`${Styles.select_link} ${
                                     Styles.imico_pop_select_arr_down
-                                    }`}
+                                }`}
                                 onClick={(e) => {
                                     this.onDropDownClicked(e, 'category', this.category_options);
                                 }}
@@ -113,7 +113,7 @@ class Navigation extends Component {
                             <div
                                 className={`${Styles.select_link} ${
                                     Styles.imico_pop_select_arr_down
-                                    }`}
+                                }`}
                                 onClick={(e) => {
                                     this.onDropDownClicked(e, 'sort', this.sort_options);
                                 }}
@@ -128,7 +128,7 @@ class Navigation extends Component {
                             <div
                                 className={`${Styles.select_link} ${
                                     Styles.imico_pop_select_arr_down
-                                    }`}
+                                }`}
                                 onClick={(e) => {
                                     this.onDropDownClicked(e, 'period', this.period_options);
                                 }}
