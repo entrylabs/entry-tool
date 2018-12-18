@@ -159,9 +159,9 @@ class FileUpload extends Component {
         const $upload = e.currentTarget;
         const uploadFiles = $upload.files;
 
-        let check = {
+        const check = {
             file: 0,
-            object: 0
+            object: 0,
         };
 
         const formData = new FormData();
