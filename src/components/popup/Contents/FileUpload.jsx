@@ -135,7 +135,7 @@ class FileUpload extends Component {
         return this.triggerNotSuportFileError();
     }
 
-    upload(formData, objectData) {
+    upload(formData, objectData, check) {
         let csrf = '';
         if (document.querySelector('meta[name="csrf-token"]')) {
             csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -144,11 +144,12 @@ class FileUpload extends Component {
             'Content-Type': undefined, // important
             'csrf-token': csrf,
         };
-        if (formData.get('uploadFile0')) {
+
+        if (check.file > 0) {
             this.props.uploadItem(this.props.popupReducer.type, formData, headers);
         }
 
-        if (objectData.get('objects')) {
+        if (check.object > 0) {
             this.props.uploadItem('object', objectData, headers);
         }
     }
@@ -157,6 +158,11 @@ class FileUpload extends Component {
         e.preventDefault();
         const $upload = e.currentTarget;
         const uploadFiles = $upload.files;
+
+        let check = {
+            file: 0,
+            object: 0
+        };
 
         const formData = new FormData();
         formData.append('type', 'user');
@@ -172,9 +178,11 @@ class FileUpload extends Component {
                 case 'sound':
                 case 'image':
                     formData.append(`uploadFile${idx}`, file);
+                    check.file++;
                     break;
                 case 'object':
                     objectData.append('objects', file);
+                    check.object++;
                     break;
                 default:
                     break;
@@ -183,7 +191,7 @@ class FileUpload extends Component {
         });
 
         if (!checkFiles) {
-            this.upload(formData, objectData);
+            this.upload(formData, objectData, check);
             $upload.value = '';
             this.setState({ isUploading: true });
         }

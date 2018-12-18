@@ -1,4 +1,5 @@
 import { UI_SELECT, APPLY_SELECTED_LIST, UPLOAD_ITEM, INIT_STATE } from '../actions/popup';
+import flatten from 'lodash/flatten';
 
 const INITIAL_STATE = {
     selected: [],
@@ -16,7 +17,7 @@ export default function popupReducer(state = INITIAL_STATE, action) {
         case UI_SELECT:
             return { ...state, ...action.data };
         case UPLOAD_ITEM:
-            return { ...state, uploads: [...state.uploads, ...action.data.data].flat() };
+            return { ...state, uploads: flatten([...state.uploads, ...action.data.data]) };
         case APPLY_SELECTED_LIST:
             return Object.assign({}, { ...state, selected: action.selected });
         default:

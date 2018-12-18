@@ -58,7 +58,7 @@ class Navigation extends Component {
                     key={item}
                     className={CommonUtils.toggleClass(
                         navigation === item || (!navigation && index === 0),
-                        Styles.on
+                        Styles.on,
                     )}
                     onClick={this.props.onClicked}
                     data-key={item}
@@ -201,5 +201,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(Navigation);
