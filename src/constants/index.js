@@ -30,7 +30,6 @@ const SPRITE_SIDEBAR = {
             animal_flying: { name: 'Category.animal_flying' },
             animal_land: { name: 'Category.animal_land' },
             animal_water: { name: 'Category.animal_water' },
-            animal_others: { name: 'Category.animal_others' },
         },
     },
     plant: {
@@ -50,7 +49,6 @@ const SPRITE_SIDEBAR = {
             vehicles_flying: { name: 'Category.vehicles_flying' },
             vehicles_land: { name: 'Category.vehicles_land' },
             vehicles_water: { name: 'Category.vehicles_water' },
-            vehicles_others: { name: 'Category.vehicles_others' },
         },
     },
     architect: {
