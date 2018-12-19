@@ -636,7 +636,7 @@ class ColorPicker extends Component {
                                 <div
                                     onClick={onSpoidClick}
                                     className={`${Styles.btn_picker} ${Styles.imbtn_picker} ${
-                                        activeSpoid ? Styles.active : ''
+                                        activeSpoid ? Styles.on : ''
                                     }`}
                                 >
                                     컬러피커 열기

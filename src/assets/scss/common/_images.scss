@@ -69,7 +69,7 @@
     cursor: pointer;
     background: url(../images/btn_pop_picker.svg) no-repeat;
     background-size: 36px auto;
-    .active {
+    &.on {
         background: url(../images/btn_pop_picker_on.svg) no-repeat;
     }
 }
