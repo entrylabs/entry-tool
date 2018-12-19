@@ -590,6 +590,7 @@ class ColorPicker extends Component {
             canSpoide,
             canTransparent,
             activeSpoid,
+            eventTypes = ['mouseup', 'touchend', 'wheel'],
         } = this.props;
         const { color, arrowLeft, isUpStyle, isTransparent, colorPickerStyle } = this.state;
         let colorClassName = '';
@@ -608,7 +609,7 @@ class ColorPicker extends Component {
                         onOutsideClick(color);
                     }
                 }}
-                eventTypes={['mouseup', 'touchend', 'wheel']}
+                eventTypes={eventTypes}
             >
                 <div
                     ref={(dom) => {

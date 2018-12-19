@@ -8,9 +8,7 @@ import root from 'window-or-global';
 
 /* eslint-disable jsx-a11y/anchor-is-valid*/
 /* eslint-disable array-element-newline */
-const numberList = [
-    '7', '8', '9', '4', '5', '6', '1', '2', '3', '-', '0', '.',
-];
+const numberList = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '-', '0', '.'];
 
 function handleTouchPreventDefault(e) {
     e.preventDefault();
@@ -159,7 +157,12 @@ class Angle extends Component {
     }
 
     render() {
-        const { onOutsideClick = () => {}, angle = 0, outsideExcludeDom } = this.props;
+        const {
+            onOutsideClick = () => {},
+            angle = 0,
+            outsideExcludeDom,
+            eventTypes = ['mouseup', 'touchend', 'wheel'],
+        } = this.props;
         const { isUpStyle, arrowLeft, componentPosition } = this.state;
 
         return (
@@ -168,7 +171,7 @@ class Angle extends Component {
                 onOutsideClick={() => {
                     onOutsideClick(angle);
                 }}
-                eventTypes={['mouseup', 'touchend', 'wheel']}
+                eventTypes={eventTypes}
             >
                 <div
                     ref={(dom) => (this.widgetDom = dom)}
