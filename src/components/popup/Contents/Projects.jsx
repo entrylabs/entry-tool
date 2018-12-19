@@ -109,15 +109,14 @@ class Projects extends Component {
                             {CommonUtils.getLang('Menus.no_project_2')}
                         </p>
                         <div className={Styles.pop_btn_box}>
-                            <a
-                                href="#NULL"
+                            <div
                                 className={Styles.active}
                                 onClick={(e) => {
                                     this.triggerEvent(e, EMIT_TYPES.makeProject);
                                 }}
                             >
                                 {CommonUtils.getLang('Menus.make_project')}
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -145,13 +144,13 @@ class Projects extends Component {
                     </div>
                 </section>
                 <div className={Styles.pop_btn_box}>
-                    <a href="#NULL" onClick={(e) => this.triggerEvent(e, EMIT_TYPES.close, null)}>
+                    <div onClick={(e) => this.triggerEvent(e, EMIT_TYPES.close, null)}>
                         {CommonUtils.getLang('Buttons.cancel')}
-                    </a>
-                    <a href="#NULL" className={Styles.active}
+                    </div>
+                    <div className={Styles.active}
                         onClick={(e) => this.triggerEvent(e, EMIT_TYPES.submit, this.state.selected)}>
                         {CommonUtils.getLang('Menus.Load')}
-                    </a>
+                    </div>
                 </div>
             </React.Fragment>
         );
