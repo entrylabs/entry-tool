@@ -4,7 +4,6 @@ import { Object } from 'core-js';
 import Styles from '../../assets/scss/popup.scss';
 import debounce from 'lodash/debounce';
 import { pure } from 'recompose';
-import isEqual from 'lodash/isEqual';
 import OutsideClick from '../common/outsideClick';
 import root from 'window-or-global';
 
@@ -363,9 +362,9 @@ class ColorPicker extends Component {
         root.removeEventListener('resize', this.handleWindowResize);
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return !isEqual(this.state, nextState);
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return !isEqual(this.state, nextState);
+    // }
 
     handleSliderMouseDown(e, type) {
         const { nativeEvent = {} } = e;

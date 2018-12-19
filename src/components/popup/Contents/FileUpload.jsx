@@ -295,7 +295,7 @@ class FileUpload extends Component {
                                     id="inpt_file"
                                     multiple="multiple"
                                     onChange={this.onAddItemChanged}
-                                    style={{fontSize:0}}
+                                    style={{ fontSize: 0 }}
                                 />
                             </div>
                             <ul className={Styles.obj_list}>
