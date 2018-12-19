@@ -590,6 +590,7 @@ class ColorPicker extends Component {
             onSpoidClick,
             canSpoide,
             canTransparent,
+            activeSpoid,
         } = this.props;
         const { color, arrowLeft, isUpStyle, isTransparent, colorPickerStyle } = this.state;
         let colorClassName = '';
@@ -634,7 +635,9 @@ class ColorPicker extends Component {
                             {canSpoide && (
                                 <div
                                     onClick={onSpoidClick}
-                                    className={`${Styles.btn_picker} ${Styles.imbtn_picker}`}
+                                    className={`${Styles.btn_picker} ${Styles.imbtn_picker} ${
+                                        activeSpoid ? Styles.active : ''
+                                    }`}
                                 >
                                     컬러피커 열기
                                 </div>

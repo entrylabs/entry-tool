@@ -66,8 +66,12 @@
     }
 }
 .imbtn_picker {
+    cursor: pointer;
     background: url(../images/btn_pop_picker.svg) no-repeat;
     background-size: 36px auto;
+    .active {
+        background: url(../images/btn_pop_picker_on.svg) no-repeat;
+    }
 }
 .btn_pop_color_slide {
     background: url(../images/btn_pop_color_slide.png) no-repeat;
