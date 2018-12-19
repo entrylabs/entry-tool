@@ -1257,7 +1257,7 @@
         padding: 16px 0;
         text-align: center;
         font-size: 0;
-        a {
+        a, div {
             display: inline-block;
             min-width: 144px;
             overflow: hidden;
@@ -1273,7 +1273,8 @@
             line-height: 44px;
             cursor: pointer;
         }
-        a.active {
+        a.active,
+        div.active {
             background-color: #4f80ff;
             color: #fff;
         }
