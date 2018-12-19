@@ -4244,7 +4244,7 @@ class Sample extends Component {
                                                 <input type="text" id="blue" name="blue" />
                                             </li>
                                         </ul>
-                                        <a href="#" className={`${Styles.btn_picker} ${Styles.imbtn_picker}`}>컬러피커 열기</a>
+                                        <a href="#" className={`${Styles.btn_picker} ${Styles.imbtn_picker_off}`}>컬러피커 열기</a>
                                     </div>
                                     <div className={Styles.color_graph}>
                                         <ul className={Styles.graph_list}>
