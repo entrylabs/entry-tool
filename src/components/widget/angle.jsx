@@ -8,6 +8,7 @@ import root from 'window-or-global';
 
 /* eslint-disable jsx-a11y/anchor-is-valid*/
 /* eslint-disable array-element-newline */
+/* eslint-disable array-bracket-newline */
 const numberList = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '-', '0', '.'];
 
 function handleTouchPreventDefault(e) {
