@@ -44,15 +44,8 @@ class Projects extends Component {
             if (item.user.avatarImage) {
                 const userId = item.user._id;
                 avatarImgUrl =
-                    `/uploads/profile/${ 
-                        userId.substring(0, 2) 
-                    }/${ 
-                        userId.substring(2, 4) 
-                    }/` +
-                    `avatar_${ 
-                        userId 
-                    }.png?${ 
-                        new Date().getTime()}`;
+                    `/uploads/profile/${userId.substring(0, 2)}/${userId.substring(2, 4)}/` +
+                    `avatar_${userId}.png?${new Date().getTime()}`;
             }
             return (
                 <li
@@ -112,24 +105,26 @@ class Projects extends Component {
                         </div>
                         <p className={Styles.result_dsc}>
                             {CommonUtils.getLang('Menus.no_project_1')}
-                            <br />
+                            <br/>
                             {CommonUtils.getLang('Menus.no_project_2')}
                         </p>
                         <div className={Styles.pop_btn_box}>
-                            <button
+                            <a
+                                href="#NULL"
                                 className={Styles.active}
                                 onClick={(e) => {
                                     this.triggerEvent(e, EMIT_TYPES.makeProject);
                                 }}
                             >
                                 {CommonUtils.getLang('Menus.make_project')}
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
             </section>
         );
     }
+
     render() {
         const data = this.props.data.data;
         if (!data || data.length === 0) {
@@ -150,21 +145,13 @@ class Projects extends Component {
                     </div>
                 </section>
                 <div className={Styles.pop_btn_box}>
-                    <button
-                        onClick={(e) => {
-                            this.triggerEvent(e, EMIT_TYPES.close, null);
-                        }}
-                    >
+                    <a href="#NULL" onClick={(e) => this.triggerEvent(e, EMIT_TYPES.close, null)}>
                         {CommonUtils.getLang('Buttons.cancel')}
-                    </button>
-                    <button
-                        className={Styles.active}
-                        onClick={(e) => {
-                            this.triggerEvent(e, EMIT_TYPES.submit, this.state.selected);
-                        }}
-                    >
+                    </a>
+                    <a href="#NULL" className={Styles.active}
+                        onClick={(e) => this.triggerEvent(e, EMIT_TYPES.submit, this.state.selected)}>
                         {CommonUtils.getLang('Menus.Load')}
-                    </button>
+                    </a>
                 </div>
             </React.Fragment>
         );
@@ -177,5 +164,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     null,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(Projects);
