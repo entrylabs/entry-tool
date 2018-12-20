@@ -218,7 +218,7 @@
         .section_cont .cont_sel_box {
             position: relative;
             overflow: hidden;
-            margin-top: 33px;
+            margin-top: 0;
             height: 176px;
             background-color: #c4dfef;
         }
@@ -726,7 +726,7 @@
             padding: 0 38px 23px;
         }
         .list_area + .img_caution_box {
-            margin-top: 60px;
+            margin-top: 0;
         }
         .file_add_box {
             @include PositionLT(absolute, 38px, 0);
@@ -1257,7 +1257,8 @@
         padding: 16px 0;
         text-align: center;
         font-size: 0;
-        a, div {
+        a,
+        div {
             display: inline-block;
             min-width: 144px;
             overflow: hidden;
