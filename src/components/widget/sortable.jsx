@@ -96,6 +96,7 @@ class Sortable extends Component {
                         items={items2}
                         onSortEnd={this.onSortEnd}
                         disabled={disabled}
+                        distance={1}
                         shouldCancelStart={shouldCancelStart}
                     />
                 </div>
