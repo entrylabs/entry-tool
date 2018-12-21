@@ -24,7 +24,7 @@ class CustomSlide extends Component {
     render() {
         const { item, type, ...props } = this.props;
         const lang = CommonUtils.getLangType();
-        const defaultName = item.label["en"] ? item.label["en"] : item.name;
+        const defaultName = item.label.en ? item.label.en : item.name;
         const name = item.label && item.label[lang] ? item.label[lang] : defaultName;
         return (
             <div className={Styles.select_item} {...props}>
