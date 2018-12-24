@@ -134,7 +134,7 @@ class WriteBox extends Component {
                     key={key}
                     className={className}
                     data-effect={key}
-                    title={effect.text}
+                    title={CommonUtils.getLang(effect.text)}
                 >
                     <span className="blind">글자 {effect.text}</span>
                 </a>
@@ -252,7 +252,7 @@ class WriteBox extends Component {
                                                 Styles.imico_pop_select_arr_down
                                             )}`}
                                             onClick={this.onFontBoxClicked}
-                                            title="글꼴"
+                                            title={CommonUtils.getLang('Workspace.font_family')}
                                         >
                                             {this.state.font.name}
                                         </div>

@@ -154,42 +154,42 @@ export const DEFAULT_OPTIONS = {
         ],
         EFFECTS: {
             bold: {
-                text: '굵게',
+                text: 'Workspace.bold',
                 apply: false,
                 css: {
                     fontWeight: 'bold',
                 },
             },
             underLine: {
-                text: '밑줄',
+                text: 'Workspace.font_underline',
                 apply: false,
                 css: {
                     textDecorationLine: 'underline',
                 },
             },
             italic: {
-                text: '기울임',
+                text: 'Workspace.font_tilt',
                 apply: false,
                 css: {
                     fontStyle: 'italic',
                 },
             },
             through: {
-                text: '취소선',
+                text: 'Workspace.font_cancel',
                 apply: false,
                 css: {
                     textDecorationLine: 'line-through',
                 },
             },
             color: {
-                text: '글자색',
+                text: 'Workspace.font_color',
                 apply: false,
                 css: {
                     color: '#000000',
                 },
             },
             backgroundColor: {
-                text: '배경색',
+                text: 'Workspace.font_fill',
                 apply: false,
                 css: {
                     backgroundColor: '#ffffff',
