@@ -69,7 +69,7 @@ class Selected extends Component {
         this.container = React.createElement(
             'style',
             {},
-            '.slick-list { position:absolute; left:82px; } ' +
+            '.slick-list { margin-left:82px; } ' +
             '.slick-slide { display: inline-block; margin-left: 12px;} ' +
             '.slick-slide:first-child { margin-left: 0; } '
         );
