@@ -34,6 +34,10 @@ class Index extends Component {
             before.sidebar !== next.sidebar ||
             before.subMenu !== next.subMenu
         ) {
+            const elmnt = document.getElementById("popupList");
+            if(elmnt) {
+                elmnt.scrollTop=0;
+            }
             this.props.triggerEvent(
                 EMIT_TYPES.fetch,
                 { type: next.type, sidebar: next.sidebar, subMenu: next.subMenu },
@@ -62,7 +66,7 @@ class Index extends Component {
     drawListBox() {
         const listBox = (
             <React.Fragment>
-                <div className={Styles.list_area}>
+                <div id="popupList" className={Styles.list_area}>
                     <ul className={Styles.obj_list}>{this.drawItems()}</ul>
                 </div>
             </React.Fragment>
