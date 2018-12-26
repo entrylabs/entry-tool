@@ -1961,7 +1961,7 @@ class Sample extends Component {
                                                 >
                                                     &nbsp;
                                                 </div>
-                                                <em className={Styles.sjt}>소리명</em>
+                                                <em className={Styles.sjt}>명</em>
                                             </div>
                                         </li>
                                         <li>
