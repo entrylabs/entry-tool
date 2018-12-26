@@ -34,9 +34,9 @@ class Index extends Component {
             before.sidebar !== next.sidebar ||
             before.subMenu !== next.subMenu
         ) {
-            const elmnt = document.getElementById("popupList");
-            if(elmnt) {
-                elmnt.scrollTop=0;
+            const elmnt = document.getElementById('popupList');
+            if (elmnt) {
+                elmnt.scrollTop = 0;
             }
             this.props.triggerEvent(
                 EMIT_TYPES.fetch,
