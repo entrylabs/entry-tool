@@ -35,16 +35,16 @@ class Sample extends Component {
                     <div className={Styles.section_navi}>
                         <ul className={Styles.list}>
                             <li className={Styles.on}>
-                                <a href="#">오브젝트 선택</a>
+                                <div>오브젝트 선택</div>
                             </li>
                             <li>
-                                <a href="#">파일 올리기</a>
+                                <div>파일 올리기</div>
                             </li>
                             <li>
-                                <a href="#">그리기</a>
+                                <div>그리기</div>
                             </li>
                             <li>
-                                <a href="#">글상자</a>
+                                <div>글상자</div>
                             </li>
                         </ul>
                         <div className={Styles.srch_box}>
@@ -66,40 +66,40 @@ class Sample extends Component {
                         <ul className={Styles.menu_list}>
                             {/* [D] 링크가 선택되면 li 요소에 on 클래스 추가  */}
                             <li>
-                                <a href="#">엔트리 봇</a>
+                                <div>엔트리 봇</div>
                             </li>
                             <li>
-                                <a href="#">사람</a>
+                                <div>사람</div>
                             </li>
                             <li className={Styles.on}>
-                                <a href="#">동물</a>
+                                <div>동물</div>
                             </li>
                             <li>
-                                <a href="#">식물</a>
+                                <div>식물</div>
                             </li>
                             <li>
-                                <a href="#">탈것</a>
+                                <div>탈것</div>
                             </li>
                             <li>
-                                <a href="#">건물</a>
+                                <div>건물</div>
                             </li>
                             <li>
-                                <a href="#">음식</a>
+                                <div>음식</div>
                             </li>
                             <li>
-                                <a href="#">환경</a>
+                                <div>환경</div>
                             </li>
                             <li>
-                                <a href="#">물건</a>
+                                <div>물건</div>
                             </li>
                             <li>
-                                <a href="#">판타지</a>
+                                <div>판타지</div>
                             </li>
                             <li>
-                                <a href="#">인터페이스</a>
+                                <div>인터페이스</div>
                             </li>
                             <li>
-                                <a href="#">배경</a>
+                                <div>배경</div>
                             </li>
                         </ul>
 
@@ -107,13 +107,11 @@ class Sample extends Component {
                             <div className={Styles.sub_menu}>
                                 <div className={Styles.menu_inner}>
                                     {/* [D] 링크가 클릭되면 li 요소에 on 클래스 추가 */}
-                                    <a href="#" className={Styles.on}>
-                                        텍스트
-                                    </a>
-                                    <a href="#">텍스트</a>
-                                    <a href="#">땅</a>
-                                    <a href="#">물</a>
-                                    <a href="#">가변형 텍스트 최소값은 72px</a>
+                                    <div className={Styles.on}>텍스트</div>
+                                    <div>텍스트</div>
+                                    <div>땅</div>
+                                    <div>물</div>
+                                    <div>가변형 텍스트 최소값은 72px</div>
                                 </div>
                             </div>
                             <div className={Styles.list_area}>
@@ -761,27 +759,23 @@ class Sample extends Component {
                                         </a>
                                     </div>
                                 </div>
-                                <a
-                                    href="#"
+                                <div
                                     className={`${Styles.btn_prev} ${Styles.imbtn_pop_sel_prev}`}
                                 >
                                     <span className={Styles.blind}>이전</span>
-                                </a>
-                                <a
-                                    href="#"
+                                </div>
+                                <div
                                     className={`${Styles.btn_next} ${Styles.imbtn_pop_sel_next}`}
                                 >
                                     <span className={Styles.blind}>다음</span>
-                                </a>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div className={Styles.pop_btn_box}>
-                        <a href="#">취소</a>
-                        <a href="#" className={Styles.active}>
-                            추가하기
-                        </a>
+                        <div>취소</div>
+                        <div className={Styles.active}>추가하기</div>
                     </div>
                 </div>
 
@@ -799,16 +793,16 @@ class Sample extends Component {
                     <div className={Styles.section_navi}>
                         <ul className={Styles.list}>
                             <li>
-                                <a href="#">오브젝트 선택</a>
+                                <div>오브젝트 선택</div>
                             </li>
                             <li className={Styles.on}>
-                                <a href="#">파일 올리기</a>
+                                <div>파일 올리기</div>
                             </li>
                             <li>
-                                <a href="#">그리기</a>
+                                <div>그리기</div>
                             </li>
                             <li>
-                                <a href="#">글상자</a>
+                                <div>글상자</div>
                             </li>
                         </ul>
                     </div>
@@ -1180,10 +1174,8 @@ class Sample extends Component {
                         </div>
                     </section>
                     <div className={Styles.pop_btn_box}>
-                        <a href="#">취소</a>
-                        <a href="#" className={Styles.active}>
-                            추가하기
-                        </a>
+                        <div>취소</div>
+                        <div className={Styles.active}>추가하기</div>
                     </div>
                 </div>
 
@@ -1201,16 +1193,16 @@ class Sample extends Component {
                     <div className={Styles.section_navi}>
                         <ul className={Styles.list}>
                             <li>
-                                <a href="#">오브젝트 선택</a>
+                                <div>오브젝트 선택</div>
                             </li>
                             <li>
-                                <a href="#">파일 올리기</a>
+                                <div>파일 올리기</div>
                             </li>
                             <li className={Styles.on}>
-                                <a href="#">그리기</a>
+                                <div>그리기</div>
                             </li>
                             <li>
-                                <a href="#">글상자</a>
+                                <div>글상자</div>
                             </li>
                         </ul>
                     </div>
@@ -1229,9 +1221,7 @@ class Sample extends Component {
                                         그리기 화면으로 이동하시겠습니까?
                                     </p>
                                     <div className={Styles.pop_btn_box}>
-                                        <a href="#" className={Styles.active}>
-                                            이동하기
-                                        </a>
+                                        <div className={Styles.active}>이동하기</div>
                                     </div>
                                 </div>
                             </div>
@@ -1253,16 +1243,16 @@ class Sample extends Component {
                     <div className={Styles.section_navi}>
                         <ul className={Styles.list}>
                             <li>
-                                <a href="#">오브젝트 선택</a>
+                                <div>오브젝트 선택</div>
                             </li>
                             <li>
-                                <a href="#">파일 올리기</a>
+                                <div>파일 올리기</div>
                             </li>
                             <li>
-                                <a href="#">그리기</a>
+                                <div>그리기</div>
                             </li>
                             <li className={Styles.on}>
-                                <a href="#">글상자</a>
+                                <div>글상자</div>
                             </li>
                         </ul>
                     </div>
@@ -1275,67 +1265,60 @@ class Sample extends Component {
                                     <div className={Styles.write_set}>
                                         {/* [D] 링크가 클릭되면 pop_selectbox클래스에 on 클래스 추가  */}
                                         <div className={`${Styles.pop_selectbox} ${Styles.on}`}>
-                                            <a
-                                                href="#"
+                                            <div
                                                 className={`${Styles.select_link} ${
                                                     Styles.imico_pop_select_arr_down
                                                     }`}
                                                 title="글꼴"
                                             >
                                                 NanumGothicOTF
-                                            </a>
+                                            </div>
                                             {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
                                             {/* 툴팁 화살표 위치를 변경하려면 arr 요소에서 margin-left:0;left: 원하는 값 으로 style이 정의 되어야 합니다. */}
                                             <div className={Styles.tooltip_box}>
                                                 <div className={Styles.tooltip_inner}>
                                                     <ul className={Styles.select_list}>
                                                         <li className={Styles.list_item}>
-                                                            <a
-                                                                href="#"
+                                                            <div
                                                                 className={Styles.list_link}
                                                             >
                                                                 바탕체
-                                                            </a>
+                                                            </div>
                                                         </li>
                                                         <li className={Styles.list_item}>
-                                                            <a
-                                                                href="#"
+                                                            <div
                                                                 className={Styles.list_link}
                                                             >
                                                                 명조체
-                                                            </a>
+                                                            </div>
                                                         </li>
                                                         <li className={Styles.list_item}>
-                                                            <a
-                                                                href="#"
+                                                            <div
                                                                 className={Styles.list_link}
                                                             >
                                                                 고딕체
-                                                            </a>
+                                                            </div>
                                                         </li>
                                                         <li className={Styles.list_item}>
-                                                            <a
-                                                                href="#"
+                                                            <div
                                                                 className={Styles.list_link}
                                                             >
                                                                 필기체
-                                                            </a>
+                                                            </div>
                                                         </li>
                                                         <li className={Styles.list_item}>
-                                                            <a
-                                                                href="#"
+                                                            <div
                                                                 className={Styles.list_link}
                                                             >
                                                                 한라산체
-                                                            </a>
+                                                            </div>
                                                         </li>
                                                         <li className={Styles.list_item}>
-                                                            <a
-                                                                href="#"
+                                                            <div
                                                                 className={Styles.list_link}
                                                             >
                                                                 코딩고딕체
-                                                            </a>
+                                                            </div>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -1347,67 +1330,61 @@ class Sample extends Component {
 
                                         <div className={Styles.font_style_box}>
                                             {/* 링크가 클릭되면 on 클래스 토글 */}
-                                            <a
-                                                href="#"
+                                            <div
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_bold
                                                     } ${Styles.on}`}
                                                 title="굵게"
                                             >
                                                 <span className={Styles.blind}>글자 굵게</span>
-                                            </a>
-                                            <a
-                                                href="#"
+                                            </div>
+                                            <div
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_underline
                                                     }`}
                                                 title="밑줄"
                                             >
                                                 <span className={Styles.blind}>글자 밑줄</span>
-                                            </a>
-                                            <a
-                                                href="#"
+                                            </div>
+                                            <div
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_italic
                                                     }`}
                                                 title="기울임"
                                             >
                                                 <span className={Styles.blind}>글자 기울기</span>
-                                            </a>
-                                            <a
-                                                href="#"
+                                            </div>
+                                            <div
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_through
                                                     }`}
                                                 title="취소선"
                                             >
                                                 <span className={Styles.blind}>글자 취소선</span>
-                                            </a>
-                                            <a
-                                                href="#"
+                                            </div>
+                                            <div
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_color
                                                     }`}
                                                 title="글자색"
                                             >
                                                 <span className={Styles.blind}>글자 색</span>
-                                            </a>
-                                            <a
-                                                href="#"
+                                            </div>
+                                            <div
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_paint
                                                     }`}
                                                 title="배경색"
                                             >
                                                 <span className={Styles.blind}>글자 배경색</span>
-                                            </a>
+                                            </div>
                                         </div>
                                         <div className={Styles.write_type_box}>
                                             {/* 링크가 클릭되면 on 클래스 토글 */}
-                                            <a href="#" className={Styles.on}>
+                                            <div className={Styles.on}>
                                                 한 줄 쓰기
-                                            </a>
-                                            <a href="#">여러 줄 쓰기</a>
+                                            </div>
+                                            <div>여러 줄 쓰기</div>
                                         </div>
                                     </div>
                                     <div className={Styles.input_box}>
@@ -1431,10 +1408,8 @@ class Sample extends Component {
                         </div>
                     </section>
                     <div className={Styles.pop_btn_box}>
-                        <a href="#">취소</a>
-                        <a href="#" className={Styles.active}>
-                            추가하기
-                        </a>
+                        <div>취소</div>
+                        <div className={Styles.active}>추가하기</div>
                     </div>
                 </div>
 
@@ -1452,16 +1427,16 @@ class Sample extends Component {
                     <div className={Styles.section_navi}>
                         <ul className={Styles.list}>
                             <li>
-                                <a href="#">오브젝트 선택</a>
+                                <div>오브젝트 선택</div>
                             </li>
                             <li>
-                                <a href="#">파일 올리기</a>
+                                <div>파일 올리기</div>
                             </li>
                             <li>
-                                <a href="#">그리기</a>
+                                <div>그리기</div>
                             </li>
                             <li className={Styles.on}>
-                                <a href="#">글상자</a>
+                                <div>글상자</div>
                             </li>
                         </ul>
                     </div>
@@ -1474,67 +1449,60 @@ class Sample extends Component {
                                     <div className={Styles.write_set}>
                                         {/* [D] 링크가 클릭되면 pop_selectbox클래스에 on 클래스 추가  */}
                                         <div className={`${Styles.pop_selectbox} ${Styles.on}`}>
-                                            <a
-                                                href="#"
+                                            <div
                                                 className={`${Styles.select_link} ${
                                                     Styles.imico_pop_select_arr_down
                                                     }`}
                                                 title="글꼴"
                                             >
                                                 NanumGothicOTF
-                                            </a>
+                                            </div>
                                             {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
                                             {/* 툴팁 화살표 위치를 변경하려면 arr 요소에서 margin-left:0;left: 원하는 값 으로 style이 정의 되어야 합니다. */}
                                             <div className={Styles.tooltip_box}>
                                                 <div className={Styles.tooltip_inner}>
                                                     <ul className={Styles.select_list}>
                                                         <li className={Styles.list_item}>
-                                                            <a
-                                                                href="#"
+                                                            <div
                                                                 className={Styles.list_link}
                                                             >
                                                                 바탕체
-                                                            </a>
+                                                            </div>
                                                         </li>
                                                         <li className={Styles.list_item}>
-                                                            <a
-                                                                href="#"
+                                                            <div
                                                                 className={Styles.list_link}
                                                             >
                                                                 명조체
-                                                            </a>
+                                                            </div>
                                                         </li>
                                                         <li className={Styles.list_item}>
-                                                            <a
-                                                                href="#"
+                                                            <div
                                                                 className={Styles.list_link}
                                                             >
                                                                 고딕체
-                                                            </a>
+                                                            </div>
                                                         </li>
                                                         <li className={Styles.list_item}>
-                                                            <a
-                                                                href="#"
+                                                            <div
                                                                 className={Styles.list_link}
                                                             >
                                                                 필기체
-                                                            </a>
+                                                            </div>
                                                         </li>
                                                         <li className={Styles.list_item}>
-                                                            <a
-                                                                href="#"
+                                                            <div
                                                                 className={Styles.list_link}
                                                             >
                                                                 한라산체
-                                                            </a>
+                                                            </div>
                                                         </li>
                                                         <li className={Styles.list_item}>
-                                                            <a
-                                                                href="#"
+                                                            <div
                                                                 className={Styles.list_link}
                                                             >
                                                                 코딩고딕체
-                                                            </a>
+                                                            </div>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -1546,67 +1514,61 @@ class Sample extends Component {
 
                                         <div className={Styles.font_style_box}>
                                             {/* 링크가 클릭되면 on 클래스 토글 */}
-                                            <a
-                                                href="#"
+                                            <div
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_bold
                                                     } ${Styles.on}`}
                                                 title="굵게"
                                             >
                                                 <span className={Styles.blind}>글자 굵게</span>
-                                            </a>
-                                            <a
-                                                href="#"
+                                            </div>
+                                            <div
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_underline
                                                     }`}
                                                 title="밑줄"
                                             >
                                                 <span className={Styles.blind}>글자 밑줄</span>
-                                            </a>
-                                            <a
-                                                href="#"
+                                            </div>
+                                            <div
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_italic
                                                     }`}
                                                 title="기울임"
                                             >
                                                 <span className={Styles.blind}>글자 기울기</span>
-                                            </a>
-                                            <a
-                                                href="#"
+                                            </div>
+                                            <div
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_through
                                                     }`}
                                                 title="취소선"
                                             >
                                                 <span className={Styles.blind}>글자 취소선</span>
-                                            </a>
-                                            <a
-                                                href="#"
+                                            </div>
+                                            <div
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_color
                                                     }`}
                                                 title="글자색"
                                             >
                                                 <span className={Styles.blind}>글자 색</span>
-                                            </a>
-                                            <a
-                                                href="#"
+                                            </div>
+                                            <div
                                                 className={`${Styles.style_link} ${
                                                     Styles.imbtn_pop_font_paint
                                                     }`}
                                                 title="배경색"
                                             >
                                                 <span className={Styles.blind}>글자 배경색</span>
-                                            </a>
+                                            </div>
                                         </div>
                                         <div className={Styles.write_type_box}>
                                             {/* 링크가 클릭되면 on 클래스 토글 */}
-                                            <a href="#" className={Styles.on}>
+                                            <div className={Styles.on}>
                                                 한 줄 쓰기
-                                            </a>
-                                            <a href="#">여러 줄 쓰기</a>
+                                            </div>
+                                            <div>여러 줄 쓰기</div>
                                         </div>
                                     </div>
 
@@ -1917,10 +1879,8 @@ class Sample extends Component {
                         </div>
                     </section>
                     <div className={Styles.pop_btn_box}>
-                        <a href="#">취소</a>
-                        <a href="#" className={Styles.active}>
-                            추가하기
-                        </a>
+                        <div>취소</div>
+                        <div className={Styles.active}>추가하기</div>
                     </div>
                 </div>
 
@@ -1938,10 +1898,10 @@ class Sample extends Component {
                     <div className={Styles.section_navi}>
                         <ul className={Styles.list}>
                             <li className={Styles.on}>
-                                <a href="#">소리 선택</a>
+                                <div>소리 선택</div>
                             </li>
                             <li>
-                                <a href="#">파일 올리기</a>
+                                <div>파일 올리기</div>
                             </li>
                         </ul>
                         <div className={Styles.srch_box}>
@@ -1962,32 +1922,30 @@ class Sample extends Component {
                         <ul className={Styles.menu_list}>
                             {/* [D] 링크가 선택되면 li 요소에 on 클래스 추가  */}
                             <li>
-                                <a href="#">사람</a>
+                                <div>사람</div>
                             </li>
                             <li>
-                                <a href="#">자연</a>
+                                <div>자연</div>
                             </li>
                             <li className={Styles.on}>
-                                <a href="#">사물</a>
+                                <div>사물</div>
                             </li>
                             <li>
-                                <a href="#">판타지</a>
+                                <div>판타지</div>
                             </li>
                             <li>
-                                <a href="#">악기</a>
+                                <div>악기</div>
                             </li>
                         </ul>
                         <div className={Styles.section_cont}>
                             <div className={Styles.sub_menu}>
                                 <div className={Styles.menu_inner}>
                                     {/* [D] 링크가 클릭되면 li 요소에 on 클래스 추가 */}
-                                    <a href="#" className={Styles.on}>
-                                        텍스트
-                                    </a>
-                                    <a href="#">텍스트</a>
-                                    <a href="#">땅</a>
-                                    <a href="#">물</a>
-                                    <a href="#">가변형 텍스트 최소값은 72px</a>
+                                    <div className={Styles.on}>텍스트</div>
+                                    <div>텍스트</div>
+                                    <div>땅</div>
+                                    <div>물</div>
+                                    <div>가변형 텍스트 최소값은 72px</div>
                                 </div>
                             </div>
                             <div className={Styles.sound_list_box}>
@@ -2424,26 +2382,22 @@ class Sample extends Component {
                                     </div>
                                 </div>
 
-                                <a
-                                    href="#"
+                                <div
                                     className={`${Styles.btn_prev} ${Styles.imbtn_pop_sel_prev}`}
                                 >
                                     <span className={Styles.blind}>이전</span>
-                                </a>
-                                <a
-                                    href="#"
+                                </div>
+                                <div
                                     className={`${Styles.btn_next} ${Styles.imbtn_pop_sel_next}`}
                                 >
                                     <span className={Styles.blind}>다음</span>
-                                </a>
+                                </div>
                             </div>
                         </div>
                     </section>
                     <div className={Styles.pop_btn_box}>
-                        <a href="#">취소</a>
-                        <a href="#" className={Styles.active}>
-                            추가하기
-                        </a>
+                        <div>취소</div>
+                        <div className={Styles.active}>추가하기</div>
                     </div>
                 </div>
 
@@ -2461,10 +2415,10 @@ class Sample extends Component {
                     <div className={Styles.section_navi}>
                         <ul className={Styles.list}>
                             <li>
-                                <a href="#">소리 선택</a>
+                                <div>소리 선택</div>
                             </li>
                             <li className={Styles.on}>
-                                <a href="#">파일 올리기</a>
+                                <div>파일 올리기</div>
                             </li>
                         </ul>
                     </div>
@@ -2901,10 +2855,8 @@ class Sample extends Component {
                         </div>
                     </section>
                     <div className={Styles.pop_btn_box}>
-                        <a href="#">취소</a>
-                        <a href="#" className={Styles.active}>
-                            추가하기
-                        </a>
+                        <div>취소</div>
+                        <div className={Styles.active}>추가하기</div>
                     </div>
                 </div>
 
@@ -2930,10 +2882,8 @@ class Sample extends Component {
                                 엔트리에 오신 것을 환영 합니다.
                             </p>
                             <div className={Styles.pop_btn_box}>
-                                <a href="#">학생</a>
-                                <a href="#" className={Styles.active}>
-                                    선생님
-                                </a>
+                                <div>학생</div>
+                                <div className={Styles.active}>선생님</div>
                             </div>
                         </section>
                         <section className={Styles.login_cont}>
@@ -3609,9 +3559,7 @@ class Sample extends Component {
                                 </p>
                             </div>
                             <div className={Styles.pop_btn_box}>
-                                <a href="#" className={Styles.active}>
-                                    다음
-                                </a>
+                                <div className={Styles.active}>다음</div>
                             </div>
                         </section>
                     </section>
@@ -3715,10 +3663,8 @@ class Sample extends Component {
                                 </div>
                             </div>
                             <div className={Styles.pop_btn_box}>
-                                <a href="#">이전</a>
-                                <a href="#" className={Styles.active}>
-                                    다음
-                                </a>
+                                <div>이전</div>
+                                <div className={Styles.active}>다음</div>
                             </div>
                         </section>
                     </section>
@@ -3762,48 +3708,47 @@ class Sample extends Component {
                                     <em className={Styles.inpt_label}>
                                         학년 <em className={Styles.chk_point}>(필수)</em>
                                     </em>
-                                    <a
-                                        href="#"
+                                    <div
                                         className={`${Styles.select_link} ${
                                             Styles.imico_pop_select_arr_down
                                             }`}
                                     >
                                         학년을 선택하세요.
-                                    </a>
+                                    </div>
                                     {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
                                     {/* 툴팁 화살표 위치를 변경하려면 arr 요소에서 margin-left:0;left: 원하는 값 으로 style이 정의 되어야 합니다. */}
                                     <div className={Styles.tooltip_box}>
                                         <div className={Styles.tooltip_inner}>
                                             <ul className={Styles.select_list}>
                                                 <li className={Styles.list_item}>
-                                                    <a href="#" className={Styles.list_link}>
+                                                    <div className={Styles.list_link}>
                                                         초등 1학년
-                                                    </a>
+                                                    </div>
                                                 </li>
                                                 <li className={Styles.list_item}>
-                                                    <a href="#" className={Styles.list_link}>
+                                                    <div className={Styles.list_link}>
                                                         초등 2학년
-                                                    </a>
+                                                    </div>
                                                 </li>
                                                 <li className={Styles.list_item}>
-                                                    <a href="#" className={Styles.list_link}>
+                                                    <div className={Styles.list_link}>
                                                         초등 3학년
-                                                    </a>
+                                                    </div>
                                                 </li>
                                                 <li className={Styles.list_item}>
-                                                    <a href="#" className={Styles.list_link}>
+                                                    <div className={Styles.list_link}>
                                                         초등 4학년
-                                                    </a>
+                                                    </div>
                                                 </li>
                                                 <li className={Styles.list_item}>
-                                                    <a href="#" className={Styles.list_link}>
+                                                    <div className={Styles.list_link}>
                                                         초등 5학년
-                                                    </a>
+                                                    </div>
                                                 </li>
                                                 <li className={Styles.list_item}>
-                                                    <a href="#" className={Styles.list_link}>
+                                                    <div className={Styles.list_link}>
                                                         초등 6학년
-                                                    </a>
+                                                    </div>
                                                 </li>
                                             </ul>
                                         </div>
@@ -3818,27 +3763,26 @@ class Sample extends Component {
                                         성별 <em className={Styles.chk_point}>(필수)</em>
                                     </em>
                                     {/* [D] on 클래스가 들어오면  imico_pop_select_arr_up 으로 바꿔주세요 */}
-                                    <a
-                                        href="#"
+                                    <div
                                         className={`${Styles.select_link} ${
                                             Styles.imico_pop_select_arr_up
                                             }`}
                                     >
                                         성별을 선택하세요.
-                                    </a>
+                                    </div>
                                     {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
                                     <div className={Styles.tooltip_box}>
                                         <div className={Styles.tooltip_inner}>
                                             <ul className={Styles.select_list}>
                                                 <li className={Styles.list_item}>
-                                                    <a href="#" className={Styles.list_link}>
+                                                    <div className={Styles.list_link}>
                                                         남자
-                                                    </a>
+                                                    </div>
                                                 </li>
                                                 <li className={Styles.list_item}>
-                                                    <a href="#" className={Styles.list_link}>
+                                                    <div className={Styles.list_link}>
                                                         여자
-                                                    </a>
+                                                    </div>
                                                 </li>
                                             </ul>
                                         </div>
@@ -3869,14 +3813,13 @@ class Sample extends Component {
                                     <em className={Styles.inpt_label}>
                                         학년 <em className={Styles.chk_point}>(필수)</em>
                                     </em>
-                                    <a
-                                        href="#"
+                                    <div
                                         className={`${Styles.select_link} ${
                                             Styles.imico_pop_select_arr_down
                                             }`}
                                     >
                                         학년을 선택하세요.
-                                    </a>
+                                    </div>
                                     {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
                                     {/* 툴팁 화살표 위치를 변경하려면 arr 요소에서 margin-left:0;left: 원하는 값 으로 style이 정의 되어야 합니다. */}
                                     <p className={Styles.error_dsc}>* 학년을 선택해주세요.</p>
@@ -3914,10 +3857,8 @@ class Sample extends Component {
                                 </div>
                             </div>
                             <div className={Styles.pop_btn_box}>
-                                <a href="#">이전</a>
-                                <a href="#" className={Styles.active}>
-                                    다음
-                                </a>
+                                <div>이전</div>
+                                <div className={Styles.active}>다음</div>
                             </div>
                         </section>
                     </section>
@@ -3954,9 +3895,7 @@ class Sample extends Component {
                                 이메일 주소를 인증해주세요.
                             </p>
                             <div className={Styles.pop_btn_box}>
-                                <a href="#" className={Styles.active}>
-                                    확인
-                                </a>
+                                <div className={Styles.active}>확인</div>
                             </div>
                         </section>
                     </section>
@@ -3989,9 +3928,7 @@ class Sample extends Component {
                                 회원가입이 완료되었습니다.
                             </strong>
                             <div className={Styles.pop_btn_box}>
-                                <a href="#" className={Styles.active}>
-                                    확인
-                                </a>
+                                <div className={Styles.active}>확인</div>
                             </div>
                         </section>
                     </section>
@@ -4120,14 +4057,12 @@ class Sample extends Component {
                                 </div>
                             </div>
                             <div className={Styles.pop_btn_box}>
-                                <a href="#" className={Styles.active}>
-                                    로그인
-                                </a>
+                                <div className={Styles.active}>로그인</div>
                             </div>
                         </section>
                         <div className={Styles.find_log}>
-                            <a href="#">아이디, 비밀번호 찾기</a>
-                            <a href="#">회원가입하기</a>
+                            <div>아이디, 비밀번호 찾기</div>
+                            <div>회원가입하기</div>
                         </div>
                     </section>
                 </div>
@@ -4244,7 +4179,7 @@ class Sample extends Component {
                                                 <input type="text" id="blue" name="blue" />
                                             </li>
                                         </ul>
-                                        <a href="#" className={`${Styles.btn_picker} ${Styles.imbtn_picker_off}`}>컬러피커 열기</a>
+                                        <div className={`${Styles.btn_picker} ${Styles.imbtn_picker_off}`}>컬러피커 열기</div>
                                     </div>
                                     <div className={Styles.color_graph}>
                                         <ul className={Styles.graph_list}>
@@ -4380,14 +4315,13 @@ class Sample extends Component {
                                                 <input type="text" id="blue" name="blue" disabled />
                                             </li>
                                         </ul>
-                                        <a
-                                            href="#"
+                                        <div
                                             className={`${Styles.btn_picker} ${
                                                 Styles.imbtn_picker
                                                 }`}
                                         >
                                             컬러피커 열기
-                                        </a>
+                                        </div>
                                     </div>
                                     <div className={Styles.color_graph}>
                                         <ul className={Styles.graph_list}>
@@ -4509,7 +4443,7 @@ class Sample extends Component {
                                                 <input type="text" id="blue" name="blue" disabled />
                                             </li>
                                         </ul>
-                                        <a href="#" className={`${Styles.btn_picker} ${Styles.imbtn_picker}`}>컬러피커 열기</a>
+                                        <div className={`${Styles.btn_picker} ${Styles.imbtn_picker}`}>컬러피커 열기</div>
                                     </div>
                                     <div className={Styles.color_graph}>
                                         <ul className={Styles.graph_list}>
@@ -4592,50 +4526,49 @@ class Sample extends Component {
                                         </div>
                                     </div>
                                     <div className={Styles.time_board}>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        <div className={Styles.btn_cnt}>
                                             7
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             8
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             9
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             4
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             5
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             6
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             1
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             2
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             3
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             -
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             0
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             .
-                                        </a>
-                                        <a
-                                            href="#"
+                                        </div>
+                                        <div
                                             className={`${Styles.btn_cnt} ${Styles.btn_del} ${
                                                 Styles.imico_pop_key_del
                                                 }`}
                                         >
                                             <span className={Styles.blind}> 지우기</span>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                                 {/* left 값 조절로 화살표 위치 잡을 수 있습니다. */}
@@ -4674,50 +4607,49 @@ class Sample extends Component {
                             >
                                 <div className={Styles.tooltip_inner}>
                                     <div className={Styles.time_board}>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        <div className={Styles.btn_cnt}>
                                             7
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             8
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             9
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             4
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             5
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             6
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             1
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             2
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             3
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             -
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             0
-                                        </a>
-                                        <a href="#" className={Styles.btn_cnt}>
+                                        </div>
+                                        <div className={Styles.btn_cnt}>
                                             .
-                                        </a>
-                                        <a
-                                            href="#"
+                                        </div>
+                                        <div
                                             className={`${Styles.btn_cnt} ${Styles.btn_del} ${
                                                 Styles.imico_pop_key_del
                                                 }`}
                                         >
                                             <span className={Styles.blind}> 지우기</span>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                                 {/* left 값 조절로 화살표 위치 잡을 수 있습니다. */}
@@ -4736,21 +4668,21 @@ class Sample extends Component {
                                         </div>
                                     </div>
                                     <div className={Styles.time_board}>
-                                        <a href="#" className={Styles.btn_cnt}>7</a>
-                                        <a href="#" className={Styles.btn_cnt}>8</a>
-                                        <a href="#" className={Styles.btn_cnt}>9</a>
-                                        <a href="#" className={Styles.btn_cnt}>4</a>
-                                        <a href="#" className={Styles.btn_cnt}>5</a>
-                                        <a href="#" className={Styles.btn_cnt}>6</a>
-                                        <a href="#" className={Styles.btn_cnt}>1</a>
-                                        <a href="#" className={Styles.btn_cnt}>2</a>
-                                        <a href="#" className={Styles.btn_cnt}>3</a>
-                                        <a href="#" className={Styles.btn_cnt}>-</a>
-                                        <a href="#" className={Styles.btn_cnt}>0</a>
-                                        <a href="#" className={Styles.btn_cnt}>.</a>
-                                        <a href="#" className={`${Styles.btn_cnt} ${Styles.btn_del} ${Styles.imico_pop_key_del}`}>
+                                        <div className={Styles.btn_cnt}>7</div>
+                                        <div className={Styles.btn_cnt}>8</div>
+                                        <div className={Styles.btn_cnt}>9</div>
+                                        <div className={Styles.btn_cnt}>4</div>
+                                        <div className={Styles.btn_cnt}>5</div>
+                                        <div className={Styles.btn_cnt}>6</div>
+                                        <div className={Styles.btn_cnt}>1</div>
+                                        <div className={Styles.btn_cnt}>2</div>
+                                        <div className={Styles.btn_cnt}>3</div>
+                                        <div className={Styles.btn_cnt}>-</div>
+                                        <div className={Styles.btn_cnt}>0</div>
+                                        <div className={Styles.btn_cnt}>.</div>
+                                        <div className={`${Styles.btn_cnt} ${Styles.btn_del} ${Styles.imico_pop_key_del}`}>
                                             <span className={Styles.blind}> 지우기</span>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                                 {/* left 값 조절로 화살표 위치 잡을 수 있습니다. */}
@@ -4775,21 +4707,21 @@ class Sample extends Component {
                             <div className={`${Styles.tooltip_box} ${Styles.pad_only}`} style={{ left: '1080px', top: '330px' }}>
                                 <div className={Styles.tooltip_inner}>
                                     <div className={Styles.time_board}>
-                                        <a href="#" className={Styles.btn_cnt}>7</a>
-                                        <a href="#" className={Styles.btn_cnt}>8</a>
-                                        <a href="#" className={Styles.btn_cnt}>9</a>
-                                        <a href="#" className={Styles.btn_cnt}>4</a>
-                                        <a href="#" className={Styles.btn_cnt}>5</a>
-                                        <a href="#" className={Styles.btn_cnt}>6</a>
-                                        <a href="#" className={Styles.btn_cnt}>1</a>
-                                        <a href="#" className={Styles.btn_cnt}>2</a>
-                                        <a href="#" className={Styles.btn_cnt}>3</a>
-                                        <a href="#" className={Styles.btn_cnt}>-</a>
-                                        <a href="#" className={Styles.btn_cnt}>0</a>
-                                        <a href="#" className={Styles.btn_cnt}>.</a>
-                                        <a href="#" className={`${Styles.btn_cnt} ${Styles.btn_del} ${Styles.imico_pop_key_del}`}>
+                                        <div className={Styles.btn_cnt}>7</div>
+                                        <div className={Styles.btn_cnt}>8</div>
+                                        <div className={Styles.btn_cnt}>9</div>
+                                        <div className={Styles.btn_cnt}>4</div>
+                                        <div className={Styles.btn_cnt}>5</div>
+                                        <div className={Styles.btn_cnt}>6</div>
+                                        <div className={Styles.btn_cnt}>1</div>
+                                        <div className={Styles.btn_cnt}>2</div>
+                                        <div className={Styles.btn_cnt}>3</div>
+                                        <div className={Styles.btn_cnt}>-</div>
+                                        <div className={Styles.btn_cnt}>0</div>
+                                        <div className={Styles.btn_cnt}>.</div>
+                                        <div href="#" className={`${Styles.btn_cnt} ${Styles.btn_del} ${Styles.imico_pop_key_del}`}>
                                             <span className={Styles.blind}> 지우기</span>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                                 {/* left 값 조절로 화살표 위치 잡을 수 있습니다. */}
@@ -4813,46 +4745,43 @@ class Sample extends Component {
                     <div className={Styles.section_navi}>
                         <ul className={Styles.list}>
                             <li className={Styles.on}>
-                                <a href="#">나의 작품</a>
+                                <div>나의 작품</div>
                             </li>
                             <li>
-                                <a href="#">관심 작품</a>
+                                <div>관심 작품</div>
                             </li>
 
                         </ul>
                         <div className={Styles.art_sel_area}>
                             <div className={`${Styles.pop_selectbox} ${Styles.on}`}>
-                                <a
-                                    href="#"
+                                <div
                                     className={`${Styles.select_link} ${
                                         Styles.imico_pop_select_arr_down
                                         }`}
                                     title="모든 작품"
                                 >
                                     모든 작품
-                                </a>
+                                </div>
                             </div>
                             <div className={Styles.pop_selectbox}>
-                                <a
-                                    href="#"
+                                <div
                                     className={`${Styles.select_link} ${
                                         Styles.imico_pop_select_arr_down
                                         }`}
                                     title="최신순"
                                 >
                                     최신순
-                                </a>
+                                </div>
                             </div>
                             <div className={Styles.pop_selectbox}>
-                                <a
-                                    href="#"
+                                <div
                                     className={`${Styles.select_link} ${
                                         Styles.imico_pop_select_arr_down
                                         }`}
                                     title="전체기간"
                                 >
                                     전체기간
-                                </a>
+                                </div>
                             </div>
                             <div className={Styles.srch_box}>
                                 <label htmlFor="srch">
@@ -5129,20 +5058,9 @@ class Sample extends Component {
                         </div>
                     </section>
                     <div className={Styles.pop_btn_box}>
-                        <a href="#">취소</a>
-                        <a href="#" className={Styles.active}>
-                            불러오기
-                        </a>
+                        <div>취소</div>
+                        <div className={Styles.active}>불러오기</div>
                     </div>
-
-
-
-
-
-
-
-
-
                 </div>
 
                 {/* 나의 작품 - 나의 작품 없을 때 */}
@@ -5159,46 +5077,43 @@ class Sample extends Component {
                     <div className={Styles.section_navi}>
                         <ul className={Styles.list}>
                             <li className={Styles.on}>
-                                <a href="#">나의 작품</a>
+                                <div>나의 작품</div>
                             </li>
                             <li>
-                                <a href="#">관심 작품</a>
+                                <div>관심 작품</div>
                             </li>
 
                         </ul>
                         <div className={Styles.art_sel_area}>
                             <div className={`${Styles.pop_selectbox} ${Styles.on}`}>
-                                <a
-                                    href="#"
+                                <div
                                     className={`${Styles.select_link} ${
                                         Styles.imico_pop_select_arr_down
                                         }`}
                                     title="모든 작품"
                                 >
                                     모든 작품
-                                </a>
+                                </div>
                             </div>
                             <div className={Styles.pop_selectbox}>
-                                <a
-                                    href="#"
+                                <div
                                     className={`${Styles.select_link} ${
                                         Styles.imico_pop_select_arr_down
                                         }`}
                                     title="최신순"
                                 >
                                     최신순
-                                </a>
+                                </div>
                             </div>
                             <div className={Styles.pop_selectbox}>
-                                <a
-                                    href="#"
+                                <div
                                     className={`${Styles.select_link} ${
                                         Styles.imico_pop_select_arr_down
                                         }`}
                                     title="전체기간"
                                 >
                                     전체기간
-                                </a>
+                                </div>
                             </div>
                             <div className={Styles.srch_box}>
                                 <label htmlFor="srch">
@@ -5224,9 +5139,7 @@ class Sample extends Component {
                                     지금 작품 만들기를 시작해보세요!
                                 </p>
                                 <div className={Styles.pop_btn_box}>
-                                    <a href="#" className={Styles.active}>
-                                        작품 만들기
-                                    </a>
+                                    <div className={Styles.active}>작품 만들기</div>
                                 </div>
                             </div>
                         </div>

@@ -57,6 +57,7 @@
         color: #2c313d;
         letter-spacing: 0;
         line-height: 15px;
+        cursor: pointer;
     }
     &.up .arr {
         bottom: auto;
@@ -177,6 +178,7 @@
         text-indent: -10px;
         width: 36px;
         height: 36px;
+        cursor: pointer;
     }
     .color_graph {
         float: left;
@@ -291,6 +293,7 @@
         letter-spacing: -0.6px;
         text-align: center;
         line-height: 19px;
+        cursor: pointer;
     }
     .time_board .btn_cnt:nth-child(3n) {
         margin-right: 0;
