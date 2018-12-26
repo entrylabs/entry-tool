@@ -59,9 +59,9 @@ class Input extends Component {
             const effect = this.props.effects[key];
             if (effect.apply) {
                 /* eslint-disable no-prototype-builtins */
-                if (effect.css.hasOwnProperty('textDecorationLine') && css.textDecorationLine) {
-                    css.textDecorationLine = `${css.textDecorationLine} ${
-                        effect.css.textDecorationLine
+                if (effect.css.hasOwnProperty('textDecoration') && css.textDecoration) {
+                    css.textDecoration = `${css.textDecoration} ${
+                        effect.css.textDecoration
                     }`;
                 } else {
                     css = { ...css, ...effect.css };
