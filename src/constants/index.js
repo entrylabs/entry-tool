@@ -164,7 +164,7 @@ export const DEFAULT_OPTIONS = {
                 text: 'Workspace.font_underline',
                 apply: false,
                 css: {
-                    textDecorationLine: 'underline',
+                    textDecoration: 'underline',
                 },
             },
             italic: {
@@ -178,7 +178,7 @@ export const DEFAULT_OPTIONS = {
                 text: 'Workspace.font_cancel',
                 apply: false,
                 css: {
-                    textDecorationLine: 'line-through',
+                    textDecoration: 'line-through',
                 },
             },
             color: {
