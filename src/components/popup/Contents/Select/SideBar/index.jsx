@@ -64,18 +64,21 @@ class Index extends Component {
     }
 
     drawListBox() {
-        const listBox = (
-            <React.Fragment>
-                <div id="popupList" className={Styles.list_area}>
-                    <ul className={Styles.obj_list}>{this.drawItems()}</ul>
-                </div>
-            </React.Fragment>
-        );
         if (this.props.type === 'sound') {
-            return <div className={Styles.sound_list_box}>{listBox}</div>;
+            return (
+                <div id="popupList" className={Styles.sound_list_box}>
+                    <div className={Styles.list_area}>
+                        <ul className={Styles.obj_list}>{this.drawItems()}</ul>
+                    </div>
+                </div>
+            );
         }
 
-        return listBox;
+        return (
+            <div id="popupList" className={Styles.list_area}>
+                <ul className={Styles.obj_list}>{this.drawItems()}</ul>
+            </div>
+        );
     }
 
     render() {
