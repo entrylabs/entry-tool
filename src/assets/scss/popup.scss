@@ -329,6 +329,7 @@
         .section_cont .cont_sel_box .select_list .select_item .sjt {
             display: block;
             overflow: hidden;
+            text-overflow: ellipsis;
             height: 30px;
             padding: 0 6px;
             background-color: #d6e9f4;
@@ -338,6 +339,7 @@
             text-align: center;
             letter-spacing: -0.3px;
             line-height: 32px;
+            white-space: nowrap;
         }
 
         .section_cont .cont_sel_box .obj_list li {
