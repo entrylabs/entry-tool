@@ -339,7 +339,7 @@ export const DEFAULT_OPTIONS = {
             },
         },
         expansion: {
-            title: 'Workspace.load_exapnsion_block',
+            title: 'Workspace.load_expansion_block',
             mainType: 'expansion',
         },
         projects: {
