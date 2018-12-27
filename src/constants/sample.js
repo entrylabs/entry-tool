@@ -1533,32 +1533,39 @@ export const SOUND_SAMPLE = {
 
 export const EXPANSION_SAMPLE = {
     data : [
-            {
-                    name: 'translate',
-                    imageName: 'papago.png',
-                    description: 'weatehr',
-                    title: {
-                        ko: '번역',
-                        en: 'translate',
-                    },
-            },
-            {
-                name: 'festival',
-                imageName: 'festival.png',
-                description: 'weatehr',
-                title: {
-                    ko: '행사',
-                    en: 'festival',
-                },
-            },
-            {
-                name: 'weather',
-                imageName: 'weather.png',
-                description: 'weatehr',
-                title: {
-                    ko: '날씨',
-                    en: 'weather',
-                },
-            },
+        {
+            'name': 'weather',
+            'imageName': 'weather.png',
+            'title': { 'ko': '날씨', 'en': 'weather', 'jp': '拡張ブロックを追加する' },
+            'titleKey': 'template.weather_title_text',
+            'description': '気温、降水量、PM10濃度など韓国の天気と関連したブロックをまとめたものです。',
+            'descriptionKey': 'Msgs.expansion_weather_description',
+            'nameByLang': 'weather',
+        },
+        {
+            'name': 'translate',
+            'imageName': 'papago.png',
+            'title': { 'ko': '번역', 'en': 'translate', 'jp': '翻訳' },
+            'titleKey': 'template.translate_title_text',
+            'description': 'Papagoを使って他の言語に翻訳できるブロックをまとめたものです。',
+            'descriptionKey': 'Msgs.expansion_translate_description',
+            'isInitialized': false,
+            'api': '/api/expansionBlock/papago/',
+            'typeMap': { 'dictionary': 'nsmt', 'artificial_intelligence': 'n2mt' },
+            'apiType': 'nsmt',
+            'nameByLang': 'translate',
+        },
+        {
+            'name': 'behaviorConductLifeSafety',
+            'imageName': 'firstaid.png',
+            'title': { 'ko': '생활안전', 'en': 'LifeSafety', 'jp': '生活安全' },
+            'titleKey': 'template.behaviorConductLifeSafety_title_text',
+            'description': '生活安全のため、国民が守らなければならない基本的な行動要領（国民安全処からの提供）',
+            'descriptionKey': 'Msgs.expansion_behaviorConductLifeSafety_description',
+            'isInitialized': false,
+            'api': '/api/expansionBlock/behaviorConduct',
+            'apiType': '03',
+            'nameByLang': 'LifeSafety',
+        },
     ]
 };
