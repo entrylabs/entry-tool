@@ -56,7 +56,7 @@ class Projects extends Component {
                     <div className={Styles.link}>
                         <div
                             className={Styles.thmb}
-                            style={{ backgroundImage: `url('${item.thumb}')` }}
+                            style={{ backgroundImage: `url('${CommonUtils.fixUrl(item.thumb)}')` }}
                         >
                             <div className={Styles.info_bar}>
                                 {`${Styles.view} ${Styles.imico_pop_info_view}`}
