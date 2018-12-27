@@ -24,6 +24,7 @@ export const CommonUtils = {
         return falseClassName;
     },
     fixUrl(url) {
+        /* eslint-disable no-useless-escape */
         const expUrl = /^[((http(s?))\:\/\/?)|/]/i;
         return expUrl.test(url) ? url : `/${url}`;
     },
