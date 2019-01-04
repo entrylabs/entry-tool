@@ -14,9 +14,12 @@ const TYPE_MAP = {
     sprite: {
         wrapClass: Styles.cont_sel_box,
         imageClass: Styles.thmb,
-        imageContent: (item) => (
-            <img src={CommonUtils.createImageUrl(item.pictures[0].filename)} alt="" />
-        ),
+        imageContent: (item) => {
+            const thumbNailUrl = item.pictures ? item.pictures[0].filename : item.filename;
+            return (
+                <img src={CommonUtils.createImageUrl(thumbNailUrl)} alt=""/>
+            );
+        },
     },
 };
 
