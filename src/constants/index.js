@@ -232,7 +232,7 @@ export const DEFAULT_OPTIONS = {
             mainType: 'sprite',
             navigations: {
                 select: {
-                    name: 'Workspace.select_library',
+                    name: 'Workspace.select_picture',
                 },
                 upload: {
                     name: 'Workspace.upload',
@@ -258,7 +258,7 @@ export const DEFAULT_OPTIONS = {
             mainType: 'sprite',
             navigations: {
                 select: {
-                    name: 'Workspace.select_library',
+                    name: 'Workspace.select_picture',
                 },
                 upload: {
                     name: 'Workspace.upload',
