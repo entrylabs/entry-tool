@@ -18,10 +18,11 @@ class Item extends Component {
         if (this.props.popupReducer.type && this.props.popupReducer.type === 'sound') {
             return <div className={`${Styles.thmb} ${Styles.imico_pop_sound_thmb}`}>&nbsp;</div>;
         }
+        const thumbNailUrl = this.props.item.pictures? this.props.item.pictures[0].filename : this.props.item.filename;
         return (
             <div className={Styles.thmb}>
                 <img
-                    src={CommonUtils.createImageUrl(this.props.item.pictures[0].filename)}
+                    src={CommonUtils.createImageUrl(thumbNailUrl)}
                     alt=""
                 />
             </div>
