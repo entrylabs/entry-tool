@@ -223,6 +223,7 @@
         // 오브젝트 선택 리스트
         .section_cont .list_area .obj_list {
             margin: -12px 0 0 -18px;
+            padding-bottom: 34px;
         }
         // 전체 선택 오브젝트 리스트
         .section_cont .cont_sel_box {
@@ -638,6 +639,7 @@
         }
         .section_cont .sound_list_box .obj_list {
             margin: -12px 0 0 -18px;
+            padding-bottom: 34px;
         }
         .section_cont .sound_list_box .obj_list li {
             background-color: inherit;
@@ -740,7 +742,7 @@
             overflow: auto;
         }
         .caution + .sound_type {
-            padding: 0 38px 23px;
+            padding: 0 38px 34px;
         }
         .list_area + .img_caution_box {
             margin-top: 0;
@@ -897,6 +899,7 @@
         .section_cont .list {
             overflow: hidden;
             margin: -18px 0 0 -18px;
+            padding-bottom: 34px;
         }
         .section_cont .list li {
             float: left;
