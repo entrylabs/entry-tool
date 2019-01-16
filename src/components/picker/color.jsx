@@ -154,6 +154,7 @@ class ColorPicker extends Component {
             isTransparent: false,
         };
         if (color) {
+            state.originColor = color;
             Object.assign(state, getColorByHex(color));
             if (onChangeColorPicker) {
                 onChangeColorPicker(state.color);
@@ -161,6 +162,19 @@ class ColorPicker extends Component {
         }
         Object.assign(state, this.getDefaultColorPickerStyle());
         this.state = state;
+    }
+
+    static getDerivedStateFromProps({ color }, { originColor }) {
+        if (color !== originColor) {
+            return Object.assign(
+                {
+                    originColor: color,
+                },
+                getColorByHex(color)
+            );
+        }
+
+        return null;
     }
 
     getGradientBackground(type) {
