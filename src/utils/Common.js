@@ -5,7 +5,7 @@ import get from 'lodash/get';
 
 export const CommonUtils = {
     getLangType: () => {
-        return cookies.load('lang');
+        return root.Lang.type;
     },
     getLang: (key = '') => {
         const lang = root.Lang || {};
@@ -28,8 +28,8 @@ export const CommonUtils = {
         const expUrl = /^[((http(s?))\:\/\/?)|/]/i;
         return expUrl.test(url) ? url : `/${url}`;
     },
-    createImageUrl: (id) => {
-        return `/uploads/${id.substring(0, 2)}/${id.substring(2, 4)}/thumb/${id}.png`;
+    createImageUrl: (id, baseUrl = '') => {
+        return `${baseUrl}/uploads/${id.substring(0, 2)}/${id.substring(2, 4)}/thumb/${id}.png`;
     },
     remove: (array, callback) => {
         const arr = [...array];

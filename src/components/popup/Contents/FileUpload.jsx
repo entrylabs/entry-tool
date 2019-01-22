@@ -23,7 +23,7 @@ class Item extends Component {
                 <img
                     src={
                         this.props.item.fileurl ||
-                        CommonUtils.createImageUrl(this.props.item.filename)
+                        CommonUtils.createImageUrl(this.props.item.filename, this.props.reducer.baseUrl)
                     }
                     alt=""
                 />
@@ -144,6 +144,15 @@ class FileUpload extends Component {
             'Content-Type': undefined, // important
             'csrf-token': csrf,
         };
+
+        if (this.props.isOffline) {
+            this.props.triggerEvent(
+                'dummyUploads',
+                formData,
+                false,
+            );
+            return;
+        }
 
         if (check.file > 0) {
             this.props.uploadItem(this.props.popupReducer.type, formData, headers);

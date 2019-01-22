@@ -41,7 +41,10 @@ class Sprite extends Component {
         window.history.pushState({}, 'popup');
     }
     componentWillMount() {
-        this.props.initState({ type: this.options.mainType });
+        this.props.initState({
+            type: this.options.mainType,
+            baseUrl: this.props.baseUrl,
+        });
     }
     componentWillUnmount() {
         window.removeEventListener('onpopstate', this.close, false);
@@ -64,6 +67,7 @@ class Sprite extends Component {
             onClicked: this.onNavigationClicked,
         };
         const imageBaseUrl = this.props.imageBaseUrl || "/lib/entry-js/images/hardware/";
+        const isOffline = this.props.isOffline;
         const defaultNavigation = <Navigation {...navSettings} />;
         const contents = {
             select: {
@@ -85,7 +89,10 @@ class Sprite extends Component {
                 ),
             },
             upload: {
-                view: <FileUpload options={this.options.opt} />,
+                view: <FileUpload
+                    options={this.options.opt}
+                    isOffline={isOffline}
+                />,
             },
             draw: {
                 view: <Draw />,
