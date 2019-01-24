@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import range from 'lodash/range';
 import _includes from 'lodash/includes';
 import Styles from '@assets/scss/popup.scss';
-import { uploadItem } from '@actions/popup';
+import { uploadItem, updateUploads } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
 import { triggerEvent } from '@actions';
 
@@ -61,6 +61,15 @@ class FileUpload extends Component {
         this.checkFIleType = this.checkFIleType.bind(this);
         this.onItemClick = this.onItemClick.bind(this);
         this.onApplyItemClicked = this.onApplyItemClicked.bind(this);
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const { uploads = [], updateUploads } = this.props;
+        const beforeUpload = prevProps.uploads || [];
+
+        if (beforeUpload.length !== uploads.length) {
+            updateUploads(this.props.popupReducer.type, uploads);
+        }
     }
 
     isValidFiles(files) {
@@ -148,7 +157,10 @@ class FileUpload extends Component {
         if (this.props.isOffline) {
             this.props.triggerEvent(
                 'dummyUploads',
-                formData,
+                {
+                    formData,
+                    objectData,
+                },
                 false,
             );
             return;
@@ -356,6 +368,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     triggerEvent: (event, data, hidden) => dispatch(triggerEvent(event, data, hidden)),
     uploadItem: (type, formData, header) => dispatch(uploadItem(type, formData, header)),
+    updateUploads: (type, data) => dispatch(updateUploads(type, data)),
 });
 
 export default connect(

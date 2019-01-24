@@ -91,6 +91,7 @@ class Sprite extends Component {
             upload: {
                 view: <FileUpload
                     options={this.options.opt}
+                    uploads={this.props.data.uploads}
                     isOffline={isOffline}
                 />,
             },
