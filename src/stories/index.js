@@ -10,6 +10,7 @@ import Number from '../components/widget/number';
 import Dropdown from '../components/widget/dropdown';
 import ModalProgress from '../components/widget/modalProgress';
 import Angle from '../components/widget/angle';
+import Backpack from '../components/widget/Backpack';
 import Sortable from '../components/widget/sortable';
 import ContextMenu from '../components/widget/contextMenu';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
@@ -51,6 +52,13 @@ const wigetStories = storiesOf('Widget', module);
 wigetStories.addDecorator(withKnobs);
 wigetStories.addDecorator((story) => <Provider story={story()} />);
 wigetStories
+    .add('백팩', () => (
+        <Backpack
+            onButtonPressed={action('onButtonPressed')}
+            onBackButtonPressed={action('onBackButtonPressed')}
+            onOutsideClick={action('onOutsideClick')}
+        />
+    ))
     .add('숫자', () => (
         <Number
             onButtonPressed={action('onButtonPressed')}
@@ -69,17 +77,7 @@ wigetStories
     .add('컬러피커', () => <ColorPicker color="#FF0000" onChangeColorPicker={action} />)
     .add('드롭다운', () => (
         <Dropdown
-            items={[
-                [1, 1],
-                [2, 2],
-                [3, 3],
-                [4, 4],
-                [5, 5],
-                [6, 6],
-                [7, 7],
-                [8, 8],
-                [9, 9],
-            ]}
+            items={[[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9]]}
         />
     ))
     .add('로딩바', () => (
