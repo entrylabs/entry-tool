@@ -1,3 +1,4 @@
+import withWrapper from '@hoc/withWrapper';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { onChangeColorPicker } from '../../actions/picker';
@@ -17,9 +18,13 @@ const mapDispatchToProps = (dispatch) => ({
     onChangeColorPicker: (visible) => dispatch(onChangeColorPicker(visible)),
 });
 
-export default connect(
-    undefined,
-    mapDispatchToProps
-)(ColorPickerContainer);
+export default withWrapper({
+    type: 'picker',
+})(
+    connect(
+        undefined,
+        mapDispatchToProps
+    )(ColorPickerContainer)
+);
 // mapStateToProps,
 // mapDispatchToProps

@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { CommonUtils } from '../utils/Common';
 
 export const UI_SELECT = 'UI_SELECT';
@@ -66,22 +66,22 @@ export const initState = (data) => (dispatch) => {
 export function uploadItem(type, formData, header) {
     const httpOption = { ...uploadOptions[type], data: formData, header };
     return (dispatch) => {
-        axios(httpOption)
-            .then((response) =>
-                dispatch({
-                    type: UPLOAD_ITEM,
-                    data: {
-                        data: httpOption.successCallback(response),
-                        objType: type,
-                    },
-                })
-            )
-            .catch((response) =>
-                dispatch({
-                    type: API_FAIL,
-                    error: response.error,
-                })
-            );
+        // axios(httpOption)
+        //     .then((response) =>
+        //         dispatch({
+        //             type: UPLOAD_ITEM,
+        //             data: {
+        //                 data: httpOption.successCallback(response),
+        //                 objType: type,
+        //             },
+        //         })
+        //     )
+        //     .catch((response) =>
+        //         dispatch({
+        //             type: API_FAIL,
+        //             error: response.error,
+        //         })
+        //     );
     };
 }
 

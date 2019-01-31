@@ -1,12 +1,34 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import postcss from 'rollup-plugin-postcss';
+import json from 'rollup-plugin-json';
 import babel from 'rollup-plugin-babel';
+import clear from 'rollup-plugin-clear';
+import url from '@entrylabs/postcss-url';
 import { terser } from 'rollup-plugin-terser';
 
 const plugins = [
-    postcss(),
+    clear({
+        targets: ['component', 'dist'],
+    }),
+    postcss({
+        modules: true,
+        extract: true,
+        plugins: [
+            url({
+                url: 'inline',
+                maxSize: 14,
+                fallback: 'copy',
+                optimizeSvgEncode: true,
+                copyPath: './dist/image',
+                assetsPath: './image',
+                useHash: true,
+            }),
+        ],
+    }),
+    json(),
     resolve({
+        preferBuiltins: true,
         extensions: ['.mjs', '.js', '.jsx', '.json'],
     }),
     commonjs({
@@ -18,6 +40,7 @@ const plugins = [
                 'createElement',
                 'createFactory',
             ],
+            'node_modules/lodash/lodash.js': ['debounce'],
             'node_modules/chroma-js/chroma.js': ['isValidElementType'],
         },
     }),
@@ -35,6 +58,7 @@ const plugins = [
                 {
                     root: ['./'],
                     alias: {
+                        '@hoc': './src/hoc',
                         '@actions': './src/actions',
                         '@assets': './src/assets',
                         '@components': './src/components',
@@ -58,7 +82,7 @@ const plugins = [
         ],
         exclude: 'node_modules/**',
     }),
-    terser(),
+    // terser(),
 ];
 
 export default [
@@ -75,14 +99,13 @@ export default [
         },
     },
     {
-        input: 'src/index.js',
+        input: 'src/index.jsx',
         plugins,
         output: {
-            file: './component/index2.js',
+            file: './dist/entry-tool.js',
             format: 'es',
             freeze: false,
             exports: 'named', // "named", "default"
-            name: 'EntryTool', // if format is "umd" or "iife"
             interop: false,
             sourcemap: true,
         },

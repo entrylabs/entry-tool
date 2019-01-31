@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'react-custom-scroll/dist/customScroll.css';
+import '../../assets/scss/scroll.scss';
 let CustomScroll = null;
 if (typeof window !== 'undefined') {
     CustomScroll = require('react-custom-scroll');

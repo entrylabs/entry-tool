@@ -3,6 +3,7 @@
         "target": "ES6",
         "baseUrl": "./",
         "paths": {
+            "@hoc/*": ["src/hoc/*"],
             "@actions/*": ["src/actions/*"],
             "@actions/scss/*": ["src/actions/scss/*"],
             "@assets/*": ["src/assets/*"],
