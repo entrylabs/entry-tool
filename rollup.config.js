@@ -70,10 +70,11 @@ const plugins = [
             ],
         ],
         presets: [
-            '@babel/react',
+            ['@babel/react', { modules: false }],
             [
                 '@babel/env',
                 {
+                    modules: false,
                     targets: {
                         browsers: ['>0.25%', 'ie >= 11'],
                     },
@@ -82,7 +83,7 @@ const plugins = [
         ],
         exclude: 'node_modules/**',
     }),
-    // terser(),
+    terser(),
 ];
 
 export default [
@@ -103,7 +104,8 @@ export default [
         plugins,
         output: {
             file: './dist/entry-tool.js',
-            format: 'es',
+            format: 'umd',
+            name: 'EntryTool',
             freeze: false,
             exports: 'named', // "named", "default"
             interop: false,

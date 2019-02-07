@@ -1,5 +1,5 @@
-import withWrapper from '@hoc/withWrapper';
 import React, { Component } from 'react';
+import withWrapper from '@hoc/withWrapper';
 import { connect } from 'react-redux';
 import { onChangeColorPicker } from '../../actions/picker';
 import ColorPicker from './color';

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import withWrapper from '@hoc/withWrapper';
 import { connect } from 'react-redux';
 import Dropdown from './dropdown';
 import { onSelectDropdown } from '@actions/widget';
@@ -12,7 +13,11 @@ const mapDispatchToProps = (dispatch) => ({
     onSelectDropdown: (visible) => dispatch(onSelectDropdown(visible)),
 });
 
-export default connect(
-    undefined,
-    mapDispatchToProps
-)(ColorPickerContainer);
+export default withWrapper({
+    type: 'widget',
+})(
+    connect(
+        undefined,
+        mapDispatchToProps
+    )(ColorPickerContainer)
+);
