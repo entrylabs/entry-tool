@@ -14,10 +14,10 @@ const TYPE_MAP = {
     sprite: {
         wrapClass: Styles.cont_sel_box,
         imageClass: Styles.thmb,
-        imageContent: (item) => {
+        imageContent: (item, baseUrl) => {
             const thumbNailUrl = item.pictures ? item.pictures[0].filename : item.filename;
             return (
-                <img src={CommonUtils.createImageUrl(thumbNailUrl)} alt=""/>
+                <img src={CommonUtils.createImageUrl(thumbNailUrl, baseUrl)} alt=""/>
             );
         },
     },
@@ -25,13 +25,13 @@ const TYPE_MAP = {
 
 class CustomSlide extends Component {
     render() {
-        const { item, type, ...props } = this.props;
+        const { item, type, url, ...props } = this.props;
         const lang = CommonUtils.getLangType();
         const defaultName = item.label.en ? item.label.en : item.name;
         const name = item.label && item.label[lang] ? item.label[lang] : defaultName;
         return (
             <div className={Styles.select_item} {...props}>
-                <div className={TYPE_MAP[type].imageClass}>{TYPE_MAP[type].imageContent(item)}</div>
+                <div className={TYPE_MAP[type].imageClass}>{TYPE_MAP[type].imageContent(item, url)}</div>
                 <em className={Styles.sjt}>
                     {name}
                 </em>

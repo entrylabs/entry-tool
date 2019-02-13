@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import range from 'lodash/range';
 import _includes from 'lodash/includes';
 import Styles from '@assets/scss/popup.scss';
-import { uploadItem } from '@actions/popup';
+import { uploadItem, updateUploads } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
 import { triggerEvent } from '@actions';
 
@@ -23,7 +23,7 @@ class Item extends Component {
                 <img
                     src={
                         this.props.item.fileurl ||
-                        CommonUtils.createImageUrl(this.props.item.filename)
+                        CommonUtils.createImageUrl(this.props.item.filename, this.props.reducer.baseUrl)
                     }
                     alt=""
                 />
@@ -61,6 +61,15 @@ class FileUpload extends Component {
         this.checkFIleType = this.checkFIleType.bind(this);
         this.onItemClick = this.onItemClick.bind(this);
         this.onApplyItemClicked = this.onApplyItemClicked.bind(this);
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const { uploads = [], updateUploads } = this.props;
+        const beforeUpload = prevProps.uploads || [];
+
+        if (beforeUpload.length !== uploads.length) {
+            updateUploads(this.props.popupReducer.type, uploads);
+        }
     }
 
     isValidFiles(files) {
@@ -144,6 +153,18 @@ class FileUpload extends Component {
             'Content-Type': undefined, // important
             'csrf-token': csrf,
         };
+
+        if (this.props.isOffline) {
+            this.props.triggerEvent(
+                'dummyUploads',
+                {
+                    formData,
+                    objectData,
+                },
+                false,
+            );
+            return;
+        }
 
         if (check.file > 0) {
             this.props.uploadItem(this.props.popupReducer.type, formData, headers);
@@ -347,6 +368,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     triggerEvent: (event, data, hidden) => dispatch(triggerEvent(event, data, hidden)),
     uploadItem: (type, formData, header) => dispatch(uploadItem(type, formData, header)),
+    updateUploads: (type, data) => dispatch(updateUploads(type, data)),
 });
 
 export default connect(
