@@ -63,12 +63,16 @@ class FileUpload extends Component {
         this.onApplyItemClicked = this.onApplyItemClicked.bind(this);
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps) {
         const { uploads = [], updateUploads } = this.props;
         const beforeUpload = prevProps.uploads || [];
+        const updatedUploads = uploads
+            .filter((afterItem) => !beforeUpload.find((beforeItem) => afterItem._id === beforeItem._id));
 
         if (beforeUpload.length !== uploads.length) {
             updateUploads(this.props.popupReducer.type, uploads);
+        } else if (updatedUploads.length > 0) {
+            updateUploads(this.props.popupReducer.type, updatedUploads);
         }
     }
 
