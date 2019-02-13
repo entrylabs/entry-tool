@@ -1,5 +1,4 @@
 import root from 'window-or-global';
-import cookies from 'react-cookies';
 import { DEFAULT_OPTIONS } from '../constants/index';
 import get from 'lodash/get';
 
