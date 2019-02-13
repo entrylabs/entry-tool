@@ -19,10 +19,11 @@ class Item extends Component {
             return <div className={`${Styles.thmb} ${Styles.imico_pop_sound_thmb}`}>&nbsp;</div>;
         }
         const thumbNailUrl = this.props.item.pictures ? this.props.item.pictures[0].filename : this.props.item.filename;
+        const baseUrl = this.props.popupReducer.baseUrl;
         return (
             <div className={Styles.thmb}>
                 <img
-                    src={CommonUtils.createImageUrl(thumbNailUrl)}
+                    src={CommonUtils.createImageUrl(thumbNailUrl, baseUrl)}
                     alt=""
                 />
             </div>
