@@ -63,6 +63,16 @@ export const initState = (data) => (dispatch) => {
     });
 };
 
+export const updateUploads = (type, data)  => (dispatch) => {
+    dispatch({
+        data : {
+            type,
+            data,
+        },
+        type: UPLOAD_ITEM,
+    });
+};
+
 export function uploadItem(type, formData, header) {
     const httpOption = { ...uploadOptions[type], data: formData, header };
     return (dispatch) => {
