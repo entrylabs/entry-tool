@@ -323,6 +323,7 @@
             content: '';
         }
         .section_cont .cont_sel_box .select_list .select_item .thmb img {
+            max-width: 96px;
             max-height: 81.8181%;
             vertical-align: middle;
             margin-left: -1px;
@@ -375,6 +376,7 @@
             height: 90px;
         }
         .section_cont .cont_sel_box .obj_list .thmb img {
+            max-width: 96px;
             max-height: 81.8181%;
         }
         .section_cont .cont_sel_box .obj_list a {
@@ -843,6 +845,7 @@
         content: '';
     }
     .extend_content .extend_block .list .thmb img {
+        max-width: 96px;
         max-height: 100%;
         margin-left: -1px;
         vertical-align: middle;
