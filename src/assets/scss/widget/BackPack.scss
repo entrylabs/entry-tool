@@ -1,0 +1,149 @@
+@charset "UTF-8";
+@import '../colors';
+
+.BackPack {
+    width: 135px;
+    height: 100%;
+    border-left: 1px solid $coolgray300;
+    background-color: $coolgray200;
+
+    * {
+        box-sizing: content-box;
+    }
+
+    .titleArea {
+        cursor: pointer;
+        height: 43px;
+        line-height: 43px;
+        border-bottom: 1px solid $coolgray300;
+        user-select: none;
+        .icon {
+            display: inline-block;
+            background-image: url(../../images/back_pack_button.svg);
+            background-repeat: no-repeat;
+            background-size: 32px auto;
+            background-position: 50% 50%;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            margin: 6px 6px 0 9px;
+            vertical-align: top;
+        }
+        .title {
+            display: inline-block;
+            width: 67px;
+            height: 15px;
+            font-family: NanumGothicOTF;
+            font-size: 14px;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: -0.6px;
+            color: $coolgray700;
+        }
+    }
+
+    .itemArea {
+        display: flex;
+        padding-top: 16px;
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        .item {
+            &.active {
+                border-color: $lightish-blue;
+                background-color: $lightish-blue;
+                .imageWrapper {
+                    width: 86px;
+                    height: 76px;
+                    margin: 1px 1px 0;
+                    border-top-left-radius: 6px;
+                    border-top-right-radius: 6px;
+                }
+                .closeButton {
+                    display: block;
+                }
+            }
+            position: relative;
+            width: 88px;
+            height: 106px;
+            margin: 0 0 8px 16px;
+            border: 1px solid $coolgray300;
+            border-radius: 8px;
+            background-color: $coolgray300;
+            cursor: pointer;
+            .closeButton {
+                display: none;
+                width: 24px;
+                height: 24px;
+                position: absolute;
+                background: url(../../images/btn_pop_chk_del.svg);
+                top: 6px;
+                right: 6px;
+            }
+            .imageWrapper {
+                width: 88px;
+                height: 77px;
+                border-top-left-radius: 7px;
+                border-top-right-radius: 7px;
+                background-color: $white;
+                .image {
+                    width: 78px;
+                    height: 67px;
+                    margin: 5px;
+                    position: absolute;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
+            }
+            .input {
+                width: 72px;
+                height: 22px;
+                margin: 3px;
+                border: 1px solid $warmgray300;
+                border-radius: 4px;
+                padding: 0 4px;
+                background-color: $white;
+
+                font-family: NanumGothic;
+                font-size: 10px;
+                font-weight: bold;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: -0.4px;
+                color: #2c313d;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+        }
+    }
+
+    .loading {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        // text-align: center;
+
+        font-family: NanumGothic;
+        font-size: 12px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: -0.1px;
+        color: #2c313d;
+
+        .image {
+            width: 60px;
+            height: 60px;
+            background: url(../../images/loading.gif);
+            background-size: cover;
+        }
+    }
+}

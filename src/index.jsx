@@ -1,8 +1,7 @@
-import ColorPicker from './components/picker/colorContainer';
-import Sortable from './components/widget/sortableContainer';
-import Dropdown from './components/widget/dropdownContainer';
-import Angle from './components/widget/angleContainer';
-import Number from './components/widget/numberContainer';
-import ContextMenu from './components/widget/contextMenuContainer';
-
-export { ColorPicker, Sortable, Dropdown, Angle, Number, ContextMenu };
+export { default as ColorPicker } from './components/picker/colorContainer';
+export { default as Sortable } from './components/widget/sortableContainer';
+export { default as Dropdown } from './components/widget/dropdownContainer';
+export { default as Angle } from './components/widget/angleContainer';
+export { default as Number } from './components/widget/numberContainer';
+export { default as ContextMenu } from './components/widget/contextMenuContainer';
+export { default as BackPack } from './components/widget/BackPackContainer';

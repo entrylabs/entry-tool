@@ -34,8 +34,12 @@ class OutsideClick extends Component {
         }
     };
     render() {
-        const { children } = this.props;
-        return <div ref={(dom) => (this.outsideWrapper = dom)}>{children}</div>;
+        const { children, className, style } = this.props;
+        return (
+            <div ref={(dom) => (this.outsideWrapper = dom)} className={className} style={style}>
+                {children}
+            </div>
+        );
     }
 }
 export default OutsideClick;

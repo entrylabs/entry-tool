@@ -74,7 +74,7 @@ const withWrapper = (option) => (WrappedComponent) => {
         getData(key) {
             const state = this.store.getState();
             const reducer = state[`${option.type}Reducer`];
-            return reducer[key] || reducer;
+            return reducer[key] === undefined ? reducer : reducer[key];
         }
 
         get isShow() {

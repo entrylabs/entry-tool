@@ -5,12 +5,14 @@ import json from 'rollup-plugin-json';
 import babel from 'rollup-plugin-babel';
 import clear from 'rollup-plugin-clear';
 import url from '@entrylabs/postcss-url';
+import builtins from 'rollup-plugin-node-builtins';
 import { terser } from 'rollup-plugin-terser';
 
 const plugins = [
     clear({
         targets: ['component', 'dist'],
     }),
+    builtins(),
     postcss({
         modules: true,
         extract: true,
@@ -42,6 +44,7 @@ const plugins = [
             ],
             'node_modules/lodash/lodash.js': ['debounce'],
             'node_modules/chroma-js/chroma.js': ['isValidElementType'],
+            'node_modules/react-is/index.js': ['isValidElementType'],
         },
     }),
     babel({

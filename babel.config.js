@@ -24,7 +24,6 @@ module.exports = function(api) {
             ],
         ],
         presets: [
-            '@babel/react',
             [
                 '@babel/env',
                 {
@@ -33,6 +32,7 @@ module.exports = function(api) {
                     },
                 },
             ],
+            '@babel/react',
         ],
     };
 };
