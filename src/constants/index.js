@@ -227,7 +227,7 @@ export const DEFAULT_OPTIONS = {
             },
             sidebar: SPRITE_SIDEBAR,
         },
-        shape: {
+        picture: {
             title: 'Workspace.picture_add',
             mainType: 'sprite',
             navigations: {
