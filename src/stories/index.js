@@ -38,7 +38,7 @@ storiesOf('Popup', module)
     .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE} />)
     .add('오브젝트추가하기', () => <Popup type="sprite" data={SPRITE_SAMPLE} />)
     .add('모양추가', () => <Popup type="shape" data={SPRITE_SAMPLE} />)
-    .add('모양 가져오기', () => <Popup type="getShape" data={SPRITE_SAMPLE} />)
+    .add('모양 가져오기', () => <Popup type="paint" data={SPRITE_SAMPLE} />)
     .add('나의 작품', () => <Popup type="projects" data={PROJECTS_SAMPLE} />)
     .add('gnb', () => <CommonGnb />);
 

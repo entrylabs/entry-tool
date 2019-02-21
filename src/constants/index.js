@@ -253,7 +253,7 @@ export const DEFAULT_OPTIONS = {
             },
             sidebar: SPRITE_SIDEBAR,
         },
-        getShape: {
+        paint: {
             title: 'Menus.picture_import',
             mainType: 'sprite',
             navigations: {
