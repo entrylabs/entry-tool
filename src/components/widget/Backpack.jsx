@@ -27,6 +27,11 @@ class BackPack extends Component {
         } else if (!value) {
             target.value = defaultValue;
         }
+        this.setState(
+            produce((draft) => {
+                draft.selectedId = '-1';
+            })
+        );
     };
 
     handleItemSelect = (id) => {
@@ -45,12 +50,34 @@ class BackPack extends Component {
     };
 
     handleDragStart(e, { _id, type }) {
-        // console.log(e, item);
-        // e.dataTransfer.setData('type', type);
         e.dataTransfer.setData('text', _id);
         const { onChangeDragType } = this.props;
         if (onChangeDragType) {
             onChangeDragType(type);
+        }
+    }
+
+    handlePreventDefault(e) {
+        e.preventDefault();
+        return false;
+    }
+
+    handleDropItem = (e) => {
+        console.log(e);
+        console.log('asd');
+    };
+
+    handleDragState = (state) => {
+        this.setState(
+            produce((draft) => {
+                draft.isDragEnter = state;
+            })
+        );
+    };
+
+    handleKeyup(e) {
+        if (e.keyCode === 13) {
+            e.target.blur();
         }
     }
 
@@ -73,12 +100,7 @@ class BackPack extends Component {
                     }}
                 >
                     <div className={Styles.imageWrapper}>
-                        <div
-                            className={Styles.image}
-                            style={{
-                                backgroundImage: `url(${imgPath})`,
-                            }}
-                        />
+                        <embed src={imgPath} className={Styles.image} />
                     </div>
                     <button
                         className={Styles.closeButton}
@@ -90,6 +112,8 @@ class BackPack extends Component {
                         <input
                             className={Styles.input}
                             defaultValue={title}
+                            onDrop={this.handlePreventDefault}
+                            onKeyUp={this.handleKeyup}
                             onBlur={({ target }) => {
                                 this.handleUpdateTitle(_id, target, title);
                             }}
@@ -111,6 +135,8 @@ class BackPack extends Component {
 
     render() {
         const { onClose = () => {}, isLoading = true } = this.props;
+        const { isDragEnter = false } = this.state;
+        console.log(isDragEnter);
         return (
             // <OutsideClick
             //     outsideExcludeDom={outsideExcludeDom}
@@ -127,9 +153,24 @@ class BackPack extends Component {
                 </div>
                 {isLoading && this.makeLoadingView()}
                 {!isLoading && (
-                    <div className={Styles.itemArea}>
+                    <div
+                        className={Styles.itemArea}
+                        onDragEnter={() => {
+                            this.handleDragState(true);
+                        }}
+                    >
                         <Scrollbars flex="1">{this.makeItemList()}</Scrollbars>
                     </div>
+                )}
+                {isDragEnter && (
+                    <div
+                        className={Styles.dragArea}
+                        onDrop={this.handleDropItem}
+                        onDragOver={this.handlePreventDefault}
+                        onDragLeave={() => {
+                            this.handleDragState(false);
+                        }}
+                    />
                 )}
             </div>
             // </OutsideClick>

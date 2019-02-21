@@ -55,8 +55,8 @@
                 border-color: $lightish-blue;
                 background-color: $lightish-blue;
                 .imageWrapper {
-                    width: 86px;
-                    height: 76px;
+                    width: 76px;
+                    height: 66px;
                     margin: 1px 1px 0;
                     border-top-left-radius: 6px;
                     border-top-right-radius: 6px;
@@ -83,19 +83,23 @@
                 right: 6px;
             }
             .imageWrapper {
-                width: 88px;
-                height: 77px;
+                display: flex;
+                justify-content: center;
+                padding: 5px;
+                width: 78px;
+                height: 67px;
                 border-top-left-radius: 7px;
                 border-top-right-radius: 7px;
                 background-color: $white;
                 .image {
-                    width: 78px;
+                    max-width: 78px;
                     height: 67px;
-                    margin: 5px;
+                    // margin: 5px;
                     position: absolute;
                     background-size: contain;
                     background-repeat: no-repeat;
                     background-position: center;
+                    pointer-events: none;
                 }
             }
             .input {
@@ -145,5 +149,15 @@
             background: url(../../images/loading.gif);
             background-size: cover;
         }
+    }
+
+    .dragArea {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        border: 2px dashed #ffc800;
+        background-color: rgba(248, 241, 204, 0.9);
     }
 }
