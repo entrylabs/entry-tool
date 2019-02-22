@@ -10,19 +10,12 @@ import { triggerEvent } from '@actions';
 import { setUIParam } from '@actions/popup';
 import { EMIT_TYPES } from '@constants';
 
-const availableTypes = [
-    'picture',
-    'sprite',
-    'paint',
-    'sound',
-];
-
 class Index extends Component {
     constructor(props) {
         super(props);
         const isEmpty = this.props.data.data.length === 0;
         this.props.setUIParam(this.options);
-        if (isEmpty && availableTypes.includes(this.props.type)) {
+        if (isEmpty) {
             this.props.triggerEvent(EMIT_TYPES.fetch, this.options, false);
         }
         this.drawItems = this.drawItems.bind(this);
