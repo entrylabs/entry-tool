@@ -18,7 +18,7 @@ class Index extends Component {
         this.getMenus = this.getMenus.bind(this);
 
         const initOpt = {
-            type: this.props.popupReducer.type,
+            type: this.props.type,
             sidebar: Object.keys(this.props.sidebar)[0],
             subMenu: 'all',
         };
@@ -48,7 +48,7 @@ class Index extends Component {
 
     drawItems() {
         return this.props.data.data.map((item) => (
-            <Item key={item._id} item={item} multiSelect={this.props.multiSelect} />
+            <Item key={item._id} item={item} multiSelect={this.props.multiSelect} type={this.props.type}/>
         ));
     }
 
@@ -88,9 +88,9 @@ class Index extends Component {
                     <h2 className={Styles.blind}>오브젝트 선택</h2>
                     <SideBar type={this.props.type} sidebar={this.props.sidebar} />
                     <div className={Styles.section_cont}>
-                        <SubMenu menus={this.getMenus()} />
+                        <SubMenu type={this.props.type} menus={this.getMenus()} />
                         {this.drawListBox()}
-                        {this.props.multiSelect && <Selected />}
+                        {this.props.multiSelect && <Selected type={this.props.type}/>}
                     </div>
                 </div>
                 <Foot />

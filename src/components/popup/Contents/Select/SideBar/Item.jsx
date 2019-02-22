@@ -15,7 +15,7 @@ class Item extends Component {
     }
 
     drawImage() {
-        if (this.props.popupReducer.type && this.props.popupReducer.type === 'sound') {
+        if (this.props.type && this.props.type === 'sound') {
             return <div className={`${Styles.thmb} ${Styles.imico_pop_sound_thmb}`}>&nbsp;</div>;
         }
         const thumbNailUrl = this.props.item.pictures ? this.props.item.pictures[0].filename : this.props.item.filename;

@@ -70,9 +70,9 @@ class FileUpload extends Component {
             .filter((afterItem) => !beforeUpload.find((beforeItem) => afterItem._id === beforeItem._id));
 
         if (beforeUpload.length !== uploads.length) {
-            updateUploads(this.props.popupReducer.type, uploads);
+            updateUploads(this.props.type, uploads);
         } else if (updatedUploads.length > 0) {
-            updateUploads(this.props.popupReducer.type, updatedUploads);
+            updateUploads(this.props.type, updatedUploads);
         }
     }
 
@@ -155,14 +155,15 @@ class FileUpload extends Component {
         let formData = null;
         let objectData = null;
         const appendData = (target, name, file) => {
-            if(!target) {
-                target = new FormData();
-                if(name !== "objects") {
-                    target.append('type', 'user');
+            let result = target;
+            if (!target) {
+                result = new FormData();
+                if (name !== 'objects') {
+                    result.append('type', 'user');
                 }
             }
-            target.append(name, file);
-            return target;
+            result.append(name, file);
+            return result;
         };
 
         if (!this.isValidFiles(uploadFiles)) {
@@ -273,7 +274,7 @@ class FileUpload extends Component {
 
                         <div
                             className={`${Styles.list_area} ${CommonUtils.toggleClass(
-                                this.props.popupReducer.type === 'sound',
+                                this.props.type === 'sound',
                                 Styles.sound_type
                             )}`}
                         >
