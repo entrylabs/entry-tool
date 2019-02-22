@@ -76,6 +76,12 @@ class FileUpload extends Component {
         }
     }
 
+    componentWillUpdate() {
+        if (this.state.isUploading) {
+            this.setState({ isUploading: false });
+        }
+    }
+
     isValidFiles(files) {
         if (!files) {
             this.props.triggerEvent(
@@ -296,6 +302,13 @@ class FileUpload extends Component {
                 <section className={`${Styles.pop_content} ${Styles.file_add_list_content}`}>
                     {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
                     <h2 className={Styles.blind}>파일 올리기</h2>
+                    {this.state.isUploading && (
+                        <div className={Styles.fileupload_loding}>
+                            <span className={Styles.loding_text}>
+                                {CommonUtils.getLang('Menus.file_upload_loading')}
+                            </span>
+                        </div>
+                    )};
                     <div className={Styles.section_cont}>
                         <p className={`${Styles.caution} ${Styles.imico_pop_caution}`}>
                             {this.getWarnMsg()}
