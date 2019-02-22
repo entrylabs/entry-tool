@@ -109,7 +109,11 @@ class Sprite extends Component {
             },
             projects: {
                 view: (
-                    <Projects type={navSettings.selected} data={this.props.data || { data: [] }}/>
+                    <Projects
+                        type={this.props.type}
+                        selected={navSettings.selected}
+                        data={this.props.data || { data: [] }}
+                    />
                 ),
                 nav: (
                     <Navigation
@@ -120,7 +124,7 @@ class Sprite extends Component {
                 ),
             },
             favorites: {
-                view: <Projects type={navSettings.selected} data={this.props.data || []}/>,
+                view: <Projects type={this.props.type} selected={navSettings.selected} data={this.props.data || []}/>,
                 nav: (
                     <Navigation
                         {...navSettings}

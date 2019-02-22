@@ -13,13 +13,16 @@ import { EMIT_TYPES } from '@constants';
 class Index extends Component {
     constructor(props) {
         super(props);
-        this.forceUpdate = true;
-        this.props.setUIParam(this.initialOptions);
+        const isEmpty = this.props.data.data.length === 0;
+        this.props.setUIParam(this.options);
+        if (isEmpty) {
+            this.props.triggerEvent(EMIT_TYPES.fetch, this.options, false);
+        }
         this.drawItems = this.drawItems.bind(this);
         this.getMenus = this.getMenus.bind(this);
     }
 
-    get initialOptions() {
+    get options() {
         return {
             type: this.props.mainType,
             sidebar: Object.keys(this.props.sidebar)[0],
@@ -30,14 +33,14 @@ class Index extends Component {
     componentDidUpdate(prevProps) {
         const before = prevProps.popupReducer;
         const next = this.props.popupReducer;
-        const isMenuChanged = this.forceUpdate || before.sidebar !== next.sidebar || before.subMenu !== next.subMenu;
+        const isMenuChanged = before.sidebar !== next.sidebar || before.subMenu !== next.subMenu;
+        const isEmpty = this.props.data.data.length === 0;
         if (prevProps.type !== this.props.type) {
-            this.forceUpdate = true;
-            this.props.setUIParam(this.initialOptions);
+            this.props.setUIParam(this.options);
+            this.props.triggerEvent(EMIT_TYPES.fetch, this.options, false);
         }
 
-        if (isMenuChanged) {
-            this.forceUpdate = false;
+        if (!isEmpty && isMenuChanged) {
             const elmnt = document.getElementById('popupList');
             if (elmnt) {
                 elmnt.scrollTop = 0;
