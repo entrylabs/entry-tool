@@ -344,6 +344,7 @@ export const DEFAULT_OPTIONS = {
         },
         projects: {
             title: 'Menus.my_project',
+            mainType: 'projects',
             navigations: {
                 projects: {
                     name: 'Menus.my_project',

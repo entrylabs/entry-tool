@@ -13,23 +13,31 @@ import { EMIT_TYPES } from '@constants';
 class Index extends Component {
     constructor(props) {
         super(props);
-        this.fetch();
+        this.forceUpdate = true;
+        this.props.setUIParam(this.initialOptions);
         this.drawItems = this.drawItems.bind(this);
         this.getMenus = this.getMenus.bind(this);
+    }
+
+    get initialOptions() {
+        return {
+            type: this.props.mainType,
+            sidebar: Object.keys(this.props.sidebar)[0],
+            subMenu: 'all',
+        };
     }
 
     componentDidUpdate(prevProps) {
         const before = prevProps.popupReducer;
         const next = this.props.popupReducer;
+        const isMenuChanged = this.forceUpdate || before.sidebar !== next.sidebar || before.subMenu !== next.subMenu;
         if (prevProps.type !== this.props.type) {
-            this.fetch();
+            this.forceUpdate = true;
+            this.props.setUIParam(this.initialOptions);
         }
 
-        if (
-            before.type !== next.type ||
-            before.sidebar !== next.sidebar ||
-            before.subMenu !== next.subMenu
-        ) {
+        if (isMenuChanged) {
+            this.forceUpdate = false;
             const elmnt = document.getElementById('popupList');
             if (elmnt) {
                 elmnt.scrollTop = 0;
@@ -42,19 +50,9 @@ class Index extends Component {
         }
     }
 
-    fetch() {
-        const initOpt = {
-            type: this.props.mainType,
-            sidebar: Object.keys(this.props.sidebar)[0],
-            subMenu: 'all',
-        };
-        this.props.triggerEvent(EMIT_TYPES.fetch, initOpt, false);
-        this.props.setUIParam(initOpt);
-    }
-
     drawItems() {
-        return this.props.data.data.map((item) => (
-            <Item key={item._id} item={item} multiSelect={this.props.multiSelect} type={this.props.mainType}/>
+        return this.props.data.data.map((item, index) => (
+            <Item key={index} item={item} multiSelect={this.props.multiSelect} type={this.props.popupReducer.type}/>
         ));
     }
 
@@ -70,7 +68,7 @@ class Index extends Component {
     }
 
     drawListBox() {
-        if (this.props.mainType === 'sound') {
+        if (this.props.popupReducer.type === 'sound') {
             return (
                 <div id="popupList" className={Styles.sound_list_box}>
                     <div className={Styles.list_area}>

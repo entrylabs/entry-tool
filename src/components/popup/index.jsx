@@ -19,6 +19,7 @@ class Sprite extends Component {
         this.state = {
             navigation: Object.keys(this.options.navigations)[0] || props.type,
         };
+        this.props.initState({ selected: [], uploads: [], baseUrl: this.props.baseUrl });
         this.onNavigationClicked = this.onNavigationClicked.bind(this);
     }
 
@@ -75,7 +76,6 @@ class Sprite extends Component {
                     <Select
                         type={this.props.type}
                         mainType={this.options.mainType}
-                        subType={'sidebar'}
                         sidebar={this.options.sidebar}
                         data={this.props.data || []}
                         multiSelect={this.options.opt && this.options.opt.multiSelect}

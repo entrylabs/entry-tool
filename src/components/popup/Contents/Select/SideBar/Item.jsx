@@ -15,7 +15,7 @@ class Item extends Component {
     }
 
     drawImage() {
-        if (this.props.type && this.props.type === 'sound') {
+        if (this.props.type === 'sound') {
             return <div className={`${Styles.thmb} ${Styles.imico_pop_sound_thmb}`}>&nbsp;</div>;
         }
         const thumbNailUrl = this.props.item.pictures ? this.props.item.pictures[0].filename : this.props.item.filename;
@@ -85,5 +85,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(Item);
