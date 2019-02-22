@@ -37,10 +37,7 @@ class Sprite extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.type !== this.props.type) {
             this.setState({ navigation: Object.keys(this.options.navigations)[0] || this.props.type });
-        }
-
-        if (prevProps.baseUrl !== this.props.baseUrl) {
-            this.props.initState({ baseUrl: this.props.baseUrl });
+            this.props.initState({ selected: [], uploads: [], baseUrl: this.props.baseUrl });
         }
     }
 
@@ -76,7 +73,8 @@ class Sprite extends Component {
             select: {
                 view: (
                     <Select
-                        type={this.options.mainType}
+                        type={this.props.type}
+                        mainType={this.options.mainType}
                         subType={'sidebar'}
                         sidebar={this.options.sidebar}
                         data={this.props.data || []}

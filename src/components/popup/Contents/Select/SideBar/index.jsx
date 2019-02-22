@@ -13,22 +13,18 @@ import { EMIT_TYPES } from '@constants';
 class Index extends Component {
     constructor(props) {
         super(props);
-
+        this.fetch();
         this.drawItems = this.drawItems.bind(this);
         this.getMenus = this.getMenus.bind(this);
-
-        const initOpt = {
-            type: this.props.type,
-            sidebar: Object.keys(this.props.sidebar)[0],
-            subMenu: 'all',
-        };
-        this.props.triggerEvent(EMIT_TYPES.fetch, initOpt, false);
-        this.props.setUIParam(initOpt);
     }
 
-    componentWillReceiveProps(nextProps) {
-        const before = this.props.popupReducer;
-        const next = nextProps.popupReducer;
+    componentDidUpdate(prevProps) {
+        const before = prevProps.popupReducer;
+        const next = this.props.popupReducer;
+        if (prevProps.type !== this.props.type) {
+            this.fetch();
+        }
+
         if (
             before.type !== next.type ||
             before.sidebar !== next.sidebar ||
@@ -41,14 +37,24 @@ class Index extends Component {
             this.props.triggerEvent(
                 EMIT_TYPES.fetch,
                 { type: next.type, sidebar: next.sidebar, subMenu: next.subMenu },
-                false
+                false,
             );
         }
     }
 
+    fetch() {
+        const initOpt = {
+            type: this.props.mainType,
+            sidebar: Object.keys(this.props.sidebar)[0],
+            subMenu: 'all',
+        };
+        this.props.triggerEvent(EMIT_TYPES.fetch, initOpt, false);
+        this.props.setUIParam(initOpt);
+    }
+
     drawItems() {
         return this.props.data.data.map((item) => (
-            <Item key={item._id} item={item} multiSelect={this.props.multiSelect} type={this.props.type}/>
+            <Item key={item._id} item={item} multiSelect={this.props.multiSelect} type={this.props.mainType}/>
         ));
     }
 
@@ -64,7 +70,7 @@ class Index extends Component {
     }
 
     drawListBox() {
-        if (this.props.type === 'sound') {
+        if (this.props.mainType === 'sound') {
             return (
                 <div id="popupList" className={Styles.sound_list_box}>
                     <div className={Styles.list_area}>
@@ -86,14 +92,14 @@ class Index extends Component {
             <React.Fragment>
                 <div className={Styles.pop_content}>
                     <h2 className={Styles.blind}>오브젝트 선택</h2>
-                    <SideBar type={this.props.type} sidebar={this.props.sidebar} />
+                    <SideBar type={this.props.mainType} sidebar={this.props.sidebar}/>
                     <div className={Styles.section_cont}>
-                        <SubMenu type={this.props.type} menus={this.getMenus()} />
+                        <SubMenu type={this.props.mainType} menus={this.getMenus()}/>
                         {this.drawListBox()}
-                        {this.props.multiSelect && <Selected type={this.props.type}/>}
+                        {this.props.multiSelect && <Selected type={this.props.mainType}/>}
                     </div>
                 </div>
-                <Foot />
+                <Foot/>
             </React.Fragment>
         );
     }
@@ -110,5 +116,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(Index);

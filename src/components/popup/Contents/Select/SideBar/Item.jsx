@@ -52,7 +52,7 @@ class Item extends Component {
     render() {
         const item = this.props.item;
         const lang = CommonUtils.getLangType();
-        const defaultName = item.label.en ? item.label.en : item.name;
+        const defaultName = item.label && item.label.en ? item.label.en : item.name;
         const name = item.label && item.label[lang] ? item.label[lang] : defaultName;
         return (
             <li
