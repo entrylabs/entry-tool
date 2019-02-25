@@ -13,27 +13,34 @@ import { EMIT_TYPES } from '@constants';
 class Index extends Component {
     constructor(props) {
         super(props);
-
+        const isEmpty = this.props.data.data.length === 0;
+        this.props.setUIParam(this.options);
+        if (isEmpty) {
+            this.props.triggerEvent(EMIT_TYPES.fetch, this.options, false);
+        }
         this.drawItems = this.drawItems.bind(this);
         this.getMenus = this.getMenus.bind(this);
+    }
 
-        const initOpt = {
-            type: this.props.popupReducer.type,
+    get options() {
+        return {
+            type: this.props.mainType,
             sidebar: Object.keys(this.props.sidebar)[0],
             subMenu: 'all',
         };
-        this.props.triggerEvent(EMIT_TYPES.fetch, initOpt, false);
-        this.props.setUIParam(initOpt);
     }
 
-    componentWillReceiveProps(nextProps) {
-        const before = this.props.popupReducer;
-        const next = nextProps.popupReducer;
-        if (
-            before.type !== next.type ||
-            before.sidebar !== next.sidebar ||
-            before.subMenu !== next.subMenu
-        ) {
+    componentDidUpdate(prevProps) {
+        const before = prevProps.popupReducer;
+        const next = this.props.popupReducer;
+        const isMenuChanged = before.sidebar !== next.sidebar || before.subMenu !== next.subMenu;
+        const isEmpty = this.props.data.data.length === 0;
+        if (prevProps.type !== this.props.type) {
+            this.props.setUIParam(this.options);
+            this.props.triggerEvent(EMIT_TYPES.fetch, this.options, false);
+        }
+
+        if (!isEmpty && isMenuChanged) {
             const elmnt = document.getElementById('popupList');
             if (elmnt) {
                 elmnt.scrollTop = 0;
@@ -41,14 +48,14 @@ class Index extends Component {
             this.props.triggerEvent(
                 EMIT_TYPES.fetch,
                 { type: next.type, sidebar: next.sidebar, subMenu: next.subMenu },
-                false
+                false,
             );
         }
     }
 
     drawItems() {
-        return this.props.data.data.map((item) => (
-            <Item key={item._id} item={item} multiSelect={this.props.multiSelect} />
+        return this.props.data.data.map((item, index) => (
+            <Item key={index} item={item} multiSelect={this.props.multiSelect} type={this.props.popupReducer.type}/>
         ));
     }
 
@@ -64,7 +71,7 @@ class Index extends Component {
     }
 
     drawListBox() {
-        if (this.props.type === 'sound') {
+        if (this.props.popupReducer.type === 'sound') {
             return (
                 <div id="popupList" className={Styles.sound_list_box}>
                     <div className={Styles.list_area}>
@@ -86,14 +93,14 @@ class Index extends Component {
             <React.Fragment>
                 <div className={Styles.pop_content}>
                     <h2 className={Styles.blind}>오브젝트 선택</h2>
-                    <SideBar type={this.props.type} sidebar={this.props.sidebar} />
+                    <SideBar type={this.props.mainType} sidebar={this.props.sidebar}/>
                     <div className={Styles.section_cont}>
-                        <SubMenu menus={this.getMenus()} />
+                        <SubMenu type={this.props.mainType} menus={this.getMenus()}/>
                         {this.drawListBox()}
-                        {this.props.multiSelect && <Selected />}
+                        {this.props.multiSelect && <Selected type={this.props.mainType}/>}
                     </div>
                 </div>
-                <Foot />
+                <Foot/>
             </React.Fragment>
         );
     }
@@ -110,5 +117,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(Index);

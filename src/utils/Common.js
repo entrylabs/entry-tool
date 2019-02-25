@@ -28,6 +28,9 @@ export const CommonUtils = {
         return expUrl.test(url) ? url : `/${url}`;
     },
     createImageUrl: (id, baseUrl = '') => {
+        if (!id) {
+            return '';
+        }
         return `${baseUrl}/uploads/${id.substring(0, 2)}/${id.substring(2, 4)}/thumb/${id}.png`;
     },
     remove: (array, callback) => {
