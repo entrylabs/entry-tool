@@ -50,6 +50,9 @@ const progressType = {
 const wigetStories = storiesOf('Widget', module);
 wigetStories.addDecorator(withKnobs);
 wigetStories.addDecorator((story) => <Provider story={story()} />);
+
+/* eslint-disable array-element-newline */
+/* eslint-disable array-bracket-newline */
 wigetStories
     .add('숫자', () => (
         <Number
@@ -69,17 +72,7 @@ wigetStories
     .add('컬러피커', () => <ColorPicker color="#FF0000" onChangeColorPicker={action} />)
     .add('드롭다운', () => (
         <Dropdown
-            items={[
-                [1, 1],
-                [2, 2],
-                [3, 3],
-                [4, 4],
-                [5, 5],
-                [6, 6],
-                [7, 7],
-                [8, 8],
-                [9, 9],
-            ]}
+            items={[[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9]]}
         />
     ))
     .add('로딩바', () => (
