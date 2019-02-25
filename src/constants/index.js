@@ -1,3 +1,8 @@
+export const COLOR_PICKER_MODE = {
+    SLIDER: 'SLIDER',
+    SWATCHES: 'SWATCHES',
+};
+
 export const EMIT_TYPES = {
     submit: 'submit',
     load: 'load',
