@@ -92,7 +92,7 @@ class Selected extends Component {
     }
 
     render() {
-        const type = this.props.popupReducer.type || 'sound';
+        const type = this.props.type || 'sound';
         const selected = this.props.popupReducer.selected || [];
         const settings = {
             dots: false,

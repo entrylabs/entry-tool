@@ -15,7 +15,7 @@ class Item extends Component {
     }
 
     drawImage() {
-        if (this.props.popupReducer.type && this.props.popupReducer.type === 'sound') {
+        if (this.props.type === 'sound') {
             return <div className={`${Styles.thmb} ${Styles.imico_pop_sound_thmb}`}>&nbsp;</div>;
         }
         const thumbNailUrl = this.props.item.pictures ? this.props.item.pictures[0].filename : this.props.item.filename;
@@ -52,7 +52,7 @@ class Item extends Component {
     render() {
         const item = this.props.item;
         const lang = CommonUtils.getLangType();
-        const defaultName = item.label.en ? item.label.en : item.name;
+        const defaultName = item.label && item.label.en ? item.label.en : item.name;
         const name = item.label && item.label[lang] ? item.label[lang] : defaultName;
         return (
             <li
@@ -85,5 +85,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(Item);

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import range from 'lodash/range';
 import _includes from 'lodash/includes';
 import Styles from '@assets/scss/popup.scss';
-import { uploadItem, updateUploads } from '@actions/popup';
+import { updateUploads } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
 import { triggerEvent } from '@actions';
 
@@ -70,9 +70,9 @@ class FileUpload extends Component {
             .filter((afterItem) => !beforeUpload.find((beforeItem) => afterItem._id === beforeItem._id));
 
         if (beforeUpload.length !== uploads.length) {
-            updateUploads(this.props.popupReducer.type, uploads);
+            updateUploads(this.props.type, uploads);
         } else if (updatedUploads.length > 0) {
-            updateUploads(this.props.popupReducer.type, updatedUploads);
+            updateUploads(this.props.type, updatedUploads);
         }
     }
 
@@ -154,50 +154,23 @@ class FileUpload extends Component {
         return this.triggerNotSuportFileError();
     }
 
-    upload(formData, objectData, check) {
-        let csrf = '';
-        if (document.querySelector('meta[name="csrf-token"]')) {
-            csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        }
-        const headers = {
-            'Content-Type': undefined, // important
-            'csrf-token': csrf,
-        };
-
-        if (this.props.isOffline) {
-            this.props.triggerEvent(
-                'dummyUploads',
-                {
-                    formData,
-                    objectData,
-                },
-                false,
-            );
-            return;
-        }
-
-        if (check.file > 0) {
-            this.props.uploadItem(this.props.popupReducer.type, formData, headers);
-        }
-
-        if (check.object > 0) {
-            this.props.uploadItem('object', objectData, headers);
-        }
-    }
-
     onAddItemChanged(e) {
         e.preventDefault();
         const $upload = e.currentTarget;
         const uploadFiles = $upload.files;
-
-        const check = {
-            file: 0,
-            object: 0,
+        let formData = null;
+        let objectData = null;
+        const appendData = (target, name, file) => {
+            let result = target;
+            if (!target) {
+                result = new FormData();
+                if (name !== 'objects') {
+                    result.append('type', 'user');
+                }
+            }
+            result.append(name, file);
+            return result;
         };
-
-        const formData = new FormData();
-        formData.append('type', 'user');
-        const objectData = new FormData();
 
         if (!this.isValidFiles(uploadFiles)) {
             return false;
@@ -208,12 +181,10 @@ class FileUpload extends Component {
             switch (this.checkFIleType(file)) {
                 case 'sound':
                 case 'image':
-                    formData.append(`uploadFile${idx}`, file);
-                    check.file++;
+                    formData = appendData(formData, `uploadFile${idx}`, file);
                     break;
                 case 'object':
-                    objectData.append('objects', file);
-                    check.object++;
+                    objectData = appendData(objectData, 'objects', file);
                     break;
                 default:
                     break;
@@ -222,7 +193,7 @@ class FileUpload extends Component {
         });
 
         if (!checkFiles) {
-            this.upload(formData, objectData, check);
+            this.props.triggerEvent('dummyUploads', { formData, objectData }, false);
             $upload.value = '';
             this.setState({ isUploading: true });
         }
@@ -316,7 +287,7 @@ class FileUpload extends Component {
 
                         <div
                             className={`${Styles.list_area} ${CommonUtils.toggleClass(
-                                this.props.popupReducer.type === 'sound',
+                                this.props.type === 'sound',
                                 Styles.sound_type
                             )}`}
                         >
@@ -366,7 +337,10 @@ class FileUpload extends Component {
                     </div>
                 </section>
                 <div className={Styles.pop_btn_box}>
-                    <a href="#NULL" onClick={() => this.props.triggerEvent('close', null, true)}>
+                    <a href="#NULL" onClick={(e) => {
+                        e.preventDefault();
+                        this.props.triggerEvent('close', null, true);
+                    }}>
                         {CommonUtils.getLang('Buttons.cancel')}
                     </a>
                     <a href="#NULL" className={Styles.active} onClick={this.onApplyItemClicked}>
@@ -384,7 +358,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     triggerEvent: (event, data, hidden) => dispatch(triggerEvent(event, data, hidden)),
-    uploadItem: (type, formData, header) => dispatch(uploadItem(type, formData, header)),
     updateUploads: (type, data) => dispatch(updateUploads(type, data)),
 });
 

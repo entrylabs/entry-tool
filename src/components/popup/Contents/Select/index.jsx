@@ -5,7 +5,7 @@ import BigICON from './BigICON';
 
 class Select extends Component {
     renderContent() {
-        if (this.props.subType === 'sidebar') {
+        if (this.props.sidebar) {
             return (
                 <SideBar { ...this.props}/>
             );
