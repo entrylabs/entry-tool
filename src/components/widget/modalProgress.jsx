@@ -6,7 +6,6 @@ class ModalProgress extends Component {
     makeProgress() {
         const { title } = this.props;
 
-        console.log('#$@!$!@%@!%!@%@!', title, Styles.progress);
         return (
             <div className={Styles.progress}>
                 <div className={Styles.title}>{title}</div>
@@ -19,8 +18,6 @@ class ModalProgress extends Component {
     }
     makeError() {
         const { title, description, onClose } = this.props;
-        console.log('title', title, description);
-        console.log(title);
         return (
             <div className={Styles.error}>
                 <div className={Styles.title} dangerouslySetInnerHTML={{ __html: title }} />

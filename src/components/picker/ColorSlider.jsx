@@ -277,14 +277,12 @@ class ColorPicker extends Component {
     }
 
     handleSliderMove = (e) => {
-        console.log('handleSliderMove', this.canMoveCapture);
         if (this.canMoveCapture) {
             e.preventDefault();
             let event = getClassifyEvent(e);
             const { clientX } = event;
             let result = (clientX - this.sliderStartX) / this.SCALE_RATIO_X + this.sliderValue;
             result = Math.round(getRangeValue(result, 0, 100));
-            console.log('this.handleChangeHsv', this.sliderType, result);
             this.handleChangeHsv(this.sliderType, result);
         }
     };
