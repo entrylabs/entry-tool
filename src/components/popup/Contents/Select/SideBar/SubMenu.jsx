@@ -39,7 +39,7 @@ class SubMenu extends Component {
         e.preventDefault();
         const key = e.target.getAttribute('data-key');
         this.props.setUIParam({
-            type: this.props.popupReducer.type,
+            type: this.props.type,
             sidebar: this.props.popupReducer.sidebar,
             subMenu: key,
         });
