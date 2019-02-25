@@ -1495,3 +1495,30 @@
         }
     }
 }
+
+.fileupload_loding {
+    width: 156px;
+    height: 156px;
+    -o-object-fit: contain;
+    object-fit: contain;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    background-color: none;
+    background: url('../images/progress/upload_loading.gif') no-repeat;
+
+    .loding_text {
+        width: 156px;
+        height: 156px;
+        font-size: 16px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: -0.2px;
+        color: #2c313d;
+        text-align: center;
+        position: absolute;
+        top: 110px;
+    }
+}
