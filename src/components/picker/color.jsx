@@ -198,6 +198,7 @@ class ColorPicker extends Component {
             className,
             onClick,
             onOutsideClick,
+            outsideExcludeDom,
             eventTypes = ['mouseup', 'touchend', 'wheel'],
         } = this.props;
         const {
@@ -209,6 +210,7 @@ class ColorPicker extends Component {
         } = this.state;
         return (
             <OutsideClick
+                outsideExcludeDom={outsideExcludeDom}
                 onOutsideClick={() => {
                     if (onOutsideClick) {
                         onOutsideClick(color);

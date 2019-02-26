@@ -4,7 +4,8 @@ import get from 'lodash/get';
 
 export const CommonUtils = {
     getLangType: () => {
-        return root.Lang.type;
+        const lang = root.Lang || {};
+        return lang.type;
     },
     getLang: (key = '') => {
         const lang = root.Lang || {};
