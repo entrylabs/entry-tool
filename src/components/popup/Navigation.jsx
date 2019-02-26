@@ -71,10 +71,14 @@ class Navigation extends Component {
 
     onDropDownClicked(e, type, options) {
         e.preventDefault();
+        if (this.state.dropDown) {
+            return this.setState({ dropDown: null });
+        }
         const dropDown = (
             <Dropdown
                 items={options}
                 positionDom={e.target}
+                outsideExcludeDom={[e.target]}
                 onSelectDropdown={(value) => {
                     this.setState({
                         [type]: value,

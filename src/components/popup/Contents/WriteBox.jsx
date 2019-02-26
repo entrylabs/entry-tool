@@ -143,6 +143,9 @@ class WriteBox extends Component {
     }
 
     createColorPicker(target, color, effects, effectName) {
+        if (this.state.colorPicker) {
+            return null;
+        }
         const canTransparent = CommonUtils.toggleClass(effectName === "backgroundColor", true);
         return (
             <ColorPicker
@@ -152,6 +155,7 @@ class WriteBox extends Component {
                 onOutsideClick={() => {
                     this.setState({ colorPicker: null });
                 }}
+                outsideExcludeDom={[target]}
                 onChangeColorPicker={(color) => {
                     effects[effectName].apply = true;
                     effects[effectName].css = { [effectName]: color };
@@ -191,6 +195,9 @@ class WriteBox extends Component {
 
     onFontBoxClicked(e) {
         e.preventDefault();
+        if (this.state.dropDown) {
+            return this.setState({ dropDown: null });
+        }
         const dropDown = (
             <Dropdown
                 items={this.state.fonts.map((font, index) => [font.name, index])}
@@ -199,6 +206,7 @@ class WriteBox extends Component {
                     this.setState({ font: this.state.fonts[font[1]] });
                     this.setState({ dropDown: null });
                 }}
+                outsideExcludeDom={[e.target]}
                 onOutsideClick={() => {
                     this.setState({ dropDown: null });
                 }}
