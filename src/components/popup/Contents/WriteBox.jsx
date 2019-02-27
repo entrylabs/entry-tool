@@ -200,6 +200,7 @@ class WriteBox extends Component {
         }
         const dropDown = (
             <Dropdown
+                animation={false}
                 items={this.state.fonts.map((font, index) => [font.name, index])}
                 positionDom={e.target}
                 onSelectDropdown={(font) => {
