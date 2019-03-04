@@ -37,6 +37,7 @@ class ColorPicker extends Component {
                 {recommendedColor.map((color) => {
                     return (
                         <div
+                            key={color}
                             className={Styles.item}
                             style={{ backgroundColor: color }}
                             onClick={() => {
@@ -52,12 +53,13 @@ class ColorPicker extends Component {
         const { onChangeColor } = this.props;
         return (
             <div className={Styles.paletteColor}>
-                {paletteColor.map((group) => {
+                {paletteColor.map((group, idx) => {
                     return (
-                        <div className={Styles.paletteGroup}>
+                        <div key={`group_${idx}`} className={Styles.paletteGroup}>
                             {group.map((color) => {
                                 return (
                                     <div
+                                        key={color}
                                         className={Styles.item}
                                         style={{ backgroundColor: color }}
                                         onClick={() => {
