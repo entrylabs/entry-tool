@@ -24,6 +24,10 @@ class Sprite extends Component {
     }
 
     get options() {
+        if (this._options && this._options.type === this.props.type) {
+            return this._options;
+        }
+
         const options = {
             ...DEFAULT_OPTIONS.POPUP_TYPE[this.props.type],
             writeBoxOption: DEFAULT_OPTIONS.WRITE_BOX,
@@ -32,6 +36,7 @@ class Sprite extends Component {
         if (!options.navigations) {
             options.navigations = [];
         }
+        this._options = options;
         return options;
     }
 
