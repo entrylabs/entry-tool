@@ -13,7 +13,7 @@ export const CommonUtils = {
     },
     getFonts: () => {
         if (root.EntryStatic && root.EntryStatic.fonts) {
-            return root.EntryStatic.fonts;
+            return root.EntryStatic.fonts.filter(font => font.visible);
         }
         return DEFAULT_OPTIONS.WRITE_BOX.FONTS;
     },
