@@ -5,6 +5,7 @@ import Styles from '../../assets/scss/popup.scss';
 import { pure } from 'recompose';
 import root from 'window-or-global';
 import { COLOR_PICKER_MODE } from '../../constants';
+import memoize from 'lodash/memoize';
 
 function getColorByHsv({ red, green, blue }) {
     const color = chroma(red, green, blue);
@@ -17,7 +18,7 @@ function getColorByHsv({ red, green, blue }) {
         red,
         green,
         blue,
-        hue: Math.round(hue / 3.6),
+        hue: Math.round(hue),
         saturation: Math.round(saturation * 100),
         brightness: Math.round(brightness * 100),
         color: color.hex(),
@@ -25,7 +26,7 @@ function getColorByHsv({ red, green, blue }) {
 }
 
 function getColorByRGB({ hue, saturation, brightness }) {
-    const color = chroma.hsv(hue * 3.6, saturation / 100, brightness / 100);
+    const color = chroma.hsv(hue, saturation / 100, brightness / 100);
     const [red, green, blue] = color.rgb();
     return {
         red,
@@ -58,15 +59,15 @@ function getColorByHex(value) {
         green,
         blue,
         isTransparent,
-        hue: Math.round(hue / 3.6),
+        hue: Math.round(hue),
         saturation: Math.round(saturation * 100),
         brightness: Math.round(brightness * 100),
         color: value,
     };
 }
 
-function setScaleRatioX(value) {
-    return Math.round(value * 1.77);
+function setScaleRatioX(value, ratio = 1) {
+    return Math.round(value * 1.77 * ratio);
 }
 
 function getRangeValue(value, min, max) {
@@ -122,15 +123,27 @@ class ColorPicker extends Component {
         return 1.77;
     }
 
+    get SCALE_RATIO_X_BY_HUE() {
+        return 177 / 360;
+    }
+
+    getScaleRatioX = memoize((type) => {
+        if (type === 'hue') {
+            return this.SCALE_RATIO_X_BY_HUE;
+        } else {
+            return this.SCALE_RATIO_X;
+        }
+    });
+
     constructor(props) {
         super(props);
-        const { color, onChangeColor } = props;
+        const { color, onChangeColor, lastColor } = props;
         let state = {
             isTransparent: false,
         };
         if (color) {
-            state.originColor = color;
-            Object.assign(state, getColorByHex(color));
+            state.originColor = lastColor || color;
+            Object.assign(state, getColorByHex(lastColor || color));
             if (onChangeColor) {
                 onChangeColor(state.color);
             }
@@ -138,7 +151,15 @@ class ColorPicker extends Component {
         this.state = state;
     }
 
-    static getDerivedStateFromProps({ color, onChangeColor }, { originColor }) {
+    static getDerivedStateFromProps({ color, onChangeColor, lastColor }, { originColor }) {
+        if (lastColor && lastColor !== color) {
+            return Object.assign(
+                {
+                    originColor: color,
+                },
+                getColorByHex(lastColor)
+            );
+        }
         if (color !== originColor) {
             if (onChangeColor) {
                 onChangeColor(color);
@@ -184,7 +205,7 @@ class ColorPicker extends Component {
     }
     saturationGradient() {
         const { hue } = this.state;
-        const hueValue = hue * 3.6;
+        const hueValue = hue;
         const start = chroma.hsv(hueValue, 0, 1);
         const end = chroma.hsv(hueValue, 1, 1);
         return {
@@ -197,7 +218,7 @@ class ColorPicker extends Component {
     }
     brightnessGradient() {
         const { hue } = this.state;
-        const hueValue = hue * 3.6;
+        const hueValue = hue;
         const start = chroma.hsv(hueValue, 1, 0);
         const end = chroma.hsv(hueValue, 1, 1);
         return {
@@ -210,7 +231,7 @@ class ColorPicker extends Component {
     }
     resultBackground() {
         const { hue, saturation, brightness } = this.state;
-        const hueValue = hue * 3.6;
+        const hueValue = hue;
         return {
             background: chroma.hsv(hueValue, saturation / 100, brightness / 100).css(),
         };
@@ -233,8 +254,9 @@ class ColorPicker extends Component {
             });
         }
         const { onChangeColor } = this.props;
+        let max = type === 'hue' ? 360 : 100;
         let thisValue = Number(value);
-        thisValue = getRangeValue(parseInt(thisValue, 10), 0, 100);
+        thisValue = getRangeValue(parseInt(thisValue, 10), 0, max);
         if (!isNaN(thisValue)) {
             this.setState((state) => {
                 const hsv = Object.assign({}, state, { [type]: thisValue });
@@ -280,9 +302,14 @@ class ColorPicker extends Component {
         if (this.canMoveCapture) {
             e.preventDefault();
             let event = getClassifyEvent(e);
+            const target = this.moveCaptureTarget || {};
+            const { dataset } = target || {};
+            const { type } = dataset || {};
             const { clientX } = event;
-            let result = (clientX - this.sliderStartX) / this.SCALE_RATIO_X + this.sliderValue;
-            result = Math.round(getRangeValue(result, 0, 100));
+            let result =
+                (clientX - this.sliderStartX) / this.getScaleRatioX(type) + this.sliderValue;
+            let max = type === 'hue' ? 360 : 100;
+            result = Math.round(getRangeValue(result, 0, max));
             this.handleChangeHsv(this.sliderType, result);
         }
     };
@@ -324,7 +351,7 @@ class ColorPicker extends Component {
     handleSliderBarClick(e, type) {
         const { clientX, target } = e;
         const { left = 0 } = target.getBoundingClientRect() || {};
-        let result = (clientX - left - this.SLIDER_SIZE / 2) / this.SCALE_RATIO_X;
+        let result = (clientX - left - this.SLIDER_SIZE / 2) / this.getScaleRatioX(type);
         result = Math.round(Math.max(Math.min(result, 100), 0));
         this.handleChangeHsv(type, result);
     }
@@ -352,6 +379,7 @@ class ColorPicker extends Component {
         const { clientX } = getClassifyEvent(nativeEvent);
         document.addEventListener('touchmove', handleTouchPreventDefault, { passive: false });
         this.canMoveCapture = true;
+        this.moveCaptureTarget = e.target;
         this.sliderStartX = clientX;
         this.sliderType = type;
         this.sliderValue = this.state[type];
@@ -376,6 +404,12 @@ class ColorPicker extends Component {
         const { isTransparent, isActiveSlider } = this.state;
         let itemClassName = isTransparent ? Styles.disabled : '';
         return metaHSVContoller.map(({ key, label }) => {
+            let max = 100;
+            let ratio = 1;
+            if (key === 'hue') {
+                max = 360;
+                ratio = 100 / 360;
+            }
             return (
                 <li key={key} className={`${Styles.item} ${itemClassName}`}>
                     <label htmlFor={key}>{label}</label>
@@ -383,7 +417,7 @@ class ColorPicker extends Component {
                         value={String(this.state[key])}
                         type="number"
                         min="0"
-                        max="100"
+                        max={max}
                         onChange={({ target }) => {
                             const { value = 0 } = target;
                             this.handleChangeHsv(key, value);
@@ -398,6 +432,8 @@ class ColorPicker extends Component {
                     />
                     <div className={`${Styles.graph_box}`} touch-action="none">
                         <span
+                            data-type={key}
+                            data-my-type={key}
                             className={`${Styles.slider} ${Styles.btn_pop_color_slide} ${
                                 isActiveSlider === key ? Styles.on : ''
                             }`}
@@ -407,7 +443,7 @@ class ColorPicker extends Component {
                             onTouchStart={(e) => {
                                 !isTransparent && this.handleSliderMouseDown(e, key);
                             }}
-                            style={{ left: `${setScaleRatioX(this.state[key])}px` }}
+                            style={{ left: `${setScaleRatioX(this.state[key], ratio)}px` }}
                         />
                         <div
                             className={`${Styles.bar}`}

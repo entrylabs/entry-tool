@@ -66,7 +66,9 @@ class ColorPicker extends Component {
     handleChangePickerMode = (pickerMode) => {
         this.setState(
             produce((draft) => {
+                const { color } = this.state;
                 draft.pickerMode = pickerMode;
+                this.lastColor = color;
                 localStorage.setItem('colorPickerMode', pickerMode);
             })
         );
@@ -208,6 +210,12 @@ class ColorPicker extends Component {
             colorPickerStyle,
             pickerMode = COLOR_PICKER_MODE.SLIDER,
         } = this.state;
+
+        let lastColor;
+        if (this.lastColor) {
+            lastColor = this.lastColor;
+            this.lastColor = undefined;
+        }
         return (
             <OutsideClick
                 outsideExcludeDom={outsideExcludeDom}
@@ -234,6 +242,7 @@ class ColorPicker extends Component {
                             {...this.props}
                             onChangePickerMode={this.handleChangePickerMode}
                             onChangeColor={this.handleChangeColor}
+                            lastColor={lastColor}
                         />
                     )}
                     {pickerMode !== COLOR_PICKER_MODE.SLIDER && (
