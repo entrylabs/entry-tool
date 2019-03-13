@@ -1,5 +1,5 @@
 {
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "[yaml]": {
         "editor.formatOnSave": false
     },

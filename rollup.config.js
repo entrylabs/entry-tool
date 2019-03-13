@@ -31,7 +31,12 @@ const plugins = [
     json(),
     resolve({
         preferBuiltins: true,
-        extensions: ['.mjs', '.js', '.jsx', '.json'],
+        extensions: [
+            '.mjs',
+            '.js',
+            '.jsx',
+            '.json',
+        ],
     }),
     commonjs({
         namedExports: {
@@ -91,11 +96,12 @@ const plugins = [
 
 export default [
     {
-        input: 'src/component.js',
+        input: 'src/index.jsx',
         plugins,
         output: {
-            file: './component/index.js',
-            format: 'es',
+            file: './dist/entry-tool.js',
+            format: 'umd',
+            name: 'EntryTool',
             freeze: false,
             exports: 'named', // "named", "default"
             interop: false,
@@ -103,12 +109,11 @@ export default [
         },
     },
     {
-        input: 'src/index.jsx',
+        input: 'src/component.js',
         plugins,
         output: {
-            file: './dist/entry-tool.js',
-            format: 'umd',
-            name: 'EntryTool',
+            file: './component/index.js',
+            format: 'es',
             freeze: false,
             exports: 'named', // "named", "default"
             interop: false,

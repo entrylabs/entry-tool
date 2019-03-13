@@ -9,15 +9,7 @@ class BackPackContainer extends Component {
         const { onChangeDragType } = this.props;
         return <BackPack {...this.props} onChangeDragType={onChangeDragType} />;
     }
-
-    get a() {
-        return 'haha';
-    }
-    get lms() {
-        return 'haha';
-    }
 }
-export const a = 'haha';
 
 const mapDispatchToProps = (dispatch) => ({
     onChangeDragType: (type) => dispatch(onChangeDragType(type)),
