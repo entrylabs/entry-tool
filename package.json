@@ -22,7 +22,6 @@
         "start": "node scripts/start.js",
         "dist": "rollup -c",
         "dev": "rollup -c -w",
-        "test": "node scripts/test.js --env=jsdom",
         "storybook": "start-storybook -p 9009",
         "build-storybook": "build-storybook"
     },
