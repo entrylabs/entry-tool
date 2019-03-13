@@ -10,18 +10,18 @@
             {
                 "root": ["./"],
                 "alias": {
+                    "@hoc": "./src/hoc",
                     "@actions": "./src/actions",
                     "@assets": "./src/assets",
                     "@components": "./src/components",
                     "@utils": "./src/utils",
-                    "@constants":"./src/constants",
-                    "@selectors":"./src/selectors"
+                    "@constants": "./src/constants",
+                    "@selectors": "./src/selectors"
                 }
             }
         ]
     ],
     "presets": [
-        "@babel/react",
         [
             "@babel/env",
             {
@@ -29,6 +29,7 @@
                     "browsers": [">0.25%", "ie >= 11"]
                 }
             }
-        ]
+        ],
+        "@babel/react"
     ]
 }

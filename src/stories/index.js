@@ -10,6 +10,7 @@ import Number from '../components/widget/number';
 import Dropdown from '../components/widget/dropdown';
 import ModalProgress from '../components/widget/modalProgress';
 import Angle from '../components/widget/angle';
+import BackPack from '../components/widget/BackPack';
 import Sortable from '../components/widget/sortable';
 import ContextMenu from '../components/widget/contextMenu';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
@@ -54,6 +55,15 @@ wigetStories.addDecorator((story) => <Provider story={story()} />);
 /* eslint-disable array-element-newline */
 /* eslint-disable array-bracket-newline */
 wigetStories
+    .add('백팩', () => (
+        <div style={{ height: '100vh' }}>
+            <BackPack
+                onButtonPressed={action('onButtonPressed')}
+                onBackButtonPressed={action('onBackButtonPressed')}
+                onOutsideClick={action('onOutsideClick')}
+            />
+        </div>
+    ))
     .add('숫자', () => (
         <Number
             onButtonPressed={action('onButtonPressed')}

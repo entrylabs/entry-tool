@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Object } from 'core-js';
 import Styles from '../../assets/scss/popup.scss';
 import debounce from 'lodash/debounce';
 import { pure } from 'recompose';

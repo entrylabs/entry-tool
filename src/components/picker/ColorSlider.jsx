@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import chroma from 'chroma-js';
-import { Object } from 'core-js';
 import Styles from '../../assets/scss/popup.scss';
 import { pure } from 'recompose';
 import root from 'window-or-global';

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import withWrapper from '@hoc/withWrapper';
 import { connect } from 'react-redux';
-import ContextMenu from "./contextMenu";
+import ContextMenu from './contextMenu';
 
 class ContextMenuContainer extends Component {
     render() {
@@ -8,7 +9,11 @@ class ContextMenuContainer extends Component {
     }
 }
 
-export default connect(
-    undefined,
-    undefined,
-)(ContextMenuContainer);
+export default withWrapper({
+    type: 'widget',
+})(
+    connect(
+        undefined,
+        undefined
+    )(ContextMenuContainer)
+);
