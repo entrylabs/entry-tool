@@ -19,7 +19,6 @@ jobs:
     before_deploy:
     - yarn
     - yarn dist
-    - yarn distc
     deploy:
       provider: npm
       email: entrydev@nts-corp.com
