@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import { CommonUtils } from '../utils/Common';
+// import { CommonUtils } from '../utils/Common';
 
 export const UI_SELECT = 'UI_SELECT';
 export const UPLOAD_ITEM = 'UPLOAD_ITEM';

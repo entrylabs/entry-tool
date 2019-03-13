@@ -96,7 +96,7 @@ class BackPack extends Component {
             );
         } else {
             return (
-                <img src={imgPath} className={Styles.image} />
+                <img src={imgPath} className={Styles.image} alt="" />
             );
         }
     }
@@ -177,7 +177,7 @@ class BackPack extends Component {
                 {!isLoading && (
                     <div
                         className={Styles.itemArea}
-                        onDragEnter={(e) => {
+                        onDragEnter={() => {
                             this.handleDragState(true);
                         }}
                         onMouseEnter={(e) => {
