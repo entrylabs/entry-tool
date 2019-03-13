@@ -16,33 +16,42 @@ import { CommonUtils } from '@utils/Common';
 class Sprite extends Component {
     constructor(props) {
         super(props);
-        this.options = {
+        this.state = {
+            navigation: Object.keys(this.options.navigations)[0] || props.type,
+        };
+        this.props.initState({ selected: [], uploads: [], baseUrl: this.props.baseUrl });
+        this.onNavigationClicked = this.onNavigationClicked.bind(this);
+    }
+
+    get options() {
+        if (this._options && this._options.type === this.props.type) {
+            return this._options;
+        }
+
+        const options = {
             ...DEFAULT_OPTIONS.POPUP_TYPE[this.props.type],
             writeBoxOption: DEFAULT_OPTIONS.WRITE_BOX,
             ...this.props,
         };
-        this.options.navigations = this.initNavigations();
-        this.state = {
-            navigation: Object.keys(this.options.navigations)[0],
-        };
-        this.onNavigationClicked = this.onNavigationClicked.bind(this);
+        if (!options.navigations) {
+            options.navigations = [];
+        }
+        this._options = options;
+        return options;
     }
 
-    initNavigations() {
-        const navigation = this.options.navigations;
-        if (!navigation) {
-            return [];
+    componentDidUpdate(prevProps) {
+        if (prevProps.type !== this.props.type) {
+            this.setState({ navigation: Object.keys(this.options.navigations)[0] || this.props.type });
+            this.props.initState({ selected: [], uploads: [], baseUrl: this.props.baseUrl });
         }
-        return navigation;
     }
 
     componentDidMount() {
         window.onpopstate = this.close;
         window.history.pushState({}, 'popup');
     }
-    componentWillMount() {
-        this.props.initState({ type: this.options.mainType });
-    }
+
     componentWillUnmount() {
         window.removeEventListener('onpopstate', this.close, false);
     }
@@ -60,17 +69,18 @@ class Sprite extends Component {
     setContent = function() {
         const navSettings = {
             list: this.options.navigations,
-            selected: this.state.navigation || this.props.type,
+            selected: this.state.navigation,
             onClicked: this.onNavigationClicked,
         };
-        const imageBaseUrl = this.props.imageBaseUrl || "/lib/entry-js/images/hardware/";
+        const imageBaseUrl = this.props.imageBaseUrl || '/lib/entry-js/images/hardware/';
+        const isOffline = this.props.isOffline;
         const defaultNavigation = <Navigation {...navSettings} />;
         const contents = {
             select: {
                 view: (
                     <Select
-                        type={this.options.mainType}
-                        subType={'sidebar'}
+                        type={this.props.type}
+                        mainType={this.options.mainType}
                         sidebar={this.options.sidebar}
                         data={this.props.data || []}
                         multiSelect={this.options.opt && this.options.opt.multiSelect}
@@ -85,21 +95,30 @@ class Sprite extends Component {
                 ),
             },
             upload: {
-                view: <FileUpload options={this.options.opt} />,
+                view: <FileUpload
+                    type={this.options.mainType}
+                    options={this.options.opt}
+                    uploads={this.props.data.uploads}
+                    isOffline={isOffline}
+                />,
             },
             draw: {
-                view: <Draw />,
+                view: <Draw/>,
             },
             write: {
-                view: <WriteBox fontOption={this.options.writeBoxOption} />,
+                view: <WriteBox fontOption={this.options.writeBoxOption}/>,
             },
             expansion: {
-                view: <Select type={'bigicon'} data={this.props.data || []} imageBaseUrl={imageBaseUrl} />,
+                view: <Select type={'bigicon'} data={this.props.data || []} imageBaseUrl={imageBaseUrl}/>,
                 nav: true,
             },
             projects: {
                 view: (
-                    <Projects type={navSettings.selected} data={this.props.data || { data: [] }} />
+                    <Projects
+                        type={this.props.type}
+                        selected={navSettings.selected}
+                        data={this.props.data || { data: [] }}
+                    />
                 ),
                 nav: (
                     <Navigation
@@ -110,7 +129,7 @@ class Sprite extends Component {
                 ),
             },
             favorites: {
-                view: <Projects type={navSettings.selected} data={this.props.data || []} />,
+                view: <Projects type={this.props.type} selected={navSettings.selected} data={this.props.data || []}/>,
                 nav: (
                     <Navigation
                         {...navSettings}
@@ -160,5 +179,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(Sprite);

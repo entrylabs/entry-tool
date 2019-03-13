@@ -1,11 +1,11 @@
 import root from 'window-or-global';
-import cookies from 'react-cookies';
 import { DEFAULT_OPTIONS } from '../constants/index';
 import get from 'lodash/get';
 
 export const CommonUtils = {
     getLangType: () => {
-        return cookies.load('lang');
+        const lang = root.Lang || {};
+        return lang.type;
     },
     getLang: (key = '') => {
         const lang = root.Lang || {};
@@ -13,7 +13,7 @@ export const CommonUtils = {
     },
     getFonts: () => {
         if (root.EntryStatic && root.EntryStatic.fonts) {
-            return root.EntryStatic.fonts;
+            return root.EntryStatic.fonts.filter(font => font.visible);
         }
         return DEFAULT_OPTIONS.WRITE_BOX.FONTS;
     },
@@ -28,8 +28,11 @@ export const CommonUtils = {
         const expUrl = /^[((http(s?))\:\/\/?)|/]/i;
         return expUrl.test(url) ? url : `/${url}`;
     },
-    createImageUrl: (id) => {
-        return `/uploads/${id.substring(0, 2)}/${id.substring(2, 4)}/thumb/${id}.png`;
+    createImageUrl: (id, baseUrl = '') => {
+        if (!id) {
+            return '';
+        }
+        return `${baseUrl}/uploads/${id.substring(0, 2)}/${id.substring(2, 4)}/thumb/${id}.png`;
     },
     remove: (array, callback) => {
         const arr = [...array];

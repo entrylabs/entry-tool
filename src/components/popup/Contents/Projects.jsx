@@ -12,15 +12,17 @@ class Projects extends Component {
             count: this.props.data.count || 0,
             selected: null,
         };
-
+        const isEmpty = this.props.data.data.length === 0;
         this.triggerEvent = this.triggerEvent.bind(this);
         this.selectItem = this.selectItem.bind(this);
-        this.props.triggerEvent(EMIT_TYPES.fetch, { type: this.props.type }, false);
+        if (isEmpty) {
+            this.props.triggerEvent(EMIT_TYPES.fetch, { type: this.props.selected }, false);
+        }
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.type !== nextProps.type) {
-            this.props.triggerEvent(EMIT_TYPES.fetch, { type: nextProps.type }, false);
+        if (this.props.selected !== nextProps.selected) {
+            this.props.triggerEvent(EMIT_TYPES.fetch, { type: nextProps.selected }, false);
         }
     }
 
@@ -35,7 +37,7 @@ class Projects extends Component {
 
     drawIems() {
         const data = this.props.data.data;
-        return data.map((item) => {
+        return data.filter((item) => item.user).map((item) => {
             let selected = false;
             if (this.state.selected && this.state.selected._id === item._id) {
                 selected = true;
@@ -147,8 +149,9 @@ class Projects extends Component {
                     <div onClick={(e) => this.triggerEvent(e, EMIT_TYPES.close, null)}>
                         {CommonUtils.getLang('Buttons.cancel')}
                     </div>
-                    <div className={Styles.active}
-                        onClick={(e) => this.triggerEvent(e, EMIT_TYPES.submit, this.state.selected)}>
+                    <div className={Styles.active} onClick={
+                        (e) => this.triggerEvent(e, EMIT_TYPES.submit, this.state.selected)
+                    }>
                         {CommonUtils.getLang('Menus.Load')}
                     </div>
                 </div>

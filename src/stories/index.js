@@ -38,8 +38,8 @@ storiesOf('Popup', module)
     .add('확장블록', () => <Popup type="expansion" data={EXPANSION_SAMPLE} />)
     .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE} />)
     .add('오브젝트추가하기', () => <Popup type="sprite" data={SPRITE_SAMPLE} />)
-    .add('모양추가', () => <Popup type="shape" data={SPRITE_SAMPLE} />)
-    .add('모양 가져오기', () => <Popup type="getShape" data={SPRITE_SAMPLE} />)
+    .add('모양추가', () => <Popup type="picture" data={SPRITE_SAMPLE} />)
+    .add('모양 가져오기', () => <Popup type="paint" data={SPRITE_SAMPLE} />)
     .add('나의 작품', () => <Popup type="projects" data={PROJECTS_SAMPLE} />)
     .add('gnb', () => <CommonGnb />);
 
@@ -51,6 +51,9 @@ const progressType = {
 const wigetStories = storiesOf('Widget', module);
 wigetStories.addDecorator(withKnobs);
 wigetStories.addDecorator((story) => <Provider story={story()} />);
+
+/* eslint-disable array-element-newline */
+/* eslint-disable array-bracket-newline */
 wigetStories
     .add('백팩', () => (
         <div style={{ height: '100vh' }}>

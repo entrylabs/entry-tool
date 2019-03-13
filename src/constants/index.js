@@ -1,3 +1,8 @@
+export const COLOR_PICKER_MODE = {
+    SLIDER: 'SLIDER',
+    SWATCHES: 'SWATCHES',
+};
+
 export const EMIT_TYPES = {
     submit: 'submit',
     load: 'load',
@@ -227,7 +232,7 @@ export const DEFAULT_OPTIONS = {
             },
             sidebar: SPRITE_SIDEBAR,
         },
-        shape: {
+        picture: {
             title: 'Workspace.picture_add',
             mainType: 'sprite',
             navigations: {
@@ -253,7 +258,7 @@ export const DEFAULT_OPTIONS = {
             },
             sidebar: SPRITE_SIDEBAR,
         },
-        getShape: {
+        paint: {
             title: 'Menus.picture_import',
             mainType: 'sprite',
             navigations: {
@@ -344,6 +349,7 @@ export const DEFAULT_OPTIONS = {
         },
         projects: {
             title: 'Menus.my_project',
+            mainType: 'projects',
             navigations: {
                 projects: {
                     name: 'Menus.my_project',
