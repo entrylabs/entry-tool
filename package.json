@@ -1,6 +1,6 @@
 {
     "name": "@entrylabs/tool",
-    "version": "v1.0.12",
+    "version": "v1.1.0",
     "license": "MIT",
     "repository": {
         "type": "git",
@@ -20,10 +20,8 @@
     "main": "./dist/entry-tool",
     "scripts": {
         "start": "node scripts/start.js",
-        "dist": "node scripts/build.js",
-        "distc": "node scripts/comp.js",
-        "dev": "node scripts/watch.js",
-        "devc": "node scripts/compWatch.js",
+        "dist": "rollup -c",
+        "dev": "rollup -c -w",
         "test": "node scripts/test.js --env=jsdom",
         "storybook": "start-storybook -p 9009",
         "build-storybook": "build-storybook"
