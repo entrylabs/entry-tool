@@ -157,6 +157,7 @@ class BackPack extends Component {
                     <div className={Styles.imageWrapper}>
                         {this.makeEmbed(imgPath)}
                     </div>
+                    <div className={Styles.imageOverlay} />
                     <button
                         className={Styles.closeButton}
                         onClick={() => {
