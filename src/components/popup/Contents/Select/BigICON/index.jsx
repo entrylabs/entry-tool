@@ -3,6 +3,7 @@ import Item from './Item';
 import { connect } from 'react-redux';
 import Styles from '@assets/scss/popup.scss';
 import Foot from './foot';
+import { CommonUtils } from '../../../../../utils/Common';
 
 class Index extends Component {
     drawItems() {
@@ -20,7 +21,7 @@ class Index extends Component {
                         <div className={Styles.cont_box}>
                             <div className={Styles.desc}>
                                 <div className={Styles.imico_exclamation_mark}></div>
-                                <div className={Styles.content}>확장 블록은 인터넷이 연결되어 있어야 정상적으로 동작합니다.</div>
+                                <div className={Styles.content}>{CommonUtils.getLang('template.expansion_block_descriptions')}</div>
                             </div>
                             <div className={Styles.extend_block}>
                                 <ul className={Styles.list}>{this.drawItems()}</ul>
