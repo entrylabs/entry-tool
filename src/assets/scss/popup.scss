@@ -180,6 +180,16 @@
             background-color: #ecf8ff;
             border-radius: 6px;
         }
+        .section_cont .desc {
+            margin-top: 26px;
+            .content {
+                display: inline-block;
+                margin-left: 6px;
+                vertical-align: top;
+                padding: 1.5px;
+                color: #3b3b3b;
+            }
+        }
         .section_cont .sub_menu {
             padding: 8px 22px 16px;
         }
@@ -802,7 +812,7 @@
         padding-left: 72px;
     }
     .extend_content .extend_block {
-        margin: 40px 0;
+        margin: 20px 0;
     }
     .extend_content .extend_block .list {
         overflow: hidden;
