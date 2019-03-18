@@ -3,6 +3,7 @@ import { pure } from 'recompose';
 import Scrollbars from '../common/scrollbars';
 import produce from 'immer';
 import Styles from '../../assets/scss/widget/BackPack.scss';
+import EntryEvent from '@entrylabs/event';
 import { CommonUtils } from '@utils/Common';
 
 class BackPack extends Component {
@@ -10,6 +11,37 @@ class BackPack extends Component {
         selectedId: '-1',
         isDragging: false,
     };
+
+    constructor(props) {
+        super(props);
+        this.backPack = React.createRef();
+    }
+    
+    componentDidMount() {
+        this.eventTarget = new EntryEvent(document);   
+        this.eventTarget.on('touchmove.bpInTool', (e) => {
+            const touch = e.touches[0];
+            const element = document.elementFromPoint(touch.clientX, touch.clientY);
+            const { current } = this.backPack;
+            const { isDragEnter } = this.state;
+            const isEnter = current.contains(element);
+            if (isEnter && !isDragEnter) {
+                this.handleCustomEnter(e);
+            } else if (!isEnter && isDragEnter) {
+                this.handleDragState(false);
+            }
+        });
+        this.eventTarget.on('touchend.bpInTool', (e) => {
+            const { isDragEnter, isDragging } = this.state;            
+            if (isDragEnter && !isDragging) {
+                this.handleBlockDrop(e);
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        this.eventTarget.off('.bpInTool');
+    }
 
     handleUpdateTitle = (id, target, defaultValue) => {
         const { value } = target;
@@ -147,11 +179,35 @@ class BackPack extends Component {
         });
     }
 
+    handleCustomEnter(e) {
+        const { onCustomDragEnter } = this.props;
+        if (onCustomDragEnter) {
+            onCustomDragEnter({
+                value: e,
+                type: 'block',
+                onDragEnter: ({ type, value }) => {
+                    if (type === 'block') {
+                        this.lastBlockView = value;
+                    }
+                    this.handleDragState(true);
+                },
+            });
+        }
+    }
+
+    handleBlockDrop = () => {
+        this.handleDragState(false);
+        this.handleDropItem({
+            type: 'block',
+            value: this.lastBlockView,
+        });
+    }
+
     makeLoadingView() {
         return (
             <div className={Styles.loading}>
                 <div className={Styles.image} />
-                로딩중
+                {CommonUtils.getLang('Menus.file_upload_loading')}
             </div>
         );
     }
@@ -168,7 +224,7 @@ class BackPack extends Component {
             //     eventTypes={eventTypes}
             //     style={{ height: '100%' }}
             // >
-            <div className={Styles.BackPack}>
+            <div ref={this.backPack} className={Styles.BackPack}>
                 <div className={Styles.titleArea} onClick={onClose}>
                     <div className={Styles.icon} />
                     <div className={Styles.title}>{CommonUtils.getLang('Workspace.my_storage')}</div>
@@ -181,25 +237,10 @@ class BackPack extends Component {
                             this.handleDragState(true);
                         }}
                         onMouseEnter={(e) => {
-                            // const {nativeEvent} = e;
-                            // const entryBoard = document.querySelector('.entryBoard');
-                            // nativeEvent.
-                            const { onCustomDragEnter } = this.props;
-                            if (onCustomDragEnter) {
-                                onCustomDragEnter({
-                                    value: e,
-                                    type: 'block',
-                                    onDragEnter: ({ type, value }) => {
-                                        if (type === 'block') {
-                                            this.lastBlockView = value;
-                                        }
-                                        this.handleDragState(true);
-                                    },
-                                });
-                            }
+                            this.handleCustomEnter(e);
                         }}
                     >
-                        <Scrollbars flex="1" className={Styles.scrollbar}>{this.makeItemList()}</Scrollbars>
+                        <Scrollbars heightRelativeToParent="100%" className={Styles.scrollbar}>{this.makeItemList()}</Scrollbars>
                     </div>
                 )}
                 {isDragEnter && !isDragging && (
@@ -217,13 +258,7 @@ class BackPack extends Component {
                         onDragLeave={() => {
                             this.handleDragState(false);
                         }}
-                        onMouseUp={() => {
-                            this.handleDragState(false);
-                            this.handleDropItem({
-                                type: 'block',
-                                value: this.lastBlockView,
-                            });
-                        }}
+                        onMouseUp={this.handleBlockDrop}
                         onMouseLeave={() => {
                             this.handleDragState(false);
                         }}
