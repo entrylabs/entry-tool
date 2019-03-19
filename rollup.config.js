@@ -100,7 +100,7 @@ export default [
         plugins,
         output: {
             file: './dist/entry-tool.js',
-            format: 'umd',
+            format: 'cjs',
             name: 'EntryTool',
             freeze: false,
             exports: 'named', // "named", "default"
