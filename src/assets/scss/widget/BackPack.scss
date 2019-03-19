@@ -47,7 +47,6 @@
     }
 
     .itemArea {
-        display: flex;
         width: 100%;
         height: calc(100% - 44px);
         flex-direction: column;
@@ -63,11 +62,14 @@
             background-color: $coolgray400;
             border-radius: 2.5px;
         }
+        :global(.rcs-inner-container) {
+            > div {
+                margin-top: 16px;
+                margin-bottom: 16px;
+            }
+        }
 
         .item {
-            &:first-child {
-                margin-top: 16px;
-            }
             &.active {
                 border-color: $lightish-blue;
                 background-color: $lightish-blue;
@@ -118,6 +120,16 @@
                     background-position: center;
                     pointer-events: none;
                 }
+            }
+            .imageOverlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding: 5px;
+                border-top-left-radius: 7px;
+                border-top-right-radius: 7px;
+                width: 78px;
+                height: 67px;
             }
             .input {
                 width: 72px;
