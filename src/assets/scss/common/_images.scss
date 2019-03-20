@@ -166,3 +166,11 @@ input[type='checkbox']:checked + .imbtn_pop_checked:before {
     background: url(../images/imico_pop_info_cmt.png) no-repeat;
     background-size: 16px auto;
 }
+
+.imico_exclamation_mark {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background: url(../images/ico_exclamation_mark.png) no-repeat;
+    background-size: 16px 16px;
+}
