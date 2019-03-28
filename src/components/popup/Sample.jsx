@@ -1546,23 +1546,62 @@ class Sample extends Component {
                                             >
                                                 <span className={Styles.blind}>글자 취소선</span>
                                             </div>
+                                            {/* 노멀상태 */}
                                             <div
-                                                className={`${Styles.style_link} ${
-                                                    Styles.imbtn_pop_font_color
-                                                    }`}
-                                                title="글자색"
-                                            >
+                                                className={Styles.imbtn_pop_font_color}
+                                                title="글자색">
                                                 <span className={Styles.blind}>글자 색</span>
+                                                {/* 팔레트에 선택되는 색상으로 넣어주세요. */}
+                                                <em style={{ backgroundColor: '#f9f9f9'}}></em> 
                                             </div>
+                                            {/* 활성화시 색상이 선택되면 on 클래스 추가 */}
                                             <div
-                                                className={`${Styles.style_link} ${
-                                                    Styles.imbtn_pop_font_paint
-                                                    }`}
+                                                className={`${Styles.imbtn_pop_font_color} ${Styles.on}`}
+                                                title="글자색">
+                                                <span className={Styles.blind}>글자 색</span>
+                                                {/* 팔레트에 선택되는 색상으로 넣어주세요. */}
+                                                <em style={{ backgroundColor: '#f00'}}></em> 
+                                            </div>
+
+                                            {/* 노멀 */}
+                                            <div
+                                                className={Styles.imbtn_pop_font_paint}
                                                 title="배경색"
                                             >
+                                                {/* 팔레트에 선택되는 색상으로 넣어주세요. */}
+                                                <em style={{ backgroundColor: '#f00'}}></em> 
+                                                <span className={Styles.blind}>글자 배경색</span>
+                                            </div>
+                                            {/* 노멀 상태에 배경색이 흰색 또는 투명일 경우 clear 클래스 추가 */}
+                                            <div
+                                                className={`${Styles.imbtn_pop_font_paint} ${Styles.clear}`}
+                                                title="배경색"
+                                            >
+                                                {/* 팔레트에 선택되는 색상으로 넣어주세요. */}
+                                                <em style={{ backgroundColor: '#fff'}}></em> 
+                                                <span className={Styles.blind}>글자 배경색</span>
+                                            </div>
+                                            {/* 활성화 상태에 배경색이 흰색 또는 투명일 경우 clear_on 클래스 추가 */}
+                                            <div
+                                                className={`${Styles.imbtn_pop_font_paint} ${Styles.clear_on}`}
+                                                title="배경색"
+                                            >
+                                                {/* 팔레트에 선택되는 색상으로 넣어주세요. */}
+                                                <em style={{ backgroundColor: '#fff'}}></em> 
+                                                <span className={Styles.blind}>글자 배경색</span>
+                                            </div>
+                                            {/* 가본 활성화시 색상이 선택되면 on 클래스 추가 */}
+                                            <div
+                                                className={`${Styles.imbtn_pop_font_paint} ${Styles.on}`}
+                                                title="배경색"
+                                            >
+                                                {/* 팔레트에 선택되는 색상으로 넣어주세요. */}
+                                                <em style={{ backgroundColor: '#f00'}}></em> 
                                                 <span className={Styles.blind}>글자 배경색</span>
                                             </div>
                                         </div>
+
+
                                         <div className={Styles.write_type_box}>
                                             {/* 링크가 클릭되면 on 클래스 토글 */}
                                             <div className={Styles.on}>
