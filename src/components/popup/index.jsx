@@ -72,7 +72,7 @@ class Sprite extends Component {
             selected: this.state.navigation,
             onClicked: this.onNavigationClicked,
         };
-        const imageBaseUrl = this.props.imageBaseUrl || '/lib/entry-js/images/hardware/';
+        const imageBaseUrl = '/lib/entry-js/images/hardware/';
         const isOffline = this.props.isOffline;
         const defaultNavigation = <Navigation {...navSettings} />;
         const contents = {
@@ -109,7 +109,7 @@ class Sprite extends Component {
                 view: <WriteBox fontOption={this.options.writeBoxOption}/>,
             },
             expansion: {
-                view: <Select type={'bigicon'} data={this.props.data || []} imageBaseUrl={imageBaseUrl}/>,
+                view: <Select type={'bigicon'} imageBaseUrl={imageBaseUrl} data={this.props.data || []}/>,
                 nav: true,
             },
             projects: {
