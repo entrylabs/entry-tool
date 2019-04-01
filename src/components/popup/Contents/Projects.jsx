@@ -20,6 +20,10 @@ class Projects extends Component {
         }
     }
 
+    componentDidMount() {
+        this.props.triggerEvent(EMIT_TYPES.fetch, { type: this.props.selected }, false);
+    }
+
     componentWillReceiveProps(nextProps) {
         if (this.props.selected !== nextProps.selected) {
             this.props.triggerEvent(EMIT_TYPES.fetch, { type: nextProps.selected }, false);
