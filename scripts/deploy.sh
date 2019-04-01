@@ -6,7 +6,7 @@ branchName="${TRAVIS_BRANCH}"
 distText="dist"
 deployName="${branchName/deploy/$distText}"
 
-DATEFMT="$(date) +%Y%m%d"
+DATEFMT=`date "+%Y%m%d"`
 cd build
 git config user.name "Entry Dev"
 git config user.email "entrydev@nts-corp.com"
