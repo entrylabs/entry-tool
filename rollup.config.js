@@ -6,6 +6,7 @@ import babel from 'rollup-plugin-babel';
 import clear from 'rollup-plugin-clear';
 import url from '@entrylabs/postcss-url';
 import builtins from 'rollup-plugin-node-builtins';
+import replace from 'rollup-plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 
 const plugins = [
@@ -91,6 +92,9 @@ const plugins = [
         ],
         exclude: 'node_modules/**',
     }),
+    replace({
+        'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
     terser(),
 ];
 
@@ -100,23 +104,8 @@ export default [
         plugins,
         output: {
             file: './dist/entry-tool.js',
-            format: 'cjs',
+            format: 'iife',
             name: 'EntryTool',
-            freeze: false,
-            exports: 'named', // "named", "default"
-            interop: false,
-            sourcemap: true,
-        },
-    },
-    {
-        input: 'src/component.js',
-        plugins,
-        output: {
-            file: './component/index.js',
-            format: 'es',
-            freeze: false,
-            exports: 'named', // "named", "default"
-            interop: false,
             sourcemap: true,
         },
     },

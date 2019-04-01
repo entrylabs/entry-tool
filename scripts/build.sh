@@ -6,7 +6,5 @@ git clone -b build "${GH_REPO}" build
 rm -rf build/**/* || exit 0
 yarn dist
 cp -r dist build/
-yarn distc
-cp -r component build/
 ls -al
 ls -al build
