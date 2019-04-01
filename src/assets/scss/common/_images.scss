@@ -78,7 +78,7 @@
         background-image: url(../images/btn_pop_font_color_on.png);
     }
 }
-.imbtn_pop_font_paint {
+.imbtn_pop_font_paint, .imbtn_pop_font_backgroundcolor {
     display: inline-block;
     position: relative;
     overflow: hidden;
@@ -98,6 +98,12 @@
     }
     &.on {
         background-image: url(../images/btn_pop_font_paint_on.png);
+        &.clear {
+            background-image: url(../images/btn_pop_font_paint_clear_on.png);
+            em {
+                display: none;
+            }
+        }
     }
     &.clear {
         background-image: url(../images/btn_pop_font_paint_clear.png);
