@@ -104,8 +104,23 @@ export default [
         plugins,
         output: {
             file: './dist/entry-tool.js',
-            format: 'iife',
+            format: 'cjs',
             name: 'EntryTool',
+            freeze: false,
+            exports: 'named', // "named", "default"
+            interop: false,
+            sourcemap: true,
+        },
+    },
+    {
+        input: 'src/component.js',
+        plugins,
+        output: {
+            file: './component/index.js',
+            format: 'es',
+            freeze: false,
+            exports: 'named', // "named", "default"
+            interop: false,
             sourcemap: true,
         },
     },
