@@ -109,6 +109,7 @@ class FileUpload extends Component {
     }
 
     triggerNotSuportFileError() {
+        this.setState({ isUploading: false });
         this.props.triggerEvent(
             'uploadFail',
             {
@@ -195,7 +196,6 @@ class FileUpload extends Component {
         if (!checkFiles) {
             this.props.triggerEvent('dummyUploads', { formData, objectData }, false);
             $upload.value = '';
-            this.setState({ isUploading: true });
         }
     }
 
