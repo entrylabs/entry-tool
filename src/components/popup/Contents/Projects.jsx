@@ -12,15 +12,8 @@ class Projects extends Component {
             count: this.props.data.count || 0,
             selected: null,
         };
-        const isEmpty = this.props.data.data.length === 0;
         this.triggerEvent = this.triggerEvent.bind(this);
         this.selectItem = this.selectItem.bind(this);
-        if (isEmpty) {
-            this.props.triggerEvent(EMIT_TYPES.fetch, { type: this.props.selected }, false);
-        }
-    }
-
-    componentDidMount() {
         this.props.triggerEvent(EMIT_TYPES.fetch, { type: this.props.selected }, false);
     }
 
