@@ -5,3 +5,4 @@ export { default as Angle } from './components/widget/angleContainer';
 export { default as Number } from './components/widget/numberContainer';
 export { default as ContextMenu } from './components/widget/contextMenuContainer';
 export { default as BackPack } from './components/widget/BackPackContainer';
+export { default as Popup } from './components/popup/popupContainer';
