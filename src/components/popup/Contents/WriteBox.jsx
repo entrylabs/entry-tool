@@ -7,6 +7,7 @@ import ColorPicker from '@components/picker/color';
 import Dropdown from '@components/widget/dropdown';
 import { EMIT_TYPES } from '@constants';
 import _cloneDeep from 'lodash/cloneDeep';
+import _includes from 'lodash/includes';
 
 /* eslint-disable array-element-newline */
 const FIELDS = {
@@ -125,19 +126,22 @@ class WriteBox extends Component {
     drawEffects() {
         return Object.keys(this.state.effects).map((key) => {
             const effect = this.state.effects[key];
-            const className = `${Styles.style_link} ${
-                Styles[`imbtn_pop_font_${key.toLowerCase()}`]
-            } ${CommonUtils.toggleClass(effect.apply, Styles.on)}`;
+            const isColor = _includes(key.toLowerCase(), 'color');
+            const backgroundColor = isColor ? effect.css[key] : null;
+            const isColorOn = this.state.colorPicker && this.state.colorPicker.props.target === key;
+            const isOn = isColor ? isColorOn : effect.apply;
+            const clear = CommonUtils.toggleClass(backgroundColor === '#ffffff' || backgroundColor === 'transparent', Styles.clear);
+            const className = `${CommonUtils.toggleClass(!isColor, Styles.style_link)} ${Styles[`imbtn_pop_font_${key.toLowerCase()}`]} ${CommonUtils.toggleClass(isOn, Styles.on)} ${clear}`;
             return (
-                <a
-                    href="#NULL"
+                <div
                     key={key}
                     className={className}
                     data-effect={key}
                     title={CommonUtils.getLang(effect.text)}
                 >
                     <span className="blind">글자 {effect.text}</span>
-                </a>
+                    {isColor && <em style={{ backgroundColor }}></em>}
+                </div>
             );
         });
     }
@@ -146,7 +150,7 @@ class WriteBox extends Component {
         if (this.state.colorPicker) {
             return null;
         }
-        const canTransparent = CommonUtils.toggleClass(effectName === "backgroundColor", true);
+        const canTransparent = CommonUtils.toggleClass(effectName === 'backgroundColor', true);
         return (
             <ColorPicker
                 color={color}
@@ -156,6 +160,7 @@ class WriteBox extends Component {
                     this.setState({ colorPicker: null });
                 }}
                 outsideExcludeDom={[target]}
+                target={effectName}
                 onChangeColorPicker={(color) => {
                     effects[effectName].apply = true;
                     effects[effectName].css = { [effectName]: color };
@@ -181,7 +186,7 @@ class WriteBox extends Component {
                     e.target,
                     effect.css[effectName],
                     effects,
-                    effectName
+                    effectName,
                 );
                 this.setState({ colorPicker });
                 break;
@@ -258,7 +263,7 @@ class WriteBox extends Component {
                                             } ${CommonUtils.toggleClass(
                                                 this.state.dropDown,
                                                 Styles.imico_pop_select_arr_up,
-                                                Styles.imico_pop_select_arr_down
+                                                Styles.imico_pop_select_arr_down,
                                             )}`}
                                             onClick={this.onFontBoxClicked}
                                             title={CommonUtils.getLang('Workspace.font_family')}
@@ -279,11 +284,11 @@ class WriteBox extends Component {
                                             href="#NULL"
                                             className={CommonUtils.toggleClass(
                                                 this.state.writeType === 'one',
-                                                Styles.on
+                                                Styles.on,
                                             )}
                                             onClick={(e) => {
                                                 handle(e, () =>
-                                                    this.setState({ writeType: 'one' })
+                                                    this.setState({ writeType: 'one' }),
                                                 );
                                             }}
                                         >
@@ -293,11 +298,11 @@ class WriteBox extends Component {
                                             href="#NULL"
                                             className={CommonUtils.toggleClass(
                                                 this.state.writeType === 'multi',
-                                                Styles.on
+                                                Styles.on,
                                             )}
                                             onClick={(e) => {
                                                 handle(e, () =>
-                                                    this.setState({ writeType: 'multi' })
+                                                    this.setState({ writeType: 'multi' }),
                                                 );
                                             }}
                                         >
@@ -344,5 +349,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     null,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(WriteBox);
