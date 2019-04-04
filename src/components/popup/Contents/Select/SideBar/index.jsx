@@ -30,10 +30,8 @@ class Index extends Component {
     componentDidUpdate(prevProps) {
         const before = prevProps.popupReducer;
         const next = this.props.popupReducer;
-        const isMenuChanged = before.sidebar !== next.sidebar || before.subMenu !== next.subMenu;
-        const isEmpty = this.props.data.data.length === 0;
-
-        if (!isEmpty && isMenuChanged) {
+        const isMenuChanged = before.sidebar && (before.sidebar !== next.sidebar || before.subMenu !== next.subMenu);
+        if (isMenuChanged) {
             const elmnt = document.getElementById('popupList');
             if (elmnt) {
                 elmnt.scrollTop = 0;
@@ -44,6 +42,14 @@ class Index extends Component {
                 false,
             );
         }
+    }
+
+    componentWillUnmount() {
+        this.props.setUIParam({
+            type: undefined,
+            sidebar: undefined,
+            subMenu: undefined,
+        });
     }
 
     drawItems() {
