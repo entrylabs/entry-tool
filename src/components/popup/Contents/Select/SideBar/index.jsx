@@ -13,11 +13,8 @@ import { EMIT_TYPES } from '@constants';
 class Index extends Component {
     constructor(props) {
         super(props);
-        const isEmpty = this.props.data.data.length === 0;
         this.props.setUIParam(this.options);
-        if (isEmpty) {
-            this.props.triggerEvent(EMIT_TYPES.fetch, this.options, false);
-        }
+        this.props.triggerEvent(EMIT_TYPES.fetch, this.options, false);
         this.drawItems = this.drawItems.bind(this);
         this.getMenus = this.getMenus.bind(this);
     }
@@ -35,10 +32,6 @@ class Index extends Component {
         const next = this.props.popupReducer;
         const isMenuChanged = before.sidebar !== next.sidebar || before.subMenu !== next.subMenu;
         const isEmpty = this.props.data.data.length === 0;
-        if (prevProps.type !== this.props.type) {
-            this.props.setUIParam(this.options);
-            this.props.triggerEvent(EMIT_TYPES.fetch, this.options, false);
-        }
 
         if (!isEmpty && isMenuChanged) {
             const elmnt = document.getElementById('popupList');
