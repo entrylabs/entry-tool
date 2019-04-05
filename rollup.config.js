@@ -49,6 +49,7 @@ const plugins = [
                 'useEffect',
                 'useRef',
                 'useMemo',
+                'useReducer',
                 'forwardRef',
             ],
             'node_modules/lodash/lodash.js': ['debounce'],
