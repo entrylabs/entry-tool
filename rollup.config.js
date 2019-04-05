@@ -9,10 +9,13 @@ import builtins from 'rollup-plugin-node-builtins';
 import replace from 'rollup-plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 
+const isProduction = process.env.NODE_ENV === 'production';
 const plugins = [
-    clear({
-        targets: ['component', 'dist'],
-    }),
+    isProduction
+        ? clear({
+              targets: ['component', 'dist'],
+          })
+        : undefined,
     builtins(),
     postcss({
         modules: true,
@@ -32,12 +35,7 @@ const plugins = [
     json(),
     resolve({
         preferBuiltins: true,
-        extensions: [
-            '.mjs',
-            '.js',
-            '.jsx',
-            '.json',
-        ],
+        extensions: ['.mjs', '.js', '.jsx', '.json'],
     }),
     commonjs({
         namedExports: {
@@ -47,6 +45,11 @@ const plugins = [
                 'PropTypes',
                 'createElement',
                 'createFactory',
+                'useState',
+                'useEffect',
+                'useRef',
+                'useMemo',
+                'forwardRef',
             ],
             'node_modules/lodash/lodash.js': ['debounce'],
             'node_modules/chroma-js/chroma.js': ['isValidElementType'],
@@ -85,7 +88,7 @@ const plugins = [
                 {
                     modules: false,
                     targets: {
-                        browsers: ['>0.25%', 'ie >= 11'],
+                        browsers: ['>0.25%', 'last 2 versions', 'ie >= 10'],
                     },
                 },
             ],
@@ -93,9 +96,11 @@ const plugins = [
         exclude: 'node_modules/**',
     }),
     replace({
-        'process.env.NODE_ENV': JSON.stringify('production'),
+        'process.env.NODE_ENV': isProduction
+            ? JSON.stringify('production')
+            : JSON.stringify('development'),
     }),
-    terser(),
+    isProduction ? terser() : undefined,
 ];
 
 export default [

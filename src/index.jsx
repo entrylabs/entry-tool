@@ -1,5 +1,6 @@
 export { default as ColorPicker } from './components/picker/colorContainer';
 export { default as Sortable } from './components/widget/sortableContainer';
+export { default as Sortable2 } from './components/widget/sortable2Container';
 export { default as Dropdown } from './components/widget/dropdownContainer';
 export { default as Angle } from './components/widget/angleContainer';
 export { default as Number } from './components/widget/numberContainer';

@@ -1,7 +1,4 @@
 {
     "editor.formatOnSave": false,
-    "[yaml]": {
-        "editor.formatOnSave": false
-    },
     "eslint.enable": true
 }
