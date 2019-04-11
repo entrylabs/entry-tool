@@ -13,11 +13,8 @@ import { EMIT_TYPES } from '@constants';
 class Index extends Component {
     constructor(props) {
         super(props);
-        const isEmpty = this.props.data.data.length === 0;
         this.props.setUIParam(this.options);
-        if (isEmpty) {
-            this.props.triggerEvent(EMIT_TYPES.fetch, this.options, false);
-        }
+        this.props.triggerEvent(EMIT_TYPES.fetch, this.options, false);
         this.drawItems = this.drawItems.bind(this);
         this.getMenus = this.getMenus.bind(this);
     }
@@ -33,14 +30,8 @@ class Index extends Component {
     componentDidUpdate(prevProps) {
         const before = prevProps.popupReducer;
         const next = this.props.popupReducer;
-        const isMenuChanged = before.sidebar !== next.sidebar || before.subMenu !== next.subMenu;
-        const isEmpty = this.props.data.data.length === 0;
-        if (prevProps.type !== this.props.type) {
-            this.props.setUIParam(this.options);
-            this.props.triggerEvent(EMIT_TYPES.fetch, this.options, false);
-        }
-
-        if (!isEmpty && isMenuChanged) {
+        const isMenuChanged = before.sidebar && (before.sidebar !== next.sidebar || before.subMenu !== next.subMenu);
+        if (isMenuChanged) {
             const elmnt = document.getElementById('popupList');
             if (elmnt) {
                 elmnt.scrollTop = 0;
@@ -51,6 +42,14 @@ class Index extends Component {
                 false,
             );
         }
+    }
+
+    componentWillUnmount() {
+        this.props.setUIParam({
+            type: undefined,
+            sidebar: undefined,
+            subMenu: undefined,
+        });
     }
 
     drawItems() {
