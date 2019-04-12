@@ -50,6 +50,8 @@ const plugins = [
                 'useRef',
                 'useMemo',
                 'useReducer',
+                'useCallback',
+                'useImperativeHandle',
                 'forwardRef',
             ],
             'node_modules/lodash/lodash.js': ['debounce'],

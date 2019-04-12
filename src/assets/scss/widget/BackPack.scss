@@ -106,6 +106,7 @@
             .imageWrapper {
                 display: flex;
                 justify-content: center;
+                align-items: center;
                 padding: 5px;
                 width: 78px;
                 height: 67px;
@@ -114,9 +115,8 @@
                 background-color: $white;
                 .image {
                     max-width: 78px;
-                    height: 67px;
-                    // margin: 5px;
-                    // position: absolute;
+                    max-height: 67px;
+                    height: auto;
                     background-size: contain;
                     background-repeat: no-repeat;
                     background-position: center;
@@ -202,6 +202,7 @@
             height: 32px;
             margin-bottom: 11px;
             background: url(../../images/img_backpack_plus.svg);
+            pointer-events: none;
         }
         
         .desc {
@@ -212,7 +213,7 @@
             white-space: pre;
             text-align: center;
             color: #2c313d;
-
+            pointer-events: none;
         }
     }
 }

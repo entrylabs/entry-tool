@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
 import withWrapper from '@hoc/withWrapper';
 import { connect } from 'react-redux';
-import { onChangeDragType } from '@actions/widget';
+import { onChangeDragType, onDragActionChange, onDragData } from '@actions/widget';
 import BackPack from './BackPack';
 
 class BackPackContainer extends Component {
     render() {
-        const { onChangeDragType } = this.props;
-        return <BackPack {...this.props} onChangeDragType={onChangeDragType} />;
+        // const { onChangeDragType, onDragActionChange, onDragData } = this.props;
+        return (
+            <BackPack
+                {...this.props}
+                // onDragData={onDragData}
+                // onChangeDragType={onChangeDragType}
+                // onDragActionChange={onDragActionChange}
+            />
+        );
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
     onChangeDragType: (type) => dispatch(onChangeDragType(type)),
+    onDragActionChange: (type) => dispatch(onDragActionChange(type)),
+    onDragData: (type) => dispatch(onDragData(type)),
 });
 
 export default withWrapper({

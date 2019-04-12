@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { pure } from 'recompose';
-import Scrollbars from '../common/scrollbars';
+import Draggable from '../widget/draggable';
 import produce from 'immer';
 import Styles from '../../assets/scss/widget/BackPack.scss';
 import EntryEvent from '@entrylabs/event';
@@ -9,16 +9,15 @@ import { CommonUtils } from '@utils/Common';
 class BackPack extends Component {
     state = {
         selectedId: '-1',
-        isDragging: false,
     };
 
     constructor(props) {
         super(props);
         this.backPack = React.createRef();
     }
-    
+
     componentDidMount() {
-        this.eventTarget = new EntryEvent(document);   
+        this.eventTarget = new EntryEvent(document);
         this.eventTarget.on('touchmove.bpInTool', (e) => {
             const touch = e.touches[0];
             const element = document.elementFromPoint(touch.clientX, touch.clientY);
@@ -32,9 +31,9 @@ class BackPack extends Component {
             }
         });
         this.eventTarget.on('touchend.bpInTool', (e) => {
-            const { isDragEnter, isDragging } = this.state;            
-            if (isDragEnter && !isDragging) {
-                this.handleBlockDrop(e);
+            const { isDragEnter } = this.state;
+            if (isDragEnter) {
+                this.handleItemDrop(e);
             }
         });
     }
@@ -73,26 +72,22 @@ class BackPack extends Component {
         }
     };
 
-    handleDragStart(e, { _id, type }) {
-        e.dataTransfer.setData('text', _id);
+    handleDragInfo = (isDragging, data) => {
+        console.log('handleDragInfo', isDragging, data);
+        const { onDragActionChange, onDragData } = this.props;
+        if (onDragActionChange) {
+            onDragActionChange(isDragging);
+        }
+        if (onDragData) {
+            onDragData(data);
+        }
+    };
+
+    handleDragStart(e, { type }) {
         const { onChangeDragType } = this.props;
         if (onChangeDragType) {
             onChangeDragType(type);
         }
-        this.setState(produce((draft) => {
-            draft.isDragging = true;
-        }));
-    }
-    
-    handleDragEnd() {
-        const { onChangeDragType } = this.props;
-        if (onChangeDragType) {
-            onChangeDragType('none');
-        }
-        this.setState(produce((draft) => {
-            draft.isDragging = false;
-            draft.isDragEnter = false;
-        }));
     }
 
     handlePreventDefault(e) {
@@ -123,13 +118,9 @@ class BackPack extends Component {
 
     makeEmbed(imgPath) {
         if (imgPath.indexOf('.svg') > -1) {
-            return (
-                <embed src={imgPath} className={Styles.image}/>
-            );
+            return <img src={imgPath} className={Styles.image} alt="" />;
         } else {
-            return (
-                <img src={imgPath} className={Styles.image} alt="" />
-            );
+            return <img src={imgPath} className={Styles.image} alt="" />;
         }
     }
 
@@ -146,17 +137,15 @@ class BackPack extends Component {
                     onClick={() => {
                         this.handleItemSelect(_id);
                     }}
-                    draggable={true}
-                    onDragStart={(e) => {
+                    onMouseDown={(e) => {
                         this.handleDragStart(e, item);
                     }}
-                    onDragEnd={(e) => {
-                        this.handleDragEnd(e);
+                    onTouchStart={(e) => {
+                        this.handleDragStart(e, item);
                     }}
+                    data-image={imgPath}
                 >
-                    <div className={Styles.imageWrapper}>
-                        {this.makeEmbed(imgPath)}
-                    </div>
+                    <div className={Styles.imageWrapper}>{this.makeEmbed(imgPath)}</div>
                     <div className={Styles.imageOverlay} />
                     <button
                         className={Styles.closeButton}
@@ -168,7 +157,6 @@ class BackPack extends Component {
                         <input
                             className={Styles.input}
                             defaultValue={title}
-                            onDrop={this.handlePreventDefault}
                             onKeyUp={this.handleKeyup}
                             onBlur={({ target }) => {
                                 this.handleUpdateTitle(_id, target, title);
@@ -186,23 +174,18 @@ class BackPack extends Component {
             onCustomDragEnter({
                 value: e,
                 type: 'block',
-                onDragEnter: ({ type, value }) => {
-                    if (type === 'block') {
-                        this.lastBlockView = value;
-                    }
+                onDragEnter: (value) => {
+                    this.lastDropItem = value;
                     this.handleDragState(true);
                 },
             });
         }
     }
 
-    handleBlockDrop = () => {
+    handleItemDrop = () => {
         this.handleDragState(false);
-        this.handleDropItem({
-            type: 'block',
-            value: this.lastBlockView,
-        });
-    }
+        this.handleDropItem(this.lastDropItem);
+    };
 
     makeLoadingView() {
         return (
@@ -214,62 +197,50 @@ class BackPack extends Component {
     }
 
     render() {
-        const { onClose = () => {}, isLoading = true } = this.props;
-        const { isDragEnter = false, isDragging = false } = this.state;
+        const { onClose = () => {}, isLoading = true, draggableOption } = this.props;
+        const { isDragEnter = false } = this.state;
         return (
-            // <OutsideClick
-            //     outsideExcludeDom={outsideExcludeDom}
-            //     onOutsideClick={() => {
-            //         onOutsideClick(angle);
-            //     }}
-            //     eventTypes={eventTypes}
-            //     style={{ height: '100%' }}
-            // >
             <div ref={this.backPack} className={Styles.BackPack}>
                 <div className={Styles.titleArea} onClick={onClose}>
                     <div className={Styles.icon} />
-                    <div className={Styles.title}>{CommonUtils.getLang('Workspace.my_storage')}</div>
+                    <div className={Styles.title}>
+                        {CommonUtils.getLang('Workspace.my_storage')}
+                    </div>
                 </div>
                 {isLoading && this.makeLoadingView()}
                 {!isLoading && (
                     <div
                         className={Styles.itemArea}
-                        onDragEnter={() => {
-                            this.handleDragState(true);
-                        }}
                         onMouseEnter={(e) => {
                             this.handleCustomEnter(e);
                         }}
                     >
-                        <Scrollbars heightRelativeToParent="100%" className={Styles.scrollbar}>{this.makeItemList()}</Scrollbars>
+                        <Draggable
+                            {...draggableOption}
+                            items={this.makeItemList()}
+                            onDragActionChange={(isDragging, data) => {
+                                this.handleDragInfo(isDragging, data);
+                            }}
+                            itemShadowClassName={Styles.item}
+                            itemShadowStyle={{ position: 'absolute', backgroundColor: '#aeaeae' }}
+                        />
                     </div>
                 )}
-                {isDragEnter && !isDragging && (
+                {isDragEnter && (
                     <div
                         className={Styles.dragArea}
-                        onDrop={(e) => {
-                            this.handleDragState(false);
-                            const value = e.dataTransfer.getData('text');
-                            this.handleDropItem({
-                                value,
-                                type: 'object',
-                            });
-                        }}
-                        onDragOver={this.handlePreventDefault}
-                        onDragLeave={() => {
-                            this.handleDragState(false);
-                        }}
-                        onMouseUp={this.handleBlockDrop}
+                        onMouseUp={this.handleItemDrop}
                         onMouseLeave={() => {
                             this.handleDragState(false);
                         }}
                     >
-                        <div className={Styles.icon}/>
-                        <div className={Styles.desc}>{CommonUtils.getLang('Workspace.my_storage_backpack_drop')}</div>
+                        <div className={Styles.icon} />
+                        <div className={Styles.desc}>
+                            {CommonUtils.getLang('Workspace.my_storage_backpack_drop')}
+                        </div>
                     </div>
                 )}
             </div>
-            // </OutsideClick>
         );
     }
 }
