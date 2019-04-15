@@ -72,7 +72,7 @@ class Sprite extends Component {
             selected: this.state.navigation,
             onClicked: this.onNavigationClicked,
         };
-        const imageBaseUrl = '/lib/entry-js/images/hardware/';
+        const imageBaseUrl = this.props.imageBaseUrl || '/lib/entry-js/images/hardware/';
         const isOffline = this.props.isOffline;
         const defaultNavigation = <Navigation {...navSettings} />;
         const contents = {
