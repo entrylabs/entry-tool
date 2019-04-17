@@ -42,6 +42,7 @@ const plugins = [
             'node_modules/react/index.js': [
                 'Children',
                 'Component',
+                'createRef',
                 'PropTypes',
                 'createElement',
                 'createFactory',

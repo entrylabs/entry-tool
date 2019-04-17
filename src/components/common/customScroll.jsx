@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import _debounce from 'lodash/debounce';
 import Styles from '../../assets/scss/customScroll.scss';
 
@@ -9,8 +9,8 @@ function getScaleNumber(num, inMin, inMax, outMin, outMax) {
 const PADDING_HEIGHT = 8;
 const MIN_HEIGHT = 40;
 
-const CustomScroll = (props) => {
-    const { children } = props;
+const CustomScroll = (props, ref) => {
+    const { children, onScroll } = props;
     const [top, setTop] = useState(0);
     const [height, setHeight] = useState(0);
     const [indicatorShow, setIndicatorShow] = useState(false);
@@ -49,6 +49,9 @@ const CustomScroll = (props) => {
                 className={Styles.customScroll}
                 ref={(dom) => {
                     if (dom) {
+                        if (ref && ref instanceof Function) {
+                            ref(dom);
+                        }
                         const { clientHeight, scrollHeight } = dom;
                         const height = Math.max(
                             Math.round((clientHeight / scrollHeight) * clientHeight),
@@ -73,6 +76,9 @@ const CustomScroll = (props) => {
                         )
                     );
                     setScrolled(true);
+                    if (onScroll) {
+                        onScroll(e);
+                    }
                 }}
             >
                 {children}
@@ -85,4 +91,4 @@ const CustomScroll = (props) => {
     );
 };
 
-export default CustomScroll;
+export default forwardRef(CustomScroll);

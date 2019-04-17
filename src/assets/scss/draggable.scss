@@ -11,6 +11,13 @@
     height: 100%;
     position: relative;
 
+    .draggableList {
+        > div {
+            position: relative;
+            transition: transform 0.2s;
+            transition-timing-function: ease;
+        }
+    }
     &.draggableInlineList {
         .draggableItem {
             display: inline-block;
@@ -33,6 +40,6 @@
     .dragView {
         max-width: 100px;
         max-height: 100px;
-        pointer-events: none;
+        position: fixed;
     }
 }

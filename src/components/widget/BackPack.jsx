@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { pure } from 'recompose';
-import Draggable from '../widget/draggable';
+import Draggable from './draggable';
 import produce from 'immer';
 import Styles from '../../assets/scss/widget/BackPack.scss';
 import EntryEvent from '@entrylabs/event';
@@ -31,6 +31,7 @@ class BackPack extends Component {
             }
         });
         this.eventTarget.on('touchend.bpInTool', (e) => {
+            console.log('????? touchend');
             const { isDragEnter } = this.state;
             if (isDragEnter) {
                 this.handleItemDrop(e);
@@ -78,7 +79,7 @@ class BackPack extends Component {
         if (onDragActionChange) {
             onDragActionChange(isDragging);
         }
-        if (onDragData) {
+        if (onDragData && data) {
             onDragData(data);
         }
     };
