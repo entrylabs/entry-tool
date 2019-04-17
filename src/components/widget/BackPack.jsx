@@ -223,7 +223,11 @@ class BackPack extends Component {
                                 this.handleDragInfo(isDragging, data);
                             }}
                             itemShadowClassName={Styles.item}
-                            itemShadowStyle={{ position: 'absolute', backgroundColor: '#aeaeae' }}
+                            itemShadowStyle={{
+                                position: 'absolute',
+                                backgroundColor: '#8aa3b2',
+                                border: 'solid 1px #728997',
+                            }}
                         />
                     </div>
                 )}
