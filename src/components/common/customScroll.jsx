@@ -10,7 +10,7 @@ const PADDING_HEIGHT = 8;
 const MIN_HEIGHT = 40;
 
 const CustomScroll = (props, ref) => {
-    const { children, onScroll } = props;
+    const { children, onScroll, style } = props;
     const [top, setTop] = useState(0);
     const [height, setHeight] = useState(0);
     const [indicatorShow, setIndicatorShow] = useState(false);
@@ -47,6 +47,7 @@ const CustomScroll = (props, ref) => {
         <>
             <div
                 className={Styles.customScroll}
+                style={style}
                 ref={(dom) => {
                     if (dom) {
                         if (ref && ref instanceof Function) {

@@ -25,12 +25,12 @@ class DraggableList extends Component {
     constructor(props) {
         super(props);
         this.draggableListRef = React.createRef();
-        const { items } = props;
-        this.setState({ items, defaultItems: items });
     }
 
     state = {
         isDragging: false,
+        items: this.props.items,
+        defaultItems: this.props.items,
     };
     targetEvent = new EntryEvent(document);
     targetEvent2 = new EntryEvent(document.body);
@@ -220,16 +220,16 @@ class DraggableList extends Component {
             if (!canSortable) {
                 return;
             }
+            const { index } = this.dragItemInfo;
             if (!this.isLeavePoint(e)) {
                 this.checkRectList = this.checkRectList
                     ? this.checkRectList
                     : _.cloneDeep(this.getCheckRect());
                 const checkItem = this.getSortableInfo(e) || {};
-                const { index } = this.dragItemInfo;
                 const { index: infoIndex = index } = checkItem;
                 this.setSortableTransform(index, infoIndex);
             } else {
-                this.lastNewIndex = -1;
+                this.lastNewIndex = index;
                 this.resetSortableTransform();
             }
         } else {
@@ -361,20 +361,20 @@ class DraggableList extends Component {
             imagePath = image.props['data-image'];
         }
         return (
-            <img
+            <div
                 className={Styles.dragView}
-                src={imagePath}
                 ref={(dom) => {
                     this.dragImage = dom;
                 }}
-                alt={image}
-            />
+            >
+                <img src={imagePath} alt={image} />
+            </div>
         );
     }
 
     render() {
         const { isDragging } = this.state;
-        const { className } = this.props;
+        const { className, scrollStyle } = this.props;
         return (
             <div className={`${Styles.draggable} ${className}`}>
                 <CustomScroll
@@ -383,6 +383,7 @@ class DraggableList extends Component {
                             this.scrollElement = dom;
                         }
                     }}
+                    style={scrollStyle}
                 >
                     {this.makeDraggableList()}
                 </CustomScroll>

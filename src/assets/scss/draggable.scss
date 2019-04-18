@@ -37,8 +37,22 @@
     pointer-events: none;
     
     .dragView {
-        max-width: 100px;
-        max-height: 100px;
+        width: 90px;
+        height: 77px;
         position: fixed;
+        background-color: #ffffff;
+        box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.3);
+        border: solid 2px #4f80ff;
+        border-radius: 6px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            max-width: 74px;
+            max-height: 61px;
+            margin: 8px;
+        }
     }
 }

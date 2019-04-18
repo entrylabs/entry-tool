@@ -31,7 +31,6 @@ class BackPack extends Component {
             }
         });
         this.eventTarget.on('touchend.bpInTool', (e) => {
-            console.log('????? touchend');
             const { isDragEnter } = this.state;
             if (isDragEnter) {
                 this.handleItemDrop(e);
@@ -74,7 +73,6 @@ class BackPack extends Component {
     };
 
     handleDragInfo = (isDragging, data) => {
-        console.log('handleDragInfo', isDragging, data);
         const { onDragActionChange, onDragData } = this.props;
         if (onDragActionChange) {
             onDragActionChange(isDragging);
@@ -221,6 +219,11 @@ class BackPack extends Component {
                             items={this.makeItemList()}
                             onDragActionChange={(isDragging, data) => {
                                 this.handleDragInfo(isDragging, data);
+                            }}
+                            className={'csacsacas'}
+                            scrollStyle={{
+                                paddingTop: '16px',
+                                height: 'calc(100% - 16px)',
                             }}
                             itemShadowClassName={Styles.item}
                             itemShadowStyle={{
