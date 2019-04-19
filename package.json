@@ -115,7 +115,7 @@
         "window-or-global": "^1.0.1"
     },
     "dependencies": {
-        "@entrylabs/event": "^1.0.2",
+        "@entrylabs/event": "^1.0.3",
         "@entrylabs/postcss-url": "^8.0.1",
         "axios": "^0.18.0",
         "chroma-js": "^1.4.0",
