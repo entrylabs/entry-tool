@@ -191,7 +191,7 @@ class DraggableList extends Component {
 
     resetSortableTransform() {
         const { current = {} } = this.draggableListRef;
-        const { children = [] } = current;
+        const { children = [] } = current || {};
 
         for (let index = 0; index < children.length; index++) {
             const element = children[index];

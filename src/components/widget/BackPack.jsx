@@ -45,7 +45,7 @@ class BackPack extends Component {
     handleUpdateTitle = (id, target, defaultValue) => {
         const { value } = target;
         const { onChangeTitle } = this.props;
-        if (onChangeTitle && value) {
+        if (onChangeTitle && value && value !== defaultValue) {
             onChangeTitle(id, value);
         } else if (!value) {
             target.value = defaultValue;
@@ -115,12 +115,8 @@ class BackPack extends Component {
         }
     }
 
-    makeEmbed(imgPath) {
-        if (imgPath.indexOf('.svg') > -1) {
-            return <img src={imgPath} className={Styles.image} alt="" />;
-        } else {
-            return <img src={imgPath} className={Styles.image} alt="" />;
-        }
+    preventDefault(e) {
+        e.preventDefault();
     }
 
     makeItemList() {
@@ -144,7 +140,9 @@ class BackPack extends Component {
                     }}
                     data-image={imgPath}
                 >
-                    <div className={Styles.imageWrapper}>{this.makeEmbed(imgPath)}</div>
+                    <div className={Styles.imageWrapper}>
+                        <img src={imgPath} className={Styles.image} alt={title} />
+                    </div>
                     <div className={Styles.imageOverlay} />
                     <button
                         className={Styles.closeButton}
@@ -158,7 +156,11 @@ class BackPack extends Component {
                             defaultValue={title}
                             onKeyUp={this.handleKeyup}
                             onBlur={({ target }) => {
-                                this.handleUpdateTitle(_id, target, title);
+                                const { value } = target;
+                                if (value !== title) {
+                                    this.handleUpdateTitle(_id, target, title);
+                                    this.handleDragInfo(false);
+                                }
                             }}
                         />
                     </div>
