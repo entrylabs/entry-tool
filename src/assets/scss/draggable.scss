@@ -48,6 +48,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        opacity: 0;
+        transition: 0.2s opacity;
 
         img {
             max-width: 74px;

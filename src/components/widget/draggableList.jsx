@@ -4,6 +4,7 @@ import produce from 'immer';
 import CustomScroll from '../common/customScroll';
 import DraggableItem from './draggableItem';
 import Styles from '@assets/scss/draggable.scss';
+import AutoScroll from '@utils/AutoScroll';
 
 function getPosition(event) {
     const position = {
@@ -34,6 +35,7 @@ class DraggableList extends Component {
     };
     targetEvent = new EntryEvent(document);
     targetEvent2 = new EntryEvent(document.body);
+    prevAutoScrollPos = { x: 0, y: 0 };
 
     setItemEvent() {
         this.targetEvent.on('touchmove.draggable', this.itemEventMove, { passive: false });
@@ -44,6 +46,10 @@ class DraggableList extends Component {
 
     unsetItemEvent() {
         this.targetEvent.off('draggable');
+    }
+
+    componentDidMount() {
+        this.autoScroll = new AutoScroll(this.scrollElement);
     }
 
     componentWillUnmount() {
@@ -91,13 +97,15 @@ class DraggableList extends Component {
         let index = -1;
         let minValue = Infinity;
         const { index: itemIndex } = this.dragItemInfo;
+        const { scrollTop = 0 } = this.scrollElement || {};
+        const scrollOffset = scrollTop - this.scrollTop;
         [...this.checkRectList, this.checkRectList[this.checkRectList.length - 1]].forEach(
             ({ y: rectY, height, translateY }, i) => {
                 let value = rectY - y + translateY;
                 if (this.checkRectList.length !== i) {
-                    value = rectY - y + translateY;
+                    value = rectY - (y + scrollOffset) + translateY;
                 } else {
-                    value = rectY - y + height;
+                    value = rectY - (y + scrollOffset) + height;
                 }
                 value = Math.abs(value);
                 if (minValue > value) {
@@ -205,16 +213,38 @@ class DraggableList extends Component {
     }
 
     itemEventMove = (e) => {
+        const { isDragging } = this.state;
+        if (isDragging && e.cancelable) {
+            e.preventDefault();
+        }
         if (!this.dragItemInfo || !this.dragItemInfo.target) {
+            return;
+        }
+        if (
+            this.isScrolling &&
+            !this.autoScroll.isAutoScrolling &&
+            Entry.isMobile() &&
+            !e.cancelable
+        ) {
+            const { onDragActionChange } = this.props;
+            const { target } = this.dragItemInfo;
+            target.style.visibility = '';
+            this.setState(
+                produce((draft) => {
+                    draft.isDragging = false;
+                })
+            );
+            if (onDragActionChange) {
+                onDragActionChange(false);
+            }
             return;
         }
 
         const { canSortable } = this.props;
-        const { isDragging } = this.state;
         if (isDragging) {
-            e.preventDefault();
             const { x, y } = getPosition(e);
             if (this.dragImage) {
+                this.dragImage.style.opacity = '1';
                 this.dragImage.style.transform = `translate3d(${x - 50}px, ${y - 50}px, 0)`;
             }
             if (!canSortable) {
@@ -225,6 +255,8 @@ class DraggableList extends Component {
                 this.checkRectList = this.checkRectList
                     ? this.checkRectList
                     : _.cloneDeep(this.getCheckRect());
+
+                this.autoScroll.update({ x, y });
                 const checkItem = this.getSortableInfo(e) || {};
                 const { index: infoIndex = index } = checkItem;
                 this.setSortableTransform(index, infoIndex);
@@ -247,6 +279,9 @@ class DraggableList extends Component {
                 nowDistance = Math.max(Math.abs(position.x - x), Math.abs(position.y - y));
             }
             if (nowDistance > distance) {
+                this.autoScroll.reset();
+                const { scrollTop = 0 } = this.scrollElement || {};
+                this.scrollTop = scrollTop;
                 const { target, item } = this.dragItemInfo;
                 const { key } = item;
                 target.style.visibility = 'hidden';
@@ -261,6 +296,11 @@ class DraggableList extends Component {
     };
 
     itemEventEnd = (e) => {
+        this.autoScroll.reset();
+        if (this.dragItemInfo && this.dragItemInfo.target) {
+            const { target = {} } = this.dragItemInfo;
+            target.style.visibility = '';
+        }
         const { isDragging } = this.state;
         if (isDragging) {
             const { onTouchEnd } = this.props;
@@ -277,13 +317,12 @@ class DraggableList extends Component {
             const { onDragActionChange } = this.props;
             onDragActionChange(false);
             if (this.dragItemInfo && this.dragItemInfo.target) {
+                const { index } = this.dragItemInfo;
                 const { onChangeList } = this.props;
-                const { target = {}, index } = this.dragItemInfo;
-                target.style.visibility = '';
-                this.dragItemInfo = {};
                 if (onChangeList) {
                     onChangeList(this.lastNewIndex, index);
                 }
+                this.dragItemInfo = {};
             }
         }
 
@@ -327,11 +366,6 @@ class DraggableList extends Component {
                                     this.dragItemInfo.index = index;
                                     this.dragItemInfo.image = image;
                                     this.setItemEvent();
-                                    // this.setState(
-                                    //     produce((draft) => {
-                                    //         draft.image = image;
-                                    //     })
-                                    // );
                                 }}
                                 index={index}
                                 value={{
@@ -360,11 +394,16 @@ class DraggableList extends Component {
         if (React.isValidElement(image)) {
             imagePath = image.props['data-image'];
         }
+        const { x, y } = this.dragItemInfo;
         return (
             <div
                 className={Styles.dragView}
                 ref={(dom) => {
                     this.dragImage = dom;
+                }}
+                style={{
+                    transform: `translate3d(${x}px, ${y}px, 0)`,
+                    opacity: 0,
                 }}
             >
                 <img src={imagePath} alt={image} />
@@ -382,6 +421,9 @@ class DraggableList extends Component {
                         if (this.scrollElement !== dom) {
                             this.scrollElement = dom;
                         }
+                    }}
+                    onScrollState={(isScrolling) => {
+                        this.isScrolling = isScrolling;
                     }}
                     style={scrollStyle}
                 >
