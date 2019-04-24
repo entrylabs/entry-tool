@@ -23,7 +23,7 @@ class BackPack extends Component {
             const element = document.elementFromPoint(touch.clientX, touch.clientY);
             const { current } = this.backPack;
             const { isDragEnter } = this.state;
-            const isEnter = current.contains(element);
+            const isEnter = current ? current.contains(element) : false;
             if (isEnter && !isDragEnter) {
                 this.handleCustomEnter(e);
             } else if (!isEnter && isDragEnter) {

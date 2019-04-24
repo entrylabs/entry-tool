@@ -11,8 +11,6 @@ const DraggableItem = (props, ref) => {
         itemShadowClassName,
         itemShadowStyle,
         handleItemEventStart,
-        handleItemEventMove,
-        handleItemEventEnd,
     } = props;
     const { item } = value;
     const attr = {
