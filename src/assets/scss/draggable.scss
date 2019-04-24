@@ -23,8 +23,10 @@
             display: inline-block;
             z-index: 10;
             height: 100%;
-            cursor: move;
         }
+    }
+    .draggableItem {
+        cursor: move;
     }
 }
 
