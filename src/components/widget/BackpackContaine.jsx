@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import withWrapper from '@hoc/withWrapper';
 import { connect } from 'react-redux';
 import { onChangeDragType, onDragActionChange, onDragData } from '@actions/widget';
-import BackPack from './Backpack';
+import Backpack from './Backpack';
 
-class BackPackContainer extends Component {
+class BackpackContainer extends Component {
     render() {
         // const { onChangeDragType, onDragActionChange, onDragData } = this.props;
         return (
-            <BackPack
+            <Backpack
                 {...this.props}
                 // onDragData={onDragData}
                 // onChangeDragType={onChangeDragType}
@@ -30,5 +30,5 @@ export default withWrapper({
     connect(
         undefined,
         mapDispatchToProps
-    )(BackPackContainer)
+    )(BackpackContainer)
 );
