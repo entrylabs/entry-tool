@@ -10,7 +10,7 @@ import Number from '../components/widget/number';
 import Dropdown from '../components/widget/dropdown';
 import ModalProgress from '../components/widget/modalProgress';
 import Angle from '../components/widget/angle';
-import BackPack from '../components/widget/BackPack';
+import BackPack from '../components/widget/Backack';
 import Sortable from '../components/widget/sortable';
 import ContextMenu from '../components/widget/contextMenu';
 import { withKnobs, text, select } from '@storybook/addon-knobs';

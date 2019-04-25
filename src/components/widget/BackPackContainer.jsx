@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import withWrapper from '@hoc/withWrapper';
 import { connect } from 'react-redux';
 import { onChangeDragType, onDragActionChange, onDragData } from '@actions/widget';
-import BackPack from './BackPack';
+import BackPack from './Backack';
 
 class BackPackContainer extends Component {
     render() {
