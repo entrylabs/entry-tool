@@ -290,9 +290,9 @@ class DraggableList extends Component {
         }
         const { isDragging } = this.state;
         if (isDragging) {
-            const { onTouchEnd } = this.props;
-            if (onTouchEnd) {
-                onTouchEnd(e);
+            const { onDropItem } = this.props;
+            if (onDropItem) {
+                onDropItem(e);
             }
             this.setState(
                 produce((draft) => {

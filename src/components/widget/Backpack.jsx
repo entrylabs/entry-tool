@@ -28,19 +28,27 @@ class Backpack extends Component {
         this.eventTarget.off('.bpInTool');
     }
 
-    getBackpackRect;
+    getBackpackRect = _.memoize(() => {
+        const { current } = this.backpack;
+        if (current) {
+            return current.getBoundingClientRect();
+        } else {
+            return undefined;
+        }
+    });
 
     handlePointMove = (e) => {
-        console.log('move');
-        const pos = CommonUtils.getPosition(e);
-        const element = document.elementFromPoint(pos.x, pos.y);
-        const { current } = this.backpack;
-        const { isDragEnter } = this.state;
-        const isEnter = current ? current.contains(element) : false;
-        if (isEnter && !isDragEnter) {
-            this.handleCustomEnter(e);
-        } else if (!isEnter && isDragEnter) {
-            this.handleDragState(false);
+        const backpackRect = this.getBackpackRect();
+        if (backpackRect) {
+            const { top, bottom, left, right } = backpackRect;
+            const pos = CommonUtils.getPosition(e);
+            const { isDragEnter } = this.state;
+            const isEnter = _.inRange(pos.x, left, right) && _.inRange(pos.y, top, bottom);
+            if (isEnter && !isDragEnter) {
+                this.handleCustomEnter(e);
+            } else if (!isEnter && isDragEnter) {
+                this.handleDragState(false);
+            }
         }
     };
 
@@ -49,6 +57,7 @@ class Backpack extends Component {
         if (isDragEnter) {
             this.handleItemDrop(e);
         }
+        this.getBackpackRect.cache = new _.memoize.Cache();
     };
 
     handleUpdateTitle = (id, target, defaultValue) => {
