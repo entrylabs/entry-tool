@@ -5,22 +5,8 @@ import CustomScroll from '../common/customScroll';
 import DraggableItem from './draggableItem';
 import Styles from '@assets/scss/draggable.scss';
 import AutoScroll from '@utils/AutoScroll';
-
-function getPosition(event) {
-    const position = {
-        x: 0,
-        y: 0,
-    };
-    if (event.touches && event.touches[0]) {
-        const touch = event.touches[0];
-        position.x = touch.pageX;
-        position.y = touch.pageY;
-    } else {
-        position.x = event.pageX;
-        position.y = event.pageY;
-    }
-    return position;
-}
+import { CommonUtils } from '@utils/Common';
+const { getPosition } = CommonUtils;
 
 class DraggableList extends Component {
     constructor(props) {
@@ -82,7 +68,8 @@ class DraggableList extends Component {
                 children[i].style.zIndex = '1';
             }
             checkRectList.push({
-                y: itemRect.y,
+                top: itemRect.top,
+                bottom: itemRect.bottom,
                 height: itemRect.height,
                 index: i,
                 element: children[i],
@@ -100,12 +87,12 @@ class DraggableList extends Component {
         const { scrollTop = 0 } = this.scrollElement || {};
         const scrollOffset = scrollTop - this.scrollTop;
         [...this.checkRectList, this.checkRectList[this.checkRectList.length - 1]].forEach(
-            ({ y: rectY, height, translateY }, i) => {
-                let value = rectY - y + translateY;
+            ({ top, bottom, translateY }, i) => {
+                let value = top - y + translateY;
                 if (this.checkRectList.length !== i) {
-                    value = rectY - (y + scrollOffset) + translateY;
+                    value = top - (y + scrollOffset) + translateY;
                 } else {
-                    value = rectY - (y + scrollOffset) + height;
+                    value = bottom - (y + scrollOffset);
                 }
                 value = Math.abs(value);
                 if (minValue > value) {
@@ -126,10 +113,10 @@ class DraggableList extends Component {
     isLeavePoint(e) {
         const { x, y } = getPosition(e);
         return !(
-            x > this.listRect.x &&
-            x < this.listRect.x + this.listRect.width &&
-            y > this.listRect.y &&
-            y < this.listRect.y + this.listRect.height
+            x > this.listRect.left &&
+            x < this.listRect.right &&
+            y > this.listRect.top &&
+            y < this.listRect.bottom
         );
     }
 
@@ -167,12 +154,12 @@ class DraggableList extends Component {
                 const { element } = checkRect;
                 let rectTranslate = 0;
                 if (index === oldIndex) {
-                    const { y, height } = this.checkRectList[newIndex];
+                    const { top, height } = this.checkRectList[newIndex];
                     let margin = 0;
                     if (oldIndex <= newIndex) {
                         margin = height - checkRect.height;
                     }
-                    rectTranslate = y - checkRect.y + margin;
+                    rectTranslate = top - checkRect.top + margin;
                     element.style.transform = `translate3d(0,${rectTranslate}px,-1px)`;
                 } else if (index >= start && index <= end) {
                     if (isDown) {

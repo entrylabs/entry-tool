@@ -39,6 +39,10 @@
     z-index: 9999;
     pointer-events: none;
     
+    * {
+        pointer-events: none;
+    }
+    
     .dragView {
         width: 90px;
         height: 77px;

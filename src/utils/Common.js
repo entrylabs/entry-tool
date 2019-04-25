@@ -6,6 +6,21 @@ export const CommonUtils = {
     getScaleNumber(num, inMin, inMax, outMin, outMax) {
         return ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
     },
+    getPosition(event) {
+        const position = {
+            x: 0,
+            y: 0,
+        };
+        if (event.touches && event.touches[0]) {
+            const touch = event.touches[0];
+            position.x = touch.pageX;
+            position.y = touch.pageY;
+        } else {
+            position.x = event.pageX;
+            position.y = event.pageY;
+        }
+        return position;
+    },
     getLangType: () => {
         const lang = root.Lang || {};
         return lang.type;

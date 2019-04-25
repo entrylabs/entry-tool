@@ -32,28 +32,18 @@ export default class AutoScroller {
             y: 10,
         };
 
-        const { y: rectY, height } = this.getContainerRect();
+        const { top, bottom, height } = this.getContainerRect();
         const checkAreaSize = height * 0.15;
-        if (rectY < y && rectY + checkAreaSize > y) {
+        if (top < y && top + checkAreaSize > y) {
             direction.y = -1;
             speed.y =
                 acceleration.y *
-                Math.abs(
-                    (1 - CommonUtils.getScaleNumber(y, rectY, rectY + checkAreaSize, 0, 1)) ** 3
-                );
-        } else if (rectY + height > y && rectY + height - checkAreaSize < y) {
+                Math.abs((1 - CommonUtils.getScaleNumber(y, top, top + checkAreaSize, 0, 1)) ** 3);
+        } else if (bottom > y && bottom - checkAreaSize < y) {
             direction.y = 1;
             speed.y =
                 acceleration.y *
-                Math.abs(
-                    CommonUtils.getScaleNumber(
-                        y,
-                        rectY + height - checkAreaSize,
-                        rectY + height,
-                        0,
-                        1
-                    ) ** 3
-                );
+                Math.abs(CommonUtils.getScaleNumber(y, bottom - checkAreaSize, bottom, 0, 1) ** 3);
         }
 
         if (this.interval) {

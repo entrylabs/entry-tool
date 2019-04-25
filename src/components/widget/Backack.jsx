@@ -2,45 +2,54 @@ import React, { Component } from 'react';
 import { pure } from 'recompose';
 import Draggable from './draggable';
 import produce from 'immer';
-import Styles from '../../assets/scss/widget/BackPack.scss';
+import Styles from '../../assets/scss/widget/Backpack.scss';
 import EntryEvent from '@entrylabs/event';
 import { CommonUtils } from '@utils/Common';
 
-class BackPack extends Component {
+class Backpack extends Component {
     state = {
         selectedId: '-1',
     };
 
     constructor(props) {
         super(props);
-        this.backPack = React.createRef();
+        this.backpack = React.createRef();
     }
 
     componentDidMount() {
         this.eventTarget = new EntryEvent(document);
-        this.eventTarget.on('touchmove.bpInTool', (e) => {
-            const touch = e.touches[0];
-            const element = document.elementFromPoint(touch.clientX, touch.clientY);
-            const { current } = this.backPack;
-            const { isDragEnter } = this.state;
-            const isEnter = current ? current.contains(element) : false;
-            if (isEnter && !isDragEnter) {
-                this.handleCustomEnter(e);
-            } else if (!isEnter && isDragEnter) {
-                this.handleDragState(false);
-            }
-        });
-        this.eventTarget.on('touchend.bpInTool', (e) => {
-            const { isDragEnter } = this.state;
-            if (isDragEnter) {
-                this.handleItemDrop(e);
-            }
-        });
+        this.eventTarget.on('touchmove.bpInTool', this.handlePointMove);
+        this.eventTarget.on('touchend.bpInTool', this.handlePointEnd);
+        this.eventTarget.on('mousemove.bpInTool', this.handlePointMove);
+        this.eventTarget.on('mouseup.bpInTool', this.handlePointEnd);
     }
 
     componentWillUnmount() {
         this.eventTarget.off('.bpInTool');
     }
+
+    getBackpackRect;
+
+    handlePointMove = (e) => {
+        console.log('move');
+        const pos = CommonUtils.getPosition(e);
+        const element = document.elementFromPoint(pos.x, pos.y);
+        const { current } = this.backpack;
+        const { isDragEnter } = this.state;
+        const isEnter = current ? current.contains(element) : false;
+        if (isEnter && !isDragEnter) {
+            this.handleCustomEnter(e);
+        } else if (!isEnter && isDragEnter) {
+            this.handleDragState(false);
+        }
+    };
+
+    handlePointEnd = (e) => {
+        const { isDragEnter } = this.state;
+        if (isDragEnter) {
+            this.handleItemDrop(e);
+        }
+    };
 
     handleUpdateTitle = (id, target, defaultValue) => {
         const { value } = target;
@@ -201,7 +210,7 @@ class BackPack extends Component {
         const { onClose = () => {}, isLoading = true, draggableOption } = this.props;
         const { isDragEnter = false } = this.state;
         return (
-            <div ref={this.backPack} className={Styles.BackPack}>
+            <div ref={this.backpack} className={Styles.Backpack}>
                 <div className={Styles.titleArea} onClick={onClose}>
                     <div className={Styles.icon} />
                     <div className={Styles.title}>
@@ -213,7 +222,7 @@ class BackPack extends Component {
                     <div
                         className={Styles.itemArea}
                         onMouseEnter={(e) => {
-                            this.handleCustomEnter(e);
+                            // this.handleCustomEnter(e);
                         }}
                     >
                         <Draggable
@@ -255,4 +264,4 @@ class BackPack extends Component {
     }
 }
 
-export default pure(BackPack);
+export default pure(Backpack);
