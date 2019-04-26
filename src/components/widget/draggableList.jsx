@@ -375,32 +375,45 @@ class DraggableList extends Component {
         );
     }
 
-    makeDragView() {
-        const { image } = this.dragItemInfo || {};
-        let imagePath = image;
-        if (React.isValidElement(image)) {
-            imagePath = image.props['data-image'];
+    addClassName(element, name) {
+        const arr = element.className.split(' ');
+        if (arr.indexOf(name) == -1) {
+            element.className += ` ${name}`;
         }
-        const { x, y } = this.dragItemInfo;
-        return (
-            <div
-                className={Styles.dragView}
-                ref={(dom) => {
-                    this.dragImage = dom;
-                }}
-                style={{
-                    transform: `translate3d(${x}px, ${y}px, 0)`,
-                    opacity: 0,
-                }}
-            >
-                <img src={imagePath} alt={image} />
-            </div>
-        );
+    }
+
+    makeDragView() {
+        const { isDragging } = this.state;
+        if (isDragging) {
+            if (!this.dragViewElement) {
+                const { image } = this.dragItemInfo || {};
+                let imagePath = image;
+                if (React.isValidElement(image)) {
+                    imagePath = image.props['data-image'];
+                }
+                this.dragViewElement = document.createElement('div');
+                this.dragImage = document.createElement('div');
+                this.addClassName(this.dragViewElement, Styles.globalDragArea);
+                this.addClassName(this.dragImage, Styles.dragView);
+                const imageElement = document.createElement('img');
+                imageElement.src = imagePath;
+                imageElement.alt = image;
+                this.dragImage.appendChild(imageElement);
+                this.dragViewElement.appendChild(this.dragImage);
+                document.body.appendChild(this.dragViewElement);
+            }
+            const { x, y } = this.dragItemInfo;
+            this.dragImage.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        } else if (this.dragViewElement) {
+            document.body.removeChild(this.dragViewElement);
+            this.dragImage = undefined;
+            this.dragViewElement = undefined;
+        }
     }
 
     render() {
-        const { isDragging } = this.state;
         const { className, scrollStyle } = this.props;
+        this.makeDragView();
         return (
             <div className={`${Styles.draggable} ${className}`}>
                 <CustomScroll
@@ -416,9 +429,9 @@ class DraggableList extends Component {
                 >
                     {this.makeDraggableList()}
                 </CustomScroll>
-                {isDragging && (
+                {/* {isDragging && (
                     <div className={`${Styles.globalDragArea}`}>{this.makeDragView()}</div>
-                )}
+                )} */}
             </div>
         );
     }
