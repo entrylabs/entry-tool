@@ -14,18 +14,23 @@ class Backpack extends Component {
     constructor(props) {
         super(props);
         this.backpack = React.createRef();
+        this.eventTarget = new EntryEvent(document);
     }
 
-    componentDidMount() {
-        this.eventTarget = new EntryEvent(document);
-        this.eventTarget.on('touchmove.bpInTool', this.handlePointMove);
-        this.eventTarget.on('touchend.bpInTool', this.handlePointEnd);
-        this.eventTarget.on('mousemove.bpInTool', this.handlePointMove);
-        this.eventTarget.on('mouseup.bpInTool', this.handlePointEnd);
+    setPointEvent() {
+        const { canPointEvent } = this.props;
+        if (canPointEvent) {
+            this.eventTarget.on('touchmove.bpInTool', this.handlePointMove);
+            this.eventTarget.on('touchend.bpInTool', this.handlePointEnd);
+            this.eventTarget.on('mousemove.bpInTool', this.handlePointMove);
+            this.eventTarget.on('mouseup.bpInTool', this.handlePointEnd);
+        } else {
+            this.eventTarget.off('bpInTool');
+        }
     }
 
     componentWillUnmount() {
-        this.eventTarget.off('.bpInTool');
+        this.eventTarget.off('bpInTool');
     }
 
     getBackpackRect = _.memoize(() => {
@@ -218,6 +223,7 @@ class Backpack extends Component {
     render() {
         const { onClose = () => {}, isLoading = true, draggableOption } = this.props;
         const { isDragEnter = false } = this.state;
+        this.setPointEvent();
         return (
             <div ref={this.backpack} className={Styles.Backpack}>
                 <div className={Styles.titleArea} onClick={onClose}>
@@ -228,12 +234,7 @@ class Backpack extends Component {
                 </div>
                 {isLoading && this.makeLoadingView()}
                 {!isLoading && (
-                    <div
-                        className={Styles.itemArea}
-                        onMouseEnter={(e) => {
-                            // this.handleCustomEnter(e);
-                        }}
-                    >
+                    <div className={Styles.itemArea}>
                         <Draggable
                             {...draggableOption}
                             items={this.makeItemList()}
