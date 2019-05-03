@@ -279,7 +279,7 @@ class FileUpload extends Component {
                                 {CommonUtils.getLang('Menus.file_upload_loading')}
                             </span>
                         </div>
-                    )};
+                    )}
                     <div className={Styles.section_cont}>
                         <p className={`${Styles.caution} ${Styles.imico_pop_caution}`}>
                             {this.getWarnMsg()}
