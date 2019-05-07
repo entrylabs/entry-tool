@@ -5,12 +5,11 @@ import { triggerEvent } from '@actions';
 import Dropdown from '@components/widget/dropdown';
 import { EMIT_TYPES } from '@constants';
 import Theme from '@utils/Theme';
-let Styles;
 
 class Navigation extends Component {
     constructor(props) {
         super(props);
-        Styles = Theme.getStyle("popup");
+        this.theme = Theme.getStyle("popup");
         this.category_options = [
             [CommonUtils.getLang('EntryStatic.art_category_all'), null],
             [CommonUtils.getLang('EntryStatic.art_category_game'), '게임'],
@@ -59,7 +58,7 @@ class Navigation extends Component {
                     key={item}
                     className={CommonUtils.toggleClass(
                         navigation === item || (!navigation && index === 0),
-                        Styles.on,
+                        this.theme.on,
                     )}
                     onClick={this.props.onClicked}
                     data-key={item}
@@ -99,10 +98,10 @@ class Navigation extends Component {
             return (
                 <form onSubmit={this.onSearchBtnClicked}>
                     {this.props.searchOption.category && (
-                        <div className={`${Styles.pop_selectbox} ${Styles.on}`}>
+                        <div className={`${this.theme.pop_selectbox} ${this.theme.on}`}>
                             <div
-                                className={`${Styles.select_link} ${
-                                    Styles.imico_pop_select_arr_down
+                                className={`${this.theme.select_link} ${
+                                    this.theme.imico_pop_select_arr_down
                                 }`}
                                 onClick={(e) => {
                                     this.onDropDownClicked(e, 'category', this.category_options);
@@ -114,10 +113,10 @@ class Navigation extends Component {
                         </div>
                     )}
                     {this.props.searchOption.order && (
-                        <div className={Styles.pop_selectbox}>
+                        <div className={this.theme.pop_selectbox}>
                             <div
-                                className={`${Styles.select_link} ${
-                                    Styles.imico_pop_select_arr_down
+                                className={`${this.theme.select_link} ${
+                                    this.theme.imico_pop_select_arr_down
                                 }`}
                                 onClick={(e) => {
                                     this.onDropDownClicked(e, 'sort', this.sort_options);
@@ -129,10 +128,10 @@ class Navigation extends Component {
                         </div>
                     )}
                     {this.props.searchOption.date && (
-                        <div className={Styles.pop_selectbox}>
+                        <div className={this.theme.pop_selectbox}>
                             <div
-                                className={`${Styles.select_link} ${
-                                    Styles.imico_pop_select_arr_down
+                                className={`${this.theme.select_link} ${
+                                    this.theme.imico_pop_select_arr_down
                                 }`}
                                 onClick={(e) => {
                                     this.onDropDownClicked(e, 'period', this.period_options);
@@ -144,7 +143,7 @@ class Navigation extends Component {
                         </div>
                     )}
                     {this.props.searchOption.query && (
-                        <div className={Styles.srch_box}>
+                        <div className={this.theme.srch_box}>
                             <label htmlFor="srch">
                                 <input
                                     type="text"
@@ -156,10 +155,10 @@ class Navigation extends Component {
                             </label>
                             <button
                                 type="button"
-                                className={`${Styles.btn_srch} ${Styles.imbtn_pop_srch}`}
+                                className={`${this.theme.btn_srch} ${this.theme.imbtn_pop_srch}`}
                                 onClick={this.onSearchBtnClicked}
                             >
-                                <span className={Styles.blind}>검색</span>
+                                <span className={this.theme.blind}>검색</span>
                             </button>
                         </div>
                     )}
@@ -185,10 +184,10 @@ class Navigation extends Component {
 
     render() {
         return (
-            <div className={Styles.section_navi}>
-                <ul className={Styles.list}>{this.drawNavigation()}</ul>
+            <div className={this.theme.section_navi}>
+                <ul className={this.theme.list}>{this.drawNavigation()}</ul>
                 {this.props.searchOption && (
-                    <div className={Styles.art_sel_area}>{this.drawSearchBox()}</div>
+                    <div className={this.theme.art_sel_area}>{this.drawSearchBox()}</div>
                 )}
                 {this.state.dropDown}
             </div>

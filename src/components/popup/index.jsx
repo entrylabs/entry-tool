@@ -12,12 +12,11 @@ import Projects from './Contents/Projects';
 import { DEFAULT_OPTIONS } from '../../constants';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
-let Styles;
 
 class Sprite extends Component {
     constructor(props) {
         super(props);
-        Styles = Theme.getStyle("popup");
+        this.theme = Theme.getStyle("popup");
         this.state = {
             navigation: Object.keys(this.options.navigations)[0] || props.type,
         };
@@ -153,14 +152,14 @@ class Sprite extends Component {
     render() {
         return (
             <div>
-                <div className={Styles.popup_wrap}>
-                    <header className={Styles.pop_header}>
+                <div className={this.theme.popup_wrap}>
+                    <header className={this.theme.pop_header}>
                         <h1>{CommonUtils.getLang(this.options.title)}</h1>
                         <button
                             onClick={this.close}
-                            className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}
+                            className={`${this.theme.btn_back} ${this.theme.imbtn_pop_back}`}
                         >
-                            <span className={Styles.blind}>뒤로가기</span>
+                            <span className={this.theme.blind}>뒤로가기</span>
                         </button>
                     </header>
                     {this.setContent()}
