@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { setUIParam } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
-let Styles;
 
 class SubMenu extends Component {
     constructor(props) {
         super(props);
-        Styles = Theme.getStyle("popup");
+        this.theme = Theme.getStyle("popup");
         this.drawSubMenu = this.drawSubMenu.bind(this);
         this.onSubMenuSelected = this.onSubMenuSelected.bind(this);
     }
@@ -25,7 +24,7 @@ class SubMenu extends Component {
                     href={"#NULL"}
                     className={CommonUtils.toggleClass(
                         subMenu === key || (!subMenu && index === 0),
-                        Styles.on
+                        this.theme.on
                     )}
                     key={item.name}
                     data-key={key}
@@ -48,8 +47,8 @@ class SubMenu extends Component {
 
     render() {
         return (
-            <div className={Styles.sub_menu}>
-                <div className={Styles.menu_inner} onClick={this.onSubMenuSelected}>
+            <div className={this.theme.sub_menu}>
+                <div className={this.theme.menu_inner} onClick={this.onSubMenuSelected}>
                     {this.drawSubMenu()}
                 </div>
             </div>

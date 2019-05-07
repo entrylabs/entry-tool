@@ -5,12 +5,11 @@ import { CommonUtils } from '@utils/Common';
 import { makeFindSelectedByName } from '@selectors';
 // import { EMIT_TYPES } from '@constants';
 import Theme from '@utils/Theme';
-let Styles;
 
 class Item extends Component {
     constructor(props) {
         super(props);
-        Styles = Theme.getStyle("popup");
+        this.theme = Theme.getStyle("popup");
         this.onItemClicked = this.onItemClicked.bind(this);
     }
 
@@ -31,11 +30,11 @@ class Item extends Component {
         return (
             <li
                 onClick={this.onItemClicked}
-                className={CommonUtils.toggleClass(this.props.index >= 0, Styles.on)}
+                className={CommonUtils.toggleClass(this.props.index >= 0, this.theme.on)}
             >
-                <div className={Styles.link}>
+                <div className={this.theme.link}>
                     <div
-                        className={Styles.thmb}
+                        className={this.theme.thmb}
                         style={{
                             backgroundImage: `url("${this.props.imageBaseUrl}${item.imageName}")`,
                             backgroundRepeat: 'no-repeat',
@@ -43,11 +42,11 @@ class Item extends Component {
                     >
                         &nbsp;
                     </div>
-                    <div className={Styles.inner_box}>
-                        <strong className={Styles.sjt}>
+                    <div className={this.theme.inner_box}>
+                        <strong className={this.theme.sjt}>
                             {CommonUtils.getLang(item.titleKey)}
                         </strong>
-                        <p className={Styles.dsc}>{CommonUtils.getLang(item.descriptionKey)}</p>
+                        <p className={this.theme.dsc}>{CommonUtils.getLang(item.descriptionKey)}</p>
                     </div>
                 </div>
             </li>

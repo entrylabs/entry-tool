@@ -4,7 +4,7 @@ import Scrollbars from '../common/scrollbars';
 import root from 'window-or-global';
 import { pure } from 'recompose';
 import Theme from '@utils/Theme';
-let Styles;
+
 class ContextMenu extends Component {
     get SCROLL_ITEM_THRESHOLD() {
         return 5;
@@ -16,7 +16,7 @@ class ContextMenu extends Component {
             left: 0,
             top: 0,
         };
-        Styles = Theme.getStyle("popup");
+        this.theme = Theme.getStyle("popup");
         this.handleWindowResize = this.handleWindowResize.bind(this);
     }
 
@@ -88,12 +88,12 @@ class ContextMenu extends Component {
                 <div
                     ref={(dom) => (this.contextDom = dom)}
                     style={{ left, top, transition: 'none' }}
-                    className={`${Styles.tooltip_box} ${Styles.dropdown} ${Styles.auto_width}`}
+                    className={`${this.theme.tooltip_box} ${this.theme.dropdown} ${this.theme.auto_width}`}
                 >
-                    <div className={Styles.tooltip_inner}>
+                    <div className={this.theme.tooltip_inner}>
                         {items.length <= this.SCROLL_ITEM_THRESHOLD && this.makeDropdownItem()}
                         {items.length > this.SCROLL_ITEM_THRESHOLD && (
-                            <Scrollbars heightRelativeToParent='260px' className={Styles.scrollbar}>
+                            <Scrollbars heightRelativeToParent='260px' className={this.theme.scrollbar}>
                                 {this.makeDropdownItem()}
                             </Scrollbars>
                         )}
@@ -112,7 +112,7 @@ class ContextMenu extends Component {
                 return (
                     <div
                         key={index}
-                        className={`${Styles.item} ${enable ? '' : Styles.disabled}`}
+                        className={`${this.theme.item} ${enable ? '' : this.theme.disabled}`}
                         onClick={() => {
                             if (enable && callback) {
                                 callback();

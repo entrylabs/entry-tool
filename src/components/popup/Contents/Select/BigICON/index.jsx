@@ -4,12 +4,11 @@ import { connect } from 'react-redux';
 import Foot from './foot';
 import { CommonUtils } from '../../../../../utils/Common';
 import Theme from '@utils/Theme';
-let Styles;
 
 class Index extends Component {
     constructor(props) {
         super(props);
-        Styles = Theme.getStyle("popup");
+        this.theme = Theme.getStyle("popup");
     }
 
     drawItems() {
@@ -21,16 +20,16 @@ class Index extends Component {
     render() {
         return (
             <React.Fragment>
-                <section className={`${Styles.extend_content} ${Styles.pop_content}`}>
-                    <div className={Styles.section_cont}>
-                        <h2 className={Styles.blind}>확장 블록 불러오기 리스트</h2>
-                        <div className={Styles.cont_box}>
-                            <div className={Styles.desc}>
-                                <div className={Styles.imico_exclamation_mark}></div>
-                                <div className={Styles.content}>{CommonUtils.getLang('template.expansion_block_descriptions')}</div>
+                <section className={`${this.theme.extend_content} ${this.theme.pop_content}`}>
+                    <div className={this.theme.section_cont}>
+                        <h2 className={this.theme.blind}>확장 블록 불러오기 리스트</h2>
+                        <div className={this.theme.cont_box}>
+                            <div className={this.theme.desc}>
+                                <div className={this.theme.imico_exclamation_mark}></div>
+                                <div className={this.theme.content}>{CommonUtils.getLang('template.expansion_block_descriptions')}</div>
                             </div>
-                            <div className={Styles.extend_block}>
-                                <ul className={Styles.list}>{this.drawItems()}</ul>
+                            <div className={this.theme.extend_block}>
+                                <ul className={this.theme.list}>{this.drawItems()}</ul>
                             </div>
                         </div>
                     </div>

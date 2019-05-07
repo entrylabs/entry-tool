@@ -6,27 +6,26 @@ import { updateUploads } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
 import { triggerEvent } from '@actions';
 import Theme from '@utils/Theme';
-let Styles;
 
 class Item extends Component {
     constructor(props) {
         super(props);
+        this.theme = Theme.getStyle('popup');
         this.onClickItem = this.onClickItem.bind(this);
     }
 
     drawImage() {
-        if (this.props.reducer.type && this.props.reducer.type === 'sound') {
-            return <div className={`${Styles.thmb} ${Styles.imico_pop_sound_thmb}`}>&nbsp;</div>;
+        if (this.props.type && this.props.type === 'sound') {
+            return <div className={`${this.theme.thmb} ${this.theme.imico_pop_sound_thmb}`}>&nbsp;</div>;
+        }
+        const { filename, fileurl } = this.props.item;
+        let thumb;
+        if (fileurl) {
+            thumb = fileurl.thumb || fileurl;
         }
         return (
-            <div className={Styles.thmb}>
-                <img
-                    src={
-                        this.props.item.fileurl ||
-                        CommonUtils.createImageUrl(this.props.item.filename, this.props.reducer.baseUrl)
-                    }
-                    alt=""
-                />
+            <div className={this.theme.thmb}>
+                <img src={thumb || CommonUtils.createImageUrl(filename, this.props.baseUrl)} alt=""/>
             </div>
         );
     }
@@ -38,10 +37,10 @@ class Item extends Component {
 
     render() {
         return (
-            <li className={CommonUtils.toggleClass(this.props.excluded, '', Styles.on)}>
-                <a href="#NULL" className={Styles.link} onClick={this.onClickItem}>
+            <li className={CommonUtils.toggleClass(this.props.excluded, '', this.theme.on)}>
+                <a href="#NULL" className={this.theme.link} onClick={this.onClickItem}>
                     {this.drawImage()}
-                    <em className={Styles.sjt}>{this.props.item.name}</em>
+                    <em className={this.theme.sjt}>{this.props.item.name}</em>
                 </a>
             </li>
         );
@@ -51,7 +50,7 @@ class Item extends Component {
 class FileUpload extends Component {
     constructor(props) {
         super(props);
-        Styles = Theme.getStyle("popup");
+        this.theme = Theme.getStyle('popup');
         this.state = {
             isUploading: false,
             excluded: [],
@@ -87,7 +86,7 @@ class FileUpload extends Component {
             this.props.triggerEvent(
                 'uploadFail',
                 { messageParent: 'Menus', message: 'file_required' },
-                false
+                false,
             );
             return false;
         }
@@ -96,7 +95,7 @@ class FileUpload extends Component {
             this.props.triggerEvent(
                 'uploadFail',
                 { messageParent: 'Menus', message: 'file_upload_max_count' },
-                false
+                false,
             );
             return false;
         }
@@ -116,7 +115,7 @@ class FileUpload extends Component {
                 messageParent: 'Workspace',
                 message: 'upload_not_supported_file_msg',
             },
-            false
+            false,
         );
         return false;
     }
@@ -125,7 +124,8 @@ class FileUpload extends Component {
         const isImage = /^image\//.test(file.type);
         // const isGif = /^image\/gif/.test(file.type);
         const isObject = /\.eo$/.test(file.name);
-        const isAudio = file.name.toLowerCase().indexOf('.mp3') >= 0;
+        const isAudio = file.name.toLowerCase()
+            .indexOf('.mp3') >= 0;
         const splittedNames = file.name.split('.');
         const ext = splittedNames[splittedNames.length - 1];
         const allowed = this.props.options.uploadAllowed;
@@ -133,7 +133,7 @@ class FileUpload extends Component {
             this.props.triggerEvent(
                 'uploadFail',
                 { messageParent: 'Menus', message: 'file_upload_max_size' },
-                false
+                false,
             );
             return false;
         }
@@ -177,21 +177,22 @@ class FileUpload extends Component {
             return false;
         }
 
-        const checkFiles = range(uploadFiles.length).some((idx) => {
-            const file = uploadFiles.item(idx);
-            switch (this.checkFIleType(file)) {
-                case 'sound':
-                case 'image':
-                    formData = appendData(formData, `uploadFile${idx}`, file);
-                    break;
-                case 'object':
-                    objectData = appendData(objectData, 'objects', file);
-                    break;
-                default:
-                    break;
-            }
-            return false;
-        });
+        const checkFiles = range(uploadFiles.length)
+            .some((idx) => {
+                const file = uploadFiles.item(idx);
+                switch (this.checkFIleType(file)) {
+                    case 'sound':
+                    case 'image':
+                        formData = appendData(formData, `uploadFile${idx}`, file);
+                        break;
+                    case 'object':
+                        objectData = appendData(objectData, 'objects', file);
+                        break;
+                    default:
+                        break;
+                }
+                return false;
+            });
 
         if (!checkFiles) {
             this.props.triggerEvent('dummyUploads', { formData, objectData }, false);
@@ -204,7 +205,7 @@ class FileUpload extends Component {
         let selected = [];
         if (this.props.options.multiSelect) {
             selected = this.props.popupReducer.uploads.filter(
-                (item) => !this.state.excluded.includes(item)
+                (item) => !this.state.excluded.includes(item),
             );
         } else {
             selected = this.state.excluded;
@@ -245,7 +246,8 @@ class FileUpload extends Component {
                 <Item
                     key={item._id}
                     item={item}
-                    reducer={this.props.popupReducer}
+                    type={this.props.type}
+                    baseUrl={this.props.popupReducer.baseUrl}
                     clickHandler={this.onItemClick}
                     excluded={isExcluded}
                 />
@@ -270,31 +272,31 @@ class FileUpload extends Component {
     render() {
         return (
             <React.Fragment>
-                <section className={`${Styles.pop_content} ${Styles.file_add_list_content}`}>
+                <section className={`${this.theme.pop_content} ${this.theme.file_add_list_content}`}>
                     {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                    <h2 className={Styles.blind}>파일 올리기</h2>
+                    <h2 className={this.theme.blind}>파일 올리기</h2>
                     {this.state.isUploading && (
-                        <div className={Styles.fileupload_loding}>
-                            <span className={Styles.loding_text}>
+                        <div className={this.theme.fileupload_loding}>
+                            <span className={this.theme.loding_text}>
                                 {CommonUtils.getLang('Menus.file_upload_loading')}
                             </span>
                         </div>
                     )}
-                    <div className={Styles.section_cont}>
-                        <p className={`${Styles.caution} ${Styles.imico_pop_caution}`}>
+                    <div className={this.theme.section_cont}>
+                        <p className={`${this.theme.caution} ${this.theme.imico_pop_caution}`}>
                             {this.getWarnMsg()}
                         </p>
 
                         <div
-                            className={`${Styles.list_area} ${CommonUtils.toggleClass(
+                            className={`${this.theme.list_area} ${CommonUtils.toggleClass(
                                 this.props.type === 'sound',
-                                Styles.sound_type
+                                this.theme.sound_type,
                             )}`}
                         >
-                            <div className={Styles.file_add_box}>
+                            <div className={this.theme.file_add_box}>
                                 <label
                                     htmlFor="inpt_file"
-                                    className={`${Styles.upload} ${Styles.imbtn_pop_upload}`}
+                                    className={`${this.theme.upload} ${this.theme.imbtn_pop_upload}`}
                                 >
                                     {CommonUtils.getLang('Workspace.upload_addfile')}
                                 </label>
@@ -307,27 +309,27 @@ class FileUpload extends Component {
                                     style={{ fontSize: 0 }}
                                 />
                             </div>
-                            <ul className={Styles.obj_list}>
+                            <ul className={this.theme.obj_list}>
                                 {/* [D] 오브젝트 링크가 클릭되면 li에 on  추가 */}
                                 {this.drawItems()}
                             </ul>
                         </div>
 
                         {this.props.options.uploadAllowed.image && (
-                            <div className={Styles.img_caution_box}>
-                                <div className={Styles.inner}>
-                                    <span className={`${Styles.thmb} ${Styles.imico_warning}`}>
+                            <div className={this.theme.img_caution_box}>
+                                <div className={this.theme.inner}>
+                                    <span className={`${this.theme.thmb} ${this.theme.imico_warning}`}>
                                         &nbsp;
                                     </span>
-                                    <div className={Styles.dsc_box}>
+                                    <div className={this.theme.dsc_box}>
                                         <strong>
                                             {CommonUtils.getLang('Menus.file_upload_desc_1')}
                                         </strong>
-                                        <p className={Styles.dsc}>
+                                        <p className={this.theme.dsc}>
                                             {CommonUtils.getLang('Menus.file_upload_desc_2')}
-                                            <br />
+                                            <br/>
                                             {CommonUtils.getLang('Menus.file_upload_desc_3')}
-                                            <br />
+                                            <br/>
                                             {CommonUtils.getLang('Menus.file_upload_desc_4')}
                                         </p>
                                     </div>
@@ -336,14 +338,14 @@ class FileUpload extends Component {
                         )}
                     </div>
                 </section>
-                <div className={Styles.pop_btn_box}>
+                <div className={this.theme.pop_btn_box}>
                     <a href="#NULL" onClick={(e) => {
                         e.preventDefault();
                         this.props.triggerEvent('close', null, true);
                     }}>
                         {CommonUtils.getLang('Buttons.cancel')}
                     </a>
-                    <a href="#NULL" className={Styles.active} onClick={this.onApplyItemClicked}>
+                    <a href="#NULL" className={this.theme.active} onClick={this.onApplyItemClicked}>
                         {CommonUtils.getLang('Buttons.add')}
                     </a>
                 </div>
@@ -363,5 +365,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(FileUpload);

@@ -5,26 +5,35 @@ import { CommonUtils } from '@utils/Common';
 import { triggerEvent } from '@actions';
 import { makeFindSelectedById } from '@selectors';
 import Theme from '@utils/Theme';
-let Styles;
 
 class Item extends Component {
     constructor(props) {
         super(props);
-        Styles = Theme.getStyle("popup");
+        this.theme = Theme.getStyle('popup');
         this.drawImage = this.drawImage.bind(this);
         this.onItemClicked = this.onItemClicked.bind(this);
     }
 
     drawImage() {
         if (this.props.type === 'sound') {
-            return <div className={`${Styles.thmb} ${Styles.imico_pop_sound_thmb}`}>&nbsp;</div>;
+            return <div className={`${this.theme.thmb} ${this.theme.imico_pop_sound_thmb}`}>&nbsp;</div>;
         }
-        const thumbNailUrl = this.props.item.pictures ? this.props.item.pictures[0].filename : this.props.item.filename;
+        let { filename, fileurl } = this.props.item;
+        let thumb;
+        if (this.props.item.pictures) {
+            filename = this.props.item.pictures[0].filename;
+            fileurl = this.props.item.pictures[0].fileurl;
+        }
+
+        if (fileurl) {
+            thumb = fileurl.thumb || fileurl.resized || fileurl.origin || fileurl;
+        }
+
         const baseUrl = this.props.popupReducer.baseUrl;
         return (
-            <div className={Styles.thmb}>
+            <div className={this.theme.thmb}>
                 <img
-                    src={CommonUtils.createImageUrl(thumbNailUrl, baseUrl)}
+                    src={thumb || CommonUtils.createImageUrl(filename, baseUrl)}
                     alt=""
                 />
             </div>
@@ -58,11 +67,11 @@ class Item extends Component {
         return (
             <li
                 onClick={this.onItemClicked}
-                className={CommonUtils.toggleClass(this.props.index >= 0, Styles.on)}
+                className={CommonUtils.toggleClass(this.props.index >= 0, this.theme.on)}
             >
-                <div className={Styles.link}>
+                <div className={this.theme.link}>
                     {this.drawImage()}
-                    <em className={Styles.sjt}>
+                    <em className={this.theme.sjt}>
                         {name}
                     </em>
                 </div>

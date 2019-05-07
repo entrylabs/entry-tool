@@ -8,7 +8,6 @@ import { EMIT_TYPES } from '@constants';
 import _cloneDeep from 'lodash/cloneDeep';
 import _includes from 'lodash/includes';
 import Theme from '@utils/Theme';
-let Styles;
 
 /* eslint-disable array-element-newline */
 const FIELDS = {
@@ -36,7 +35,7 @@ const handle = (e, cb) => {
 class Input extends Component {
     constructor(props) {
         super(props);
-
+        this.theme = Theme.getStyle("popup");
         this.state = {
             active: false,
             text: '',
@@ -76,9 +75,9 @@ class Input extends Component {
     render() {
         const filed = FIELDS[this.props.writeType];
         return (
-            <div className={Styles.input_box}>
+            <div className={this.theme.input_box}>
                 <div
-                    className={Styles.input_inner}
+                    className={this.theme.input_inner}
                     onFocus={(e) => handle(e, () => this.setState({ active: true }))}
                     onBlur={this.onInputBlur}
                 >
@@ -97,7 +96,7 @@ class Input extends Component {
                         style={this.getFontStyle()}
                     />
                 </div>
-                <ul className={Styles.list}>
+                <ul className={this.theme.list}>
                     {filed.descriptions.map((description, index) => (
                         <li key={index}>{CommonUtils.getLang(description)}</li>
                     ))}
@@ -110,7 +109,7 @@ class Input extends Component {
 class WriteBox extends Component {
     constructor(props) {
         super(props);
-        Styles = Theme.getStyle("popup");
+        this.theme = Theme.getStyle("popup");
         this.fonts = CommonUtils.getFonts();
         this.state = {
             writeType: 'one',
@@ -131,8 +130,8 @@ class WriteBox extends Component {
             const backgroundColor = isColor ? effect.css[key] : null;
             const isColorOn = this.state.colorPicker && this.state.colorPicker.props.target === key;
             const isOn = isColor ? isColorOn : effect.apply;
-            const clear = CommonUtils.toggleClass(backgroundColor === '#ffffff' || backgroundColor === 'transparent', Styles.clear);
-            const className = `${CommonUtils.toggleClass(!isColor, Styles.style_link)} ${Styles[`imbtn_pop_font_${key.toLowerCase()}`]} ${CommonUtils.toggleClass(isOn, Styles.on)} ${clear}`;
+            const clear = CommonUtils.toggleClass(backgroundColor === '#ffffff' || backgroundColor === 'transparent', this.theme.clear);
+            const className = `${CommonUtils.toggleClass(!isColor, this.theme.style_link)} ${this.theme[`imbtn_pop_font_${key.toLowerCase()}`]} ${CommonUtils.toggleClass(isOn, this.theme.on)} ${clear}`;
             return (
                 <div
                     key={key}
@@ -250,21 +249,21 @@ class WriteBox extends Component {
     render() {
         return (
             <React.Fragment>
-                <section className={Styles.pop_content}>
-                    <div className={Styles.section_cont}>
+                <section className={this.theme.pop_content}>
+                    <div className={this.theme.section_cont}>
                         {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                        <h2 className={Styles.blind}>글상자</h2>
-                        <div className={Styles.cont_box}>
-                            <div className={Styles.write_box}>
-                                <div className={Styles.write_set}>
-                                    <div className={Styles.pop_selectbox}>
+                        <h2 className={this.theme.blind}>글상자</h2>
+                        <div className={this.theme.cont_box}>
+                            <div className={this.theme.write_box}>
+                                <div className={this.theme.write_set}>
+                                    <div className={this.theme.pop_selectbox}>
                                         <div
                                             className={`${
-                                                Styles.select_link
+                                                this.theme.select_link
                                             } ${CommonUtils.toggleClass(
                                                 this.state.dropDown,
-                                                Styles.imico_pop_select_arr_up,
-                                                Styles.imico_pop_select_arr_down,
+                                                this.theme.imico_pop_select_arr_up,
+                                                this.theme.imico_pop_select_arr_down,
                                             )}`}
                                             onClick={this.onFontBoxClicked}
                                             title={CommonUtils.getLang('Workspace.font_family')}
@@ -274,18 +273,18 @@ class WriteBox extends Component {
                                     </div>
 
                                     <div
-                                        className={Styles.font_style_box}
+                                        className={this.theme.font_style_box}
                                         onClick={this.onEffectBtnClicked}
                                     >
                                         {this.drawEffects()}
                                     </div>
-                                    <div className={Styles.write_type_box}>
+                                    <div className={this.theme.write_type_box}>
                                         {/* 링크가 클릭되면 on 클래스 토글 */}
                                         <a
                                             href="#NULL"
                                             className={CommonUtils.toggleClass(
                                                 this.state.writeType === 'one',
-                                                Styles.on,
+                                                this.theme.on,
                                             )}
                                             onClick={(e) => {
                                                 handle(e, () =>
@@ -299,7 +298,7 @@ class WriteBox extends Component {
                                             href="#NULL"
                                             className={CommonUtils.toggleClass(
                                                 this.state.writeType === 'multi',
-                                                Styles.on,
+                                                this.theme.on,
                                             )}
                                             onClick={(e) => {
                                                 handle(e, () =>
@@ -325,7 +324,7 @@ class WriteBox extends Component {
                     {this.state.colorPicker}
                     {this.state.dropDown}
                 </section>
-                <div className={Styles.pop_btn_box}>
+                <div className={this.theme.pop_btn_box}>
                     <a
                         href="#NULL"
                         onClick={(e) => {
@@ -335,7 +334,7 @@ class WriteBox extends Component {
                     >
                         {CommonUtils.getLang('Buttons.cancel')}
                     </a>
-                    <a href="#NULL" className={Styles.active} onClick={this.onSubmitBtnClicked}>
+                    <a href="#NULL" className={this.theme.active} onClick={this.onSubmitBtnClicked}>
                         {CommonUtils.getLang('Buttons.apply')}
                     </a>
                 </div>

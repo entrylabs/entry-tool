@@ -5,7 +5,7 @@ import root from 'window-or-global';
 import { COLOR_PICKER_MODE } from '../../constants';
 import memoize from 'lodash/memoize';
 import Theme from '@utils/Theme';
-let Styles;
+
 function getColorByHsv({ red, green, blue }) {
     const color = chroma(red, green, blue);
     /* eslint-disable prefer-const */
@@ -136,7 +136,7 @@ class ColorPicker extends Component {
 
     constructor(props) {
         super(props);
-        Styles = Theme.getStyle("popup");
+        this.theme = Theme.getStyle("popup");
         const { color, onChangeColor, lastColor } = props;
         let state = {
             isTransparent: false,
@@ -402,7 +402,7 @@ class ColorPicker extends Component {
 
     makeHSVController() {
         const { isTransparent, isActiveSlider } = this.state;
-        let itemClassName = isTransparent ? Styles.disabled : '';
+        let itemClassName = isTransparent ? this.theme.disabled : '';
         return metaHSVContoller.map(({ key, label }) => {
             let max = 100;
             let ratio = 1;
@@ -411,7 +411,7 @@ class ColorPicker extends Component {
                 ratio = 100 / 360;
             }
             return (
-                <li key={key} className={`${Styles.item} ${itemClassName}`}>
+                <li key={key} className={`${this.theme.item} ${itemClassName}`}>
                     <label htmlFor={key}>{label}</label>
                     <input
                         value={String(this.state[key])}
@@ -430,12 +430,12 @@ class ColorPicker extends Component {
                         name={key}
                         disabled={isTransparent}
                     />
-                    <div className={`${Styles.graph_box}`} touch-action="none">
+                    <div className={`${this.theme.graph_box}`} touch-action="none">
                         <span
                             data-type={key}
                             data-my-type={key}
-                            className={`${Styles.slider} ${Styles.btn_pop_color_slide} ${
-                                isActiveSlider === key ? Styles.on : ''
+                            className={`${this.theme.slider} ${this.theme.btn_pop_color_slide} ${
+                                isActiveSlider === key ? this.theme.on : ''
                             }`}
                             onMouseDown={(e) => {
                                 !isTransparent && this.handleSliderMouseDown(e, key);
@@ -446,7 +446,7 @@ class ColorPicker extends Component {
                             style={{ left: `${setScaleRatioX(this.state[key], ratio)}px` }}
                         />
                         <div
-                            className={`${Styles.bar}`}
+                            className={`${this.theme.bar}`}
                             style={this.getGradientBackground(key)}
                             onMouseDown={(e) => {
                                 !isTransparent && this.handleSliderBarClick(e, key);
@@ -464,12 +464,12 @@ class ColorPicker extends Component {
         const { isTransparent } = this.state;
         let itemClassName = '';
         if (isTransparent) {
-            itemClassName = Styles.disabled;
+            itemClassName = this.theme.disabled;
         }
 
         return metaRgbContoller.map(({ label, key }) => {
             return (
-                <li key={key} className={`${Styles.item} ${itemClassName}`}>
+                <li key={key} className={`${this.theme.item} ${itemClassName}`}>
                     <label htmlFor={key}>{label}</label>
                     <input
                         value={String(this.state[key])}
@@ -488,7 +488,7 @@ class ColorPicker extends Component {
                         name={key}
                         disabled={isTransparent}
                     />
-                    <div className={`${Styles.graph}`} />
+                    <div className={`${this.theme.graph}`} />
                 </li>
             );
         });
@@ -505,44 +505,44 @@ class ColorPicker extends Component {
         const { isTransparent } = this.state;
         let colorClassName = '';
         let colorBackground = null;
-        let transparentEnableClassName = canTransparent ? '' : Styles.disabled;
+        let transparentEnableClassName = canTransparent ? '' : this.theme.disabled;
         if (isTransparent) {
-            colorClassName = `${Styles.imico_pop_color_uncheck} ${Styles.imico_pop_circle_check}`;
+            colorClassName = `${this.theme.imico_pop_color_uncheck} ${this.theme.imico_pop_circle_check}`;
         } else {
-            colorClassName = Styles.imico_pop_circle_check_on;
+            colorClassName = this.theme.imico_pop_circle_check_on;
             colorBackground = this.resultBackground();
         }
         return (
-            <div className={Styles.colorSlider}>
+            <div className={this.theme.colorSlider}>
                 <div
-                    className={Styles.colorSwatchesButton}
+                    className={this.theme.colorSwatchesButton}
                     onClick={() => {
                         onChangePickerMode(COLOR_PICKER_MODE.SWATCHES);
                     }}
                 />
-                <div className={`${Styles.tooltip_inner}`}>
-                    <div className={`${Styles.color_box}`}>
+                <div className={`${this.theme.tooltip_inner}`}>
+                    <div className={`${this.theme.color_box}`}>
                         <span
                             className={`${
-                                Styles.color
+                                this.theme.color
                             } ${colorClassName} ${transparentEnableClassName}`}
                             style={colorBackground}
                             onClick={this.handleColorClick}
                         />
-                        <ul className={`${Styles.color_list}`}>{this.makeRGBController()}</ul>
+                        <ul className={`${this.theme.color_list}`}>{this.makeRGBController()}</ul>
                         {canSpoide && (
                             <div
                                 onClick={onSpoidClick}
-                                className={`${Styles.btn_picker} ${Styles.imbtn_picker} ${
-                                    activeSpoid ? Styles.on : ''
+                                className={`${this.theme.btn_picker} ${this.theme.imbtn_picker} ${
+                                    activeSpoid ? this.theme.on : ''
                                 }`}
                             >
                                 컬러피커 열기
                             </div>
                         )}
                     </div>
-                    <div className={`${Styles.color_graph}`}>
-                        <ul className={`${Styles.graph_list}`}>{this.makeHSVController()}</ul>
+                    <div className={`${this.theme.color_graph}`}>
+                        <ul className={`${this.theme.graph_list}`}>{this.makeHSVController()}</ul>
                     </div>
                 </div>
             </div>

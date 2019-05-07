@@ -4,12 +4,11 @@ import { triggerEvent } from '@actions/index';
 import { EMIT_TYPES } from '@constants';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
-let Styles;
 
 class Foot extends Component {
     constructor(props) {
         super(props);
-        Styles = Theme.getStyle("popup");
+        this.theme = Theme.getStyle("popup");
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -20,13 +19,13 @@ class Foot extends Component {
 
     render() {
         return (
-            <div className={Styles.pop_btn_box}>
+            <div className={this.theme.pop_btn_box}>
                 <a href="#NULL" onClick={(e) => this.handleSubmit(e, EMIT_TYPES.close)}>
                     {CommonUtils.getLang("Buttons.cancel")}
                 </a>
                 <a
                     href="#NULL"
-                    className={Styles.active}
+                    className={this.theme.active}
                     onClick={(e) =>
                         this.handleSubmit(e, EMIT_TYPES.submit, { selected: this.props.popupReducer.selected })
                     }

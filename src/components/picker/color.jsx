@@ -8,7 +8,7 @@ import ColorSwatches from './ColorSwatches';
 import produce from 'immer';
 import { COLOR_PICKER_MODE } from '../../constants';
 import Theme from '@utils/Theme';
-let Styles;
+
 class ColorPicker extends Component {
     get PICKER_WIDTH() {
         return 398;
@@ -36,7 +36,7 @@ class ColorPicker extends Component {
 
     constructor(props) {
         super(props);
-        Styles = Theme.getStyle("popup");
+        this.theme = Theme.getStyle("popup");
         const state = {
             isTransparent: false,
             pickerMode: this.defaultPickerMode(),
@@ -232,8 +232,8 @@ class ColorPicker extends Component {
                     }}
                     style={colorPickerStyle}
                     onClick={onClick}
-                    className={`${Styles.tooltip_box} ${Styles.color_picker} ${
-                        isUpStyle ? Styles.up : ''
+                    className={`${this.theme.tooltip_box} ${this.theme.color_picker} ${
+                        isUpStyle ? this.theme.up : ''
                     }
                         ${className}`}
                 >
@@ -253,7 +253,7 @@ class ColorPicker extends Component {
                         />
                     )}
                     <span
-                        className={`${Styles.arr} ${Styles.free}`}
+                        className={`${this.theme.arr} ${this.theme.free}`}
                         style={{ left: `${arrowLeft}px` }}
                     >
                         <i />

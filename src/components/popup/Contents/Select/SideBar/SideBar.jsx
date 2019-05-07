@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { CommonUtils } from '@utils/Common';
 import { setUIParam } from '@actions/popup';
 import Theme from '@utils/Theme';
-let Styles;
 
 class SideBar extends Component {
     constructor(props) {
         super(props);
-        Styles = Theme.getStyle("popup");
+        this.theme = Theme.getStyle("popup");
         this.drawSideBar = this.drawSideBar.bind(this);
         this.onSidebarCliecked = this.onSidebarCliecked.bind(this);
     }
@@ -36,7 +35,7 @@ class SideBar extends Component {
                     onClick={this.onSidebarCliecked}
                     className={CommonUtils.toggleClass(
                         sidebar === item || (!sidebar && index === 0),
-                        Styles.on
+                        this.theme.on
                     )}
                 >
                     <a href="#NULL">{CommonUtils.getLang(list[item].name)}</a>
@@ -46,7 +45,7 @@ class SideBar extends Component {
     }
 
     render() {
-        return <ul className={Styles.menu_list}>{this.drawSideBar()}</ul>;
+        return <ul className={this.theme.menu_list}>{this.drawSideBar()}</ul>;
     }
 }
 
