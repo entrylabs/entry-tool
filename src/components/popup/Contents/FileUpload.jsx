@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import range from 'lodash/range';
 import _includes from 'lodash/includes';
-import Styles from '@assets/scss/popup.scss';
 import { updateUploads } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
 import { triggerEvent } from '@actions';
+import Theme from '@utils/Theme';
+let Styles;
 
 class Item extends Component {
     constructor(props) {
         super(props);
-
         this.onClickItem = this.onClickItem.bind(this);
     }
 
@@ -51,7 +51,7 @@ class Item extends Component {
 class FileUpload extends Component {
     constructor(props) {
         super(props);
-
+        Styles = Theme.getStyle("popup");
         this.state = {
             isUploading: false,
             excluded: [],

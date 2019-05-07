@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CommonUtils } from '@utils/Common';
-import Styles from '@assets/scss/popup.scss';
 import { triggerEvent } from '@actions';
 import ColorPicker from '@components/picker/color';
 import Dropdown from '@components/widget/dropdown';
 import { EMIT_TYPES } from '@constants';
 import _cloneDeep from 'lodash/cloneDeep';
 import _includes from 'lodash/includes';
+import Theme from '@utils/Theme';
+let Styles;
 
 /* eslint-disable array-element-newline */
 const FIELDS = {
@@ -109,7 +110,7 @@ class Input extends Component {
 class WriteBox extends Component {
     constructor(props) {
         super(props);
-
+        Styles = Theme.getStyle("popup");
         this.fonts = CommonUtils.getFonts();
         this.state = {
             writeType: 'one',

@@ -80,6 +80,7 @@
         "react-custom-scroll": "^4.0.1",
         "react-dev-utils": "^5.0.1",
         "react-dom": "^16.4.2",
+        "react-icons": "^3.6.1",
         "react-redux": "^5.0.7",
         "react-sortable-hoc": "^0.8.4",
         "react-test-renderer": "^16.4.2",

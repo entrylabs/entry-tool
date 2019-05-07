@@ -14,7 +14,7 @@ import BackPack from '../components/widget/BackPack';
 import Sortable from '../components/widget/sortable';
 import ContextMenu from '../components/widget/contextMenu';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
-
+import Theme from '@utils/Theme';
 import { action } from '@storybook/addon-actions';
 import httpService from '../config/axios';
 import {
@@ -30,7 +30,7 @@ httpService.setupInterceptors('http://localhost:4000');
 export default function Provider({ story }) {
     return <ReduxProvider store={store}>{story}</ReduxProvider>;
 }
-
+Theme.type="entryline";
 storiesOf('Popup', module)
     .addDecorator((story) => <Provider story={story()} />)
     .add('전체', () => <Sample />)

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CommonUtils } from '@utils/Common';
-import Styles from '@assets/scss/popup.scss';
 import { setUIParam } from '@actions/popup';
+import Theme from '@utils/Theme';
+let Styles;
 
 class SideBar extends Component {
     constructor(props) {
         super(props);
-
+        Styles = Theme.getStyle("popup");
         this.drawSideBar = this.drawSideBar.bind(this);
         this.onSidebarCliecked = this.onSidebarCliecked.bind(this);
     }

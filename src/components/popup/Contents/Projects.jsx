@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Styles from '@assets/scss/popup.scss';
 import { triggerEvent } from '@actions';
 import { CommonUtils } from '@utils/Common';
 import { EMIT_TYPES } from '@constants';
+import Theme from '@utils/Theme';
+let Styles;
 
 class Projects extends Component {
     constructor(props) {
         super(props);
+        Styles = Theme.getStyle("popup");
         this.state = {
             count: this.props.data.count || 0,
             selected: null,

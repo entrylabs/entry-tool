@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Styles from '../../assets/scss/popup.scss';
 import debounce from 'lodash/debounce';
 import { pure } from 'recompose';
 import OutsideClick from '../common/outsideClick';
@@ -8,7 +7,8 @@ import ColorSlider from './ColorSlider';
 import ColorSwatches from './ColorSwatches';
 import produce from 'immer';
 import { COLOR_PICKER_MODE } from '../../constants';
-
+import Theme from '@utils/Theme';
+let Styles;
 class ColorPicker extends Component {
     get PICKER_WIDTH() {
         return 398;
@@ -36,6 +36,7 @@ class ColorPicker extends Component {
 
     constructor(props) {
         super(props);
+        Styles = Theme.getStyle("popup");
         const state = {
             isTransparent: false,
             pickerMode: this.defaultPickerMode(),

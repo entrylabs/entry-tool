@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setUIParam } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
-import Styles from '@assets/scss/popup.scss';
+import Theme from '@utils/Theme';
+let Styles;
 
 class SubMenu extends Component {
     constructor(props) {
         super(props);
-
+        Styles = Theme.getStyle("popup");
         this.drawSubMenu = this.drawSubMenu.bind(this);
         this.onSubMenuSelected = this.onSubMenuSelected.bind(this);
     }

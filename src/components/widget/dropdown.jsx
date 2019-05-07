@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { pure } from 'recompose';
-import Styles from '@assets/scss/popup.scss';
 import { CommonUtils } from '@utils/Common';
 import debounce from 'lodash/debounce';
 import Scrollbars from '@components/common/scrollbars';
 import OutsideClick from '@components/common/outsideClick';
 import root from 'window-or-global';
+import Theme from '@utils/Theme';
+let Styles;
 
 class Dropdown extends Component {
     get DROPDOWN_WIDTH_MARGIN() {
@@ -25,6 +26,7 @@ class Dropdown extends Component {
     }
     constructor(props) {
         super(props);
+        Styles = Theme.getStyle("popup");
         this.state = CommonUtils.getDefaultComponentPosition(props, this.getPositionOptions());
     }
 

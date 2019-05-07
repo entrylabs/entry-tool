@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { initState } from '@actions/popup';
 import { visibleAction } from '@actions/index';
-import Styles from '@assets/scss/popup.scss';
 
 import Navigation from './Navigation';
 import Select from './Contents/Select';
@@ -12,10 +11,13 @@ import Draw from './Contents/Draw';
 import Projects from './Contents/Projects';
 import { DEFAULT_OPTIONS } from '../../constants';
 import { CommonUtils } from '@utils/Common';
+import Theme from '@utils/Theme';
+let Styles;
 
 class Sprite extends Component {
     constructor(props) {
         super(props);
+        Styles = Theme.getStyle("popup");
         this.state = {
             navigation: Object.keys(this.options.navigations)[0] || props.type,
         };

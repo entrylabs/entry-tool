@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { applySelected } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
-import Styles from '@assets/scss/popup.scss';
 import { triggerEvent } from '@actions';
 import { makeFindSelectedById } from '@selectors';
+import Theme from '@utils/Theme';
+let Styles;
 
 class Item extends Component {
     constructor(props) {
         super(props);
-
+        Styles = Theme.getStyle("popup");
         this.drawImage = this.drawImage.bind(this);
         this.onItemClicked = this.onItemClicked.bind(this);
     }

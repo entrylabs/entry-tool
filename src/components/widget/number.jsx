@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { pure } from 'recompose';
-import Styles from '@assets/scss/popup.scss';
 import { CommonUtils } from '@utils/Common';
 import OutsideClick from '../common/outsideClick';
 import { debounce } from 'lodash';
 import root from 'window-or-global';
+import Theme from '@utils/Theme';
+let Styles;
 
 /* eslint-disable jsx-a11y/anchor-is-valid*/
 /* eslint-disable array-element-newline */
@@ -25,6 +26,7 @@ class Number extends Component {
 
     constructor(props) {
         super(props);
+        Styles = Theme.getStyle("popup");
         this.state = CommonUtils.getDefaultComponentPosition(props, this.getPositionOptions());
         this.makeNumberButtons = this.makeNumberButtons.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);

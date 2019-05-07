@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Styles from '../../assets/scss/popup.scss';
 import { triggerEvent } from '../../actions/index';
+import Theme from '@utils/Theme';
+let Styles;
 
 class Index extends Component {
     constructor(props) {
         super(props);
+        Styles = Theme.getStyle("popup");
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 

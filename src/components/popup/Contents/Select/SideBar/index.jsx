@@ -4,15 +4,17 @@ import Item from './Item';
 import SideBar from './SideBar';
 import SubMenu from './SubMenu';
 import Selected from './Selected';
-import Styles from '@assets/scss/popup.scss';
 import Foot from './foot';
 import { triggerEvent } from '@actions';
 import { setUIParam } from '@actions/popup';
 import { EMIT_TYPES } from '@constants';
+import Theme from '@utils/Theme';
+let Styles;
 
 class Index extends Component {
     constructor(props) {
         super(props);
+        Styles = Theme.getStyle("popup");
         this.props.setUIParam(this.options);
         this.props.triggerEvent(EMIT_TYPES.fetch, this.options, false);
         this.drawItems = this.drawItems.bind(this);

@@ -1,0 +1,9 @@
+@charset "UTF-8";
+$imageDir:'../../entry/images';
+@import '../../entry/scss/popup';
+
+.popup_wrap {
+  .pop_header {
+    background-color: green;
+  }
+}

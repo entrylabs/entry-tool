@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import chroma from 'chroma-js';
-import Styles from '../../assets/scss/popup.scss';
 import { pure } from 'recompose';
 import root from 'window-or-global';
 import { COLOR_PICKER_MODE } from '../../constants';
 import memoize from 'lodash/memoize';
-
+import Theme from '@utils/Theme';
+let Styles;
 function getColorByHsv({ red, green, blue }) {
     const color = chroma(red, green, blue);
     /* eslint-disable prefer-const */
@@ -136,6 +136,7 @@ class ColorPicker extends Component {
 
     constructor(props) {
         super(props);
+        Styles = Theme.getStyle("popup");
         const { color, onChangeColor, lastColor } = props;
         let state = {
             isTransparent: false,

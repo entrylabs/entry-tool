@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { pure } from 'recompose';
 import Scrollbars from '../common/scrollbars';
 import produce from 'immer';
-import Styles from '../../assets/scss/widget/BackPack.scss';
 import EntryEvent from '@entrylabs/event';
 import { CommonUtils } from '@utils/Common';
+import Theme from '@utils/Theme';
+let Styles;
 
 class BackPack extends Component {
     state = {
@@ -14,6 +15,7 @@ class BackPack extends Component {
 
     constructor(props) {
         super(props);
+        Styles = Theme.getStyle("popup");
         this.backPack = React.createRef();
     }
     

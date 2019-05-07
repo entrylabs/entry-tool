@@ -1,27 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { applySelected } from '../../../../../actions/popup';
-import { CommonUtils } from '../../../../../utils/Common';
+import { applySelected } from '@actions/popup';
+import { CommonUtils } from '@utils/Common';
 import Slider from 'react-slick';
-import Styles from '../../../../../assets/scss/popup.scss';
-
-const TYPE_MAP = {
-    sound: {
-        wrapClass: `${Styles.cont_sel_box} ${Styles.sound_type}`,
-        imageClass: `${Styles.thmb} ${Styles.imico_pop_sound_thmb}`,
-        imageContent: () => '&nbsp;',
-    },
-    sprite: {
-        wrapClass: Styles.cont_sel_box,
-        imageClass: Styles.thmb,
-        imageContent: (item, baseUrl) => {
-            const thumbNailUrl = item.pictures ? item.pictures[0].filename : item.filename;
-            return (
-                <img src={CommonUtils.createImageUrl(thumbNailUrl, baseUrl)} alt=""/>
-            );
-        },
-    },
-};
+import Theme from '@utils/Theme';
+let Styles;
+let TYPE_MAP;
 
 class CustomSlide extends Component {
     render() {
@@ -68,7 +52,7 @@ function Arrow(props) {
 class Selected extends Component {
     constructor(props) {
         super(props);
-
+        Styles = Theme.getStyle("popup");
         this.container = React.createElement(
             'style',
             {},
@@ -77,6 +61,23 @@ class Selected extends Component {
             '.slick-slide:first-child { margin-left: 0; } '
         );
         this.itemClicked = this.itemClicked.bind(this);
+        TYPE_MAP = {
+            sound: {
+                wrapClass: `${Styles.cont_sel_box} ${Styles.sound_type}`,
+                imageClass: `${Styles.thmb} ${Styles.imico_pop_sound_thmb}`,
+                imageContent: () => '&nbsp;',
+            },
+            sprite: {
+                wrapClass: Styles.cont_sel_box,
+                imageClass: Styles.thmb,
+                imageContent: (item, baseUrl) => {
+                    const thumbNailUrl = item.pictures ? item.pictures[0].filename : item.filename;
+                    return (
+                        <img src={CommonUtils.createImageUrl(thumbNailUrl, baseUrl)} alt=""/>
+                    );
+                },
+            },
+        };
     }
 
     itemClicked(e) {

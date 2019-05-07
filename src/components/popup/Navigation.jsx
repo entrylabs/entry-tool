@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CommonUtils } from '@utils/Common';
-import Styles from '@assets/scss/popup.scss';
 import { triggerEvent } from '@actions';
 import Dropdown from '@components/widget/dropdown';
 import { EMIT_TYPES } from '@constants';
+import Theme from '@utils/Theme';
+let Styles;
 
 class Navigation extends Component {
     constructor(props) {
         super(props);
-
+        Styles = Theme.getStyle("popup");
         this.category_options = [
             [CommonUtils.getLang('EntryStatic.art_category_all'), null],
             [CommonUtils.getLang('EntryStatic.art_category_game'), '게임'],

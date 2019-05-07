@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import Item from './Item';
 import { connect } from 'react-redux';
-import Styles from '@assets/scss/popup.scss';
 import Foot from './foot';
 import { CommonUtils } from '../../../../../utils/Common';
+import Theme from '@utils/Theme';
+let Styles;
 
 class Index extends Component {
+    constructor(props) {
+        super(props);
+        Styles = Theme.getStyle("popup");
+    }
+
     drawItems() {
         return this.props.data.data.map((item) => (
             <Item key={item.name} item={item} imageBaseUrl={this.props.imageBaseUrl} />

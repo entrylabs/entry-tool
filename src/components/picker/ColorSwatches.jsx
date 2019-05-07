@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Styles from '../../assets/scss/popup.scss';
 import { pure } from 'recompose';
 import { COLOR_PICKER_MODE } from '../../constants';
-
+import Theme from '@utils/Theme';
+let Styles;
 const recommendedColor = [
     '#e83a30',
     '#e88c30',
@@ -30,6 +30,10 @@ const paletteColor = [
 ];
 
 class ColorPicker extends Component {
+    constructor(props) {
+        super(props);
+        Styles = Theme.getStyle("popup");
+    }
     makeRecommendedColor() {
         const { onChangeColor } = this.props;
         return (

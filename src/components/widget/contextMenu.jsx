@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import OutsideClick from '../common/outsideClick';
 import Scrollbars from '../common/scrollbars';
-import Styles from '@assets/scss/popup.scss';
 import root from 'window-or-global';
 import { pure } from 'recompose';
-
+import Theme from '@utils/Theme';
+let Styles;
 class ContextMenu extends Component {
     get SCROLL_ITEM_THRESHOLD() {
         return 5;
@@ -16,7 +16,7 @@ class ContextMenu extends Component {
             left: 0,
             top: 0,
         };
-
+        Styles = Theme.getStyle("popup");
         this.handleWindowResize = this.handleWindowResize.bind(this);
     }
 

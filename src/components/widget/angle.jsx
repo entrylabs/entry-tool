@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { CommonUtils } from '@utils/Common';
 import { debounce } from 'lodash';
 import { pure } from 'recompose';
-import Styles from '../../assets/scss/popup.scss';
 import OutsideClick from '../common/outsideClick';
 import root from 'window-or-global';
-
+import Theme from '@utils/Theme';
+let Styles;
 /* eslint-disable jsx-a11y/anchor-is-valid*/
 /* eslint-disable array-element-newline */
 /* eslint-disable array-bracket-newline */
@@ -29,7 +29,7 @@ class Angle extends Component {
 
     constructor(props) {
         super(props);
-
+        Styles = Theme.getStyle("popup");
         this.state = CommonUtils.getDefaultComponentPosition(props, this.getPositionOptions());
         this.handleAngleArrowMove = this.handleAngleArrowMove.bind(this);
         this.removeMouseMove = this.removeMouseMove.bind(this);

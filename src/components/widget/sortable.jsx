@@ -4,8 +4,8 @@ import _isPlainObject from 'lodash/isPlainObject';
 import { pure } from 'recompose';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import Scrollbars from '@components/common/scrollbars';
-import Styles from '@assets/scss/popup.scss';
-
+import Theme from '@utils/Theme';
+let Styles;
 /* eslint-disable new-cap */
 const SortableItem = SortableElement(({ value }) => {
     const { item } = value;
@@ -56,6 +56,11 @@ const SortableList = SortableContainer(({ items, disabled }) => {
 });
 
 class Sortable extends Component {
+    constructor(props) {
+        super(props);
+        Styles = Theme.getStyle("popup");
+    }
+
     onSortEnd = ({ oldIndex, newIndex }) => {
         const { onChangeList } = this.props;
         if (onChangeList) {

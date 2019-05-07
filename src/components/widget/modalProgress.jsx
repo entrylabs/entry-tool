@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { pure } from 'recompose';
-import Styles from '@assets/scss/progress.scss';
+import Theme from '@utils/Theme';
+let Styles;
 
 class ModalProgress extends Component {
     makeProgress() {
         const { title } = this.props;
-
+        Styles = Theme.getStyle("popup");
         return (
             <div className={Styles.progress}>
                 <div className={Styles.title}>{title}</div>

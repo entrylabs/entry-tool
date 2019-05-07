@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Styles from '@assets/scss/popup.scss';
 import { triggerEvent } from '@actions';
 import { EMIT_TYPES } from '@constants';
 import { CommonUtils } from '@utils/Common';
+import Theme from '@utils/Theme';
+let Styles;
 
 class Draw extends Component {
     constructor(props) {
         super(props);
+        Styles = Theme.getStyle("popup");
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
