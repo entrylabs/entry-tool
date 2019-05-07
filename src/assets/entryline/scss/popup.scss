@@ -3,12 +3,6 @@ $imageDir:'../../entry/images';
 $lineImageDir:'../images';
 @import '../../entry/scss/popup';
 
-.popup_wrap {
-  .pop_header {
-    background-color: green;
-  }
-}
-
 .imico_warning {
   background: url(#{$lineImageDir}/ico_pop_warning.png) no-repeat;
   background-size: 112px auto;
