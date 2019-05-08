@@ -15,6 +15,7 @@ class Backpack extends Component {
         super(props);
         this.backpack = React.createRef();
         this.eventTarget = new EntryEvent(document);
+        this.eventWindow = new EntryEvent(window);
     }
 
     setPointEvent() {
@@ -24,6 +25,12 @@ class Backpack extends Component {
             this.eventTarget.on('touchend.bpInTool', this.handlePointEnd);
             this.eventTarget.on('mousemove.bpInTool', this.handlePointMove);
             this.eventTarget.on('mouseup.bpInTool', this.handlePointEnd);
+            this.eventWindow.on(
+                'resize.bpInTool',
+                _.throttle(() => {
+                    this.getBackpackRect.cache = new _.memoize.Cache();
+                }, 500)
+            );
         } else {
             this.eventTarget.off('bpInTool');
         }
@@ -256,13 +263,7 @@ class Backpack extends Component {
                     </div>
                 )}
                 {isDragEnter && (
-                    <div
-                        className={Styles.dragArea}
-                        onMouseUp={this.handleItemDrop}
-                        onMouseLeave={() => {
-                            this.handleDragState(false);
-                        }}
-                    >
+                    <div className={Styles.dragArea}>
                         <div className={Styles.icon} />
                         <div className={Styles.desc}>
                             {CommonUtils.getLang('Workspace.my_storage_backpack_drop')}
