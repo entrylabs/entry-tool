@@ -227,6 +227,15 @@ class Backpack extends Component {
         );
     }
 
+    getDropMsg() {
+        const { type = '' } = this.lastDropItem || {};
+        if (type === 'block') {
+            return CommonUtils.getLang('Workspace.my_storage_block_drop');
+        } else {
+            return CommonUtils.getLang('Workspace.my_storage_object_drop');
+        }
+    }
+
     render() {
         const { onClose = () => {}, isLoading = true, draggableOption } = this.props;
         const { isDragEnter = false } = this.state;
@@ -263,11 +272,15 @@ class Backpack extends Component {
                     </div>
                 )}
                 {isDragEnter && (
-                    <div className={Styles.dragArea}>
+                    <div
+                        className={Styles.dragArea}
+                        onMouseUp={this.handleItemDrop}
+                        onMouseLeave={() => {
+                            this.handleDragState(false);
+                        }}
+                    >
                         <div className={Styles.icon} />
-                        <div className={Styles.desc}>
-                            {CommonUtils.getLang('Workspace.my_storage_backpack_drop')}
-                        </div>
+                        <div className={Styles.desc}>{this.getDropMsg()}</div>
                     </div>
                 )}
             </div>
