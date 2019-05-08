@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { pure } from 'recompose';
-import Styles from '@assets/scss/popup.scss';
 import { CommonUtils } from '@utils/Common';
 import OutsideClick from '../common/outsideClick';
 import { debounce } from 'lodash';
 import root from 'window-or-global';
+import Theme from '@utils/Theme';
 
 /* eslint-disable jsx-a11y/anchor-is-valid*/
 /* eslint-disable array-element-newline */
@@ -25,6 +25,7 @@ class Number extends Component {
 
     constructor(props) {
         super(props);
+        this.theme = Theme.getStyle("popup");
         this.state = CommonUtils.getDefaultComponentPosition(props, this.getPositionOptions());
         this.makeNumberButtons = this.makeNumberButtons.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);
@@ -59,7 +60,7 @@ class Number extends Component {
     makeNumberButtons() {
         return numberList.map((value) => (
             <a
-                className={Styles.btn_cnt}
+                className={this.theme.btn_cnt}
                 key={value}
                 onClick={() => {
                     this.handleButtonClick('buttonPressed', value);
@@ -96,27 +97,27 @@ class Number extends Component {
                         this.numberWidget = dom;
                     }}
                     style={componentPosition}
-                    className={`${Styles.tooltip_box} ${Styles.pad_only} ${
-                        isUpStyle ? Styles.up : ''
+                    className={`${this.theme.tooltip_box} ${this.theme.pad_only} ${
+                        isUpStyle ? this.theme.up : ''
                     }`}
                 >
-                    <div className={Styles.tooltip_inner}>
-                        <div className={Styles.time_board}>
+                    <div className={this.theme.tooltip_inner}>
+                        <div className={this.theme.time_board}>
                             {this.makeNumberButtons()}
                             <a
-                                className={`${Styles.btn_cnt} ${Styles.btn_del} ${
-                                    Styles.imico_pop_key_del
+                                className={`${this.theme.btn_cnt} ${this.theme.btn_del} ${
+                                    this.theme.imico_pop_key_del
                                 }`}
                                 onClick={() => {
                                     this.handleButtonClick('backButtonPressed');
                                 }}
                             >
-                                <span className={Styles.blind}>지우기</span>
+                                <span className={this.theme.blind}>지우기</span>
                             </a>
                         </div>
                     </div>
                     <span
-                        className={`${Styles.arr} ${Styles.free}`}
+                        className={`${this.theme.arr} ${this.theme.free}`}
                         style={{ left: `${arrowLeft}px` }}
                     >
                         <i />

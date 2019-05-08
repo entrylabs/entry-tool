@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Styles from '../../assets/scss/popup.scss';
 import { pure } from 'recompose';
 import { COLOR_PICKER_MODE } from '../../constants';
+import Theme from '@utils/Theme';
 
 const recommendedColor = [
     '#e83a30',
@@ -30,15 +30,19 @@ const paletteColor = [
 ];
 
 class ColorPicker extends Component {
+    constructor(props) {
+        super(props);
+        this.theme = Theme.getStyle("popup");
+    }
     makeRecommendedColor() {
         const { onChangeColor } = this.props;
         return (
-            <div className={Styles.recommendedColor}>
+            <div className={this.theme.recommendedColor}>
                 {recommendedColor.map((color) => {
                     return (
                         <div
                             key={color}
-                            className={Styles.item}
+                            className={this.theme.item}
                             style={{ backgroundColor: color }}
                             onClick={() => {
                                 onChangeColor(color);
@@ -52,15 +56,15 @@ class ColorPicker extends Component {
     makePaletteColor() {
         const { onChangeColor } = this.props;
         return (
-            <div className={Styles.paletteColor}>
+            <div className={this.theme.paletteColor}>
                 {paletteColor.map((group, idx) => {
                     return (
-                        <div key={`group_${idx}`} className={Styles.paletteGroup}>
+                        <div key={`group_${idx}`} className={this.theme.paletteGroup}>
                             {group.map((color) => {
                                 return (
                                     <div
                                         key={color}
-                                        className={Styles.item}
+                                        className={this.theme.item}
                                         style={{ backgroundColor: color }}
                                         onClick={() => {
                                             onChangeColor(color);
@@ -77,9 +81,9 @@ class ColorPicker extends Component {
     render() {
         const { onChangePickerMode } = this.props;
         return (
-            <div className={Styles.colorSwatches}>
+            <div className={this.theme.colorSwatches}>
                 <div
-                    className={Styles.colorSliderButton}
+                    className={this.theme.colorSliderButton}
                     onClick={() => {
                         onChangePickerMode(COLOR_PICKER_MODE.SLIDER);
                     }}

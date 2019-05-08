@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { pure } from 'recompose';
 import Scrollbars from '../common/scrollbars';
 import produce from 'immer';
-import Styles from '../../assets/scss/widget/BackPack.scss';
 import EntryEvent from '@entrylabs/event';
 import { CommonUtils } from '@utils/Common';
+import Theme from '@utils/Theme';
 
 class BackPack extends Component {
     state = {
@@ -14,6 +14,7 @@ class BackPack extends Component {
 
     constructor(props) {
         super(props);
+        this.theme = Theme.getStyle("popup");
         this.backPack = React.createRef();
     }
     
@@ -124,11 +125,11 @@ class BackPack extends Component {
     makeEmbed(imgPath) {
         if (imgPath.indexOf('.svg') > -1) {
             return (
-                <embed src={imgPath} className={Styles.image}/>
+                <embed src={imgPath} className={this.theme.image}/>
             );
         } else {
             return (
-                <img src={imgPath} className={Styles.image} alt="" />
+                <img src={imgPath} className={this.theme.image} alt="" />
             );
         }
     }
@@ -142,7 +143,7 @@ class BackPack extends Component {
             return (
                 <div
                     key={_id}
-                    className={`${Styles.item} ${isSelected ? Styles.active : ''}`}
+                    className={`${this.theme.item} ${isSelected ? this.theme.active : ''}`}
                     onClick={() => {
                         this.handleItemSelect(_id);
                     }}
@@ -154,19 +155,19 @@ class BackPack extends Component {
                         this.handleDragEnd(e);
                     }}
                 >
-                    <div className={Styles.imageWrapper}>
+                    <div className={this.theme.imageWrapper}>
                         {this.makeEmbed(imgPath)}
                     </div>
-                    <div className={Styles.imageOverlay} />
+                    <div className={this.theme.imageOverlay} />
                     <button
-                        className={Styles.closeButton}
+                        className={this.theme.closeButton}
                         onClick={() => {
                             this.handleRemoveItem(_id);
                         }}
                     />
                     <div>
                         <input
-                            className={Styles.input}
+                            className={this.theme.input}
                             defaultValue={title}
                             onDrop={this.handlePreventDefault}
                             onKeyUp={this.handleKeyup}
@@ -206,8 +207,8 @@ class BackPack extends Component {
 
     makeLoadingView() {
         return (
-            <div className={Styles.loading}>
-                <div className={Styles.image} />
+            <div className={this.theme.loading}>
+                <div className={this.theme.image} />
                 {CommonUtils.getLang('Menus.file_upload_loading')}
             </div>
         );
@@ -225,15 +226,15 @@ class BackPack extends Component {
             //     eventTypes={eventTypes}
             //     style={{ height: '100%' }}
             // >
-            <div ref={this.backPack} className={Styles.BackPack}>
-                <div className={Styles.titleArea} onClick={onClose}>
-                    <div className={Styles.icon} />
-                    <div className={Styles.title}>{CommonUtils.getLang('Workspace.my_storage')}</div>
+            <div ref={this.backPack} className={this.theme.BackPack}>
+                <div className={this.theme.titleArea} onClick={onClose}>
+                    <div className={this.theme.icon} />
+                    <div className={this.theme.title}>{CommonUtils.getLang('Workspace.my_storage')}</div>
                 </div>
                 {isLoading && this.makeLoadingView()}
                 {!isLoading && (
                     <div
-                        className={Styles.itemArea}
+                        className={this.theme.itemArea}
                         onDragEnter={() => {
                             this.handleDragState(true);
                         }}
@@ -241,12 +242,12 @@ class BackPack extends Component {
                             this.handleCustomEnter(e);
                         }}
                     >
-                        <Scrollbars heightRelativeToParent="100%" className={Styles.scrollbar}>{this.makeItemList()}</Scrollbars>
+                        <Scrollbars heightRelativeToParent="100%" className={this.theme.scrollbar}>{this.makeItemList()}</Scrollbars>
                     </div>
                 )}
                 {isDragEnter && !isDragging && (
                     <div
-                        className={Styles.dragArea}
+                        className={this.theme.dragArea}
                         onDrop={(e) => {
                             this.handleDragState(false);
                             const value = e.dataTransfer.getData('text');
@@ -264,8 +265,8 @@ class BackPack extends Component {
                             this.handleDragState(false);
                         }}
                     >
-                        <div className={Styles.icon}/>
-                        <div className={Styles.desc}>{CommonUtils.getLang('Workspace.my_storage_backpack_drop')}</div>
+                        <div className={this.theme.icon}/>
+                        <div className={this.theme.desc}>{CommonUtils.getLang('Workspace.my_storage_backpack_drop')}</div>
                     </div>
                 )}
             </div>

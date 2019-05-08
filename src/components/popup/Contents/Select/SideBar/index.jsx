@@ -4,15 +4,16 @@ import Item from './Item';
 import SideBar from './SideBar';
 import SubMenu from './SubMenu';
 import Selected from './Selected';
-import Styles from '@assets/scss/popup.scss';
 import Foot from './foot';
 import { triggerEvent } from '@actions';
 import { setUIParam } from '@actions/popup';
 import { EMIT_TYPES } from '@constants';
+import Theme from '@utils/Theme';
 
 class Index extends Component {
     constructor(props) {
         super(props);
+        this.theme = Theme.getStyle("popup");
         this.props.setUIParam(this.options);
         this.props.triggerEvent(EMIT_TYPES.fetch, this.options, false);
         this.drawItems = this.drawItems.bind(this);
@@ -72,17 +73,17 @@ class Index extends Component {
     drawListBox() {
         if (this.props.popupReducer.type === 'sound') {
             return (
-                <div id="popupList" className={Styles.sound_list_box}>
-                    <div className={Styles.list_area}>
-                        <ul className={Styles.obj_list}>{this.drawItems()}</ul>
+                <div id="popupList" className={this.theme.sound_list_box}>
+                    <div className={this.theme.list_area}>
+                        <ul className={this.theme.obj_list}>{this.drawItems()}</ul>
                     </div>
                 </div>
             );
         }
 
         return (
-            <div id="popupList" className={Styles.list_area}>
-                <ul className={Styles.obj_list}>{this.drawItems()}</ul>
+            <div id="popupList" className={this.theme.list_area}>
+                <ul className={this.theme.obj_list}>{this.drawItems()}</ul>
             </div>
         );
     }
@@ -90,10 +91,10 @@ class Index extends Component {
     render() {
         return (
             <React.Fragment>
-                <div className={Styles.pop_content}>
-                    <h2 className={Styles.blind}>오브젝트 선택</h2>
+                <div className={this.theme.pop_content}>
+                    <h2 className={this.theme.blind}>오브젝트 선택</h2>
                     <SideBar type={this.props.mainType} sidebar={this.props.sidebar}/>
-                    <div className={Styles.section_cont}>
+                    <div className={this.theme.section_cont}>
                         <SubMenu type={this.props.mainType} menus={this.getMenus()}/>
                         {this.drawListBox()}
                         {this.props.multiSelect && <Selected type={this.props.mainType}/>}

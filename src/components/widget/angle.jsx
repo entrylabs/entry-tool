@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { CommonUtils } from '@utils/Common';
 import { debounce } from 'lodash';
 import { pure } from 'recompose';
-import Styles from '../../assets/scss/popup.scss';
 import OutsideClick from '../common/outsideClick';
 import root from 'window-or-global';
-
+import Theme from '@utils/Theme';
 /* eslint-disable jsx-a11y/anchor-is-valid*/
 /* eslint-disable array-element-newline */
 /* eslint-disable array-bracket-newline */
@@ -29,7 +28,7 @@ class Angle extends Component {
 
     constructor(props) {
         super(props);
-
+        this.theme = Theme.getStyle("popup");
         this.state = CommonUtils.getDefaultComponentPosition(props, this.getPositionOptions());
         this.handleAngleArrowMove = this.handleAngleArrowMove.bind(this);
         this.removeMouseMove = this.removeMouseMove.bind(this);
@@ -107,7 +106,7 @@ class Angle extends Component {
             backgroundImage: `${startStyle},linear-gradient(${endOffset}deg, white 50%, transparent 50%)`,
         };
 
-        return <div className={Styles.pie} style={pieStyle} />;
+        return <div className={this.theme.pie} style={pieStyle} />;
     }
 
     refineDegree(degree) {
@@ -138,7 +137,7 @@ class Angle extends Component {
     makeNumberButtons() {
         return numberList.map((value) => (
             <a
-                className={Styles.btn_cnt}
+                className={this.theme.btn_cnt}
                 key={value}
                 onClick={() => {
                     this.handleButtonClick('buttonPressed', value);
@@ -177,43 +176,43 @@ class Angle extends Component {
                 <div
                     ref={(dom) => (this.widgetDom = dom)}
                     style={componentPosition}
-                    className={`${Styles.tooltip_box} ${Styles.clock_box} ${
-                        isUpStyle ? Styles.up : ''
+                    className={`${this.theme.tooltip_box} ${this.theme.clock_box} ${
+                        isUpStyle ? this.theme.up : ''
                     }`}
                 >
-                    <div className={Styles.tooltip_inner}>
-                        <div className={Styles.clock_board}>
+                    <div className={this.theme.tooltip_inner}>
+                        <div className={this.theme.clock_board}>
                             <div
                                 ref={(dom) => (this.clockDom = dom)}
-                                className={Styles.clock}
+                                className={this.theme.clock}
                                 onMouseDown={this.addMouseMove}
                                 onTouchStart={this.addMouseMove}
                                 onClick={this.handleAngleArrowMove}
                             >
                                 {this.makeCircleSection(angle)}
                                 <div
-                                    className={`${Styles.arrow}`}
+                                    className={`${this.theme.arrow}`}
                                     style={{
                                         transform: `rotate(${angle}deg)`,
                                     }}
                                 />
                             </div>
                         </div>
-                        <div className={Styles.time_board}>
+                        <div className={this.theme.time_board}>
                             {this.makeNumberButtons()}
                             <a
-                                className={`${Styles.btn_cnt} ${Styles.btn_del} ${
-                                    Styles.imico_pop_key_del
+                                className={`${this.theme.btn_cnt} ${this.theme.btn_del} ${
+                                    this.theme.imico_pop_key_del
                                 }`}
                                 onClick={() => {
                                     this.handleButtonClick('backButtonPressed');
                                 }}
                             >
-                                <span className={Styles.blind}>지우기</span>
+                                <span className={this.theme.blind}>지우기</span>
                             </a>
                         </div>
                     </div>
-                    <span style={{ left: `${arrowLeft}px` }} className={Styles.arr}>
+                    <span style={{ left: `${arrowLeft}px` }} className={this.theme.arr}>
                         <i />
                     </span>
                 </div>
