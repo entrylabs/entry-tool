@@ -415,7 +415,23 @@ class DraggableList extends Component {
         const { className, scrollStyle } = this.props;
         this.makeDragView();
         return (
-            <div className={`${Styles.draggable} ${className}`}>
+            <div
+                className={`${Styles.draggable} ${className}`}
+                ref={(dom) => {
+                    if (dom) {
+                        dom.addEventListener(
+                            'mousedown',
+                            (e) => {
+                                if (e.target.tagName === 'INPUT') {
+                                    e.stopPropagation();
+                                    e.stopImmediatePropagation();
+                                }
+                            },
+                            true
+                        );
+                    }
+                }}
+            >
                 <CustomScroll
                     ref={(dom) => {
                         if (this.scrollElement !== dom) {

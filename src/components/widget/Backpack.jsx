@@ -185,6 +185,9 @@ class Backpack extends Component {
                             className={Styles.input}
                             defaultValue={title}
                             onKeyUp={this.handleKeyup}
+                            onFocus={() => {
+                                this.handleItemSelect(_id);
+                            }}
                             onBlur={({ target }) => {
                                 const { value } = target;
                                 if (value !== title) {
