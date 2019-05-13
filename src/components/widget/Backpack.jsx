@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { pure } from 'recompose';
 import Draggable from './draggable';
+import LimitedInput from '../common/LimitedInput';
 import produce from 'immer';
 import Styles from '../../assets/scss/widget/Backpack.scss';
 import EntryEvent from '@entrylabs/event';
@@ -181,13 +182,15 @@ class Backpack extends Component {
                         }}
                     />
                     <div>
-                        <input
+                        <LimitedInput
+                            type={'text'}
                             className={Styles.input}
-                            defaultValue={title}
+                            value={title}
                             onKeyUp={this.handleKeyup}
                             onFocus={() => {
                                 this.handleItemSelect(_id);
                             }}
+                            maxLength={45}
                             onBlur={({ target }) => {
                                 const { value } = target;
                                 if (value !== title) {

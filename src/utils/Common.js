@@ -165,6 +165,12 @@ export const CommonUtils = {
             },
         };
     },
+
+    getByteLength(s, b, i, c) {
+        // eslint-disable-next-line no-multi-assign, no-param-reassign, no-nested-ternary
+        for (b = i = 0; (c = s.charCodeAt(i++)); b += c >> 11 ? 3 : c >> 7 ? 2 : 1) {}
+        return b;
+    },
 };
 
 export function FormAsyncException(obj) {
