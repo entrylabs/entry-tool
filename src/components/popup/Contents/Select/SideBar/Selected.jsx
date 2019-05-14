@@ -75,9 +75,9 @@ class Selected extends Component {
                 wrapClass: this.theme.cont_sel_box,
                 imageClass: this.theme.thmb,
                 imageContent: (item, baseUrl) => {
-                    let { filename, fileurl } = item;
+                    let { filename, fileurl, pictures = [] } = item;
                     let thumb;
-                    if (item.pictures) {
+                    if (pictures.length > 0) {
                         filename = item.pictures[0].filename;
                         fileurl = item.pictures[0].fileurl;
                     }
