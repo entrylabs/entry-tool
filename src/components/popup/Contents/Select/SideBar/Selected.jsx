@@ -78,8 +78,8 @@ class Selected extends Component {
                     let { filename, fileurl, pictures = [] } = item;
                     let thumb;
                     if (pictures.length > 0) {
-                        filename = item.pictures[0].filename;
-                        fileurl = item.pictures[0].fileurl;
+                        filename = pictures[0].filename;
+                        fileurl = pictures[0].fileurl;
                     }
                     if (fileurl) {
                         thumb = fileurl.thumb || fileurl.resized || fileurl.origin || fileurl;
