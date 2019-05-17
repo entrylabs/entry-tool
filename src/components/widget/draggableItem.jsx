@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import Styles from '@assets/scss/draggable.scss';
+import React from 'react';
+import Styles from '@assets/entry/scss/draggable.scss';
 
 /* eslint-disable new-cap */
 const DraggableItem = (props, ref) => {

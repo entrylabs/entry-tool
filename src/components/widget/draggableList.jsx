@@ -3,7 +3,7 @@ import EntryEvent from '@entrylabs/event';
 import produce from 'immer';
 import CustomScroll from '../common/customScroll';
 import DraggableItem from './draggableItem';
-import Styles from '@assets/scss/draggable.scss';
+import Styles from '@assets/entry/scss/draggable.scss';
 import AutoScroll from '@utils/AutoScroll';
 import { CommonUtils } from '@utils/Common';
 const { getPosition } = CommonUtils;

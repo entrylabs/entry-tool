@@ -3,7 +3,7 @@ import { pure } from 'recompose';
 import Draggable from './draggable';
 import LimitedInput from '../common/LimitedInput';
 import produce from 'immer';
-import Styles from '../../assets/scss/widget/Backpack.scss';
+import Styles from '../../assets/entry/scss/widget/Backpack.scss';
 import EntryEvent from '@entrylabs/event';
 import { CommonUtils } from '@utils/Common';
 

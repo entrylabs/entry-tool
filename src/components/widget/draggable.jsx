@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import _intersection from 'lodash/intersection';
 import { pure } from 'recompose';
 import DraggableList from './draggableList';
-import Styles from '@assets/scss/draggable.scss';
+import Styles from '@assets/entry/scss/draggable.scss';
 
 class Draggable extends Component {
     onSortEnd = ({ oldIndex, newIndex }) => {
