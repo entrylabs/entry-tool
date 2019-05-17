@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { pure } from 'recompose';
-import Styles from '@assets/scss/popup.scss';
 import { CommonUtils } from '@utils/Common';
 import debounce from 'lodash/debounce';
 import Scrollbars from '@components/common/scrollbars';
 import OutsideClick from '@components/common/outsideClick';
 import root from 'window-or-global';
+import Theme from '@utils/Theme';
 
 class Dropdown extends Component {
     get DROPDOWN_WIDTH_MARGIN() {
@@ -25,6 +25,7 @@ class Dropdown extends Component {
     }
     constructor(props) {
         super(props);
+        this.theme = Theme.getStyle("popup");
         this.state = CommonUtils.getDefaultComponentPosition(props, this.getPositionOptions());
     }
 
@@ -85,7 +86,7 @@ class Dropdown extends Component {
                     key={value}
                     value={value}
                     index={index}
-                    className={Styles.item}
+                    className={this.theme.item}
                     onClick={() => {
                         this.handleItemClick(item);
                     }}
@@ -125,20 +126,20 @@ class Dropdown extends Component {
                 <div
                     ref={(dom) => (this.dropdown = dom)}
                     style={{ ...componentPosition, ...animationStyle }}
-                    className={`${Styles.tooltip_box} ${Styles.dropdown} ${
-                        isUpStyle ? Styles.up : ''
-                    } ${autoWidth ? Styles.auto_width : ''}`}
+                    className={`${this.theme.tooltip_box} ${this.theme.dropdown} ${
+                        isUpStyle ? this.theme.up : ''
+                    } ${autoWidth ? this.theme.auto_width : ''}`}
                 >
-                    <div className={Styles.tooltip_inner}>
+                    <div className={this.theme.tooltip_inner}>
                         {items.length <= 5 && this.makeDropdownItem()}
                         {items.length > 5 && (
-                            <Scrollbars heightRelativeToParent="260px" className={Styles.scrollbar}>
+                            <Scrollbars heightRelativeToParent="260px" className={this.theme.scrollbar}>
                                 {this.makeDropdownItem()}
                             </Scrollbars>
                         )}
                     </div>
 
-                    <span style={{ left: `${arrowLeft}px` }} className={Styles.arr}>
+                    <span style={{ left: `${arrowLeft}px` }} className={this.theme.arr}>
                         <i />
                     </span>
                 </div>
