@@ -4,7 +4,7 @@ import { pure } from 'recompose';
 import root from 'window-or-global';
 import { COLOR_PICKER_MODE } from '../../constants';
 import memoize from 'lodash/memoize';
-import { CommonUtils } from '../../utils/Common';
+import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 
 const { getLang } = CommonUtils;
@@ -509,6 +509,7 @@ class ColorPicker extends Component {
             <div className={this.theme.colorSlider}>
                 <div
                     className={this.theme.colorSwatchesButton}
+                    title={getLang('Workspace.palette_mode')}
                     onClick={() => {
                         onChangePickerMode(COLOR_PICKER_MODE.SWATCHES);
                     }}
@@ -529,9 +530,8 @@ class ColorPicker extends Component {
                                 className={`${this.theme.btn_picker} ${this.theme.imbtn_picker} ${
                                     activeSpoid ? this.theme.on : ''
                                 }`}
-                            >
-                                컬러피커 열기
-                            </div>
+                                title={getLang(`Workspace.spoid`)}
+                            />
                         )}
                     </div>
                     <div className={`${this.theme.color_graph}`}>
