@@ -40,6 +40,7 @@ class DraggableList extends Component {
 
     componentWillUnmount() {
         this.unsetItemEvent();
+        this.dragItemInfo = undefined;
     }
 
     getListRect = _.memoize(() => {
