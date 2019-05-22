@@ -34,8 +34,6 @@ class Backpack extends Component {
                     this.getBackpackRect.cache = new _.memoize.Cache();
                 }, 500)
             );
-        } else {
-            this.eventTarget.off('bpInTool');
         }
     }
 
@@ -73,6 +71,7 @@ class Backpack extends Component {
             this.handleItemDrop(e);
         }
         this.getBackpackRect.cache = new _.memoize.Cache();
+        this.eventTarget.off('bpInTool');
     };
 
     handleUpdateTitle = (id, target, defaultValue) => {
@@ -291,13 +290,7 @@ class Backpack extends Component {
                     </div>
                 )}
                 {isDragEnter && (
-                    <div
-                        className={Styles.dragArea}
-                        onMouseUp={this.handleItemDrop}
-                        onMouseLeave={() => {
-                            this.handleDragState(false);
-                        }}
-                    >
+                    <div className={Styles.dragArea}>
                         <div className={Styles.icon} />
                         <div className={Styles.desc}>{this.getDropMsg()}</div>
                     </div>
