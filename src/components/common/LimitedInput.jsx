@@ -22,7 +22,7 @@ class LimitedInput extends Component {
     };
 
     render() {
-        const { type, className, onKeyUp, onFocus, onBlur } = this.props;
+        const { type, className, onKeyUp, onFocus, onBlur, inputRef } = this.props;
         const { value } = this.state;
         const options = {
             type,
@@ -31,6 +31,7 @@ class LimitedInput extends Component {
             onFocus,
             onBlur,
             value,
+            ref: inputRef,
         };
         return <input {...options} onChange={this.handleChange} />;
     }

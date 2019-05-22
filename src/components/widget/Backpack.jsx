@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { pure } from 'recompose';
 import Draggable from './draggable';
 import LimitedInput from '../common/LimitedInput';
+import OutsideClick from '../common/outsideClick';
 import produce from 'immer';
 import Styles from '../../assets/entry/scss/widget/Backpack.scss';
 import EntryEvent from '@entrylabs/event';
@@ -17,6 +18,7 @@ class Backpack extends Component {
         this.backpack = React.createRef();
         this.eventTarget = new EntryEvent(document);
         this.eventWindow = new EntryEvent(window);
+        this.input = React.createRef();
     }
 
     setPointEvent() {
@@ -182,23 +184,34 @@ class Backpack extends Component {
                         }}
                     />
                     <div>
-                        <LimitedInput
-                            type={'text'}
-                            className={Styles.input}
-                            value={title}
-                            onKeyUp={this.handleKeyup}
-                            onFocus={() => {
-                                this.handleItemSelect(_id);
-                            }}
-                            maxLength={45}
-                            onBlur={({ target }) => {
-                                const { value } = target;
-                                if (value !== title) {
-                                    this.handleUpdateTitle(_id, target, title);
-                                    this.handleDragInfo(false);
+                        <OutsideClick
+                            onOutsideClick={() => {
+                                const { current } = this.input;
+                                if (current) {
+                                    current.blur();
                                 }
                             }}
-                        />
+                            eventTypes={['mouseup', 'touchend']}
+                        >
+                            <LimitedInput
+                                type={'text'}
+                                inputRef={this.input}
+                                className={Styles.input}
+                                value={title}
+                                onKeyUp={this.handleKeyup}
+                                onFocus={() => {
+                                    this.handleItemSelect(_id);
+                                }}
+                                maxLength={45}
+                                onBlur={({ target }) => {
+                                    const { value } = target;
+                                    if (value !== title) {
+                                        this.handleUpdateTitle(_id, target, title);
+                                        this.handleDragInfo(false);
+                                    }
+                                }}
+                            />
+                        </OutsideClick>
                     </div>
                 </div>
             );
