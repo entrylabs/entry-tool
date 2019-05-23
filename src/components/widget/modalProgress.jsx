@@ -5,6 +5,7 @@ import Theme from '@utils/Theme';
 class ModalProgress extends Component {
     constructor(props) {
         super(props);
+        Theme.type = props.theme;
         this.theme = Theme.getStyle("progress");
     }
     makeProgress() {

@@ -279,18 +279,19 @@ $lineImageDir:'../images';
 
     .title {
       position: absolute;
-      background: url(#{$imageDir}/progress/text_back.png) no-repeat;
+      background-color:#fff;
+      border-radius: 15px;
       width: 367px;
-      height: 90px;
+      height: 45px;
       font-size: 27px;
       font-weight: bold;
       line-height: 27px;
-      color: #2a7def;
+      color: #9b9b9b;
       text-align: center;
       padding-top: 24px;
       z-index: 10;
       margin-left: -20px;
-      margin-top: 302px;
+      margin-top: 110px;
     }
 
     .background_1 {
@@ -301,6 +302,7 @@ $lineImageDir:'../images';
     }
 
     .character {
+      display:none;
       position: absolute;
       width: 327px;
       height: 327px;
