@@ -19,6 +19,7 @@ class Backpack extends Component {
         this.eventTarget = new EntryEvent(document);
         this.eventWindow = new EntryEvent(window);
         this.input = React.createRef();
+        this.refsList = [];
     }
 
     setPointEvent() {
@@ -151,6 +152,13 @@ class Backpack extends Component {
         e.preventDefault();
     }
 
+    handleOutsideClick = (key) => {
+        const current = this.refsList[key];
+        if (current === document.activeElement) {
+            current.blur();
+        }
+    };
+
     makeItemList() {
         const { items = [] } = this.props;
         const { selectedId = '-1' } = this.state;
@@ -185,16 +193,15 @@ class Backpack extends Component {
                     <div>
                         <OutsideClick
                             onOutsideClick={() => {
-                                const { current } = this.input;
-                                if (current) {
-                                    current.blur();
-                                }
+                                this.handleOutsideClick(_id);
                             }}
-                            eventTypes={['mouseup', 'touchend']}
+                            eventTypes={['mousedown', 'touchstart']}
                         >
                             <LimitedInput
                                 type={'text'}
-                                inputRef={this.input}
+                                inputRef={(dom) => {
+                                    this.refsList[_id] = dom;
+                                }}
                                 className={Styles.input}
                                 value={title}
                                 onKeyUp={this.handleKeyup}
