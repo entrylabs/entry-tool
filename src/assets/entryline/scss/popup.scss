@@ -90,6 +90,11 @@ $lineImageDir:'../images';
     .section_cont .write_box .input_inner input[type='text']:active {
       border-color: #1c8850;
     }
+    .section_cont .sound_type .obj_list .thmb,
+    .section_cont .sound_type .select_list .select_item .thmb {
+      position: relative;
+      background-color: #fffdea;
+    }
   }
   .extend_content .extend_block .list .thmb {
     background-color: #e6e3c4;
@@ -114,6 +119,7 @@ $lineImageDir:'../images';
     .section_cont .list .info_box .from em {
       color: #1c8850;
     }
+
   }
 
   .pop_btn_box {
@@ -129,6 +135,21 @@ $lineImageDir:'../images';
       color: #fff;
     }
   }
+}
+
+.imbtn_pop_chk_del {
+  background: url(#{$lineImageDir}/btn_pop_chk_del.png) no-repeat;
+  background-size: 24px auto;
+}
+
+.imico_pop_sound_thmb:before {
+  background: url(#{$lineImageDir}/ico_pop_sound_thmb.png) no-repeat;
+  background-size: 64px auto;
+}
+
+.imbtn_pop_srch {
+  background: url(#{$lineImageDir}/btn_pop_srch.png) no-repeat;
+  background-size: 21px auto;
 }
 
 .imbtn_pop_sel_prev {
