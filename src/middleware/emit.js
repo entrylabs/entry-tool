@@ -1,7 +1,12 @@
 import { VISIBLE, CLICK_BUTTON, TRIGGER_EVENT } from '@actions/index';
 import { API_FAIL, UPLOAD_ITEM } from '@actions/popup';
 import { CHANGE_COLOR_PICKER } from '@actions/picker';
-import { SELECT_DROPDOWN, CHANGED_ANGLE, CHANGE_SORTABLE_LIST } from '@actions/widget';
+import {
+    SELECT_DROPDOWN,
+    CHANGED_ANGLE,
+    CHANGE_SORTABLE_LIST,
+    CHANGE_DRAGGING,
+} from '@actions/widget';
 
 export default class EmitMiddleware {
     constructor(emitter) {
@@ -49,6 +54,10 @@ export default class EmitMiddleware {
                 }
                 case SELECT_DROPDOWN: {
                     this.emitter.emit('select', action.data);
+                    break;
+                }
+                case CHANGE_DRAGGING: {
+                    this.emitter.emit('onChangeDragging', action.data);
                     break;
                 }
                 default: {

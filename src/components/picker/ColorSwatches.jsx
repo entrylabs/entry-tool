@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { pure } from 'recompose';
 import { COLOR_PICKER_MODE } from '../../constants';
 import Theme from '@utils/Theme';
+import { CommonUtils } from '@utils/Common';
+const { getLang } = CommonUtils;
 
 const recommendedColor = [
     '#e83a30',
@@ -32,7 +34,7 @@ const paletteColor = [
 class ColorPicker extends Component {
     constructor(props) {
         super(props);
-        this.theme = Theme.getStyle("popup");
+        this.theme = Theme.getStyle('popup');
     }
     makeRecommendedColor() {
         const { onChangeColor } = this.props;
@@ -84,6 +86,7 @@ class ColorPicker extends Component {
             <div className={this.theme.colorSwatches}>
                 <div
                     className={this.theme.colorSliderButton}
+                    title={getLang('Workspace.slider_mode')}
                     onClick={() => {
                         onChangePickerMode(COLOR_PICKER_MODE.SLIDER);
                     }}
