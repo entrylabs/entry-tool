@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { visibleAction } from '../../actions/index';
-import Styles from '../../assets/scss/popup.scss';
+import Styles from '../../assets/entry/scss/popup.scss';
 
 class Sample extends Component {
     componentDidMount() {

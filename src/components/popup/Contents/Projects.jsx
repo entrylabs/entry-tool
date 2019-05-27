@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Styles from '@assets/scss/popup.scss';
 import { triggerEvent } from '@actions';
 import { CommonUtils } from '@utils/Common';
 import { EMIT_TYPES } from '@constants';
+import Theme from '@utils/Theme';
 
 class Projects extends Component {
     constructor(props) {
         super(props);
+        this.theme = Theme.getStyle("popup");
         this.state = {
             count: this.props.data.count || 0,
             selected: null,
@@ -50,33 +51,33 @@ class Projects extends Component {
                 <li
                     key={item._id}
                     onClick={(e) => this.selectItem(e, item)}
-                    className={CommonUtils.toggleClass(selected, Styles.on)}
+                    className={CommonUtils.toggleClass(selected, this.theme.on)}
                 >
-                    <div className={Styles.link}>
+                    <div className={this.theme.link}>
                         <div
-                            className={Styles.thmb}
+                            className={this.theme.thmb}
                             style={{ backgroundImage: `url('${CommonUtils.fixUrl(item.thumb)}')` }}
                         >
-                            <div className={Styles.info_bar}>
-                                {`${Styles.view} ${Styles.imico_pop_info_view}`}
-                                <span className={`${Styles.view} ${Styles.imico_pop_info_view}`}>
+                            <div className={this.theme.info_bar}>
+                                {`${this.theme.view} ${this.theme.imico_pop_info_view}`}
+                                <span className={`${this.theme.view} ${this.theme.imico_pop_info_view}`}>
                                     {item.visit}
                                 </span>
-                                <span className={`${Styles.like} ${Styles.imico_pop_info_like}`}>
+                                <span className={`${this.theme.like} ${this.theme.imico_pop_info_like}`}>
                                     {item.likeCnt}
                                 </span>
-                                <span className={`${Styles.cmt} ${Styles.imico_pop_info_cmt}`}>
+                                <span className={`${this.theme.cmt} ${this.theme.imico_pop_info_cmt}`}>
                                     {item.comment}
                                 </span>
                             </div>
                         </div>
-                        <div className={Styles.info_box}>
+                        <div className={this.theme.info_box}>
                             <div
-                                className={Styles.user_thmb}
+                                className={this.theme.user_thmb}
                                 style={{ backgroundImage: `url('${avatarImgUrl}')` }}
                             />
-                            <em className={Styles.tit}>{item.name}</em>
-                            <span className={Styles.from}>
+                            <em className={this.theme.tit}>{item.name}</em>
+                            <span className={this.theme.from}>
                                 from
                                 <em>{item.user.username}</em>
                             </span>
@@ -94,22 +95,22 @@ class Projects extends Component {
 
     emptyPage() {
         return (
-            <section className={`${Styles.pop_content} ${Styles.art_content}`}>
-                <div className={Styles.section_cont}>
+            <section className={`${this.theme.pop_content} ${this.theme.art_content}`}>
+                <div className={this.theme.section_cont}>
                     {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                    <h2 className={Styles.blind}>{CommonUtils.getLang('Menus.my_project')}</h2>
-                    <div className={Styles.result_box}>
-                        <div className={`${Styles.thmb} ${Styles.imico_pop_mywrite_thmb}`}>
+                    <h2 className={this.theme.blind}>{CommonUtils.getLang('Menus.my_project')}</h2>
+                    <div className={this.theme.result_box}>
+                        <div className={`${this.theme.thmb} ${this.theme.imico_pop_mywrite_thmb}`}>
                             &nbsp;
                         </div>
-                        <p className={Styles.result_dsc}>
+                        <p className={this.theme.result_dsc}>
                             {CommonUtils.getLang('Menus.no_project_1')}
                             <br/>
                             {CommonUtils.getLang('Menus.no_project_2')}
                         </p>
-                        <div className={Styles.pop_btn_box}>
+                        <div className={this.theme.pop_btn_box}>
                             <div
-                                className={Styles.active}
+                                className={this.theme.active}
                                 onClick={(e) => {
                                     this.triggerEvent(e, EMIT_TYPES.makeProject);
                                 }}
@@ -130,23 +131,23 @@ class Projects extends Component {
         }
         return (
             <React.Fragment>
-                <section className={`${Styles.pop_content} ${Styles.art_content}`}>
-                    <div className={Styles.section_cont}>
+                <section className={`${this.theme.pop_content} ${this.theme.art_content}`}>
+                    <div className={this.theme.section_cont}>
                         {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                        <h2 className={Styles.blind}>{CommonUtils.getLang('Menus.my_project')}</h2>
-                        <strong className={Styles.list_sjt}>
+                        <h2 className={this.theme.blind}>{CommonUtils.getLang('Menus.my_project')}</h2>
+                        <strong className={this.theme.list_sjt}>
                             {CommonUtils.getLang('Menus.all')} ({this.props.data.data.length})
                         </strong>
-                        <div className={Styles.scroll_box}>
-                            <ul className={Styles.list}>{this.drawIems()}</ul>
+                        <div className={this.theme.scroll_box}>
+                            <ul className={this.theme.list}>{this.drawIems()}</ul>
                         </div>
                     </div>
                 </section>
-                <div className={Styles.pop_btn_box}>
+                <div className={this.theme.pop_btn_box}>
                     <div onClick={(e) => this.triggerEvent(e, EMIT_TYPES.close, null)}>
                         {CommonUtils.getLang('Buttons.cancel')}
                     </div>
-                    <div className={Styles.active} onClick={
+                    <div className={this.theme.active} onClick={
                         (e) => this.triggerEvent(e, EMIT_TYPES.submit, this.state.selected)
                     }>
                         {CommonUtils.getLang('Menus.Load')}

@@ -3,6 +3,24 @@ import { DEFAULT_OPTIONS } from '../constants/index';
 import get from 'lodash/get';
 
 export const CommonUtils = {
+    getScaleNumber(num, inMin, inMax, outMin, outMax) {
+        return ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+    },
+    getPosition(event) {
+        const position = {
+            x: 0,
+            y: 0,
+        };
+        if (event.touches && event.touches[0]) {
+            const touch = event.touches[0];
+            position.x = touch.pageX;
+            position.y = touch.pageY;
+        } else {
+            position.x = event.pageX;
+            position.y = event.pageY;
+        }
+        return position;
+    },
     getLangType: () => {
         const lang = root.Lang || {};
         return lang.type;
@@ -13,7 +31,7 @@ export const CommonUtils = {
     },
     getFonts: () => {
         if (root.EntryStatic && root.EntryStatic.fonts) {
-            return root.EntryStatic.fonts.filter(font => font.visible);
+            return root.EntryStatic.fonts.filter((font) => font.visible);
         }
         return DEFAULT_OPTIONS.WRITE_BOX.FONTS;
     },
@@ -42,9 +60,7 @@ export const CommonUtils = {
         }
         return arr;
     },
-    generateHash: () => {
-        return `0000${((Math.random() * Math.pow(36, 4)) << 0).toString(36)}`.substr(-4);
-    },
+    generateHash: () => `0000${((Math.random() * Math.pow(36, 4)) << 0).toString(36)}`.substr(-4),
 
     getDefaultComponentPosition(props, options) {
         const { left, top, isUpStyle } = CommonUtils.getComponentPosition(props, options);
@@ -148,6 +164,12 @@ export const CommonUtils = {
                 transform: `translate3d(${x}px, ${y}px, 0)`,
             },
         };
+    },
+
+    getByteLength(s, b, i, c) {
+        // eslint-disable-next-line no-multi-assign, no-param-reassign, no-nested-ternary
+        for (b = i = 0; (c = s.charCodeAt(i++)); b += c >> 11 ? 3 : c >> 7 ? 2 : 1) {}
+        return b;
     },
 };
 

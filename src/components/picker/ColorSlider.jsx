@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import chroma from 'chroma-js';
-import Styles from '../../assets/scss/popup.scss';
 import { pure } from 'recompose';
 import root from 'window-or-global';
 import { COLOR_PICKER_MODE } from '../../constants';
 import memoize from 'lodash/memoize';
+import { CommonUtils } from '@utils/Common';
+import Theme from '@utils/Theme';
+
+const { getLang } = CommonUtils;
 
 function getColorByHsv({ red, green, blue }) {
     const color = chroma(red, green, blue);
@@ -136,6 +139,7 @@ class ColorPicker extends Component {
 
     constructor(props) {
         super(props);
+        this.theme = Theme.getStyle('popup');
         const { color, onChangeColor, lastColor } = props;
         let state = {
             isTransparent: false,
@@ -246,11 +250,9 @@ class ColorPicker extends Component {
 
     handleChangeHsv(type, value) {
         if (typeof value === 'string' && !value.length) {
-            return this.setState(() => {
-                return {
-                    [type]: value,
-                };
-            });
+            return this.setState(() => ({
+                [type]: value,
+            }));
         }
         const { onChangeColor } = this.props;
         let max = type === 'hue' ? 360 : 100;
@@ -277,11 +279,9 @@ class ColorPicker extends Component {
 
     handleChangeRGB(type, value) {
         if (typeof value === 'string' && !value.length) {
-            return this.setState(() => {
-                return {
-                    [type]: value,
-                };
-            });
+            return this.setState(() => ({
+                [type]: value,
+            }));
         }
         const { onChangeColor } = this.props;
         let thisValue = Number(value);
@@ -316,11 +316,9 @@ class ColorPicker extends Component {
     handleSliderUp = () => {
         document.removeEventListener('touchmove', handleTouchPreventDefault);
         this.canMoveCapture = false;
-        this.setState(() => {
-            return {
-                isActiveSlider: null,
-            };
-        });
+        this.setState(() => ({
+            isActiveSlider: null,
+        }));
     };
 
     handleColorClick = () => {
@@ -382,11 +380,9 @@ class ColorPicker extends Component {
         this.sliderStartX = clientX;
         this.sliderType = type;
         this.sliderValue = this.state[type];
-        this.setState(() => {
-            return {
-                isActiveSlider: type,
-            };
-        });
+        this.setState(() => ({
+            isActiveSlider: type,
+        }));
     }
 
     getTranslate3d(el) {
@@ -394,15 +390,13 @@ class ColorPicker extends Component {
         if (!values[1] || !values[1].length) {
             return [0, 0, 0];
         }
-        return values[1].split(/,\s?/g).map((value) => {
-            return parseInt(value, 10);
-        });
+        return values[1].split(/,\s?/g).map((value) => parseInt(value, 10));
     }
 
     makeHSVController() {
         const { isTransparent, isActiveSlider } = this.state;
-        let itemClassName = isTransparent ? Styles.disabled : '';
-        return metaHSVContoller.map(({ key, label }) => {
+        let itemClassName = isTransparent ? this.theme.disabled : '';
+        return metaHSVContoller.map(({ key }) => {
             let max = 100;
             let ratio = 1;
             if (key === 'hue') {
@@ -410,8 +404,8 @@ class ColorPicker extends Component {
                 ratio = 100 / 360;
             }
             return (
-                <li key={key} className={`${Styles.item} ${itemClassName}`}>
-                    <label htmlFor={key}>{label}</label>
+                <li key={key} className={`${this.theme.item} ${itemClassName}`}>
+                    <label htmlFor={key}>{getLang(`Workspace.${key}`)}</label>
                     <input
                         value={String(this.state[key])}
                         type="number"
@@ -429,12 +423,12 @@ class ColorPicker extends Component {
                         name={key}
                         disabled={isTransparent}
                     />
-                    <div className={`${Styles.graph_box}`} touch-action="none">
+                    <div className={`${this.theme.graph_box}`} touch-action="none">
                         <span
                             data-type={key}
                             data-my-type={key}
-                            className={`${Styles.slider} ${Styles.btn_pop_color_slide} ${
-                                isActiveSlider === key ? Styles.on : ''
+                            className={`${this.theme.slider} ${this.theme.btn_pop_color_slide} ${
+                                isActiveSlider === key ? this.theme.on : ''
                             }`}
                             onMouseDown={(e) => {
                                 !isTransparent && this.handleSliderMouseDown(e, key);
@@ -445,7 +439,7 @@ class ColorPicker extends Component {
                             style={{ left: `${setScaleRatioX(this.state[key], ratio)}px` }}
                         />
                         <div
-                            className={`${Styles.bar}`}
+                            className={`${this.theme.bar}`}
                             style={this.getGradientBackground(key)}
                             onMouseDown={(e) => {
                                 !isTransparent && this.handleSliderBarClick(e, key);
@@ -463,34 +457,32 @@ class ColorPicker extends Component {
         const { isTransparent } = this.state;
         let itemClassName = '';
         if (isTransparent) {
-            itemClassName = Styles.disabled;
+            itemClassName = this.theme.disabled;
         }
 
-        return metaRgbContoller.map(({ label, key }) => {
-            return (
-                <li key={key} className={`${Styles.item} ${itemClassName}`}>
-                    <label htmlFor={key}>{label}</label>
-                    <input
-                        value={String(this.state[key])}
-                        type="number"
-                        min="0"
-                        max="255"
-                        onChange={({ target }) => {
-                            const { value } = target;
-                            this.handleChangeRGB(key, value);
-                        }}
-                        onBlur={({ target }) => {
-                            const { value } = target;
-                            this.handleBlurRGB(key, value);
-                        }}
-                        id={key}
-                        name={key}
-                        disabled={isTransparent}
-                    />
-                    <div className={`${Styles.graph}`} />
-                </li>
-            );
-        });
+        return metaRgbContoller.map(({ key }) => (
+            <li key={key} className={`${this.theme.item} ${itemClassName}`}>
+                <label htmlFor={key}>{getLang(`Workspace.${key}`)}</label>
+                <input
+                    value={String(this.state[key])}
+                    type="number"
+                    min="0"
+                    max="255"
+                    onChange={({ target }) => {
+                        const { value } = target;
+                        this.handleChangeRGB(key, value);
+                    }}
+                    onBlur={({ target }) => {
+                        const { value } = target;
+                        this.handleBlurRGB(key, value);
+                    }}
+                    id={key}
+                    name={key}
+                    disabled={isTransparent}
+                />
+                <div className={`${this.theme.graph}`} />
+            </li>
+        ));
     }
 
     render() {
@@ -504,44 +496,46 @@ class ColorPicker extends Component {
         const { isTransparent } = this.state;
         let colorClassName = '';
         let colorBackground = null;
-        let transparentEnableClassName = canTransparent ? '' : Styles.disabled;
+        let transparentEnableClassName = canTransparent ? '' : this.theme.disabled;
         if (isTransparent) {
-            colorClassName = `${Styles.imico_pop_color_uncheck} ${Styles.imico_pop_circle_check}`;
+            colorClassName = `${this.theme.imico_pop_color_uncheck} ${
+                this.theme.imico_pop_circle_check
+            }`;
         } else {
-            colorClassName = Styles.imico_pop_circle_check_on;
+            colorClassName = this.theme.imico_pop_circle_check_on;
             colorBackground = this.resultBackground();
         }
         return (
-            <div className={Styles.colorSlider}>
+            <div className={this.theme.colorSlider}>
                 <div
-                    className={Styles.colorSwatchesButton}
+                    className={this.theme.colorSwatchesButton}
+                    title={getLang('Workspace.palette_mode')}
                     onClick={() => {
                         onChangePickerMode(COLOR_PICKER_MODE.SWATCHES);
                     }}
                 />
-                <div className={`${Styles.tooltip_inner}`}>
-                    <div className={`${Styles.color_box}`}>
+                <div className={`${this.theme.tooltip_inner}`}>
+                    <div className={`${this.theme.color_box}`}>
                         <span
                             className={`${
-                                Styles.color
+                                this.theme.color
                             } ${colorClassName} ${transparentEnableClassName}`}
                             style={colorBackground}
                             onClick={this.handleColorClick}
                         />
-                        <ul className={`${Styles.color_list}`}>{this.makeRGBController()}</ul>
+                        <ul className={`${this.theme.color_list}`}>{this.makeRGBController()}</ul>
                         {canSpoide && (
                             <div
                                 onClick={onSpoidClick}
-                                className={`${Styles.btn_picker} ${Styles.imbtn_picker} ${
-                                    activeSpoid ? Styles.on : ''
+                                className={`${this.theme.btn_picker} ${this.theme.imbtn_picker} ${
+                                    activeSpoid ? this.theme.on : ''
                                 }`}
-                            >
-                                컬러피커 열기
-                            </div>
+                                title={getLang(`Workspace.spoid`)}
+                            />
                         )}
                     </div>
-                    <div className={`${Styles.color_graph}`}>
-                        <ul className={`${Styles.graph_list}`}>{this.makeHSVController()}</ul>
+                    <div className={`${this.theme.color_graph}`}>
+                        <ul className={`${this.theme.graph_list}`}>{this.makeHSVController()}</ul>
                     </div>
                 </div>
             </div>

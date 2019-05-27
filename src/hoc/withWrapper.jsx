@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import App from '../App';
 import configureStore from '../store';
 import { visibleAction } from '../actions/index';
+import Theme from '@utils/Theme';
 // import httpService from '../config/axios';
 
 const withWrapper = (option) => (WrappedComponent) => {
@@ -15,7 +16,7 @@ const withWrapper = (option) => (WrappedComponent) => {
             this.render();
         }
 
-        initialize({ container, target, isShow = true, type, data, props, url } = {}) {
+        initialize({ container, target, isShow = true, type, data, props, url, theme } = {}) {
             let thisTarget = target;
             let thisContainer = container;
             if (!thisTarget) {
@@ -24,7 +25,7 @@ const withWrapper = (option) => (WrappedComponent) => {
             if (!thisContainer) {
                 thisContainer = document.createElement('div');
             }
-
+            Theme.type = theme;
             this._container = thisContainer;
             this._target = thisTarget;
             this._data = data;

@@ -4,17 +4,17 @@ import _isPlainObject from 'lodash/isPlainObject';
 import { pure } from 'recompose';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import Scrollbars from '@components/common/scrollbars';
-import Styles from '@assets/scss/popup.scss';
-
+import Theme from '@utils/Theme';
 /* eslint-disable new-cap */
 const SortableItem = SortableElement(({ value }) => {
     const { item } = value;
+    const theme = Theme.getStyle("popup");
     if (typeof item === 'string') {
-        return <div className={Styles.sortableItem} dangerouslySetInnerHTML={{ __html: item }} />;
+        return <div className={theme.sortableItem} dangerouslySetInnerHTML={{ __html: item }} />;
     } else if (item instanceof HTMLElement) {
         return (
             <div
-                className={`${Styles.sortableItem} sortableItem`}
+                className={`${theme.sortableItem} sortableItem`}
                 ref={(dom) => {
                     if (dom) {
                         dom.appendChild(item);
@@ -23,9 +23,9 @@ const SortableItem = SortableElement(({ value }) => {
             />
         );
     } else if (React.isValidElement(item)) {
-        return <div className={Styles.sortableItem}>{item}</div>;
+        return <div className={theme.sortableItem}>{item}</div>;
     } else {
-        return <div className={Styles.sortableItem} />;
+        return <div className={theme.sortableItem} />;
     }
 });
 
@@ -56,6 +56,11 @@ const SortableList = SortableContainer(({ items, disabled }) => {
 });
 
 class Sortable extends Component {
+    constructor(props) {
+        super(props);
+        this.theme = Theme.getStyle("popup");
+    }
+
     onSortEnd = ({ oldIndex, newIndex }) => {
         const { onChangeList } = this.props;
         if (onChangeList) {
@@ -83,13 +88,13 @@ class Sortable extends Component {
     render() {
         const { axis = 'y', lockAxis, height, items: items2, disabled = false } = this.props;
         const shouldCancelStart = this.getShouldCancelStart();
-        let className = Styles.sortableList;
+        let className = this.theme.sortableList;
         if (axis === 'x') {
-            className = Styles.sortableInlineList;
+            className = this.theme.sortableInlineList;
         }
         return (
             <Scrollbars heightRelativeToParent={height}>
-                <div className={`${Styles.sortable} ${className}`}>
+                <div className={`${this.theme.sortable} ${className}`}>
                     <SortableList
                         axis={axis}
                         lockAxis={lockAxis}
