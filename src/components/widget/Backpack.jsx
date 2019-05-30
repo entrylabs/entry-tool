@@ -184,7 +184,7 @@ class Backpack extends Component {
                         <img src={imgPath} className={Styles.image} alt={title} />
                     </div>
                     <div className={Styles.imageOverlay} />
-                    <button
+                    <div
                         className={Styles.closeButton}
                         onClick={() => {
                             this.handleRemoveItem(_id);
