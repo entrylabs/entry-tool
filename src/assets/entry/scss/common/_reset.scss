@@ -1,53 +1,4 @@
 @charset "UTF-8";
-body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select {
-	margin: 0;
-	padding: 0;
-}
-
-body, input, textarea, select, button, table {
-	font-family: NanumGothicOTF, "나눔고딕", NanumGothic, "맑은 고딕", Malgun Gothic, "Apple SD Gothic Neo", "돋움", dotum, Helvetica, arial, sans-serif;
-	font-size: 14px;
-}
-
-img, fieldset, button {
-	border: 0;
-	vertical-align: top;
-}
-
-ul, ol {
-	list-style: none;
-}
-
-em, address {
-	font-style: normal;
-}
-
-a {
-	text-decoration: none;
-}
-
-a:hover, a:active, a:focus {
-	text-decoration: none;
-}
-
-hr, legend {
-	display: none;
-}
-
-button {
-	cursor: pointer;
-	background-color: transparent;
-}
-
-input, select, textarea, button {
-	border-radius: 0;
-	appearance: none;
-	-moz-appearance: none;
-	-webkit-appearance: none;
-	-webkit-border-radius: 0;
-	background: none;
-	outline: 0;
-}
 
 .blind {
 	overflow: hidden !important;
@@ -57,14 +8,6 @@ input, select, textarea, button {
 	border: 0 !important;
 	padding: 0 !important;
 	clip: rect(0px, 0px, 0px, 0px) !important;
-}
-
-::-ms-clear {
-	display: none;
-}
-
-html, body {
-	height: 100%;
 }
 
 /* skip navigation */
