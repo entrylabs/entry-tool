@@ -34,7 +34,7 @@
             display: inline-block;
             width: 67px;
             height: 15px;
-            font-family: NanumGothic;
+            font-family: EntryFont;
             font-size: 14px;
             font-weight: bold;
             font-style: normal;
@@ -142,7 +142,7 @@
                 padding: 0 4px;
                 background-color: $white;
 
-                font-family: NanumGothic;
+                font-family: EntryFont;
                 font-size: 10px;
                 font-weight: bold;
                 font-style: normal;
@@ -165,7 +165,7 @@
         align-items: center;
         // text-align: center;
 
-        font-family: NanumGothic;
+        font-family: EntryFont;
         font-size: 12px;
         font-weight: bold;
         font-style: normal;
@@ -206,7 +206,7 @@
         }
         
         .desc {
-            font-family: NanumGothic;
+            font-family: EntryFont;
             font-size: 12px;
             font-weight: bold;
             letter-spacing: -0.1px;
