@@ -216,6 +216,37 @@ $lineImageDir:'../images';
     border-color: #e6e3c4;
   }
 }
+
+//컬러 피커
+.tooltip_box.color_picker {
+  .colorSliderButton {
+    background-image: url(#{$lineImageDir}/colorSliderBtn.png);
+    background-size: 36px;
+  }
+
+  .colorSwatchesButton {
+    background-image: url(#{$lineImageDir}/colorSwatchesBtn.png);
+    background-size: 36px;
+  }
+  .colorSlider {
+    .color_box .color_list .item input[type='text']:focus,
+    .color_graph .graph_list .item input[type='text']:focus,
+    .color_box .color_list .item input[type='number']:focus,
+    .color_graph .graph_list .item input[type='number']:focus {
+      border: 2px solid #1c8850;
+    }
+  }
+}
+.imico_pop_circle_check_on:before {
+  background: url(#{$lineImageDir}/ico_pop_circle_check_on.png) no-repeat;
+  background-size: 14px auto;
+}
+.imbtn_picker {
+  &.on {
+    background: url(#{$lineImageDir}/btn_pop_picker_on.png) no-repeat;
+    background-size: 36px;
+  }
+}
 /* progress */
 @keyframes blink1 {
   24% {
