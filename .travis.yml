@@ -16,7 +16,7 @@ cache:
 jobs:
   include:
   - stage: npm release
-    before_deploy:
+    before_script:
     - chmod +x ./scripts/build.sh
     - chmod +x ./scripts/deploy.sh
     install:
