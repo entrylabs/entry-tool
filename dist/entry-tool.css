@@ -67,14 +67,9 @@
   background-color: rgba(78, 183, 245, 0.7);
   border-radius: 3px; }
 
-@charset "UTF-8";
 body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select {
   margin: 0;
   padding: 0; }
-
-body, input, textarea, select, button, table {
-  font-family: NanumGothicOTF, "\B098\B214\ACE0\B515", NanumGothic, "\B9D1\C740  \ACE0\B515", Malgun Gothic, "Apple SD Gothic Neo", "\B3CB\C6C0", dotum, Helvetica, arial, sans-serif;
-  font-size: 14px; }
 
 img, fieldset, button {
   border: 0;
@@ -2077,7 +2072,7 @@ input[type='checkbox']:checked + .popup_imbtn_pop_checked__7oirh:before {
       display: inline-block;
       width: 67px;
       height: 15px;
-      font-family: NanumGothic;
+      font-family: EntryFont;
       font-size: 14px;
       font-weight: bold;
       font-style: normal;
@@ -2166,7 +2161,7 @@ input[type='checkbox']:checked + .popup_imbtn_pop_checked__7oirh:before {
         border-radius: 4px;
         padding: 0 4px;
         background-color: #ffffff;
-        font-family: NanumGothic;
+        font-family: EntryFont;
         font-size: 10px;
         font-weight: bold;
         font-style: normal;
@@ -2183,7 +2178,7 @@ input[type='checkbox']:checked + .popup_imbtn_pop_checked__7oirh:before {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: NanumGothic;
+    font-family: EntryFont;
     font-size: 12px;
     font-weight: bold;
     font-style: normal;
@@ -2217,7 +2212,7 @@ input[type='checkbox']:checked + .popup_imbtn_pop_checked__7oirh:before {
       background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3e    %3cg fill='none' fill-rule='nonzero'%3e        %3ccircle cx='16' cy='16' r='16' fill='%23FFC800'/%3e        %3cpath fill='%23FFF' d='M15 15v-4a1 1 0 0 1 2 0v4h4a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4h-4a1 1 0 0 1 0-2h4z'/%3e    %3c/g%3e%3c/svg%3e");
       pointer-events: none; }
     .Backpack_Backpack__10zc2 .Backpack_dragArea__2lzev .Backpack_desc__39_We {
-      font-family: NanumGothic;
+      font-family: EntryFont;
       font-size: 12px;
       font-weight: bold;
       letter-spacing: -0.1px;
@@ -2340,14 +2335,9 @@ input[type='checkbox']:checked + .popup_imbtn_pop_checked__7oirh:before {
       width: 21px;
       height: 21px; }
 
-@charset "UTF-8";
 body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select {
   margin: 0;
   padding: 0; }
-
-body, input, textarea, select, button, table {
-  font-family: NanumGothicOTF, "\B098\B214\ACE0\B515", NanumGothic, "\B9D1\C740  \ACE0\B515", Malgun Gothic, "Apple SD Gothic Neo", "\B3CB\C6C0", dotum, Helvetica, arial, sans-serif;
-  font-size: 14px; }
 
 img, fieldset, button {
   border: 0;
@@ -4556,14 +4546,9 @@ input[type='checkbox']:checked + .popup_imbtn_pop_checked__25We5:before {
       width: 21px;
       height: 21px; }
 
-@charset "UTF-8";
 body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select {
   margin: 0;
   padding: 0; }
-
-body, input, textarea, select, button, table {
-  font-family: NanumGothicOTF, "\B098\B214\ACE0\B515", NanumGothic, "\B9D1\C740  \ACE0\B515", Malgun Gothic, "Apple SD Gothic Neo", "\B3CB\C6C0", dotum, Helvetica, arial, sans-serif;
-  font-size: 14px; }
 
 img, fieldset, button {
   border: 0;
@@ -5136,14 +5121,9 @@ html, body {
       animation-fill-mode: forwards;
       animation-timing-function: ease-in-out; }
 
-@charset "UTF-8";
 body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select {
   margin: 0;
   padding: 0; }
-
-body, input, textarea, select, button, table {
-  font-family: NanumGothicOTF, "\B098\B214\ACE0\B515", NanumGothic, "\B9D1\C740  \ACE0\B515", Malgun Gothic, "Apple SD Gothic Neo", "\B3CB\C6C0", dotum, Helvetica, arial, sans-serif;
-  font-size: 14px; }
 
 img, fieldset, button {
   border: 0;
