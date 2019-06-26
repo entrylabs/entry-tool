@@ -68,9 +68,7 @@ class FileUpload extends Component {
         const updatedUploads = uploads
             .filter((afterItem) => !beforeUpload.find((beforeItem) => afterItem._id === beforeItem._id));
 
-        if (beforeUpload.length !== uploads.length) {
-            updateUploads(this.props.type, uploads);
-        } else if (updatedUploads.length > 0) {
+        if (updatedUploads.length > 0) {
             updateUploads(this.props.type, updatedUploads);
         }
     }
