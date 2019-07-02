@@ -184,6 +184,101 @@ $lineImageDir:'../images';
   background: url(#{$lineImageDir}/imico_pop_mywrite_thmb.png) no-repeat;
   background-size: 160px auto;
 }
+.imbtn_pop_font_bold {
+  background: url(#{$lineImageDir}/btn_pop_font_bold.png) no-repeat;
+  background-size: 38px auto;
+  &.on {
+    background-image: url(#{$lineImageDir}/btn_pop_font_bold_on.png);
+    border-color: #4f80ff !important;
+  }
+}
+.imbtn_pop_font_underline {
+  background: url(#{$lineImageDir}/btn_pop_font_underline.png) no-repeat;
+  background-size: 38px auto;
+  &.on {
+    background-image: url(#{$lineImageDir}/btn_pop_font_underline_on.png);
+    border-color: #4f80ff !important;
+  }
+}
+.imbtn_pop_font_italic {
+  background: url(#{$lineImageDir}/btn_pop_font_italic.png) no-repeat;
+  background-size: 38px auto;
+  &.on {
+    background-image: url(#{$lineImageDir}/btn_pop_font_italic_on.png);
+    border-color: #4f80ff !important;
+  }
+}
+.imbtn_pop_font_through {
+  background: url(#{$lineImageDir}/btn_pop_font_through.png) no-repeat;
+  background-size: 38px auto;
+  &.on {
+    background-image: url(#{$lineImageDir}/btn_pop_font_through_on.png);
+    border-color: #4f80ff !important;
+  }
+}
+.imbtn_pop_font_color {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 66px;
+  height: 40px;
+  margin-left: 10px;
+  background: url(#{$lineImageDir}/btn_pop_font_color.png) no-repeat;
+  background-size: 66px auto;
+  cursor: pointer;
+  em {
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    top: 5px;
+    bottom: 5px;
+    background-color: #f9f9f9;
+    z-index: -1;
+  }
+  &.on {
+    background-image: url(#{$lineImageDir}/btn_pop_font_color_on.png);
+  }
+}
+.imbtn_pop_font_paint, .imbtn_pop_font_backgroundcolor {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 66px;
+  height: 40px;
+  margin-left: 10px;
+  background: url(#{$lineImageDir}/btn_pop_font_paint.png) no-repeat;
+  background-size: 66px auto;
+  cursor: pointer;
+  em {
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    top: 5px;
+    bottom: 5px;
+    z-index: -1;
+  }
+  &.on {
+    background-image: url(#{$lineImageDir}/btn_pop_font_paint_on.png);
+    &.clear {
+      background-image: url(#{$lineImageDir}/btn_pop_font_paint_clear_on.png);
+      em {
+        display: none;
+      }
+    }
+  }
+  &.clear {
+    background-image: url(#{$lineImageDir}/btn_pop_font_paint_clear.png);
+    em {
+      display: none;
+    }
+  }
+  &.clear_on {
+    background-image: url(#{$lineImageDir}/btn_pop_font_paint_clear_on.png);
+    em {
+      display: none;
+    }
+  }
+}
 
 .tooltip_box.clock_box {
   border-color: #e6e3c4;
