@@ -80,6 +80,9 @@ $lineImageDir:'../images';
     }
     .section_cont .img_caution_box {
       background-color: #fffcdc;
+      .inner {
+        width: 801px;
+      }
     }
     .upload {
       border: 1px solid #c3c09f;
