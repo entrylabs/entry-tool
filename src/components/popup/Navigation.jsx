@@ -191,7 +191,13 @@ class Navigation extends Component {
                 {this.props.searchOption && (
                     <div className={this.theme.art_sel_area}>{this.drawSearchBox()}</div>
                 )}
-                {isDrawVector && <div className={this.theme.vector}><span>{CommonUtils.getLang('벡터 모아보기')}</span></div>}
+                {isDrawVector && (
+                    <div className={this.theme.vector}
+                        onClick={() => this.props.triggerEvent(EMIT_TYPES.fetchVector, hidden, false)}
+                    >
+                        <span>{CommonUtils.getLang('벡터 모아보기')}</span>
+                    </div>
+                )}
                 {this.state.dropDown}
             </div>
         );
