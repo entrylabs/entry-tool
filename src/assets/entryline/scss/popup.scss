@@ -8,6 +8,10 @@ $lineImageDir:'../images';
   .section_navi .srch_box {
     border: 1px solid #1c8850;
   }
+  .section_navi .vector {
+    border: solid 1px #1c8850;
+    background-color: #1c8850;
+  }
   .pop_header {
     background-color: #1c8850;
   }
@@ -57,6 +61,9 @@ $lineImageDir:'../images';
     }
     .section_cont .obj_list .link:after {
       border: 1px solid #e6e3c4;
+    }
+    .section_cont .obj_list .thmb.svg {
+      background: none;
     }
     .section_cont .cont_sel_box {
       background-color: #e6e3c4;

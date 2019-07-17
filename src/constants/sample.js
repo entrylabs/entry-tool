@@ -106,7 +106,8 @@ export const SPRITE_SAMPLE = {
                     },
                     _id: "55c45ea28650a40b0088cfd8",
                     filename: "a8268fd79a48fd9b92c7b47406b95393",
-                    name: "(1)엔트리봇_걷기1"
+                    name: "(1)엔트리봇_걷기1",
+                    imageType: 'svg'
                 },
                 {
                     label: {
@@ -120,7 +121,8 @@ export const SPRITE_SAMPLE = {
                     },
                     _id: "55c45ea18650a40b0088cfd7",
                     filename: "44cbd5953180e91751e82837bdff91ac",
-                    name: "(1)엔트리봇_걷기2"
+                    name: "(1)엔트리봇_걷기2",
+                    imageType: 'svg'
                 }
             ],
             __v: 5
@@ -153,7 +155,8 @@ export const SPRITE_SAMPLE = {
                     },
                     _id: "58196ed2edbbbf16684da2f7",
                     filename: "f2a7a0b57de442aba21e63a53a387436",
-                    name: "(2)엔트리봇_앞1"
+                    name: "(2)엔트리봇_앞1",
+                    imageType: 'svg'
                 },
                 {
                     label: {
@@ -167,7 +170,8 @@ export const SPRITE_SAMPLE = {
                     },
                     _id: "58196ed2edbbbf16684da2f9",
                     filename: "e76839144f79e3292bab21db18d56f4f",
-                    name: "(2)엔트리봇_앞2"
+                    name: "(2)엔트리봇_앞2",
+                    imageType: 'svg'
                 },
                 {
                     label: {
@@ -181,7 +185,8 @@ export const SPRITE_SAMPLE = {
                     },
                     _id: "58196ed2edbbbf16684da2f4",
                     filename: "9c572182618b3efa2c023ce3a03974f9",
-                    name: "(2)엔트리봇_뒤1"
+                    name: "(2)엔트리봇_뒤1",
+                    imageType: 'svg'
                 },
                 {
                     label: {
@@ -195,7 +200,8 @@ export const SPRITE_SAMPLE = {
                     },
                     _id: "58196ed2edbbbf16684da2f5",
                     filename: "afb10f14c61a6c767dbcf316265e4619",
-                    name: "(2)엔트리봇_뒤2"
+                    name: "(2)엔트리봇_뒤2",
+                    imageType: 'svg'
                 }
             ],
             __v: 0
