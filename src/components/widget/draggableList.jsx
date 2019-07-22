@@ -6,12 +6,14 @@ import DraggableItem from './draggableItem';
 import Styles from '@assets/entry/scss/draggable.scss';
 import AutoScroll from '@utils/AutoScroll';
 import { CommonUtils } from '@utils/Common';
+import Theme from '@utils/Theme';
 const { getPosition } = CommonUtils;
 
 class DraggableList extends Component {
     constructor(props) {
         super(props);
         this.draggableListRef = React.createRef();
+        this.theme = Theme.getStyle('draggable');
     }
 
     state = {
@@ -334,7 +336,7 @@ class DraggableList extends Component {
         } = this.props;
 
         return (
-            <div ref={this.draggableListRef} className={Styles.draggableList}>
+            <div ref={this.draggableListRef} className={this.theme.draggableList}>
                 {items.map((value, index) => {
                     let key = `item-${index}`;
                     let item = value;
@@ -394,8 +396,8 @@ class DraggableList extends Component {
                 }
                 this.dragViewElement = document.createElement('div');
                 this.dragImage = document.createElement('div');
-                this.addClassName(this.dragViewElement, Styles.globalDragArea);
-                this.addClassName(this.dragImage, Styles.dragView);
+                this.addClassName(this.dragViewElement, this.theme.globalDragArea);
+                this.addClassName(this.dragImage, this.theme.dragView);
                 const imageElement = document.createElement('img');
                 imageElement.src = imagePath;
                 imageElement.alt = image;
@@ -417,7 +419,7 @@ class DraggableList extends Component {
         this.makeDragView();
         return (
             <div
-                className={`${Styles.draggable} ${className}`}
+                className={`${this.theme.draggable} ${className}`}
                 ref={(dom) => {
                     if (dom) {
                         dom.addEventListener(
@@ -447,7 +449,7 @@ class DraggableList extends Component {
                     {this.makeDraggableList()}
                 </CustomScroll>
                 {/* {isDragging && (
-                    <div className={`${Styles.globalDragArea}`}>{this.makeDragView()}</div>
+                    <div className={`${this.theme.globalDragArea}`}>{this.makeDragView()}</div>
                 )} */}
             </div>
         );

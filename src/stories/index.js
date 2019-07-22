@@ -65,6 +65,23 @@ wigetStories
             />
         </div>
     ))
+    .add('백팩 - item', () => (
+        <div style={{ height: '100vh' }}>
+            <Backpack
+                onButtonPressed={action('onButtonPressed')}
+                onBackButtonPressed={action('onBackButtonPressed')}
+                onOutsideClick={action('onOutsideClick')}
+                isLoading={false}
+                items={[
+                    {
+                        _id: 'test',
+                        imgPath: 'https://playentry.org/uploads/60/c4/image/60c429a8a742a5d573af8abd37b22f2b.png',
+                        title: 'title',
+                    },
+                ]}
+            />
+        </div>
+    ))
     .add('숫자', () => (
         <Number
             onButtonPressed={action('onButtonPressed')}
