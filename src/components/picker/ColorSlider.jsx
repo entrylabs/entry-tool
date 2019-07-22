@@ -129,6 +129,10 @@ class ColorPicker extends Component {
         return 177 / 360;
     }
 
+    get SLIDER_SIZE() {
+        return 28;
+    }
+
     getScaleRatioX = memoize((type) => {
         if (type === 'hue') {
             return this.SCALE_RATIO_X_BY_HUE;
@@ -140,16 +144,13 @@ class ColorPicker extends Component {
     constructor(props) {
         super(props);
         this.theme = Theme.getStyle('popup');
-        const { color, onChangeColor, lastColor } = props;
+        const { color, lastColor } = props;
         let state = {
             isTransparent: false,
         };
         if (color) {
             state.originColor = lastColor || color;
             Object.assign(state, getColorByHex(lastColor || color));
-            if (onChangeColor) {
-                onChangeColor(state.color);
-            }
         }
         this.state = state;
     }
@@ -345,12 +346,26 @@ class ColorPicker extends Component {
         }
     };
 
+    setSliderMoveEvent(type, startX, value) {
+        document.addEventListener('touchmove', handleTouchPreventDefault, { passive: false });
+        this.canMoveCapture = true;
+        this.moveCaptureTarget = document.getElementById(`pebble_${type}`);
+        this.sliderStartX = startX;
+        this.sliderType = type;
+        this.sliderValue = value;
+        this.setState(() => ({
+            isActiveSlider: type,
+        }));
+    }
+
     handleSliderBarClick(e, type) {
         const { clientX, target } = e;
         const { left = 0 } = target.getBoundingClientRect() || {};
         let result = (clientX - left - this.SLIDER_SIZE / 2) / this.getScaleRatioX(type);
-        result = Math.round(Math.max(Math.min(result, 100), 0));
+        let max = type === 'hue' ? 360 : 100;
+        result = Math.round(Math.max(Math.min(result, max), 0));
         this.handleChangeHsv(type, result);
+        this.setSliderMoveEvent(type, clientX, result);
     }
 
     componentDidMount() {
@@ -374,15 +389,7 @@ class ColorPicker extends Component {
     handleSliderMouseDown(e, type) {
         const { nativeEvent = {} } = e;
         const { clientX } = getClassifyEvent(nativeEvent);
-        document.addEventListener('touchmove', handleTouchPreventDefault, { passive: false });
-        this.canMoveCapture = true;
-        this.moveCaptureTarget = e.target;
-        this.sliderStartX = clientX;
-        this.sliderType = type;
-        this.sliderValue = this.state[type];
-        this.setState(() => ({
-            isActiveSlider: type,
-        }));
+        this.setSliderMoveEvent(type, clientX, this.state[type]);
     }
 
     getTranslate3d(el) {
@@ -425,6 +432,7 @@ class ColorPicker extends Component {
                     />
                     <div className={`${this.theme.graph_box}`} touch-action="none">
                         <span
+                            id={`pebble_${key}`}
                             data-type={key}
                             data-my-type={key}
                             className={`${this.theme.slider} ${this.theme.btn_pop_color_slide} ${
