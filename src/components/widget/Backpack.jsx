@@ -281,7 +281,7 @@ class Backpack extends Component {
         const { onClose = () => {}, isLoading = true, draggableOption } = this.props;
         const { isDragEnter = false } = this.state;
         this.setPointEvent();
-        console.log(Theme.type)
+
         return (
             <div ref={this.backpack} className={this.theme.Backpack}>
                 <div className={this.theme.titleArea} onClick={onClose}>

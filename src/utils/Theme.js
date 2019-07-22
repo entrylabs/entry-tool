@@ -5,6 +5,7 @@ import EntryDraggable from '@assets/entry/scss/draggable.scss';
 import EntryLinePopupStyle from '@assets/entryline/scss/popup.scss';
 import EntryLineBackpackStyle from '@assets/entryline/scss/Backpack.scss';
 import EntryLineDraggable from '@assets/entryline/scss/draggable.scss';
+
 class Theme {
     constructor() {
         this._type = 'entry';
