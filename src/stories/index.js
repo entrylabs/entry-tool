@@ -102,6 +102,22 @@ wigetStories
             />
         </div>
     ))
+    .add('에러 팝업', () => (
+        <div>
+            <ColorPicker color="#FF0000" onChangeColorPicker={action}/>
+            <ModalProgress
+                title={text('Title', '업로드에 실패했습니다.')}
+                description={text(
+                    'description',
+                    '문제가 계속된다면<br>entry@connect.or.kr 로 문의해주세요.',
+                )}
+                type={select('type', progressType, 'error')}
+                onClose={() => {
+                    alert('닫힘');
+                }}
+            />
+        </div>
+    ))
     .add('컨텍스트메뉴', () => (
         <ContextMenu
             coordinate={{

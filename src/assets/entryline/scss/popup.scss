@@ -489,3 +489,17 @@ $lineImageDir:'../images';
     }
   }
 }
+
+.fileupload_loding {
+  background: url('#{$lineImageDir}/progress/upload_loading.gif') no-repeat;
+  background-size: 156px;
+}
+
+.Backpack {
+  .loading {
+	.image {
+	  background: url('#{$lineImageDir}/progress/upload_loading.gif') no-repeat;
+      background-size: 156px;
+	}
+  }
+}
