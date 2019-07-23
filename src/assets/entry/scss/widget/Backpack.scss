@@ -20,7 +20,7 @@
         user-select: none;
         .icon {
             display: inline-block;
-            background-image: url(../../images/back_pack_button.svg);
+            background-image: url('../#{$imageDir}/back_pack_button.svg');
             background-repeat: no-repeat;
             background-size: 32px auto;
             background-position: 50% 50%;
@@ -99,7 +99,7 @@
                 width: 24px;
                 height: 24px;
                 position: absolute;
-                background: url(../../images/btn_pop_chk_del.svg);
+                background: url('../#{$imageDir}/btn_pop_chk_del.svg');
                 top: 6px;
                 right: 6px;
             }
@@ -177,7 +177,7 @@
         .image {
             width: 60px;
             height: 60px;
-            background: url(../../images/loading.gif);
+            background: url('../#{$imageDir}/loading.gif');
             background-size: cover;
         }
     }
@@ -201,7 +201,7 @@
             width: 32px;
             height: 32px;
             margin-bottom: 11px;
-            background: url(../../images/img_backpack_plus.svg);
+            background: url('../#{$imageDir}/img_backpack_plus.svg');
             pointer-events: none;
         }
         
