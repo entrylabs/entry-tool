@@ -439,10 +439,10 @@ class ColorPicker extends Component {
                                 isActiveSlider === key ? this.theme.on : ''
                             }`}
                             onMouseDown={(e) => {
-                                !isTransparent && this.handleSliderMouseDown(e, key);
+                                this.handleSliderMouseDown(e, key);
                             }}
                             onTouchStart={(e) => {
-                                !isTransparent && this.handleSliderMouseDown(e, key);
+                                this.handleSliderMouseDown(e, key);
                             }}
                             style={{ left: `${setScaleRatioX(this.state[key], ratio)}px` }}
                         />
@@ -450,10 +450,10 @@ class ColorPicker extends Component {
                             className={`${this.theme.bar}`}
                             style={this.getGradientBackground(key)}
                             onMouseDown={(e) => {
-                                !isTransparent && this.handleSliderBarClick(e, key);
+                                this.handleSliderBarClick(e, key);
                             }}
                             onTouchStart={(e) => {
-                                !isTransparent && this.handleSliderBarClick(e, key);
+                                this.handleSliderBarClick(e, key);
                             }}
                         />
                     </div>

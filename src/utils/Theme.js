@@ -1,5 +1,6 @@
 import EntryPopupStyle from '@assets/entry/scss/popup.scss';
 import EntryBackpackStyle from '@assets/entry/scss/widget/Backpack.scss';
+import EntryDropper from '@assets/entry/scss/widget/Dropper.scss';
 import EntryProgress from '@assets/entry/scss/progress.scss';
 import EntryLinePopupStyle from '@assets/entryline/scss/popup.scss';
 
@@ -11,11 +12,13 @@ class Theme {
                 popup: EntryPopupStyle,
                 backpack: EntryBackpackStyle,
                 progress: EntryProgress,
+                dropper: EntryDropper,
             },
             entryline: {
                 popup: EntryLinePopupStyle,
                 backpack: EntryBackpackStyle,
                 progress: EntryLinePopupStyle,
+                dropper: EntryDropper,
             },
         };
     }

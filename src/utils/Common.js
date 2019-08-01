@@ -21,6 +21,17 @@ export const CommonUtils = {
         }
         return position;
     },
+    getMouseEvent(event) {
+        let mouseEvent;
+        if (event.originalEvent && event.originalEvent.touches) {
+            mouseEvent = event.originalEvent.touches[0];
+        } else if (event.touches) {
+            mouseEvent = event.touches[0];
+        } else {
+            mouseEvent = event;
+        }
+        return mouseEvent;
+    },
     getLangType: () => {
         const lang = root.Lang || {};
         return lang.type;
