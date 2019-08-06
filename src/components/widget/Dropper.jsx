@@ -80,12 +80,12 @@ class Droppper extends Component {
 
     componentDidMount() {
         const { onPickColor, setVisible } = this.props;
-        this.targetEvent.on('mousedown.magify', (e) => {
+        this.targetEvent.on('mousedown.magnify', (e) => {
             e.stopImmediatePropagation();
         });
         this.targetEvent.on(
             'touchstart.magnify touchmove.magnify mousemove.magnify',
-            this.cursorMoveEvnet
+            this.cursorMoveEvent
         );
         this.targetEvent.on('click.magnify touchend.magnify', (e) => {
             const { color = [] } = this.state;
@@ -102,13 +102,12 @@ class Droppper extends Component {
 
     componentWillUnmount() {
         this.targetEvent.off('magnify');
-        this.mainCanvas.removeClass('isPickerMode');
+        this.mainCanvas.removeClass(this.theme.isPickerMode);
     }
 
     render() {
         return (
-            <div
-            className={this.theme.Droppper}>
+            <div className={this.theme.Droppper}>
                 <Magnify
                     mainCanvas={this.mainCanvas}
                     position={this.canvasPosition}
