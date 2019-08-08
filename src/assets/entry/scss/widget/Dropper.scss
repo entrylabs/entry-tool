@@ -57,7 +57,7 @@
             width: 114px;
             height: 114px;
             border-radius: 57px;
-            background-image: url(#{$imageDir}/magnify/big_circle.svg);
+            background-image: url(../#{$imageDir}/magnify/big_circle.svg);
             box-shadow: -1px 1px 1px 0 rgba(0, 0, 0, 0.19);
         }
         .colorPreview {
@@ -75,7 +75,7 @@
                 height: 28px;
                 border-radius: 14px;
                 box-shadow: 0.5px 0.5px 1px 0 rgba(0, 0, 0, 0.27);
-                background-image: url(#{$imageDir}/magnify/small_circle.svg);
+                background-image: url(../#{$imageDir}/magnify/small_circle.svg);
             }
         }
         .magnifyRect {
