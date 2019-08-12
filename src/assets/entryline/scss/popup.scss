@@ -78,6 +78,9 @@ $lineImageDir:'../images';
     .section_cont .cont_sel_box:after {
       background-color: #f1f1d4;
     }
+    .section_cont .cont_sel_box .select_list .select_item {
+      border: 1px solid #C7C79F;
+    }
     .section_cont .cont_sel_box .select_list .select_item:hover:after {
       border: 2px solid #1c8850;
     }
