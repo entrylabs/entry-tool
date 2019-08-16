@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { pure } from 'recompose';
 import Theme from '@utils/Theme';
+import EntryEvent from '@entrylabs/event';
 
 class Magnify extends Component {
     constructor(props) {
@@ -8,18 +9,33 @@ class Magnify extends Component {
         this.theme = Theme.getStyle('dropper');
     }
 
+    static MAGNIFY_CANVAS_SIZE = 56;
+    targetEvent = new EntryEvent(document);
+
+    componentWillUnmount() {
+        this.targetEvent.off('magnify');
+    }
+
     setCanvas = (canvas) => {
-        if (canvas) {
-            const { mainCanvas, position } = this.props;
-            const { width, height } = position;
-            const width3x = width * 3;
-            const height3x = height * 3;
-            canvas.setAttribute('width', width3x);
-            canvas.setAttribute('height', height3x);
-            this.colorSpoidCtx = canvas.getContext('2d');
-            this.colorSpoidCtx.imageSmoothingEnabled = false;
-            this.colorSpoidCtx.drawImage(mainCanvas, 0, 0, width3x, height3x);
+        if (!canvas) {
+            return;
         }
+
+        canvas.setAttribute('width', this.MAGNIFY_CANVAS_SIZE);
+        canvas.setAttribute('height', this.MAGNIFY_CANVAS_SIZE);
+        const { width, height } = canvas;
+        this.colorSpoidCtx = canvas.getContext('2d');
+        this.imageData = this.colorSpoidCtx.getImageData(0, 0, width, height);
+        this.targetEvent.off('magnify').on('mousemove.magnify', this.handleMouseMove);
+    };
+
+    handleMouseMove = () => {
+        const { magnifyScene } = this.props;
+        if (!magnifyScene) {
+            return;
+        }
+        this.imageData.data.set(magnifyScene);
+        this.colorSpoidCtx.putImageData(this.imageData, 0, 0);
     };
 
     getMagnifyStyle() {
@@ -29,6 +45,7 @@ class Magnify extends Component {
             transform: wrapperTransform,
         };
     }
+
     getCanvasStyle() {
         const { innerTransform } = this.props;
         return {
@@ -40,7 +57,7 @@ class Magnify extends Component {
         const { color = [] } = this.props;
         const [red = 0, green = 0, blue = 0] = color;
         return {
-            'backgroundColor': `rgb(${red}, ${green}, ${blue})`,
+            backgroundColor: `rgb(${red}, ${green}, ${blue})`,
         };
     }
 
@@ -51,8 +68,6 @@ class Magnify extends Component {
                 <div className={this.theme.canvasWrapper}>
                     <div className={this.theme.innerCanvasWrapper}>
                         <canvas
-                            width="640"
-                            height="380"
                             className={this.theme.magnify}
                             ref={this.setCanvas}
                             style={this.getCanvasStyle()}
