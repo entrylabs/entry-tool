@@ -9,7 +9,7 @@ class Magnify extends Component {
         this.theme = Theme.getStyle('dropper');
     }
 
-    static MAGNIFY_CANVAS_SIZE = 56;
+    MAGNIFY_CANVAS_SIZE = 56;
     targetEvent = new EntryEvent(document);
 
     componentWillUnmount() {
@@ -68,6 +68,8 @@ class Magnify extends Component {
                 <div className={this.theme.canvasWrapper}>
                     <div className={this.theme.innerCanvasWrapper}>
                         <canvas
+                            width="640"
+                            height="380"
                             className={this.theme.magnify}
                             ref={this.setCanvas}
                             style={this.getCanvasStyle()}

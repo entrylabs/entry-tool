@@ -168,8 +168,6 @@ class Droppper extends Component {
         return (
             <div className={this.theme.Droppper}>
                 <Magnify
-                    mainCanvas={this.mainCanvas}
-                    position={this.canvasPosition}
                     {..._.pick(this.state, [
                         'isShow',
                         'wrapperTransform',
