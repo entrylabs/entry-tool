@@ -11,12 +11,12 @@ class Navigation extends Component {
         super(props);
         this.theme = Theme.getStyle("popup");
         this.category_options = [
-            [CommonUtils.getLang('EntryStatic.art_category_all'), null],
-            [CommonUtils.getLang('EntryStatic.art_category_game'), '게임'],
-            [CommonUtils.getLang('EntryStatic.art_category_animation'), '애니메이션'],
-            [CommonUtils.getLang('EntryStatic.art_category_media'), '미디어아트'],
-            [CommonUtils.getLang('EntryStatic.art_category_physical'), '피지컬'],
-            [CommonUtils.getLang('EntryStatic.art_category_etc'), '기타'],
+            [CommonUtils.getLang('EntryStatic.art_category_all'), 'art_category_all'],
+            [CommonUtils.getLang('EntryStatic.art_category_game'), 'art_category_game'],
+            [CommonUtils.getLang('EntryStatic.art_category_animation'), 'art_category_animation'],
+            [CommonUtils.getLang('EntryStatic.art_category_media'), 'art_category_media'],
+            [CommonUtils.getLang('EntryStatic.art_category_physical'), 'art_category_physical'],
+            [CommonUtils.getLang('EntryStatic.art_category_etc'), 'art_category_etc'],
         ];
 
         this.sort_options = [

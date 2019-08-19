@@ -65,6 +65,23 @@ wigetStories
             />
         </div>
     ))
+    .add('백팩 - item', () => (
+        <div style={{ height: '100vh' }}>
+            <Backpack
+                onButtonPressed={action('onButtonPressed')}
+                onBackButtonPressed={action('onBackButtonPressed')}
+                onOutsideClick={action('onOutsideClick')}
+                isLoading={false}
+                items={[
+                    {
+                        _id: 'test',
+                        imgPath: 'https://playentry.org/uploads/60/c4/image/60c429a8a742a5d573af8abd37b22f2b.png',
+                        title: 'title',
+                    },
+                ]}
+            />
+        </div>
+    ))
     .add('숫자', () => (
         <Number
             onButtonPressed={action('onButtonPressed')}
@@ -96,6 +113,22 @@ wigetStories
                     '문제가 계속된다면<br>entry@connect.or.kr 로 문의해주세요.',
                 )}
                 type={select('type', progressType, 'progress')}
+                onClose={() => {
+                    alert('닫힘');
+                }}
+            />
+        </div>
+    ))
+    .add('에러 팝업', () => (
+        <div>
+            <ColorPicker color="#FF0000" onChangeColorPicker={action}/>
+            <ModalProgress
+                title={text('Title', '업로드에 실패했습니다.')}
+                description={text(
+                    'description',
+                    '문제가 계속된다면<br>entry@connect.or.kr 로 문의해주세요.',
+                )}
+                type={select('type', progressType, 'error')}
                 onClose={() => {
                     alert('닫힘');
                 }}
