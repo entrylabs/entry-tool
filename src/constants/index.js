@@ -270,6 +270,7 @@ export const DEFAULT_OPTIONS = {
                 },
             },
             opt: {
+                search: { query: true },
                 multiSelect: false,
                 uploadAllowed: {
                     image: true,
