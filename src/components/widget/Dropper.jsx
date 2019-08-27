@@ -6,6 +6,8 @@ import { CommonUtils } from '@utils/Common';
 import Magnify from '@components/common/Magnify';
 import Theme from '@utils/Theme';
 
+const RADIUS = 56;
+
 class Droppper extends Component {
     constructor(props) {
         super(props);
@@ -64,7 +66,7 @@ class Droppper extends Component {
         ];
     }
 
-    _getSceneFromImageData(x, y, size = 56) {
+    _getSceneFromImageData(x, y, size = RADIUS) {
         if (!this.imageData) {
             return;
         }
@@ -112,15 +114,26 @@ class Droppper extends Component {
             const y = Math.floor(
                 ((innerY - this.CLIENT_OFFSET_Y) * this.mainCanvas.height) / height
             ); // + 28;
+
+            if (this.colorSpoidCtx) {
+                this.colorSpoidCtx.drawImage(
+                    this.mainCanvas,
+                    x - RADIUS / 3,
+                    y - RADIUS / 3,
+                    (RADIUS * 2) / 3,
+                    (RADIUS * 2) / 3,
+                    0,
+                    0,
+                    RADIUS * 2,
+                    RADIUS * 2
+                );
+            }
             this.setState(
                 produce((draft) => {
                     draft.isShow = true;
                     draft.wrapperTransform = `translate3d(${mouseEvent.pageX -
                         57}px, ${mouseEvent.pageY - this.TRANSFORM_OFFSET_Y}px, 0)`;
-                    draft.innerTransform = `scale3d(3,3,1) translate3d(-10px, ${-9 +
-                        this.INNER_TRANSFORM_OFFSET_Y}px, 0)`;
                     draft.color = this._getColorFromImageData(x, y);
-                    draft.magnifyScene = this._getSceneFromImageData(x, y);
                 })
             );
         } else {
@@ -168,12 +181,14 @@ class Droppper extends Component {
         return (
             <div className={this.theme.Droppper}>
                 <Magnify
+                    injectColorSpoidCtx={(ctx) => {
+                        this.colorSpoidCtx = ctx;
+                    }}
                     {..._.pick(this.state, [
                         'isShow',
                         'wrapperTransform',
                         'innerTransform',
                         'color',
-                        'magnifyScene',
                     ])}
                 />
                 <div className={this.theme.entryMagnifyCurtain} />

@@ -9,7 +9,7 @@ class Magnify extends Component {
         this.theme = Theme.getStyle('dropper');
     }
 
-    MAGNIFY_CANVAS_SIZE = 56;
+    MAGNIFY_CANVAS_SIZE = 56 * 2;
     targetEvent = new EntryEvent(document);
 
     componentWillUnmount() {
@@ -23,19 +23,11 @@ class Magnify extends Component {
 
         canvas.setAttribute('width', this.MAGNIFY_CANVAS_SIZE);
         canvas.setAttribute('height', this.MAGNIFY_CANVAS_SIZE);
-        const { width, height } = canvas;
         this.colorSpoidCtx = canvas.getContext('2d');
-        this.imageData = this.colorSpoidCtx.getImageData(0, 0, width, height);
-        this.targetEvent.off('magnify').on('mousemove.magnify', this.handleMouseMove);
-    };
+        this.colorSpoidCtx.imageSmoothingEnabled = false;
 
-    handleMouseMove = () => {
-        const { magnifyScene } = this.props;
-        if (!magnifyScene) {
-            return;
-        }
-        this.imageData.data.set(magnifyScene);
-        this.colorSpoidCtx.putImageData(this.imageData, 0, 0);
+        const { injectColorSpoidCtx } = this.props;
+        injectColorSpoidCtx(this.colorSpoidCtx);
     };
 
     getMagnifyStyle() {
