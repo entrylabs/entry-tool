@@ -95,18 +95,28 @@ class Angle extends Component {
         let startOffset = -90;
         let endOffset = refinedDegree - 90;
         let startStyle = `linear-gradient(${startOffset}deg, transparent 50%, white 50%)`;
-
+        let innerStyle = {};
         if (refinedDegree > 180) {
             startOffset = refinedDegree - 270;
             endOffset = 90;
             startStyle = `linear-gradient(${startOffset}deg, #ffb500 50%, transparent 50%)`;
+            const innerBackgroundDegree = 225 - refinedDegree;
+            innerStyle = {
+                display: 'block',
+                transform: `rotate(${refinedDegree}deg)`,
+                backgroundImage: `repeating-linear-gradient(${innerBackgroundDegree}deg, rgb(255, 181, 0), rgb(255, 195, 50) 1px, rgb(255, 181, 0) 4px, rgb(255, 181, 0) 1px)`,
+            };
         }
 
         const pieStyle = {
-            backgroundImage: `${startStyle},linear-gradient(${endOffset}deg, white 50%, transparent 50%)`,
+            backgroundImage: `${startStyle},linear-gradient(${endOffset}deg, white 50%, transparent 50%), repeating-linear-gradient(45deg, #ffb500, #ffc332 1px, #ffb500 4px, #ffb500 1px)`,
         };
 
-        return <div className={this.theme.pie} style={pieStyle} />;
+        return (
+            <div className={this.theme.pie} style={pieStyle}>
+                <div className={this.theme.inner} style={innerStyle} />
+            </div>
+        );
     }
 
     refineDegree(degree) {
