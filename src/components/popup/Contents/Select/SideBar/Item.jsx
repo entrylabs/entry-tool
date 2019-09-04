@@ -31,7 +31,7 @@ class Item extends Component {
         }
         const baseUrl = this.props.popupReducer.baseUrl;
         return (
-            <div className={`${this.theme.thmb} ${this.theme[imageType]}`}>
+            <div className={`${this.theme.thmb} ${imageType && this.theme[imageType]}`}>
                 <img
                     src={thumb || CommonUtils.createImageUrl(filename, baseUrl)}
                     alt=""
