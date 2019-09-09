@@ -183,11 +183,20 @@ class Navigation extends Component {
     }
 
     render() {
+        const { hidden = {} } = this.props;
+        const isDrawVector = hidden.type === 'sprite' || hidden.type === 'paint' || hidden.type === 'picture';
         return (
             <div className={this.theme.section_navi}>
                 <ul className={this.theme.list}>{this.drawNavigation()}</ul>
                 {this.props.searchOption && (
                     <div className={this.theme.art_sel_area}>{this.drawSearchBox()}</div>
+                )}
+                {isDrawVector && (
+                    <div className={this.theme.vector}
+                        onClick={() => this.props.triggerEvent(EMIT_TYPES.fetchVector, hidden, false)}
+                    >
+                        <span>{CommonUtils.getLang('벡터 모아보기')}</span>
+                    </div>
                 )}
                 {this.state.dropDown}
             </div>
