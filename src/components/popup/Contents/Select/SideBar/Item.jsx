@@ -18,12 +18,16 @@ class Item extends Component {
         if (this.props.type === 'sound') {
             return <div className={`${this.theme.thmb} ${this.theme.imico_pop_sound_thmb}`}>&nbsp;</div>;
         }
-        let { filename, fileurl, imageType, pictures = [] } = this.props.item;
+        let { filename, fileurl, imageType, pictures = [], hasSvg } = this.props.item;
         let thumb;
         if (pictures.length > 0) {
             filename = pictures[0].filename;
             fileurl = pictures[0].fileurl;
             imageType = pictures[0].imageType;
+        }
+
+        if (hasSvg) {
+            imageType = 'svg';
         }
 
         if (fileurl) {
