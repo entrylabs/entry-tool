@@ -158,7 +158,7 @@ class Navigation extends Component {
                                 className={`${this.theme.btn_srch} ${this.theme.imbtn_pop_srch}`}
                                 onClick={this.onSearchBtnClicked}
                             >
-                                <span className={this.theme.blind}>검색</span>
+                                <span className={this.theme.blind}>{CommonUtils.getLang('Menus.search_lang')}</span>
                             </button>
                         </div>
                     )}
