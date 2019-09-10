@@ -112,7 +112,7 @@ class Number extends Component {
                                     this.handleButtonClick('backButtonPressed');
                                 }}
                             >
-                                <span className={this.theme.blind}>지우기</span>
+                                <span className={this.theme.blind}>remove</span>
                             </a>
                         </div>
                     </div>
