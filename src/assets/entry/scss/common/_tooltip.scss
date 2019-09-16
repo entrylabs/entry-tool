@@ -327,6 +327,13 @@
                     border-bottom-left-radius: 90px;
                     border-top-left-radius: 90px;
                 }
+                &:after {
+                    content: '';
+                    background: url(#{$imageDir}/img_angle_dot.svg) no-repeat;
+                    width: 152px;
+                    height: 152px;
+                    position: absolute;
+                }
             }
 
             .arrow {
