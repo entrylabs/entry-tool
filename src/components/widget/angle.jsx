@@ -96,6 +96,8 @@ class Angle extends Component {
         let endOffset = refinedDegree - 90;
         let startStyle = `linear-gradient(${startOffset}deg, transparent 50%, white 50%)`;
         let innerStyle = {};
+        const brightYello = 'rgb(255, 195, 50)';
+        const darkYello = 'rgb(255, 181, 0)';
         if (refinedDegree > 180) {
             startOffset = refinedDegree - 270;
             endOffset = 90;
@@ -104,12 +106,12 @@ class Angle extends Component {
             innerStyle = {
                 display: 'block',
                 transform: `rotate(${refinedDegree}deg)`,
-                backgroundImage: `repeating-linear-gradient(${innerBackgroundDegree}deg, rgb(255, 181, 0), rgb(255, 195, 50) 1px, rgb(255, 181, 0) 4px, rgb(255, 181, 0) 1px)`,
+                backgroundImage: `repeating-linear-gradient(${innerBackgroundDegree}deg, ${darkYello}, ${brightYello} 1px, ${darkYello} 4px, ${darkYello} 1px)`,
             };
         }
 
         const pieStyle = {
-            backgroundImage: `${startStyle},linear-gradient(${endOffset}deg, white 50%, transparent 50%), repeating-linear-gradient(45deg, #ffb500, #ffc332 1px, #ffb500 4px, #ffb500 1px)`,
+            backgroundImage: `${startStyle},linear-gradient(${endOffset}deg, white 50%, transparent 50%), repeating-linear-gradient(45deg, ${darkYello}, ${brightYello} 1px, ${darkYello} 4px, ${darkYello} 1px)`,
         };
 
         return (
