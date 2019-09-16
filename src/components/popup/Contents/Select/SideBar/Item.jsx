@@ -18,21 +18,7 @@ class Item extends Component {
         if (this.props.type === 'sound') {
             return <div className={`${this.theme.thmb} ${this.theme.imico_pop_sound_thmb}`}>&nbsp;</div>;
         }
-        let { filename, fileurl, imageType, pictures = [], hasSvg } = this.props.item;
-        let thumb;
-        if (pictures.length > 0) {
-            filename = pictures[0].filename;
-            fileurl = pictures[0].fileurl;
-            imageType = pictures[0].imageType;
-        }
-
-        if (hasSvg) {
-            imageType = 'svg';
-        }
-
-        if (fileurl) {
-            thumb = fileurl.thumb || fileurl.resized || fileurl.origin || fileurl;
-        }
+        const { thumb, filename, imageType } = CommonUtils.getImageSummary(this.props.item);
         const baseUrl = this.props.popupReducer.baseUrl;
         return (
             <div className={`${this.theme.thmb} ${imageType && this.theme[imageType]}`}>

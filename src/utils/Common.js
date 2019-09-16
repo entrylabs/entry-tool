@@ -171,6 +171,33 @@ export const CommonUtils = {
         for (b = i = 0; (c = s.charCodeAt(i++)); b += c >> 11 ? 3 : c >> 7 ? 2 : 1) {}
         return b;
     },
+
+    getImageSummary(item) {
+        let { label = {}, name: itemName, imageType, filename, fileurl, pictures = [], hasSvg } = item;
+        let thumb;
+        const lang = this.getLangType();
+        if (pictures.length > 0) {
+            filename = pictures[0].filename;
+            fileurl = pictures[0].fileurl;
+        }
+        if (pictures.length > 0) {
+            imageType = pictures[0].imageType;
+        }
+        if (hasSvg) {
+            imageType = 'svg';
+        }
+        if (fileurl) {
+            thumb = fileurl.thumb || fileurl.resized || fileurl.origin || fileurl;
+        }
+        const defaultName = label.en ? label.en : itemName;
+        const name = label[lang] ? label[lang] : defaultName;
+        return {
+            name,
+            imageType,
+            thumb,
+            filename,
+        };
+    },
 };
 
 export function FormAsyncException(obj) {

@@ -13,15 +13,13 @@ class CustomSlide extends Component {
     }
     render() {
         const { item, type, url, ...props } = this.props;
-        const lang = CommonUtils.getLangType();
-        const defaultName = item.label.en ? item.label.en : item.name;
-        const name = item.label && item.label[lang] ? item.label[lang] : defaultName;
+        const { name, imageType } = CommonUtils.getImageSummary(this.props.item);
         return (
             <div className={this.theme.select_item} {...props}>
-                <div className={TYPE_MAP[type].imageClass}>{TYPE_MAP[type].imageContent(item, url)}</div>
-                <em className={this.theme.sjt}>
-                    {name}
-                </em>
+                <div className={`${TYPE_MAP[type].imageClass} ${imageType && this.theme[imageType]}`}>
+                    {TYPE_MAP[type].imageContent(item, url)}
+                </div>
+                <em className={this.theme.sjt}>{name}</em>
                 <a
                     href="#NULL"
                     className={`${this.theme.btn_del} ${this.theme.imbtn_pop_chk_del}`}
@@ -75,17 +73,9 @@ class Selected extends Component {
                 wrapClass: this.theme.cont_sel_box,
                 imageClass: this.theme.thmb,
                 imageContent: (item, baseUrl) => {
-                    let { filename, fileurl, pictures = [] } = item;
-                    let thumb;
-                    if (pictures.length > 0) {
-                        filename = pictures[0].filename;
-                        fileurl = pictures[0].fileurl;
-                    }
-                    if (fileurl) {
-                        thumb = fileurl.thumb || fileurl.resized || fileurl.origin || fileurl;
-                    }
+                    const { thumb, filename } = CommonUtils.getImageSummary(item);
                     return (
-                        <img src={thumb || CommonUtils.createImageUrl(filename, baseUrl)} alt=""/>
+                        <img src={thumb || CommonUtils.createImageUrl(filename, baseUrl)} alt="" />
                     );
                 },
             },
