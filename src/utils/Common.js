@@ -173,7 +173,7 @@ export const CommonUtils = {
     },
 
     getImageSummary(item) {
-        let { label, name: itemName, imageType, filename, fileurl, pictures = [], hasSvg } = item;
+        let { label = {}, name: itemName, imageType, filename, fileurl, pictures = [], hasSvg } = item;
         let thumb;
         const lang = this.getLangType();
         if (pictures.length > 0) {
@@ -190,7 +190,7 @@ export const CommonUtils = {
             thumb = fileurl.thumb || fileurl.resized || fileurl.origin || fileurl;
         }
         const defaultName = label.en ? label.en : itemName;
-        const name = label && label[lang] ? label[lang] : defaultName;
+        const name = label[lang] ? label[lang] : defaultName;
         return {
             name,
             imageType,
