@@ -112,7 +112,7 @@
     .section_navi .vector span {
         display: block;
         margin-left:40px;
-        margin-top: 13px;
+        margin-top: 11.5px;
         font-size:14px;
         color: #fff;
     }
@@ -362,6 +362,16 @@
             height: 100%;
             vertical-align: middle;
             content: '';
+        }
+        .section_cont .cont_sel_box .select_list .select_item .thmb.svg:after {
+            content: '';
+            width: 28px;
+            height: 28px;
+            top: 8px;
+            left: 8px;
+            background: url('#{$imageDir}/imico_pop_vector.png') no-repeat;
+            background-size: 100%;
+            position: absolute;
         }
         .section_cont .cont_sel_box .select_list .select_item .thmb img {
             max-width: 96px;
@@ -733,11 +743,6 @@
             font-size: 0;
             text-align: center;
         }
-        .section_cont .obj_list .thmb.svg {
-            background: url('#{$imageDir}/imico_pop_vector.png') no-repeat;
-            background-size: 28px;
-            background-position: 12px 8px;
-        }
         .section_cont .obj_list .thmb img {
             max-width: 96px;
             max-height: 100%;
@@ -750,6 +755,16 @@
             height: 100%;
             vertical-align: middle;
             content: '';
+        }
+        .section_cont .obj_list .thmb.svg:after {
+            content: '';
+            width: 28px;
+            height: 28px;
+            top: 8px;
+            left: 8px;
+            background: url('#{$imageDir}/imico_pop_vector.png') no-repeat;
+            background-size: 100%;
+            position: absolute;
         }
 
         .section_cont .obj_list .sjt {
