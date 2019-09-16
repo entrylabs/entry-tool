@@ -112,14 +112,14 @@
     .section_navi .vector span {
         display: block;
         margin-left:40px;
-        margin-top: 11.5px;
+        margin-top: 10.5px;
         font-size:14px;
         color: #fff;
     }
     .section_navi .vector:before {
         position:absolute;
         content: '';
-        margin: 10px 7px 0 12px;
+        margin: 8.5px 7px 0 12px;
         background: url('#{$imageDir}/btn_pop_get_vectors.png') no-repeat;
         width: 21px;
         height: 21px;
