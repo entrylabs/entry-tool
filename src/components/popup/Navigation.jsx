@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CommonUtils } from '@utils/Common';
 import { triggerEvent } from '@actions';
+import { setUIParam } from '@actions/popup';
 import Dropdown from '@components/widget/dropdown';
 import { EMIT_TYPES } from '@constants';
 import Theme from '@utils/Theme';
@@ -183,7 +184,8 @@ class Navigation extends Component {
     }
 
     render() {
-        const { hidden = {} } = this.props;
+        const { hidden = {}, popupReducer = {} } = this.props;
+        const { isVectorOnly = false } = popupReducer;
         const isDrawVector = hidden.type === 'sprite' || hidden.type === 'paint' || hidden.type === 'picture';
         return (
             <div className={this.theme.section_navi}>
@@ -192,8 +194,10 @@ class Navigation extends Component {
                     <div className={this.theme.art_sel_area}>{this.drawSearchBox()}</div>
                 )}
                 {isDrawVector && (
-                    <div className={this.theme.vector}
-                        onClick={() => this.props.triggerEvent(EMIT_TYPES.fetchVector, hidden, false)}
+                    <div className={`${this.theme.vector} ${isVectorOnly && this.theme.on}`}
+                        onClick={() => {
+                            this.props.setUIParam({ isVectorOnly: !isVectorOnly });
+                        }}
                     >
                         <span>{CommonUtils.getLang('벡터 모아보기')}</span>
                     </div>
@@ -210,6 +214,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     triggerEvent: (event, data, hidden) => dispatch(triggerEvent(event, data, hidden)),
+    setUIParam: (data) => dispatch(setUIParam(data)),
 });
 
 export default connect(
