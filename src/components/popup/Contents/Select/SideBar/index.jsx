@@ -39,7 +39,12 @@ class Index extends Component {
             }
             this.props.triggerEvent(
                 EMIT_TYPES.fetch,
-                { type: next.type, sidebar: next.sidebar, subMenu: next.subMenu },
+                {
+                    type: next.type,
+                    sidebar: next.sidebar,
+                    subMenu: next.subMenu,
+                    onlyVector: !!next.onlyVector,
+                },
                 false,
             );
         }

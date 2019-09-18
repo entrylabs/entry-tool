@@ -104,8 +104,8 @@
         position: relative;
         height: 40px;
         border-radius: 20px;
-        border: solid 1px #4f80ff;
-        background-color: #4f80ff;
+        border: solid 1px #e2e2e2;
+        background-color: #ffffff;
         padding-right: 16px;
         cursor:pointer;
     }
@@ -114,13 +114,13 @@
         margin-left:40px;
         margin-top: 10.5px;
         font-size:14px;
-        color: #fff;
+        color: #979797;
     }
     .section_navi .vector:before {
         position:absolute;
         content: '';
         margin: 8.5px 7px 0 12px;
-        background: url('#{$imageDir}/btn_pop_get_vectors.png') no-repeat;
+        background: url('#{$imageDir}/btn_pop_get_vectors_off.svg') no-repeat;
         width: 21px;
         height: 21px;
         background-size: 21px;
@@ -129,6 +129,16 @@
         display: block;
         clear: both;
         content: '';
+    }
+    .section_navi .vector.on {
+        background-color: #4f80ff;
+        border: solid 1px #4f80ff;
+        span {
+            color: #fff;
+        }
+        &:before {
+            background-image: url('#{$imageDir}/btn_pop_get_vectors_on.svg');
+        }
     }
     .section_navi .art_sel_area {
         float: right;
