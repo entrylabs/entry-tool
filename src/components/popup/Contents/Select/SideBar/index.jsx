@@ -43,7 +43,7 @@ class Index extends Component {
                     type: next.type,
                     sidebar: next.sidebar,
                     subMenu: next.subMenu,
-                    onlyVector: !!next.onlyVector,
+                    isVectorOnly: !!next.isVectorOnly,
                 },
                 false,
             );

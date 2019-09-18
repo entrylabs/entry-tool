@@ -185,7 +185,7 @@ class Navigation extends Component {
 
     render() {
         const { hidden = {}, popupReducer = {} } = this.props;
-        const { onlyVector = false } = popupReducer;
+        const { isVectorOnly = false } = popupReducer;
         const isDrawVector = hidden.type === 'sprite' || hidden.type === 'paint' || hidden.type === 'picture';
         return (
             <div className={this.theme.section_navi}>
@@ -194,11 +194,11 @@ class Navigation extends Component {
                     <div className={this.theme.art_sel_area}>{this.drawSearchBox()}</div>
                 )}
                 {isDrawVector && (
-                    <div className={`${this.theme.vector} ${onlyVector && this.theme.on}`}
+                    <div className={`${this.theme.vector} ${isVectorOnly && this.theme.on}`}
                         onClick={() => {
                             const { sidebar, subMenu, type } = this.props.popupReducer;
-                            this.props.triggerEvent(EMIT_TYPES.fetch, { type, sidebar, subMenu, onlyVector: !onlyVector }, false);
-                            this.props.setUIParam({ onlyVector: !onlyVector });
+                            this.props.triggerEvent(EMIT_TYPES.fetch, { type, sidebar, subMenu, isVectorOnly: !isVectorOnly }, false);
+                            this.props.setUIParam({ isVectorOnly: !isVectorOnly });
                         }}
                     >
                         <span>{CommonUtils.getLang('벡터 모아보기')}</span>
