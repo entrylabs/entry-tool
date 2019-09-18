@@ -172,6 +172,18 @@ export const CommonUtils = {
         return b;
     },
 
+    isVectorItem(item) {
+        let { pictures = [], hasSvg } = item;
+        if (hasSvg) {
+            return true;
+        }
+
+        if (pictures.length > 0 && pictures[0].imageType === 'svg') {
+            return true;
+        }
+        return false;
+    },
+
     getImageSummary(item) {
         let { label = {}, name: itemName, imageType, filename, fileurl, pictures = [], hasSvg } = item;
         let thumb;
