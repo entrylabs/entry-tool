@@ -34,58 +34,60 @@ class Projects extends Component {
     }
 
     drawIems() {
-        const data = this.props.data.data;
-        return data.filter((item) => item.user).map((item) => {
-            let selected = false;
-            if (this.state.selected && this.state.selected._id === item._id) {
-                selected = true;
-            }
-            let avatarImgUrl = '/img/assets/avatar_img.png';
-            if (item.user.avatarImage) {
-                const userId = item.user._id;
-                avatarImgUrl =
-                    `/uploads/profile/${userId.substring(0, 2)}/${userId.substring(2, 4)}/` +
-                    `avatar_${userId}.png?${new Date().getTime()}`;
-            }
-            return (
-                <li
-                    key={item._id}
-                    onClick={(e) => this.selectItem(e, item)}
-                    className={CommonUtils.toggleClass(selected, this.theme.on)}
-                >
-                    <div className={this.theme.link}>
-                        <div
-                            className={this.theme.thmb}
-                            style={{ backgroundImage: `url('${CommonUtils.fixUrl(item.thumb)}')` }}
-                        >
-                            <div className={this.theme.info_bar}>
-                                {`${this.theme.view} ${this.theme.imico_pop_info_view}`}
-                                <span className={`${this.theme.view} ${this.theme.imico_pop_info_view}`}>
-                                    {item.visit}
-                                </span>
-                                <span className={`${this.theme.like} ${this.theme.imico_pop_info_like}`}>
-                                    {item.likeCnt}
-                                </span>
-                                <span className={`${this.theme.cmt} ${this.theme.imico_pop_info_cmt}`}>
-                                    {item.comment}
+        const { data, avatarImage } = this.props.data;
+        return data
+            .filter((item) => item.user)
+            .map((item) => {
+                let selected = false;
+                if (this.state.selected && this.state.selected._id === item._id) {
+                    selected = true;
+                }
+                let avatarImgUrl = avatarImage || '/img/assets/avatar_img.png';
+                if (item.user.avatarImage) {
+                    const userId = item.user._id;
+                    avatarImgUrl =
+                        `/uploads/profile/${userId.substring(0, 2)}/${userId.substring(2, 4)}/` +
+                        `avatar_${userId}.png?${new Date().getTime()}`;
+                }
+                return (
+                    <li
+                        key={item._id}
+                        onClick={(e) => this.selectItem(e, item)}
+                        className={CommonUtils.toggleClass(selected, this.theme.on)}
+                    >
+                        <div className={this.theme.link}>
+                            <div
+                                className={this.theme.thmb}
+                                style={{ backgroundImage: `url('${CommonUtils.fixUrl(item.thumb)}')` }}
+                            >
+                                <div className={this.theme.info_bar}>
+                                    {`${this.theme.view} ${this.theme.imico_pop_info_view}`}
+                                    <span className={`${this.theme.view} ${this.theme.imico_pop_info_view}`}>
+                                        {item.visit}
+                                    </span>
+                                    <span className={`${this.theme.like} ${this.theme.imico_pop_info_like}`}>
+                                        {item.likeCnt}
+                                    </span>
+                                    <span className={`${this.theme.cmt} ${this.theme.imico_pop_info_cmt}`}>
+                                        {item.comment}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className={this.theme.info_box}>
+                                <div
+                                    className={this.theme.user_thmb}
+                                    style={{ backgroundImage: `url('${avatarImgUrl}')` }}
+                                />
+                                <em className={this.theme.tit}>{item.name}</em>
+                                <span className={this.theme.from}>
+                                    from
+                                    <em>{item.user.username}</em>
                                 </span>
                             </div>
                         </div>
-                        <div className={this.theme.info_box}>
-                            <div
-                                className={this.theme.user_thmb}
-                                style={{ backgroundImage: `url('${avatarImgUrl}')` }}
-                            />
-                            <em className={this.theme.tit}>{item.name}</em>
-                            <span className={this.theme.from}>
-                                from
-                                <em>{item.user.username}</em>
-                            </span>
-                        </div>
-                    </div>
-                </li>
-            );
-        });
+                    </li>
+                );
+            });
     }
 
     triggerEvent(e, event, data = null) {

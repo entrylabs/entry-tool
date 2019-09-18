@@ -11,12 +11,12 @@ class Navigation extends Component {
         super(props);
         this.theme = Theme.getStyle("popup");
         this.category_options = [
-            [CommonUtils.getLang('EntryStatic.art_category_all'), null],
-            [CommonUtils.getLang('EntryStatic.art_category_game'), '게임'],
-            [CommonUtils.getLang('EntryStatic.art_category_animation'), '애니메이션'],
-            [CommonUtils.getLang('EntryStatic.art_category_media'), '미디어아트'],
-            [CommonUtils.getLang('EntryStatic.art_category_physical'), '피지컬'],
-            [CommonUtils.getLang('EntryStatic.art_category_etc'), '기타'],
+            [CommonUtils.getLang('EntryStatic.art_category_all'), 'art_category_all'],
+            [CommonUtils.getLang('EntryStatic.art_category_game'), 'art_category_game'],
+            [CommonUtils.getLang('EntryStatic.art_category_animation'), 'art_category_animation'],
+            [CommonUtils.getLang('EntryStatic.art_category_media'), 'art_category_media'],
+            [CommonUtils.getLang('EntryStatic.art_category_physical'), 'art_category_physical'],
+            [CommonUtils.getLang('EntryStatic.art_category_etc'), 'art_category_etc'],
         ];
 
         this.sort_options = [
@@ -158,7 +158,7 @@ class Navigation extends Component {
                                 className={`${this.theme.btn_srch} ${this.theme.imbtn_pop_srch}`}
                                 onClick={this.onSearchBtnClicked}
                             >
-                                <span className={this.theme.blind}>검색</span>
+                                <span className={this.theme.blind}>{CommonUtils.getLang('Menus.search_lang')}</span>
                             </button>
                         </div>
                     )}
@@ -183,11 +183,20 @@ class Navigation extends Component {
     }
 
     render() {
+        const { hidden = {} } = this.props;
+        const isDrawVector = hidden.type === 'sprite' || hidden.type === 'paint' || hidden.type === 'picture';
         return (
             <div className={this.theme.section_navi}>
                 <ul className={this.theme.list}>{this.drawNavigation()}</ul>
                 {this.props.searchOption && (
                     <div className={this.theme.art_sel_area}>{this.drawSearchBox()}</div>
+                )}
+                {isDrawVector && (
+                    <div className={this.theme.vector}
+                        onClick={() => this.props.triggerEvent(EMIT_TYPES.fetchVector, hidden, false)}
+                    >
+                        <span>{CommonUtils.getLang('벡터 모아보기')}</span>
+                    </div>
                 )}
                 {this.state.dropDown}
             </div>

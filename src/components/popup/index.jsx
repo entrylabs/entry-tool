@@ -159,7 +159,9 @@ class Sprite extends Component {
                             onClick={this.close}
                             className={`${this.theme.btn_back} ${this.theme.imbtn_pop_back}`}
                         >
-                            <span className={this.theme.blind}>뒤로가기</span>
+                            <span className={this.theme.blind}>
+                                {CommonUtils.getLang('Menus.history_back')}
+                            </span>
                         </button>
                     </header>
                     {this.setContent()}

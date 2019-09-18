@@ -105,6 +105,37 @@
         height: 21px;
         vertical-align: top;
     }
+    .section_navi .vector {
+        float: right;
+        position: relative;
+        height: 40px;
+        border-radius: 20px;
+        border: solid 1px #4f80ff;
+        background-color: #4f80ff;
+        padding-right: 16px;
+        cursor:pointer;
+    }
+    .section_navi .vector span {
+        display: block;
+        margin-left:40px;
+        margin-top: 10.5px;
+        font-size:14px;
+        color: #fff;
+    }
+    .section_navi .vector:before {
+        position:absolute;
+        content: '';
+        margin: 8.5px 7px 0 12px;
+        background: url('#{$imageDir}/btn_pop_get_vectors.png') no-repeat;
+        width: 21px;
+        height: 21px;
+        background-size: 21px;
+    }
+    .section_navi .vector:after {
+        display: block;
+        clear: both;
+        content: '';
+    }
     .section_navi .art_sel_area {
         float: right;
         position: relative;
@@ -120,7 +151,7 @@
         float: left;
         right: 0;
         top: 0;
-        margin-left: 20px;
+        margin-left: 12px;
     }
     .section_navi .art_sel_area .pop_selectbox {
         float: left;
@@ -352,6 +383,16 @@
             height: 100%;
             vertical-align: middle;
             content: '';
+        }
+        .section_cont .cont_sel_box .select_list .select_item .thmb.svg:after {
+            content: '';
+            width: 28px;
+            height: 28px;
+            top: 8px;
+            left: 8px;
+            background: url('#{$imageDir}/imico_pop_vector.png') no-repeat;
+            background-size: 100%;
+            position: absolute;
         }
         .section_cont .cont_sel_box .select_list .select_item .thmb img {
             max-width: 96px;
@@ -741,6 +782,16 @@
             height: 100%;
             vertical-align: middle;
             content: '';
+        }
+        .section_cont .obj_list .thmb.svg:after {
+            content: '';
+            width: 28px;
+            height: 28px;
+            top: 8px;
+            left: 8px;
+            background: url('#{$imageDir}/imico_pop_vector.png') no-repeat;
+            background-size: 100%;
+            position: absolute;
         }
 
         .section_cont .obj_list .sjt {
@@ -1564,7 +1615,7 @@
     top: 40%;
     left: 50%;
     background-color: none;
-    background: url('#{$imageDir}/progress/upload_loading.gif') no-repeat;
+    background: url('#{$imageDir}/loading.gif') no-repeat;
 
     .loding_text {
         width: 156px;

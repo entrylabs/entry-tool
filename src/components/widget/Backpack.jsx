@@ -4,9 +4,9 @@ import Draggable from './draggable';
 import LimitedInput from '../common/LimitedInput';
 import OutsideClick from '../common/outsideClick';
 import produce from 'immer';
-import Styles from '../../assets/entry/scss/widget/Backpack.scss';
 import EntryEvent from '@entrylabs/event';
 import { CommonUtils } from '@utils/Common';
+import Theme from '@utils/Theme';
 
 class Backpack extends Component {
     state = {
@@ -20,6 +20,22 @@ class Backpack extends Component {
         this.eventWindow = new EntryEvent(window);
         this.input = React.createRef();
         this.refsList = [];
+        this.theme = Theme.getStyle("backpack");
+    }
+
+    get itemShadowStyle() {
+        if (Theme.type === 'entryline') {
+            return {
+                position: 'absolute',
+                backgroundColor: '#888888',
+                border: 'solid 1px #888888',
+            };
+        }
+        return {
+            position: 'absolute',
+            backgroundColor: '#8aa3b2',
+            border: 'solid 1px #728997',
+        };
     }
 
     setPointEvent() {
@@ -168,7 +184,7 @@ class Backpack extends Component {
             return (
                 <div
                     key={_id}
-                    className={`${Styles.item} ${isSelected ? Styles.active : ''}`}
+                    className={`${this.theme.item} ${isSelected ? this.theme.active : ''}`}
                     onClick={() => {
                         this.handleItemSelect(_id);
                     }}
@@ -180,12 +196,12 @@ class Backpack extends Component {
                     }}
                     data-image={imgPath}
                 >
-                    <div className={Styles.imageWrapper}>
-                        <img src={imgPath} className={Styles.image} alt={title} />
+                    <div className={this.theme.imageWrapper}>
+                        <img src={imgPath} className={this.theme.image} alt={title} />
                     </div>
-                    <div className={Styles.imageOverlay} />
+                    <div className={this.theme.imageOverlay} />
                     <div
-                        className={Styles.closeButton}
+                        className={this.theme.closeButton}
                         onClick={() => {
                             this.handleRemoveItem(_id);
                         }}
@@ -202,7 +218,7 @@ class Backpack extends Component {
                                 inputRef={(dom) => {
                                     this.refsList[_id] = dom;
                                 }}
-                                className={Styles.input}
+                                className={this.theme.input}
                                 value={title}
                                 onKeyUp={this.handleKeyup}
                                 onFocus={() => {
@@ -245,8 +261,8 @@ class Backpack extends Component {
 
     makeLoadingView() {
         return (
-            <div className={Styles.loading}>
-                <div className={Styles.image} />
+            <div className={this.theme.loading}>
+                <div className={this.theme.image} />
                 {CommonUtils.getLang('Menus.file_upload_loading')}
             </div>
         );
@@ -265,17 +281,18 @@ class Backpack extends Component {
         const { onClose = () => {}, isLoading = true, draggableOption } = this.props;
         const { isDragEnter = false } = this.state;
         this.setPointEvent();
+
         return (
-            <div ref={this.backpack} className={Styles.Backpack}>
-                <div className={Styles.titleArea} onClick={onClose}>
-                    <div className={Styles.icon} />
-                    <div className={Styles.title}>
+            <div ref={this.backpack} className={this.theme.Backpack}>
+                <div className={this.theme.titleArea} onClick={onClose}>
+                    <div className={this.theme.icon} />
+                    <div className={this.theme.title}>
                         {CommonUtils.getLang('Workspace.my_storage')}
                     </div>
                 </div>
                 {isLoading && this.makeLoadingView()}
                 {!isLoading && (
-                    <div className={Styles.itemArea}>
+                    <div className={this.theme.itemArea}>
                         <Draggable
                             {...draggableOption}
                             items={this.makeItemList()}
@@ -287,19 +304,15 @@ class Backpack extends Component {
                                 paddingTop: '16px',
                                 height: 'calc(100% - 16px)',
                             }}
-                            itemShadowClassName={Styles.item}
-                            itemShadowStyle={{
-                                position: 'absolute',
-                                backgroundColor: '#8aa3b2',
-                                border: 'solid 1px #728997',
-                            }}
+                            itemShadowClassName={this.theme.item}
+                            itemShadowStyle={this.itemShadowStyle}
                         />
                     </div>
                 )}
                 {isDragEnter && (
-                    <div className={Styles.dragArea}>
-                        <div className={Styles.icon} />
-                        <div className={Styles.desc}>{this.getDropMsg()}</div>
+                    <div className={this.theme.dragArea}>
+                        <div className={this.theme.icon} />
+                        <div className={this.theme.desc}>{this.getDropMsg()}</div>
                     </div>
                 )}
             </div>

@@ -92,7 +92,7 @@ class Index extends Component {
         return (
             <React.Fragment>
                 <div className={this.theme.pop_content}>
-                    <h2 className={this.theme.blind}>오브젝트 선택</h2>
+                    <h2 className={this.theme.blind}>Popup</h2>
                     <SideBar type={this.props.mainType} sidebar={this.props.sidebar}/>
                     <div className={this.theme.section_cont}>
                         <SubMenu type={this.props.mainType} menus={this.getMenus()}/>
