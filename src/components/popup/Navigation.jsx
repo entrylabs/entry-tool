@@ -176,9 +176,11 @@ class Navigation extends Component {
 
     onSearchBtnClicked(e) {
         e.preventDefault();
+        const { isVectorOnly = false } = this.props.popupReducer || {};
         const query = {
             ...this.props.hidden,
             ...this.state,
+            isVectorOnly,
         };
         this.props.triggerEvent(EMIT_TYPES.search, query, false);
     }
