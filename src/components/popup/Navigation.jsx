@@ -199,7 +199,7 @@ class Navigation extends Component {
                             this.props.setUIParam({ isVectorOnly: !isVectorOnly });
                         }}
                     >
-                        <span>{CommonUtils.getLang('벡터 모아보기')}</span>
+                        <span>{CommonUtils.getLang('Buttons.show_only_vector')}</span>
                     </div>
                 )}
                 {this.state.dropDown}
