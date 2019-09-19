@@ -107,7 +107,7 @@ class Navigation extends Component {
                                 onClick={(e) => {
                                     this.onDropDownClicked(e, 'category', this.category_options);
                                 }}
-                                title="모든 작품"
+                                title="category"
                             >
                                 {this.state.category[0]}
                             </div>
@@ -122,7 +122,7 @@ class Navigation extends Component {
                                 onClick={(e) => {
                                     this.onDropDownClicked(e, 'sort', this.sort_options);
                                 }}
-                                title="최신순"
+                                title="sort"
                             >
                                 {this.state.sort[0]}
                             </div>
@@ -137,7 +137,7 @@ class Navigation extends Component {
                                 onClick={(e) => {
                                     this.onDropDownClicked(e, 'period', this.period_options);
                                 }}
-                                title="전체기간"
+                                title="period"
                             >
                                 {this.state.period[0]}
                             </div>
