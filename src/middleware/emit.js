@@ -6,6 +6,7 @@ import {
     CHANGED_ANGLE,
     CHANGE_SORTABLE_LIST,
     CHANGE_DRAGGING,
+    PICK_COLOR,
 } from '@actions/widget';
 
 export default class EmitMiddleware {
@@ -44,6 +45,10 @@ export default class EmitMiddleware {
                 }
                 case API_FAIL: {
                     this.emitter.emit('fail', action.error);
+                    break;
+                }
+                case PICK_COLOR: {
+                    this.emitter.emit('pick', action.data);
                     break;
                 }
                 case CHANGED_ANGLE:

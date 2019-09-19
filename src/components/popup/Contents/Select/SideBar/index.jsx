@@ -8,6 +8,7 @@ import Foot from './foot';
 import { triggerEvent } from '@actions';
 import { setUIParam } from '@actions/popup';
 import { EMIT_TYPES } from '@constants';
+import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 
 class Index extends Component {
@@ -39,7 +40,11 @@ class Index extends Component {
             }
             this.props.triggerEvent(
                 EMIT_TYPES.fetch,
-                { type: next.type, sidebar: next.sidebar, subMenu: next.subMenu },
+                {
+                    type: next.type,
+                    sidebar: next.sidebar,
+                    subMenu: next.subMenu,
+                },
                 false,
             );
         }
@@ -54,9 +59,17 @@ class Index extends Component {
     }
 
     drawItems() {
-        return this.props.data.data.map((item, index) => (
-            <Item key={index} item={item} multiSelect={this.props.multiSelect} type={this.props.popupReducer.type}/>
-        ));
+        const { isVectorOnly = false } = this.props.popupReducer;
+        return this.props.data.data
+            .filter((item) => !isVectorOnly || CommonUtils.isVectorItem(item))
+            .map((item, index) => (
+                <Item
+                    key={index}
+                    item={item}
+                    multiSelect={this.props.multiSelect}
+                    type={this.props.popupReducer.type}
+                />
+            ));
     }
 
     getMenus() {
