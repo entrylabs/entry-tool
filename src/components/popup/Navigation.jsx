@@ -10,30 +10,49 @@ import Theme from '@utils/Theme';
 class Navigation extends Component {
     constructor(props) {
         super(props);
-        this.theme = Theme.getStyle("popup");
-        this.category_options = [
-            [CommonUtils.getLang('EntryStatic.art_category_all'), 'art_category_all'],
-            [CommonUtils.getLang('EntryStatic.art_category_game'), 'art_category_game'],
-            [CommonUtils.getLang('EntryStatic.art_category_animation'), 'art_category_animation'],
-            [CommonUtils.getLang('EntryStatic.art_category_media'), 'art_category_media'],
-            [CommonUtils.getLang('EntryStatic.art_category_physical'), 'art_category_physical'],
-            [CommonUtils.getLang('EntryStatic.art_category_etc'), 'art_category_etc'],
-        ];
+        this.theme = Theme.getStyle('popup');
+        const { categoryOptions, sortOptions, periodOptions } = this.props.projectNavOptions;
+        this.category_options = categoryOptions
+            ? categoryOptions.map((item) => {
+                  return [CommonUtils.getLang(`EntryStatic.${item}`), item];
+              })
+            : [
+                  [CommonUtils.getLang('EntryStatic.art_category_all'), 'art_category_all'],
+                  [CommonUtils.getLang('EntryStatic.art_category_game'), 'art_category_game'],
+                  [
+                      CommonUtils.getLang('EntryStatic.art_category_animation'),
+                      'art_category_animation',
+                  ],
+                  [CommonUtils.getLang('EntryStatic.art_category_media'), 'art_category_media'],
+                  [
+                      CommonUtils.getLang('EntryStatic.art_category_physical'),
+                      'art_category_physical',
+                  ],
+                  [CommonUtils.getLang('EntryStatic.art_category_etc'), 'art_category_etc'],
+              ];
 
-        this.sort_options = [
-            [CommonUtils.getLang('EntryStatic.art_sort_updated'), 'updated'],
-            [CommonUtils.getLang('EntryStatic.art_sort_visit'), 'visit'],
-            [CommonUtils.getLang('EntryStatic.art_sort_likeCnt'), 'likeCnt'],
-            [CommonUtils.getLang('EntryStatic.art_sort_comment'), 'comment'],
-        ];
+        this.sort_options = sortOptions
+            ? sortOptions.map((item) => {
+                  return [CommonUtils.getLang(`EntryStatic.art_sort_${item}`), item];
+              })
+            : [
+                  [CommonUtils.getLang('EntryStatic.art_sort_updated'), 'updated'],
+                  [CommonUtils.getLang('EntryStatic.art_sort_visit'), 'visit'],
+                  [CommonUtils.getLang('EntryStatic.art_sort_likeCnt'), 'likeCnt'],
+                  [CommonUtils.getLang('EntryStatic.art_sort_comment'), 'comment'],
+              ];
 
-        this.period_options = [
-            [CommonUtils.getLang('EntryStatic.art_period_all'), null],
-            [CommonUtils.getLang('EntryStatic.art_period_day'), '1'],
-            [CommonUtils.getLang('EntryStatic.art_period_week'), '7'],
-            [CommonUtils.getLang('EntryStatic.art_period_month'), '30'],
-            [CommonUtils.getLang('EntryStatic.art_period_three_month'), '90'],
-        ];
+        this.period_options = periodOptions
+            ? periodOptions.map((item) => {
+                  return [CommonUtils.getLang(`EntryStatic.${item}`), item];
+              })
+            : [
+                  [CommonUtils.getLang('EntryStatic.art_period_all'), null],
+                  [CommonUtils.getLang('EntryStatic.art_period_day'), '1'],
+                  [CommonUtils.getLang('EntryStatic.art_period_week'), '7'],
+                  [CommonUtils.getLang('EntryStatic.art_period_month'), '30'],
+                  [CommonUtils.getLang('EntryStatic.art_period_three_month'), '90'],
+              ];
 
         this.state = {
             searchQuery: '',
@@ -41,7 +60,6 @@ class Navigation extends Component {
             sort: this.sort_options[0],
             period: this.period_options[0],
         };
-
         this.onSearchBtnClicked = this.onSearchBtnClicked.bind(this);
         this.onDropDownClicked = this.onDropDownClicked.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -59,7 +77,7 @@ class Navigation extends Component {
                     key={item}
                     className={CommonUtils.toggleClass(
                         navigation === item || (!navigation && index === 0),
-                        this.theme.on,
+                        this.theme.on
                     )}
                     onClick={this.props.onClicked}
                     data-key={item}
@@ -70,7 +88,7 @@ class Navigation extends Component {
         });
     }
 
-    onDropDownClicked(e, type, options) {
+    async onDropDownClicked(e, type, options) {
         e.preventDefault();
         if (this.state.dropDown) {
             return this.setState({ dropDown: null });
@@ -80,11 +98,12 @@ class Navigation extends Component {
                 items={options}
                 positionDom={e.target}
                 outsideExcludeDom={[e.target]}
-                onSelectDropdown={(value) => {
-                    this.setState({
+                onSelectDropdown={async (value) => {
+                    await this.setState({
                         [type]: value,
                         dropDown: null,
                     });
+                    this.onSearchBtnClicked(e);
                 }}
                 onOutsideClick={() => {
                     this.setState({ dropDown: null });
@@ -159,7 +178,9 @@ class Navigation extends Component {
                                 className={`${this.theme.btn_srch} ${this.theme.imbtn_pop_srch}`}
                                 onClick={this.onSearchBtnClicked}
                             >
-                                <span className={this.theme.blind}>{CommonUtils.getLang('Menus.search_lang')}</span>
+                                <span className={this.theme.blind}>
+                                    {CommonUtils.getLang('Menus.search_lang')}
+                                </span>
                             </button>
                         </div>
                     )}
@@ -181,12 +202,14 @@ class Navigation extends Component {
             ...this.state,
         };
         this.props.triggerEvent(EMIT_TYPES.search, query, false);
+        this.forceUpdate();
     }
 
     render() {
         const { hidden = {}, popupReducer = {} } = this.props;
         const { isVectorOnly = false } = popupReducer;
-        const isDrawVector = hidden.type === 'sprite' || hidden.type === 'paint' || hidden.type === 'picture';
+        const isDrawVector =
+            hidden.type === 'sprite' || hidden.type === 'paint' || hidden.type === 'picture';
         return (
             <div className={this.theme.section_navi}>
                 <ul className={this.theme.list}>{this.drawNavigation()}</ul>
@@ -194,7 +217,8 @@ class Navigation extends Component {
                     <div className={this.theme.art_sel_area}>{this.drawSearchBox()}</div>
                 )}
                 {isDrawVector && (
-                    <div className={`${this.theme.vector} ${isVectorOnly && this.theme.on}`}
+                    <div
+                        className={`${this.theme.vector} ${isVectorOnly && this.theme.on}`}
                         onClick={() => {
                             this.props.setUIParam({ isVectorOnly: !isVectorOnly });
                         }}
@@ -219,5 +243,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(Navigation);

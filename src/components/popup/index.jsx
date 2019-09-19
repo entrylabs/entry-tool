@@ -16,7 +16,7 @@ import Theme from '@utils/Theme';
 class Sprite extends Component {
     constructor(props) {
         super(props);
-        this.theme = Theme.getStyle("popup");
+        this.theme = Theme.getStyle('popup');
         this.state = {
             navigation: Object.keys(this.options.navigations)[0] || props.type,
         };
@@ -43,7 +43,9 @@ class Sprite extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.type !== this.props.type) {
-            this.setState({ navigation: Object.keys(this.options.navigations)[0] || this.props.type });
+            this.setState({
+                navigation: Object.keys(this.options.navigations)[0] || this.props.type,
+            });
             this.props.initState({ selected: [], uploads: [], baseUrl: this.props.baseUrl });
         }
     }
@@ -96,21 +98,29 @@ class Sprite extends Component {
                 ),
             },
             upload: {
-                view: <FileUpload
-                    type={this.options.mainType}
-                    options={this.options.opt}
-                    uploads={this.props.data.uploads}
-                    isOffline={isOffline}
-                />,
+                view: (
+                    <FileUpload
+                        type={this.options.mainType}
+                        options={this.options.opt}
+                        uploads={this.props.data.uploads}
+                        isOffline={isOffline}
+                    />
+                ),
             },
             draw: {
-                view: <Draw/>,
+                view: <Draw />,
             },
             write: {
-                view: <WriteBox fontOption={this.options.writeBoxOption}/>,
+                view: <WriteBox fontOption={this.options.writeBoxOption} />,
             },
             expansion: {
-                view: <Select type={'bigicon'} imageBaseUrl={imageBaseUrl} data={this.props.data || []}/>,
+                view: (
+                    <Select
+                        type={'bigicon'}
+                        imageBaseUrl={imageBaseUrl}
+                        data={this.props.data || []}
+                    />
+                ),
                 nav: true,
             },
             projects: {
@@ -126,11 +136,18 @@ class Sprite extends Component {
                         {...navSettings}
                         searchOption={{ category: true, date: true, order: true, query: true }}
                         hidden={{ type: navSettings.selected }}
+                        projectNavOptions={this.props.projectNavOptions}
                     />
                 ),
             },
             favorites: {
-                view: <Projects type={this.props.type} selected={navSettings.selected} data={this.props.data || []}/>,
+                view: (
+                    <Projects
+                        type={this.props.type}
+                        selected={navSettings.selected}
+                        data={this.props.data || []}
+                    />
+                ),
                 nav: (
                     <Navigation
                         {...navSettings}
@@ -182,5 +199,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(Sprite);
