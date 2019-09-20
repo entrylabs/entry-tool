@@ -11,7 +11,7 @@ class Navigation extends Component {
     constructor(props) {
         super(props);
         this.theme = Theme.getStyle('popup');
-        const { categoryOptions, sortOptions, periodOptions } = this.props.projectNavOptions;
+        const { categoryOptions, sortOptions, periodOptions } = this.props.projectNavOptions || {};
         this.category_options = categoryOptions
             ? categoryOptions.map((item) => {
                   return [CommonUtils.getLang(`EntryStatic.${item}`), item];
