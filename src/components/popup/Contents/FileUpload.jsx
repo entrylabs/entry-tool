@@ -255,19 +255,33 @@ class FileUpload extends Component {
 
     getWarnMsg() {
         const allowed = this.props.options.uploadAllowed;
+        const result = { warnExt: '', prohibitedTitle: '', prohibitedDesc: '' };
         if (allowed.sound) {
-            return CommonUtils.getLang('Menus.sound_upload_warn_1');
+            result.warnExt = CommonUtils.getLang('Menus.sound_upload_warn_1');
+            result.prohibitedTitle = CommonUtils.getLang('Menus.file_upload_warn_title_sound');
+            result.prohibitedDesc = CommonUtils.getLang('Menus.file_upload_warn_desc_sound');
         }
         if (allowed.object && allowed.image) {
-            return CommonUtils.getLang('Menus.sprite_upload_warn');
+            result.warnExt = CommonUtils.getLang('Menus.sprite_upload_warn');
+            result.prohibitedTitle = CommonUtils.getLang('Menus.file_upload_warn_title_image');
+            result.prohibitedDesc = CommonUtils.getLang('Menus.file_upload_warn_desc_image');
         }
         if (!allowed.object && allowed.image) {
-            return CommonUtils.getLang('Menus.picture_upload_warn_1');
+            result.warnExt = CommonUtils.getLang('Menus.picture_upload_warn_1');
+            result.prohibitedTitle = CommonUtils.getLang('Menus.file_upload_warn_title_image');
+            result.prohibitedDesc = CommonUtils.getLang('Menus.file_upload_warn_desc_image');
         }
-        return '';
+        result.prohibitedDesc = `${result.prohibitedDesc} <a 
+            target="_blank" 
+            class="copyright_link"
+            href="https://www.copyright.or.kr/education/educlass/learning/infringement-case/index.do">
+            [${CommonUtils.getLang('Menus.file_upload_warn_link')}]
+        </a>`;
+        return result;
     }
 
     render() {
+        const { warnExt, prohibitedTitle, prohibitedDesc } = this.getWarnMsg();
         return (
             <React.Fragment>
                 <section className={`${this.theme.pop_content} ${this.theme.file_add_list_content}`}>
@@ -282,7 +296,7 @@ class FileUpload extends Component {
                     )}
                     <div className={this.theme.section_cont}>
                         <p className={`${this.theme.caution} ${this.theme.imico_pop_caution}`}>
-                            {this.getWarnMsg()}
+                            {warnExt}
                         </p>
 
                         <div
@@ -312,28 +326,17 @@ class FileUpload extends Component {
                                 {this.drawItems()}
                             </ul>
                         </div>
-
-                        {this.props.options.uploadAllowed.image && (
-                            <div className={this.theme.img_caution_box}>
-                                <div className={this.theme.inner}>
-                                    <span className={`${this.theme.thmb} ${this.theme.imico_warning}`}>
-                                        &nbsp;
-                                    </span>
-                                    <div className={this.theme.dsc_box}>
-                                        <strong>
-                                            {CommonUtils.getLang('Menus.file_upload_desc_1')}
-                                        </strong>
-                                        <p className={this.theme.dsc}>
-                                            {CommonUtils.getLang('Menus.file_upload_desc_2')}
-                                            <br/>
-                                            {CommonUtils.getLang('Menus.file_upload_desc_3')}
-                                            <br/>
-                                            {CommonUtils.getLang('Menus.file_upload_desc_4')}
-                                        </p>
-                                    </div>
+                        <div className={this.theme.img_caution_box}>
+                            <div className={this.theme.inner}>
+                                <span className={`${this.theme.thmb} ${this.theme.imico_warning}`}>
+                                    &nbsp;
+                                </span>
+                                <div className={this.theme.dsc_box}>
+                                    <strong>{prohibitedTitle}</strong>
+                                    <div className={this.theme.dsc} dangerouslySetInnerHTML={{__html: prohibitedDesc}} />
                                 </div>
                             </div>
-                        )}
+                        </div>
                     </div>
                 </section>
                 <div className={this.theme.pop_btn_box}>

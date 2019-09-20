@@ -108,6 +108,9 @@ $lineImageDir: '../images';
             .inner {
                 width: 801px;
             }
+            .dsc_box .dsc a {
+                display:none;
+            }
         }
         .upload {
             border: 1px solid #c3c09f;
