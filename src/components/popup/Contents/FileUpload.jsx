@@ -326,7 +326,7 @@ class FileUpload extends Component {
                                 {this.drawItems()}
                             </ul>
                         </div>
-                        <div className={this.theme.img_caution_box}>
+                        <div className={`${this.theme.img_caution_box} ${this.theme[this.props.type]}`}>
                             <div className={this.theme.inner}>
                                 <span className={`${this.theme.thmb} ${this.theme.imico_warning}`}>
                                     &nbsp;

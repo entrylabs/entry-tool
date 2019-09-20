@@ -111,6 +111,9 @@ $lineImageDir: '../images';
             .dsc_box .dsc a {
                 display:none;
             }
+            &.sound {
+                display:none;
+            }
         }
         .upload {
             border: 1px solid #c3c09f;
