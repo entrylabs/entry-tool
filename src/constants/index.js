@@ -103,6 +103,9 @@ const SPRITE_SIDEBAR = {
         name: 'Category.interface',
         sub: {
             all: { name: 'Menus.all' },
+            interface_website: { name: 'Category.interface_website' },
+            interface_game: { name: 'Category.interface_game' },
+            interface_others: { name: 'Category.interface_others' },
         },
     },
     background: {
