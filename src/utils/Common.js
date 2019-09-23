@@ -21,6 +21,17 @@ export const CommonUtils = {
         }
         return position;
     },
+    getMouseEvent(event) {
+        let mouseEvent;
+        if (event.originalEvent && event.originalEvent.touches) {
+            mouseEvent = event.originalEvent.touches[0];
+        } else if (event.touches) {
+            mouseEvent = event.touches[0];
+        } else {
+            mouseEvent = event;
+        }
+        return mouseEvent;
+    },
     getLangType: () => {
         const lang = root.Lang || {};
         return lang.type;
@@ -170,6 +181,18 @@ export const CommonUtils = {
         // eslint-disable-next-line no-multi-assign, no-param-reassign, no-nested-ternary
         for (b = i = 0; (c = s.charCodeAt(i++)); b += c >> 11 ? 3 : c >> 7 ? 2 : 1) {}
         return b;
+    },
+
+    isVectorItem(item) {
+        let { pictures = [], hasSvg } = item;
+        if (hasSvg) {
+            return true;
+        }
+
+        if (pictures.length > 0 && pictures[0].imageType === 'svg') {
+            return true;
+        }
+        return false;
     },
 
     getImageSummary(item) {

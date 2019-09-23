@@ -4,6 +4,7 @@ export const CHANGE_SORTABLE_LIST = 'CHANGE_SORTABLE_LIST';
 export const CHANGE_DRAG_TYPE = 'CHANGE_DRAG_TYPE';
 export const CHANGE_DRAGGING = 'CHANGE_DRAGGING';
 export const CHANGE_DRAG_DATA = 'CHANGE_DRAG_DATA';
+export const PICK_COLOR = 'PICK_COLOR';
 
 export const onSelectDropdown = (item) => (dispatch) => {
     dispatch({
@@ -43,6 +44,13 @@ export const onDragActionChange = (isDragging) => (dispatch) => {
 export const onDragData = (data) => (dispatch) => {
     dispatch({
         type: CHANGE_DRAG_DATA,
+        data,
+    });
+};
+
+export const onPickColor = (data) => (dispatch) => {
+    dispatch({
+        type: PICK_COLOR,
         data,
     });
 };

@@ -46,7 +46,7 @@ class Item extends Component {
                         <strong className={this.theme.sjt}>
                             {CommonUtils.getLang(item.titleKey)}
                         </strong>
-                        <p className={this.theme.dsc}>{CommonUtils.getLang(item.descriptionKey)}</p>
+                        <div className={this.theme.dsc} dangerouslySetInnerHTML={{__html: CommonUtils.getLang(item.descriptionKey)}} />
                     </div>
                 </div>
             </li>
