@@ -273,7 +273,7 @@ class FileUpload extends Component {
         }
         result.prohibitedDesc = `${result.prohibitedDesc} <a 
             target="_blank" 
-            class="copyright_link"
+            class="${this.theme.copyright_link}"
             href="https://www.copyright.or.kr/education/educlass/learning/infringement-case/index.do">
             [${CommonUtils.getLang('Menus.file_upload_warn_link')}]
         </a>`;
