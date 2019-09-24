@@ -1583,6 +1583,8 @@
             color: $textColor;
             white-space: nowrap;
             cursor: pointer;
+            overflow:hidden;
+            text-overflow:ellipsis;
             a {
                 color: $textColor;
             }
