@@ -2075,7 +2075,9 @@ input[type='checkbox']:checked + .popup_imbtn_pop_checked__7oirh:before {
     font-weight: bold;
     color: #2c313d;
     white-space: nowrap;
-    cursor: pointer; }
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis; }
     .popup_tooltip_box__3Mrun.popup_dropdown__1NAbZ .popup_tooltip_inner__2ku0_ .popup_item__2zvYI:not(:first-child),
     .popup_sortable__mgzrb.popup_dropdown__1NAbZ .popup_tooltip_inner__2ku0_ .popup_item__2zvYI:not(:first-child) {
       border-top: #f2f2f2 solid 1px; }
@@ -5103,7 +5105,9 @@ input[type='checkbox']:checked + .popup_imbtn_pop_checked__25We5:before {
     font-weight: bold;
     color: #2c313d;
     white-space: nowrap;
-    cursor: pointer; }
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis; }
     .popup_tooltip_box__IP-AV.popup_dropdown__2kt5c .popup_tooltip_inner__1KdZ6 .popup_item__3H4K1:not(:first-child),
     .popup_sortable__33N1g.popup_dropdown__2kt5c .popup_tooltip_inner__1KdZ6 .popup_item__3H4K1:not(:first-child) {
       border-top: #f2f2f2 solid 1px; }
