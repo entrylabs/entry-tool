@@ -184,8 +184,11 @@ export const CommonUtils = {
     },
 
     isVectorItem(item) {
-        let { pictures = [], hasSvg } = item;
+        const { pictures = [], hasSvg, imageType } = item;
         if (hasSvg) {
+            return true;
+        }
+        if (imageType == 'svg') {
             return true;
         }
 
@@ -196,7 +199,15 @@ export const CommonUtils = {
     },
 
     getImageSummary(item) {
-        let { label = {}, name: itemName, imageType, filename, fileurl, pictures = [], hasSvg } = item;
+        let {
+            label = {},
+            name: itemName,
+            imageType,
+            filename,
+            fileurl,
+            pictures = [],
+            hasSvg,
+        } = item;
         let thumb;
         const lang = this.getLangType();
         if (pictures.length > 0) {
