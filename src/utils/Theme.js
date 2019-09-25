@@ -16,12 +16,14 @@ class Theme {
                 backpack: EntryBackpackStyle,
                 progress: EntryProgress,
                 draggable: EntryDraggable,
+                dropper: EntryDropper,
             },
             entryline: {
                 popup: EntryLinePopupStyle,
                 backpack: EntryLineBackpackStyle,
                 progress: EntryLinePopupStyle,
                 draggable: EntryLineDraggable,
+                dropper: EntryDropper,
             },
         };
     }
