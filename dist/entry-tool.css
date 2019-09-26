@@ -831,6 +831,7 @@ input[type='checkbox']:checked + .popup_imbtn_pop_checked__7oirh:before {
     height: 21px;
     vertical-align: top; }
   .popup_popup_wrap__3Z7Sl .popup_section_navi__3DQqL .popup_vector__2Wy9c {
+    display: none;
     float: right;
     position: relative;
     height: 40px;
@@ -3862,6 +3863,7 @@ input[type='checkbox']:checked + .popup_imbtn_pop_checked__25We5:before {
     height: 21px;
     vertical-align: top; }
   .popup_popup_wrap__1SWso .popup_section_navi__3FAWz .popup_vector__nDpqL {
+    display: none;
     float: right;
     position: relative;
     height: 40px;
