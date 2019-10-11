@@ -16,7 +16,11 @@ class Item extends Component {
 
     drawImage() {
         if (this.props.type && this.props.type === 'sound') {
-            return <div className={`${this.theme.thmb} ${this.theme.imico_pop_sound_thmb}`}>&nbsp;</div>;
+            return (
+                <div className={`${this.theme.thmb} ${this.theme.imico_pop_sound_thmb}`}>
+                    &nbsp;
+                </div>
+            );
         }
         const { filename, fileurl } = this.props.item;
         let thumb;
@@ -25,7 +29,10 @@ class Item extends Component {
         }
         return (
             <div className={this.theme.thmb}>
-                <img src={thumb || CommonUtils.createImageUrl(filename, this.props.baseUrl)} alt=""/>
+                <img
+                    src={thumb || CommonUtils.createImageUrl(filename, this.props.baseUrl)}
+                    alt=""
+                />
             </div>
         );
     }
@@ -65,12 +72,31 @@ class FileUpload extends Component {
     componentDidUpdate(prevProps) {
         const { uploads = [], updateUploads } = this.props;
         const beforeUpload = prevProps.uploads || [];
-        const updatedUploads = uploads
-            .filter((afterItem) => !beforeUpload.find((beforeItem) => afterItem._id === beforeItem._id));
+        const updatedUploads = uploads.filter(
+            (afterItem) => !beforeUpload.find((beforeItem) => afterItem._id === beforeItem._id)
+        );
 
         if (updatedUploads.length > 0) {
             updateUploads(this.props.type, updatedUploads);
         }
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.props.options.multiSelect) {
+            return true;
+        }
+        const { uploads = [] } = nextProps;
+        const { length } = uploads;
+        if (length) {
+            if (
+                this.props.popupReducer.uploads.findIndex(
+                    (element) => element._id === uploads[0]._id
+                ) < 0
+            ) {
+                nextState.excluded = [uploads[length - 1]];
+            }
+        }
+        return true;
     }
 
     componentWillUpdate() {
@@ -84,7 +110,7 @@ class FileUpload extends Component {
             this.props.triggerEvent(
                 'uploadFail',
                 { messageParent: 'Menus', message: 'file_required' },
-                false,
+                false
             );
             return false;
         }
@@ -93,7 +119,7 @@ class FileUpload extends Component {
             this.props.triggerEvent(
                 'uploadFail',
                 { messageParent: 'Menus', message: 'file_upload_max_count' },
-                false,
+                false
             );
             return false;
         }
@@ -113,7 +139,7 @@ class FileUpload extends Component {
                 messageParent: 'Workspace',
                 message: 'upload_not_supported_file_msg',
             },
-            false,
+            false
         );
         return false;
     }
@@ -122,8 +148,7 @@ class FileUpload extends Component {
         const isImage = /^image\//.test(file.type);
         // const isGif = /^image\/gif/.test(file.type);
         const isObject = /\.eo$/.test(file.name);
-        const isAudio = file.name.toLowerCase()
-            .indexOf('.mp3') >= 0;
+        const isAudio = file.name.toLowerCase().indexOf('.mp3') >= 0;
         const splittedNames = file.name.split('.');
         const ext = splittedNames[splittedNames.length - 1];
         const allowed = this.props.options.uploadAllowed;
@@ -131,7 +156,7 @@ class FileUpload extends Component {
             this.props.triggerEvent(
                 'uploadFail',
                 { messageParent: 'Menus', message: 'file_upload_max_size' },
-                false,
+                false
             );
             return false;
         }
@@ -175,22 +200,21 @@ class FileUpload extends Component {
             return false;
         }
 
-        const checkFiles = range(uploadFiles.length)
-            .some((idx) => {
-                const file = uploadFiles.item(idx);
-                switch (this.checkFIleType(file)) {
-                    case 'sound':
-                    case 'image':
-                        formData = appendData(formData, `uploadFile${idx}`, file);
-                        break;
-                    case 'object':
-                        objectData = appendData(objectData, 'objects', file);
-                        break;
-                    default:
-                        break;
-                }
-                return false;
-            });
+        const checkFiles = range(uploadFiles.length).some((idx) => {
+            const file = uploadFiles.item(idx);
+            switch (this.checkFIleType(file)) {
+                case 'sound':
+                case 'image':
+                    formData = appendData(formData, `uploadFile${idx}`, file);
+                    break;
+                case 'object':
+                    objectData = appendData(objectData, 'objects', file);
+                    break;
+                default:
+                    break;
+            }
+            return false;
+        });
 
         if (!checkFiles) {
             this.props.triggerEvent('dummyUploads', { formData, objectData }, false);
@@ -203,7 +227,7 @@ class FileUpload extends Component {
         let selected = [];
         if (this.props.options.multiSelect) {
             selected = this.props.popupReducer.uploads.filter(
-                (item) => !this.state.excluded.includes(item),
+                (item) => !this.state.excluded.includes(item)
             );
         } else {
             selected = this.state.excluded;
@@ -284,7 +308,9 @@ class FileUpload extends Component {
         const { warnExt, prohibitedTitle, prohibitedDesc } = this.getWarnMsg();
         return (
             <React.Fragment>
-                <section className={`${this.theme.pop_content} ${this.theme.file_add_list_content}`}>
+                <section
+                    className={`${this.theme.pop_content} ${this.theme.file_add_list_content}`}
+                >
                     {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
                     <h2 className={this.theme.blind}>파일 올리기</h2>
                     {this.state.isUploading && (
@@ -302,13 +328,15 @@ class FileUpload extends Component {
                         <div
                             className={`${this.theme.list_area} ${CommonUtils.toggleClass(
                                 this.props.type === 'sound',
-                                this.theme.sound_type,
+                                this.theme.sound_type
                             )}`}
                         >
                             <div className={this.theme.file_add_box}>
                                 <label
                                     htmlFor="inpt_file"
-                                    className={`${this.theme.upload} ${this.theme.imbtn_pop_upload}`}
+                                    className={`${this.theme.upload} ${
+                                        this.theme.imbtn_pop_upload
+                                    }`}
                                 >
                                     {CommonUtils.getLang('Workspace.upload_addfile')}
                                 </label>
@@ -326,24 +354,34 @@ class FileUpload extends Component {
                                 {this.drawItems()}
                             </ul>
                         </div>
-                        <div className={`${this.theme.img_caution_box} ${this.theme[this.props.type]}`}>
+                        <div
+                            className={`${this.theme.img_caution_box} ${
+                                this.theme[this.props.type]
+                            }`}
+                        >
                             <div className={this.theme.inner}>
                                 <span className={`${this.theme.thmb} ${this.theme.imico_warning}`}>
                                     &nbsp;
                                 </span>
                                 <div className={this.theme.dsc_box}>
                                     <strong>{prohibitedTitle}</strong>
-                                    <div className={this.theme.dsc} dangerouslySetInnerHTML={{__html: prohibitedDesc}} />
+                                    <div
+                                        className={this.theme.dsc}
+                                        dangerouslySetInnerHTML={{ __html: prohibitedDesc }}
+                                    />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
                 <div className={this.theme.pop_btn_box}>
-                    <a href="#NULL" onClick={(e) => {
-                        e.preventDefault();
-                        this.props.triggerEvent('close', null, true);
-                    }}>
+                    <a
+                        href="#NULL"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            this.props.triggerEvent('close', null, true);
+                        }}
+                    >
                         {CommonUtils.getLang('Buttons.cancel')}
                     </a>
                     <a href="#NULL" className={this.theme.active} onClick={this.onApplyItemClicked}>
@@ -366,5 +404,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(FileUpload);
