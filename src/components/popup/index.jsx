@@ -20,7 +20,12 @@ class Sprite extends Component {
         this.state = {
             navigation: Object.keys(this.options.navigations)[0] || props.type,
         };
-        this.props.initState({ selected: [], uploads: [], baseUrl: this.props.baseUrl });
+        this.props.initState({
+            selected: [],
+            uploads: [],
+            baseUrl: this.props.baseUrl,
+            isVectorOnly: false,
+        });
         this.onNavigationClicked = this.onNavigationClicked.bind(this);
     }
 
@@ -46,7 +51,12 @@ class Sprite extends Component {
             this.setState({
                 navigation: Object.keys(this.options.navigations)[0] || this.props.type,
             });
-            this.props.initState({ selected: [], uploads: [], baseUrl: this.props.baseUrl });
+            this.props.initState({
+                selected: [],
+                uploads: [],
+                baseUrl: this.props.baseUrl,
+                isVectorOnly: false,
+            });
         }
     }
 
