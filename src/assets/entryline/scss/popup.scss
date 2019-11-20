@@ -147,6 +147,12 @@ $lineImageDir: '../images';
             position: relative;
             background-color: #fffdea;
         }
+        .section_cont .draw_box {
+            padding: 144px 0 204px;
+        }
+        .section_cont .draw_box .warn_box{
+            display:none;
+        }
     }
     .extend_content .extend_block .list .thmb {
         background-color: #e6e3c4;
