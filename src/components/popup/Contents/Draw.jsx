@@ -17,6 +17,12 @@ class Draw extends Component {
     }
 
     render() {
+        const warnMessage = `${CommonUtils.getLang('Menus.file_upload_warn_desc_image')} <a 
+            target="_blank" 
+            class="${this.theme.copyright_link}"
+            href="https://www.copyright.or.kr/education/educlass/learning/infringement-case/index.do">
+            [${CommonUtils.getLang('Menus.file_upload_warn_link')}]
+        </a>`;
         return (
             <div className={this.theme.pop_content}>
                 <div className={this.theme.section_cont}>
@@ -32,6 +38,10 @@ class Draw extends Component {
                                 <br />
                                 {CommonUtils.getLang("Menus.draw_new_ques_2")}
                             </p>
+                            <div className={this.theme.warn_box}>
+                                <p className={this.theme.warn_title}>{CommonUtils.getLang('Menus.file_upload_warn_title_image')}</p>
+                                <div className={this.theme.warn_desc} dangerouslySetInnerHTML={{ __html: warnMessage }} />
+                            </div>
                             <div className={this.theme.pop_btn_box}>
                                 <a
                                     href="#NULL"
