@@ -13,6 +13,8 @@ export const EMIT_TYPES = {
     draw: 'draw',
     makeProject: 'makeproject',
     select: 'select',
+    itemon: 'itemon',
+    itemoff: 'itemoff',
 };
 
 const SPRITE_SIDEBAR = {
