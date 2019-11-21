@@ -62,7 +62,7 @@ class Sprite extends Component {
 
     componentDidMount() {
         window.onpopstate = this.close;
-        window.history.pushState({}, 'popup');
+        window.history.pushState({}, 'popup', '/ws');
     }
 
     componentWillUnmount() {
