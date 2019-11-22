@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { triggerEvent } from '@actions';
+import { closePopup } from '@actions/popup';
 import { EMIT_TYPES } from '@constants';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
+import classname from 'classnames';
 
 const copyRightLink = 'https://www.copyright.or.kr/education/educlass/learning/infringement-case/index.do';
 const Index = ({ goDraw }) => {
@@ -11,7 +13,7 @@ const Index = ({ goDraw }) => {
     const warnMessage = `${CommonUtils.getLang('Menus.file_upload_warn_desc_image')} <a 
             target="_blank" 
             class="${theme.copyright_link}"
-            href={${copyRightLink}>
+            href="${copyRightLink}">
             [${CommonUtils.getLang('Menus.file_upload_warn_link')}]
         </a>`;
     return (
@@ -20,7 +22,7 @@ const Index = ({ goDraw }) => {
                 <h2 className={theme.blind}>DRAW</h2>
                 <div className={theme.cont_box}>
                     <div className={theme.draw_box}>
-                        <div className={`${theme.thmb} ${theme.imico_pop_draw_thmb}`}>
+                        <div className={classname(theme.thmb, theme.imico_pop_draw_thmb)}>
                             &nbsp;
                         </div>
                         <p className={theme.draw_dsc}>
@@ -38,7 +40,11 @@ const Index = ({ goDraw }) => {
                             />
                         </div>
                         <div className={theme.pop_btn_box}>
-                            <a href="#NULL" className={theme.active} onClick={(e) => goDraw()}>
+                            <a
+                                href="#NULL"
+                                className={theme.active}
+                                onClick={CommonUtils.handleClick(goDraw)}
+                            >
                                 {CommonUtils.getLang('Menus.draw_new_go')}
                             </a>
                         </div>
@@ -50,7 +56,10 @@ const Index = ({ goDraw }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    goDraw: (data) => dispatch(triggerEvent(EMIT_TYPES.draw, data)),
+    goDraw: () => {
+        dispatch(triggerEvent(EMIT_TYPES.draw, null, false));
+        dispatch(closePopup());
+    },
 });
 
 export default connect(

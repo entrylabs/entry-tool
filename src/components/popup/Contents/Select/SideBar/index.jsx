@@ -62,12 +62,16 @@ const Index = (props) => {
     );
 };
 
+const mapStateToProps = (state) => ({
+    isVectorOnly: state.popupReducer.isVectorOnly,
+});
+
 const mapDispatchToProps = (dispatch) => ({
     fetch: (type, sidebar, subMenu) =>
         dispatch(triggerEvent(Types.fetch, { type, sidebar, subMenu }, false)),
 });
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(Index);

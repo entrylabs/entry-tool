@@ -6,43 +6,6 @@ import Slider from 'react-slick';
 import Theme from '@utils/Theme';
 import classname from 'classnames';
 
-const CustomSlide = ({ item, onClick, theme, imageClass, content }) => {
-    const { name, imageType } = CommonUtils.getImageSummary(item);
-    const deleteClass = classname(theme.btn_del, theme.imbtn_pop_chk_del);
-    const handleClick = (e) => {
-        e.preventDefault();
-        onClick && onClick(item);
-    };
-    return (
-        <div className={theme.select_item}>
-            <div className={classname(imageClass, { [theme[imageType]]: !!imageType })}>
-                {content}
-            </div>
-            <em className={theme.sjt}>{name}</em>
-            <a href={'#NULL'} className={deleteClass} onClick={handleClick}>
-                <span className={theme.blind}>delete</span>
-            </a>
-        </div>
-    );
-};
-
-const Arrow = ({ type = '', className, style, onClick, theme }) => {
-    const clazz = classname(theme[`btn_${type}`], theme[`imbtn_pop_sel_${type}`], className);
-    return (
-        <div className={clazz} style={{ ...style }} onClick={onClick}>
-            <span className={theme.blind}>{type}</span>
-        </div>
-    );
-};
-
-const container = React.createElement(
-    'style',
-    {},
-    '.slick-list { position:relative; left:82px; } ' +
-        '.slick-slide { display: inline-block; margin-left: 12px;} ' +
-        '.slick-slide:first-child { margin-left: 0; } '
-);
-
 const Index = (props) => {
     const { type, baseUrl, popup, applySelected } = props;
     const { selected } = popup;
@@ -110,3 +73,40 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(Index);
+
+const CustomSlide = ({ item, onClick, theme, imageClass, content }) => {
+    const { name, imageType } = CommonUtils.getImageSummary(item);
+    const deleteClass = classname(theme.btn_del, theme.imbtn_pop_chk_del);
+    const handleClick = (e) => {
+        e.preventDefault();
+        onClick && onClick(item);
+    };
+    return (
+        <div className={theme.select_item}>
+            <div className={classname(imageClass, { [theme[imageType]]: !!imageType })}>
+                {content}
+            </div>
+            <em className={theme.sjt}>{name}</em>
+            <a href={'#NULL'} className={deleteClass} onClick={handleClick}>
+                <span className={theme.blind}>delete</span>
+            </a>
+        </div>
+    );
+};
+
+const Arrow = ({ type = '', className, style, onClick, theme }) => {
+    const clazz = classname(theme[`btn_${type}`], theme[`imbtn_pop_sel_${type}`], className);
+    return (
+        <div className={clazz} style={{ ...style }} onClick={onClick}>
+            <span className={theme.blind}>{type}</span>
+        </div>
+    );
+};
+
+const container = React.createElement(
+    'style',
+    {},
+    '.slick-list { position:relative; left:82px; } ' +
+        '.slick-slide { display: inline-block; margin-left: 12px;} ' +
+        '.slick-slide:first-child { margin-left: 0; } '
+);

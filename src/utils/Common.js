@@ -232,6 +232,12 @@ export const CommonUtils = {
             filename,
         };
     },
+    handleClick(func) {
+        return (e) => {
+            e.preventDefault();
+            func();
+        };
+    },
 };
 
 export function FormAsyncException(obj) {
