@@ -20,17 +20,17 @@ const Index = (props) => {
     const { warnExt, title, desc } = getWarnMsg(opt.uploadAllowed, theme.copyright_link);
     const getExcludedIndex = (item) => excluded.findIndex(({ _id }) => _id === item._id);
     const onItemClick = (item) => {
-        if (opt.multiSelect) {
-            const index = getExcludedIndex(item);
-            if (index >= 0) {
-                setExcluded(excluded.filter((item, i) => i !== index));
-                deselect(item);
-            } else {
-                setExcluded([...excluded, item]);
-                select(item);
-            }
-        } else {
+        if (!opt.multiSelect) {
             setExcluded([item]);
+            select(item);
+            return;
+        }
+        const index = getExcludedIndex(item);
+        if (index >= 0) {
+            setExcluded(excluded.filter((t, i) => i !== index));
+            deselect(item);
+        } else {
+            setExcluded([...excluded, item]);
             select(item);
         }
     };

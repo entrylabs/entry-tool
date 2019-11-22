@@ -14,5 +14,5 @@ export default ({ title, desc, type }) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};

@@ -18,7 +18,12 @@ const Index = ({ uploadNotAllowedExt, uploadAllowed, uploadFail, upload, setUplo
             return false;
         }
         setUploadState(true);
-        const result = createData({ uploadNotAllowedExt, uploadAllowed, uploadFiles, failEvent: uploadFail });
+        const result = createData({
+            uploadNotAllowedExt,
+            uploadAllowed,
+            uploadFiles,
+            failEvent: uploadFail,
+        });
         if (result) {
             upload(result);
             $upload.value = '';
