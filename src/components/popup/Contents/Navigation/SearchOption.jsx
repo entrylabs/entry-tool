@@ -10,7 +10,7 @@ export default ({ options, onSelect, setDropdown, isOpenDefault }) => {
     const dropdownClass = classname(
         theme.select_link,
         { [theme.imico_pop_select_arr_down]: !isOpen },
-        { [theme.imico_pop_select_arr_up]: isOpen },
+        { [theme.imico_pop_select_arr_up]: isOpen }
     );
 
     const closeDropDown = () => {

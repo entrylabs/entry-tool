@@ -27,7 +27,7 @@ const Index = ({ goDraw }) => {
                         </div>
                         <p className={theme.draw_dsc}>
                             {CommonUtils.getLang('Menus.draw_new_ques_1')}
-                            <br/>
+                            <br />
                             {CommonUtils.getLang('Menus.draw_new_ques_2')}
                         </p>
                         <div className={theme.warn_box}>

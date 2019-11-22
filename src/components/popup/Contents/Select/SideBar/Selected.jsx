@@ -19,8 +19,8 @@ const Index = (props) => {
         className: theme.select_list,
         variableWidth: true,
         swipeToSlide: true,
-        nextArrow: <Arrow type="next" theme={theme}/>,
-        prevArrow: <Arrow type="prev" theme={theme}/>,
+        nextArrow: <Arrow type="next" theme={theme} />,
+        prevArrow: <Arrow type="prev" theme={theme} />,
     };
 
     const itemClicked = ({ _id: id }) => {

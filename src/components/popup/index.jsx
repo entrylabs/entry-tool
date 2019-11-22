@@ -62,10 +62,11 @@ class Sprite extends Component {
     setContent = function() {
         const { opt = {}, writeBoxOption, data: dataObj, imageBaseUrl } = this.property;
         const { isDrawVector, multiSelect, search: searchOption } = opt;
+        const { navigation: selected } = this.state;
         const navSettings = {
             ...this.property,
             searchOption,
-            selected: this.state.navigation,
+            selected,
             onClicked: (item) => this.setState({ navigation: item }),
         };
         // 이전버전 호환을 위해 삽입.
@@ -73,9 +74,9 @@ class Sprite extends Component {
         const uploads = isOld ? dataObj.uploads : dataObj;
         const data = isOld ? dataObj.data : dataObj;
 
-        let navigation = <Navigation {...navSettings} isDrawVector={isDrawVector}/>;
+        let navigation = <Navigation {...navSettings} isDrawVector={isDrawVector} />;
         let view = <div>empty</div>;
-        switch (navSettings.selected) {
+        switch (selected) {
             case 'select':
                 view = <Select {...this.property} multiSelect={multiSelect} data={data} />;
                 navigation = <Navigation {...navSettings} isDrawVector={isDrawVector} />;
@@ -99,7 +100,7 @@ class Sprite extends Component {
                 break;
             case 'projects':
             case 'favorites':
-                view = <Projects type={navSettings.selected} selected={navSettings.selected} data={data} />;
+                view = <Projects type={selected} data={data} />;
                 break;
             default:
                 break;
