@@ -41,7 +41,6 @@ class Sprite extends Component {
 
     componentDidMount() {
         window.onpopstate = this.onpopstate;
-        console.log('add history');
         window.history.pushState({}, 'popup');
     }
 
@@ -55,7 +54,6 @@ class Sprite extends Component {
     };
     
     close() {
-        console.log('remove history');
         root.history.back();
     }
 
