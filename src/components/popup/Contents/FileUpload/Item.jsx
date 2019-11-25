@@ -3,9 +3,9 @@ import Theme from '@utils/Theme';
 import { CommonUtils } from '@utils/Common';
 import classname from 'classnames';
 
-const getImageSrc = (filename, fileurl, baseUrl) => {
-    if (fileurl) {
-        return fileurl.thumb || fileurl;
+const getImageSrc = (filename, fileUrl, baseUrl) => {
+    if (fileUrl) {
+        return fileUrl.thumb || fileUrl;
     }
     return CommonUtils.createImageUrl(filename, baseUrl);
 };
@@ -24,7 +24,7 @@ export default ({ isSound, excluded, item = {}, onClick, baseUrl }) => {
                 {isSound && <div className={classname(theme.thmb, theme.imico_pop_sound_thmb)} />}
                 {!isSound && (
                     <div className={theme.thmb}>
-                        <img src={src} alt={item.name} />
+                        <img src={src} alt="" />
                     </div>
                 )}
                 <em className={theme.sjt}>{item.name}</em>
