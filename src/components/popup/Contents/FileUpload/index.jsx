@@ -12,7 +12,7 @@ import { triggerEvent } from '@actions/index';
 
 const Index = (props) => {
     const { type, opt = {}, uploads = [], baseUrl } = props;
-    const { submit, select, deselect, closePopup, applyUploaded, popup } = props;
+    const { submit, select, deselect, closePopup, applyUploaded, uploadedItems } = props;
     const [excluded, setExcluded] = useState([]);
     const [isUploading, setUploadState] = useState(false);
     const theme = Theme.getStyle('popup');
@@ -38,14 +38,14 @@ const Index = (props) => {
     const onSubmit = () => {
         let selected = excluded;
         if (opt.multiSelect) {
-            selected = popup.uploads.filter((item) => !excluded.includes(item));
+            selected = uploadedItems.filter((item) => !excluded.includes(item));
         }
         submit(selected);
     };
 
     useEffect(() => {
-        const result = [...popup.uploads, ...uploads];
-        if (result.length !== popup.uploads.length) {
+        const result = [...uploadedItems, ...uploads];
+        if (result.length !== uploadedItems.length) {
             applyUploaded(result);
             if (!opt.multiSelect) {
                 setExcluded(uploads);
@@ -74,7 +74,7 @@ const Index = (props) => {
                             setUploadState={(state) => setUploadState(state)}
                         />
                         <ul className={theme.obj_list}>
-                            {popup.uploads.map((item) => (
+                            {uploadedItems.map((item) => (
                                 <Item
                                     key={item._id}
                                     item={item}
@@ -106,7 +106,7 @@ const Index = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-    popup: state.popupReducer,
+    uploadedItems: state.popupReducer.uploads,
 });
 
 const mapDispatchToProps = (dispatch) => ({

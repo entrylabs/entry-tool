@@ -34,7 +34,7 @@ class Sprite extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.popup.closed) {
+        if (this.props.isClosed) {
             this.close();
         }
     }
@@ -52,7 +52,7 @@ class Sprite extends Component {
         const { visibleAction } = this.props;
         visibleAction(false);
     };
-    
+
     close() {
         root.history.back();
     }
@@ -133,7 +133,7 @@ class Sprite extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    popup: state.popupReducer,
+    isClosed: state.popupReducer.closed,
 });
 
 const mapDispatchToProps = (dispatch) => ({

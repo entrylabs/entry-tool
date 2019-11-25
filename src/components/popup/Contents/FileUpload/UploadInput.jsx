@@ -49,17 +49,13 @@ const Index = ({ uploadNotAllowedExt, uploadAllowed, uploadFail, upload, setUplo
     );
 };
 
-const mapStateToProps = (state) => ({
-    popup: state.popupReducer,
-});
-
 const mapDispatchToProps = (dispatch) => ({
     upload: (data) => dispatch(triggerEvent(Types.uploads, data, false)),
     uploadFail: (err) => dispatch(triggerEvent(Types.uploadFail, err, false)),
 });
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(Index);
 
