@@ -1,7 +1,9 @@
 import React, { useState, useEffect, forwardRef } from 'react';
 import _debounce from 'lodash/debounce';
 import EntryEvent from '@entrylabs/event';
-import Styles from '@assets/entry/scss/customScroll.scss';
+import Theme from '../../utils/Theme';
+// import Styles from '@assets/entry/scss/customScroll.scss';
+const Styles = Theme.getStyle('customScroll');
 
 function getScaleNumber(num, inMin, inMax, outMin, outMax) {
     return ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;

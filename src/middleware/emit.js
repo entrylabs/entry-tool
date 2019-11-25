@@ -8,6 +8,7 @@ import {
     CHANGE_DRAGGING,
     PICK_COLOR,
 } from '@actions/widget';
+import root from 'window-or-global';
 
 export default class EmitMiddleware {
     constructor(emitter) {
@@ -39,7 +40,7 @@ export default class EmitMiddleware {
                 case TRIGGER_EVENT: {
                     this.emitter.emit(action.event, action.data);
                     if (action.hide) {
-                        this.emitter.hide();
+                        root.history.back();
                     }
                     break;
                 }

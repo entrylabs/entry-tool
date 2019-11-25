@@ -12,6 +12,7 @@ import Projects from './Contents/Projects';
 import { DEFAULT_OPTIONS } from '../../constants';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
+import root from 'window-or-global';
 
 class Sprite extends Component {
     constructor(props) {
@@ -61,17 +62,21 @@ class Sprite extends Component {
     }
 
     componentDidMount() {
-        window.onpopstate = this.close;
-        window.history.pushState({}, 'popup');
+        window.onpopstate = this.onpopstate;
+        window.history.pushState({}, 'popup', '/ws');
     }
 
     componentWillUnmount() {
-        window.removeEventListener('onpopstate', this.close, false);
+        window.removeEventListener('onpopstate', this.onpopstate, false);
     }
 
-    close = () => {
+    onpopstate = () => {
         const { visibleAction } = this.props;
         visibleAction(false);
+    };
+
+    close = () => {
+        root.history.back();
     };
 
     onNavigationClicked(e) {
