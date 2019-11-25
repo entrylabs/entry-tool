@@ -44,7 +44,7 @@ const Index = (props) => {
     };
 
     useEffect(() => {
-        const result = [...uploadedItems, ...uploads];
+        const result = [...uploadedItems, ...uploads].filter(CommonUtils.distinct);
         if (result.length !== uploadedItems.length) {
             applyUploaded(result);
             if (!opt.multiSelect) {

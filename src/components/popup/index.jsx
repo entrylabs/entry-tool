@@ -58,7 +58,8 @@ class Sprite extends Component {
     }
 
     setContent = function() {
-        const { opt = {}, writeBoxOption, data: dataObj, imageBaseUrl } = this.property;
+        const { opt = {}, writeBoxOption, data: dataObj, uploads: uploaded } = this.property;
+        const { imageBaseUrl: expsnsionIconBaseUrl } = this.property;
         const { isDrawVector, multiSelect, search: searchOption } = opt;
         const { navigation: selected } = this.state;
         const navSettings = {
@@ -69,7 +70,7 @@ class Sprite extends Component {
         };
         // 이전버전 호환을 위해 삽입.
         const isOld = dataObj && dataObj.data;
-        const uploads = isOld ? dataObj.uploads : dataObj;
+        const uploads = isOld ? dataObj.uploads : uploaded;
         const data = isOld ? dataObj.data : dataObj;
 
         let navigation = <Navigation {...navSettings} isDrawVector={isDrawVector} />;
@@ -92,7 +93,7 @@ class Sprite extends Component {
                 navigation = <Navigation {...navSettings} searchOption={false} />;
                 break;
             case 'expansion':
-                const url = imageBaseUrl || '/lib/entry-js/images/hardware/';
+                const url = expsnsionIconBaseUrl || '/lib/entry-js/images/hardware/';
                 navigation = null;
                 view = <Select type={'bigicon'} imageBaseUrl={url} data={data} />;
                 break;

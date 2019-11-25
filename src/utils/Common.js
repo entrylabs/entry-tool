@@ -238,6 +238,9 @@ export const CommonUtils = {
             func();
         };
     },
+    distinct(item, index, self) {
+        return self.indexOf(item) === index;
+    },
 };
 
 export function FormAsyncException(obj) {
