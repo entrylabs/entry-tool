@@ -31,7 +31,7 @@ httpService.setupInterceptors('http://localhost:4000');
 export default function Provider({ story }) {
     return <ReduxProvider store={store}>{story}</ReduxProvider>;
 }
-Theme.type = 'entryline';
+// Theme.type = 'entryline';
 storiesOf('Popup', module)
     .addDecorator((story) => <Provider story={story()}/>)
     .add('전체', () => <Sample/>)

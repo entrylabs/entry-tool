@@ -1,6 +1,5 @@
 //https://playentry.org/api/project/find?option=list&sort=updated&rows=6&page=1&user=5b1a3b5cdb04dd5f42e6b5b0&type=project&isPracticalCourse=false&&noCache=1543918687104
-export const PROJECTS_SAMPLE = {
-    data: [
+export const PROJECTS_SAMPLE = [
         {
             comment: 0,
             likeCnt: 0,
@@ -58,14 +57,10 @@ export const PROJECTS_SAMPLE = {
             likeCntGroup: [ ],
             commentGroup: [ ],
         },
-    ],
-    skip: 0,
-    count: 3,
-};
+    ];
 
 //https://playentry.org/api/sprite/browse/default/entrybot_friends/
-export const SPRITE_SAMPLE = {
-    data:  [
+export const SPRITE_SAMPLE = [
         {
             label: {
                 ko: "(1)엔트리봇",
@@ -826,13 +821,10 @@ export const SPRITE_SAMPLE = {
             ],
             __v: 0
         }
-    ],
-    uploads: []
-};
+    ];
 
 //https://playentry.org/api/sound/browse/default/%EC%9E%90%EC%97%B0/%EB%8F%99%EB%AC%BC
-export const SOUND_SAMPLE = {
-    data:  [
+export const SOUND_SAMPLE = [
         {
             label: {
                 ko: "강아지 짖는소리",
@@ -1533,12 +1525,9 @@ export const SOUND_SAMPLE = {
             name: "호랑이 울음소리",
             user: "53281c3ca9a5cf70288bc90c"
         }
-    ],
-    uploads: []
-};
+    ];
 
-export const EXPANSION_SAMPLE = {
-    data : [
+export const EXPANSION_SAMPLE = [
         {
             'name': 'weather',
             'imageName': 'weather.png',
@@ -1573,5 +1562,4 @@ export const EXPANSION_SAMPLE = {
             'apiType': '03',
             'nameByLang': 'LifeSafety',
         },
-    ]
-};
+    ];
