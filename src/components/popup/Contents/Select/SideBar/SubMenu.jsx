@@ -1,70 +1,37 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { setUIParam } from '@actions/popup';
+import React, { useEffect, useState } from 'react';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
+import classname from 'classnames';
 
-class SubMenu extends Component {
-    constructor(props) {
-        super(props);
-        this.theme = Theme.getStyle("popup");
-        this.drawSubMenu = this.drawSubMenu.bind(this);
-        this.onSubMenuSelected = this.onSubMenuSelected.bind(this);
-    }
-
-    drawSubMenu() {
-        if (!this.props.menus) {
-            return '';
+export default ({ menus = {}, onClick }) => {
+    const theme = Theme.getStyle('popup');
+    const list = Object.keys(menus);
+    const [selected, select] = useState(list[0]);
+    const selectItem = (key) => (e) => {
+        e && e.preventDefault();
+        select(key);
+        if (onClick) {
+            onClick(key);
         }
-        return Object.keys(this.props.menus).map((key, index) => {
-            const item = this.props.menus[key];
-            const subMenu = this.props.popupReducer.subMenu;
-            return (
-                <a
-                    href={"#NULL"}
-                    className={CommonUtils.toggleClass(
-                        subMenu === key || (!subMenu && index === 0),
-                        this.theme.on
-                    )}
-                    key={item.name}
-                    data-key={key}
-                >
-                    {CommonUtils.getLang(item.name)}
-                </a>
-            );
-        });
-    }
+    };
 
-    onSubMenuSelected(e) {
-        e.preventDefault();
-        const key = e.target.getAttribute('data-key');
-        this.props.setUIParam({
-            type: this.props.type,
-            sidebar: this.props.popupReducer.sidebar,
-            subMenu: key,
-        });
-    }
+    useEffect(() => {
+        selectItem(list[0]).apply();
+    }, [menus]);
 
-    render() {
-        return (
-            <div className={this.theme.sub_menu}>
-                <div className={this.theme.menu_inner} onClick={this.onSubMenuSelected}>
-                    {this.drawSubMenu()}
-                </div>
+    return (
+        <div className={theme.sub_menu}>
+            <div className={theme.menu_inner}>
+                {list.map((key) => {
+                    const { name } = menus[key];
+                    const clazz = classname({ [theme.on]: selected === key });
+                    return (
+                        <a key={key} href={'#NULL'} className={clazz} onClick={selectItem(key)}>
+                            {CommonUtils.getLang(name)}
+                        </a>
+                    );
+                })}
             </div>
-        );
-    }
-}
-
-const mapStateToProps = (state) => ({
-    ...state,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-    setUIParam: (type, category, subMenu) => dispatch(setUIParam(type, category, subMenu)),
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SubMenu);
+        </div>
+    );
+};

@@ -1,50 +1,49 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import Item from './Item';
-import { connect } from 'react-redux';
-import Foot from './foot';
-import { CommonUtils } from '../../../../../utils/Common';
+import Foot from '../foot';
+import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
+import classname from 'classnames';
+import { applySelected } from '@actions/popup';
+import { connect } from 'react-redux';
 
-class Index extends Component {
-    constructor(props) {
-        super(props);
-        this.theme = Theme.getStyle("popup");
-    }
+const Index = (props) => {
+    const theme = Theme.getStyle('popup');
+    const { data = [], imageBaseUrl, applySelected } = props;
 
-    drawItems() {
-        return this.props.data.data.map((item) => (
-            <Item key={item.name} item={item} imageBaseUrl={this.props.imageBaseUrl} />
-        ));
-    }
+    useEffect(() => {
+        applySelected(data.filter((item) => item.active));
+    }, []);
 
-    render() {
-        return (
-            <React.Fragment>
-                <section className={`${this.theme.extend_content} ${this.theme.pop_content}`}>
-                    <div className={this.theme.section_cont}>
-                        <h2 className={this.theme.blind}>확장 블록 불러오기 리스트</h2>
-                        <div className={this.theme.cont_box}>
-                            <div className={this.theme.desc}>
-                                <div className={this.theme.imico_exclamation_mark}></div>
-                                <div className={this.theme.content}>{CommonUtils.getLang('template.expansion_block_descriptions')}</div>
-                            </div>
-                            <div className={this.theme.extend_block}>
-                                <ul className={this.theme.list}>{this.drawItems()}</ul>
+    return (
+        <>
+            <section className={classname(theme.extend_content, theme.pop_content)}>
+                <div className={theme.section_cont}>
+                    <h2 className={theme.blind}>BIG ICON LIST</h2>
+                    <div className={theme.cont_box}>
+                        <div className={theme.desc}>
+                            <div className={theme.imico_exclamation_mark} />
+                            <div className={theme.content}>
+                                {CommonUtils.getLang('template.expansion_block_descriptions')}
                             </div>
                         </div>
+                        <div className={theme.extend_block}>
+                            <ul className={theme.list}>
+                                {data.map((item) => (
+                                    <Item key={item.name} item={item} imageBaseUrl={imageBaseUrl} />
+                                ))}
+                            </ul>
+                        </div>
                     </div>
-                </section>
-                <Foot />
-            </React.Fragment>
-        );
-    }
-}
+                </div>
+            </section>
+            <Foot />
+        </>
+    );
+};
 
-const mapStateToProps = (state) => ({
-    ...state,
+const mapDispatchToProps = (dispatch) => ({
+    applySelected: (list) => dispatch(applySelected(list)),
 });
 
-export default connect(
-    mapStateToProps,
-    null
-)(Index);
+export default connect(null, mapDispatchToProps)(Index);
