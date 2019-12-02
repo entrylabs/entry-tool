@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Item from './Item';
 import Foot from '../foot';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 import classname from 'classnames';
+import { applySelected } from '@actions/popup';
+import { connect } from 'react-redux';
 
-export default (props) => {
+const Index = (props) => {
     const theme = Theme.getStyle('popup');
-    const { data = [], imageBaseUrl } = props;
+    const { data = [], imageBaseUrl, applySelected } = props;
+
+    useEffect(() => {
+        applySelected(data.filter((item) => item.active));
+    }, []);
+
     return (
         <>
             <section className={classname(theme.extend_content, theme.pop_content)}>
@@ -34,3 +41,9 @@ export default (props) => {
         </>
     );
 };
+
+const mapDispatchToProps = (dispatch) => ({
+    applySelected: (list) => dispatch(applySelected(list)),
+});
+
+export default connect(null, mapDispatchToProps)(Index);
