@@ -36,7 +36,7 @@ export default class EmitMiddleware {
                 case TRIGGER_EVENT: {
                     this.emitter.emit(action.event, action.data);
                     if (action.hide) {
-                        root.history.back();
+                        this.emitter.emit('hide');
                     }
                     break;
                 }
