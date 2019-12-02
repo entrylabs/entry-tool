@@ -232,15 +232,6 @@ export const CommonUtils = {
             filename,
         };
     },
-    handleClick(func) {
-        return (e) => {
-            e.preventDefault();
-            func();
-        };
-    },
-    distinct(item, index, self) {
-        return self.indexOf(item) === index;
-    },
 };
 
 export function FormAsyncException(obj) {

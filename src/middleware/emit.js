@@ -1,5 +1,5 @@
 import { VISIBLE, CLICK_BUTTON, TRIGGER_EVENT } from '@actions/index';
-import { API_FAIL } from '@actions/popup';
+import { API_FAIL, UPLOAD_ITEM } from '@actions/popup';
 import { CHANGE_COLOR_PICKER } from '@actions/picker';
 import {
     SELECT_DROPDOWN,
@@ -33,6 +33,10 @@ export default class EmitMiddleware {
                     this.emitter.emit('hide');
                     break;
                 }
+                case UPLOAD_ITEM:
+                    action.data.objType = action.objType;
+                    this.emitter.emit('loaded', action.data.data);
+                    break;
                 case TRIGGER_EVENT: {
                     this.emitter.emit(action.event, action.data);
                     if (action.hide) {
