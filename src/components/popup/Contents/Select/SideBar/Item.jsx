@@ -1,75 +1,89 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { applySelected } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
-import { EMIT_TYPES as Types } from '@constants';
 import { triggerEvent } from '@actions';
 import { makeFindSelectedById } from '@selectors';
 import Theme from '@utils/Theme';
-import classname from 'classnames';
 
-const getName = (item) => {
-    const lang = CommonUtils.getLangType();
-    const defaultName = item.label && item.label.en ? item.label.en : item.name;
-    return item.label && item.label[lang] ? item.label[lang] : defaultName;
-};
-const Index = (props) => {
-    const { index, selected, applySelected, select, deselect } = props;
-    const { baseUrl, type, item, multiSelect = true } = props;
-    const theme = Theme.getStyle('popup');
+class Item extends Component {
+    constructor(props) {
+        super(props);
+        this.theme = Theme.getStyle('popup');
+        this.drawImage = this.drawImage.bind(this);
+        this.onItemClicked = this.onItemClicked.bind(this);
+    }
 
-    const onItemClicked = (e) => {
-        e.preventDefault();
-        const id = item._id || item.id;
-        if (!multiSelect) {
-            select(id);
-            applySelected([item]);
-            return;
+    drawImage() {
+        if (this.props.type === 'sound') {
+            return <div className={`${this.theme.thmb} ${this.theme.imico_pop_sound_thmb}`}>&nbsp;</div>;
         }
-        if (index >= 0) {
-            selected.splice(index, 1);
-            deselect(id);
-        } else {
-            selected.push(item);
-            select(id);
-        }
-        applySelected(selected);
-    };
-
-    const { thumb, filename, imageType } = CommonUtils.getImageSummary(item);
-    const src = thumb || CommonUtils.createImageUrl(filename, baseUrl);
-    return (
-        <li onClick={onItemClicked} className={classname({ [theme.on]: index >= 0 })}>
-            <div className={theme.link}>
-                {type === 'sound' && (
-                    <div className={classname(theme.thmb, theme.imico_pop_sound_thmb)} />
-                )}
-                {type !== 'sound' && (
-                    <div className={classname(theme.thmb, { [theme[imageType]]: !!imageType })}>
-                        <img src={src} alt={filename} />
-                    </div>
-                )}
-                <em className={theme.sjt}>{getName(item)}</em>
+        const { thumb, filename, imageType } = CommonUtils.getImageSummary(this.props.item);
+        const baseUrl = this.props.popupReducer.baseUrl;
+        return (
+            <div className={`${this.theme.thmb} ${imageType && this.theme[imageType]}`}>
+                <img
+                    src={thumb || CommonUtils.createImageUrl(filename, baseUrl)}
+                    alt=""
+                />
             </div>
-        </li>
-    );
-};
+        );
+    }
+
+    onItemClicked(e) {
+        e.preventDefault();
+        const selected = this.props.popupReducer.selected;
+        const index = this.props.index;
+        if (this.props.multiSelect) {
+            if (index >= 0) {
+                selected.splice(index, 1);
+                this.props.triggerEvent('itemoff', null, false);
+            } else {
+                selected.push(this.props.item);
+                this.props.triggerEvent('itemon', { id: this.props.item._id }, false);
+            }
+            this.props.applySelected(selected);
+        } else {
+            this.props.applySelected([this.props.item]);
+            this.props.triggerEvent('itemon', { id: this.props.item._id }, false);
+        }
+    }
+
+    render() {
+        const item = this.props.item;
+        const lang = CommonUtils.getLangType();
+        const defaultName = item.label && item.label.en ? item.label.en : item.name;
+        const name = item.label && item.label[lang] ? item.label[lang] : defaultName;
+        return (
+            <li
+                onClick={this.onItemClicked}
+                className={CommonUtils.toggleClass(this.props.index >= 0, this.theme.on)}
+            >
+                <div className={this.theme.link}>
+                    {this.drawImage()}
+                    <em className={this.theme.sjt}>
+                        {name}
+                    </em>
+                </div>
+            </li>
+        );
+    }
+}
 
 const mapStateToProps = (state, props) => {
     const getIndex = makeFindSelectedById(props.item._id);
     return {
-        selected: state.popupReducer.selected,
+        ...state,
         index: getIndex(state),
     };
 };
 
 const mapDispatchToProps = (dispatch) => ({
     applySelected: (list) => dispatch(applySelected(list)),
-    select: (id) => dispatch(triggerEvent(Types.itemon, { id }, false)),
-    deselect: (id) => dispatch(triggerEvent(Types.itemoff, { id }, false)),
+    triggerEvent: (event, data, hide) => dispatch(triggerEvent(event, data, hide)),
 });
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
-)(Index);
+    mapDispatchToProps,
+)(Item);

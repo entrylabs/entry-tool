@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CommonUtils } from '@utils/Common';
 import { triggerEvent } from '@actions';
-import { closePopup } from '@actions/popup';
 import ColorPicker from '@components/picker/color';
 import Dropdown from '@components/widget/dropdown';
 import { EMIT_TYPES } from '@constants';
@@ -244,7 +243,7 @@ class WriteBox extends Component {
             writeType: this.state.writeType,
         };
 
-        this.props.write(result);
+        this.props.triggerEvent(EMIT_TYPES.write, result);
     }
 
     render() {
@@ -330,7 +329,7 @@ class WriteBox extends Component {
                         href="#NULL"
                         onClick={(e) => {
                             e.preventDefault();
-                            this.props.closePopup();
+                            this.props.triggerEvent(EMIT_TYPES.close, null, true);
                         }}
                     >
                         {CommonUtils.getLang('Buttons.cancel')}
@@ -345,14 +344,10 @@ class WriteBox extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    write: (data) => {
-        dispatch(triggerEvent(EMIT_TYPES.write, data, false));
-        dispatch(closePopup());
-    },
-    closePopup: () => dispatch(closePopup()),
+    triggerEvent: (event, data) => dispatch(triggerEvent(event, data)),
 });
 
 export default connect(
     null,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(WriteBox);
