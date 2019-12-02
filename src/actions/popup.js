@@ -1,34 +1,31 @@
-// import axios from 'axios';
-// import { CommonUtils } from '../utils/Common';
-
-export const UI_SELECT = 'UI_SELECT';
-export const UPLOAD_ITEM = 'UPLOAD_ITEM';
+export const TOGGLE_VECTOR = 'TOGGLE_VECTOR';
+export const CLOSE_POPUP = 'CLOSE_POPUP';
 export const APPLY_SELECTED_LIST = 'APPLY_SELECTED_LIST';
+export const APPLY_UPLOAD_LIST = 'APPLY_UPLOAD_LIST';
 export const INIT_STATE = 'INIT_STATE';
 export const API_FAIL = 'API_FAIL';
 
-export const setUIParam = (data) => (dispatch) => {
-    dispatch({
-        type: UI_SELECT,
-        data,
-    });
+export const closePopup = () => (dispatch) => {
+    dispatch({ type: CLOSE_POPUP });
 };
 
-export const initState = (data) => (dispatch) => {
+export const toggleVector = () => (dispatch) => {
+    dispatch({ type: TOGGLE_VECTOR });
+};
+
+export const initState = () => (dispatch) => {
     dispatch({
-        data,
         type: INIT_STATE,
     });
 };
 
-export const updateUploads = (type, data)  => (dispatch) => {
-    dispatch({
-        data : {
-            type,
-            data,
-        },
-        type: UPLOAD_ITEM,
-    });
+export function applyUploaded(list) {
+    return (dispatch) => {
+        dispatch({
+            type: APPLY_UPLOAD_LIST,
+            uploads: list,
+        });
+    };
 };
 
 export function applySelected(list) {

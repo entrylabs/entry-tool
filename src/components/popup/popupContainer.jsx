@@ -23,6 +23,6 @@ export default withWrapper({
 })(
     connect(
         mapStateToProps,
-        mapDispatchToProps,
+        mapDispatchToProps
     )(PopupContainer)
 );

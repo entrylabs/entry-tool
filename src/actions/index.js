@@ -10,6 +10,10 @@ export function triggerEvent(event, data, hide = true) {
     return { type: TRIGGER_EVENT, event, hide, data };
 }
 
+export const commonAction = (type, data) => (dispatch) => {
+    dispatch({ type, data });
+};
+
 export const visibleAction = (visible) => (dispatch) => {
     dispatch({
         type: VISIBLE,
