@@ -1,24 +1,26 @@
-import { APPLY_SELECTED_LIST, INIT_STATE, CLOSE_POPUP, TOGGLE_VECTOR, APPLY_UPLOAD_LIST } from '../actions/popup';
+import { UI_SELECT, APPLY_SELECTED_LIST, UPLOAD_ITEM, INIT_STATE } from '../actions/popup';
+import flatten from 'lodash/flatten';
 
 const INITIAL_STATE = {
     selected: [],
     uploads: [],
-    isVectorOnly: false,
-    closed: false,
+    baseUrl: '',
 };
 
 export default function popupReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
-        case CLOSE_POPUP:
-            return { ...state, closed: true };
-        case TOGGLE_VECTOR:
-            return { ...state, isVectorOnly: !state.isVectorOnly };
+        case 'CLOSE':
+            return {
+                result: action.payload,
+            };
         case INIT_STATE:
-            return { ...state, selected: [], uploads: [], isVectorOnly: false, closed: false };
-        case APPLY_UPLOAD_LIST:
-            return { ...state, uploads: action.uploads };
+            return { ...state, ...action.data, selected: [], uploads: [], data: [] };
+        case UI_SELECT:
+            return { ...state, ...action.data };
+        case UPLOAD_ITEM:
+            return { ...state, uploads: flatten([...state.uploads, ...action.data.data]) };
         case APPLY_SELECTED_LIST:
-            return { ...state, selected: action.selected };
+            return Object.assign({}, { ...state, selected: action.selected });
         default:
             return state;
     }

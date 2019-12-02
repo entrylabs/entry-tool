@@ -13,11 +13,6 @@ export const EMIT_TYPES = {
     draw: 'draw',
     makeProject: 'makeproject',
     select: 'select',
-    itemon: 'itemon',
-    itemoff: 'itemoff',
-    submitUploads: 'uploads',
-    uploadFail: 'uploadFail',
-    uploads: 'dummyUploads',
 };
 
 const SPRITE_SIDEBAR = {
@@ -234,7 +229,6 @@ export const DEFAULT_OPTIONS = {
             opt: {
                 search: { query: true },
                 multiSelect: true,
-                isDrawVector: true,
                 uploadAllowed: {
                     image: true,
                     object: true,
@@ -260,7 +254,6 @@ export const DEFAULT_OPTIONS = {
             },
             opt: {
                 search: { query: true },
-                isDrawVector: true,
                 multiSelect: true,
                 uploadAllowed: {
                     image: true,
@@ -285,7 +278,6 @@ export const DEFAULT_OPTIONS = {
             opt: {
                 search: { query: true },
                 multiSelect: false,
-                isDrawVector: true,
                 uploadAllowed: {
                     image: true,
                     object: false,
@@ -365,9 +357,6 @@ export const DEFAULT_OPTIONS = {
         projects: {
             title: 'Menus.my_project',
             mainType: 'projects',
-            opt: {
-                search: { category: true, date: true, order: true, query: true },
-            },
             navigations: {
                 projects: {
                     name: 'Menus.my_project',

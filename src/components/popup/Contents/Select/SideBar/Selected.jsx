@@ -1,68 +1,138 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { applySelected } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
 import Slider from 'react-slick';
 import Theme from '@utils/Theme';
-import classname from 'classnames';
+let TYPE_MAP;
 
-const Index = (props) => {
-    const { type, baseUrl, popup, applySelected } = props;
-    const { selected } = popup;
-    const theme = Theme.getStyle('popup');
-    const isSound = type === 'sound';
-    const settings = {
-        dots: false,
-        infinite: false,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        className: theme.select_list,
-        variableWidth: true,
-        swipeToSlide: true,
-        nextArrow: <Arrow type="next" theme={theme} />,
-        prevArrow: <Arrow type="prev" theme={theme} />,
-    };
+class CustomSlide extends Component {
+    constructor(props) {
+        super(props);
+        this.theme = Theme.getStyle("popup");
+    }
+    render() {
+        const { item, type, url, ...props } = this.props;
+        const { name, imageType } = CommonUtils.getImageSummary(this.props.item);
+        return (
+            <div className={this.theme.select_item} {...props}>
+                <div className={`${TYPE_MAP[type].imageClass} ${imageType && this.theme[imageType]}`}>
+                    {TYPE_MAP[type].imageContent(item, url)}
+                </div>
+                <em className={this.theme.sjt}>{name}</em>
+                <a
+                    href="#NULL"
+                    className={`${this.theme.btn_del} ${this.theme.imbtn_pop_chk_del}`}
+                    data-key={item._id}
+                >
+                    <span className={this.theme.blind}>삭제</span>
+                </a>
+            </div>
+        );
+    }
+}
 
-    const itemClicked = ({ _id: id }) => {
-        if (id) {
-            applySelected(CommonUtils.remove(selected, (element) => element._id === id));
-        }
-    };
-
-    const imageClass = classname(theme.thmb, { [theme.imico_pop_sound_thmb]: isSound });
+function Arrow(props) {
+    const { type, className, style, onClick } = props;
+    const theme = Theme.getStyle("popup");
+    let customClass = null;
+    let text = '';
+    if (type === 'prev') {
+        customClass = `${theme.btn_prev} ${theme.imbtn_pop_sel_prev} ${className}`;
+        text = 'prev';
+    } else {
+        customClass = `${theme.btn_next} ${theme.imbtn_pop_sel_next} ${className}`;
+        text = 'next';
+    }
     return (
-        <div className={classname(theme.cont_sel_box, { [theme.sound_type]: isSound })}>
-            {container}
-            <strong className={theme.tit}>
-                {CommonUtils.getLang('Menus.all')} ({selected.length})
-            </strong>
-            <Slider {...settings}>
-                {selected.map((item, index) => {
+        <div className={customClass} style={{ ...style }} onClick={onClick}>
+            <span className={theme.blind}>{text}</span>
+        </div>
+    );
+}
+
+class Selected extends Component {
+    constructor(props) {
+        super(props);
+        this.theme = Theme.getStyle("popup");
+        this.container = React.createElement(
+            'style',
+            {},
+            '.slick-list { position:relative; left:82px; } ' +
+            '.slick-slide { display: inline-block; margin-left: 12px;} ' +
+            '.slick-slide:first-child { margin-left: 0; } '
+        );
+        this.itemClicked = this.itemClicked.bind(this);
+        TYPE_MAP = {
+            sound: {
+                wrapClass: `${this.theme.cont_sel_box} ${this.theme.sound_type}`,
+                imageClass: `${this.theme.thmb} ${this.theme.imico_pop_sound_thmb}`,
+                imageContent: () => '&nbsp;',
+            },
+            sprite: {
+                wrapClass: this.theme.cont_sel_box,
+                imageClass: this.theme.thmb,
+                imageContent: (item, baseUrl) => {
                     const { thumb, filename } = CommonUtils.getImageSummary(item);
-                    let content = '';
-                    if (!isSound) {
-                        const src = thumb || CommonUtils.createImageUrl(filename, baseUrl);
-                        content = <img src={src} alt={item.name} />;
-                    }
                     return (
+                        <img src={thumb || CommonUtils.createImageUrl(filename, baseUrl)} alt="" />
+                    );
+                },
+            },
+        };
+    }
+
+    itemClicked(e) {
+        e.preventDefault();
+        const key = e.target.getAttribute('data-key');
+        if (key) {
+            const selected = CommonUtils.remove(
+                this.props.popupReducer.selected,
+                (element) => element._id === key
+            );
+            this.props.applySelected(selected);
+        }
+    }
+
+    render() {
+        const type = this.props.type || 'sound';
+        const selected = this.props.popupReducer.selected || [];
+        const settings = {
+            dots: false,
+            infinite: false,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            className: this.theme.select_list,
+            variableWidth: true,
+            swipeToSlide: true,
+            nextArrow: <Arrow type="next" />,
+            prevArrow: <Arrow type="prev" />,
+        };
+
+        return (
+            <div className={TYPE_MAP[type].wrapClass} onClick={this.itemClicked}>
+                {this.container}
+                <strong className={this.theme.tit}>
+                    {CommonUtils.getLang('Menus.all')} ({selected.length})
+                </strong>
+                <Slider {...settings}>
+                    {selected.map((item, index) => (
                         <CustomSlide
                             key={index}
                             item={item}
-                            theme={theme}
-                            imageClass={imageClass}
-                            content={content}
+                            type={type}
                             style={{ width: 100 }}
-                            onClick={itemClicked}
+                            url={this.props.popupReducer.baseUrl}
                         />
-                    );
-                })}
-            </Slider>
-        </div>
-    );
-};
+                    ))}
+                </Slider>
+            </div>
+        );
+    }
+}
 
 const mapStateToProps = (state) => ({
-    popup: state.popupReducer,
+    ...state,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -72,41 +142,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Index);
-
-const CustomSlide = ({ item, onClick, theme, imageClass, content }) => {
-    const { name, imageType } = CommonUtils.getImageSummary(item);
-    const deleteClass = classname(theme.btn_del, theme.imbtn_pop_chk_del);
-    const handleClick = (e) => {
-        e.preventDefault();
-        onClick && onClick(item);
-    };
-    return (
-        <div className={theme.select_item}>
-            <div className={classname(imageClass, { [theme[imageType]]: !!imageType })}>
-                {content}
-            </div>
-            <em className={theme.sjt}>{name}</em>
-            <a href={'#NULL'} className={deleteClass} onClick={handleClick}>
-                <span className={theme.blind}>delete</span>
-            </a>
-        </div>
-    );
-};
-
-const Arrow = ({ type = '', className, style, onClick, theme }) => {
-    const clazz = classname(theme[`btn_${type}`], theme[`imbtn_pop_sel_${type}`], className);
-    return (
-        <div className={clazz} style={{ ...style }} onClick={onClick}>
-            <span className={theme.blind}>{type}</span>
-        </div>
-    );
-};
-
-const container = React.createElement(
-    'style',
-    {},
-    '.slick-list { position:relative; left:82px; } ' +
-        '.slick-slide { display: inline-block; margin-left: 12px;} ' +
-        '.slick-slide:first-child { margin-left: 0; } '
-);
+)(Selected);
