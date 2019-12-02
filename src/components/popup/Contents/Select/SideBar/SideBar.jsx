@@ -1,63 +1,30 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
 import { CommonUtils } from '@utils/Common';
-import { setUIParam } from '@actions/popup';
 import Theme from '@utils/Theme';
+import classname from 'classnames';
 
-class SideBar extends Component {
-    constructor(props) {
-        super(props);
-        this.theme = Theme.getStyle("popup");
-        this.drawSideBar = this.drawSideBar.bind(this);
-        this.onSidebarCliecked = this.onSidebarCliecked.bind(this);
-    }
-
-    onSidebarCliecked(e) {
+export default ({ sidebar = {}, onClick }) => {
+    const theme = Theme.getStyle('popup');
+    const list = Object.keys(sidebar);
+    const [selected, select] = useState(list[0]);
+    const selectItem = (item) => (e) => {
         e.preventDefault();
-        this.props.setUIParam({
-            type: this.props.type,
-            sidebar: e.currentTarget.getAttribute('data-key'),
-            subMenu: 'all',
-        });
-    }
-
-    drawSideBar() {
-        const list = this.props.sidebar;
-        const sidebar = this.props.popupReducer.sidebar;
-        if (!list) {
-            return '';
+        select(item);
+        if (onClick) {
+            onClick(item);
         }
-        return Object.keys(list).map((item, index) => {
-            return (
-                <li
-                    key={item}
-                    data-key={item}
-                    onClick={this.onSidebarCliecked}
-                    className={CommonUtils.toggleClass(
-                        sidebar === item || (!sidebar && index === 0),
-                        this.theme.on
-                    )}
-                >
-                    <a href="#NULL">{CommonUtils.getLang(list[item].name)}</a>
-                </li>
-            );
-        });
-    }
+    };
 
-    render() {
-        return <ul className={this.theme.menu_list}>{this.drawSideBar()}</ul>;
-    }
-}
-
-const mapStateToProps = (state) => ({
-    ...state,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-    setUIParam: (data) => dispatch(setUIParam(data)),
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SideBar);
+    return (
+        <ul className={theme.menu_list}>
+            {list.map((item) => {
+                const clazz = classname({ [theme.on]: selected === item });
+                return (
+                    <li key={item} onClick={selectItem(item)} className={clazz}>
+                        <a href="#NULL">{CommonUtils.getLang(sidebar[item].name)}</a>
+                    </li>
+                );
+            })}
+        </ul>
+    );
+};
