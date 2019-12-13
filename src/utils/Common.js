@@ -21,6 +21,17 @@ export const CommonUtils = {
         }
         return position;
     },
+    getMouseEvent(event) {
+        let mouseEvent;
+        if (event.originalEvent && event.originalEvent.touches) {
+            mouseEvent = event.originalEvent.touches[0];
+        } else if (event.touches) {
+            mouseEvent = event.touches[0];
+        } else {
+            mouseEvent = event;
+        }
+        return mouseEvent;
+    },
     getLangType: () => {
         const lang = root.Lang || {};
         return lang.type;
@@ -170,6 +181,65 @@ export const CommonUtils = {
         // eslint-disable-next-line no-multi-assign, no-param-reassign, no-nested-ternary
         for (b = i = 0; (c = s.charCodeAt(i++)); b += c >> 11 ? 3 : c >> 7 ? 2 : 1) {}
         return b;
+    },
+
+    isVectorItem(item) {
+        const { pictures = [], hasSvg, imageType } = item;
+        if (hasSvg) {
+            return true;
+        }
+        if (imageType == 'svg') {
+            return true;
+        }
+
+        if (pictures.length > 0 && pictures[0].imageType === 'svg') {
+            return true;
+        }
+        return false;
+    },
+
+    getImageSummary(item) {
+        let {
+            label = {},
+            name: itemName,
+            imageType,
+            filename,
+            fileurl,
+            pictures = [],
+            hasSvg,
+        } = item;
+        let thumb;
+        const lang = this.getLangType();
+        if (pictures.length > 0) {
+            filename = pictures[0].filename;
+            fileurl = pictures[0].fileurl;
+        }
+        if (pictures.length > 0) {
+            imageType = pictures[0].imageType;
+        }
+        if (hasSvg) {
+            imageType = 'svg';
+        }
+        if (fileurl) {
+            thumb = fileurl.thumb || fileurl.resized || fileurl.origin || fileurl;
+        }
+        const defaultName = label.en ? label.en : itemName;
+        const name = label[lang] ? label[lang] : defaultName;
+        return {
+            name,
+            imageType,
+            thumb,
+            filename,
+        };
+    },
+    handleClick(func) {
+        return (e) => {
+            e.preventDefault();
+            func();
+        };
+    },
+    distinct(item, index, self) {
+        return self.indexOf(item) === index;
     },
 };
 

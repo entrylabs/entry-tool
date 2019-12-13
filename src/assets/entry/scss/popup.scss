@@ -7,8 +7,13 @@
 
 .popup_wrap {
     position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     width: 100%;
     height: 100%;
     min-width: 1024px;
@@ -85,7 +90,8 @@
         padding: 0 45px 0 12px;
         border: 1px solid #4f80ff;
         border-radius: 38px;
-        box-sizing: content-box;
+        -webkit-box-sizing: content-box;
+                box-sizing: content-box;
     }
     .section_navi .srch_box input[type='text'] {
         width: 100%;
@@ -104,23 +110,23 @@
         position: relative;
         height: 40px;
         border-radius: 20px;
-        border: solid 1px #4f80ff;
-        background-color: #4f80ff;
+        border: solid 1px #e2e2e2;
+        background-color: #ffffff;
         padding-right: 16px;
         cursor:pointer;
     }
     .section_navi .vector span {
         display: block;
         margin-left:40px;
-        margin-top: 13px;
+        margin-top: 10.5px;
         font-size:14px;
-        color: #fff;
+        color: #979797;
     }
     .section_navi .vector:before {
         position:absolute;
         content: '';
-        margin: 10px 7px 0 12px;
-        background: url('#{$imageDir}/btn_pop_get_vectors.png') no-repeat;
+        margin: 8.5px 7px 0 12px;
+        background: url('#{$imageDir}/btn_pop_get_vectors_off.svg') no-repeat;
         width: 21px;
         height: 21px;
         background-size: 21px;
@@ -129,6 +135,16 @@
         display: block;
         clear: both;
         content: '';
+    }
+    .section_navi .vector.on {
+        background-color: #4f80ff;
+        border: solid 1px #4f80ff;
+        span {
+            color: #fff;
+        }
+        &:before {
+            background-image: url('#{$imageDir}/btn_pop_get_vectors_on.svg');
+        }
     }
     .section_navi .art_sel_area {
         float: right;
@@ -157,15 +173,21 @@
         padding: 0 16px;
     }
     .pop_content {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex: 1;
+        -webkit-box-flex: 1;
+            -ms-flex: 1;
+                flex: 1;
         overflow: hidden;
         // min-height: 567px;
         background-color: #fff;
         .menu_list {
             width: 146px;
             overflow: auto;
-            flex: none;
+            -webkit-box-flex: 0;
+                -ms-flex: none;
+                    flex: none;
             margin: 0 8px 0 16px;
             border-radius: 6px;
         }
@@ -204,9 +226,16 @@
             color: #fff;
         }
         .section_cont {
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
-            flex-direction: column;
-            flex: 1;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                    flex-direction: column;
+            -webkit-box-flex: 1;
+                -ms-flex: 1;
+                    flex: 1;
             overflow: hidden;
             background-color: #ecf8ff;
             border-radius: 6px;
@@ -255,7 +284,9 @@
             color: #4f80ff;
         }
         .section_cont .list_area {
-            flex: 1;
+            -webkit-box-flex: 1;
+                -ms-flex: 1;
+                    flex: 1;
             position: relative;
             padding-left: 22px;
             overflow: auto;
@@ -362,6 +393,16 @@
             height: 100%;
             vertical-align: middle;
             content: '';
+        }
+        .section_cont .cont_sel_box .select_list .select_item .thmb.svg:after {
+            content: '';
+            width: 28px;
+            height: 28px;
+            top: 8px;
+            left: 8px;
+            background: url('#{$imageDir}/imico_pop_vector.png') no-repeat;
+            background-size: 100%;
+            position: absolute;
         }
         .section_cont .cont_sel_box .select_list .select_item .thmb img {
             max-width: 96px;
@@ -498,11 +539,50 @@
         .section_cont .img_caution_box .dsc_box .dsc {
             margin-top: 14px;
             line-height: 18px;
+            a.copyright_link {
+                color: #4f80ff;
+            }
         }
 
         // 그리기
         .section_cont .draw_box {
-            padding: 144px 0 204px;
+            padding: 59px 0 204px;
+        }
+        .section_cont .draw_box .warn_box{
+            width: 550px;
+            height: 174px;
+            background-color: #f7fcff;
+            padding: 20px;
+            border: solid 1px #d6e9f4;
+            border-radius: 6px;
+            margin: 20px auto 30px auto;
+            font-size: 14px;
+            letter-spacing: -0.32px;
+            font-weight: bold;
+            line-height: 22px;
+        }
+        .section_cont .draw_box .warn_box .warn_title{
+
+        }
+        .section_cont .draw_box .warn_box .warn_desc{
+            padding: 12px;
+            position: relative;
+
+            a.copyright_link {
+                color: #4f80ff;
+            }
+
+            &:before {
+                position: absolute;
+                top: 20px;
+                left: 0;
+                width: 4px;
+                height: 4px;
+                content: '';
+                border-radius: 50%;
+                background-color: #aac5d5;
+                box-shadow: 0px 22px 0px #aac5d5, 0px 44px 0px #aac5d5, 0px 66px 0px #aac5d5;
+            }
         }
         .section_cont .draw_box .thmb {
             overflow: hidden;
@@ -582,7 +662,8 @@
         .section_cont .write_box .write_set .write_type_box div {
             display: inline-block;
             position: relative;
-            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
             width: 102px;
             height: 40px;
             border: 1px solid #e2e2e2;
@@ -630,13 +711,15 @@
             position: relative;
             overflow: hidden;
             border-radius: 4px;
-            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
             background-color: #fff;
         }
         .section_cont .write_box .input_inner input[type='text'] {
             width: 100%;
             height: 40px;
-            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
             padding: 0 16px;
             border: 0;
             border: 1px solid #e2e2e2;
@@ -650,9 +733,11 @@
             border-color: #4f80ff;
         }
         .section_cont .write_box .input_inner textarea {
+            resize: none;
             width: 100%;
             height: 204px;
-            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
             padding: 12px 16px;
             border: 1px solid #e2e2e2;
             border-radius: 4px;
@@ -674,7 +759,9 @@
         }
         // 소리 오브젝트
         .section_cont .sound_list_box {
-            flex: 1;
+            -webkit-box-flex: 1;
+                -ms-flex: 1;
+                    flex: 1;
             overflow: auto;
         }
         .section_cont .sound_list_box .scroll_box {
@@ -733,11 +820,6 @@
             font-size: 0;
             text-align: center;
         }
-        .section_cont .obj_list .thmb.svg {
-            background: url('#{$imageDir}/imico_pop_vector.png') no-repeat;
-            background-size: 28px;
-            background-position: 12px 8px;
-        }
         .section_cont .obj_list .thmb img {
             max-width: 96px;
             max-height: 100%;
@@ -750,6 +832,16 @@
             height: 100%;
             vertical-align: middle;
             content: '';
+        }
+        .section_cont .obj_list .thmb.svg:after {
+            content: '';
+            width: 28px;
+            height: 28px;
+            top: 8px;
+            left: 8px;
+            background: url('#{$imageDir}/imico_pop_vector.png') no-repeat;
+            background-size: 100%;
+            position: absolute;
         }
 
         .section_cont .obj_list .sjt {
@@ -784,9 +876,12 @@
             color: #000;
             letter-spacing: -0.3px;
             line-height: 16px;
+            white-space: pre;
         }
         .caution + .list_area {
-            flex: 1;
+            -webkit-box-flex: 1;
+                -ms-flex: 1;
+                    flex: 1;
             padding: 0 38px;
             margin: 23px 0 0;
             overflow: auto;
@@ -939,13 +1034,16 @@
             line-height: 18px;
         }
         .section_cont .scroll_box {
-            flex: 1 1;
+            -webkit-box-flex: 1;
+                -ms-flex: 1 1;
+                    flex: 1 1;
             margin-top: 12px;
             overflow: hidden;
             overflow-y: auto;
         }
         .section_cont .scroll_box * {
-            box-sizing: content-box;
+            -webkit-box-sizing: content-box;
+                    box-sizing: content-box;
         }
         .section_cont .list {
             overflow: hidden;
@@ -982,12 +1080,8 @@
             right: 0;
             bottom: 0;
             height: 40px;
-            font-size: 0;
-            background: -webkit-linear-gradient(
-                top,
-                rgba(0, 0, 0, 0) 0%,
-                rgba(0, 0, 0, 1) 100%
-            ); /* Chrome10-25,Safari5.1-6 */
+            font-size: 0; /* Chrome10-25,Safari5.1-6 */
+            background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 1)));
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
         }
         .section_cont .list .info_bar span {
@@ -1085,7 +1179,10 @@
 
     // 로그인 팝업
     .login_area {
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
         overflow: auto;
         .login_header {
             padding: 40px 0 40px;
@@ -1398,10 +1495,19 @@
             border: 1px solid #e2e2e2;
             border-radius: 4px;
             outline: 0;
-            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
             font-weight: 600;
             color: #2c313d;
             letter-spacing: -0.3px;
+        }
+        input::-webkit-input-placeholder,
+        input::-webkit-input-placeholder,
+        input::-moz-placeholder,
+        input:-ms-input-placeholder,
+        input:-moz-placeholder {
+            font-weight: 600;
+            color: #979797;
         }
         input::placeholder,
         input::-webkit-input-placeholder,
@@ -1423,7 +1529,8 @@
         .select_link {
             display: block;
             position: relative;
-            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
             width: 142px;
             height: 40px;
             padding: 0 12px;
@@ -1458,7 +1565,8 @@
         }
     }
     .pop_selectbox * {
-        box-sizing: content-box;
+        -webkit-box-sizing: content-box;
+                box-sizing: content-box;
     }
     .pop_selectbox .tooltip_box {
         display: none;
@@ -1474,12 +1582,17 @@
 .tooltip_box.dropdown,
 .sortable.dropdown {
     * {
-        box-sizing: content-box;
+        -webkit-box-sizing: content-box;
+                box-sizing: content-box;
     }
     width: 184px;
-    user-select: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
     z-index: 251;
     position: fixed;
+    -webkit-transition: all ease 0.3s;
     transition: all ease 0.3s;
     &.auto_width {
         width: auto;
@@ -1507,6 +1620,8 @@
             color: $textColor;
             white-space: nowrap;
             cursor: pointer;
+            overflow:hidden;
+            text-overflow:ellipsis;
             a {
                 color: $textColor;
             }

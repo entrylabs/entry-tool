@@ -1,29 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import SideBar from './SideBar';
 import BigICON from './BigICON';
 
-class Select extends Component {
-    renderContent() {
-        if (this.props.sidebar) {
-            return (
-                <SideBar { ...this.props}/>
-            );
-        } else {
-            return <BigICON { ...this.props}/>;
-        }
+export default (props) => {
+    if (props.sidebar) {
+        return <SideBar {...props} />;
     }
-
-    render() {
-        return this.renderContent();
-    }
-}
-
-const mapStateToProps = (state) => ({
-    ...state,
-});
-
-export default connect(
-    mapStateToProps,
-    null
-)(Select);
+    return <BigICON {...props} />;
+};

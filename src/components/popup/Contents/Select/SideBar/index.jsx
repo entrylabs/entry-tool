@@ -1,121 +1,77 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 import Item from './Item';
 import SideBar from './SideBar';
 import SubMenu from './SubMenu';
 import Selected from './Selected';
-import Foot from './foot';
-import { triggerEvent } from '@actions';
-import { setUIParam } from '@actions/popup';
-import { EMIT_TYPES } from '@constants';
+import Foot from '../foot';
+import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
+import { EMIT_TYPES as Types } from '@constants';
+import { triggerEvent } from '@actions/index';
+import { connect } from 'react-redux';
 
-class Index extends Component {
-    constructor(props) {
-        super(props);
-        this.theme = Theme.getStyle("popup");
-        this.props.setUIParam(this.options);
-        this.props.triggerEvent(EMIT_TYPES.fetch, this.options, false);
-        this.drawItems = this.drawItems.bind(this);
-        this.getMenus = this.getMenus.bind(this);
-    }
+const Index = (props) => {
+    const { data, type, sidebar, multiSelect = true, isVectorOnly = false, fetch, baseUrl } = props;
+    const [selectedSidebar, selectSidebar] = useState(Object.keys(sidebar)[0]);
+    const [selectedSubMenu, selectSubMenu] = useState(null);
+    const theme = Theme.getStyle('popup');
+    const subMenu = sidebar[selectedSidebar].sub;
+    const drawItems = () =>
+        data
+            .filter((item) => !isVectorOnly || CommonUtils.isVectorItem(item))
+            .map((item, index) => (
+                <Item
+                    key={index}
+                    item={item}
+                    multiSelect={multiSelect}
+                    type={type}
+                    baseUrl={baseUrl}
+                />
+            ));
 
-    get options() {
-        return {
-            type: this.props.mainType,
-            sidebar: Object.keys(this.props.sidebar)[0],
-            subMenu: 'all',
-        };
-    }
-
-    componentDidUpdate(prevProps) {
-        const before = prevProps.popupReducer;
-        const next = this.props.popupReducer;
-        const isMenuChanged = before.sidebar && (before.sidebar !== next.sidebar || before.subMenu !== next.subMenu);
-        if (isMenuChanged) {
-            const elmnt = document.getElementById('popupList');
-            if (elmnt) {
-                elmnt.scrollTop = 0;
-            }
-            this.props.triggerEvent(
-                EMIT_TYPES.fetch,
-                { type: next.type, sidebar: next.sidebar, subMenu: next.subMenu },
-                false,
-            );
+    useEffect(() => {
+        if (subMenu[selectedSubMenu]) {
+            fetch(type, selectedSidebar, selectedSubMenu);
         }
-    }
+    }, [selectedSidebar, selectedSubMenu]);
 
-    componentWillUnmount() {
-        this.props.setUIParam({
-            type: undefined,
-            sidebar: undefined,
-            subMenu: undefined,
-        });
-    }
-
-    drawItems() {
-        return this.props.data.data.map((item, index) => (
-            <Item key={index} item={item} multiSelect={this.props.multiSelect} type={this.props.popupReducer.type}/>
-        ));
-    }
-
-    getMenus() {
-        if (!this.props.sidebar) {
-            return null;
-        }
-        const subTitle = this.props.popupReducer.sidebar;
-        if (subTitle && this.props.sidebar[subTitle]) {
-            return this.props.sidebar[subTitle].sub;
-        }
-        return this.props.sidebar[Object.keys(this.props.sidebar)[0]].sub;
-    }
-
-    drawListBox() {
-        if (this.props.popupReducer.type === 'sound') {
-            return (
-                <div id="popupList" className={this.theme.sound_list_box}>
-                    <div className={this.theme.list_area}>
-                        <ul className={this.theme.obj_list}>{this.drawItems()}</ul>
-                    </div>
+    return (
+        <>
+            <div className={theme.pop_content}>
+                <h2 className={theme.blind}>Popup</h2>
+                <SideBar type={type} sidebar={sidebar} onClick={(item) => selectSidebar(item)} />
+                <div className={theme.section_cont}>
+                    <SubMenu menus={subMenu} onClick={(item) => selectSubMenu(item)} />
+                    {type === 'sound' && (
+                        <div id="popupList" className={theme.sound_list_box}>
+                            <div className={theme.list_area}>
+                                <ul className={theme.obj_list}>{drawItems()}</ul>
+                            </div>
+                        </div>
+                    )}
+                    {type !== 'sound' && (
+                        <div id="popupList" className={theme.list_area}>
+                            <ul className={theme.obj_list}>{drawItems()}</ul>
+                        </div>
+                    )}
+                    {multiSelect && <Selected type={type} baseUrl={baseUrl} />}
                 </div>
-            );
-        }
-
-        return (
-            <div id="popupList" className={this.theme.list_area}>
-                <ul className={this.theme.obj_list}>{this.drawItems()}</ul>
             </div>
-        );
-    }
-
-    render() {
-        return (
-            <React.Fragment>
-                <div className={this.theme.pop_content}>
-                    <h2 className={this.theme.blind}>오브젝트 선택</h2>
-                    <SideBar type={this.props.mainType} sidebar={this.props.sidebar}/>
-                    <div className={this.theme.section_cont}>
-                        <SubMenu type={this.props.mainType} menus={this.getMenus()}/>
-                        {this.drawListBox()}
-                        {this.props.multiSelect && <Selected type={this.props.mainType}/>}
-                    </div>
-                </div>
-                <Foot/>
-            </React.Fragment>
-        );
-    }
-}
+            <Foot />
+        </>
+    );
+};
 
 const mapStateToProps = (state) => ({
-    ...state,
+    isVectorOnly: state.popupReducer.isVectorOnly,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    triggerEvent: (event, data, hidden) => dispatch(triggerEvent(event, data, hidden)),
-    setUIParam: (data) => dispatch(setUIParam(data)),
+    fetch: (type, sidebar, subMenu) =>
+        dispatch(triggerEvent(Types.fetch, { type, sidebar, subMenu }, false)),
 });
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(Index);

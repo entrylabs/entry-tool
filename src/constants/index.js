@@ -8,12 +8,16 @@ export const EMIT_TYPES = {
     load: 'load',
     search: 'search',
     fetch: 'fetch',
-    fetchVector: 'fetchVector',
     close: 'close',
     write: 'write',
     draw: 'draw',
     makeProject: 'makeproject',
     select: 'select',
+    itemon: 'itemon',
+    itemoff: 'itemoff',
+    submitUploads: 'uploads',
+    uploadFail: 'uploadFail',
+    uploads: 'dummyUploads',
 };
 
 const SPRITE_SIDEBAR = {
@@ -104,6 +108,9 @@ const SPRITE_SIDEBAR = {
         name: 'Category.interface',
         sub: {
             all: { name: 'Menus.all' },
+            interface_website: { name: 'Category.interface_website' },
+            interface_game: { name: 'Category.interface_game' },
+            interface_others: { name: 'Category.interface_others' },
         },
     },
     background: {
@@ -142,18 +149,21 @@ export const DEFAULT_OPTIONS = {
             {
                 name: '필기체',
                 family: 'Nanum Pen Script',
+                style: { backgroundColor: '#f7fcff', padding: '17px 22px 14px 16px', margin:'0px', borderTop: 'solid 1px #d6e9f4' },
                 url: '/css/nanumpenscript.css',
                 $$hashKey: 'object:138',
             },
             {
                 name: '한라산체',
                 family: 'Jeju Hallasan',
+                style: { backgroundColor: '#f7fcff', padding: '17px 22px 14px 16px', margin:'0px', borderTop: 'solid 1px #d6e9f4' },
                 url: '/css/jejuhallasan.css',
                 $$hashKey: 'object:139',
             },
             {
                 name: '코딩고딕체',
                 family: 'Nanum Gothic Coding',
+                style: { backgroundColor: '#f7fcff', padding: '17px 22px 14px 16px', margin:'0px', borderTop: 'solid 1px #d6e9f4' },
                 url: '/css/nanumgothiccoding.css',
                 $$hashKey: 'object:140',
             },
@@ -224,6 +234,7 @@ export const DEFAULT_OPTIONS = {
             opt: {
                 search: { query: true },
                 multiSelect: true,
+                isDrawVector: true,
                 uploadAllowed: {
                     image: true,
                     object: true,
@@ -249,6 +260,7 @@ export const DEFAULT_OPTIONS = {
             },
             opt: {
                 search: { query: true },
+                isDrawVector: true,
                 multiSelect: true,
                 uploadAllowed: {
                     image: true,
@@ -271,7 +283,9 @@ export const DEFAULT_OPTIONS = {
                 },
             },
             opt: {
+                search: { query: true },
                 multiSelect: false,
+                isDrawVector: true,
                 uploadAllowed: {
                     image: true,
                     object: false,
@@ -351,6 +365,9 @@ export const DEFAULT_OPTIONS = {
         projects: {
             title: 'Menus.my_project',
             mainType: 'projects',
+            opt: {
+                search: { category: true, date: true, order: true, query: true },
+            },
             navigations: {
                 projects: {
                     name: 'Menus.my_project',

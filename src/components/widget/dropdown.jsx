@@ -79,13 +79,15 @@ class Dropdown extends Component {
     };
     makeDropdownItem() {
         const { items } = this.props;
+
         return items.map((item, index) => {
-            const [text, value] = item;
+            const [text, value, style] = item;
             return (
                 <div
                     key={value}
                     value={value}
                     index={index}
+                    style={style}
                     className={this.theme.item}
                     onClick={() => {
                         this.handleItemClick(item);

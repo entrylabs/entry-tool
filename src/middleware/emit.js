@@ -1,12 +1,14 @@
 import { VISIBLE, CLICK_BUTTON, TRIGGER_EVENT } from '@actions/index';
-import { API_FAIL, UPLOAD_ITEM } from '@actions/popup';
+import { API_FAIL } from '@actions/popup';
 import { CHANGE_COLOR_PICKER } from '@actions/picker';
 import {
     SELECT_DROPDOWN,
     CHANGED_ANGLE,
     CHANGE_SORTABLE_LIST,
     CHANGE_DRAGGING,
+    PICK_COLOR,
 } from '@actions/widget';
+import root from 'window-or-global';
 
 export default class EmitMiddleware {
     constructor(emitter) {
@@ -31,19 +33,19 @@ export default class EmitMiddleware {
                     this.emitter.emit('hide');
                     break;
                 }
-                case UPLOAD_ITEM:
-                    action.data.objType = action.objType;
-                    this.emitter.emit('loaded', action.data.data);
-                    break;
                 case TRIGGER_EVENT: {
                     this.emitter.emit(action.event, action.data);
                     if (action.hide) {
-                        this.emitter.hide();
+                        this.emitter.emit('hide');
                     }
                     break;
                 }
                 case API_FAIL: {
                     this.emitter.emit('fail', action.error);
+                    break;
+                }
+                case PICK_COLOR: {
+                    this.emitter.emit('pick', action.data);
                     break;
                 }
                 case CHANGED_ANGLE:
