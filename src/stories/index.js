@@ -6,6 +6,7 @@ import Sample from '../components/popup/Sample';
 import CommonGnb from '../components/popup/Gnb';
 import Popup from '../components/popup';
 import ColorPicker from '../components/picker/color';
+import LedPicker from '../components/ledPicker/ledPicker';
 import Number from '../components/widget/number';
 import Dropdown from '../components/widget/dropdown';
 import ModalProgress from '../components/widget/modalProgress';
@@ -33,16 +34,16 @@ export default function Provider({ story }) {
 }
 Theme.type = 'entryline';
 storiesOf('Popup', module)
-    .addDecorator((story) => <Provider story={story()}/>)
-    .add('전체', () => <Sample/>)
-    .add('툴팁', () => <Tooltips/>)
-    .add('확장블록', () => <Popup type="expansion" data={EXPANSION_SAMPLE}/>)
-    .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE}/>)
-    .add('오브젝트추가하기', () => <Popup type="sprite" data={SPRITE_SAMPLE}/>)
-    .add('모양추가', () => <Popup type="picture" data={SPRITE_SAMPLE}/>)
-    .add('모양 가져오기', () => <Popup type="paint" data={SPRITE_SAMPLE}/>)
-    .add('나의 작품', () => <Popup type="projects" data={PROJECTS_SAMPLE}/>)
-    .add('gnb', () => <CommonGnb/>);
+    .addDecorator((story) => <Provider story={story()} />)
+    .add('전체', () => <Sample />)
+    .add('툴팁', () => <Tooltips />)
+    .add('확장블록', () => <Popup type="expansion" data={EXPANSION_SAMPLE} />)
+    .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE} />)
+    .add('오브젝트추가하기', () => <Popup type="sprite" data={SPRITE_SAMPLE} />)
+    .add('모양추가', () => <Popup type="picture" data={SPRITE_SAMPLE} />)
+    .add('모양 가져오기', () => <Popup type="paint" data={SPRITE_SAMPLE} />)
+    .add('나의 작품', () => <Popup type="projects" data={PROJECTS_SAMPLE} />)
+    .add('gnb', () => <CommonGnb />);
 
 const progressType = {
     progress: 'Progress',
@@ -51,7 +52,7 @@ const progressType = {
 };
 const wigetStories = storiesOf('Widget', module);
 wigetStories.addDecorator(withKnobs);
-wigetStories.addDecorator((story) => <Provider story={story()}/>);
+wigetStories.addDecorator((story) => <Provider story={story()} />);
 
 /* eslint-disable array-element-newline */
 /* eslint-disable array-bracket-newline */
@@ -75,7 +76,8 @@ wigetStories
                 items={[
                     {
                         _id: 'test',
-                        imgPath: 'https://playentry.org/uploads/60/c4/image/60c429a8a742a5d573af8abd37b22f2b.png',
+                        imgPath:
+                            'https://playentry.org/uploads/60/c4/image/60c429a8a742a5d573af8abd37b22f2b.png',
                         title: 'title',
                     },
                 ]}
@@ -97,7 +99,8 @@ wigetStories
             onChangeAngle={action('onChangeAngle')}
         />
     ))
-    .add('컬러피커', () => <ColorPicker color="#FF0000" onChangeColorPicker={action}/>)
+    .add('컬러피커', () => <ColorPicker color="#FF0000" onChangeColorPicker={action} />)
+    .add('LED피커', () => <LedPicker />)
     .add('드롭다운', () => (
         <Dropdown
             items={[[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9]]}
@@ -105,12 +108,12 @@ wigetStories
     ))
     .add('로딩바', () => (
         <div>
-            <ColorPicker color="#FF0000" onChangeColorPicker={action}/>
+            <ColorPicker color="#FF0000" onChangeColorPicker={action} />
             <ModalProgress
                 title={text('Title', '업로드 중입니다.')}
                 description={text(
                     'description',
-                    '문제가 계속된다면<br>entry@connect.or.kr 로 문의해주세요.',
+                    '문제가 계속된다면<br>entry@connect.or.kr 로 문의해주세요.'
                 )}
                 type={select('type', progressType, 'progress')}
                 onClose={() => {
@@ -121,12 +124,12 @@ wigetStories
     ))
     .add('에러 팝업', () => (
         <div>
-            <ColorPicker color="#FF0000" onChangeColorPicker={action}/>
+            <ColorPicker color="#FF0000" onChangeColorPicker={action} />
             <ModalProgress
                 title={text('Title', '업로드에 실패했습니다.')}
                 description={text(
                     'description',
-                    '문제가 계속된다면<br>entry@connect.or.kr 로 문의해주세요.',
+                    '문제가 계속된다면<br>entry@connect.or.kr 로 문의해주세요.'
                 )}
                 type={select('type', progressType, 'error')}
                 onClose={() => {
