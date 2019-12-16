@@ -88,7 +88,7 @@ export default class EntryTool extends EventEmitter {
 
     getModule(type) {
         switch (type) {
-            case 'microBitLedPicker':
+            case 'ledPicker':
                 this.reducerType = 'picker';
                 return import('./components/ledPicker/ledPickerContainer');
             case 'colorPicker':
