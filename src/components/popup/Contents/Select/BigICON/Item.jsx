@@ -23,6 +23,18 @@ const Index = ({ index, imageBaseUrl, item, selected, applySelected }) => {
     return (
         <li onClick={onItemClicked} className={classname({ [theme.on]: index >= 0 })}>
             <div className={theme.link}>
+                {item && item.sponsor && item.sponsor === 'naver' && (
+                    <a
+                        className={theme.sponsored}
+                        target="_blank"
+                        href={`${item.sponsorLink}`}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                        }}
+                    >
+                        <div className={theme.text}>Sponsored by NAVER</div>
+                    </a>
+                )}
                 <div
                     className={theme.thmb}
                     style={{
@@ -30,6 +42,7 @@ const Index = ({ index, imageBaseUrl, item, selected, applySelected }) => {
                         backgroundRepeat: 'no-repeat',
                     }}
                 />
+
                 <div className={theme.inner_box}>
                     <strong className={theme.sjt}>{CommonUtils.getLang(titleKey)}</strong>
                     <div className={theme.dsc} dangerouslySetInnerHTML={{ __html: desc }} />
