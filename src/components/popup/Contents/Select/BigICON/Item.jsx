@@ -20,21 +20,22 @@ const Index = ({ index, imageBaseUrl, item, selected, applySelected }) => {
 		applySelected(selected);
 	};
 
+	const sponsorName = item && item.sponsor ? item.sponsor : '';
+
 	return (
 		<li onClick={onItemClicked} className={classname({ [theme.on]: index >= 0 })}>
 			<div className={theme.link}>
 				{item &&
-				item.sponsor &&
-				item.sponsor === 'naver' && (
+				item.sponsor && (
 					<a
-						className={`${theme.sponsored} ${theme.naver}`}
+						className={`${theme.sponsored} ${theme[item.sponsor]}`}
 						target="_blank"
 						href={`${item.sponsorLink}`}
 						onClick={(e) => {
 							e.stopPropagation();
 						}}
 					>
-						<div className={theme.text}>Sponsored by NAVER</div>
+						<div className={theme.text}>{item.sponsorText}</div>
 					</a>
 				)}
 				<div

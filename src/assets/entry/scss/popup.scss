@@ -980,11 +980,17 @@
 		width: 134px;
 		height: 32px;
 		border-radius: 6px;
-		background-color: #ffffff;
+		background-color: #03cf5d;
 		z-index: 1000;
 		// by NAVER
-		&.naver {
+		&.papagoNaver {
 			background-color: #03cf5d;
+			margin: 126px 10px 10px 120px;
+		}
+		&.clovaNaver {
+			width: 154px;
+			background-color: #03cf5d;
+			margin: 126px 10px 10px 100px;
 		}
 		.text {
 			font-size: 12px;
