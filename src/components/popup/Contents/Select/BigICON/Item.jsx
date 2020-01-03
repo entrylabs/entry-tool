@@ -14,14 +14,15 @@ const Index = ({ index, imageBaseUrl, item, selected, applySelected, select, des
     const desc = CommonUtils.getLang(item.descriptionKey);
     const onItemClicked = (e) => {
         e.preventDefault();
+        const isBlockDeselect = typeof item.active !== 'undefined';
         if (index >= 0) {
-            deselect(item, () => {
+            if (isBlockDeselect) {
+                deselect(item, () => selected.splice(index, 1));
+            } else {
                 selected.splice(index, 1);
-            });
+            }
         } else {
-            selected.push(item, () => {
-                select(item);
-            });
+            selected.push(item, () => select(item));
         }
         applySelected(selected);
     };
