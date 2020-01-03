@@ -2,20 +2,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { applySelected } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';
+import { EMIT_TYPES as Types } from '@constants';
+import { triggerEvent } from '@actions';
 import { makeFindSelectedByName } from '@selectors';
 import classname from 'classnames';
 import Theme from '@utils/Theme';
 
-const Index = ({ index, imageBaseUrl, item, selected, applySelected }) => {
+const Index = ({ index, imageBaseUrl, item, selected, applySelected, select, deselect }) => {
     const theme = Theme.getStyle('popup');
     const { imageName, titleKey } = item;
     const desc = CommonUtils.getLang(item.descriptionKey);
     const onItemClicked = (e) => {
         e.preventDefault();
+        const isBlockDeselect = typeof item.active !== 'undefined';
         if (index >= 0) {
-            selected.splice(index, 1);
+            if (isBlockDeselect) {
+                deselect(item, () => selected.splice(index, 1));
+            } else {
+                selected.splice(index, 1);
+            }
         } else {
-            selected.push(item);
+            selected.push(item, () => select(item));
         }
         applySelected(selected);
     };
@@ -49,6 +56,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch) => ({
     applySelected: (list) => dispatch(applySelected(list)),
+    select: (data, callback) => dispatch(triggerEvent(Types.itemon, { data, callback }, false)),
+    deselect: (data, callback) => dispatch(triggerEvent(Types.itemoff, { data, callback }, false)),
 });
 
 export default connect(
