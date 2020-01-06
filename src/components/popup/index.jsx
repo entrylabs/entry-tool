@@ -57,7 +57,7 @@ class Sprite extends Component {
         root.history.back();
     }
 
-    setContent = function() {
+    setContent() {
         const { opt = {}, writeBoxOption, data: dataObj, uploads: uploaded } = this.property;
         const { imageBaseUrl: expsnsionIconBaseUrl } = this.property;
         const { isDrawVector, multiSelect, search: searchOption } = opt;
@@ -92,11 +92,12 @@ class Sprite extends Component {
                 view = <WriteBox fontOption={writeBoxOption} />;
                 navigation = <Navigation {...navSettings} searchOption={false} />;
                 break;
-            case 'expansion':
+            case 'expansion': {
                 const url = expsnsionIconBaseUrl || '/lib/entry-js/images/hardware/';
                 navigation = null;
                 view = <Select type={'bigicon'} imageBaseUrl={url} data={data} />;
                 break;
+            }
             case 'projects':
             case 'favorites':
                 view = <Projects type={selected} data={data} />;
@@ -111,7 +112,7 @@ class Sprite extends Component {
                 {view}
             </>
         );
-    };
+    }
 
     render() {
         return (
@@ -142,7 +143,4 @@ const mapDispatchToProps = (dispatch) => ({
     initState: () => dispatch(initState()),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Sprite);
+export default connect(mapStateToProps, mapDispatchToProps)(Sprite);

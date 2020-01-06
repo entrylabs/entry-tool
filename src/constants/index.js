@@ -149,21 +149,36 @@ export const DEFAULT_OPTIONS = {
             {
                 name: '필기체',
                 family: 'Nanum Pen Script',
-                style: { backgroundColor: '#f7fcff', padding: '17px 22px 14px 16px', margin:'0px', borderTop: 'solid 1px #d6e9f4' },
+                style: {
+                    backgroundColor: '#f7fcff',
+                    padding: '17px 22px 14px 16px',
+                    margin: '0px',
+                    borderTop: 'solid 1px #d6e9f4',
+                },
                 url: '/css/nanumpenscript.css',
                 $$hashKey: 'object:138',
             },
             {
                 name: '한라산체',
                 family: 'Jeju Hallasan',
-                style: { backgroundColor: '#f7fcff', padding: '17px 22px 14px 16px', margin:'0px', borderTop: 'solid 1px #d6e9f4' },
+                style: {
+                    backgroundColor: '#f7fcff',
+                    padding: '17px 22px 14px 16px',
+                    margin: '0px',
+                    borderTop: 'solid 1px #d6e9f4',
+                },
                 url: '/css/jejuhallasan.css',
                 $$hashKey: 'object:139',
             },
             {
                 name: '코딩고딕체',
                 family: 'Nanum Gothic Coding',
-                style: { backgroundColor: '#f7fcff', padding: '17px 22px 14px 16px', margin:'0px', borderTop: 'solid 1px #d6e9f4' },
+                style: {
+                    backgroundColor: '#f7fcff',
+                    padding: '17px 22px 14px 16px',
+                    margin: '0px',
+                    borderTop: 'solid 1px #d6e9f4',
+                },
                 url: '/css/nanumgothiccoding.css',
                 $$hashKey: 'object:140',
             },
@@ -374,6 +389,70 @@ export const DEFAULT_OPTIONS = {
                 },
                 favorites: {
                     name: 'Menus.marked_project',
+                },
+            },
+        },
+        table: {
+            title: 'Workspace.table_add',
+            mainType: 'sprite',
+            navigations: {
+                select: {
+                    name: 'Workspace.select_table',
+                },
+                upload: {
+                    name: 'Workspace.upload',
+                },
+            },
+            opt: {
+                search: { query: true },
+                multiSelect: true,
+                uploadAllowed: {
+                    image: false,
+                    object: false,
+                    sound: false,
+                    table: true,
+                },
+            },
+            sidebar: {
+                사람: {
+                    name: 'Menus.people',
+                    sub: {
+                        all: { name: 'Menus.all' },
+                    },
+                },
+                자연: {
+                    name: 'Menus.nature',
+                    sub: {
+                        all: { name: 'Menus.all' },
+                        동물: { name: 'Menus.animal_insect' },
+                        자연환경: { name: 'Menus.environment' },
+                    },
+                },
+                사물: {
+                    name: 'Menus.things',
+                    sub: {
+                        all: { name: 'Menus.all' },
+                        이동수단: { name: 'Menus.vehicles' },
+                        기타: { name: 'Menus.others' },
+                    },
+                },
+                판타지: {
+                    name: 'Menus.fantasy',
+                    sub: {
+                        all: { name: 'Menus.all' },
+                    },
+                },
+                악기: {
+                    name: 'Menus.instrument',
+                    sub: {
+                        all: { name: 'Menus.all' },
+                        피아노: { name: 'Menus.piano' },
+                        마림바: { name: 'Menus.marimba' },
+                        드럼: { name: 'Menus.drum' },
+                        장구: { name: 'Menus.janggu' },
+                        효과음: { name: 'Menus.sound_effect' },
+                        기타타악기: { name: 'Menus.others_instrument' },
+                    },
                 },
             },
         },
