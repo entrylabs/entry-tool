@@ -120,10 +120,7 @@ const mapDispatchToProps = (dispatch) => ({
     applyUploaded: (list) => dispatch(applyUploaded(list)),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Index);
+export default connect(mapStateToProps, mapDispatchToProps)(Index);
 
 const getWarnMsg = (allowed, copyrightClass) => {
     const result = { warnExt: '', title: '', desc: '' };
@@ -131,13 +128,15 @@ const getWarnMsg = (allowed, copyrightClass) => {
         result.warnExt = CommonUtils.getLang('Menus.sound_upload_warn_1');
         result.title = CommonUtils.getLang('Menus.file_upload_warn_title_sound');
         result.desc = CommonUtils.getLang('Menus.file_upload_warn_desc_sound');
-    }
-    if (allowed.object && allowed.image) {
+    } else if (allowed.table) {
+        result.warnExt = CommonUtils.getLang('Menus.table_upload_warn_1');
+        result.title = CommonUtils.getLang('Menus.file_upload_warn_title_table');
+        result.desc = CommonUtils.getLang('Menus.file_upload_warn_desc_table');
+    } else if (allowed.object && allowed.image) {
         result.warnExt = CommonUtils.getLang('Menus.sprite_upload_warn');
         result.title = CommonUtils.getLang('Menus.file_upload_warn_title_image');
         result.desc = CommonUtils.getLang('Menus.file_upload_warn_desc_image');
-    }
-    if (!allowed.object && allowed.image) {
+    } else if (!allowed.object && allowed.image) {
         result.warnExt = CommonUtils.getLang('Menus.picture_upload_warn_1');
         result.title = CommonUtils.getLang('Menus.file_upload_warn_title_image');
         result.desc = CommonUtils.getLang('Menus.file_upload_warn_desc_image');

@@ -54,10 +54,7 @@ const mapDispatchToProps = (dispatch) => ({
     uploadFail: (err) => dispatch(triggerEvent(Types.uploadFail, err, false)),
 });
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(Index);
+export default connect(null, mapDispatchToProps)(Index);
 
 const appendData = (target, name, file) => {
     let result = target;
@@ -87,6 +84,7 @@ const checkFileType = ({ file, uploadNotAllowedExt, failEvent, uploadAllowed: al
     // const isGif = /^image\/gif/.test(file.type);
     const isObject = /\.eo$/.test(file.name);
     const isAudio = file.name.toLowerCase().indexOf('.mp3') >= 0;
+    const isTable = /\.(csv|xlsx?|json|xml)$/.test(file.name);
     const splittedNames = file.name.split('.');
     const ext = splittedNames[splittedNames.length - 1];
     const notSupported = { messageParent: 'Workspace', message: 'upload_not_supported_file_msg' };
@@ -102,12 +100,14 @@ const checkFileType = ({ file, uploadNotAllowedExt, failEvent, uploadAllowed: al
     if (allowed.sound && isAudio) {
         return 'sound';
     }
-
     if (allowed.object && isObject) {
         return 'object';
     }
     if (allowed.image && isImage) {
         return 'image';
+    }
+    if (allowed.table && isTable) {
+        return 'table';
     }
 
     failEvent(notSupported);
@@ -122,6 +122,7 @@ const createData = ({ uploadFiles, failEvent, uploadNotAllowedExt, uploadAllowed
         switch (checkFileType({ file, uploadNotAllowedExt, failEvent, uploadAllowed })) {
             case 'sound':
             case 'image':
+            case 'table':
                 formData = appendData(formData, `uploadFile${idx}`, file);
                 break;
             case 'object':
