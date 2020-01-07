@@ -252,3 +252,13 @@ export function FormAsyncException(obj) {
 
 export const isString = (str) => isNaN(str) || Number(str).toString() != str;
 export const someString = (array) => _some(array, isString);
+export const getHeader = (matrix, editor = 'text') =>
+    _.chain(matrix)
+        .head()
+        .map((column) => ({ editor, name: column }))
+        .value();
+export const getData = (matrix) =>
+    _.chain(matrix)
+        .slice(1)
+        .map((content) => _.zipObject(_.head(matrix), content))
+        .value();
