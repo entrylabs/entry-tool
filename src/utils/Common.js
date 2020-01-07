@@ -1,6 +1,7 @@
 import root from 'window-or-global';
 import { DEFAULT_OPTIONS } from '../constants/index';
 import get from 'lodash/get';
+import _some from 'lodash/some';
 
 export const CommonUtils = {
     getScaleNumber(num, inMin, inMax, outMin, outMax) {
@@ -32,21 +33,21 @@ export const CommonUtils = {
         }
         return mouseEvent;
     },
-    getLangType: () => {
+    getLangType() {
         const lang = root.Lang || {};
         return lang.type;
     },
-    getLang: (key = '') => {
+    getLang(key = '') {
         const lang = root.Lang || {};
         return get(lang, key) || key;
     },
-    getFonts: () => {
+    getFonts() {
         if (root.EntryStatic && root.EntryStatic.fonts) {
             return root.EntryStatic.fonts.filter((font) => font.visible);
         }
         return DEFAULT_OPTIONS.WRITE_BOX.FONTS;
     },
-    toggleClass: (isActive, className, falseClassName = '') => {
+    toggleClass(isActive, className, falseClassName = '') {
         if (isActive) {
             return className;
         }
@@ -57,13 +58,13 @@ export const CommonUtils = {
         const expUrl = /^[((http(s?))\:\/\/?)|/]/i;
         return expUrl.test(url) ? url : `/${url}`;
     },
-    createImageUrl: (id, baseUrl = '') => {
+    createImageUrl(id, baseUrl = '') {
         if (!id) {
             return '';
         }
         return `${baseUrl}/uploads/${id.substring(0, 2)}/${id.substring(2, 4)}/thumb/${id}.png`;
     },
-    remove: (array, callback) => {
+    remove(array, callback) {
         const arr = [...array];
         const index = arr.findIndex(callback);
         if (index >= 0) {
@@ -93,7 +94,7 @@ export const CommonUtils = {
     },
 
     // 정해진 Dom위치에 Picker 배치
-    getComponentPosition: (props, options) => {
+    getComponentPosition(props, options) {
         const { positionDom, marginRect = {}, positionRect, boundaryDom } = props;
         const { width: componentWidth, height: componentHeight, arrowHeight } = options;
         let boundaryHeight = 0;
@@ -127,7 +128,7 @@ export const CommonUtils = {
         };
     },
 
-    getAlignPosition: (props, component, options) => {
+    getAlignPosition(props, component, options) {
         const { boundaryDom } = props;
         const { top, left, isUpStyle } = CommonUtils.getComponentPosition(props, options);
         const { widthMargin = 0, maxArrowPosition, arrowWidth = 0 } = options;
@@ -223,8 +224,8 @@ export const CommonUtils = {
         if (fileurl) {
             thumb = fileurl.thumb || fileurl.resized || fileurl.origin || fileurl;
         }
-        const defaultName = label.en ? label.en : itemName;
-        const name = label[lang] ? label[lang] : defaultName;
+        const defaultName = label.en || itemName;
+        const name = label[lang] || defaultName;
         return {
             name,
             imageType,
@@ -240,6 +241,12 @@ export const CommonUtils = {
     },
     distinct(item, index, self) {
         return self.indexOf(item) === index;
+    },
+    isString(str) {
+        return isNaN(str) || Number(str).toString() != str;
+    },
+    someString(array) {
+        return _some(array, this.isString);
     },
 };
 
