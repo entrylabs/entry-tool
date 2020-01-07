@@ -242,12 +242,6 @@ export const CommonUtils = {
     distinct(item, index, self) {
         return self.indexOf(item) === index;
     },
-    isString(str) {
-        return isNaN(str) || Number(str).toString() != str;
-    },
-    someString(array) {
-        return _some(array, this.isString);
-    },
 };
 
 export function FormAsyncException(obj) {
@@ -255,3 +249,6 @@ export function FormAsyncException(obj) {
         this[key] = obj[key];
     });
 }
+
+export const isString = (str) => isNaN(str) || Number(str).toString() != str;
+export const someString = (array) => _some(array, isString);

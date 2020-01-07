@@ -23,9 +23,11 @@ import {
     SPRITE_SAMPLE,
     EXPANSION_SAMPLE,
     SOUND_SAMPLE,
+    TABLE_SAMPLE,
 } from '../constants/sample';
 
 import configureStore from '../store';
+import Chart from '../components/chart/Chart';
 
 const store = configureStore();
 httpService.setupInterceptors('http://localhost:4000');
@@ -43,7 +45,8 @@ storiesOf('Popup', module)
     .add('모양추가', () => <Popup type="picture" data={SPRITE_SAMPLE} />)
     .add('모양 가져오기', () => <Popup type="paint" data={SPRITE_SAMPLE} />)
     .add('나의 작품', () => <Popup type="projects" data={PROJECTS_SAMPLE} />)
-    .add('gnb', () => <CommonGnb />);
+    .add('gnb', () => <CommonGnb />)
+    .add('차트', () => <Chart table={TABLE_SAMPLE} />);
 
 const progressType = {
     progress: 'Progress',
@@ -103,7 +106,17 @@ wigetStories
     .add('LED피커', () => <LedPicker />)
     .add('드롭다운', () => (
         <Dropdown
-            items={[[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9]]}
+            items={[
+                [1, 1],
+                [2, 2],
+                [3, 3],
+                [4, 4],
+                [5, 5],
+                [6, 6],
+                [7, 7],
+                [8, 8],
+                [9, 9],
+            ]}
         />
     ))
     .add('로딩바', () => (

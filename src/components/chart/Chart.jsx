@@ -4,16 +4,15 @@ import bb from 'billboard.js';
 import 'billboard.js/dist/theme/insight.css';
 
 import _reduce from 'lodash/reduce';
-import _chain from 'lodash/chain';
 import _slice from 'lodash/slice';
 
-import { CommonUtils } from '@utils/Common';
-const { generateHash, someString } = CommonUtils;
+import { CommonUtils, someString } from '@utils/Common';
+const { generateHash } = CommonUtils;
 
 const getColumnGroup = (row) => (someString(_slice(row, 1)) ? 'stringColumn' : 'numberColumn');
 
 const classifyColumn = (table) =>
-    _chain(table)
+    _.chain(table)
         .unzip()
         .groupBy(getColumnGroup)
         .value();
@@ -23,7 +22,7 @@ const getColumns = (yAxis, yIndexs = [0]) =>
 
 const getGenerateOption = (props) => {
     const {
-        table = [[]],
+        table = [],
         type = 'bar',
         axisXType = 'category',
         size = { width: 960, height: 540 },
@@ -39,9 +38,10 @@ const getGenerateOption = (props) => {
     let { x, columns } = props;
 
     if (!x && table.length) {
-        const { xAxis, yAxis } = classifyColumn(table);
+        const { stringColumn: xAxis, numberColumn: yAxis } = classifyColumn(table);
         x = xAxis[xIndex];
-        columns = [x, ...getColumns(xAxis, yAxis, xIndex, yIndexs)];
+        columns = [x, ...getColumns(yAxis, yIndexs)];
+        x = x[0];
     }
 
     const generateOption = {
@@ -66,7 +66,11 @@ const Chart = (props) => {
 
     bb.generate(generateOption);
 
-    return <div id={id}></div>;
+    return (
+        <div>
+            <div id={id} />
+        </div>
+    );
 };
 
 export default Chart;
