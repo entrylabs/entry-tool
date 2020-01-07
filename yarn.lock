@@ -1126,6 +1126,13 @@
     "@svgr/plugin-svgo" "^4.3.1"
     rollup-pluginutils "^2.8.1"
 
+"@toast-ui/react-grid@^4.8.1":
+  version "4.8.1"
+  resolved "https://registry.yarnpkg.com/@toast-ui/react-grid/-/react-grid-4.8.1.tgz#3fe74eab8d1e1852a0377515657ecc36e98ae170"
+  integrity sha512-7GCFItVjRn3bAmzPLv3SZ5yvgCtP6m/g8OfBlCXKXlTVJyaFFunuaPMytKpkXNxTLo5SB4uRX7cHssOIyokuWQ==
+  dependencies:
+    tui-grid "^4.8.1"
+
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"
@@ -7860,6 +7867,11 @@ jest@20.0.4:
   dependencies:
     jest-cli "^20.0.4"
 
+jquery@^1.11.0:
+  version "1.12.4"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.12.4.tgz#01e1dfba290fe73deba77ceeacb0f9ba2fec9e0c"
+  integrity sha1-AeHfuikP5z3rp3zurLD5ui/sngw=
+
 js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.5.1.tgz#1efa39ef2c5f7980bb1784ade4a8af2de3291121"
@@ -10474,6 +10486,11 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.2, postcss@^7.0.5:
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
+preact@^8.4.2:
+  version "8.5.3"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-8.5.3.tgz#78c2a5562fcecb1fed1d0055fa4ac1e27bde17c1"
+  integrity sha512-O3kKP+1YdgqHOFsZF2a9JVdtqD+RPzCQc3rP+Ualf7V6rmRDchZ9MJbiGTT7LuyqFKZqlHSOyO/oMFmI2lVTsw==
+
 prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
@@ -13053,7 +13070,7 @@ trim-right@^1.0.1:
   dependencies:
     glob "^7.1.2"
 
-tslib@^1.9.0:
+tslib@^1.10.0, tslib@^1.9.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
   integrity sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
@@ -13062,6 +13079,45 @@ tty-browserify@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
   integrity sha1-oVe6QC2iTpv5V/mqadUk7tQpAaY=
+
+tui-code-snippet@^1.5.0:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/tui-code-snippet/-/tui-code-snippet-1.5.2.tgz#f4b8f0f1ac996b0b5b621f77c9507af19a0de238"
+  integrity sha512-6UqTlQaaC1KLcmC0HAoq5dtl1G4Fib+R+NC7pmaV7kiIlZ7JqKhUmnOoGRcreAyzd81UTK/vCvhrw9QJskpCFQ==
+
+tui-date-picker@^3.3.3:
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/tui-date-picker/-/tui-date-picker-3.3.4.tgz#e3422ce6e38e6d86579823a3d7153eb83e850109"
+  integrity sha512-tJekUFhVFh6OeHSkKP6zgVjMNacLToDxaNVpVtmEZgmEo7r1xCgqq3RgVOqf7Im+7cHE5BQtJdcX/ZNP3tO9Yg==
+  dependencies:
+    jquery "^1.11.0"
+    tui-code-snippet "^1.5.0"
+    tui-time-picker "^1.3.0"
+
+tui-grid@^4.8.1:
+  version "4.8.1"
+  resolved "https://registry.yarnpkg.com/tui-grid/-/tui-grid-4.8.1.tgz#c8baf171935e86e32eeee01799fb1ebe78034e65"
+  integrity sha512-uAlbxVVg/yZaakoD7XfvdxfyVliBMWmxT4SSb7TL6Deg1dFyEAxH4gZar/x/31t9DSsCBIrX8LPUHOF5mMDaZg==
+  dependencies:
+    preact "^8.4.2"
+    tslib "^1.10.0"
+    tui-date-picker "^3.3.3"
+    tui-pagination "^3.3.2"
+
+tui-pagination@^3.3.2:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/tui-pagination/-/tui-pagination-3.3.3.tgz#c3b61978c9ee67d78c125bb6c1576a1240605bf1"
+  integrity sha512-jecspV0PpmvnZRG8cwj2JwyKeqQaWY2DlE6o1++qFrulL5Wdqy4uhjFVXduioCq1nBI9uJ4/W7kjv/3tIRy7KA==
+  dependencies:
+    tui-code-snippet "^1.5.0"
+
+tui-time-picker@^1.3.0:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/tui-time-picker/-/tui-time-picker-1.6.1.tgz#9cd0e34262d0c3fac773069701f115a5a4c3666e"
+  integrity sha512-UynhhFjTh+fLMqCm8vbMVQZocKs9WweEZ9N66gHtPCv3JQQ1gg7ZKr8p6rOV9Z8F1aztmKGaSH+nIhwmQqwHQw==
+  dependencies:
+    jquery "^1.11.0"
+    tui-code-snippet "^1.5.0"
 
 tunnel-agent@^0.6.0:
   version "0.6.0"

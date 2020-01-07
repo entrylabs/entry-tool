@@ -7,12 +7,18 @@ module.exports = {
         rules: [
             {
                 test: /\.(css|scss)$/,
-                include: path.resolve('./node_modules/react-custom-scroll/'),
+                include: [
+                    path.resolve('./node_modules/react-custom-scroll/'),
+                    path.resolve('./node_modules/tui-grid/'),
+                ],
                 use: [require.resolve('style-loader'), require.resolve('css-loader')],
             },
             {
                 test: /\.(css|scss)$/,
-                exclude: path.resolve('./node_modules/react-custom-scroll/'),
+                exclude: [
+                    path.resolve('./node_modules/react-custom-scroll/'),
+                    path.resolve('./node_modules/tui-grid/'),
+                ],
                 use: [
                     require.resolve('style-loader'),
                     {

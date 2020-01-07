@@ -18,6 +18,7 @@ import { withKnobs, text, select } from '@storybook/addon-knobs';
 import Theme from '@utils/Theme';
 import { action } from '@storybook/addon-actions';
 import httpService from '../config/axios';
+import 'tui-grid/dist/tui-grid.css';
 import {
     PROJECTS_SAMPLE,
     SPRITE_SAMPLE,
@@ -27,7 +28,8 @@ import {
 } from '../constants/sample';
 
 import configureStore from '../store';
-import Chart from '../components/chart/Chart';
+import Chart from '../components/widget/Chart';
+import Table from '../components/widget/Table';
 
 const store = configureStore();
 httpService.setupInterceptors('http://localhost:4000');
@@ -45,8 +47,7 @@ storiesOf('Popup', module)
     .add('모양추가', () => <Popup type="picture" data={SPRITE_SAMPLE} />)
     .add('모양 가져오기', () => <Popup type="paint" data={SPRITE_SAMPLE} />)
     .add('나의 작품', () => <Popup type="projects" data={PROJECTS_SAMPLE} />)
-    .add('gnb', () => <CommonGnb />)
-    .add('차트', () => <Chart table={TABLE_SAMPLE} />);
+    .add('gnb', () => <CommonGnb />);
 
 const progressType = {
     progress: 'Progress',
@@ -242,4 +243,6 @@ wigetStories
                 ]}
             />
         );
-    });
+    })
+    .add('차트', () => <Chart table={TABLE_SAMPLE} />)
+    .add('테이블', () => <Table table={TABLE_SAMPLE} editor={'text'} />);
