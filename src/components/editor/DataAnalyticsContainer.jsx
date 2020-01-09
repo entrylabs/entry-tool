@@ -8,4 +8,4 @@ class DataAnalyticsContainer extends Component {
     }
 }
 
-export default withWrapper({ type: 'widget' })(DataAnalyticsContainer);
+export default withWrapper({ type: 'editor' })(DataAnalyticsContainer);
