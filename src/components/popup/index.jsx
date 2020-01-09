@@ -60,7 +60,7 @@ class Sprite extends Component {
     setContent() {
         const { opt = {}, writeBoxOption, data: dataObj, uploads: uploaded } = this.property;
         const { imageBaseUrl: expsnsionIconBaseUrl } = this.property;
-        const { isDrawVector, multiSelect, search: searchOption } = opt;
+        const { isDrawVector, multiSelect, showSelected, search: searchOption } = opt;
         const { navigation: selected } = this.state;
         const navSettings = {
             ...this.property,
@@ -77,7 +77,7 @@ class Sprite extends Component {
         let view = <div>empty</div>;
         switch (selected) {
             case 'select':
-                view = <Select {...this.property} multiSelect={multiSelect} data={data} />;
+                view = <Select {...this.property} multiSelect={multiSelect} showSelected={showSelected} data={data} />;
                 navigation = <Navigation {...navSettings} isDrawVector={isDrawVector} />;
                 break;
             case 'upload':

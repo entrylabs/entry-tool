@@ -46,6 +46,7 @@ storiesOf('Popup', module)
     .add('툴팁', () => <Tooltips />)
     .add('확장블록', () => <Popup type="expansion" data={EXPANSION_SAMPLE} />)
     .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE} />)
+    .add('데이터 테이블', () => <Popup type="table" data={TABLE_SAMPLE} />)
     .add('오브젝트추가하기', () => <Popup type="sprite" data={SPRITE_SAMPLE} />)
     .add('모양추가', () => <Popup type="picture" data={SPRITE_SAMPLE} />)
     .add('모양 가져오기', () => <Popup type="paint" data={SPRITE_SAMPLE} />)
@@ -250,8 +251,8 @@ wigetStories
     .add('차트', () => <Chart table={TABLE_SAMPLE} />)
     .add('테이블', () => <Table table={TABLE_SAMPLE} editor={'text'} />);
 
-storiesOf('AiLayout', module) 
-    .addDecorator((story) => <Provider story={story()}/>)
+storiesOf('AiLayout', module)
+    .addDecorator((story) => <Provider story={story()} />)
     .add('테이블 추가하기 - 데이터 선택', () => <DataSelect />)
     .add('테이블 추가하기 - 데이터 선택 딤드', () => <DataSelect Dimmed />)
     .add('테이블 추가하기 - 데이터 업로드', () => <DataUpload />);

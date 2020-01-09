@@ -16,7 +16,6 @@ const Index = (props) => {
     const [excluded, setExcluded] = useState([]);
     const [isUploading, setUploadState] = useState(false);
     const theme = Theme.getStyle('popup');
-    const isSound = type === 'sound';
     const { warnExt, title, desc } = getWarnMsg(opt.uploadAllowed, theme.copyright_link);
     const getExcludedIndex = (item) => excluded.findIndex(({ _id }) => _id === item._id);
     const onItemClick = (item) => {
@@ -67,7 +66,7 @@ const Index = (props) => {
                 )}
                 <div className={theme.section_cont}>
                     <p className={classname(theme.caution, theme.imico_pop_caution)}>{warnExt}</p>
-                    <div className={classname(theme.list_area, { [theme.sound_type]: isSound })}>
+                    <div className={classname(theme.list_area, { [theme.sound_type]: type === 'sound' })}>
                         <UploadInput
                             uploadNotAllowedExt={opt.uploadNotAllowedExt}
                             uploadAllowed={opt.uploadAllowed}
@@ -78,7 +77,7 @@ const Index = (props) => {
                                 <Item
                                     key={item._id}
                                     item={item}
-                                    isSound={isSound}
+                                    type={type}
                                     baseUrl={baseUrl}
                                     onClick={onItemClick}
                                     excluded={opt.multiSelect !== getExcludedIndex(item) >= 0}
