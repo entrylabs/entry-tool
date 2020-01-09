@@ -1,28 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import _memoize from 'lodash/memoize';
+import React from 'react';
 
-const memoizeImport = _memoize((url) => import(url));
-const Types = ['sound', 'table'];
+import SoundPopupList from './sound/PopupList';
+import SoundSelectItem from './sound/SelectItem';
+import TablePopupList from './table/PopupList';
+import TableSelectItem from './table/SelectItem';
+import DefaultPopupList from './default/PopupList';
+import DefaultSelectItem from './default/SelectItem';
 
-const createAsyncComonent = (name) => (props) => {
-    const [component, setComponent] = useState();
-    let { type } = props;
-    if (!Types.includes(type)) {
-        type = 'default';
-    }
-
-    useEffect(() => {
-        const url = `./${type}/${name}`;
-        memoizeImport(url).then((component) => {
-            setComponent(component);
-        });
-    }, []);
-
-    if (component) {
-        return <component.default {...props} />;
-    }
-    return null;
+const Components = {
+    sound: {
+        PopupList: SoundPopupList,
+        SelectItem: SoundSelectItem,
+    },
+    table: {
+        PopupList: TablePopupList,
+        SelectItem: TableSelectItem,
+    },
+    default: {
+        PopupList: DefaultPopupList,
+        SelectItem: DefaultSelectItem,
+    },
 };
 
-export const PopupList = createAsyncComonent('PopupList');
-export const SelectItem = createAsyncComonent('SelectItem');
+const createComonent = (name) => (props) => {
+    let { type } = props;
+    const TypeComponent = Components[type] ? Components[type] : Components.default;
+    const View = TypeComponent[name];
+    return <View {...props} />;
+};
+
+export const PopupList = createComonent('PopupList');
+export const SelectItem = createComonent('SelectItem');
