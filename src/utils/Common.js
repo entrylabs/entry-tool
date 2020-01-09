@@ -224,8 +224,8 @@ export const CommonUtils = {
         if (fileurl) {
             thumb = fileurl.thumb || fileurl.resized || fileurl.origin || fileurl;
         }
-        const defaultName = label.en || itemName;
-        const name = label[lang] || defaultName;
+        const defaultName = item.label && item.label.en ? item.label.en : item.name;
+        const name = item.label && item.label[lang] ? item.label[lang] : defaultName;
         return {
             name,
             imageType,
