@@ -16,7 +16,7 @@ class ContextMenu extends Component {
             left: 0,
             top: 0,
         };
-        this.theme = Theme.getStyle("popup");
+        this.theme = Theme.getStyle('popup');
         this.handleWindowResize = this.handleWindowResize.bind(this);
     }
 
@@ -27,7 +27,7 @@ class ContextMenu extends Component {
         const { x: windowX, y: windowY } = this.getWindowSize();
         const { width, height } = this.contextDom.getBoundingClientRect();
 
-        if ((x + width) - windowX > 0) {
+        if (x + width - windowX > 0) {
             x -= width;
 
             if (items.length > this.SCROLL_ITEM_THRESHOLD) {
@@ -35,7 +35,7 @@ class ContextMenu extends Component {
             }
         }
 
-        if ((y + height) - windowY > 0) {
+        if (y + height - windowY > 0) {
             y -= height;
         }
 
@@ -93,7 +93,10 @@ class ContextMenu extends Component {
                     <div className={this.theme.tooltip_inner}>
                         {items.length <= this.SCROLL_ITEM_THRESHOLD && this.makeDropdownItem()}
                         {items.length > this.SCROLL_ITEM_THRESHOLD && (
-                            <Scrollbars heightRelativeToParent='260px' className={this.theme.scrollbar}>
+                            <Scrollbars
+                                heightRelativeToParent="260px"
+                                className={this.theme.scrollbar}
+                            >
                                 {this.makeDropdownItem()}
                             </Scrollbars>
                         )}
@@ -106,26 +109,25 @@ class ContextMenu extends Component {
     makeDropdownItem() {
         const { items, onOutsideClick } = this.props;
 
-        return items
-            .map((value, index) => {
-                const { text, enable = true, callback } = value;
-                return (
-                    <div
-                        key={index}
-                        className={`${this.theme.item} ${enable ? '' : this.theme.disabled}`}
-                        onClick={() => {
-                            if (enable && callback) {
-                                callback();
-                            }
-                            if (onOutsideClick) {
-                                onOutsideClick();
-                            }
-                        }}
-                    >
-                        {text}
-                    </div>
-                );
-            });
+        return items.map((value, index) => {
+            const { text, enable = true, callback } = value;
+            return (
+                <div
+                    key={index}
+                    className={`${this.theme.item} ${enable ? '' : this.theme.disabled}`}
+                    onClick={() => {
+                        if (enable && callback) {
+                            callback();
+                        }
+                        if (onOutsideClick) {
+                            onOutsideClick();
+                        }
+                    }}
+                >
+                    {text}
+                </div>
+            );
+        });
     }
 }
 
