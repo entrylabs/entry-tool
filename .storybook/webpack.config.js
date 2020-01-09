@@ -10,6 +10,7 @@ module.exports = {
                 include: [
                     path.resolve('./node_modules/react-custom-scroll/'),
                     path.resolve('./node_modules/tui-grid/'),
+                    path.resolve('./node_modules/billboard.js/'),
                 ],
                 use: [require.resolve('style-loader'), require.resolve('css-loader')],
             },
@@ -18,6 +19,7 @@ module.exports = {
                 exclude: [
                     path.resolve('./node_modules/react-custom-scroll/'),
                     path.resolve('./node_modules/tui-grid/'),
+                    path.resolve('./node_modules/billboard.js/'),
                 ],
                 use: [
                     require.resolve('style-loader'),
