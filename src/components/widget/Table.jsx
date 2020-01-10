@@ -1,10 +1,13 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import TuiGrid from 'tui-grid';
 import 'tui-grid/dist/tui-grid.css';
 import Grid from '@toast-ui/react-grid';
-import { getHeader, getData } from '@utils/Common';
+import { getHeader, getData, makeTable } from '@utils/Common';
 import ContextMenu from '../widget/contextMenu';
+import '@assets/entry/scss/table.scss';
 
 const RIGHT_CLICK = 3;
+const BLANK = ' ';
 const rowContextMenu = [
     {
         text: '위에 행 추가하기',
@@ -46,6 +49,14 @@ const columnContextMenu = [
     },
 ];
 
+TuiGrid.applyTheme('entry', {
+    cell: {
+        header: {
+            background: '#f4f4f4',
+        },
+    },
+});
+
 const Table = (props) => {
     const [{ x, y, isVisible, contextMenu }, setContextMenuOption] = useState({
         x: 0,
@@ -55,40 +66,37 @@ const Table = (props) => {
     });
     const gridRef = useRef();
     let grid = { off: () => {} };
+
+    let { table = [] } = props;
     const {
-        table = [],
         width = 500,
-        bodyHeight = 200,
+        bodyHeight = 290,
         columnOptions = {},
-        rowHeight = 25,
         editor = 'text',
-        rowHeaders = [{ type: 'rowNum' }],
+        rowHeight = 40,
+        needRowHeader = true,
     } = props;
-    const data = getData(table);
-    const columns = getHeader(table, editor);
 
     useEffect(() => {
         grid = gridRef.current.getInstance();
     }, []);
 
     const handleMousedown = useCallback((event) => {
-        let contextMenu = [];
         const { nativeEvent } = event;
         const { which, x, y } = nativeEvent;
         if (which !== RIGHT_CLICK) {
             return;
         }
 
-        switch (event.targetType) {
-            case 'columnHeader':
-                contextMenu = columnContextMenu;
-                break;
-            case 'rowHeader':
-                contextMenu = rowContextMenu;
-                break;
-            default:
-                return;
+        let contextMenu = [];
+        if (event.targetType === 'columnHeader' && needRowHeader && event.columnName !== BLANK) {
+            contextMenu = columnContextMenu;
+        } else if (event.targetType === 'cell' && event.columnName === BLANK) {
+            contextMenu = rowContextMenu;
+        } else {
+            return;
         }
+
         setContextMenuOption((prev) => ({ x, y, contextMenu, isVisible: true }));
     }, []);
 
@@ -99,8 +107,16 @@ const Table = (props) => {
     const handleContextMenu = (event) => {
         event.preventDefault();
     };
+
+    if (needRowHeader) {
+        table = makeTable(table);
+    }
+
+    const data = getData(table);
+    const columns = getHeader(table, editor);
+
     return (
-        <div onContextMenu={handleContextMenu} style={{ height: '100vh' }}>
+        <div className="Table" onContextMenu={handleContextMenu}>
             <Grid
                 ref={gridRef}
                 data={data}
@@ -111,7 +127,6 @@ const Table = (props) => {
                 columnOptions={columnOptions}
                 virtualScrolling={true}
                 usageStatistics={false}
-                rowHeaders={rowHeaders}
                 onMousedown={handleMousedown}
             />
             {isVisible && (
