@@ -66,7 +66,7 @@ const Index = (props) => {
                 )}
                 <div className={theme.section_cont}>
                     <p className={classname(theme.caution, theme.imico_pop_caution)}>{warnExt}</p>
-                    <div className={classname(theme.list_area, { [theme.sound_type]: type === 'sound' })}>
+                    <div className={classname(theme.list_area, theme[`${type}_type`])}>
                         <UploadInput
                             uploadNotAllowedExt={opt.uploadNotAllowedExt}
                             uploadAllowed={opt.uploadAllowed}
