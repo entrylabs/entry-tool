@@ -24,6 +24,7 @@ import {
     EXPANSION_SAMPLE,
     SOUND_SAMPLE,
     TABLE_SAMPLE,
+    table_sample,
 } from '../constants/sample';
 
 import configureStore from '../store';
@@ -246,12 +247,11 @@ wigetStories
             />
         );
     })
-    .add('차트', () => <Chart table={TABLE_SAMPLE} />)
-    .add('테이블', () => <Table table={TABLE_SAMPLE} editor={'text'} />);
+    .add('차트', () => <Chart table={table_sample} type="line" />)
+    .add('테이블', () => <Table table={table_sample} editor={'text'} />);
 
 storiesOf('AiLayout', module)
     .addDecorator((story) => <Provider story={story()} />)
     .add('테이블 추가하기 - 데이터 선택', () => <DataSelect />)
     .add('테이블 추가하기 - 데이터 선택 딤드', () => <DataSelect Dimmed />)
     .add('테이블 추가하기 - 데이터 업로드', () => <DataUpload />);
-

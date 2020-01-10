@@ -4,6 +4,7 @@ import EntryDropper from '@assets/entry/scss/widget/Dropper.scss';
 import EntryProgress from '@assets/entry/scss/progress.scss';
 import EntryDraggable from '@assets/entry/scss/draggable.scss';
 import EntryCustomScroll from '@assets/entry/scss/customScroll.scss';
+import EntryTableStyle from '@assets/entry/scss/table.scss';
 import EntryLineCustomScroll from '@assets/entryline/scss/customScroll.scss';
 import EntryLinePopupStyle from '@assets/entryline/scss/popup.scss';
 import EntryLineBackpackStyle from '@assets/entryline/scss/Backpack.scss';
@@ -20,6 +21,7 @@ class Theme {
                 draggable: EntryDraggable,
                 dropper: EntryDropper,
                 customScroll: EntryCustomScroll,
+                table: EntryTableStyle,
             },
             entryline: {
                 popup: EntryLinePopupStyle,
@@ -28,6 +30,7 @@ class Theme {
                 draggable: EntryLineDraggable,
                 dropper: EntryDropper,
                 customScroll: EntryLineCustomScroll,
+                table: EntryTableStyle,
             },
         };
     }
