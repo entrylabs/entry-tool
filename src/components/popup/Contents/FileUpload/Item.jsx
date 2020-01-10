@@ -13,7 +13,7 @@ export default ({ type, excluded, item = {}, onClick, baseUrl }) => {
                 className={theme.link}
                 onClick={CommonUtils.handleClick(() => onClick(item))}
             >
-                <SelectItem type={type} theme={theme} item={item} baseUrl={baseUrl}/>
+                <SelectItem type={type} theme={theme} item={item} baseUrl={baseUrl} upload />
             </a>
         </li>
     );

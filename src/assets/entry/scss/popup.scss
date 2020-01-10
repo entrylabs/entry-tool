@@ -505,6 +505,17 @@
             margin: -32px 0 0 -32px;
         }
 
+        // data table type
+        .section_cont .table_type .obj_list .thmb {
+            position: relative;
+        }
+        .section_cont .table_type .obj_list li .thmb:before {
+            @include PositionLT(absolute, 50%, 50%);
+            width: 64px;
+            height: 64px;
+            margin: -32px 0 0 -32px;
+        }
+
         // 이미지 등록 경고
         .section_cont .img_caution_box {
             overflow: hidden;
@@ -934,12 +945,6 @@
         .obj_list li:first-child {
             margin-left: 156px;
         }
-    }
-    .file_add_list_box .obj_list li:first-child {
-        margin-left: 156px;
-    }
-    // 데이터 업로드 리스트
-    .data_upload_content {
         .caution .more_link {
             display: inline-block;
             position: relative;
@@ -960,37 +965,11 @@
                 background-color: #2c313d;
                 content: '';
             }
-            
-        }
-        .section_cont .obj_list .thmb {
-            position: relative;
-        }
-        .section_cont .obj_list li .thmb:before {
-            @include PositionLT(absolute, 50%, 50%);
-            width: 64px;
-            height: 64px;
-            margin: -32px 0 0 -32px;
-        }
-        .section_cont .img_caution_box {
-            overflow: hidden;
-            padding: 14px 0 18px;
 
-            background-color: #f7fcff;
         }
-        .section_cont .img_caution_box .inner {
-            width: 580px;
-            overflow: hidden;
-            margin: 0 auto;
-        }
-        .section_cont .img_caution_box .dsc_box {
-            padding-top: 12px;
-            float: left;
-            color: #000;
-            letter-spacing: -0.3px;
-        }
-        .section_cont .img_caution_box .dsc_box .dsc {
-            margin-top: 12px;
-        }
+    }
+    .file_add_list_box .obj_list li:first-child {
+        margin-left: 156px;
     }
 
     // 확장 블록 불러오기

@@ -1567,10 +1567,6 @@ export const EXPANSION_SAMPLE = [
 
 export const TABLE_SAMPLE = [
     {
-        label: {
-            ko: '한국국제교류재단 한국음식정보',
-            en: 'food',
-        },
         category: {
             main: 'public',
         },
@@ -1580,7 +1576,8 @@ export const TABLE_SAMPLE = [
             ['파전', '파', '굽는다'],
         ],
         info: {
-            length: 2,
+            rows: 2,
+            name: '한국국제교류재단 한국음식정보',
             provider: '한국 국제 교류재단 문화예술사업부',
             modifyDate: '2019-12-27',
             summary:
