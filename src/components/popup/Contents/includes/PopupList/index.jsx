@@ -10,9 +10,6 @@ const PopupList = {
 
 export default (props) => {
     const { type = 'default' } = props;
-    let Component = DefaultPopupList;
-    if (PopupList[type]) {
-        Component = PopupList[type];
-    }
+    const Component = PopupList[type] || DefaultPopupList;
     return <Component {...props} />;
 };
