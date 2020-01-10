@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import TuiGrid from 'tui-grid';
 import 'tui-grid/dist/tui-grid.css';
 import Grid from '@toast-ui/react-grid';
@@ -7,67 +7,30 @@ import ContextMenu from '../widget/contextMenu';
 import Theme from '@utils/Theme';
 
 const RIGHT_CLICK = 3;
-const BLANK = ' ';
-const rowContextMenu = [
-    {
-        text: '위에 행 추가하기',
-        callback: () => {
-            console.log('위에 행 추가하기');
-        },
-    },
-    {
-        text: '아래에 행 추가하기',
-        callback: () => {
-            console.log('아래에 행 추가하기');
-        },
-    },
-    {
-        text: '행 삭제하기',
-        callback: () => {
-            console.log('행삭제하기');
-        },
-    },
-];
-const columnContextMenu = [
-    {
-        text: '왼쪽에 속성 추가하기',
-        callback: () => {
-            console.log('위에 행 추가하기');
-        },
-    },
-    {
-        text: '오른쪽에 속성 추가하기',
-        callback: () => {
-            console.log('아래에 행 추가하기');
-        },
-    },
-    {
-        text: '속성 삭제하기',
-        callback: () => {
-            console.log('행삭제하기');
-        },
-    },
-];
 
-const makeContextMenu = (grid, type) => {
+const makeContextMenu = (targetTable, setTable, type, key) => {
+    const table = [...targetTable];
     if (type === 'row') {
         return [
             {
                 text: '위에 행 추가하기',
                 callback: () => {
-                    console.log('위에 행 추가하기');
+                    table.splice(key + 1, 0, Array(table[0].length).fill(0));
+                    setTable(table);
                 },
             },
             {
                 text: '아래에 행 추가하기',
                 callback: () => {
-                    console.log('아래에 행 추가하기');
+                    setTable(table.splice(key + 2, 0, Array(table[0].length).fill(0)));
+                    setTable(table);
                 },
             },
             {
                 text: '행 삭제하기',
                 callback: () => {
-                    console.log('행삭제하기');
+                    setTable(table.splice(key + 1, 1));
+                    setTable(table);
                 },
             },
         ];
@@ -76,19 +39,37 @@ const makeContextMenu = (grid, type) => {
             {
                 text: '왼쪽에 속성 추가하기',
                 callback: () => {
-                    console.log('위에 행 추가하기');
+                    const index = table[0].findIndex((header) => key === header);
+                    setTable(
+                        table.map((row) => {
+                            row.splice(index, 0, 0);
+                            return row;
+                        })
+                    );
                 },
             },
             {
                 text: '오른쪽에 속성 추가하기',
                 callback: () => {
-                    console.log('아래에 행 추가하기');
+                    const index = table[0].findIndex((header) => key === header) + 1;
+                    setTable(
+                        table.map((row) => {
+                            row.splice(index, 0, 0);
+                            return row;
+                        })
+                    );
                 },
             },
             {
                 text: '속성 삭제하기',
                 callback: () => {
-                    console.log('행삭제하기');
+                    const index = table[0].findIndex((header) => key === header);
+                    setTable(
+                        table.map((row) => {
+                            row.splice(index, 1);
+                            return row;
+                        })
+                    );
                 },
             },
         ];
@@ -103,7 +84,7 @@ TuiGrid.applyTheme('entry', {
         },
     },
 });
-
+let t;
 const Table = (props) => {
     const [{ x, y, isVisible, contextMenu }, setContextMenuOption] = useState({
         x: 0,
@@ -111,10 +92,10 @@ const Table = (props) => {
         isVisible: false,
         contextMenu: [],
     });
+    const { table: tableProps = [] } = props;
+    const [table, setTable] = useState(tableProps);
     const gridRef = useRef();
-    let grid = { off: () => {} };
 
-    const { table = [] } = props;
     const {
         width = 500,
         bodyHeight = 290,
@@ -125,28 +106,27 @@ const Table = (props) => {
         needRowHeader = true,
     } = props;
 
-    useEffect(() => {
-        grid = gridRef.current.getInstance();
-    }, []);
+    const handleMousedown = useCallback(
+        (event) => {
+            const { nativeEvent } = event;
+            const { which, x, y } = nativeEvent;
+            if (which !== RIGHT_CLICK) {
+                return;
+            }
 
-    const handleMousedown = useCallback((event) => {
-        const { nativeEvent } = event;
-        const { which, x, y } = nativeEvent;
-        if (which !== RIGHT_CLICK) {
-            return;
-        }
-
-        let contextMenu = [];
-        if (event.targetType === 'columnHeader' && needRowHeader && event.columnName !== BLANK) {
-            contextMenu = columnContextMenu;
-        } else if (event.targetType === 'cell' && event.columnName === BLANK) {
-            contextMenu = rowContextMenu;
-        } else {
-            return;
-        }
-
-        setContextMenuOption((prev) => ({ x, y, contextMenu, isVisible: true }));
-    }, []);
+            const { targetType, columnName, rowKey } = event;
+            let contextMenu = [];
+            if (targetType === 'columnHeader' && columnName !== '_number') {
+                contextMenu = makeContextMenu(table, setTable, 'column', columnName);
+            } else if (targetType === 'rowHeader') {
+                contextMenu = makeContextMenu(table, setTable, 'row', rowKey);
+            } else {
+                return;
+            }
+            setContextMenuOption((prev) => ({ x, y, contextMenu, isVisible: true }));
+        },
+        [table]
+    );
 
     const handleOutsideClick = () => {
         setContextMenuOption((prev) => ({ ...prev, isVisible: false }));
