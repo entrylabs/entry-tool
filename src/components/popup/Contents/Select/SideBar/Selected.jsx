@@ -5,7 +5,7 @@ import { CommonUtils } from '@utils/Common';
 import Slider from 'react-slick';
 import Theme from '@utils/Theme';
 import classname from 'classnames';
-import { SelectItem } from '../../components';
+import SelectItem from '../../includes/SelectItem';
 
 const Index = (props) => {
     const { type, baseUrl, popup, applySelected } = props;
