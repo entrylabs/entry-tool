@@ -299,6 +299,7 @@ export const DEFAULT_OPTIONS = {
             },
             opt: {
                 search: { query: true },
+                showSelected: false,
                 multiSelect: false,
                 isDrawVector: true,
                 uploadAllowed: {
@@ -405,6 +406,7 @@ export const DEFAULT_OPTIONS = {
             },
             opt: {
                 search: { query: true },
+                showSelected: false,
                 multiSelect: true,
                 uploadAllowed: {
                     image: false,
@@ -414,45 +416,11 @@ export const DEFAULT_OPTIONS = {
                 },
             },
             sidebar: {
-                사람: {
-                    name: 'Menus.people',
-                    sub: {
-                        all: { name: 'Menus.all' },
-                    },
+                public: {
+                    name: 'Menus.public',
                 },
-                자연: {
-                    name: 'Menus.nature',
-                    sub: {
-                        all: { name: 'Menus.all' },
-                        동물: { name: 'Menus.animal_insect' },
-                        자연환경: { name: 'Menus.environment' },
-                    },
-                },
-                사물: {
-                    name: 'Menus.things',
-                    sub: {
-                        all: { name: 'Menus.all' },
-                        이동수단: { name: 'Menus.vehicles' },
-                        기타: { name: 'Menus.others' },
-                    },
-                },
-                판타지: {
-                    name: 'Menus.fantasy',
-                    sub: {
-                        all: { name: 'Menus.all' },
-                    },
-                },
-                악기: {
-                    name: 'Menus.instrument',
-                    sub: {
-                        all: { name: 'Menus.all' },
-                        피아노: { name: 'Menus.piano' },
-                        마림바: { name: 'Menus.marimba' },
-                        드럼: { name: 'Menus.drum' },
-                        장구: { name: 'Menus.janggu' },
-                        효과음: { name: 'Menus.sound_effect' },
-                        기타타악기: { name: 'Menus.others_instrument' },
-                    },
+                naver: {
+                    name: 'Menus.naver',
                 },
             },
         },

@@ -30,18 +30,22 @@ import configureStore from '../store';
 import Chart from '../components/widget/Chart';
 import Table from '../components/widget/Table';
 
+import DataSelect from '../components/ai_layout/DataSelect';
+import DataUpload from '../components/ai_layout/DataUpload';
+
 const store = configureStore();
 httpService.setupInterceptors('http://localhost:4000');
 export default function Provider({ story }) {
     return <ReduxProvider store={store}>{story}</ReduxProvider>;
 }
-Theme.type = 'entryline';
+//Theme.type = 'entryline';
 storiesOf('Popup', module)
     .addDecorator((story) => <Provider story={story()} />)
     .add('전체', () => <Sample />)
     .add('툴팁', () => <Tooltips />)
     .add('확장블록', () => <Popup type="expansion" data={EXPANSION_SAMPLE} />)
     .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE} />)
+    .add('데이터 테이블', () => <Popup type="table" data={TABLE_SAMPLE} />)
     .add('오브젝트추가하기', () => <Popup type="sprite" data={SPRITE_SAMPLE} />)
     .add('모양추가', () => <Popup type="picture" data={SPRITE_SAMPLE} />)
     .add('모양 가져오기', () => <Popup type="paint" data={SPRITE_SAMPLE} />)
@@ -244,3 +248,10 @@ wigetStories
     })
     .add('차트', () => <Chart table={TABLE_SAMPLE} />)
     .add('테이블', () => <Table table={TABLE_SAMPLE} editor={'text'} />);
+
+storiesOf('AiLayout', module)
+    .addDecorator((story) => <Provider story={story()} />)
+    .add('테이블 추가하기 - 데이터 선택', () => <DataSelect />)
+    .add('테이블 추가하기 - 데이터 선택 딤드', () => <DataSelect Dimmed />)
+    .add('테이블 추가하기 - 데이터 업로드', () => <DataUpload />);
+
