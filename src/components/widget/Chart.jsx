@@ -3,6 +3,9 @@ import React from 'react';
 import bb from 'billboard.js';
 import 'billboard.js/dist/theme/insight.css';
 
+import flow from 'lodash/fp/flow';
+import unzip from 'lodash/fp/unzip';
+import groupBy from 'lodash/fp/groupBy';
 import _reduce from 'lodash/reduce';
 import _slice from 'lodash/slice';
 
@@ -11,11 +14,7 @@ const { generateHash } = CommonUtils;
 
 const getColumnGroup = (row) => (someString(_slice(row, 1)) ? 'stringColumn' : 'numberColumn');
 
-const classifyColumn = (table) =>
-    _.chain(table)
-        .unzip()
-        .groupBy(getColumnGroup)
-        .value();
+const classifyColumn = flow(unzip, groupBy(getColumnGroup));
 
 const getColumns = (yAxis, yIndexs = [0]) =>
     _reduce(yIndexs, (previous, index) => [...previous, yAxis[index]], []);
