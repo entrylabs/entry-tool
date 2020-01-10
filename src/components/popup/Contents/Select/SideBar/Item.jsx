@@ -6,7 +6,7 @@ import { triggerEvent } from '@actions';
 import { makeFindSelectedById } from '@selectors';
 import Theme from '@utils/Theme';
 import classname from 'classnames';
-import { SelectItem } from '../../components';
+import SelectItem from '../../includes/SelectItem';
 
 const Index = (props) => {
     const { index, selected, applySelected, select, deselect } = props;

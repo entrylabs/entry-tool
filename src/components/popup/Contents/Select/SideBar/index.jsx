@@ -9,7 +9,7 @@ import Theme from '@utils/Theme';
 import { EMIT_TYPES as Types } from '@constants';
 import { triggerEvent } from '@actions/index';
 import { connect } from 'react-redux';
-import { PopupList } from '../../components';
+import PopupList from '../../includes/PopupList';
 
 const Index = (props) => {
     const { data, type, sidebar, multiSelect = true, showSelected = true, isVectorOnly = false, fetch, baseUrl } = props;

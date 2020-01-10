@@ -2,7 +2,7 @@ import React from 'react';
 import Theme from '@utils/Theme';
 import { CommonUtils } from '@utils/Common';
 import classname from 'classnames';
-import { SelectItem } from '../components';
+import SelectItem from '../includes/SelectItem';
 
 export default ({ type, excluded, item = {}, onClick, baseUrl }) => {
     const theme = Theme.getStyle('popup');
