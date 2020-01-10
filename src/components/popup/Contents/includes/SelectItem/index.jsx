@@ -10,9 +10,6 @@ const SelectItem = {
 
 export default (props) => {
     const { type = 'default' } = props;
-    let Component = DefaultSelectItem;
-    if (SelectItem[type]) {
-        Component = SelectItem[type];
-    }
+    const Component = SelectItem[type] || DefaultSelectItem;
     return <Component {...props} />;
 };
