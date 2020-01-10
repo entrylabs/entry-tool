@@ -30,7 +30,7 @@ const Index = (props) => {
     };
 
     return (
-        <div className={classname(theme.cont_sel_box, { [theme.sound_type]: type === 'sound' })}>
+        <div className={classname(theme.cont_sel_box, theme[`${type}_type`])}>
             {container}
             <strong className={theme.tit}>
                 {CommonUtils.getLang('Menus.all')} ({selected.length})
