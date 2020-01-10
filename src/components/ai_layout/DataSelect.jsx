@@ -39,7 +39,7 @@ class DataSelect extends Component {
                             </button>
                         </div>
                     </div>
-                    <section className={Styles.pop_content}>
+                    <section className= {`${Styles.pop_content} ${Styles.data_select_content}`}>
                         {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
                         <h2 className={Styles.blind}>분류 선택</h2>
                         <ul className={Styles.menu_list}>
@@ -476,6 +476,17 @@ class DataSelect extends Component {
                                     수정일 : 2019-12-31
                                 </li>
                             </ul>
+                            <ul className={Styles.more_sub_info}>
+                                <li>
+                                    <strong>속성 : 3개</strong>
+                                    <p>
+                                        요리명, 재료, 조리법, 요리명, 재료, 조리법, 요리명, 재료, 조리법, 요리명
+                                    </p>
+                                </li>
+                                <li>
+                                    <strong>행 : 813개</strong>
+                                </li>
+                            </ul>
                             <p className={Styles.more_dsc}>
                                 한국국제교류재단은 한국인의 매일 먹는 밥, 반찬, 찌개, 국부터 전통음힉에 이르기까지 800여 가지가 넘는 한식의 보다 정확한 정보를 스마트폰으로 쉽게 찾고, 듣고, 공유할 수 있도록 ‘Korean Food Guide 800’ 앱으로 출시하였다. 이에 800여가지의 한식을 재료별(곡물, 콩, 채소, 고기 등) 조리법별(밥, 국, 찌개, 구이 등)로 분류한 엑셀데이터를 공공데이터로 공개한다. 분류한 엑셀데이터를 공공데이터로 공개한다.
                                 한국국제교류재단은 한국인의 매일 먹는 밥, 반찬, 찌개, 국부터 전통음힉에 이르기까지 800여 가지가 넘는 한식의 보다 정확한 정보를 스마트폰으로 쉽게 찾고, 듣고, 공유할 수 있도록 ‘Korean Food Guide 800’ 앱으로 출시하였다. 이에 800여가지의 한식을 재료별(곡물, 콩, 채소, 고기 등) 조리법별(밥, 국, 찌개, 구이 등)로 분류한 엑셀데이터를 공공데이터로 공개한다. 분류한 엑셀데이터를 공공데이터로 공개한다.      
@@ -520,7 +531,7 @@ class DataSelect extends Component {
                             </button>
                         </div>
                     </div>
-                    <section className={Styles.pop_content}>
+                    <section className= {`${Styles.pop_content} ${Styles.data_select_content}`}>
                         {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
                         <h2 className={Styles.blind}>분류 선택</h2>
                         <ul className={Styles.menu_list}>
