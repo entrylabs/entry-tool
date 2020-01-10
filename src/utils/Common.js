@@ -255,10 +255,11 @@ export const someString = (array) => _some(array, isString);
 export const getHeader = (matrix, editor = 'text') =>
     _.chain(matrix)
         .head()
-        .map((column) => ({ editor, name: column }))
+        .map((column) => ({ editor, name: column, align: 'center' }))
         .value();
 export const getData = (matrix) =>
     _.chain(matrix)
         .slice(1)
         .map((content) => _.zipObject(_.head(matrix), content))
         .value();
+export const makeTable = (row) => _.map(row, (column, index) => [index || ' ', ...column]);
