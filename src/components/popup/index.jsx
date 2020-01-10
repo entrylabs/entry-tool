@@ -13,6 +13,7 @@ import { DEFAULT_OPTIONS } from '../../constants';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 import root from 'window-or-global';
+import Modal from './Modal';
 
 class Sprite extends Component {
     constructor(props) {
@@ -129,6 +130,7 @@ class Sprite extends Component {
                     </button>
                 </header>
                 {this.setContent()}
+                <Modal />
             </div>
         );
     }
