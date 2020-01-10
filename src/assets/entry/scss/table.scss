@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+.Table {
+    :global(.tui-grid-cell-header) {
+        font-family: NanumGothicOTF;
+        font-size: 14px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.43;
+        letter-spacing: -0.5px;
+        text-align: center;
+        color: #2c313d;
+        background-color: #f4f4f4;
+    }
+
+    :global(.tui-grid-cell-content) {
+        font-family: NanumGothicOTF;
+        font-size: 14px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.43;
+        letter-spacing: -0.5px;
+        text-align: center;
+        color: #2c313d;
+    }
+}
