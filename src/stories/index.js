@@ -14,7 +14,6 @@ import Backpack from '../components/widget/Backpack';
 import Sortable from '../components/widget/sortable';
 import ContextMenu from '../components/widget/contextMenu';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
-import Theme from '@utils/Theme';
 import { action } from '@storybook/addon-actions';
 import httpService from '../config/axios';
 import 'tui-grid/dist/tui-grid.css';
@@ -34,6 +33,7 @@ import Table from '../components/widget/Table';
 import DataSelect from '../components/ai_layout/DataSelect';
 import DataUpload from '../components/ai_layout/DataUpload';
 import DataDetail from '../components/ai_layout/DataDetail';
+import DataAnalytics from '../components/editor/dataAnalytics/DataAnalytics';
 
 const store = configureStore();
 httpService.setupInterceptors('http://localhost:4000');
@@ -249,7 +249,8 @@ wigetStories
         );
     })
     .add('차트', () => <Chart table={table_sample} type="line" />)
-    .add('테이블', () => <Table table={table_sample} editor={'text'} />);
+    .add('테이블', () => <Table table={table_sample} editor={'text'} />)
+    .add('DataAnalytics', () => <DataAnalytics table={table_sample} />);
 
 storiesOf('AiLayout', module)
     .addDecorator((story) => <Provider story={story()} />)
