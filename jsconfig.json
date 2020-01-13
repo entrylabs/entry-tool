@@ -7,7 +7,7 @@
             "@actions/*": ["src/actions/*"],
             "@actions/scss/*": ["src/actions/scss/*"],
             "@assets/*": ["src/assets/*"],
-            "@componets/*": ["src/components/*"],
+            "@components/*": ["src/components/*"],
             "@utils/*": ["src/utils/*"]
         }
     },
