@@ -410,6 +410,67 @@ input[type='checkbox']:checked + .popup_imbtn_pop_checked__7oirh:before {
   .popup_tooltip_box__3Mrun.popup_down__o82BN .popup_arr__HxUx_ i {
     transform: translate(-50%, -50%) rotate(45deg); }
 
+.popup_tooltip_box__3Mrun.popup_led_picker__vVk1a {
+  user-select: none;
+  z-index: 251;
+  font-size: 14px;
+  width: 224px;
+  height: 296.8px;
+  background-color: '#d6e9f4';
+  border-radius: 2px;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.25);
+  border: solid 1px #bfd8e6;
+  position: fixed;
+  padding: 0; }
+  .popup_tooltip_box__3Mrun.popup_led_picker__vVk1a * {
+    box-sizing: content-box; }
+
+.popup_led_picker_inner__PshBg {
+  margin: 11px;
+  margin-bottom: 6px; }
+
+.popup_led_clear__3OF_n {
+  width: 190px;
+  height: 48px;
+  border-radius: 18px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  margin: 6px 16px 16px 16px;
+  margin: 0 auto; }
+
+.popup_led_clear_text__B2quZ {
+  width: 100%;
+  height: 100%;
+  display: table;
+  font-family: NanumGothicOTF;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.53px;
+  text-align: center;
+  color: #606c73; }
+
+.popup_led_clear_text_content__2TkKu {
+  display: table-cell;
+  vertical-align: middle; }
+
+.popup_led_item__nkWm8 {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin: 5px;
+  padding: 0;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+  border: solid 1px #d6e9f4;
+  background-color: #c6deeb; }
+
+.popup_led_item_selected__2kiK4 {
+  background-color: #ffffff;
+  border-color: #d6e9f4; }
+
 .popup_tooltip_box__3Mrun.popup_color_picker__2Jz0s {
   user-select: none;
   z-index: 251;
@@ -2768,6 +2829,67 @@ html, body {
   .draggable_tooltip_box__2G2z-.draggable_down__3hWOd .draggable_arr__3p8ZC i {
     transform: translate(-50%, -50%) rotate(45deg); }
 
+.draggable_tooltip_box__2G2z-.draggable_led_picker__3-4U_ {
+  user-select: none;
+  z-index: 251;
+  font-size: 14px;
+  width: 224px;
+  height: 296.8px;
+  background-color: '#d6e9f4';
+  border-radius: 2px;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.25);
+  border: solid 1px #bfd8e6;
+  position: fixed;
+  padding: 0; }
+  .draggable_tooltip_box__2G2z-.draggable_led_picker__3-4U_ * {
+    box-sizing: content-box; }
+
+.draggable_led_picker_inner__12LZr {
+  margin: 11px;
+  margin-bottom: 6px; }
+
+.draggable_led_clear__pXfnB {
+  width: 190px;
+  height: 48px;
+  border-radius: 18px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  margin: 6px 16px 16px 16px;
+  margin: 0 auto; }
+
+.draggable_led_clear_text__sDshh {
+  width: 100%;
+  height: 100%;
+  display: table;
+  font-family: NanumGothicOTF;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.53px;
+  text-align: center;
+  color: #606c73; }
+
+.draggable_led_clear_text_content__3nnrT {
+  display: table-cell;
+  vertical-align: middle; }
+
+.draggable_led_item__Orv3t {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin: 5px;
+  padding: 0;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+  border: solid 1px #d6e9f4;
+  background-color: #c6deeb; }
+
+.draggable_led_item_selected__2fIEE {
+  background-color: #ffffff;
+  border-color: #d6e9f4; }
+
 .draggable_tooltip_box__2G2z-.draggable_color_picker__1DFhn {
   user-select: none;
   z-index: 251;
@@ -3353,6 +3475,67 @@ html, body {
     top: 100%; }
   .customScroll_tooltip_box__1Fwhp.customScroll_down__1TDfq .customScroll_arr__2Z-RD i {
     transform: translate(-50%, -50%) rotate(45deg); }
+
+.customScroll_tooltip_box__1Fwhp.customScroll_led_picker__2iA8G {
+  user-select: none;
+  z-index: 251;
+  font-size: 14px;
+  width: 224px;
+  height: 296.8px;
+  background-color: '#d6e9f4';
+  border-radius: 2px;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.25);
+  border: solid 1px #bfd8e6;
+  position: fixed;
+  padding: 0; }
+  .customScroll_tooltip_box__1Fwhp.customScroll_led_picker__2iA8G * {
+    box-sizing: content-box; }
+
+.customScroll_led_picker_inner__2boDh {
+  margin: 11px;
+  margin-bottom: 6px; }
+
+.customScroll_led_clear__6vKTc {
+  width: 190px;
+  height: 48px;
+  border-radius: 18px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  margin: 6px 16px 16px 16px;
+  margin: 0 auto; }
+
+.customScroll_led_clear_text__8xGQM {
+  width: 100%;
+  height: 100%;
+  display: table;
+  font-family: NanumGothicOTF;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.53px;
+  text-align: center;
+  color: #606c73; }
+
+.customScroll_led_clear_text_content__vcIIu {
+  display: table-cell;
+  vertical-align: middle; }
+
+.customScroll_led_item__16c3b {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin: 5px;
+  padding: 0;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+  border: solid 1px #d6e9f4;
+  background-color: #c6deeb; }
+
+.customScroll_led_item_selected__MLQXe {
+  background-color: #ffffff;
+  border-color: #d6e9f4; }
 
 .customScroll_tooltip_box__1Fwhp.customScroll_color_picker__2JRAP {
   user-select: none;
@@ -3944,6 +4127,67 @@ html, body {
     top: 100%; }
   .customScroll_tooltip_box__3sEUS.customScroll_down__YbQOP .customScroll_arr__1tjIU i {
     transform: translate(-50%, -50%) rotate(45deg); }
+
+.customScroll_tooltip_box__3sEUS.customScroll_led_picker__2WzC1 {
+  user-select: none;
+  z-index: 251;
+  font-size: 14px;
+  width: 224px;
+  height: 296.8px;
+  background-color: '#d6e9f4';
+  border-radius: 2px;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.25);
+  border: solid 1px #bfd8e6;
+  position: fixed;
+  padding: 0; }
+  .customScroll_tooltip_box__3sEUS.customScroll_led_picker__2WzC1 * {
+    box-sizing: content-box; }
+
+.customScroll_led_picker_inner__1VM8A {
+  margin: 11px;
+  margin-bottom: 6px; }
+
+.customScroll_led_clear__2Fo_I {
+  width: 190px;
+  height: 48px;
+  border-radius: 18px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  margin: 6px 16px 16px 16px;
+  margin: 0 auto; }
+
+.customScroll_led_clear_text__2lfWD {
+  width: 100%;
+  height: 100%;
+  display: table;
+  font-family: NanumGothicOTF;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.53px;
+  text-align: center;
+  color: #606c73; }
+
+.customScroll_led_clear_text_content__v_605 {
+  display: table-cell;
+  vertical-align: middle; }
+
+.customScroll_led_item__rAD6n {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin: 5px;
+  padding: 0;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+  border: solid 1px #d6e9f4;
+  background-color: #c6deeb; }
+
+.customScroll_led_item_selected__24Jyq {
+  background-color: #ffffff;
+  border-color: #d6e9f4; }
 
 .customScroll_tooltip_box__3sEUS.customScroll_color_picker__16nHJ {
   user-select: none;
@@ -4731,6 +4975,67 @@ input[type='checkbox']:checked + .popup_imbtn_pop_checked__25We5:before {
     top: 100%; }
   .popup_tooltip_box__IP-AV.popup_down__34eVO .popup_arr__34jW- i {
     transform: translate(-50%, -50%) rotate(45deg); }
+
+.popup_tooltip_box__IP-AV.popup_led_picker__lXxlz {
+  user-select: none;
+  z-index: 251;
+  font-size: 14px;
+  width: 224px;
+  height: 296.8px;
+  background-color: '#d6e9f4';
+  border-radius: 2px;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.25);
+  border: solid 1px #bfd8e6;
+  position: fixed;
+  padding: 0; }
+  .popup_tooltip_box__IP-AV.popup_led_picker__lXxlz * {
+    box-sizing: content-box; }
+
+.popup_led_picker_inner__1yVkd {
+  margin: 11px;
+  margin-bottom: 6px; }
+
+.popup_led_clear__24aPM {
+  width: 190px;
+  height: 48px;
+  border-radius: 18px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  margin: 6px 16px 16px 16px;
+  margin: 0 auto; }
+
+.popup_led_clear_text__3fNVX {
+  width: 100%;
+  height: 100%;
+  display: table;
+  font-family: NanumGothicOTF;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.53px;
+  text-align: center;
+  color: #606c73; }
+
+.popup_led_clear_text_content__3uyzO {
+  display: table-cell;
+  vertical-align: middle; }
+
+.popup_led_item__1z9Gk {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin: 5px;
+  padding: 0;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+  border: solid 1px #d6e9f4;
+  background-color: #c6deeb; }
+
+.popup_led_item_selected__2pVvs {
+  background-color: #ffffff;
+  border-color: #d6e9f4; }
 
 .popup_tooltip_box__IP-AV.popup_color_picker__3cj3K {
   user-select: none;
@@ -7338,6 +7643,67 @@ html, body {
     top: 100%; }
   .draggable_tooltip_box__2wTFw.draggable_down__1sr56 .draggable_arr__2xzKF i {
     transform: translate(-50%, -50%) rotate(45deg); }
+
+.draggable_tooltip_box__2wTFw.draggable_led_picker__22dQ4 {
+  user-select: none;
+  z-index: 251;
+  font-size: 14px;
+  width: 224px;
+  height: 296.8px;
+  background-color: '#d6e9f4';
+  border-radius: 2px;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.25);
+  border: solid 1px #bfd8e6;
+  position: fixed;
+  padding: 0; }
+  .draggable_tooltip_box__2wTFw.draggable_led_picker__22dQ4 * {
+    box-sizing: content-box; }
+
+.draggable_led_picker_inner__1LoiY {
+  margin: 11px;
+  margin-bottom: 6px; }
+
+.draggable_led_clear__1sIsh {
+  width: 190px;
+  height: 48px;
+  border-radius: 18px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  margin: 6px 16px 16px 16px;
+  margin: 0 auto; }
+
+.draggable_led_clear_text__1W0F0 {
+  width: 100%;
+  height: 100%;
+  display: table;
+  font-family: NanumGothicOTF;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.53px;
+  text-align: center;
+  color: #606c73; }
+
+.draggable_led_clear_text_content__2nGCC {
+  display: table-cell;
+  vertical-align: middle; }
+
+.draggable_led_item__1KVeL {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin: 5px;
+  padding: 0;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+  border: solid 1px #d6e9f4;
+  background-color: #c6deeb; }
+
+.draggable_led_item_selected__2e1l0 {
+  background-color: #ffffff;
+  border-color: #d6e9f4; }
 
 .draggable_tooltip_box__2wTFw.draggable_color_picker__31rqC {
   user-select: none;
