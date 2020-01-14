@@ -5,7 +5,18 @@ import Theme from '@utils/Theme';
 
 export default ({ item, isSelected, onClick, avatarImgUrl }) => {
     const { thumb, name, likeCnt = 0, comment = 0, visit = 0, user = {} } = item;
-    const { username } = user;
+    const { _id, username, avatarImage } = user;
+    if (!avatarImgUrl) {
+        if (avatarImage) {
+            const id = String(_id);
+            avatarImgUrl = `/uploads/profile/${id.substr(0, 2)}/${id.substr(
+                2,
+                2
+            )}/avatar_${id}.png`;
+        } else {
+            avatarImgUrl = '/img/assets/avatar_img.png';
+        }
+    }
     const theme = Theme.getStyle('popup');
     const itemCss = { backgroundImage: `url('${CommonUtils.fixUrl(thumb)}')` };
     const userCss = { backgroundImage: `url('${avatarImgUrl}')` };
