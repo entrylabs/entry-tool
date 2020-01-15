@@ -47,15 +47,13 @@ const Index = ({ projectNavOptions, searchOption = {}, triggerSearch }) => {
                     })}
                 {searchOption.query && (
                     <div className={theme.srch_box}>
-                        <label htmlFor="srch">
-                            <input
-                                type="text"
-                                id="srch"
-                                name="searchQuery"
-                                value={query}
-                                onChange={(e) => setQuery(e.target.value)}
-                            />
-                        </label>
+                        <input
+                            type="text"
+                            id="srch"
+                            name="searchQuery"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                        />
                         <button
                             type="button"
                             className={classname(theme.btn_srch, theme.imbtn_pop_srch)}
@@ -77,10 +75,7 @@ const mapDispatchToProps = (dispatch) => ({
     triggerSearch: (query) => dispatch(triggerEvent(Types.search, query, false)),
 });
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(Index);
+export default connect(null, mapDispatchToProps)(Index);
 
 const defaultOptions = {
     category: [
@@ -110,19 +105,22 @@ const createDropDownOption = (projectNavOptions = {}) => {
     const { categoryOptions, sortOptions, periodOptions } = projectNavOptions;
     const result = defaultOptions;
     if (categoryOptions) {
-        result.category = categoryOptions.map((item) => {
-            return [CommonUtils.getLang(`EntryStatic.${item}`), item];
-        });
+        result.category = categoryOptions.map((item) => [
+            CommonUtils.getLang(`EntryStatic.${item}`),
+            item,
+        ]);
     }
     if (sortOptions) {
-        result.sort = sortOptions.map((item) => {
-            return [CommonUtils.getLang(`EntryStatic.art_sort_${item}`), item];
-        });
+        result.sort = sortOptions.map((item) => [
+            CommonUtils.getLang(`EntryStatic.art_sort_${item}`),
+            item,
+        ]);
     }
     if (periodOptions) {
-        result.period = periodOptions.map((item) => {
-            return [CommonUtils.getLang(`EntryStatic.${item}`), item];
-        });
+        result.period = periodOptions.map((item) => [
+            CommonUtils.getLang(`EntryStatic.${item}`),
+            item,
+        ]);
     }
     return result;
 };
