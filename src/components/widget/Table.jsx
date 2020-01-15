@@ -1,81 +1,17 @@
 import React, { useState, useRef, useCallback } from 'react';
 import TuiGrid from 'tui-grid';
-import 'tui-grid/dist/tui-grid.css';
 import Grid from '@toast-ui/react-grid';
+import { Prompt } from '@entrylabs/modal';
+
+import Theme from '@utils/Theme';
 import { getHeader, getData } from '@utils/Common';
 import ContextMenu from '../widget/contextMenu';
-import Theme from '@utils/Theme';
+
+import 'tui-grid/dist/tui-grid.css';
+import '@entrylabs/modal/dist/entry/entry-modal.css';
 
 const RIGHT_CLICK = 3;
-
-const makeContextMenu = (targetTable, setTable, type, key) => {
-    const table = [...targetTable];
-    if (type === 'row') {
-        return [
-            {
-                text: '위에 행 추가하기',
-                callback: () => {
-                    table.splice(key + 1, 0, Array(table[0].length).fill(0));
-                    setTable(table);
-                },
-            },
-            {
-                text: '아래에 행 추가하기',
-                callback: () => {
-                    setTable(table.splice(key + 2, 0, Array(table[0].length).fill(0)));
-                    setTable(table);
-                },
-            },
-            {
-                text: '행 삭제하기',
-                callback: () => {
-                    setTable(table.splice(key + 1, 1));
-                    setTable(table);
-                },
-            },
-        ];
-    } else if (type === 'column') {
-        return [
-            {
-                text: '왼쪽에 속성 추가하기',
-                callback: () => {
-                    const index = table[0].findIndex((header) => key === header);
-                    setTable(
-                        table.map((row) => {
-                            row.splice(index, 0, 0);
-                            return row;
-                        })
-                    );
-                },
-            },
-            {
-                text: '오른쪽에 속성 추가하기',
-                callback: () => {
-                    const index = table[0].findIndex((header) => key === header) + 1;
-                    setTable(
-                        table.map((row) => {
-                            row.splice(index, 0, 0);
-                            return row;
-                        })
-                    );
-                },
-            },
-            {
-                text: '속성 삭제하기',
-                callback: () => {
-                    const index = table[0].findIndex((header) => key === header);
-                    setTable(
-                        table.map((row) => {
-                            row.splice(index, 1);
-                            return row;
-                        })
-                    );
-                },
-            },
-        ];
-    }
-    return [{ text: ' ' }];
-};
+let removeColumnIndex = -1;
 
 TuiGrid.applyTheme('entry', {
     cell: {
@@ -84,21 +20,22 @@ TuiGrid.applyTheme('entry', {
         },
     },
 });
-let t;
+
 const Table = (props) => {
     const [{ x, y, isVisible, contextMenu }, setContextMenuOption] = useState({
         x: 0,
         y: 0,
         isVisible: false,
-        contextMenu: [],
+        showPrompt: false,
     });
+    const [showPrompt, setShowPrompt] = useState(false);
     const { table: tableProps = [] } = props;
     const [table, setTable] = useState(tableProps);
     const gridRef = useRef();
 
     const {
-        width = 500,
-        bodyHeight = 290,
+        width,
+        bodyHeight,
         columnOptions = {},
         editable = 'text',
         rowHeight = 40,
@@ -136,6 +73,69 @@ const Table = (props) => {
         event.preventDefault();
     };
 
+    // const handleClick = () => {
+    //     console.log(gridRef.current.getInstance().getData());
+    // };
+
+    const makeContextMenu = (targetTable, setTable, type, key) => {
+        const table = [...targetTable];
+        if (type === 'row') {
+            return [
+                {
+                    text: '위에 행 추가하기',
+                    callback: () => {
+                        table.splice(key + 1, 0, Array(table[0].length).fill(0));
+                        setTable(table);
+                    },
+                },
+                {
+                    text: '아래에 행 추가하기',
+                    callback: () => {
+                        setTable(table.splice(key + 2, 0, Array(table[0].length).fill(0)));
+                        setTable(table);
+                    },
+                },
+                {
+                    text: '행 삭제하기',
+                    callback: () => {
+                        setTable(table.splice(key + 1, 1));
+                        setTable(table);
+                    },
+                },
+            ];
+        } else if (type === 'column') {
+            return [
+                {
+                    text: '왼쪽에 속성 추가하기',
+                    callback: () => {
+                        removeColumnIndex = table[0].findIndex((header) => key === header);
+                        setShowPrompt(true);
+                    },
+                },
+                {
+                    text: '오른쪽에 속성 추가하기',
+                    callback: () => {
+                        removeColumnIndex = table[0].findIndex((header) => key === header) + 1;
+                        setShowPrompt(true);
+                    },
+                },
+                {
+                    text: '속성 삭제하기',
+                    callback: () => {
+                        const index = table[0].findIndex((header) => key === header);
+                        setTable(
+                            table.map((row) => {
+                                row.splice(index, 1);
+                                return row;
+                            })
+                        );
+                    },
+                },
+            ];
+        }
+        return [{ text: ' ' }];
+    };
+
     const data = getData(table);
     const columns = getHeader(table, editable);
     const theme = Theme.getStyle('table');
@@ -162,6 +162,32 @@ const Table = (props) => {
                     coordinate={{
                         x,
                         y,
+                    }}
+                />
+            )}
+            {showPrompt && (
+                <Prompt
+                    content="content"
+                    defaultValue="value"
+                    title="title"
+                    onEvent={(columnName) => {
+                        if (removeColumnIndex === -1) {
+                            return;
+                        }
+                        setShowPrompt(false);
+                        // todo: columnName 중복 제거 로직 추가
+                        setTable(
+                            table.map((row, index) => {
+                                row.splice(removeColumnIndex, 0, index ? 0 : columnName);
+                                return row;
+                            })
+                        );
+                        removeColumnIndex = -1;
+                    }}
+                    options={{
+                        placeholder: 'placeholder',
+                        negativeButtonText: 'cancel',
+                        positiveButtonText: 'ok',
                     }}
                 />
             )}

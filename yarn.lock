@@ -773,6 +773,13 @@
   resolved "https://registry.yarnpkg.com/@entrylabs/event/-/event-1.0.3.tgz#a8754edcf4e44c0365a0e95b57801f3f52532e9d"
   integrity sha512-IDC7sWnfe8GVQIEGsct9Bcsj1Nh4XikO6PG+veVuix0Zv/XH98NkFjmXiyrriJ/rjJoGFBq6sKesfmaFCCr3MA==
 
+"@entrylabs/modal@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@entrylabs/modal/-/modal-1.1.2.tgz#dfbaeb9c8fb593f3135481045446e52ce4a8509b"
+  integrity sha512-vbY139OHw0MRAWESlhOYOk7r5HoRsVUNgmyHQGeAV3gjl1KQcAT8BhxIo7BR+Cs3lPgsE6GBwSVv41ty5+k6pQ==
+  dependencies:
+    lodash-es "^4.17.15"
+
 "@entrylabs/postcss-url@^8.0.1":
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/@entrylabs/postcss-url/-/postcss-url-8.0.1.tgz#81f682d2be52928060b4c545ad3e7ae8a9f17d64"
@@ -8314,7 +8321,7 @@ locate-path@^3.0.0:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
 
-lodash-es@^4.17.10, lodash-es@^4.2.1:
+lodash-es@^4.17.10, lodash-es@^4.17.15, lodash-es@^4.2.1:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.15.tgz#21bd96839354412f23d7a10340e5eac6ee455d78"
   integrity sha512-rlrc3yU3+JNOpZ9zj5pQtxnx2THmvRykwL4Xlxoa8I9lHBlVbbyPhgyPMioxVZ4NqyxaVVtaJnzsyOidQIhyyQ==
