@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import bb from 'billboard.js';
 import 'billboard.js/dist/theme/insight.css';
@@ -19,18 +19,21 @@ const classifyColumn = flow(unzip, groupBy(getColumnGroup));
 const getColumns = (yAxis, yIndexs = [0]) =>
     _reduce(yIndexs, (previous, index) => [...previous, yAxis[index]], []);
 
+const getChartId = () =>
+    'abcdefghijklmnopqrstuvwxyz'[Math.floor(Math.random() * 26)] + generateHash();
+
 const getGenerateOption = (props) => {
     const {
         table = [],
         type = 'bar',
         axisXType = 'category',
-        size = { width: 960, height: 540 },
+        size,
         bar = {
             width: {
                 ratio: 0.5,
             },
         },
-        id = generateHash(),
+        id = getChartId(),
         xIndex = 0,
         yIndexs = [0],
     } = props;
@@ -63,12 +66,14 @@ const Chart = (props) => {
     const generateOption = getGenerateOption(props);
     const { id } = generateOption;
 
-    bb.generate(generateOption);
+    useEffect(() => {
+        bb.generate(generateOption);
+    }, []);
 
     return (
-        <div>
+        <>
             <div id={id} />
-        </div>
+        </>
     );
 };
 
