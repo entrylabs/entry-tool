@@ -2,7 +2,7 @@ import React from 'react';
 import Styles from '@assets/entry/scss/popup.scss';
 
 const Tab = (props) => {
-    const { selected, tabItems = [], onClickTab } = props;
+    const { selected, tabItems = [], onClickTab = () => {} } = props;
 
     return (
         <ul className={Styles.tab_box}>
