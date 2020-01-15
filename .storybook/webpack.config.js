@@ -11,6 +11,7 @@ module.exports = {
                     path.resolve('./node_modules/react-custom-scroll/'),
                     path.resolve('./node_modules/tui-grid/'),
                     path.resolve('./node_modules/billboard.js/'),
+                    path.resolve('./node_modules/@entrylabs/modal/'),
                 ],
                 use: [require.resolve('style-loader'), require.resolve('css-loader')],
             },
@@ -20,6 +21,7 @@ module.exports = {
                     path.resolve('./node_modules/react-custom-scroll/'),
                     path.resolve('./node_modules/tui-grid/'),
                     path.resolve('./node_modules/billboard.js/'),
+                    path.resolve('./node_modules/@entrylabs/modal/'),
                 ],
                 use: [
                     require.resolve('style-loader'),
