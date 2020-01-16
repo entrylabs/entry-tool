@@ -11,6 +11,8 @@ if (process.env.NODE_ENV === 'watch') {
     options.watch = true;
 }
 
+const crypto = require('crypto');
+
 const BANNER = [
     'ENTRY TOOL by @entrylabs',
     `@version ${pkg.version} | ${new Date().toDateString()}`,
@@ -50,10 +52,17 @@ const config = {
                     {
                         loader: 'css-loader',
                         options: {
-                            sourceMap: true,
                             modules: true,
+                            sourceMap: true,
                             importLoaders: 2,
-                            localIdentName: '[name]__[local]___[hash:base64:5]',
+                            getLocalIdent: (context, localIdentName, localName, options) => {
+                                const hash = crypto
+                                    .createHash('sha256')
+                                    .update(context.resourcePath)
+                                    .digest('hex')
+                                    .substr(0, 5);
+                                return `${localName}__${hash}`;
+                            },
                         },
                     },
                     {
