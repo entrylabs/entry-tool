@@ -44,7 +44,7 @@ const SummaryChartList = (props) => {
                 <strong>차트</strong>
             </div>
             <div className={Styles.chart_list}>
-                <ul className={Styles.list} style={{ width: `${152 * charts.length}px` }}>
+                <ul className={Styles.list} style={{ width: `${252 * charts.length}px` }}>
                     {chartList(charts)}
                 </ul>
             </div>

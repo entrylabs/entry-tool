@@ -1662,5 +1662,11 @@ export const TABLE_SAMPLE2 = {
             xIndex: 0,
             yIndexs: [1, 2],
         },
+        {
+            title: '',
+            type: 'line',
+            xIndex: 0,
+            yIndexs: [1, 2],
+        },
     ],
 };

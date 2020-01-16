@@ -2,15 +2,7 @@ import React from 'react';
 import Styles from '@assets/entry/scss/popup.scss';
 
 const ChartNavigation = (props) => {
-    const { charts, onClickItem } = props;
-
-    const handleMouseEnter = (event) => {
-        event.currentTarget.classList(Styles.on);
-    };
-
-    const handleMouseLeave = (event) => {
-        event.currentTarget.classList(Styles.on);
-    };
+    const { charts, onClickItem, selected } = props;
 
     const chartName = (chartType) => {
         switch (chartType) {
@@ -30,9 +22,8 @@ const ChartNavigation = (props) => {
     const navigationList = (charts) =>
         charts.map((chart, index) => (
             <li
-                className={`${Styles[chart.type]} ${Styles.on}`}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                key={`chart_${index}`}
+                className={`${Styles[chart.type]} ${index === selected ? Styles.on : ''}`}
             >
                 <a href="#" onClick={onClickItem(index)}>
                     <span className={Styles.blind}>{chartName(chart.type)}</span>

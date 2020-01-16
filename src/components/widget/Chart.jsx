@@ -94,11 +94,7 @@ const Chart = (props) => {
         bb.generate(option);
     }, []);
 
-    return (
-        <>
-            <div id={id} />
-        </>
-    );
+    return <div id={id} />;
 };
 
 export default Chart;
