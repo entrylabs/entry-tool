@@ -18,18 +18,22 @@ const DataAnalytics = (props) => {
     };
 
     let content;
-    switch (tab) {
-        case SUMMARY:
-            content = <Summary table={table} />;
-            break;
-        case TABLE:
-            content = <TableEditor table={table} />;
-            break;
-        case CHART:
-            content = <ChartEditor table={table} />;
-            break;
-        default:
-            break;
+    if (!table) {
+        content = null;
+    } else {
+        switch (tab) {
+            case SUMMARY:
+                content = <Summary table={table} />;
+                break;
+            case TABLE:
+                content = <TableEditor table={table} />;
+                break;
+            case CHART:
+                content = <ChartEditor table={table} />;
+                break;
+            default:
+                break;
+        }
     }
 
     return (
