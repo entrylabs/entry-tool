@@ -16,7 +16,7 @@ const Index = (props) => {
     const [selectedSidebar, selectSidebar] = useState(Object.keys(sidebar)[0]);
     const [selectedSubMenu, selectSubMenu] = useState(null);
     const theme = Theme.getStyle('popup');
-    const subMenu = sidebar[selectedSidebar].sub || {};
+    const subMenu = sidebar[selectedSidebar] && sidebar[selectedSidebar].sub || {};
     const drawItems = () =>
         data
             .filter((item) => !isVectorOnly || CommonUtils.isVectorItem(item))

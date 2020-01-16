@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 import classname from 'classnames';
+import _isEmpty from 'lodash/isEmpty';
 
 export default ({ sidebar = {}, onClick }) => {
+    const isEmpty = _isEmpty(sidebar);
+    if (isEmpty) {
+        return <div />;
+    }
     const theme = Theme.getStyle('popup');
     const list = Object.keys(sidebar);
     const [selected, select] = useState(list[0]);

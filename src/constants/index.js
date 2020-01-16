@@ -415,14 +415,7 @@ export const DEFAULT_OPTIONS = {
                     table: true,
                 },
             },
-            sidebar: {
-                public: {
-                    name: 'Menus.public',
-                },
-                naver: {
-                    name: 'Menus.naver',
-                },
-            },
+            sidebar: {},
         },
     },
 };
