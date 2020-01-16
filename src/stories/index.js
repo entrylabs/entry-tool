@@ -24,7 +24,7 @@ import {
     EXPANSION_SAMPLE,
     SOUND_SAMPLE,
     TABLE_SAMPLE,
-    table_sample,
+    TABLE_SAMPLE2,
 } from '../constants/sample';
 
 import configureStore from '../store';
@@ -250,10 +250,7 @@ wigetStories
                 ]}
             />
         );
-    })
-    .add('차트', () => <Chart table={table_sample} type="line" />)
-    .add('테이블', () => <Table table={table_sample} editor={'text'} />)
-    .add('DataAnalytics', () => <DataAnalytics table={table_sample} />);
+    });
 
 storiesOf('AiLayout', module)
     .addDecorator((story) => <Provider story={story()} />)
@@ -262,4 +259,11 @@ storiesOf('AiLayout', module)
     .add('테이블 추가하기 - 데이터 업로드', () => <DataUpload />)
     .add('데이터 상세 - 요약', () => <DataDetail />)
     .add('데이터 상세 - 테이블', () => <DataDetail DetailState="Table" />)
-    .add('데이터 상세 - 차트', () => <DataDetail DetailState="Chart" />);
+    .add('데이터 상세 - 차트', () => <DataDetail DetailState="Chart" />)
+    .add('차트', () => (
+        <Chart table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} type="line" />
+    ))
+    .add('테이블', () => (
+        <Table table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} editor={'text'} />
+    ))
+    .add('DataAnalytics', () => <DataAnalytics table={TABLE_SAMPLE2} />);

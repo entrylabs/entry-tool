@@ -1,28 +1,25 @@
 import React, { useEffect } from 'react';
-
 import bb from 'billboard.js';
 import 'billboard.js/dist/theme/insight.css';
 
-import flow from 'lodash/fp/flow';
-import unzip from 'lodash/fp/unzip';
-import groupBy from 'lodash/fp/groupBy';
-import _reduce from 'lodash/reduce';
-import _slice from 'lodash/slice';
-
-import { CommonUtils, someString } from '@utils/Common';
+import { CommonUtils, isString, someString } from '@utils/Common';
 const { generateHash } = CommonUtils;
 
-const getColumnGroup = (row) => (someString(_slice(row, 1)) ? 'stringColumn' : 'numberColumn');
-
-const classifyColumn = flow(unzip, groupBy(getColumnGroup));
-
 const getColumns = (yAxis, yIndexs = [0]) =>
-    _reduce(yIndexs, (previous, index) => [...previous, yAxis[index]], []);
+    yIndexs.reduce((previous, index) => [...previous, yAxis[index]], []);
 
 const getChartId = () =>
     'abcdefghijklmnopqrstuvwxyz'[Math.floor(Math.random() * 26)] + generateHash();
 
-const getGenerateOption = (props) => {
+const getNumberColumns = (table) => table.filter((row) => !someString(row.slice(1)));
+
+const zipColumns = (data) => {
+    const list = _.uniq(data[0].slice(1));
+    const indexes = list.map((value) => _.lastIndexOf(data[0], value));
+    return data.map((row) => [0, ...indexes].map((index) => row[index]));
+};
+
+const generateOption = (props) => {
     const {
         table = [],
         type = 'bar',
@@ -40,13 +37,14 @@ const getGenerateOption = (props) => {
     let { x, columns } = props;
 
     if (!x && table.length) {
-        const { stringColumn: xAxis, numberColumn: yAxis } = classifyColumn(table);
+        const xAxis = _.unzip(table);
+        const yAxis = getNumberColumns(xAxis);
         x = xAxis[xIndex];
-        columns = [x, ...getColumns(yAxis, yIndexs)];
+        columns = zipColumns([x, ...getColumns(yAxis, yIndexs)]);
         x = x[0];
     }
 
-    const generateOption = {
+    const option = {
         id,
         bar,
         size,
@@ -59,15 +57,41 @@ const getGenerateOption = (props) => {
         },
     };
 
-    return generateOption;
+    return option;
+};
+
+const hasNumberColumn = (table) => {
+    for (let j = 0; j < table[0].length; j++) {
+        let i = 1;
+        for (; i < table.length; i++) {
+            if (isString(table[i][j])) {
+                break;
+            }
+        }
+        if (i === table.length) {
+            return true;
+        }
+    }
+    return false;
+};
+
+const isDrawable = (table, type) => {
+    if (type === 'bar' || type === 'line') {
+        return table[0].length > 1 && hasNumberColumn(table);
+    }
+    return true;
 };
 
 const Chart = (props) => {
-    const generateOption = getGenerateOption(props);
-    const { id } = generateOption;
+    const { table, type = 'bar' } = props;
+    if (!isDrawable(table, type)) {
+        return <div>차트 표현이 불가능합니다.</div>;
+    }
+    const option = generateOption(props);
+    const { id } = option;
 
     useEffect(() => {
-        bb.generate(generateOption);
+        bb.generate(option);
     }, []);
 
     return (
