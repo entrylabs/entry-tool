@@ -73,6 +73,7 @@ typings/
 # production
 /build
 /dist
+/lib
 
 # misc
 .DS_Store

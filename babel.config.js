@@ -2,7 +2,12 @@ module.exports = function(api) {
     api.cache(true);
     return {
         plugins: [
-            '@babel/plugin-transform-runtime',
+            [
+                '@babel/plugin-transform-runtime',
+                {
+                    useESModules: true,
+                },
+            ],
             '@babel/plugin-transform-regenerator',
             '@babel/plugin-syntax-dynamic-import',
             '@babel/plugin-transform-object-assign',
