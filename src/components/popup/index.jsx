@@ -97,6 +97,11 @@ class Sprite extends Component {
                 navigation = null;
                 view = <Select type={'bigicon'} imageBaseUrl={url} data={data} />;
                 break;
+            case 'aiUtilize':
+                const aiImageurl = expsnsionIconBaseUrl || '/lib/entry-js/images/hardware/';
+                navigation = null;
+                view = <Select type={'bigicon'} imageBaseUrl={aiImageurl} data={data} />;
+                break;
             case 'projects':
             case 'favorites':
                 view = <Projects type={selected} data={data} />;
