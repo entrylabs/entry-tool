@@ -10,13 +10,15 @@ import { EMIT_TYPES as Types } from '@constants';
 import { triggerEvent } from '@actions/index';
 import { connect } from 'react-redux';
 import PopupList from '../../includes/PopupList';
+import _isEmpty from 'lodash/isEmpty';
 
 const Index = (props) => {
     const { data, type, sidebar, multiSelect = true, showSelected = true, isVectorOnly = false, fetch, baseUrl } = props;
     const [selectedSidebar, selectSidebar] = useState(Object.keys(sidebar)[0]);
     const [selectedSubMenu, selectSubMenu] = useState(null);
     const theme = Theme.getStyle('popup');
-    const subMenu = sidebar[selectedSidebar].sub || {};
+    const isEmpty = _isEmpty(sidebar);
+    const subMenu = sidebar[selectedSidebar] && sidebar[selectedSidebar].sub || {};
     const drawItems = () =>
         data
             .filter((item) => !isVectorOnly || CommonUtils.isVectorItem(item))
@@ -31,7 +33,7 @@ const Index = (props) => {
             ));
 
     useEffect(() => {
-        if (subMenu[selectedSubMenu]) {
+        if (isEmpty || subMenu[selectedSubMenu]) {
             fetch(type, selectedSidebar, selectedSubMenu);
         }
     }, [selectedSidebar, selectedSubMenu]);
@@ -40,7 +42,13 @@ const Index = (props) => {
         <>
             <div className={theme.pop_content}>
                 <h2 className={theme.blind}>Popup</h2>
-                <SideBar type={type} sidebar={sidebar} onClick={(item) => selectSidebar(item)} />
+                {!isEmpty && (
+                    <SideBar
+                        type={type}
+                        sidebar={sidebar}
+                        onClick={(item) => selectSidebar(item)}
+                    />
+                )}
                 <div className={theme.section_cont}>
                     <SubMenu menus={subMenu} onClick={(item) => selectSubMenu(item)} />
                     <PopupList type={type} theme={theme}>

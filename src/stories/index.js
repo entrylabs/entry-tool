@@ -6,6 +6,7 @@ import Sample from '../components/popup/Sample';
 import CommonGnb from '../components/popup/Gnb';
 import Popup from '../components/popup';
 import ColorPicker from '../components/picker/color';
+import LedPicker from '../components/ledPicker/ledPicker';
 import Number from '../components/widget/number';
 import Dropdown from '../components/widget/dropdown';
 import ModalProgress from '../components/widget/modalProgress';
@@ -23,7 +24,7 @@ import {
     EXPANSION_SAMPLE,
     SOUND_SAMPLE,
     TABLE_SAMPLE,
-    table_sample,
+    TABLE_SAMPLE2,
 } from '../constants/sample';
 
 import configureStore from '../store';
@@ -34,13 +35,14 @@ import DataSelect from '../components/ai_layout/DataSelect';
 import DataUpload from '../components/ai_layout/DataUpload';
 import DataDetail from '../components/ai_layout/DataDetail';
 import DataAnalytics from '../components/editor/dataAnalytics/DataAnalytics';
+import Theme from '@utils/Theme';
 
 const store = configureStore();
 httpService.setupInterceptors('http://localhost:4000');
 export default function Provider({ story }) {
     return <ReduxProvider store={store}>{story}</ReduxProvider>;
 }
-//Theme.type = 'entryline';
+Theme.type = 'entry';
 storiesOf('Popup', module)
     .addDecorator((story) => <Provider story={story()} />)
     .add('전체', () => <Sample />)
@@ -109,6 +111,7 @@ wigetStories
         />
     ))
     .add('컬러피커', () => <ColorPicker color="#FF0000" onChangeColorPicker={action} />)
+    .add('LED피커', () => <LedPicker />)
     .add('드롭다운', () => (
         <Dropdown
             items={[
@@ -247,10 +250,7 @@ wigetStories
                 ]}
             />
         );
-    })
-    .add('차트', () => <Chart table={table_sample} type="line" />)
-    .add('테이블', () => <Table table={table_sample} editor={'text'} />)
-    .add('DataAnalytics', () => <DataAnalytics table={table_sample} />);
+    });
 
 storiesOf('AiLayout', module)
     .addDecorator((story) => <Provider story={story()} />)
@@ -259,4 +259,11 @@ storiesOf('AiLayout', module)
     .add('테이블 추가하기 - 데이터 업로드', () => <DataUpload />)
     .add('데이터 상세 - 요약', () => <DataDetail />)
     .add('데이터 상세 - 테이블', () => <DataDetail DetailState="Table" />)
-    .add('데이터 상세 - 차트', () => <DataDetail DetailState="Chart" />);
+    .add('데이터 상세 - 차트', () => <DataDetail DetailState="Chart" />)
+    .add('차트', () => (
+        <Chart table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} type="line" />
+    ))
+    .add('테이블', () => (
+        <Table table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} editor={'text'} />
+    ))
+    .add('DataAnalytics', () => <DataAnalytics table={TABLE_SAMPLE2} />);

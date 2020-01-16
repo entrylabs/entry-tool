@@ -2297,32 +2297,32 @@
             height: 40px;
             background-size: 40px auto;
         }
-        .sel1 a {
+        .bar a {
             background-image: url('#{$imageDir}/icon_chart_sel01_off.svg');
         }
-        .sel1.on a,
-        .sel1:hover a {
+        .bar.on a,
+        .bar:hover a {
             background-image: url('#{$imageDir}/icon_chart_sel01_on.svg');
         }
-        .sel2 a {
+        .line a {
             background-image: url('#{$imageDir}/icon_chart_sel02_off.svg');
         }
-        .sel2.on a,
-        .sel2:hover a {
+        .line.on a,
+        .line:hover a {
             background-image: url('#{$imageDir}/icon_chart_sel02_on.svg');
         }
-        .sel3 a {
+        .pie a {
             background-image: url('#{$imageDir}/icon_chart_sel03_off.svg');
         }
-        .sel3.on a,
-        .sel3:hover a {
+        .pie.on a,
+        .pie:hover a {
             background-image: url('#{$imageDir}/icon_chart_sel03_on.svg');
         }
-        .sel4 a {
+        .scatter a {
             background-image: url('#{$imageDir}/icon_chart_sel04_off.svg');
         }
-        .sel4.on a,
-        .sel4:hover a {
+        .scatter.on a,
+        .scatter:hover a {
             background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
         }
     }

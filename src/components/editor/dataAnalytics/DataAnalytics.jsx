@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import Header from './Header';
-import Summary from './Summary';
+import Summary from './Summary/Summary';
 import TableEditor from './TableEditor';
 import ChartEditor from './ChartEditor';
 import { SUMMARY, TABLE, CHART, TAB_ITEMS } from './Constants';
@@ -10,7 +10,9 @@ import Styles from '@assets/entry/scss/popup.scss';
 
 const DataAnalytics = (props) => {
     const { table } = props;
+    const { name, fields, origin = [], chart } = table;
     const [tab, setTab] = useState(SUMMARY);
+    const originTable = [fields, ...origin];
 
     const handleClickTab = (name) => (event) => {
         event.preventDefault();
@@ -23,13 +25,13 @@ const DataAnalytics = (props) => {
     } else {
         switch (tab) {
             case SUMMARY:
-                content = <Summary table={table} />;
+                content = <Summary name={name} table={originTable} charts={chart} />;
                 break;
             case TABLE:
-                content = <TableEditor table={table} />;
+                content = <TableEditor table={originTable} />;
                 break;
             case CHART:
-                content = <ChartEditor table={table} />;
+                content = <ChartEditor table={originTable} charts={chart} />;
                 break;
             default:
                 break;
@@ -39,10 +41,8 @@ const DataAnalytics = (props) => {
     return (
         <div className={Styles.data_detail_wrap}>
             <Header selected={tab} tabItems={TAB_ITEMS} onClickTab={handleClickTab} />
-            <section className={`${Styles.detail_cont} ${Styles.table_state}`}>
-                {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                {content}
-            </section>
+            {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
+            {content}
         </div>
     );
 };

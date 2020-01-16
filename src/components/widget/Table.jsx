@@ -39,7 +39,7 @@ const Table = (props) => {
         columnOptions = {},
         editable = 'text',
         rowHeight = 40,
-        rowHeaders = [{ type: 'rowNum' }],
+        rowHeaders = [{ type: 'rowNum', width: 98 }],
         needRowHeader = true,
     } = props;
 
@@ -60,7 +60,7 @@ const Table = (props) => {
             } else {
                 return;
             }
-            setContextMenuOption((prev) => ({ x, y, contextMenu, isVisible: true }));
+            setContextMenuOption(() => ({ x, y, contextMenu, isVisible: true }));
         },
         [table]
     );
@@ -73,9 +73,10 @@ const Table = (props) => {
         event.preventDefault();
     };
 
-    // const handleClick = () => {
-    //     console.log(gridRef.current.getInstance().getData());
-    // };
+    const handleEditingFinish = useCallback((event) => {
+        tableProps[event.rowKey + 1][table[0].findIndex((header) => event.columnName === header)] =
+            event.value;
+    });
 
     const makeContextMenu = (targetTable, setTable, type, key) => {
         const table = [...targetTable];
@@ -154,6 +155,7 @@ const Table = (props) => {
                 usageStatistics={false}
                 rowHeaders={needRowHeader ? rowHeaders : {}}
                 onMousedown={handleMousedown}
+                onEditingFinish={handleEditingFinish}
             />
             {isVisible && (
                 <ContextMenu

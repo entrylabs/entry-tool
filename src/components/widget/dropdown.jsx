@@ -25,7 +25,7 @@ class Dropdown extends Component {
     }
     constructor(props) {
         super(props);
-        this.theme = Theme.getStyle("popup");
+        this.theme = Theme.getStyle('popup');
         this.state = CommonUtils.getDefaultComponentPosition(props, this.getPositionOptions());
     }
 
@@ -135,7 +135,10 @@ class Dropdown extends Component {
                     <div className={this.theme.tooltip_inner}>
                         {items.length <= 5 && this.makeDropdownItem()}
                         {items.length > 5 && (
-                            <Scrollbars heightRelativeToParent="260px" className={this.theme.scrollbar}>
+                            <Scrollbars
+                                heightRelativeToParent="260px"
+                                className={this.theme.scrollbar}
+                            >
                                 {this.makeDropdownItem()}
                             </Scrollbars>
                         )}

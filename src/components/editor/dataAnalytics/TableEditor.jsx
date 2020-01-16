@@ -5,7 +5,7 @@ import Table from '@components/widget/Table';
 const TableEditor = (props) => {
     const { table = [[]] } = props;
     return (
-        <>
+        <section className={`${Styles.detail_cont} ${Styles.table_state}`}>
             <h2 className={Styles.blind}>테이블</h2>
             <div className={Styles.content_box}>
                 <div className={Styles.input_box}>
@@ -25,7 +25,7 @@ const TableEditor = (props) => {
                     </div>
                 </div>
             </div>
-        </>
+        </section>
     );
 };
 

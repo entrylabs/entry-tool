@@ -2,6 +2,9 @@ import root from 'window-or-global';
 import { DEFAULT_OPTIONS } from '../constants/index';
 import get from 'lodash/get';
 import _some from 'lodash/some';
+import flow from 'lodash/fp/flow';
+import map from 'lodash/fp/map';
+import unzip from 'lodash/fp/unzip';
 
 export const CommonUtils = {
     getScaleNumber(num, inMin, inMax, outMin, outMax) {
@@ -262,3 +265,30 @@ export const getData = (matrix) =>
         .slice(1)
         .map((content) => _.zipObject(_.head(matrix), content))
         .value();
+const getAverage = (array) => array.reduce((sum, value) => sum + Number(value), 0) / array.length;
+const getStandardDeviation = (arr, average) =>
+    Math.sqrt(arr.reduce((acc, curr) => acc + Math.pow(curr - average, 2), 0) / arr.length);
+const makeSummary = (row) => {
+    const restRow = row.slice(1);
+    const count = restRow.length;
+    if (someString(restRow)) {
+        return [row[0], count, '-', '-', '-', '-', '-', '-', '-', '-'];
+    }
+    const max = Math.max(...restRow);
+    const min = Math.min(...restRow);
+    const average = getAverage(restRow);
+
+    return [
+        row[0],
+        count,
+        average,
+        getStandardDeviation(restRow, average),
+        max,
+        min + ((max - min) / 4) * 3,
+        min + (max - min) / 2,
+        min + (max - min) / 4,
+        min,
+        restRow.sort((a, b) => a - b)[Math.floor((restRow.length - 1) / 2)],
+    ];
+};
+export const getSummary = flow(unzip, map(makeSummary));
