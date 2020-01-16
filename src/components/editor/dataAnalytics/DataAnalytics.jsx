@@ -9,7 +9,7 @@ import { SUMMARY, TABLE, CHART, TAB_ITEMS } from './Constants';
 import Styles from '@assets/entry/scss/popup.scss';
 
 const DataAnalytics = (props) => {
-    const { table } = props;
+    const { table = {} } = props;
     const { name, fields, origin = [], chart } = table;
     const [tab, setTab] = useState(SUMMARY);
     const originTable = [fields, ...origin];
