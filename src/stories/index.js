@@ -35,13 +35,14 @@ import DataSelect from '../components/ai_layout/DataSelect';
 import DataUpload from '../components/ai_layout/DataUpload';
 import DataDetail from '../components/ai_layout/DataDetail';
 import DataAnalytics from '../components/editor/dataAnalytics/DataAnalytics';
+import Theme from '@utils/Theme';
 
 const store = configureStore();
 httpService.setupInterceptors('http://localhost:4000');
 export default function Provider({ story }) {
     return <ReduxProvider store={store}>{story}</ReduxProvider>;
 }
-//Theme.type = 'entryline';
+Theme.type = 'entry';
 storiesOf('Popup', module)
     .addDecorator((story) => <Provider story={story()} />)
     .add('전체', () => <Sample />)
