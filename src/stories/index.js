@@ -6,6 +6,7 @@ import Sample from '../components/popup/Sample';
 import CommonGnb from '../components/popup/Gnb';
 import Popup from '../components/popup';
 import ColorPicker from '../components/picker/color';
+import LedPicker from '../components/ledPicker/ledPicker';
 import Number from '../components/widget/number';
 import Dropdown from '../components/widget/dropdown';
 import ModalProgress from '../components/widget/modalProgress';
@@ -109,6 +110,7 @@ wigetStories
         />
     ))
     .add('컬러피커', () => <ColorPicker color="#FF0000" onChangeColorPicker={action} />)
+    .add('LED피커', () => <LedPicker />)
     .add('드롭다운', () => (
         <Dropdown
             items={[

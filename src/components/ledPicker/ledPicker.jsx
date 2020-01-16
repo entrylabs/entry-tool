@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import debounce from 'lodash/debounce';
 import { pure } from 'recompose';
+import { CommonUtils } from '@utils/Common';
 import OutsideClick from '../common/outsideClick';
+import { debounce } from 'lodash';
 import root from 'window-or-global';
-import ColorSlider from './ColorSlider';
-import ColorSwatches from './ColorSwatches';
 import produce from 'immer';
-import { COLOR_PICKER_MODE } from '../../constants';
 import Theme from '@utils/Theme';
 
-class ColorPicker extends Component {
+class LedPicker extends Component {
     get PICKER_WIDTH() {
-        return 398;
+        return 222;
     }
 
     get PICKER_WIDTH_MARGIN() {
@@ -19,19 +17,15 @@ class ColorPicker extends Component {
     }
 
     get MAX_ARROW_POSITION() {
-        return 366;
+        return 192;
     }
 
     get PICKER_HEIGHT() {
-        return 278;
+        return 296.8;
     }
 
     get ARROW_HEIGHT() {
         return 9;
-    }
-
-    get SLIDER_SIZE() {
-        return 28;
     }
 
     constructor(props) {
@@ -39,9 +33,19 @@ class ColorPicker extends Component {
         this.theme = Theme.getStyle('popup');
         const state = {
             isTransparent: false,
-            pickerMode: this.defaultPickerMode(),
         };
-        Object.assign(state, this.getDefaultColorPickerStyle());
+        this.defaultLedStatus = [
+            [0, 0, 0, 0, 0],
+            [0, 1, 0, 1, 0],
+            [0, 0, 0, 0, 0],
+            [1, 0, 0, 0, 1],
+            [0, 1, 1, 1, 0],
+        ];
+        if (this.props.ledStatus) {
+            var clonedArray = JSON.parse(JSON.stringify(this.props.ledStatus));
+        }
+        Object.assign(state, this.getDefaultLedPickerStyle());
+        Object.assign(state, { ledStatus: clonedArray || this.defaultLedStatus });
         this.state = state;
     }
 
@@ -54,38 +58,6 @@ class ColorPicker extends Component {
         root.removeEventListener('resize', this.handleWindowResize);
     }
 
-    defaultPickerMode() {
-        let pickerMode = localStorage.getItem('colorPickerMode');
-        if (!pickerMode) {
-            pickerMode = COLOR_PICKER_MODE.SLIDER;
-            localStorage.setItem('colorPickerMode', pickerMode);
-        }
-        return pickerMode;
-    }
-
-    handleChangePickerMode = (pickerMode) => {
-        this.setState(
-            produce((draft) => {
-                const { color } = this.state;
-                draft.pickerMode = pickerMode;
-                this.lastColor = color;
-                localStorage.setItem('colorPickerMode', pickerMode);
-            })
-        );
-    };
-
-    handleChangeColor = (color) => {
-        const { onChangeColorPicker } = this.props;
-        this.setState(
-            produce((draft) => {
-                draft.color = color;
-                if (onChangeColorPicker) {
-                    onChangeColorPicker(color);
-                }
-            })
-        );
-    };
-
     alignPosition(updateState) {
         this.setState(() => {
             return Object.assign(this.getAlignPosition(), updateState);
@@ -97,7 +69,7 @@ class ColorPicker extends Component {
     }, 300);
 
     // 정해진 Dom위치에 Picker 배치
-    getColorPickerPosition() {
+    getLedPickerPosition() {
         const { positionDom, marginRect = {}, positionRect, boundaryDom } = this.props;
 
         let boundaryHeight = 0;
@@ -132,12 +104,12 @@ class ColorPicker extends Component {
         };
     }
 
-    getDefaultColorPickerStyle() {
-        const { left, top, isUpStyle } = this.getColorPickerPosition();
+    getDefaultLedPickerStyle() {
+        const { left, top, isUpStyle } = this.getLedPickerPosition();
         return {
             isUpStyle,
-            arrowLeft: 183,
-            colorPickerStyle: {
+            arrowLeft: 0,
+            LedPickerStyle: {
                 left,
                 top,
                 transform: `translate3d(0px, 0px, 0)`,
@@ -147,7 +119,7 @@ class ColorPicker extends Component {
 
     getAlignPosition() {
         const { boundaryDom } = this.props;
-        const { top, left, isUpStyle } = this.getColorPickerPosition();
+        const { top, left, isUpStyle } = this.getLedPickerPosition();
 
         let boundrayRect = {};
         if (boundaryDom) {
@@ -161,8 +133,8 @@ class ColorPicker extends Component {
             };
         }
 
-        const colorPickerRect = this.colorPicker.getBoundingClientRect();
-        const { width, height } = colorPickerRect;
+        const ledPickerRect = this.ledPicker.getBoundingClientRect();
+        const { width, height } = ledPickerRect;
         const bottom = top + height;
         const right = left + width;
         let x = 0;
@@ -187,13 +159,41 @@ class ColorPicker extends Component {
         return {
             arrowLeft,
             isUpStyle,
-            colorPickerStyle: {
+            ledPickerStyle: {
                 left,
                 top,
                 transform: `translate3d(${x}px, ${y}px, 0)`,
+                backgroundColor: '#d6e9f4',
             },
         };
     }
+    _handleLedStatusChange = ({ x, y, isReset }) => {
+        const { onChangeLedPicker } = this.props;
+
+        let status = this.state.ledStatus;
+        if (isReset) {
+            for (let i = 0; i < status.length; i++) {
+                const row = status[i];
+                const rowLength = row.length;
+                status[i] = new Array(rowLength).fill(0);
+            }
+        } else {
+            if (status[x][y] == 1) {
+                status[x][y] = 0;
+            } else {
+                status[x][y] = 1;
+            }
+        }
+
+        this.setState(
+            produce((draft) => {
+                draft.lastState = status;
+                if (onChangeLedPicker) {
+                    onChangeLedPicker(status);
+                }
+            })
+        );
+    };
 
     render() {
         const {
@@ -201,62 +201,65 @@ class ColorPicker extends Component {
             onClick,
             onOutsideClick,
             outsideExcludeDom,
-            eventTypes = ['mouseup', 'touchend', 'wheel'],
+            eventTypes = ['mouseup', 'touchend'],
+            animation = true,
         } = this.props;
-        const {
-            color,
-            arrowLeft,
-            isUpStyle,
-            colorPickerStyle,
-            pickerMode = COLOR_PICKER_MODE.SLIDER,
-        } = this.state;
-
-        let lastColor;
-        if (this.lastColor) {
-            lastColor = this.lastColor;
-            this.lastColor = undefined;
+        const { color, arrowLeft, isUpStyle, ledPickerStyle, ledStatus } = this.state;
+        let animationStyle = {};
+        if (!animation) {
+            animationStyle = {
+                transition: 'none',
+            };
         }
         return (
             <OutsideClick
                 outsideExcludeDom={outsideExcludeDom}
                 onOutsideClick={() => {
                     if (onOutsideClick) {
-                        onOutsideClick(color);
+                        onOutsideClick(this.state.ledStatus);
                     }
                 }}
                 eventTypes={eventTypes}
             >
                 <div
                     ref={(dom) => {
-                        this.colorPicker = dom;
+                        this.ledPicker = dom;
                     }}
-                    style={colorPickerStyle}
+                    style={ledPickerStyle}
                     onClick={onClick}
-                    className={`${this.theme.tooltip_box} ${this.theme.color_picker} ${
+                    className={`${this.theme.tooltip_box} ${this.theme.led_picker} ${
                         isUpStyle ? this.theme.up : ''
-                    }
-                        ${className}`}
+                    }`}
                 >
-                    {pickerMode === COLOR_PICKER_MODE.SLIDER && (
-                        <ColorSlider
-                            {...this.props}
-                            onChangePickerMode={this.handleChangePickerMode}
-                            onChangeColor={this.handleChangeColor}
-                            lastColor={lastColor}
-                        />
-                    )}
-                    {pickerMode !== COLOR_PICKER_MODE.SLIDER && (
-                        <ColorSwatches
-                            {...this.props}
-                            onChangePickerMode={this.handleChangePickerMode}
-                            onChangeColor={this.handleChangeColor}
-                        />
-                    )}
+                    <div className={this.theme.led_picker_inner}>
+                        {ledStatus.map((leds, x) => {
+                            return leds.map((led, y) => {
+                                return (
+                                    <div
+                                        className={`${this.theme.led_item} ${led > 0 &&
+                                            this.theme.led_item_selected}`}
+                                        key={`led${x}${y}`}
+                                        onClick={() =>
+                                            this._handleLedStatusChange({ x, y, isReset: false })
+                                        }
+                                    />
+                                );
+                            });
+                        })}
+                    </div>
+                    <div
+                        className={this.theme.led_clear}
+                        onClick={() => this._handleLedStatusChange({ isReset: true })}
+                    >
+                        <p className={this.theme.led_clear_text}>
+                            <span className={this.theme.led_clear_text_content}>모두 지우기</span>
+                        </p>
+                    </div>
                     <span
                         className={`${this.theme.arr} ${this.theme.free}`}
                         style={{ left: `${arrowLeft}px` }}
                     >
-                        <i />
+                        <i style={{ backgroundColor: '#d6e9f4' }} />
                     </span>
                 </div>
             </OutsideClick>
@@ -264,4 +267,4 @@ class ColorPicker extends Component {
     }
 }
 
-export default pure(ColorPicker);
+export default pure(LedPicker);

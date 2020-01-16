@@ -1,6 +1,6 @@
 import { VISIBLE, CLICK_BUTTON, TRIGGER_EVENT } from '@actions/index';
 import { API_FAIL } from '@actions/popup';
-import { CHANGE_COLOR_PICKER } from '@actions/picker';
+import { CHANGE_COLOR_PICKER, CHANGE_LED_PICKER } from '@actions/picker';
 import {
     SELECT_DROPDOWN,
     CHANGED_ANGLE,
@@ -50,6 +50,7 @@ export default class EmitMiddleware {
                 }
                 case CHANGED_ANGLE:
                 case CHANGE_SORTABLE_LIST:
+                case CHANGE_LED_PICKER:
                 case CHANGE_COLOR_PICKER: {
                     this.emitter.emit('change', action.data);
                     break;
