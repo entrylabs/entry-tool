@@ -149,21 +149,36 @@ export const DEFAULT_OPTIONS = {
             {
                 name: '필기체',
                 family: 'Nanum Pen Script',
-                style: { backgroundColor: '#f7fcff', padding: '17px 22px 14px 16px', margin:'0px', borderTop: 'solid 1px #d6e9f4' },
+                style: {
+                    backgroundColor: '#f7fcff',
+                    padding: '17px 22px 14px 16px',
+                    margin: '0px',
+                    borderTop: 'solid 1px #d6e9f4',
+                },
                 url: '/css/nanumpenscript.css',
                 $$hashKey: 'object:138',
             },
             {
                 name: '한라산체',
                 family: 'Jeju Hallasan',
-                style: { backgroundColor: '#f7fcff', padding: '17px 22px 14px 16px', margin:'0px', borderTop: 'solid 1px #d6e9f4' },
+                style: {
+                    backgroundColor: '#f7fcff',
+                    padding: '17px 22px 14px 16px',
+                    margin: '0px',
+                    borderTop: 'solid 1px #d6e9f4',
+                },
                 url: '/css/jejuhallasan.css',
                 $$hashKey: 'object:139',
             },
             {
                 name: '코딩고딕체',
                 family: 'Nanum Gothic Coding',
-                style: { backgroundColor: '#f7fcff', padding: '17px 22px 14px 16px', margin:'0px', borderTop: 'solid 1px #d6e9f4' },
+                style: {
+                    backgroundColor: '#f7fcff',
+                    padding: '17px 22px 14px 16px',
+                    margin: '0px',
+                    borderTop: 'solid 1px #d6e9f4',
+                },
                 url: '/css/nanumgothiccoding.css',
                 $$hashKey: 'object:140',
             },
@@ -361,6 +376,10 @@ export const DEFAULT_OPTIONS = {
         expansion: {
             title: 'Workspace.load_expansion_block',
             mainType: 'expansion',
+        },
+        aiUtilize: {
+            title: 'Workspace.load_ai_utilize_block',
+            mainType: 'aiUtilize',
         },
         projects: {
             title: 'Menus.my_project',
