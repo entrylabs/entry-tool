@@ -15,7 +15,7 @@ const DataAnalytics = (props) => {
         event.preventDefault();
         setTab(name);
     };
-    
+
     let content;
     if (!table) {
         content = null;

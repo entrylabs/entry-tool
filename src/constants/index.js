@@ -403,6 +403,9 @@ export const DEFAULT_OPTIONS = {
                 upload: {
                     name: 'Workspace.upload',
                 },
+                draw: {
+                    name: 'Workspace.draw_new_table',
+                },
             },
             opt: {
                 search: { query: true },
