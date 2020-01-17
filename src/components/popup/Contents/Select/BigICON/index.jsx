@@ -25,7 +25,7 @@ const Index = (props) => {
                             <div className={theme.imico_exclamation_mark} />
                             <div className={theme.content}>
                                 {CommonUtils.getLang(
-                                    imageBaseUrl.indexOf('aiUtilize') > -1
+                                    imageBaseUrl.includes('aiUtilize')
                                         ? 'template.aiUtilize_block_descriptions'
                                         : 'template.expansion_block_descriptions'
                                 )}
