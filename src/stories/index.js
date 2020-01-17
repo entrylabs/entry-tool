@@ -23,7 +23,7 @@ import {
     SPRITE_SAMPLE,
     EXPANSION_SAMPLE,
     SOUND_SAMPLE,
-    TABLE_SAMPLE,
+    TABLE_INFO_SAMPLE,
     TABLE_SAMPLE2,
     TABLE_SAMPLE3,
 } from '../constants/sample';
@@ -50,7 +50,7 @@ storiesOf('Popup', module)
     .add('툴팁', () => <Tooltips />)
     .add('확장블록', () => <Popup type="expansion" data={EXPANSION_SAMPLE} />)
     .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE} uploads={SOUND_SAMPLE} />)
-    .add('데이터 테이블', () => <Popup type="table" data={TABLE_SAMPLE} uploads={TABLE_SAMPLE} />)
+    .add('데이터 테이블', () => <Popup type="table" data={TABLE_INFO_SAMPLE} uploads={[TABLE_SAMPLE2]} />)
     .add('오브젝트추가하기', () => <Popup type="sprite" data={SPRITE_SAMPLE} />)
     .add('모양추가', () => <Popup type="picture" data={SPRITE_SAMPLE} />)
     .add('모양 가져오기', () => <Popup type="paint" data={SPRITE_SAMPLE} />)
