@@ -59,7 +59,7 @@ class Sprite extends Component {
     }
 
     setContent() {
-        const { opt = {}, writeBoxOption, data: dataObj, uploads: uploaded } = this.property;
+        const { opt = {}, writeBoxOption, data: dataObj, uploads: uploaded, type } = this.property;
         const { imageBaseUrl: expsnsionIconBaseUrl } = this.property;
         const { isDrawVector, multiSelect, showSelected, search: searchOption } = opt;
         const { navigation: selected } = this.state;
@@ -86,7 +86,7 @@ class Sprite extends Component {
                 navigation = <Navigation {...navSettings} searchOption={false} />;
                 break;
             case 'draw':
-                view = <Draw />;
+                view = <Draw type={type} />;
                 navigation = <Navigation {...navSettings} searchOption={false} />;
                 break;
             case 'write':
