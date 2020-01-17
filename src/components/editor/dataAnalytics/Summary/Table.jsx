@@ -1,7 +1,7 @@
 import React from 'react';
 import TableToolTip from '@components/tooltip/TableToolTip';
 import Styles from '@assets/entry/scss/popup.scss';
-const SummaryTable = (props) => {
+const Table = (props) => {
     const { summary } = props;
     const header = [
         ' ',
@@ -68,4 +68,4 @@ const SummaryTable = (props) => {
     );
 };
 
-export default SummaryTable;
+export default Table;

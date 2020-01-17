@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 import Styles from '@assets/entry/scss/popup.scss';
 
 const TitleInput = (props) => {
-    const { title: propsTitle = '' } = props;
+    const { title: propsTitle = '', onChangeTitle } = props;
     const [title, setTitle] = useState(propsTitle);
 
     const handleChange = (event) => {
         setTitle(event.target.value);
+        onChangeTitle && onChangeTitle(event);
     };
 
     const handleClick = (event) => {

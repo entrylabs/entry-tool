@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import bb from 'billboard.js';
-import 'billboard.js/dist/theme/insight.css';
+import '@assets/entry/scss/widget/insight.css';
 
 import { CommonUtils, isString, someString } from '@utils/Common';
 const { generateHash } = CommonUtils;
@@ -49,7 +49,11 @@ const generateOption = (props) => {
         bar,
         size,
         bindto: `#${id}`,
-        data: { x, columns, type },
+        data: {
+            x,
+            columns,
+            type,
+        },
         axis: {
             x: {
                 type: axisXType,
@@ -94,7 +98,7 @@ const Chart = (props) => {
         bb.generate(option);
     }, []);
 
-    return <div id={id} />;
+    return <div id={id} className="asdfasdf" />;
 };
 
 export default Chart;

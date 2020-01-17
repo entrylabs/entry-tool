@@ -25,6 +25,7 @@ import {
     SOUND_SAMPLE,
     TABLE_SAMPLE,
     TABLE_SAMPLE2,
+    TABLE_SAMPLE3,
 } from '../constants/sample';
 
 import configureStore from '../store';

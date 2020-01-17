@@ -1,9 +1,10 @@
 import React from 'react';
 import Chart from '@components/widget/Chart';
 import Styles from '@assets/entry/scss/popup.scss';
+import { CHART } from '../Constants';
 
-const SummaryChartList = (props) => {
-    const { table, charts } = props;
+const ChartList = (props) => {
+    const { table, charts, onClickChart } = props;
 
     const handleMouseEnter = (event) => {
         event.currentTarget.className = Styles.on;
@@ -23,6 +24,7 @@ const SummaryChartList = (props) => {
                 key={`chart_${index}`}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
+                onClick={onClickChart(CHART, index)}
             >
                 <Chart
                     type={chart.type}
@@ -52,4 +54,4 @@ const SummaryChartList = (props) => {
     );
 };
 
-export default SummaryChartList;
+export default ChartList;

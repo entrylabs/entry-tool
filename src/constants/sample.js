@@ -1613,18 +1613,8 @@ export const TABLE_SAMPLE = [
 ];
 
 export const TABLE_SAMPLE2 = {
-    name: '', //excel file name && workspace save name..? 생각 필요.
+    name: '기후', //excel file name && workspace save name..? 생각 필요.
     fields: ['지역', '연도', '기온', '미세먼지', '초미세먼지', '습도'], //excel fields
-    data: [
-        {
-            key: '12df',
-            value: ['된장찌개', '된장', '끓인다'],
-        },
-        {
-            key: '532h',
-            value: ['파전', '파', '굽는다'],
-        },
-    ],
     origin: [
         ['서울', '2000', '25', '12', '34', '50'],
         ['서울', '2001', '26', '13', '32', '51'],
@@ -1657,16 +1647,26 @@ export const TABLE_SAMPLE2 = {
     user: '',
     chart: [
         {
-            title: '',
+            title: '테스트1',
             type: 'bar',
             xIndex: 0,
             yIndexs: [1, 2],
         },
         {
-            title: '',
+            title: '테스트2',
             type: 'line',
             xIndex: 0,
             yIndexs: [1, 2],
         },
     ],
+};
+export const TABLE_SAMPLE3 = {
+    name: '', //excel file name && workspace save name..? 생각 필요.
+    fields: [], //excel fields
+    data: [],
+    origin: [],
+    type: '__system__',
+    project: '',
+    user: '',
+    chart: [],
 };

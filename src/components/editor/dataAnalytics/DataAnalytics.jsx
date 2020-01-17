@@ -1,23 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import Header from './Header';
 import Summary from './Summary/Summary';
 import TableEditor from './TableEditor';
-import ChartEditor from './ChartEditor';
+import ChartEditor from './Chart/ChartEditor';
 import { SUMMARY, TABLE, CHART, TAB_ITEMS } from './Constants';
 
 import Styles from '@assets/entry/scss/popup.scss';
 
 const DataAnalytics = (props) => {
-    const { table } = props;
-    const { name, fields, origin = [], chart } = table;
-    const [tab, setTab] = useState(SUMMARY);
+    const { table = {} } = props;
+    const { name = '', fields, origin = [], chart = [] } = table;
+    const [{ tab, selectedChart }, setTab] = useState({ tab: SUMMARY, selectedChart: 0 });
+    const [title, setTitle] = useState(name);
     const originTable = [fields, ...origin];
 
-    const handleClickTab = (name) => (event) => {
+    const handleChangeTab = (tab, index) => (event) => {
         event.preventDefault();
-        setTab(name);
+        setTab({ tab, selectedChart: index || selectedChart });
     };
+
+    const handleChangeTitle = useCallback(
+        (event) => {
+            setTitle(event.target.value);
+        },
+        [title]
+    );
 
     let content;
     if (!table) {
@@ -25,13 +33,35 @@ const DataAnalytics = (props) => {
     } else {
         switch (tab) {
             case SUMMARY:
-                content = <Summary name={name} table={originTable} charts={chart} />;
+                content = (
+                    <Summary
+                        title={title}
+                        table={originTable}
+                        charts={chart}
+                        onChangeTitle={handleChangeTitle}
+                        onClickChart={handleChangeTab}
+                    />
+                );
                 break;
             case TABLE:
-                content = <TableEditor table={originTable} />;
+                content = (
+                    <TableEditor
+                        title={title}
+                        table={originTable}
+                        onChangeTitle={handleChangeTitle}
+                    />
+                );
                 break;
             case CHART:
-                content = <ChartEditor table={originTable} charts={chart} />;
+                content = (
+                    <ChartEditor
+                        title={title}
+                        table={originTable}
+                        charts={chart}
+                        selected={selectedChart}
+                        onChangeTitle={handleChangeTitle}
+                    />
+                );
                 break;
             default:
                 break;
@@ -40,8 +70,7 @@ const DataAnalytics = (props) => {
 
     return (
         <div className={Styles.data_detail_wrap}>
-            <Header selected={tab} tabItems={TAB_ITEMS} onClickTab={handleClickTab} />
-            {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
+            <Header selected={tab} tabItems={TAB_ITEMS} onClickTab={handleChangeTab} />
             {content}
         </div>
     );

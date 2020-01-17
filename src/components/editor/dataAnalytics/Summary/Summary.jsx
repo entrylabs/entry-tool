@@ -7,7 +7,7 @@ import ChartList from './ChartList';
 import { getSummary } from '@utils/Common';
 
 const Summary = (props) => {
-    const { table = [[]], title = '', charts = [] } = props;
+    const { table = [[]], title = '', charts = [], onChangeTitle, onClickChart } = props;
 
     const summary = getSummary(table);
 
@@ -16,7 +16,7 @@ const Summary = (props) => {
             <h2 className={Styles.blind}>요약</h2>
             <div className={Styles.content_box}>
                 <div className={Styles.input_box}>
-                    <TitleInput title={title} />
+                    <TitleInput title={title} onChangeTitle={onChangeTitle} />
                     <ul className={Styles.cnt_result}>
                         <li>속성 {summary.length}개</li>
                         <li>행 {table.length - 1}행</li>
@@ -26,7 +26,7 @@ const Summary = (props) => {
 
                 <div className={Styles.cont_inner}>
                     <Table summary={summary} />
-                    <ChartList table={table} charts={charts} />
+                    <ChartList table={table} charts={charts} onClickChart={onClickChart} />
                 </div>
             </div>
         </section>
