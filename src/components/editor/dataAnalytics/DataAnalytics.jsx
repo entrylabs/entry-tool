@@ -10,19 +10,18 @@ import Styles from '@assets/entry/scss/popup.scss';
 
 const DataAnalytics = (props) => {
     const { table } = props;
-    const { name, fields, origin = [], chart } = table;
     const [tab, setTab] = useState(SUMMARY);
-    const originTable = [fields, ...origin];
-
     const handleClickTab = (name) => (event) => {
         event.preventDefault();
         setTab(name);
     };
-
+    
     let content;
     if (!table) {
         content = null;
     } else {
+        const { name, fields, origin = [], chart } = table;
+        const originTable = [fields, ...origin];
         switch (tab) {
             case SUMMARY:
                 content = <Summary name={name} table={originTable} charts={chart} />;
