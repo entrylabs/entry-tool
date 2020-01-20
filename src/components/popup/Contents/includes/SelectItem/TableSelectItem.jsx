@@ -3,20 +3,17 @@ import { openModal } from '@actions/popup';
 import { connect } from 'react-redux';
 import { CommonUtils } from '@utils/Common';
 import classname from 'classnames';
-
-
+import moment from 'moment';
 
 const DetailModal = ({ theme, info = {} }) => {
-    const { provider, summary, rows = 0, label, fields, modifiDate, description } = info;
+    const { provider, rows = 0, name, fields, updatedAt = '', description } = info;
+    const updated = moment(new Date(updatedAt)).format('YYYY-MM-DD');
     return (
         <>
-            <strong className={theme.more_sjt}>{label}</strong>
+            <strong className={theme.more_sjt}>{name}</strong>
             <ul className={theme.more_info}>
-                <li>
-                    {`${CommonUtils.getLang('Menus.data_table_provider')} : ` +
-                        `${provider}`}
-                </li>
-                <li>{`${CommonUtils.getLang('Menus.data_table_modifidate')} : ${modifiDate}`}</li>
+                <li>{`${CommonUtils.getLang('Menus.data_table_provider')} : ` + `${provider}`}</li>
+                <li>{`${CommonUtils.getLang('Menus.data_table_modifidate')} : ${updated}`}</li>
             </ul>
             <ul className={theme.more_sub_info}>
                 <li>

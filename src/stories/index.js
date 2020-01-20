@@ -130,6 +130,31 @@ wigetStories
             ]}
         />
     ))
+    .add('드롭다운(체크박스)', () => (
+        <Dropdown
+            multiple
+            checkedIndex={[1, 3, 5]}
+            items={[
+                [1, 1],
+                [2, 2],
+                [3, 3],
+                [4, 4],
+                [5, 5],
+                [6, 6],
+                [7, 7],
+                [8, 8],
+                [9, 9],
+            ]}
+            onChange={(a, b, c) => {
+                console.log(a, b, c);
+                action('onChange');
+            }}
+            onOutsideClick={(a, b, c) => {
+                console.log(a, b, c);
+                action('onOutsideClick');
+            }}
+        />
+    ))
     .add('로딩바', () => (
         <div>
             <ColorPicker color="#FF0000" onChangeColorPicker={action} />

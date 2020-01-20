@@ -123,6 +123,7 @@
         "billboard.js": "^1.11.1",
         "chroma-js": "^1.4.0",
         "classnames": "^2.2.6",
+        "moment": "^2.24.0",
         "react-cookies": "^0.1.0",
         "react-outside-click-handler": "^1.2.2",
         "react-slick": "^0.23.2",
