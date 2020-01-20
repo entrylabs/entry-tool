@@ -12,8 +12,10 @@ const Navigation = (props) => {
                 return '꺽은선 그래프';
             case 'pie':
                 return '원형 그래프';
-            case '':
+            case 'scatter':
                 return '점 그래프';
+            case 'plus':
+                return '추가';
             default:
                 return '';
         }
@@ -33,7 +35,18 @@ const Navigation = (props) => {
 
     return (
         <div className={Styles.chart_navi}>
-            <ul className={Styles.list}>{navigationList(charts)}</ul>
+            <ul className={Styles.list}>
+                {navigationList(charts)}
+                {charts.length < 10 ? (
+                    <li key={`chart_last`} className={`${Styles.plus}`}>
+                        <a href="#" onClick={onClickItem(index)}>
+                            <span className={Styles.blind}>{chartName('plus')}</span>
+                        </a>
+                    </li>
+                ) : (
+                    <></>
+                )}
+            </ul>
         </div>
     );
 };

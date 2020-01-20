@@ -50,7 +50,9 @@ storiesOf('Popup', module)
     .add('툴팁', () => <Tooltips />)
     .add('확장블록', () => <Popup type="expansion" data={EXPANSION_SAMPLE} />)
     .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE} uploads={SOUND_SAMPLE} />)
-    .add('데이터 테이블', () => <Popup type="table" data={TABLE_INFO_SAMPLE} uploads={[TABLE_SAMPLE2]} />)
+    .add('데이터 테이블', () => (
+        <Popup type="table" data={TABLE_INFO_SAMPLE} uploads={[TABLE_SAMPLE2]} />
+    ))
     .add('오브젝트추가하기', () => <Popup type="sprite" data={SPRITE_SAMPLE} />)
     .add('모양추가', () => <Popup type="picture" data={SPRITE_SAMPLE} />)
     .add('모양 가져오기', () => <Popup type="paint" data={SPRITE_SAMPLE} />)
@@ -265,6 +267,6 @@ storiesOf('AiLayout', module)
         <Chart table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} type="line" />
     ))
     .add('테이블', () => (
-        <Table table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} editor={'text'} />
+        <Table table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]} editor={'text'} />
     ))
     .add('DataAnalytics', () => <DataAnalytics table={TABLE_SAMPLE2} />);

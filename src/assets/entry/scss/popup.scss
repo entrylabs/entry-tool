@@ -2325,6 +2325,13 @@
         .scatter:hover a {
             background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
         }
+        .plus a {
+            background-image: url('#{$imageDir}/icon_chart_sel04_off.svg');
+        }
+        .plus.on a,
+        .plus:hover a {
+            background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
+        }
     }
     .chart_box {
         position: relative;

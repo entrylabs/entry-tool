@@ -203,15 +203,8 @@ export const CommonUtils = {
     },
 
     getImageSummary(item) {
-        let {
-            label = {},
-            name: itemName,
-            imageType,
-            filename,
-            fileurl,
-            pictures = [],
-            hasSvg,
-        } = item;
+        let { imageType, filename, fileurl } = item;
+        const { label = {}, name: itemName, pictures = [], hasSvg } = item;
         let thumb;
         const lang = this.getLangType();
         if (pictures.length > 0) {
@@ -227,8 +220,8 @@ export const CommonUtils = {
         if (fileurl) {
             thumb = fileurl.thumb || fileurl.resized || fileurl.origin || fileurl;
         }
-        const defaultName = item.label && item.label.en ? item.label.en : item.name;
-        const name = item.label && item.label[lang] ? item.label[lang] : defaultName;
+        const defaultName = label && label.en ? label.en : itemName;
+        const name = label && label[lang] ? label[lang] : defaultName;
         return {
             name,
             imageType,
@@ -265,6 +258,8 @@ export const getData = (matrix) =>
         .slice(1)
         .map((content) => _.zipObject(_.head(matrix), content))
         .value();
+
+export const toFixed = (num, dp = 2) => Math.round(num * Math.pow(10, dp)) / Math.pow(10, dp);
 const getAverage = (array) => array.reduce((sum, value) => sum + Number(value), 0) / array.length;
 const getStandardDeviation = (arr, average) =>
     Math.sqrt(arr.reduce((acc, curr) => acc + Math.pow(curr - average, 2), 0) / arr.length);
@@ -289,6 +284,6 @@ const makeSummary = (row) => {
         min + (max - min) / 4,
         min,
         restRow.sort((a, b) => a - b)[Math.floor((restRow.length - 1) / 2)],
-    ];
+    ].map((value) => toFixed(value));
 };
 export const getSummary = flow(unzip, map(makeSummary));
