@@ -1,7 +1,7 @@
 import React from 'react';
 import Styles from '@assets/entry/scss/popup.scss';
 
-const ChartNavigation = (props) => {
+const Navigation = (props) => {
     const { charts, onClickItem, selected } = props;
 
     const chartName = (chartType) => {
@@ -38,4 +38,4 @@ const ChartNavigation = (props) => {
     );
 };
 
-export default ChartNavigation;
+export default Navigation;

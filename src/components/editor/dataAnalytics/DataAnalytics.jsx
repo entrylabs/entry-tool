@@ -21,8 +21,8 @@ const DataAnalytics = (props) => {
     };
 
     const handleChangeTitle = useCallback(
-        (event) => {
-            setTitle(event.target.value);
+        (value) => {
+            setTitle(value);
         },
         [title]
     );

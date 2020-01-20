@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-
 import Styles from '@assets/entry/scss/popup.scss';
 
 const TitleInput = (props) => {
-    const { title: propsTitle = '', onChangeTitle } = props;
+    const { title: propsTitle = '', onChangeTitle = () => {} } = props;
     const [title, setTitle] = useState(propsTitle);
 
     const handleChange = (event) => {
         setTitle(event.target.value);
-        onChangeTitle && onChangeTitle(event);
+        onChangeTitle(event.target.value);
     };
 
     const handleClick = (event) => {
         event.preventDefault();
         setTitle('');
+        onChangeTitle('');
     };
 
     return (
@@ -21,7 +21,7 @@ const TitleInput = (props) => {
             <input type="text" value={title} onChange={handleChange} />
             <a
                 href="#"
-                className={title ? Styles.close_btn : ''}
+                className={propsTitle ? Styles.close_btn : ''}
                 role="button"
                 onClick={handleClick}
             >
