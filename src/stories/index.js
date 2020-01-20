@@ -50,7 +50,9 @@ storiesOf('Popup', module)
     .add('툴팁', () => <Tooltips />)
     .add('확장블록', () => <Popup type="expansion" data={EXPANSION_SAMPLE} />)
     .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE} uploads={SOUND_SAMPLE} />)
-    .add('데이터 테이블', () => <Popup type="table" data={TABLE_INFO_SAMPLE} uploads={[TABLE_SAMPLE2]} />)
+    .add('데이터 테이블', () => (
+        <Popup type="table" data={TABLE_INFO_SAMPLE} uploads={[TABLE_SAMPLE2]} />
+    ))
     .add('오브젝트추가하기', () => <Popup type="sprite" data={SPRITE_SAMPLE} />)
     .add('모양추가', () => <Popup type="picture" data={SPRITE_SAMPLE} />)
     .add('모양 가져오기', () => <Popup type="paint" data={SPRITE_SAMPLE} />)
@@ -126,6 +128,31 @@ wigetStories
                 [8, 8],
                 [9, 9],
             ]}
+        />
+    ))
+    .add('드롭다운(체크박스)', () => (
+        <Dropdown
+            multiple
+            checkedIndex={[1, 3, 5]}
+            items={[
+                [1, 1],
+                [2, 2],
+                [3, 3],
+                [4, 4],
+                [5, 5],
+                [6, 6],
+                [7, 7],
+                [8, 8],
+                [9, 9],
+            ]}
+            onChange={(a, b, c) => {
+                console.log(a, b, c);
+                action('onChange');
+            }}
+            onOutsideClick={(a, b, c) => {
+                console.log(a, b, c);
+                action('onOutsideClick');
+            }}
         />
     ))
     .add('로딩바', () => (
