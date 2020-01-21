@@ -10,7 +10,7 @@ import Theme from '@utils/Theme';
 
 const Index = ({ index, imageBaseUrl, item, selected, applySelected, select, deselect }) => {
     const theme = Theme.getStyle('popup');
-    const { imageName, titleKey } = item;
+    const { imageName, titleKey, sponserText } = item;
     const desc = CommonUtils.getLang(item.descriptionKey);
     const onItemClicked = (e) => {
         e.preventDefault();
@@ -35,8 +35,15 @@ const Index = ({ index, imageBaseUrl, item, selected, applySelected, select, des
                     style={{
                         backgroundImage: `url("${imageBaseUrl}${imageName}")`,
                         backgroundRepeat: 'no-repeat',
+                        position: 'relative',
                     }}
-                />
+                >
+                    {sponserText && (
+                        <div className={theme.sponser_text}>
+                            <span className={theme.sponser_text_span}>{sponserText}</span>
+                        </div>
+                    )}
+                </div>
                 <div className={theme.inner_box}>
                     <strong className={theme.sjt}>{CommonUtils.getLang(titleKey)}</strong>
                     <div className={theme.dsc} dangerouslySetInnerHTML={{ __html: desc }} />
