@@ -321,8 +321,8 @@ storiesOf('AiLayout', module)
     .add('분산차트', () => (
         <Chart
             table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]}
-            type="scatter"
             chart={{
+                type: 'scatter',
                 xIndex: 1,
                 yIndex: 2,
                 categoryIndexes: [0],

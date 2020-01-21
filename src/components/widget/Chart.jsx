@@ -83,7 +83,7 @@ const generateOption = (option) => {
             xs = scatterXs(table, xIndex, yIndex, categoryIndexes);
             axisX = {
                 tick: {
-                    fit: true,
+                    fit: false,
                 },
             };
             break;
