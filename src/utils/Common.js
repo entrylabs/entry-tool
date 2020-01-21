@@ -284,6 +284,6 @@ const makeSummary = (row) => {
         min + (max - min) / 4,
         min,
         restRow.sort((a, b) => a - b)[Math.floor((restRow.length - 1) / 2)],
-    ].map((value) => toFixed(value));
+    ].map((value) => (isString(value) ? value : toFixed(value)));
 };
 export const getSummary = flow(unzip, map(makeSummary));

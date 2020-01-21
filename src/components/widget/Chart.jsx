@@ -2,66 +2,117 @@ import React, { useEffect } from 'react';
 import bb from 'billboard.js';
 import '@assets/entry/scss/widget/insight.css';
 
-import { CommonUtils, isString, someString } from '@utils/Common';
+import { CommonUtils, isString } from '@utils/Common';
 const { generateHash } = CommonUtils;
 
-const getColumns = (yAxis, yIndexs = [0]) =>
-    yIndexs.reduce((previous, index) => [...previous, yAxis[index]], []);
+const pivot = (table, xIndex, yIndex, categoryIndex) =>
+    table.slice(1).reduce((prev, row) => {
+        prev[row[xIndex]] = prev[row[xIndex]] || {};
+        prev[row[xIndex]][row[categoryIndex]] = row[yIndex];
+        return prev;
+    }, {});
 
-const getChartId = () =>
-    'abcdefghijklmnopqrstuvwxyz'[Math.floor(Math.random() * 26)] + generateHash();
+const categoryKeys = (table, categoryIndex) =>
+    _.uniq(table.slice(1).map((row) => row[categoryIndex]));
 
-const getNumberColumns = (table) => table.filter((row) => !someString(row.slice(1)));
+const makeTable = (pvTable, cateKey) =>
+    cateKey.map((key) => [key, ..._.map(pvTable, (xAxis) => xAxis[key] || 0)]);
 
-const zipColumns = (data) => {
-    const list = _.uniq(data[0].slice(1));
-    const indexes = list.map((value) => _.lastIndexOf(data[0], value));
-    return data.map((row) => [0, ...indexes].map((index) => row[index]));
-};
+const pivotTable = (table, xIndex, yIndex, categoryIndex) => [
+    [table[0][xIndex], ..._.uniq(table.slice(1).map((row) => row[xIndex]))],
+    ...makeTable(pivot(table, xIndex, yIndex, categoryIndex), categoryKeys(table, categoryIndex)),
+];
 
-const generateOption = (props) => {
-    const {
-        table = [],
-        type = 'bar',
-        axisXType = 'category',
-        size,
-        bar = {
-            width: {
-                ratio: 0.5,
-            },
-        },
-        id = getChartId(),
-        xIndex = 0,
-        yIndexs = [0],
-    } = props;
-    let { x, columns } = props;
+const pieChart = (table, xIndex, categoryIndex) => [
+    [table[0][xIndex], table[0][categoryIndex]],
+    ..._.toPairs(
+        table.slice(1).reduce((prev, row) => {
+            prev[row[xIndex]] = prev[row[xIndex]] || 0;
+            prev[row[xIndex]] += Number(row[categoryIndex]);
+            return prev;
+        }, {})
+    ),
+];
 
-    if (!x && table.length) {
-        const xAxis = _.unzip(table);
-        const yAxis = getNumberColumns(xAxis);
-        x = xAxis[xIndex];
-        columns = zipColumns([x, ...getColumns(yAxis, yIndexs)]);
-        x = x[0];
+const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
+    _.map(
+        table.slice(1).reduce((prev, row) => {
+            prev[`${row[categoryIndex]}-${table[0][yIndex]}`] =
+                prev[`${row[categoryIndex]}-${table[0][yIndex]}`] || [];
+            prev[`${row[categoryIndex]}-${table[0][yIndex]}`].push(row[yIndex]);
+            prev[`${row[categoryIndex]}-${table[0][xIndex]}`] =
+                prev[`${row[categoryIndex]}-${table[0][xIndex]}`] || [];
+            prev[`${row[categoryIndex]}-${table[0][xIndex]}`].push(row[xIndex]);
+            return prev;
+        }, {}),
+        (value, index) => [index, ...value]
+    );
+
+const scatterXs = (table, xIndex, yIndex, categoryIndex) =>
+    table.slice(1).reduce((prev, row) => {
+        prev[
+            `${row[categoryIndex]}-${table[0][yIndex]}`
+        ] = `${row[categoryIndex]}-${table[0][xIndex]}`;
+        return prev;
+    }, {});
+
+const generateOption = (option) => {
+    const { table, type, xIndex, yIndex = -1, categoryIndexes, id, size, legend, tooltip } = option;
+
+    let x;
+    let xs;
+    let columns;
+    let axisX = { type: 'category' };
+
+    switch (type) {
+        case 'bar':
+        case 'line':
+            if (yIndex !== -1) {
+                columns = pivotTable(table, xIndex, yIndex, categoryIndexes[0]);
+            } else {
+                columns = [xIndex, ...categoryIndexes].map((index) => _.unzip(table)[index]);
+            }
+            x = table[0][xIndex];
+            break;
+        case 'pie':
+            columns = pieChart(table, xIndex, categoryIndexes[0]);
+            x = table[0][xIndex];
+            break;
+        case 'scatter':
+            columns = scatterChart(table, xIndex, yIndex, categoryIndexes);
+            xs = scatterXs(table, xIndex, yIndex, categoryIndexes);
+            axisX = {
+                tick: {
+                    fit: true,
+                },
+            };
+            break;
+        default:
+            columns = [[]];
+            break;
     }
 
-    const option = {
+    return {
         id,
-        bar,
+        legend,
         size,
+        tooltip,
+        bar: {
+            width: {
+                ratio: 0.7,
+            },
+        },
         bindto: `#${id}`,
         data: {
             x,
+            xs,
             columns,
             type,
         },
         axis: {
-            x: {
-                type: axisXType,
-            },
+            x: axisX,
         },
     };
-
-    return option;
 };
 
 const hasNumberColumn = (table) => {
@@ -79,26 +130,56 @@ const hasNumberColumn = (table) => {
     return false;
 };
 
-const isDrawable = (table, type) => {
-    if (type === 'bar' || type === 'line') {
-        return table[0].length > 1 && hasNumberColumn(table);
-    }
-    return true;
-};
+const isDrawable = (table) => table[0].length > 1 && hasNumberColumn(table);
+const isZipable = (table, xIndex) => _.uniqBy(table, (row) => row[xIndex]).length !== table.length;
 
 const Chart = (props) => {
-    const { table, type = 'bar' } = props;
-    if (!isDrawable(table, type)) {
+    const {
+        table = [[]],
+        chart = {},
+        size,
+        legend,
+        tooltip = {
+            grouped: false,
+        },
+    } = props;
+    const { type = 'bar', xIndex = -1, yIndex, categoryIndexes = [] } = chart;
+    const id = `c${generateHash()}`;
+
+    if (!isDrawable(table)) {
         return <div>차트 표현이 불가능합니다.</div>;
     }
-    const option = generateOption(props);
-    const { id } = option;
 
     useEffect(() => {
-        bb.generate(option);
+        if (categoryIndexes.length && xIndex >= 0 && xIndex < table[0].length) {
+            const option = generateOption({
+                table,
+                type,
+                xIndex,
+                yIndex,
+                categoryIndexes,
+                id,
+                size,
+                legend,
+                tooltip,
+            });
+            option && bb.generate(option);
+        }
     }, []);
 
-    return <div id={id} className="asdfasdf" />;
+    let content = null;
+
+    if (!categoryIndexes.length) {
+        content = <div>범례를 선택해주세요</div>;
+    }
+
+    if (xIndex === -1) {
+        content = <div>가로축을 선택해주세요</div>;
+    } else if (isZipable(table, xIndex) && yIndex === -1) {
+        content = <div>세로축을 선택해주세요</div>;
+    }
+
+    return <div id={id}>{content}</div>;
 };
 
 export default Chart;

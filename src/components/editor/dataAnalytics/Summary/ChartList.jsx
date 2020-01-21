@@ -27,14 +27,14 @@ const ChartList = (props) => {
                 onClick={onClickChart(CHART, index)}
             >
                 <Chart
-                    type={chart.type}
-                    xIndex={chart.xIndex}
-                    yIndexs={chart.yIndexs}
+                    chart={chart}
                     table={table}
                     size={{
                         width: 236,
                         height: 140,
                     }}
+                    legend={{ show: false }}
+                    tooltip={{ show: false }}
                 />
             </li>
         ));

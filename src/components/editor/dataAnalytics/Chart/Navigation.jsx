@@ -39,7 +39,7 @@ const Navigation = (props) => {
                 {navigationList(charts)}
                 {charts.length < 10 ? (
                     <li key={`chart_last`} className={`${Styles.plus}`}>
-                        <a href="#" onClick={onClickItem(index)}>
+                        <a href="#" onClick={onClickItem(-1)}>
                             <span className={Styles.blind}>{chartName('plus')}</span>
                         </a>
                     </li>

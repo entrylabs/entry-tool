@@ -288,8 +288,46 @@ storiesOf('AiLayout', module)
     .add('데이터 상세 - 요약', () => <DataDetail />)
     .add('데이터 상세 - 테이블', () => <DataDetail DetailState="Table" />)
     .add('데이터 상세 - 차트', () => <DataDetail DetailState="Chart" />)
-    .add('차트', () => (
-        <Chart table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} type="line" />
+    .add('바차트', () => (
+        <Chart
+            table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]}
+            chart={{
+                type: 'bar',
+                xIndex: 0,
+                categoryIndexes: [1, 2],
+            }}
+        />
+    ))
+    .add('라인차트', () => (
+        <Chart
+            table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]}
+            chart={{
+                type: 'line',
+                xIndex: 0,
+                categoryIndexes: [1, 2],
+            }}
+        />
+    ))
+    .add('파이차트', () => (
+        <Chart
+            table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]}
+            chart={{
+                type: 'pie',
+                xIndex: 0,
+                categoryIndexes: [1],
+            }}
+        />
+    ))
+    .add('분산차트', () => (
+        <Chart
+            table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]}
+            type="scatter"
+            chart={{
+                xIndex: 1,
+                yIndex: 2,
+                categoryIndexes: [0],
+            }}
+        />
     ))
     .add('테이블', () => (
         <Table table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]} editor={'text'} />
