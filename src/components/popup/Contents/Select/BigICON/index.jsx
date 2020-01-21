@@ -24,7 +24,11 @@ const Index = (props) => {
                         <div className={theme.desc}>
                             <div className={theme.imico_exclamation_mark} />
                             <div className={theme.content}>
-                                {CommonUtils.getLang('template.expansion_block_descriptions')}
+                                {CommonUtils.getLang(
+                                    imageBaseUrl.includes('aiUtilize')
+                                        ? 'template.aiUtilize_block_descriptions'
+                                        : 'template.expansion_block_descriptions'
+                                )}
                             </div>
                         </div>
                         <div className={theme.extend_block}>
@@ -46,4 +50,7 @@ const mapDispatchToProps = (dispatch) => ({
     applySelected: (list) => dispatch(applySelected(list)),
 });
 
-export default connect(null, mapDispatchToProps)(Index);
+export default connect(
+    null,
+    mapDispatchToProps
+)(Index);

@@ -252,7 +252,9 @@ class LedPicker extends Component {
                         onClick={() => this._handleLedStatusChange({ isReset: true })}
                     >
                         <p className={this.theme.led_clear_text}>
-                            <span className={this.theme.led_clear_text_content}>모두 지우기</span>
+                            <span className={this.theme.led_clear_text_content}>
+                                {Lang.Msgs.microbit_led_erase_all}
+                            </span>
                         </p>
                     </div>
                     <span
