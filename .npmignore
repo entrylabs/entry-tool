@@ -25,10 +25,11 @@ coverage
 # Optional npm cache directory
 .npm
 
-# Optional eslint cache
+# lint
 .eslintcache
 .eslintignore
 .eslintrc
+.prettierrc
 
 # Optional REPL history
 .node_repl_history
@@ -58,6 +59,7 @@ bower_components
 .config
 .idea
 .cache/
+.travis.yml
 
 # project
 rollup.config.js
