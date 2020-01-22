@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react';
-import { dataAnalyticsReducer } from '../reducers/DataAnalyticsReducer';
+import { dataAnalyticsReducer } from '../reducer/DataAnalyticsReducer';
 
 export const DataAnalyticsContext = createContext();
 
@@ -8,6 +8,7 @@ const DataAnalyticsContextProvider = (props) => {
         name: '',
         table: [],
         charts: [],
+        tab: '',
     });
 
     return (
