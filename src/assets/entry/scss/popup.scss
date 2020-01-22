@@ -1211,13 +1211,7 @@
             bottom: 0;
             height: 40px;
             font-size: 0; /* Chrome10-25,Safari5.1-6 */
-            background: -webkit-gradient(
-                linear,
-                left top,
-                left bottom,
-                from(rgba(0, 0, 0, 0)),
-                to(rgba(0, 0, 0, 1))
-            );
+            background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 1)));
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
         }
         .section_cont .list .info_bar span {
@@ -2353,11 +2347,7 @@
             background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
         }
         .plus a {
-            background-image: url('#{$imageDir}/icon_chart_sel04_off.svg');
-        }
-        .plus.on a,
-        .plus:hover a {
-            background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
+            background-image: url('#{$imageDir}/icon_chart_sel05.svg');
         }
     }
     .chart_box {
@@ -2366,6 +2356,10 @@
         min-height: 552px;
         border-radius: 6px;
         background-color: #fff;
+        .chart_area {
+            width: calc(100% - 150px);
+            min-width: 740px;
+        }
         .legend_box {
             position: absolute;
             right: 20px;
@@ -2378,7 +2372,7 @@
             z-index: 100;
         }
         .legend_box .legend_link {
-            display:block;
+            display: block;
             position: relative;
             font-size: 14px;
             font-weight: 600;
@@ -2407,7 +2401,6 @@
             font-weight: 600;
             color: #2c313d;
             line-height: 18px;
-
         }
         .legend_box .legend_list .color {
             display: inline-block;
@@ -2445,28 +2438,26 @@
             vertical-align: top;
             content: '';
         }
-        .legend_box .tooltip_box .chk_box input[type="checkbox"] {
+        .legend_box .tooltip_box .chk_box input[type='checkbox'] {
             position: absolute;
             left: 0;
             top: 0;
         }
-        .legend_box .tooltip_box .chk_box input[type="checkbox"]:checked + label:before {
+        .legend_box .tooltip_box .chk_box input[type='checkbox']:checked + label:before {
             background-image: url('#{$imageDir}/icon_checkbox_on.svg');
-
         }
-
 
         .x_legend {
             position: absolute;
             right: 55px;
-            bottom: 47px;
+            bottom: 20px;
             z-index: 100;
         }
         .x_legend a {
             font-size: 18px;
             font-weight: 600;
             color: #2c313d;
-            line-height: 20px;   
+            line-height: 20px;
         }
         .x_legend a:after {
             display: inline-block;

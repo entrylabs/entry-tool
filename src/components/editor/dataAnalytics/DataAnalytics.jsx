@@ -1,9 +1,10 @@
 import React, { useState, useCallback } from 'react';
 
 import Header from './Header';
-import Summary from './Summary/Summary';
+import Summary from './summary/Summary';
 import TableEditor from './TableEditor';
-import ChartEditor from './Chart/ChartEditor';
+import ChartEditor from './chart/ChartEditor';
+import DataAnalyticsContextProvider from './context/DataAnalyticsContext';
 import { SUMMARY, TABLE, CHART, TAB_ITEMS } from './Constants';
 
 import Styles from '@assets/entry/scss/popup.scss';
@@ -69,10 +70,12 @@ const DataAnalytics = (props) => {
     }
 
     return (
-        <div className={Styles.data_detail_wrap}>
-            <Header selected={tab} tabItems={TAB_ITEMS} onClickTab={handleChangeTab} />
-            {content}
-        </div>
+        <DataAnalyticsContextProvider>
+            <div className={Styles.data_detail_wrap}>
+                <Header selected={tab} tabItems={TAB_ITEMS} onClickTab={handleChangeTab} />
+                {content}
+            </div>
+        </DataAnalyticsContextProvider>
     );
 };
 
