@@ -2372,23 +2372,20 @@
             z-index: 100;
         }
         .legend_box .legend_link {
-            display: block;
-            position: relative;
             font-size: 14px;
             font-weight: 600;
             color: #2c313d;
             line-height: 20px;
         }
-        .legend_box .legend_link:after {
+        .legend_box .btn_more {
             position: absolute;
-            right: 0;
-            top: -1px;
+            right: 8px;
+            top: 13px;
             width: 20px;
             height: 20px;
             background: url('#{$imageDir}/icon_chart_setting.svg') no-repeat;
             background-size: 20px auto;
             vertical-align: top;
-            content: '';
         }
         .legend_box .legend_list {
             padding-top: 5px;
@@ -2453,13 +2450,13 @@
             bottom: 20px;
             z-index: 100;
         }
-        .x_legend a {
+        .x_legend em {
             font-size: 18px;
             font-weight: 600;
             color: #2c313d;
             line-height: 20px;
         }
-        .x_legend a:after {
+        .x_legend .more_btn {
             display: inline-block;
             width: 20px;
             height: 20px;
@@ -2467,7 +2464,6 @@
             background: url('#{$imageDir}/icon_chart_setting.svg') no-repeat;
             background-size: 20px auto;
             vertical-align: top;
-            content: '';
         }
         .x_legend .tooltip_box {
             display: none;
