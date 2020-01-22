@@ -35,4 +35,4 @@ const TitleInput = (props) => {
     );
 };
 
-export default TitleInput;
+export default React.memo(TitleInput);
