@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Chart from '@components/widget/Chart';
+import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
 import Styles from '@assets/entry/scss/popup.scss';
 import { CHART } from '../Constants';
 
 const ChartList = (props) => {
-    const { table, charts, onClickChart } = props;
+    const { table, charts } = props;
+    const { dispatch } = useContext(DataAnalyticsContext);
+
+    const handleClickChart = (tab, index) => () => {
+        dispatch({
+            type: 'SET_TAB',
+            tab,
+            index,
+        });
+    };
 
     const handleMouseEnter = (event) => {
         event.currentTarget.className = Styles.on;
@@ -24,7 +34,7 @@ const ChartList = (props) => {
                 key={`chart_${index}`}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
-                onClick={onClickChart(CHART, index)}
+                onClick={handleClickChart(CHART, index)}
             >
                 <Chart
                     chart={chart}

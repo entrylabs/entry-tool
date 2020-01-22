@@ -1,27 +1,44 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import Navigation from './Navigation';
 import TitleInput from '../TitleInput';
 import Chart from '@components/widget/Chart';
+import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
 
 import Styles from '@assets/entry/scss/popup.scss';
 
 import { CommonUtils } from '@utils/Common';
 const { generateHash } = CommonUtils;
 
-const ChartEditor = (props) => {
-    const {
-        table = [[]],
-        charts = [],
-        selected: propsSelected = 0,
-        title = '',
-        onChangeTitle = () => {},
-    } = props;
-    const [selected, setSelected] = useState(propsSelected);
+const ChartEditor = () => {
+    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
+    const { table, charts, title, chartIndex: selected = 0 } = dataAnalytics;
+
+    const handleChangeTitle = (value) => (event) => {
+        dispatch({
+            type: 'EDIT_TITLE',
+            title: value,
+        });
+    };
+
+    const handleChangeChartTitle = (value) => (event) => {
+        dispatch({
+            type: 'EDIT_CHART_TITLE',
+            title: value,
+        });
+    };
 
     const handleClickItem = (index) => (event) => {
         event.preventDefault();
         if (index !== -1) {
-            setSelected(index);
+            dispatch({
+                index,
+                type: 'SET_CHART_INDEX',
+            });
+        } else {
+            dispatch({
+                type: 'ADD_CHART',
+                chartType: 'bar',
+            });
         }
     };
 
@@ -34,8 +51,12 @@ const ChartEditor = (props) => {
             {charts.length ? (
                 <div className={Styles.content_box}>
                     <div className={Styles.input_box}>
-                        <TitleInput title={title} onChangeTitle={onChangeTitle} />
-                        <TitleInput key={`c${generateHash()}`} title={chartTitle} />
+                        <TitleInput title={title} onChangeTitle={handleChangeTitle} />
+                        <TitleInput
+                            key={`c${generateHash()}`}
+                            title={chartTitle}
+                            onChangeTitle={handleChangeChartTitle}
+                        />
                     </div>
                     <div className={Styles.cont_inner}>
                         <div className={Styles.chart_box}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Styles from '@assets/entry/scss/popup.scss';
 
 const Legend = (props) => {
@@ -47,41 +47,6 @@ const Legend = (props) => {
                         &nbsp;
                     </span>
                     예시1
-                </li>
-                <li>
-                    {/* 그래프 색상 값을 넣어주세요. */}
-                    <span className={Styles.color} style={{ backgroundColor: '#ffb500' }}>
-                        &nbsp;
-                    </span>
-                    예시2
-                </li>
-                <li>
-                    {/* 그래프 색상 값을 넣어주세요. */}
-                    <span className={Styles.color} style={{ backgroundColor: '#ffb500' }}>
-                        &nbsp;
-                    </span>
-                    예시2
-                </li>
-                <li>
-                    {/* 그래프 색상 값을 넣어주세요. */}
-                    <span className={Styles.color} style={{ backgroundColor: '#ffb500' }}>
-                        &nbsp;
-                    </span>
-                    예시2
-                </li>
-                <li>
-                    {/* 그래프 색상 값을 넣어주세요. */}
-                    <span className={Styles.color} style={{ backgroundColor: '#ffb500' }}>
-                        &nbsp;
-                    </span>
-                    예시2
-                </li>
-                <li>
-                    {/* 그래프 색상 값을 넣어주세요. */}
-                    <span className={Styles.color} style={{ backgroundColor: '#ffb500' }}>
-                        &nbsp;
-                    </span>
-                    예시2
                 </li>
             </ul>
         </div>

@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { DataAnalyticsContext } from './context/DataAnalyticsContext';
 import Styles from '@assets/entry/scss/popup.scss';
 
 const Tab = (props) => {
-    const { selected, tabItems = [], onClickTab = () => {} } = props;
+    const { selected, tabItems = [] } = props;
+    const { dispatch } = useContext(DataAnalyticsContext);
+
+    const handleClick = (value) => (event) => {
+        event.preventDefault();
+        dispatch({
+            type: 'SET_TAB',
+            tab: value,
+        });
+    };
 
     return (
         <ul className={Styles.tab_box}>
@@ -12,7 +22,7 @@ const Tab = (props) => {
                     value={item.value}
                     key={`tab_${index}`}
                 >
-                    <a href="#" onClick={onClickTab(item.value)}>
+                    <a href="#" onClick={handleClick(item.value)}>
                         {item.name}
                     </a>
                 </li>
