@@ -6,9 +6,12 @@ const Legend = (props) => {
 
     return (
         <div className={Styles.legend_box}>
-            <a href="#" className={Styles.legend_link}>
+            <span className={Styles.legend_link}>
                 범례
-            </a>
+                <a href="#" className={Styles.btn_more}>
+                    <span className={Styles.blind}>더보기</span>
+                </a>
+            </span>
             {/* 학교명이 클릭되면 style="display:block" 추가 */}
             {/* <div className={Styles.tooltip_box} style={{ display: 'block' }}> */}
             {/* <div className={Styles.tooltip_inner}>

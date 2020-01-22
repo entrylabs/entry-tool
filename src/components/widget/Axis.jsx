@@ -6,7 +6,12 @@ const Axis = (props) => {
     const { list } = props;
     return (
         <div className={Styles.x_legend}>
-            <a href="#">학교명</a>
+            <em>
+                학교명
+                <a href="#" className={Styles.more_btn}>
+                    <span className={Styles.blind}>더보기</span>
+                </a>
+            </em>
             {/* 학교명이 클릭되면 style="display:block" 추가 */}
             <div className={`${Styles.tooltip_box} ${Styles.down}`} style={{ display: 'block' }}>
                 <div className={Styles.tooltip_inner}>
