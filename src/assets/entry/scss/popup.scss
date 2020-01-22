@@ -1706,10 +1706,6 @@
         z-index: 10;
         top: 52px;
     }
-
-    // 데이터 추가하기 - 데이터 선택
-    .data_select_content {
-    }
 }
 
 //드롭다운
@@ -1932,6 +1928,131 @@
             word-break: break-all;
             letter-spacing: -0.5px;
             line-height: 22px;
+        }
+    }
+    .center {
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .modal {
+        background: #fff;
+        width: 680px;
+        height: 472px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+        .head {
+            display: flex;
+            background-color: #4f80ff;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+            .text {
+                display: inline-block;
+                -webkit-box-flex: 1;
+                -ms-flex: 1;
+                flex: 1;
+                margin: 0px 21px;
+                height: 54px;
+                line-height: 54px;
+                font-size: 18px;
+                font-weight: bold;
+                color: #ffffff;
+            }
+            .close {
+                display: inline-block;
+                cursor: pointer;
+                right: 0;
+                margin: 16px 26px 0 0;
+                width: 22px;
+                height: 22px;
+                background: url('#{$imageDir}/btn_more_popup_close_white.svg') no-repeat;
+                background-repeat: no-repeat;
+            }
+        }
+
+        .body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .content {
+                width: 660px;
+                line-height: 18px;
+                font-size: 16px;
+                overflow: hidden;
+                margin: 14px 0;
+                display: table;
+
+                .chart_area {
+                    margin-top: 21px;
+                }
+
+                .pop_selectbox {
+                    position: relative;
+                    display: inline-block;
+
+                    .select_link {
+                        display: block;
+                        position: relative;
+                        -webkit-box-sizing: border-box;
+                        box-sizing: border-box;
+                        width: 168px;
+                        height: 40px;
+                        padding: 0 12px;
+                        border: 1px solid #e2e2e2;
+                        background-color: #fff;
+                        border-radius: 4px;
+                        font-weight: 600;
+                        color: #555;
+                        letter-spacing: -0.3px;
+                        line-height: 38px;
+                        cursor: pointer;
+                    }
+
+                    .select_link:after {
+                        @include PositionRT(absolute, 16px, 50%);
+                        width: 8px;
+                        height: 6px;
+                        margin-top: -3px;
+                        vertical-align: top;
+                        content: '';
+                    }
+
+                    & + .pop_selectbox {
+                        margin-left: 10px;
+                    }
+
+                    & + .on {
+                        z-index: 10;
+                    }
+
+                    &.error .select_link {
+                        border-color: #f00;
+                    }
+                }
+
+                .pop_selectbox * {
+                    -webkit-box-sizing: content-box;
+                    box-sizing: content-box;
+                }
+
+                .pop_selectbox .tooltip_box {
+                    display: none;
+                }
+
+                .pop_selectbox.on .tooltip_box {
+                    display: block;
+                    z-index: 10;
+                    top: 52px;
+                }
+            }
         }
     }
 }
