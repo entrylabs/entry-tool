@@ -342,7 +342,12 @@ class DataDetail extends Component {
                                 <div className={Styles.chart_box}>
                                     {/* 그래프를 넣어주세요 */}
                                     <div className={Styles.x_legend}>
-                                        <a href="#">학교명</a>
+                                        <em>
+                                            학교명
+                                            <a href="#" className={Styles.more_btn}>
+                                                <span className={Styles.blind}>더보기</span>
+                                            </a>
+                                        </em>
                                         {/* 학교명이 클릭되면 style="display:block" 추가 */}
                                         <div className={`${Styles.tooltip_box} ${Styles.down}`}
                                             style={{ display: 'block' }}
@@ -377,7 +382,12 @@ class DataDetail extends Component {
                                         </div>
                                     </div>
                                     <div className={Styles.legend_box}>
-                                        <a href="#" className={Styles.legend_link}>범례</a>
+                                        <span className={Styles.legend_link}>
+                                            범례
+                                            <a href="#" className={Styles.btn_more}>
+                                                <span className={Styles.blind}>더보기</span>
+                                            </a>
+                                        </span>
                                         {/* 학교명이 클릭되면 style="display:block" 추가 */}
                                         <div className={Styles.tooltip_box}
                                             style={{ display: 'block' }}
