@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import TuiGrid from 'tui-grid';
 import Grid from '@toast-ui/react-grid';
 import { Prompt } from '@entrylabs/modal';
@@ -63,6 +63,10 @@ const Table = (props) => {
     const { table: tableProps = [] } = props;
     const [table, setTable] = useState(tableProps);
     const gridRef = useRef();
+
+    useEffect(() => {
+        setTable(tableProps);
+    }, [tableProps]);
 
     const {
         width,
