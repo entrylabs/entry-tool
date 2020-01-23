@@ -328,7 +328,7 @@ class DataDetail extends Component {
                                 {/* 차트 추가하기 링크 누르면 display: block 처리 해주세요. */}
                                 <div
                                     className={Styles.tooltip_box}
-                                    style={{ width: '240px', left: '-3px', top: '55px'  }}
+                                    style={{ width: '240px', left: '-3px', top: '55px', display: 'block' }}
                                 >
                                     <div className={Styles.tooltip_inner} style={{ padding: '16px' }}>
                                         <ul className={Styles.list}>                                            
@@ -374,106 +374,21 @@ class DataDetail extends Component {
                                     </a>
                                 </div>
                                 <div className={Styles.input_inner}>
+                                    {/* 인풋 비활성화는 disabled 요소 추가 */}
                                     <input type="text" id="data2" name="data2" value="비활성화 컬러 테스트" disabled />
                                 </div>
-                                <a href="#" className={Styles.chart_del}>차트 삭제</a>
+                                {/* 버튼 비활성화는 disabled 클래스 추가 */}
+                                <a href="#" className={`${Styles.chart_del} ${Styles.disabled}`}>차트 삭제</a>
                             </div>
                             <div className={Styles.cont_inner}>
                                 <div className={Styles.chart_box}>
-                                    {/* 그래프를 넣어주세요 */}
-                                    <div className={Styles.x_legend}>
-                                        <em>
-                                            학교명
-                                            <a href="#" className={Styles.more_btn}>
-                                                <span className={Styles.blind}>더보기</span>
-                                            </a>
-                                        </em>
-                                        {/* 학교명이 클릭되면 style="display:block" 추가 */}
-                                        <div className={`${Styles.tooltip_box} ${Styles.down}`}
-                                            style={{ display: 'block' }}
-                                        >
-                                            <div className={Styles.tooltip_inner}>
-                                                <ul className={Styles.select_list}>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            구분
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            학교명
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            주소
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            교무실
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <span className={Styles.arr}>
-                                                <i />
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className={Styles.legend_box}>
-                                        <span className={Styles.legend_link}>
-                                            범례
-                                            <a href="#" className={Styles.btn_more}>
-                                                <span className={Styles.blind}>더보기</span>
-                                            </a>
-                                        </span>
-                                        {/* 학교명이 클릭되면 style="display:block" 추가 */}
-                                        <div className={Styles.tooltip_box}
-                                            style={{ display: 'block' }}
-                                        >
-                                            <div className={Styles.tooltip_inner}>
-                                                <ul className={Styles.select_list}>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.chk_box}>
-                                                            <input type="checkbox" id="chk1" name="chk1" />
-                                                            <label htmlFor="chk1">범례1</label>
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.chk_box}>
-                                                            <input type="checkbox" id="chk2" name="chk2" />
-                                                            <label htmlFor="chk2">범례2</label>
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.chk_box}>
-                                                            <input type="checkbox" id="chk3" name="chk3" />
-                                                            <label htmlFor="chk3">범례3</label>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <span className={Styles.arr}>
-                                                <i />
-                                            </span>
-                                        </div>
-                                        <ul className={Styles.legend_list}>
-                                            <li>
-                                                {/* 그래프 색상 값을 넣어주세요. */}
-                                                <span 
-                                                    className={Styles.color}
-                                                    style={{ backgroundColor: '#4f80ff' }}
-                                                >&nbsp;</span>예시1
-                                            </li>
-                                            <li>
-                                                {/* 그래프 색상 값을 넣어주세요. */}
-                                                <span 
-                                                    className={Styles.color}
-                                                    style={{ backgroundColor: '#ffb500' }}
-                                                >&nbsp;</span>예시2
-                                            </li>
-                                        </ul>
+                                    <div className={Styles.data_add_box}>
+                                        <a href="#">
+                                            <span className={Styles.blind}>차트 추가하기</span>
+                                        </a>
+                                        <p>
+                                            차트를 먼저 추가해주세요.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -508,7 +423,7 @@ class DataDetail extends Component {
                         <h2 className={Styles.blind}>차트</h2>
                         <div className={Styles.chart_navi}>
                             {/* 차트가 추가되면 리스트 노출 시켜주세요. */}
-                            <ul className={Styles.list} style={{ display: 'none' }}>
+                            <ul className={Styles.list} style={{ display: 'block' }}>
                                 {/* 선택된 그래프를 제외한 그래프는 disabled 클래스 추가 */}
                                 <li className={Styles.bar}>
                                     <a href="#">
@@ -538,7 +453,7 @@ class DataDetail extends Component {
                                 {/* 차트 추가하기 링크 누르면 display: block 처리 해주세요. */}
                                 <div
                                     className={Styles.tooltip_box}
-                                    style={{ width: '240px', left: '-3px', top: '55px'  }}
+                                    style={{ width: '240px', left: '-3px', top: '55px', display: 'none' }}
                                 >
                                     <div className={Styles.tooltip_inner} style={{ padding: '16px' }}>
                                         <ul className={Styles.list}>                                            
@@ -590,58 +505,11 @@ class DataDetail extends Component {
                             </div>
                             <div className={Styles.cont_inner}>
                                 <div className={Styles.chart_box}>
-                                    {/* 그래프를 넣어주세요 */}
-                                    <div className={Styles.x_legend}>
-                                        <em>
-                                            학교명
-                                            <a href="#" className={Styles.more_btn}>
-                                                <span className={Styles.blind}>더보기</span>
-                                            </a>
-                                        </em>
-                                        {/* 학교명이 클릭되면 style="display:block" 추가 */}
-                                        <div className={`${Styles.tooltip_box} ${Styles.down}`}
-                                            style={{ display: 'block' }}
-                                        >
-                                            <div className={Styles.tooltip_inner}>
-                                                <ul className={Styles.select_list}>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            구분
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            학교명
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            주소
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            교무실
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <span className={Styles.arr}>
-                                                <i />
-                                            </span>
-                                        </div>
-                                    </div>
+                                    {/* 범례 비활성화 경우 disabled 클래스 추가 */}
                                     <div className={Styles.legend_box}>
-                                        <span className={Styles.legend_link}>
-                                            범례
-                                            <a href="#" className={Styles.btn_more}>
-                                                <span className={Styles.blind}>더보기</span>
-                                            </a>
-                                        </span>
-                                        {/* 학교명이 클릭되면 style="display:block" 추가 */}
-                                        <div className={Styles.tooltip_box}
-                                            style={{ display: 'block' }}
-                                        >
+                                        <a href="#" className={Styles.common_legend}>범례</a>
+                                        {/* 범례 링크가 눌리면 display: block 처리 해주세요. */}
+                                        <div className={Styles.tooltip_box} style={{ display: 'block' }}>
                                             <div className={Styles.tooltip_inner}>
                                                 <ul className={Styles.select_list}>
                                                     <li className={Styles.list_item}>
@@ -668,6 +536,7 @@ class DataDetail extends Component {
                                                 <i />
                                             </span>
                                         </div>
+                                        {/* 범례 체크박스에 선택되면 활성화 시켜주세요 */}
                                         <ul className={Styles.legend_list}>
                                             <li>
                                                 {/* 그래프 색상 값을 넣어주세요. */}
@@ -683,7 +552,73 @@ class DataDetail extends Component {
                                                     style={{ backgroundColor: '#ffb500' }}
                                                 >&nbsp;</span>예시2
                                             </li>
-                                        </ul>
+                                        </ul>    
+                                    </div>
+
+                                    {/* y축 범례 비활성화 경우 disabled 클래스 추가 */}
+                                    <div className={Styles.y_legend_box}>
+                                        {/* 비활성화 경우 disabled 클래스 추가 */}
+                                        <a href="#" className={Styles.common_legend}>세로축세로축세로축</a>
+                                        {/* 세로축 링크가 눌리면 display: block 처리 해주세요. */}
+                                        <div className={Styles.tooltip_box} style={{ display: 'block' }}>
+                                            <div className={Styles.tooltip_inner}>
+                                                <ul className={Styles.select_list}>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            국어점수
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            수학점수
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            영어점수
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <span className={Styles.arr}>
+                                                <i />
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {/* x축 범례 비활성화 경우 disabled 클래스 추가 */}
+                                    <div className={Styles.x_legend_box}>
+                                        <a href="#" className={Styles.common_legend}>가로축</a>
+                                        {/* 가로축 링크가 눌리면 display: block 처리 해주세요. */}
+                                        <div className={`${Styles.tooltip_box} ${Styles.down}`} style={{ display: 'block' }}>
+                                            <div className={Styles.tooltip_inner}>
+                                                <ul className={Styles.select_list}>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            이름
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            수학점수
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            영어점수
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <span className={Styles.arr}>
+                                                <i />
+                                            </span>
+                                        </div>
+                                    </div>
+                                
+                                    {/* 그래프 */}
+                                    <div className={Styles.graph_cont} style={{ backgroundColor: 'orange' }}>
+                                        그래프 영역 개발 해주실때 배경색 지워주세요.
                                     </div>
                                 </div>
                             </div>
@@ -691,16 +626,482 @@ class DataDetail extends Component {
                     </section>
                 </div>
             );
-        } 
-        
-        
-        
-        
-        
-        
-        
-        
-        else if (DetailState == 'DataOff') {
+        } else if (DetailState == 'LegendOff') {
+            return (
+                <div className={Styles.data_detail_wrap}>
+                    <div className={Styles.detail_top}>
+                        <a href="#" role="button" class={Styles.switch_btn}>
+                            <span className={Styles.blind}>창 전환</span>
+                        </a>
+                        <ul className={Styles.tab_box}>
+                            <li>
+                                <a href="#">요약</a>
+                            </li>
+                            <li>
+                                <a href="#">테이블</a>
+                            </li>
+                            <li className={Styles.on}>
+                                <a href="#">차트</a>
+                            </li>
+                        </ul>
+                        <a href="#" className={Styles.btn_save} role="button">
+                            저장하기
+                        </a>
+                    </div>
+                    <section className={`${Styles.detail_cont} ${Styles.chart_state}`}>
+                        {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
+                        <h2 className={Styles.blind}>차트</h2>
+                        <div className={Styles.chart_navi}>
+                            {/* 차트가 추가되면 리스트 노출 시켜주세요. */}
+                            <ul className={Styles.list} style={{ display: 'block' }}>
+                                {/* 선택된 그래프를 제외한 그래프는 disabled 클래스 추가 */}
+                                <li className={Styles.bar}>
+                                    <a href="#">
+                                        <span className={Styles.blind}>막대 그래프</span>
+                                    </a>
+                                </li>
+                                <li className={`${Styles.line} ${Styles.disabled}`}>
+                                    <a href="#">
+                                        <span className={Styles.blind}>꺽은선 그래프</span>
+                                    </a>
+                                </li>
+                                <li className={`${Styles.pie} ${Styles.disabled}`}>
+                                    <a href="#">
+                                        <span className={Styles.blind}>원형 그래프</span>
+                                    </a>
+                                </li>
+                                <li className={`${Styles.scatter} ${Styles.disabled}`}>
+                                    <a href="#">
+                                        <span className={Styles.blind}>분산형 그래프</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div className={Styles.chart_add_box}>
+                                <a href="#" className={Styles.chart_add}>
+                                    <span className={Styles.blind}>차트 추가하기</span>
+                                </a>
+                                {/* 차트 추가하기 링크 누르면 display: block 처리 해주세요. */}
+                                <div
+                                    className={Styles.tooltip_box}
+                                    style={{ width: '240px', left: '-3px', top: '55px', display: 'none' }}
+                                >
+                                    <div className={Styles.tooltip_inner} style={{ padding: '16px' }}>
+                                        <ul className={Styles.list}>                                            
+                                            <li className={Styles.bar}>
+                                                <a href="#">
+                                                    막대<span className={Styles.blind}>그래프</span>
+                                                </a>
+                                            </li>
+                                            <li className={Styles.line}>
+                                                <a href="#">
+                                                    꺽은선<span className={Styles.blind}>그래프</span>
+                                                </a>
+                                            </li>
+                                            <li className={Styles.pie}>
+                                                <a href="#">
+                                                    원형<span className={Styles.blind}>그래프</span>
+                                                </a>
+                                            </li>
+                                            <li className={Styles.scatter}>
+                                                <a href="#">
+                                                    분산형<span className={Styles.blind}>그래프</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <span
+                                        className={`${Styles.arr} ${Styles.free}`}
+                                        style={{ left: '6px' }}
+                                    >
+                                    <i />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={Styles.content_box}>
+                            
+                            <div className={Styles.input_box}>
+                                <div className={Styles.input_inner}>
+                                    <input type="text" id="data1" name="data1" />
+                                    {/* 인풋에 내용이 들어가면 close_btn을 활성화 해주세요 */}
+                                    <a href="#" className={Styles.close_btn} role="button">
+                                        <span className={Styles.blind}>입력 취소</span>
+                                    </a>
+                                </div>
+                                <div className={Styles.input_inner}>
+                                    <input type="text" id="data2" name="data2" value="비활성화 컬러 테스트" disabled />
+                                </div>
+                                <a href="#" className={Styles.chart_del}>차트 삭제</a>
+                            </div>
+                            <div className={Styles.cont_inner}>
+                                <div className={Styles.chart_box}>
+                                    {/* 범례 비활성화 경우 disabled 클래스 추가 */}
+                                    <div className={`${Styles.legend_box} ${Styles.disabled}`}>
+                                        <a href="#" className={Styles.common_legend}>범례</a>
+                                        {/* 범례 링크가 눌리면 display: block 처리 해주세요. */}
+                                        <div className={Styles.tooltip_box} style={{ display: 'none' }}>
+                                            <div className={Styles.tooltip_inner}>
+                                                <ul className={Styles.select_list}>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.chk_box}>
+                                                            <input type="checkbox" id="chk1" name="chk1" />
+                                                            <label htmlFor="chk1">범례1</label>
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.chk_box}>
+                                                            <input type="checkbox" id="chk2" name="chk2" />
+                                                            <label htmlFor="chk2">범례2</label>
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.chk_box}>
+                                                            <input type="checkbox" id="chk3" name="chk3" />
+                                                            <label htmlFor="chk3">범례3</label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <span className={Styles.arr}>
+                                                <i />
+                                            </span>
+                                        </div>
+                                        
+                                        {/* 범례 체크박스에 선택되면 활성화 시켜주세요 */}
+                                        <ul className={Styles.legend_list} style={{ display: 'none' }}>
+                                            <li>
+                                                {/* 그래프 색상 값을 넣어주세요. */}
+                                                <span 
+                                                    className={Styles.color}
+                                                    style={{ backgroundColor: '#4f80ff' }}
+                                                >&nbsp;</span>예시1
+                                            </li>
+                                            <li>
+                                                {/* 그래프 색상 값을 넣어주세요. */}
+                                                <span 
+                                                    className={Styles.color}
+                                                    style={{ backgroundColor: '#ffb500' }}
+                                                >&nbsp;</span>예시2
+                                            </li>
+                                        </ul>
+                                        
+                                    </div>
+
+                                    {/* y축 범례 비활성화 경우 disabled 클래스 추가 */}
+                                    <div className={`${Styles.y_legend_box} ${Styles.disabled}`}>
+                                        {/* 비활성화 경우 disabled 클래스 추가 */}
+                                        <a href="#" className={Styles.common_legend}>세로축세로축세로축</a>
+                                        {/* 세로축 링크가 눌리면 display: block 처리 해주세요. */}
+                                        <div className={Styles.tooltip_box} style={{ display: 'none' }}>
+                                            <div className={Styles.tooltip_inner}>
+                                                <ul className={Styles.select_list}>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            국어점수
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            수학점수
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            영어점수
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <span className={Styles.arr}>
+                                                <i />
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {/* x축 범례 비활성화 경우 disabled 클래스 추가 */}
+                                    <div className={`${Styles.x_legend_box} ${Styles.disabled}`}>
+                                        <a href="#" className={Styles.common_legend}>가로축</a>
+                                        {/* 가로축 링크가 눌리면 display: block 처리 해주세요. */}
+                                        <div className={`${Styles.tooltip_box} ${Styles.down}`} style={{ display: 'none' }}>
+                                            <div className={Styles.tooltip_inner}>
+                                                <ul className={Styles.select_list}>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            이름
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            수학점수
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            영어점수
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <span className={Styles.arr}>
+                                                <i />
+                                            </span>
+                                        </div>
+                                    </div>
+                                
+                                    {/* 그래프 */}
+                                    <div className={Styles.graph_cont} style={{ backgroundColor: 'orange' }}>
+                                        그래프 영역 개발 해주실때 배경색 지워주세요.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            );
+        } else if (DetailState == 'LegendDel') {
+            return (
+                <div className={Styles.data_detail_wrap}>
+                    <div className={Styles.detail_top}>
+                        <a href="#" role="button" class={Styles.switch_btn}>
+                            <span className={Styles.blind}>창 전환</span>
+                        </a>
+                        <ul className={Styles.tab_box}>
+                            <li>
+                                <a href="#">요약</a>
+                            </li>
+                            <li>
+                                <a href="#">테이블</a>
+                            </li>
+                            <li className={Styles.on}>
+                                <a href="#">차트</a>
+                            </li>
+                        </ul>
+                        <a href="#" className={Styles.btn_save} role="button">
+                            저장하기
+                        </a>
+                    </div>
+                    <section className={`${Styles.detail_cont} ${Styles.chart_state}`}>
+                        {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
+                        <h2 className={Styles.blind}>차트</h2>
+                        <div className={Styles.chart_navi}>
+                            {/* 차트가 추가되면 리스트 노출 시켜주세요. */}
+                            <ul className={Styles.list} style={{ display: 'block' }}>
+                                {/* 선택된 그래프를 제외한 그래프는 disabled 클래스 추가 */}
+                                <li className={Styles.bar}>
+                                    <a href="#">
+                                        <span className={Styles.blind}>막대 그래프</span>
+                                    </a>
+                                </li>
+                                <li className={`${Styles.line} ${Styles.disabled}`}>
+                                    <a href="#">
+                                        <span className={Styles.blind}>꺽은선 그래프</span>
+                                    </a>
+                                </li>
+                                <li className={`${Styles.pie} ${Styles.disabled}`}>
+                                    <a href="#">
+                                        <span className={Styles.blind}>원형 그래프</span>
+                                    </a>
+                                </li>
+                                <li className={`${Styles.scatter} ${Styles.disabled}`}>
+                                    <a href="#">
+                                        <span className={Styles.blind}>분산형 그래프</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div className={Styles.chart_add_box}>
+                                <a href="#" className={Styles.chart_add}>
+                                    <span className={Styles.blind}>차트 추가하기</span>
+                                </a>
+                                {/* 차트 추가하기 링크 누르면 display: block 처리 해주세요. */}
+                                <div
+                                    className={Styles.tooltip_box}
+                                    style={{ width: '240px', left: '-3px', top: '55px', display: 'none' }}
+                                >
+                                    <div className={Styles.tooltip_inner} style={{ padding: '16px' }}>
+                                        <ul className={Styles.list}>                                            
+                                            <li className={Styles.bar}>
+                                                <a href="#">
+                                                    막대<span className={Styles.blind}>그래프</span>
+                                                </a>
+                                            </li>
+                                            <li className={Styles.line}>
+                                                <a href="#">
+                                                    꺽은선<span className={Styles.blind}>그래프</span>
+                                                </a>
+                                            </li>
+                                            <li className={Styles.pie}>
+                                                <a href="#">
+                                                    원형<span className={Styles.blind}>그래프</span>
+                                                </a>
+                                            </li>
+                                            <li className={Styles.scatter}>
+                                                <a href="#">
+                                                    분산형<span className={Styles.blind}>그래프</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <span
+                                        className={`${Styles.arr} ${Styles.free}`}
+                                        style={{ left: '6px' }}
+                                    >
+                                    <i />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={Styles.content_box}>
+                            
+                            <div className={Styles.input_box}>
+                                <div className={Styles.input_inner}>
+                                    <input type="text" id="data1" name="data1" />
+                                    {/* 인풋에 내용이 들어가면 close_btn을 활성화 해주세요 */}
+                                    <a href="#" className={Styles.close_btn} role="button">
+                                        <span className={Styles.blind}>입력 취소</span>
+                                    </a>
+                                </div>
+                                <div className={Styles.input_inner}>
+                                    <input type="text" id="data2" name="data2" value="비활성화 컬러 테스트" disabled />
+                                </div>
+                                <a href="#" className={Styles.chart_del}>차트 삭제</a>
+                            </div>
+                            <div className={Styles.cont_inner}>
+                                <div className={Styles.chart_box}>
+                                    {/* 범례 비활성화 경우 disabled 클래스 추가 */}
+                                    <div className={`${Styles.legend_box} ${Styles.disabled}`}>
+                                        <a href="#" className={Styles.common_legend}>범례</a>
+                                        {/* 범례 링크가 눌리면 display: block 처리 해주세요. */}
+                                        <div className={Styles.tooltip_box} style={{ display: 'none' }}>
+                                            <div className={Styles.tooltip_inner}>
+                                                <ul className={Styles.select_list}>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.chk_box}>
+                                                            <input type="checkbox" id="chk1" name="chk1" />
+                                                            <label htmlFor="chk1">범례1</label>
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.chk_box}>
+                                                            <input type="checkbox" id="chk2" name="chk2" />
+                                                            <label htmlFor="chk2">범례2</label>
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.chk_box}>
+                                                            <input type="checkbox" id="chk3" name="chk3" />
+                                                            <label htmlFor="chk3">범례3</label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <span className={Styles.arr}>
+                                                <i />
+                                            </span>
+                                        </div>
+                                        
+                                        {/* 범례 체크박스에 선택되면 활성화 시켜주세요 */}
+                                        <ul className={Styles.legend_list} style={{ display: 'none' }}>
+                                            <li>
+                                                {/* 그래프 색상 값을 넣어주세요. */}
+                                                <span 
+                                                    className={Styles.color}
+                                                    style={{ backgroundColor: '#4f80ff' }}
+                                                >&nbsp;</span>예시1
+                                            </li>
+                                            <li>
+                                                {/* 그래프 색상 값을 넣어주세요. */}
+                                                <span 
+                                                    className={Styles.color}
+                                                    style={{ backgroundColor: '#ffb500' }}
+                                                >&nbsp;</span>예시2
+                                            </li>
+                                        </ul>
+                                        
+                                    </div>
+
+                                    {/* y축 범례 비활성화 경우 disabled 클래스 추가 */}
+                                    <div className={Styles.y_legend_box}>
+                                        {/* 삭제 버튼일 경우 common_legend 클래스 대신 del_legend 클래스 추가 */}
+                                        <span className={Styles.del_legend}>
+                                            국어점수
+                                            <a href="#" className={Styles.close_btn}>
+                                                <span className={Styles.blind}>삭제</span>
+                                            </a>
+                                        </span>
+                                        {/* 세로축 링크가 눌리면 display: block 처리 해주세요. */}
+                                        <div className={Styles.tooltip_box} style={{ display: 'block' }}>
+                                            <div className={Styles.tooltip_inner}>
+                                                <ul className={Styles.select_list}>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            국어점수
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            수학점수
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            영어점수
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <span className={Styles.arr}>
+                                                <i />
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {/* x축 범례 비활성화 경우 disabled 클래스 추가 */}
+                                    <div className={`${Styles.x_legend_box} ${Styles.disabled}`}>
+                                        {/* 삭제 버튼일 경우 common_legend 클래스 대신 del_legend 클래스 추가 */}
+                                        <span className={Styles.del_legend}>
+                                            국어점수
+                                            <a href="#" className={Styles.close_btn}>
+                                                <span className={Styles.blind}>삭제</span>
+                                            </a>
+                                        </span>
+                                        {/* 가로축 링크가 눌리면 display: block 처리 해주세요. */}
+                                        <div className={`${Styles.tooltip_box} ${Styles.down}`} style={{ display: 'block' }}>
+                                            <div className={Styles.tooltip_inner}>
+                                                <ul className={Styles.select_list}>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            이름
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            수학점수
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.list_link}>
+                                                            영어점수
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <span className={Styles.arr}>
+                                                <i />
+                                            </span>
+                                        </div>
+                                    </div>
+                                
+                                    {/* 그래프 */}
+                                    <div className={Styles.graph_cont} style={{ backgroundColor: 'orange' }}>
+                                        그래프 영역 개발 해주실때 배경색 지워주세요.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            );
+        } else if (DetailState == 'DataOff') {
             return (
                 <div className={Styles.data_detail_wrap}>
                     <div className={Styles.detail_top}>

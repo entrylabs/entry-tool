@@ -262,6 +262,8 @@ storiesOf('AiLayout', module)
     .add('데이터 상세 - 데이터 없음', () => <DataDetail DetailState="DataOff" />)
     .add('데이터 상세 - 테이블', () => <DataDetail DetailState="Table" />)
     .add('데이터 상세 - 차트', () => <DataDetail DetailState="Chart" />)
+    .add('데이터 상세 - 차트 범례 OFF', () => <DataDetail DetailState="LegendOff" />)
+    .add('데이터 상세 - 차트 범례 삭제버튼', () => <DataDetail DetailState="LegendDel" />)
     .add('데이터 상세 - 차트 데이터 없음', () => <DataDetail DetailState="ChartDataOff" />)
     .add('차트', () => (
         <Chart table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} type="line" />

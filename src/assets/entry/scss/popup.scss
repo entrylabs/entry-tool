@@ -2057,6 +2057,11 @@
             text-align: center;
             line-height: 38px;
         }
+        .input_box .chart_del.disabled {
+            background-color: #f9f9f9;
+            color: #cbcbcb;
+            pointer-events: none;
+        }
         .input_box .cnt_result {
             float: left;
             overflow: hidden;
@@ -2263,7 +2268,6 @@
         box-sizing: border-box;
         padding-top: 80px;
         background-color: #fff;
-        border-bottom: 1px solid #979797;
         text-align: center;
         a {
             display: block;
@@ -2439,120 +2443,179 @@
         min-height: 552px;
         border-radius: 6px;
         background-color: #fff;
+        .data_add_box {
+            overflow: hidden;
+            box-sizing: border-box;
+            padding-top: 220px;
+            background-color: #f9f9f9;
+            height: auto;
+            min-height: 552px;
+            border-radius: 6px;
+
+        }
+        .data_add_box a {
+            width: 44px;
+            height: 44px;
+            background-image: url('#{$imageDir}/icon_cart_add.png');
+            background-size: 44px auto;
+        }
+        .data_add_box p {
+            padding-top: 10px;
+            color: #cbcbcb;
+        }
+        .y_legend_box, .x_legend_box,.legend_box {
+            width: 120px;
+            border: 1px solid #e2e2e2;
+            border-radius: 4px;
+            background-color: #fff;
+            z-index: 20;
+            .tooltip_box {
+                width: 120px;
+                top: 58px;
+                left: 50%;
+                margin-left: -60px;
+                font-size: 14px;
+            }
+            &.disabled .common_legend {
+                background-color: #f9f9f9;
+                color: #cbcbcb;
+                pointer-events: none;            
+            }
+            &.disabled .common_legend:after {
+                background-image: url('#{$imageDir}/icon_legend_more_off.svg');
+            }
+        }
+        .y_legend_box {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+        }
+        .x_legend_box {
+            position: absolute;
+            right: 20px;
+            bottom: 44px;
+            .tooltip_box {
+                top: auto;
+                bottom: 58px;
+            }
+        }
         .legend_box {
             position: absolute;
             right: 20px;
             top: 20px;
-            min-width: 98px;
-            padding: 14px 8px 14px 12px;
-            background-color: #fff;
-            border-radius: 4px;
-            border: 1px solid #e2e2e2;
-            z-index: 100;
+            .common_legend {
+                text-align: left;
+            }
+            .tooltip_box .chk_box {
+                position: relative;
+                overflow: hidden;
+            }
+            .tooltip_box .chk_box label {
+                display: block;
+                height: 15px;
+                padding: 15px 0 16px 7px;
+                font-size: 14px;
+                font-weight: 600;
+                color: #2c313d;
+                cursor: pointer;
+            }
+            .tooltip_box .chk_box label:before {
+                display: inline-block;
+                margin-right: 8px;
+                width: 16px;
+                height: 16px;
+                background-image: url('#{$imageDir}/icon_checkbox_off.svg');
+                background-size: 16px auto;
+                vertical-align: top;
+                content: '';
+            }
+            .tooltip_box .chk_box input[type="checkbox"] {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            .tooltip_box .chk_box input[type="checkbox"]:checked + label:before {
+                background-image: url('#{$imageDir}/icon_checkbox_on.svg');
+    
+            }
+            .legend_list {
+                padding: 2px 0 12px;
+                margin: 0 8px;
+                border-top: 1px solid #f2f2f2;
+            }
+            .legend_list li {
+                overflow: hidden;
+                height: 16px;
+                margin-top: 10px;
+                font-size: 14px;
+                font-weight: 600;
+                color: #2c313d;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                word-break: break-all;
+                line-height: 18px;
+            }
+            .legend_list .color {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                margin-right: 8px;
+                vertical-align: top;
+            }
+            
         }
-        .legend_box .legend_link {
-            font-size: 14px;
-            font-weight: 600;
-            color: #2c313d;
-            line-height: 20px;
-        }
-        .legend_box .btn_more {
-            position: absolute;
-            right: 8px;
-            top: 13px;
-            width: 20px;
-            height: 20px;
-            background: url('#{$imageDir}/icon_chart_setting.svg') no-repeat;
-            background-size: 20px auto;
-            vertical-align: top;
-        }
-        .legend_box .legend_list {
-            padding-top: 5px;
-        }
-        .legend_box .legend_list li {
+        .common_legend, .del_legend {
+            display: block;
             overflow: hidden;
-            height: 16px;
-            margin-top: 8px;
-            font-size: 12px;
+            position: relative;
+            padding: 13px 44px 11px 12px;
+            font-size: 16px;
             font-weight: 600;
+            border-radius: 4px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-break: break-all;
             color: #2c313d;
             line-height: 18px;
-
+            &:after {
+                position: absolute;
+                right: 12px;
+                top: 12px;
+                width: 20px;
+                height: 20px;
+                background-image: url('#{$imageDir}/icon_legend_more_on.svg');
+                background-size: 20px auto;
+                content: '';
+            }
         }
-        .legend_box .legend_list .color {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            margin-right: 8px;
-            vertical-align: top;
-        }
-        .legend_box .tooltip_box {
+        .del_legend:after {
             display: none;
-            width: 102px;
-            left: 48px;
-            top: 48px;
         }
-        .legend_box .tooltip_box .chk_box {
-            position: relative;
+        .del_legend .close_btn {
+            position: absolute;
+            right: 2px;
+            top: 2px;
+            padding: 8px;
+            background-color: #fff;
+            border-radius: 4px;
+            &:after {
+                display: block;
+                width: 22px;
+                height: 22px;
+                background: url('#{$imageDir}/btn_input_close.svg') no-repeat;
+                background-size: 22px auto;
+                content: '';
+            }
+        }
+        .graph_cont {
             overflow: hidden;
-        }
-        .legend_box .tooltip_box .chk_box label {
-            display: block;
-            height: 15px;
-            padding: 15px 0 16px 7px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #2c313d;
-            cursor: pointer;
-        }
-        .legend_box .tooltip_box .chk_box label:before {
-            display: inline-block;
-            margin-right: 8px;
-            width: 16px;
-            height: 16px;
-            background-image: url('#{$imageDir}/icon_checkbox_off.svg');
-            background-size: 16px auto;
-            vertical-align: top;
-            content: '';
-        }
-        .legend_box .tooltip_box .chk_box input[type="checkbox"] {
             position: absolute;
-            left: 0;
-            top: 0;
-        }
-        .legend_box .tooltip_box .chk_box input[type="checkbox"]:checked + label:before {
-            background-image: url('#{$imageDir}/icon_checkbox_on.svg');
-
-        }
-        .x_legend {
-            position: absolute;
-            right: 55px;
-            bottom: 47px;
-            z-index: 100;
-        }
-        .x_legend em {
-            font-size: 18px;
-            font-weight: 600;
-            color: #2c313d;
-            line-height: 20px;   
-        }
-        .x_legend .more_btn {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin: -1px 0 0 6px;
-            background: url('#{$imageDir}/icon_chart_setting.svg') no-repeat;
-            background-size: 20px auto;
-            vertical-align: top;
-        }
-        .x_legend .tooltip_box {
-            display: none;
-            width: 102px;
-            left: 11px;
-            top: -206px;
-        }
-        .tooltip_box .select_list .list_link {
-            font-size: 14px;
+            left: 60px;
+            top: 95px;
+            width: 684px;
+            height: 397px;
+            background-color: #fff;
+            z-index: 10;
         }
     }
 }
