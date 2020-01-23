@@ -4,13 +4,11 @@ type Action = {
    setTableRef
 }
 */
-var temp = 1;
 class UndoRedoController {
     constructor(emitter) {
         this.emitter = emitter;
         this.history = [];
         this.step = -1;
-        this.temp = temp++;
         this.isSkip = false;
     }
 

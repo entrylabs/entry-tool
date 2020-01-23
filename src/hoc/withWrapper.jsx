@@ -7,6 +7,8 @@ import configureStore from '../store';
 import { visibleAction } from '../actions/index';
 import Theme from '@utils/Theme';
 import UndoRedoController from '../utils/undoRedoController';
+import { ToolContext } from './toolContext';
+
 // import httpService from '../config/axios';
 
 const withWrapper = (option) => (WrappedComponent) => {
@@ -135,12 +137,11 @@ const withWrapper = (option) => (WrappedComponent) => {
             if (this._container) {
                 ReactDOM.render(
                     <Provider store={this.store}>
-                        <App className={option.type} container={this._container}>
-                            <WrappedComponent
-                                {...Object.assign({}, this._props, this._data)}
-                                eventEmitter={this}
-                            />
-                        </App>
+                        <ToolContext.Provider value={this}>
+                            <App className={option.type} container={this._container}>
+                                <WrappedComponent {...Object.assign({}, this._props, this._data)} />
+                            </App>
+                        </ToolContext.Provider>
                     </Provider>,
                     this._container
                 );

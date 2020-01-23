@@ -3,6 +3,7 @@ import Styles from '@assets/entry/scss/popup.scss';
 import Table from '@components/widget/Table';
 import { DataAnalyticsContext } from './context/DataAnalyticsContext';
 import TitleInput from './TitleInput';
+import { ToolContext } from '../../../hoc/toolContext';
 
 const TableEditor = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
@@ -25,7 +26,11 @@ const TableEditor = () => {
 
                 <div className={Styles.cont_inner}>
                     <div className={Styles.table_box}>
-                        <Table table={table} {...props} />
+                        <ToolContext.Consumer>
+                            {(emitter) => {
+                                return <Table table={table} eventEmitter={emitter} />;
+                            }}
+                        </ToolContext.Consumer>
                     </div>
                 </div>
             </div>
