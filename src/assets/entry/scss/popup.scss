@@ -524,7 +524,7 @@
             background-color: #f7fcff;
         }
         .section_cont .img_caution_box .inner {
-            width: 580px;
+            width: 600px;
             overflow: hidden;
             margin: 0 auto;
         }
@@ -1706,10 +1706,6 @@
         z-index: 10;
         top: 52px;
     }
-
-    // 데이터 추가하기 - 데이터 선택
-    .data_select_content {
-    }
 }
 
 //드롭다운
@@ -1737,6 +1733,27 @@
         }
     }
     .tooltip_inner {
+        .checkbox {
+            display: inline-block;
+            width: 16px;
+            margin: -3px 8px -3px 0;
+            overflow: visible;
+            cursor: pointer;
+            &:checked {
+                &::after {
+                    background: url('#{$imageDir}/ico_checked.svg') no-repeat;
+                }
+            }
+            &::after {
+                content: ' ';
+                width: 16px;
+                height: 16px;
+                position: relative;
+                display: inline-block;
+                top: 3px;
+                background: url('#{$imageDir}/ico_unchecked.svg') no-repeat;
+            }
+        }
         .item {
             &:not(:first-child) {
                 border-top: $warmgray200 solid 1px;
@@ -1826,7 +1843,7 @@
     top: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.6);
-    z-index: 100;
+    z-index: 1050;
 
     .more_popup {
         overflow: hidden;
@@ -1911,6 +1928,131 @@
             word-break: break-all;
             letter-spacing: -0.5px;
             line-height: 22px;
+        }
+    }
+    .center {
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .modal {
+        background: #fff;
+        width: 680px;
+        height: 472px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+        .head {
+            display: flex;
+            background-color: #4f80ff;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+            .text {
+                display: inline-block;
+                -webkit-box-flex: 1;
+                -ms-flex: 1;
+                flex: 1;
+                margin: 0px 21px;
+                height: 54px;
+                line-height: 54px;
+                font-size: 18px;
+                font-weight: bold;
+                color: #ffffff;
+            }
+            .close {
+                display: inline-block;
+                cursor: pointer;
+                right: 0;
+                margin: 16px 26px 0 0;
+                width: 22px;
+                height: 22px;
+                background: url('#{$imageDir}/btn_more_popup_close_white.svg') no-repeat;
+                background-repeat: no-repeat;
+            }
+        }
+
+        .body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .content {
+                width: 660px;
+                line-height: 18px;
+                font-size: 16px;
+                overflow: hidden;
+                margin: 14px 0;
+                display: table;
+
+                .chart_area {
+                    margin-top: 21px;
+                }
+
+                .pop_selectbox {
+                    position: relative;
+                    display: inline-block;
+
+                    .select_link {
+                        display: block;
+                        position: relative;
+                        -webkit-box-sizing: border-box;
+                        box-sizing: border-box;
+                        width: 168px;
+                        height: 40px;
+                        padding: 0 12px;
+                        border: 1px solid #e2e2e2;
+                        background-color: #fff;
+                        border-radius: 4px;
+                        font-weight: 600;
+                        color: #555;
+                        letter-spacing: -0.3px;
+                        line-height: 38px;
+                        cursor: pointer;
+                    }
+
+                    .select_link:after {
+                        @include PositionRT(absolute, 16px, 50%);
+                        width: 8px;
+                        height: 6px;
+                        margin-top: -3px;
+                        vertical-align: top;
+                        content: '';
+                    }
+
+                    & + .pop_selectbox {
+                        margin-left: 10px;
+                    }
+
+                    & + .on {
+                        z-index: 10;
+                    }
+
+                    &.error .select_link {
+                        border-color: #f00;
+                    }
+                }
+
+                .pop_selectbox * {
+                    -webkit-box-sizing: content-box;
+                    box-sizing: content-box;
+                }
+
+                .pop_selectbox .tooltip_box {
+                    display: none;
+                }
+
+                .pop_selectbox.on .tooltip_box {
+                    display: block;
+                    z-index: 10;
+                    top: 52px;
+                }
+            }
         }
     }
 }
@@ -2205,6 +2347,37 @@
         overflow: auto;
         border-bottom: 1px solid #979797;
         background-color: #fff;
+      
+        &.tui_grid {
+            overflow: hidden;
+        }
+    }
+    :global(.tui-grid-show-lside-area) {
+        :global(.tui-grid-lside-area) {
+            // :global(.tui-grid-header-area .tui-grid-table) {
+            //     border-right: 2px #cbcbcb solid;
+            //     box-sizing: border-box;
+            // }
+            :global(.tui-grid-body-area .tui-grid-table) {
+                border-right: 2px #f2f2f2 solid;
+                box-sizing: border-box;
+            }
+        }
+        :global(.tui-grid-rside-area) {
+            :global(.tui-grid-header-area .tui-grid-cell-header) {
+                position: relative;
+                &::before {
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    width: 1px;
+                    height: 20px;
+                    margin-top: -10px;
+                    background-color: #cbcbcb;
+                    content: '';
+                }
+            }
+        }
     }
     .table {
         width: 100%;
@@ -2432,6 +2605,9 @@
             height: 50px;
             content: '';
         }
+        .plus a {
+            background-image: url('#{$imageDir}/icon_chart_sel05.svg');
+        }
     }
     .chart_box {
         position: relative;
@@ -2439,6 +2615,10 @@
         min-height: 552px;
         border-radius: 6px;
         background-color: #fff;
+        .chart_area {
+            width: calc(100% - 150px);
+            min-width: 740px;
+        }
         .legend_box {
             position: absolute;
             right: 20px;
@@ -2477,7 +2657,6 @@
             font-weight: 600;
             color: #2c313d;
             line-height: 18px;
-
         }
         .legend_box .legend_list .color {
             display: inline-block;
@@ -2515,26 +2694,25 @@
             vertical-align: top;
             content: '';
         }
-        .legend_box .tooltip_box .chk_box input[type="checkbox"] {
+        .legend_box .tooltip_box .chk_box input[type='checkbox'] {
             position: absolute;
             left: 0;
             top: 0;
         }
-        .legend_box .tooltip_box .chk_box input[type="checkbox"]:checked + label:before {
+        .legend_box .tooltip_box .chk_box input[type='checkbox']:checked + label:before {
             background-image: url('#{$imageDir}/icon_checkbox_on.svg');
-
         }
         .x_legend {
             position: absolute;
             right: 55px;
-            bottom: 47px;
+            bottom: 20px;
             z-index: 100;
         }
         .x_legend em {
             font-size: 18px;
             font-weight: 600;
             color: #2c313d;
-            line-height: 20px;   
+            line-height: 20px;
         }
         .x_legend .more_btn {
             display: inline-block;
