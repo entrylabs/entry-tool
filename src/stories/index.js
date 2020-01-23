@@ -293,6 +293,7 @@ storiesOf('AiLayout', module)
     .add('데이터 상세 - 차트 데이터 없음', () => <DataDetail DetailState="ChartDataOff" />)
     .add('차트', () => (
         <Chart table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} type="line" />
+    ))
     .add('차트팝업', () => (
         <ModalChart
             tables={[
