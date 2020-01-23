@@ -29,51 +29,61 @@ const ChartEditor = () => {
 
     const handleClickItem = (index) => (event) => {
         event.preventDefault();
-        if (index !== -1) {
-            dispatch({
-                index,
-                type: 'SET_CHART_INDEX',
-            });
-        } else {
-            dispatch({
-                type: 'ADD_CHART',
-                chartType: 'bar',
-            });
-        }
+        dispatch({
+            type: 'SET_CHART_INDEX',
+            index,
+        });
     };
 
-    const chartTitle = (charts[selected] && charts[selected].title) || `${title}_차트 제목`;
+    const handleClickDelete = (event) => {
+        event.preventDefault();
+        dispatch({
+            type: 'DELETE_CHART',
+            selected,
+        });
+    };
+
+    const selectedChart = charts[selected] || {};
+    const chartTitle = selectedChart.title;
 
     return (
         <section className={`${Styles.detail_cont} ${Styles.chart_state}`}>
             <h2 className={Styles.blind}>차트</h2>
             <Navigation selected={selected} charts={charts} onClickItem={handleClickItem} />
-            {charts.length ? (
-                <div className={Styles.content_box}>
-                    <div className={Styles.input_box}>
+            <div className={Styles.content_box}>
+                <div className={Styles.input_box}>
+                    <div className={Styles.input_inner}>
                         <TitleInput title={title} onChangeTitle={handleChangeTitle} />
+                    </div>
+                    <div className={Styles.input_inner}>
                         <TitleInput
                             key={`c${generateHash()}`}
                             title={chartTitle}
                             onChangeTitle={handleChangeChartTitle}
+                            disabled={!charts.length}
                         />
                     </div>
+                    <a href="#" className={Styles.chart_del} onClick={handleClickDelete}>
+                        차트 삭제
+                    </a>
+                </div>
+                {charts.length ? (
                     <div className={Styles.cont_inner}>
                         <div className={Styles.chart_box}>
                             <Chart
                                 key={`c${generateHash()}`}
                                 table={table}
-                                chart={charts[selected] || {}}
+                                chart={selectedChart}
                                 size={{ height: 552 }}
                                 showAxis={true}
                                 showLegend={true}
                             />
                         </div>
                     </div>
-                </div>
-            ) : (
-                <div>차트를 먼저 추가해주세요</div>
-            )}
+                ) : (
+                    <div>차트를 먼저 추가해주세요</div>
+                )}
+            </div>
         </section>
     );
 };
