@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useMemo, useEffect } from 'react';
+import React, { createContext, useReducer, useEffect } from 'react';
 import { SUMMARY } from '../Constants';
 import { dataAnalyticsReducer } from '../reducer/DataAnalyticsReducer';
 

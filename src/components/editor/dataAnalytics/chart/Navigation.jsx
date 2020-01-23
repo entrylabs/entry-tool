@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
+import OutsideClick from '@components/common/outsideClick';
+import SelectChartDropdown from './SelectChartDropdown';
 import Styles from '@assets/entry/scss/popup.scss';
 
 const Navigation = (props) => {
     const { charts, onClickItem, selected } = props;
+    const [showDropdown, setShowDropdown] = useState(false);
+    const { dispatch } = useContext(DataAnalyticsContext);
 
     const chartName = (chartType) => {
         switch (chartType) {
@@ -19,6 +24,23 @@ const Navigation = (props) => {
             default:
                 return '';
         }
+    };
+
+    const handleOutsideClick = () => {
+        setShowDropdown(false);
+    };
+
+    const handleAClick = (event) => {
+        event.preventDefault();
+        setShowDropdown(true);
+    };
+
+    const handleClick = (value) => (event) => {
+        dispatch({
+            type: 'ADD_CHART',
+            chartType: value,
+        });
+        setShowDropdown(false);
     };
 
     const navigationList = (charts) =>
@@ -39,7 +61,7 @@ const Navigation = (props) => {
                 {navigationList(charts)}
                 {charts.length < 10 ? (
                     <li key={`chart_last`} className={`${Styles.plus}`}>
-                        <a href="#" onClick={onClickItem(-1)}>
+                        <a href="#" onClick={handleAClick}>
                             <span className={Styles.blind}>{chartName('plus')}</span>
                         </a>
                     </li>
@@ -47,6 +69,13 @@ const Navigation = (props) => {
                     <></>
                 )}
             </ul>
+            {showDropdown ? (
+                <OutsideClick onOutsideClick={handleOutsideClick}>
+                    <SelectChartDropdown onClick={handleClick} />
+                </OutsideClick>
+            ) : (
+                <></>
+            )}
         </div>
     );
 };

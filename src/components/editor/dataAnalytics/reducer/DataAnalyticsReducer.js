@@ -48,8 +48,14 @@ export const dataAnalyticsReducer = (state, action) => {
                 charts,
             };
         }
-        case 'REMOVE_CHART':
-            return state.filter((matrixs) => matrixs.id !== action.id);
+        case 'DELETE_CHART': {
+            const charts = [...state.charts];
+            return {
+                ...state,
+                charts: charts.filter((chart, index) => index !== action.selected),
+                chartIndex: 0,
+            };
+        }
         default:
             return state;
     }
