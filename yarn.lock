@@ -781,10 +781,10 @@
   resolved "https://registry.yarnpkg.com/@entrylabs/event/-/event-1.0.3.tgz#a8754edcf4e44c0365a0e95b57801f3f52532e9d"
   integrity sha512-IDC7sWnfe8GVQIEGsct9Bcsj1Nh4XikO6PG+veVuix0Zv/XH98NkFjmXiyrriJ/rjJoGFBq6sKesfmaFCCr3MA==
 
-"@entrylabs/modal@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@entrylabs/modal/-/modal-1.1.2.tgz#dfbaeb9c8fb593f3135481045446e52ce4a8509b"
-  integrity sha512-vbY139OHw0MRAWESlhOYOk7r5HoRsVUNgmyHQGeAV3gjl1KQcAT8BhxIo7BR+Cs3lPgsE6GBwSVv41ty5+k6pQ==
+"@entrylabs/modal@^1.2.0":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@entrylabs/modal/-/modal-1.2.1.tgz#9d97efc79dea3f3d95b830619774790bc3dd19dd"
+  integrity sha512-VjoYAty5AWHf4GX3VmEa9yucYlrO8rFIsFS5aq7gokbFC3AXJMeXILXALUUF0lhcIE5LIxwSet2zBopgmYsSyg==
   dependencies:
     lodash-es "^4.17.15"
 
