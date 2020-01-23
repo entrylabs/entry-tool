@@ -3,6 +3,8 @@ import { pure } from 'recompose';
 import Theme from '@utils/Theme';
 import Option from '../popup/Contents/Navigation/SearchOption';
 import Chart from '@components/widget/Chart';
+import { CommonUtils } from '@utils/Common';
+const { generateHash } = CommonUtils;
 
 const ModalChart = (props) => {
     const theme = Theme.getStyle('popup');
@@ -17,7 +19,6 @@ const ModalChart = (props) => {
         setChart(chart[index]);
     };
     const data = [fields, ...origin];
-    console.log('draw chart', name);
     return (
         <div className={theme.dimmed}>
             <div className={theme.center}>
@@ -42,7 +43,13 @@ const ModalChart = (props) => {
                                 isOpenDefault={!!dropdown}
                             />
                             <div className={theme.chart_area}>
-                                {selectedChart && <Chart table={data} chart={selectedChart} />}
+                                {selectedChart && (
+                                    <Chart
+                                        key={`c${generateHash()}`}
+                                        table={data}
+                                        chart={selectedChart}
+                                    />
+                                )}
                             </div>
                         </div>
                     </div>
