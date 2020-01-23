@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Styles from '@assets/entry/scss/popup.scss';
 
 const TitleInput = (props) => {
-    const { title: propsTitle = '', onChangeTitle = () => {} } = props;
+    const { title: propsTitle = '', onChangeTitle = () => {}, disabled = false } = props;
     const [title, setTitle] = useState(propsTitle);
 
     const handleChange = (event) => {
@@ -22,6 +22,7 @@ const TitleInput = (props) => {
                 value={title}
                 onChange={handleChange}
                 onBlur={onChangeTitle(title)}
+                disabled={disabled}
             />
             <a
                 href="#"
