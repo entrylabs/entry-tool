@@ -126,11 +126,19 @@ const Table = (props) => {
                             table.splice(rowIndex, 0, Array(table[0].length).fill(0));
                             return table;
                         });
+                        // setTable((table) => {
+                        //     table.splice(rowIndex, 0, Array(table[0].length).fill(0));
+                        //     return table;
+                        // });
                     },
                 },
                 {
                     text: '아래에 행 추가하기',
                     callback: () => {
+                        setTable((table) => {
+                            table.splice(rowIndex + 1, 0, Array(table[0].length).fill(0));
+                            return table;
+                        });
                         setTable((table) => {
                             table.splice(rowIndex + 1, 0, Array(table[0].length).fill(0));
                             return table;
@@ -144,6 +152,10 @@ const Table = (props) => {
                             table.splice(rowIndex, 1);
                             return table;
                         });
+                        // setTable((table) => {
+                        //     table.splice(rowIndex, 1);
+                        //     return table;
+                        // });
                     },
                 },
             ];

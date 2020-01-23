@@ -23,35 +23,36 @@ class UndoRedoController {
 
     undo() {
         if (this.step === -1) return;
-        this.setTable(this.step, true);
+        this.updateData(this.step, true);
         this.step--;
     }
 
     redo() {
         if (this.step === this.history.length - 1) return;
         this.step++;
-        this.setTable(this.step, false);
+        this.updateData(this.step, false);
     }
 
-    setTable(step, isUndo) {
+    updateData(step, isUndo) {
+        console.log('CALLED');
         const target = this.history[step];
         const { action, row, col, value, table, updateFunc } = target;
         if (!col) {
             //row operation
             if (isUndo) {
                 if (action === 'ADD') {
-                    table.splice(row, 1);
+                    updateFunc(table.splice(row, 1));
                     updateFunc(table);
                 } else if (action === 'REMOVE') {
-                    table.splice(row, 0, value);
+                    updateFunc(table.splice(row, 0, value));
                     updateFunc(table);
                 }
             } else {
                 if (action === 'ADD') {
-                    table.splice(row, 0, value);
+                    updateFunc(table.splice(row, 0, value));
                     updateFunc(table);
                 } else if (action === 'REMOVE') {
-                    table.splice(row, 1);
+                    updateFunc(table.splice(row, 1));
                     updateFunc(table);
                 }
             }
