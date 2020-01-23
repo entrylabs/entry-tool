@@ -2,6 +2,10 @@ import React, { useEffect } from 'react';
 import bb from 'billboard.js';
 import '@assets/entry/scss/widget/insight.css';
 
+import Legend from '@components/widget/Legend';
+import Axis from '@components/widget/Axis';
+import Styles from '@assets/entry/scss/popup.scss';
+
 import { CommonUtils, isString } from '@utils/Common';
 const { generateHash } = CommonUtils;
 
@@ -57,7 +61,7 @@ const scatterXs = (table, xIndex, yIndex, categoryIndex) =>
     }, {});
 
 const generateOption = (option) => {
-    const { table, type, xIndex, yIndex = -1, categoryIndexes, id, size, legend, tooltip } = option;
+    const { table, type, xIndex, yIndex = -1, categoryIndexes, id, size, tooltip } = option;
 
     let x;
     let xs;
@@ -94,7 +98,7 @@ const generateOption = (option) => {
 
     return {
         id,
-        legend,
+        legend: { show: false },
         size,
         tooltip,
         bar: {
@@ -138,11 +142,11 @@ const Chart = (props) => {
         table = [[]],
         chart = {},
         size,
-        legend,
-        tooltip = {
-            grouped: false,
-        },
+        tooltip = { grouped: false },
+        showLegend,
+        showAxis,
     } = props;
+
     const { type = 'bar', xIndex = -1, yIndex, categoryIndexes = [] } = chart;
     const id = `c${generateHash()}`;
 
@@ -160,7 +164,6 @@ const Chart = (props) => {
                 categoryIndexes,
                 id,
                 size,
-                legend,
                 tooltip,
             });
             option && bb.generate(option);
@@ -179,7 +182,15 @@ const Chart = (props) => {
         content = <div>세로축을 선택해주세요</div>;
     }
 
-    return <div id={id}>{content}</div>;
+    return (
+        <>
+            <div className={Styles.chart_area}>
+                <div id={id}>{content}</div>
+            </div>
+            {showLegend ? <Legend /> : <></>}
+            {showAxis ? <Axis /> : <></>}
+        </>
+    );
 };
 
 export default Chart;

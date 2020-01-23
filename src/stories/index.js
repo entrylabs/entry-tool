@@ -31,6 +31,7 @@ import {
 import configureStore from '../store';
 import Chart from '../components/widget/Chart';
 import Table from '../components/widget/Table';
+import ModalChart from '../components/widget/modalChart';
 
 import DataSelect from '../components/ai_layout/DataSelect';
 import DataUpload from '../components/ai_layout/DataUpload';
@@ -288,6 +289,9 @@ storiesOf('AiLayout', module)
     .add('데이터 상세 - 요약', () => <DataDetail />)
     .add('데이터 상세 - 테이블', () => <DataDetail DetailState="Table" />)
     .add('데이터 상세 - 차트', () => <DataDetail DetailState="Chart" />)
+    .add('차트팝업', () => (
+        <ModalChart />
+    ))
     .add('바차트', () => (
         <Chart
             table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]}
