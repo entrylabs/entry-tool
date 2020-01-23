@@ -259,8 +259,10 @@ storiesOf('AiLayout', module)
     .add('테이블 추가하기 - 데이터 선택 딤드', () => <DataSelect Dimmed />)
     .add('테이블 추가하기 - 데이터 업로드', () => <DataUpload />)
     .add('데이터 상세 - 요약', () => <DataDetail />)
+    .add('데이터 상세 - 데이터 없음', () => <DataDetail DetailState="DataOff" />)
     .add('데이터 상세 - 테이블', () => <DataDetail DetailState="Table" />)
     .add('데이터 상세 - 차트', () => <DataDetail DetailState="Chart" />)
+    .add('데이터 상세 - 차트 데이터 없음', () => <DataDetail DetailState="ChartDataOff" />)
     .add('차트', () => (
         <Chart table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} type="line" />
     ))
