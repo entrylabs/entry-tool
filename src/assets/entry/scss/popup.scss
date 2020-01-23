@@ -2159,6 +2159,7 @@
         }
         .input_box {
             overflow: hidden;
+            min-width: 908px;
         }
         .input_box .input_inner {
             float: left;
@@ -2182,12 +2183,26 @@
             }
         }
         .input_box .input_inner + .input_inner {
-            margin-left: 10px;
+            margin-left: 12px;
+        }
+        .input_box .chart_del {
+            float: left;
+            width: 82px;
+            height: 38px;
+            margin-left: 12px;
+            background-color: #fff;
+            border: 1px solid #e2e2e2;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+            text-align: center;
+            line-height: 38px;
         }
         .input_box .cnt_result {
             float: left;
             overflow: hidden;
-            margin-left: 10px;
+            margin-left: 11px;
             padding: 0 2px 0 1px;
             background-color: #f2f2f2;
             border: 1px solid #d8d8d8;
@@ -2248,6 +2263,13 @@
         }
         &.chart_state .content_box {
             padding: 30px 30px 28px;
+        }
+        &.chart_state .input_inner {
+            width: 400px;
+        }
+        &.chart_state .input_inner input[type="text"]:disabled {
+            background-color: #f9f9f9;
+            color: #cbcbcb;
         }
     }
     .cont_inner {
@@ -2321,9 +2343,11 @@
     }
     .table_box {
         margin-top: 10px;
-        max-height: 330px;
+        height: 329px;
         overflow: auto;
-
+        border-bottom: 1px solid #979797;
+        background-color: #fff;
+      
         &.tui_grid {
             overflow: hidden;
         }
@@ -2398,6 +2422,38 @@
             background-color: #cbcbcb;
             content: '';
         }
+        &.DataOffTable {
+            .headtit {
+                color: #cbcbcb;
+            }
+            .headtit:before {
+                background-color: #cbcbcb;
+            }
+        }
+    }
+    .data_add_box {
+        height: 287px;
+        box-sizing: border-box;
+        padding-top: 80px;
+        background-color: #fff;
+        border-bottom: 1px solid #979797;
+        text-align: center;
+        a {
+            display: block;
+            margin: 0 auto;
+            width: 64px;
+            height: 64px;
+            background: url('#{$imageDir}/icon_chart_table_add.png');
+            background-size: 64px auto;
+        }
+        p {
+            padding-top: 18px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+            letter-spacing: -0.5px;
+            line-height: 20px;
+        }
     }
     .chart_list {
         margin-top: 10px;
@@ -2430,12 +2486,12 @@
             li:first-child {
                 margin-left: 0;
             }
-            .on {
+            .on, li:hover {
                 -webkit-box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.15),
                     2px 2px 6px 0 rgba(0, 0, 0, 0.17);
                 box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.15), 2px 2px 6px 0 rgba(0, 0, 0, 0.17);
             }
-            .on:before {
+            .on:before,li:hover:before {
                 border-width: 2px;
                 border-color: #4f80ff;
             }
@@ -2444,16 +2500,33 @@
                 clear: both;
                 content: '';
             }
+            .data_add_box {
+                height: 148px;
+                padding-top: 26px;
+                border: 0;
+                a {
+                    width: 44px;
+                    height: 44px;
+                    background: url('#{$imageDir}/icon_chart_add.png');
+                    background-size: 44px auto;
+                }
+                p {
+                    padding-top: 10px;
+                    line-height: 18px;
+                }
+            }
         }
     }
     .chart_navi {
-        overflow: auto;
+        position: relative;
+        overflow: visible;
         -webkit-box-flex: 0;
         -ms-flex: none;
         flex: none;
         width: 56px;
         background-color: #f9f9f9;
         border-right: 1px solid #e2e2e2;
+        z-index: 10;
         .list {
             overflow: hidden;
             margin-left: 8px;
@@ -2463,40 +2536,74 @@
             margin-top: 10px;
             width: 40px;
             height: 40px;
-            background-color: #fff;
+            background-repeat: no-repeat;
+            background-size: 40px auto;
         }
         .list a {
             display: block;
             height: 40px;
-            background-size: 40px auto;
         }
-        .bar a {
-            background-image: url('#{$imageDir}/icon_chart_sel01_off.svg');
-        }
-        .bar.on a,
-        .bar:hover a {
+        .bar {
             background-image: url('#{$imageDir}/icon_chart_sel01_on.svg');
         }
-        .line a {
-            background-image: url('#{$imageDir}/icon_chart_sel02_off.svg');
+        .bar.disabled {
+            background-image: url('#{$imageDir}/icon_chart_sel01_off.svg');
         }
-        .line.on a,
-        .line:hover a {
+        .line {
             background-image: url('#{$imageDir}/icon_chart_sel02_on.svg');
         }
-        .pie a {
-            background-image: url('#{$imageDir}/icon_chart_sel03_off.svg');
+        .line.disabled {
+            background-image: url('#{$imageDir}/icon_chart_sel02_off.svg');
         }
-        .pie.on a,
-        .pie:hover a {
+        .pie {
             background-image: url('#{$imageDir}/icon_chart_sel03_on.svg');
         }
-        .scatter a {
+        .pie.disabled {
+            background-image: url('#{$imageDir}/icon_chart_sel03_off.svg');
+        }
+        .scatter {
+            background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
+        }
+        .scatter.disabled {
             background-image: url('#{$imageDir}/icon_chart_sel04_off.svg');
         }
-        .scatter.on a,
-        .scatter:hover a {
-            background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
+        .chart_add_box {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            margin: 10px auto 0;
+        }
+        .chart_add_box .chart_add {
+            display: block;
+            width: 40px;
+            height: 40px;
+            background: url('#{$imageDir}/icon_chart_add.svg') no-repeat;
+            background-size: 40px auto;
+        }
+        .chart_add_box .list {
+            margin: 0;
+        }
+        .chart_add_box .list li {
+            float: left;
+            height: auto;
+            margin: 0 0 0 16px;
+        }
+        .chart_add_box .list li:first-child {
+            margin-left: 0;
+        }
+        .chart_add_box .list a {
+            height: auto;
+            font-size: 14px;
+            font-weight: bold;
+            color: #2c313d;
+            text-align: center;
+            letter-spacing: -0.5px;
+            line-height: 15px;
+        }
+        .chart_add_box .list a:before {
+            display: block;
+            height: 50px;
+            content: '';
         }
         .plus a {
             background-image: url('#{$imageDir}/icon_chart_sel05.svg');
@@ -2595,7 +2702,6 @@
         .legend_box .tooltip_box .chk_box input[type='checkbox']:checked + label:before {
             background-image: url('#{$imageDir}/icon_checkbox_on.svg');
         }
-
         .x_legend {
             position: absolute;
             right: 55px;
