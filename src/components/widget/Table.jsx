@@ -10,38 +10,102 @@ import ContextMenu from '../widget/contextMenu';
 import 'tui-grid/dist/tui-grid.css';
 import '@entrylabs/modal/dist/entry/entry-modal.css';
 
+const LEFT_CLICK = 1;
 const RIGHT_CLICK = 3;
 let removeColumnIndex = -1;
 
 TuiGrid.applyTheme('entry', {
     cell: {
+        normal: {
+            border: '#f2f2f2',
+            showVerticalBorder: true,
+        },
         header: {
-            background: '#f4f4f4',
+            showVerticalBorder: false,
+        },
+        focused: {
+            border: '#4f80ff',
         },
     },
 });
+
+const handleContextMenu = (event) => {
+    event.preventDefault();
+};
+
+let lastColumnName;
+const isColumnDblClick = ({ nativeEvent, columnName, targetType }) => {
+    const { which } = nativeEvent;
+    if (which !== LEFT_CLICK || targetType !== 'columnHeader') {
+        lastColumnName = undefined;
+    } else if (!lastColumnName) {
+        lastColumnName = columnName;
+        setTimeout(() => {
+            lastColumnName = undefined;
+        }, 300);
+    } else {
+        return true;
+    }
+    return false;
+};
 
 const Table = (props) => {
     const [{ x, y, isVisible, contextMenu }, setContextMenuOption] = useState({
         x: 0,
         y: 0,
         isVisible: false,
-        showPrompt: false,
+        contextMenu: false,
     });
-    const [showPrompt, setShowPrompt] = useState(false);
+    const [{ showPrompt, promptText, promptFunction }, setShowPrompt] = useState({
+        showPrompt: false,
+        promptText: '',
+    });
     const { table: tableProps = [] } = props;
     const [table, setTable] = useState(tableProps);
     const gridRef = useRef();
 
     const {
         width,
-        bodyHeight,
-        columnOptions = {},
+        bodyHeight = 510,
+        columnOptions = {
+            minWidth: 130,
+        },
         editable = 'text',
         rowHeight = 40,
         rowHeaders = [{ type: 'rowNum', width: 98 }],
         needRowHeader = true,
     } = props;
+
+    const handleNameChange = (name, index) => {
+        setTable((table) => {
+            table[0][index] = name;
+            return table;
+        });
+    };
+
+    const handleClick = useCallback(
+        (event) => {
+            const { nativeEvent } = event;
+            const { which, target } = nativeEvent;
+            const { cellIndex } = target;
+            const [fields] = table;
+            if (which === LEFT_CLICK && isColumnDblClick(event)) {
+                setShowPrompt({
+                    showPrompt: true,
+                    promptText: fields[cellIndex],
+                    promptFunction: (name) => {
+                        if (name) {
+                            handleNameChange(name, cellIndex);
+                        }
+                        setShowPrompt({
+                            showPrompt: false,
+                        });
+                    },
+                });
+            }
+        },
+        [table]
+    );
 
     const handleMousedown = useCallback(
         (event) => {
@@ -69,8 +133,21 @@ const Table = (props) => {
         setContextMenuOption((prev) => ({ ...prev, isVisible: false }));
     };
 
-    const handleContextMenu = (event) => {
-        event.preventDefault();
+    const handleAddColumn = (columnName) => {
+        if (removeColumnIndex === -1) {
+            return;
+        }
+        setShowPrompt({
+            showPrompt: false,
+        });
+        // todo: columnName 중복 제거 로직 추가
+        setTable(
+            table.map((row, index) => {
+                row.splice(removeColumnIndex, 0, index ? 0 : columnName);
+                return row;
+            })
+        );
+        removeColumnIndex = -1;
     };
 
     const handleEditingFinish = useCallback((event) => {
@@ -110,14 +187,20 @@ const Table = (props) => {
                     text: '왼쪽에 속성 추가하기',
                     callback: () => {
                         removeColumnIndex = table[0].findIndex((header) => key === header);
-                        setShowPrompt(true);
+                        setShowPrompt({
+                            showPrompt: true,
+                            promptFunction: handleAddColumn,
+                        });
                     },
                 },
                 {
                     text: '오른쪽에 속성 추가하기',
                     callback: () => {
                         removeColumnIndex = table[0].findIndex((header) => key === header) + 1;
-                        setShowPrompt(true);
+                        setShowPrompt({
+                            showPrompt: true,
+                            promptFunction: handleAddColumn,
+                        });
                     },
                 },
                 {
@@ -134,7 +217,7 @@ const Table = (props) => {
                 },
             ];
         }
-        return [{ text: ' ' }];
+        return [{ text: ' ' }, handleAddColumn];
     };
 
     const data = getData(table);
@@ -142,7 +225,7 @@ const Table = (props) => {
     const theme = Theme.getStyle('table');
 
     return (
-        <div className={theme.Table} onContextMenu={handleContextMenu}>
+        <div className={`${theme.Table} ${theme.tui_grid}`} onContextMenu={handleContextMenu}>
             <Grid
                 ref={gridRef}
                 data={data}
@@ -155,6 +238,7 @@ const Table = (props) => {
                 usageStatistics={false}
                 rowHeaders={needRowHeader ? rowHeaders : {}}
                 onMousedown={handleMousedown}
+                onClick={handleClick}
                 onEditingFinish={handleEditingFinish}
             />
             {isVisible && (
@@ -170,24 +254,19 @@ const Table = (props) => {
             {showPrompt && (
                 <Prompt
                     content="content"
-                    defaultValue="value"
+                    defaultValue={promptText}
                     title="title"
-                    onEvent={(columnName) => {
-                        if (removeColumnIndex === -1) {
-                            return;
+                    onEvent={(event) => {
+                        if (promptFunction) {
+                            promptFunction(event);
+                        } else {
+                            setShowPrompt({
+                                showPrompt: false,
+                            });
                         }
-                        setShowPrompt(false);
-                        // todo: columnName 중복 제거 로직 추가
-                        setTable(
-                            table.map((row, index) => {
-                                row.splice(removeColumnIndex, 0, index ? 0 : columnName);
-                                return row;
-                            })
-                        );
-                        removeColumnIndex = -1;
                     }}
                     options={{
-                        placeholder: 'placeholder',
+                        placeholder: '',
                         negativeButtonText: 'cancel',
                         positiveButtonText: 'ok',
                     }}

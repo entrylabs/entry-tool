@@ -251,7 +251,13 @@ export const someString = (array) => _some(array, isString);
 export const getHeader = (matrix, editable = true) =>
     _.chain(matrix)
         .head()
-        .map((column) => ({ editor: editable ? 'text' : '', name: column, align: 'center' }))
+        .map((column) => ({
+            editor: editable ? 'text' : '',
+            name: column,
+            align: 'center',
+            width: 130,
+            ellipsis: true,
+        }))
         .value();
 export const getData = (matrix) =>
     _.chain(matrix)

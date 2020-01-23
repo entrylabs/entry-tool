@@ -2208,6 +2208,37 @@
         margin-top: 10px;
         max-height: 330px;
         overflow: auto;
+
+        &.tui_grid {
+            overflow: hidden;
+        }
+    }
+    :global(.tui-grid-show-lside-area) {
+        :global(.tui-grid-lside-area) {
+            // :global(.tui-grid-header-area .tui-grid-table) {
+            //     border-right: 2px #cbcbcb solid;
+            //     box-sizing: border-box;
+            // }
+            :global(.tui-grid-body-area .tui-grid-table) {
+                border-right: 2px #f2f2f2 solid;
+                box-sizing: border-box;
+            }
+        }
+        :global(.tui-grid-rside-area) {
+            :global(.tui-grid-header-area .tui-grid-cell-header) {
+                position: relative;
+                &::before {
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    width: 1px;
+                    height: 20px;
+                    margin-top: -10px;
+                    background-color: #cbcbcb;
+                    content: '';
+                }
+            }
+        }
     }
     .table {
         width: 100%;
@@ -2404,7 +2435,6 @@
             font-weight: 600;
             color: #2c313d;
             line-height: 18px;
-
         }
         .legend_box .legend_list .color {
             display: inline-block;
@@ -2442,16 +2472,14 @@
             vertical-align: top;
             content: '';
         }
-        .legend_box .tooltip_box .chk_box input[type="checkbox"] {
+        .legend_box .tooltip_box .chk_box input[type='checkbox'] {
             position: absolute;
             left: 0;
             top: 0;
         }
-        .legend_box .tooltip_box .chk_box input[type="checkbox"]:checked + label:before {
+        .legend_box .tooltip_box .chk_box input[type='checkbox']:checked + label:before {
             background-image: url('#{$imageDir}/icon_checkbox_on.svg');
-
         }
-
 
         .x_legend {
             position: absolute;
@@ -2463,7 +2491,7 @@
             font-size: 18px;
             font-weight: 600;
             color: #2c313d;
-            line-height: 20px;   
+            line-height: 20px;
         }
         .x_legend .more_btn {
             display: inline-block;
