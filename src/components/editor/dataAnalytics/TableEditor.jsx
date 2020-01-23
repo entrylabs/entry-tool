@@ -25,7 +25,7 @@ const TableEditor = () => {
 
                 <div className={Styles.cont_inner}>
                     <div className={Styles.table_box}>
-                        <Table table={table} />
+                        <Table table={table} {...props} />
                     </div>
                 </div>
             </div>

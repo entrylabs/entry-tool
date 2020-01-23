@@ -6,6 +6,7 @@ import App from '../App';
 import configureStore from '../store';
 import { visibleAction } from '../actions/index';
 import Theme from '@utils/Theme';
+import UndoRedoController from '../utils/undoRedoController';
 // import httpService from '../config/axios';
 
 const withWrapper = (option) => (WrappedComponent) => {
@@ -33,7 +34,7 @@ const withWrapper = (option) => (WrappedComponent) => {
             this._type = type;
             this.store = configureStore({}, this);
             // httpService.setupInterceptors(url);
-
+            this.undoRedoController = new UndoRedoController(this);
             if (isShow) {
                 this.show();
             } else {
@@ -121,6 +122,13 @@ const withWrapper = (option) => (WrappedComponent) => {
             this._data = undefined;
             this._props = undefined;
             this.container = undefined;
+        }
+        undo() {
+            this.undoRedoController.undo();
+        }
+
+        redo() {
+            this.undoRedoController.redo();
         }
 
         async render() {
