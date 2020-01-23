@@ -290,7 +290,13 @@ storiesOf('AiLayout', module)
     .add('데이터 상세 - 테이블', () => <DataDetail DetailState="Table" />)
     .add('데이터 상세 - 차트', () => <DataDetail DetailState="Chart" />)
     .add('차트팝업', () => (
-        <ModalChart />
+        <ModalChart
+            tables={[
+                ['테이블1', 'a2vx'],
+                ['테이블2', 'ewv5'],
+            ]}
+            source={{}}
+        />
     ))
     .add('바차트', () => (
         <Chart

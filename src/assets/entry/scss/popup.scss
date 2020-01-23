@@ -1843,7 +1843,7 @@
     top: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.6);
-    z-index: 100;
+    z-index: 1000;
 
     .more_popup {
         overflow: hidden;
@@ -2323,6 +2323,37 @@
         margin-top: 10px;
         max-height: 330px;
         overflow: auto;
+
+        &.tui_grid {
+            overflow: hidden;
+        }
+    }
+    :global(.tui-grid-show-lside-area) {
+        :global(.tui-grid-lside-area) {
+            // :global(.tui-grid-header-area .tui-grid-table) {
+            //     border-right: 2px #cbcbcb solid;
+            //     box-sizing: border-box;
+            // }
+            :global(.tui-grid-body-area .tui-grid-table) {
+                border-right: 2px #f2f2f2 solid;
+                box-sizing: border-box;
+            }
+        }
+        :global(.tui-grid-rside-area) {
+            :global(.tui-grid-header-area .tui-grid-cell-header) {
+                position: relative;
+                &::before {
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    width: 1px;
+                    height: 20px;
+                    margin-top: -10px;
+                    background-color: #cbcbcb;
+                    content: '';
+                }
+            }
+        }
     }
     .table {
         width: 100%;
