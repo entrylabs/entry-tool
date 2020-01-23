@@ -1,47 +1,56 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { pure } from 'recompose';
 import Theme from '@utils/Theme';
-import classname from 'classnames';
+import Option from '../popup/Contents/Navigation/SearchOption';
+import Chart from '@components/widget/Chart';
 
-class ModalChart extends Component {
-    constructor(props) {
-        super(props);
-        Theme.type = props.theme;
-        this.theme = Theme.getStyle('popup');
-    }
-
-    render() {
-        const isOpen = true;
-        const dropdownClass = classname(
-            this.theme.select_link,
-            { [this.theme.imico_pop_select_arr_down]: !isOpen },
-            { [this.theme.imico_pop_select_arr_up]: isOpen },
-        );
-
-        return (
-            <div className={this.theme.dimmed}>
-                <div className={this.theme.center}>
-                    <div className={this.theme.modal}>
-                        <div className={this.theme.head}>
-                            <div className={this.theme.text}>차트 보기</div>
-                            <div className={this.theme.close} />
-                        </div>
-                        <div className={this.theme.body}>
-                            <div className={this.theme.content}>
-                                <div className={this.theme.pop_selectbox}>
-                                    <div className={dropdownClass}>테이블 명</div>
-                                </div>
-                                <div className={this.theme.pop_selectbox}>
-                                    <div className={dropdownClass}>차트 명</div>
-                                </div>
-                                <div className={this.theme.chart_area}>chart area</div>
+const ModalChart = (props) => {
+    const theme = Theme.getStyle('popup');
+    const { tables = [], source = {}, setTable, onClose } = props;
+    const { chart = [], name, fields = [], origin = [] } = source;
+    const [dropdown, setDropdown] = useState('');
+    const [selectedChart, setChart] = useState(chart && chart[0]);
+    const toggleDropDown = (dropdown) => setDropdown(dropdown);
+    const chartList = chart.map(({ title }, index) => [title, index]);
+    const selectChart = (option) => {
+        const [name, index] = option;
+        setChart(chart[index]);
+    };
+    const data = [fields, ...origin];
+    console.log('draw chart', name);
+    return (
+        <div className={theme.dimmed}>
+            <div className={theme.center}>
+                <div className={theme.modal}>
+                    <div className={theme.head}>
+                        <div className={theme.text}>차트 보기</div>
+                        <div className={theme.close} onClick={onClose} />
+                    </div>
+                    <div className={theme.body}>
+                        <div className={theme.content}>
+                            <Option
+                                onSelect={setTable}
+                                options={tables}
+                                setDropdown={toggleDropDown}
+                                isOpenDefault={!!dropdown}
+                                staticName={name}
+                            />
+                            <Option
+                                onSelect={selectChart}
+                                options={chartList}
+                                setDropdown={toggleDropDown}
+                                isOpenDefault={!!dropdown}
+                            />
+                            <div className={theme.chart_area}>
+                                {selectedChart && <Chart table={data} chart={selectedChart} />}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        );
-    }
-}
+            {dropdown}
+        </div>
+    );
+};
 
 export default pure(ModalChart);
