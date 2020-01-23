@@ -3,9 +3,7 @@ export const dataAnalyticsReducer = (state, action) => {
         case 'SET_DATA':
             return {
                 ...state,
-                title: action.title,
-                table: action.table,
-                charts: action.charts,
+                ...action.payload,
             };
         case 'SET_TAB':
             return {
