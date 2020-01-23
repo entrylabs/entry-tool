@@ -295,7 +295,7 @@ storiesOf('AiLayout', module)
                 ['테이블1', 'a2vx'],
                 ['테이블2', 'ewv5'],
             ]}
-            source={{}}
+            source={TABLE_SAMPLE2}
         />
     ))
     .add('바차트', () => (
