@@ -4,6 +4,7 @@ import { CommonUtils } from '@utils/Common';
 import debounce from 'lodash/debounce';
 import Scrollbars from '@components/common/scrollbars';
 import OutsideClick from '@components/common/outsideClick';
+import CheckBox from '@components/common/CheckBox';
 import root from 'window-or-global';
 import Theme from '@utils/Theme';
 
@@ -26,7 +27,11 @@ class Dropdown extends Component {
     constructor(props) {
         super(props);
         this.theme = Theme.getStyle('popup');
-        this.state = CommonUtils.getDefaultComponentPosition(props, this.getPositionOptions());
+        const { checkedIndex = [] } = props;
+        this.state = {
+            ...CommonUtils.getDefaultComponentPosition(props, this.getPositionOptions()),
+            checkedIndex,
+        };
     }
 
     handleWindowResize = debounce(() => {
@@ -43,12 +48,12 @@ class Dropdown extends Component {
     }
 
     alignPosition(updateState) {
-        this.setState(() => {
-            return Object.assign(
+        this.setState(() =>
+            Object.assign(
                 CommonUtils.getAlignPosition(this.props, this.dropdown, this.getPositionOptions()),
                 updateState
-            );
-        });
+            )
+        );
     }
 
     getPositionOptions() {
@@ -77,11 +82,31 @@ class Dropdown extends Component {
             onSelectDropdown(item);
         }
     };
-    makeDropdownItem() {
-        const { items } = this.props;
 
+    handleItemCheckChange = (item, index) => {
+        this.setState((prev) => {
+            const { checkedIndex = [] } = prev;
+            const target = checkedIndex.indexOf(index);
+            if (target > -1) {
+                checkedIndex.splice(target, 1);
+            } else {
+                checkedIndex.push(index);
+            }
+            return { ...prev, checkedIndex };
+        });
+        const { onChange } = this.props;
+        if (onChange) {
+            onChange(item, index);
+        }
+    };
+
+    makeDropdownItem() {
+        const { items, multiple } = this.props;
+        const { checkedIndex = [] } = this.state;
+        const handleEvent = multiple ? this.handleItemCheckChange : this.handleItemClick;
         return items.map((item, index) => {
             const [text, value, style] = item;
+            const checked = checkedIndex.includes(index);
             return (
                 <div
                     key={value}
@@ -90,13 +115,24 @@ class Dropdown extends Component {
                     style={style}
                     className={this.theme.item}
                     onClick={() => {
-                        this.handleItemClick(item);
+                        handleEvent(item, index);
                     }}
                 >
+                    {multiple && <CheckBox className={this.theme.checkbox} checked={checked} />}
                     {text}
                 </div>
             );
         });
+    }
+
+    getCheckData() {
+        const { checkedIndex = [] } = this.state;
+        const { items = [] } = this.props;
+        checkedIndex.sort();
+        return {
+            checkedIndex,
+            items: items.filter((item, index) => checkedIndex.includes(index)),
+        };
     }
 
     render() {
@@ -107,6 +143,7 @@ class Dropdown extends Component {
             outsideExcludeDom,
             autoWidth,
             animation = true,
+            multiple,
         } = this.props;
         const { isUpStyle, arrowLeft, componentPosition } = this.state;
         let animationStyle = {};
@@ -119,8 +156,12 @@ class Dropdown extends Component {
             <OutsideClick
                 outsideExcludeDom={outsideExcludeDom}
                 onOutsideClick={() => {
+                    let result;
+                    if (multiple) {
+                        result = this.getCheckData();
+                    }
                     if (onOutsideClick) {
-                        onOutsideClick();
+                        onOutsideClick(result);
                     }
                 }}
                 eventTypes={eventTypes}

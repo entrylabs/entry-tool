@@ -31,6 +31,7 @@ import {
 import configureStore from '../store';
 import Chart from '../components/widget/Chart';
 import Table from '../components/widget/Table';
+import ModalChart from '../components/widget/modalChart';
 
 import DataSelect from '../components/ai_layout/DataSelect';
 import DataUpload from '../components/ai_layout/DataUpload';
@@ -50,7 +51,9 @@ storiesOf('Popup', module)
     .add('툴팁', () => <Tooltips />)
     .add('확장블록', () => <Popup type="expansion" data={EXPANSION_SAMPLE} />)
     .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE} uploads={SOUND_SAMPLE} />)
-    .add('데이터 테이블', () => <Popup type="table" data={TABLE_INFO_SAMPLE} uploads={[TABLE_SAMPLE2]} />)
+    .add('데이터 테이블', () => (
+        <Popup type="table" data={TABLE_INFO_SAMPLE} uploads={[TABLE_SAMPLE2]} />
+    ))
     .add('오브젝트추가하기', () => <Popup type="sprite" data={SPRITE_SAMPLE} />)
     .add('모양추가', () => <Popup type="picture" data={SPRITE_SAMPLE} />)
     .add('모양 가져오기', () => <Popup type="paint" data={SPRITE_SAMPLE} />)
@@ -126,6 +129,31 @@ wigetStories
                 [8, 8],
                 [9, 9],
             ]}
+        />
+    ))
+    .add('드롭다운(체크박스)', () => (
+        <Dropdown
+            multiple
+            checkedIndex={[1, 3, 5]}
+            items={[
+                [1, 1],
+                [2, 2],
+                [3, 3],
+                [4, 4],
+                [5, 5],
+                [6, 6],
+                [7, 7],
+                [8, 8],
+                [9, 9],
+            ]}
+            onChange={(a, b, c) => {
+                console.log(a, b, c);
+                action('onChange');
+            }}
+            onOutsideClick={(a, b, c) => {
+                console.log(a, b, c);
+                action('onOutsideClick');
+            }}
         />
     ))
     .add('로딩바', () => (
@@ -267,8 +295,57 @@ storiesOf('AiLayout', module)
     .add('데이터 상세 - 차트 데이터 없음', () => <DataDetail DetailState="ChartDataOff" />)
     .add('차트', () => (
         <Chart table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} type="line" />
+    .add('차트팝업', () => (
+        <ModalChart
+            tables={[
+                ['테이블1', 'a2vx'],
+                ['테이블2', 'ewv5'],
+            ]}
+            source={TABLE_SAMPLE2}
+        />
+    ))
+    .add('바차트', () => (
+        <Chart
+            table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]}
+            chart={{
+                type: 'bar',
+                xIndex: 0,
+                categoryIndexes: [1, 2],
+            }}
+        />
+    ))
+    .add('라인차트', () => (
+        <Chart
+            table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]}
+            chart={{
+                type: 'line',
+                xIndex: 0,
+                categoryIndexes: [1, 2],
+            }}
+        />
+    ))
+    .add('파이차트', () => (
+        <Chart
+            table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]}
+            chart={{
+                type: 'pie',
+                xIndex: 0,
+                categoryIndexes: [1],
+            }}
+        />
+    ))
+    .add('분산차트', () => (
+        <Chart
+            table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]}
+            chart={{
+                type: 'scatter',
+                xIndex: 1,
+                yIndex: 2,
+                categoryIndexes: [0],
+            }}
+        />
     ))
     .add('테이블', () => (
-        <Table table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} editor={'text'} />
+        <Table table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]} editor={'text'} />
     ))
     .add('DataAnalytics', () => <DataAnalytics table={TABLE_SAMPLE2} />);

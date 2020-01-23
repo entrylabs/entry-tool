@@ -1211,13 +1211,7 @@
             bottom: 0;
             height: 40px;
             font-size: 0; /* Chrome10-25,Safari5.1-6 */
-            background: -webkit-gradient(
-                linear,
-                left top,
-                left bottom,
-                from(rgba(0, 0, 0, 0)),
-                to(rgba(0, 0, 0, 1))
-            );
+            background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 1)));
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
         }
         .section_cont .list .info_bar span {
@@ -1743,27 +1737,6 @@
         }
     }
     .tooltip_inner {
-        .checkbox {
-            display: inline-block;
-            width: 16px;
-            margin: -3px 8px -3px 0;
-            overflow: visible;
-            cursor: pointer;
-            &:checked {
-                &::after {
-                    background: url('#{$imageDir}/ico_checked.svg') no-repeat;
-                }
-            }
-            &::after {
-                content: ' ';
-                width: 16px;
-                height: 16px;
-                position: relative;
-                display: inline-block;
-                top: 3px;
-                background: url('#{$imageDir}/ico_unchecked.svg') no-repeat;
-            }
-        }
         .item {
             &:not(:first-child) {
                 border-top: $warmgray200 solid 1px;
@@ -1938,131 +1911,6 @@
             word-break: break-all;
             letter-spacing: -0.5px;
             line-height: 22px;
-        }
-    }
-    .center {
-        position: fixed;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
-    .modal {
-        background: #fff;
-        width: 680px;
-        height: 472px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        border-bottom-left-radius: 7px;
-        border-bottom-right-radius: 7px;
-        .head {
-            display: flex;
-            background-color: #4f80ff;
-            border-top-left-radius: 7px;
-            border-top-right-radius: 7px;
-            .text {
-                display: inline-block;
-                -webkit-box-flex: 1;
-                -ms-flex: 1;
-                flex: 1;
-                margin: 0px 21px;
-                height: 54px;
-                line-height: 54px;
-                font-size: 18px;
-                font-weight: bold;
-                color: #ffffff;
-            }
-            .close {
-                display: inline-block;
-                cursor: pointer;
-                right: 0;
-                margin: 16px 26px 0 0;
-                width: 22px;
-                height: 22px;
-                background: url('#{$imageDir}/btn_more_popup_close_white.svg') no-repeat;
-                background-repeat: no-repeat;
-            }
-        }
-
-        .body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            .content {
-                width: 660px;
-                line-height: 18px;
-                font-size: 16px;
-                overflow: hidden;
-                margin: 14px 0;
-                display: table;
-
-                .chart_area {
-                    margin-top: 21px;
-                }
-
-                .pop_selectbox {
-                    position: relative;
-                    display: inline-block;
-
-                    .select_link {
-                        display: block;
-                        position: relative;
-                        -webkit-box-sizing: border-box;
-                        box-sizing: border-box;
-                        width: 168px;
-                        height: 40px;
-                        padding: 0 12px;
-                        border: 1px solid #e2e2e2;
-                        background-color: #fff;
-                        border-radius: 4px;
-                        font-weight: 600;
-                        color: #555;
-                        letter-spacing: -0.3px;
-                        line-height: 38px;
-                        cursor: pointer;
-                    }
-
-                    .select_link:after {
-                        @include PositionRT(absolute, 16px, 50%);
-                        width: 8px;
-                        height: 6px;
-                        margin-top: -3px;
-                        vertical-align: top;
-                        content: '';
-                    }
-
-                    & + .pop_selectbox {
-                        margin-left: 10px;
-                    }
-
-                    & + .on {
-                        z-index: 10;
-                    }
-
-                    &.error .select_link {
-                        border-color: #f00;
-                    }
-                }
-
-                .pop_selectbox * {
-                    -webkit-box-sizing: content-box;
-                    box-sizing: content-box;
-                }
-
-                .pop_selectbox .tooltip_box {
-                    display: none;
-                }
-
-                .pop_selectbox.on .tooltip_box {
-                    display: block;
-                    z-index: 10;
-                    top: 52px;
-                }
-            }
         }
     }
 }
@@ -2282,7 +2130,7 @@
         &.chart_state .input_inner {
             width: 400px;
         }
-        &.chart_state .input_inner input[type='text']:disabled {
+        &.chart_state .input_inner input[type="text"]:disabled {
             background-color: #f9f9f9;
             color: #cbcbcb;
         }
@@ -2362,37 +2210,6 @@
         overflow: auto;
         border-bottom: 1px solid #979797;
         background-color: #fff;
-
-        &.tui_grid {
-            overflow: hidden;
-        }
-    }
-    :global(.tui-grid-show-lside-area) {
-        :global(.tui-grid-lside-area) {
-            // :global(.tui-grid-header-area .tui-grid-table) {
-            //     border-right: 2px #cbcbcb solid;
-            //     box-sizing: border-box;
-            // }
-            :global(.tui-grid-body-area .tui-grid-table) {
-                border-right: 2px #f2f2f2 solid;
-                box-sizing: border-box;
-            }
-        }
-        :global(.tui-grid-rside-area) {
-            :global(.tui-grid-header-area .tui-grid-cell-header) {
-                position: relative;
-                &::before {
-                    position: absolute;
-                    left: 0;
-                    top: 50%;
-                    width: 1px;
-                    height: 20px;
-                    margin-top: -10px;
-                    background-color: #cbcbcb;
-                    content: '';
-                }
-            }
-        }
     }
     .table {
         width: 100%;
@@ -2451,7 +2268,6 @@
         box-sizing: border-box;
         padding-top: 80px;
         background-color: #fff;
-        border-bottom: 1px solid #979797;
         text-align: center;
         a {
             display: block;
@@ -2501,14 +2317,12 @@
             li:first-child {
                 margin-left: 0;
             }
-            .on,
-            li:hover {
+            .on, li:hover {
                 -webkit-box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.15),
                     2px 2px 6px 0 rgba(0, 0, 0, 0.17);
                 box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.15), 2px 2px 6px 0 rgba(0, 0, 0, 0.17);
             }
-            .on:before,
-            li:hover:before {
+            .on:before,li:hover:before {
                 border-width: 2px;
                 border-color: #4f80ff;
             }
@@ -2622,9 +2436,6 @@
             height: 50px;
             content: '';
         }
-        .plus a {
-            background-image: url('#{$imageDir}/icon_chart_sel05.svg');
-        }
     }
     .chart_box {
         position: relative;
@@ -2640,6 +2451,7 @@
             height: auto;
             min-height: 552px;
             border-radius: 6px;
+
         }
         .data_add_box a {
             width: 44px;
@@ -2651,9 +2463,7 @@
             padding-top: 10px;
             color: #cbcbcb;
         }
-        .y_legend_box,
-        .x_legend_box,
-        .legend_box {
+        .y_legend_box, .x_legend_box,.legend_box {
             width: 120px;
             border: 1px solid #e2e2e2;
             border-radius: 4px;
@@ -2669,7 +2479,7 @@
             &.disabled .common_legend {
                 background-color: #f9f9f9;
                 color: #cbcbcb;
-                pointer-events: none;
+                pointer-events: none;            
             }
             &.disabled .common_legend:after {
                 background-image: url('#{$imageDir}/icon_legend_more_off.svg');
@@ -2688,10 +2498,6 @@
                 top: auto;
                 bottom: 58px;
             }
-        }
-        .chart_area {
-            width: calc(100% - 150px);
-            min-width: 740px;
         }
         .legend_box {
             position: absolute;
@@ -2723,13 +2529,14 @@
                 vertical-align: top;
                 content: '';
             }
-            .tooltip_box .chk_box input[type='checkbox'] {
+            .tooltip_box .chk_box input[type="checkbox"] {
                 position: absolute;
                 left: 0;
                 top: 0;
             }
-            .tooltip_box .chk_box input[type='checkbox']:checked + label:before {
+            .tooltip_box .chk_box input[type="checkbox"]:checked + label:before {
                 background-image: url('#{$imageDir}/icon_checkbox_on.svg');
+    
             }
             .legend_list {
                 padding: 2px 0 12px;
@@ -2755,9 +2562,9 @@
                 margin-right: 8px;
                 vertical-align: top;
             }
+            
         }
-        .common_legend,
-        .del_legend {
+        .common_legend, .del_legend {
             display: block;
             overflow: hidden;
             position: relative;
@@ -2809,108 +2616,6 @@
             height: 397px;
             background-color: #fff;
             z-index: 10;
-        }
-        .legend_box .legend_link {
-            font-size: 14px;
-            font-weight: 600;
-            color: #2c313d;
-            line-height: 20px;
-        }
-        .legend_box .btn_more {
-            position: absolute;
-            right: 8px;
-            top: 13px;
-            width: 20px;
-            height: 20px;
-            background: url('#{$imageDir}/icon_chart_setting.svg') no-repeat;
-            background-size: 20px auto;
-            vertical-align: top;
-        }
-        .legend_box .legend_list {
-            padding-top: 5px;
-        }
-        .legend_box .legend_list li {
-            overflow: hidden;
-            height: 16px;
-            margin-top: 8px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #2c313d;
-            line-height: 18px;
-        }
-        .legend_box .legend_list .color {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            margin-right: 8px;
-            vertical-align: top;
-        }
-        .legend_box .tooltip_box {
-            display: none;
-            width: 102px;
-            left: 48px;
-            top: 48px;
-        }
-        .legend_box .tooltip_box .chk_box {
-            position: relative;
-            overflow: hidden;
-        }
-        .legend_box .tooltip_box .chk_box label {
-            display: block;
-            height: 15px;
-            padding: 15px 0 16px 7px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #2c313d;
-            cursor: pointer;
-        }
-        .legend_box .tooltip_box .chk_box label:before {
-            display: inline-block;
-            margin-right: 8px;
-            width: 16px;
-            height: 16px;
-            background-image: url('#{$imageDir}/icon_checkbox_off.svg');
-            background-size: 16px auto;
-            vertical-align: top;
-            content: '';
-        }
-        .legend_box .tooltip_box .chk_box input[type='checkbox'] {
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-        .legend_box .tooltip_box .chk_box input[type='checkbox']:checked + label:before {
-            background-image: url('#{$imageDir}/icon_checkbox_on.svg');
-        }
-        .x_legend {
-            position: absolute;
-            right: 55px;
-            bottom: 20px;
-            z-index: 100;
-        }
-        .x_legend em {
-            font-size: 18px;
-            font-weight: 600;
-            color: #2c313d;
-            line-height: 20px;
-        }
-        .x_legend .more_btn {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin: -1px 0 0 6px;
-            background: url('#{$imageDir}/icon_chart_setting.svg') no-repeat;
-            background-size: 20px auto;
-            vertical-align: top;
-        }
-        .x_legend .tooltip_box {
-            display: none;
-            width: 102px;
-            left: 11px;
-            top: -206px;
-        }
-        .tooltip_box .select_list .list_link {
-            font-size: 14px;
         }
     }
 }

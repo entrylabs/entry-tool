@@ -7,18 +7,22 @@ const TitleInput = (props) => {
 
     const handleChange = (event) => {
         setTitle(event.target.value);
-        onChangeTitle(event.target.value);
     };
 
     const handleClick = (event) => {
         event.preventDefault();
+        onChangeTitle('')();
         setTitle('');
-        onChangeTitle('');
     };
 
     return (
         <div className={Styles.input_inner}>
-            <input type="text" value={title} onChange={handleChange} />
+            <input
+                type="text"
+                value={title}
+                onChange={handleChange}
+                onBlur={onChangeTitle(title)}
+            />
             <a
                 href="#"
                 className={propsTitle ? Styles.close_btn : ''}
