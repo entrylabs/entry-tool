@@ -26,7 +26,20 @@ const ChartList = (props) => {
 
     const chartList = (charts) => {
         if (charts.length === 0) {
-            return null;
+            return (
+                <li onClick={handleClickChart(CHART, 0)}>
+                    <div className={Styles.data_add_box}>
+                        <a href="#" onClick={(e) => e.preventDefault()}>
+                            <span className={Styles.blind}>데이터 추가하기</span>
+                        </a>
+                        <p>
+                            추가된 차트가 없습니다.
+                            <br />
+                            데이터를 입력해주세요.
+                        </p>
+                    </div>
+                </li>
+            );
         }
 
         return charts.map((chart, index) => (
