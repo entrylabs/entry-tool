@@ -57,25 +57,21 @@ const Navigation = (props) => {
 
     return (
         <div className={Styles.chart_navi}>
-            <ul className={Styles.list}>
-                {navigationList(charts)}
-                {charts.length < 10 ? (
-                    <li key={`chart_last`} className={`${Styles.plus}`}>
-                        <a href="#" onClick={handleAClick}>
-                            <span className={Styles.blind}>{chartName('plus')}</span>
-                        </a>
-                    </li>
-                ) : (
-                    <></>
-                )}
-            </ul>
-            {showDropdown ? (
-                <OutsideClick onOutsideClick={handleOutsideClick}>
-                    <SelectChartDropdown onClick={handleClick} />
-                </OutsideClick>
-            ) : (
-                <></>
-            )}
+            <ul className={Styles.list}>{navigationList(charts)}</ul>
+
+            {charts.length < 10 ? (
+                <div className={Styles.chart_add_box}>
+                    <a href="#" className={Styles.chart_add} onClick={handleAClick}>
+                        <span className={Styles.blind}>{chartName('plus')}</span>
+                    </a>
+
+                    {showDropdown ? (
+                        <OutsideClick onOutsideClick={handleOutsideClick}>
+                            <SelectChartDropdown onClick={handleClick} />
+                        </OutsideClick>
+                    ) : null}
+                </div>
+            ) : null}
         </div>
     );
 };

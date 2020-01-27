@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 import bb from 'billboard.js';
+
+import Styles from '@assets/entry/scss/popup.scss';
 import '@assets/entry/scss/widget/insight.css';
 
-import Legend from '@components/widget/Legend';
-import Axis from '@components/widget/Axis';
-import Styles from '@assets/entry/scss/popup.scss';
-
-import { CommonUtils, isString } from '@utils/Common';
+import { CommonUtils, isString, categoryKeys, isZipable } from '@utils/Common';
 const { generateHash } = CommonUtils;
 
 const pivot = (table, xIndex, yIndex, categoryIndex) =>
@@ -15,9 +13,6 @@ const pivot = (table, xIndex, yIndex, categoryIndex) =>
         prev[row[xIndex]][row[categoryIndex]] = row[yIndex];
         return prev;
     }, {});
-
-const categoryKeys = (table, categoryIndex) =>
-    _.uniq(table.slice(1).map((row) => row[categoryIndex]));
 
 const makeTable = (pvTable, cateKey) =>
     cateKey.map((key) => [key, ..._.map(pvTable, (xAxis) => xAxis[key] || 0)]);
@@ -135,17 +130,9 @@ const hasNumberColumn = (table) => {
 };
 
 const isDrawable = (table) => table[0].length > 1 && hasNumberColumn(table);
-const isZipable = (table, xIndex) => _.uniqBy(table, (row) => row[xIndex]).length !== table.length;
 
 const Chart = (props) => {
-    const {
-        table = [[]],
-        chart = {},
-        size,
-        tooltip = { grouped: false },
-        showLegend,
-        showAxis,
-    } = props;
+    const { table = [[]], chart = {}, size, tooltip = { grouped: false } } = props;
 
     const { type = 'bar', xIndex = -1, yIndex, categoryIndexes = [] } = chart;
     const id = `c${generateHash()}`;
@@ -183,13 +170,9 @@ const Chart = (props) => {
     }
 
     return (
-        <>
-            <div className={Styles.chart_area}>
-                <div id={id}>{content}</div>
-            </div>
-            {showLegend ? <Legend /> : <></>}
-            {showAxis ? <Axis /> : <></>}
-        </>
+        <div className={Styles.graph_cont}>
+            <div id={id}>{content}</div>
+        </div>
     );
 };
 

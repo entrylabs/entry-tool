@@ -2543,7 +2543,7 @@
         width: 56px;
         background-color: #f9f9f9;
         border-right: 1px solid #e2e2e2;
-        z-index: 10;
+        z-index: 30;
         .list {
             overflow: hidden;
             margin-left: 8px;
@@ -2689,10 +2689,10 @@
                 bottom: 58px;
             }
         }
-        .chart_area {
-            width: calc(100% - 150px);
-            min-width: 740px;
-        }
+        // .chart_area {
+        //     width: calc(100% - 150px);
+        //     min-width: 740px;
+        // }
         .legend_box {
             position: absolute;
             right: 20px;

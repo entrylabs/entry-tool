@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
 import Navigation from './Navigation';
 import TitleInput from '../TitleInput';
-import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
 
 import Styles from '@assets/entry/scss/popup.scss';
 
 import { CommonUtils } from '@utils/Common';
+import ChartLayout from './ChartLayout';
 const { generateHash } = CommonUtils;
 
 const ChartEditor = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { table, charts, title, chartIndex: selected = 0 } = dataAnalytics;
+    const { charts, title, chartIndex: selected = 0 } = dataAnalytics;
 
     const handleChangeTitle = (value) => (event) => {
         dispatch({
@@ -67,22 +67,7 @@ const ChartEditor = () => {
                         차트 삭제
                     </a>
                 </div>
-                {charts.length ? (
-                    <div className={Styles.cont_inner}>
-                        <div className={Styles.chart_box}>
-                            <Chart
-                                key={`c${generateHash()}`}
-                                table={table}
-                                chart={selectedChart}
-                                size={{ height: 552 }}
-                                showAxis={true}
-                                showLegend={true}
-                            />
-                        </div>
-                    </div>
-                ) : (
-                    <div>차트를 먼저 추가해주세요</div>
-                )}
+                <ChartLayout />
             </div>
         </section>
     );
