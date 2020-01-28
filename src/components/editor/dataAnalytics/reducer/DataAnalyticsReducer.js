@@ -9,7 +9,7 @@ export const dataAnalyticsReducer = (state, action) => {
             return {
                 ...state,
                 tab: action.tab,
-                chartIndex: action.index || state.chartIndex,
+                chartIndex: action.index === undefined ? state.chartIndex : action.index,
             };
         case 'SET_CHART_INDEX':
             return {

@@ -142,7 +142,7 @@ const hasNumberColumn = (table) => {
 const isDrawable = (table) => table[0].length > 1 && hasNumberColumn(table);
 
 const Chart = (props) => {
-    const { table = [[]], chart = {}, size, tooltip = { grouped: false } } = props;
+    const { table = [[]], chart = {}, size, tooltip = { grouped: false }, legend } = props;
 
     const { type = 'bar', xIndex = -1, yIndex, categoryIndexes = [] } = chart;
     const id = `c${generateHash()}`;
@@ -162,6 +162,7 @@ const Chart = (props) => {
                 id,
                 size,
                 tooltip,
+                legend,
             });
             option && bb.generate(option);
         }

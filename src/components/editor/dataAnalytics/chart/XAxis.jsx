@@ -20,8 +20,7 @@ const XAxis = (props) => {
         setShowDropdown(false);
     };
 
-    const handleOutsideClick = (event) => {
-        event.preventDefault();
+    const handleOutsideClick = () => {
         setShowDropdown(false);
     };
 
