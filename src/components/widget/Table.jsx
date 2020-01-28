@@ -88,12 +88,25 @@ const Table = (props) => {
 
     const handleNameChange = (index) => (name) => {
         if (name) {
+            debugger;
             setTable((table) => {
-                table[0][index] = name;
+                const currentIndex = index;
+                const prevValue = table[0][currentIndex];
+                const nextValue = name;
+                eventEmitter.undoRedoController.saveAction({
+                    updateFunc: () => {
+                        debugger;
+                        table[0][currentIndex] = nextValue;
+                        forceUpdateTable();
+                    },
+                    revertFunc: () => {
+                        table[0][currentIndex] = prevValue;
+                        forceUpdateTable();
+                    },
+                });
                 return table;
             });
         }
-        forceUpdateTable();
     };
 
     const handleClick = useCallback(
@@ -128,19 +141,16 @@ const Table = (props) => {
                     text: '위에 행 추가하기',
                     callback: () => {
                         eventEmitter.undoRedoController.saveAction({
-                            type: 'table',
-                            action: 'ADD',
-                            row: rowIndex,
-                            table,
-                            updateFunc: (index) => {
+                            updateFunc: () => {
                                 setTable((table) => {
-                                    table.splice(index, 0, Array(table[0].length).fill(0));
+                                    table.splice(rowIndex, 0, Array(table[0].length).fill(0));
                                     return table;
                                 });
+                                forceUpdateTable();
                             },
-                            revertFunc: (index) => {
+                            revertFunc: () => {
                                 setTable((table) => {
-                                    table.splice(index, 1);
+                                    table.splice(rowIndex, 1);
                                     return table;
                                 });
                                 forceUpdateTable();
@@ -152,19 +162,16 @@ const Table = (props) => {
                     text: '아래에 행 추가하기',
                     callback: () => {
                         eventEmitter.undoRedoController.saveAction({
-                            type: 'table',
-                            action: 'ADD',
-                            row: rowIndex + 1,
-                            table,
-                            updateFunc: (index) => {
+                            updateFunc: () => {
                                 setTable((table) => {
-                                    table.splice(index, 0, Array(table[0].length).fill(0));
+                                    table.splice(rowIndex + 1, 0, Array(table[0].length).fill(0));
                                     return table;
                                 });
+                                forceUpdateTable();
                             },
-                            revertFunc: (index) => {
+                            revertFunc: () => {
                                 setTable((table) => {
-                                    table.splice(index, 1);
+                                    table.splice(rowIndex + 1, 1);
                                     return table;
                                 });
                                 forceUpdateTable();
@@ -178,18 +185,16 @@ const Table = (props) => {
                         setTable((table) => {
                             const value = table[rowIndex];
                             eventEmitter.undoRedoController.saveAction({
-                                action: 'REMOVE',
-                                row: rowIndex,
-                                table,
-                                updateFunc: (index) => {
+                                updateFunc: () => {
                                     setTable((table) => {
-                                        table.splice(index, 1);
+                                        table.splice(rowIndex, 1);
                                         return table;
                                     });
+                                    forceUpdateTable();
                                 },
-                                revertFunc: (index) => {
+                                revertFunc: () => {
                                     setTable((table) => {
-                                        table.splice(index, 0, value);
+                                        table.splice(rowIndex, 0, value);
                                         return table;
                                     });
                                     forceUpdateTable();
@@ -227,17 +232,15 @@ const Table = (props) => {
                         setTable((table) => {
                             const value = [];
                             eventEmitter.undoRedoController.saveAction({
-                                action: 'REMOVE',
-                                col: colIndex,
-                                table,
                                 updateFunc: (index) => {
                                     table.map((row) => {
                                         value.push(row[colIndex]);
                                         row.splice(colIndex, 1);
                                         return row;
                                     });
+                                    forceUpdateTable();
                                 },
-                                revertFunc: (index) => {
+                                revertFunc: (colIndex) => {
                                     table.map((row, i) => {
                                         const valueToBeIn = value.shift() || 0;
                                         row.splice(colIndex, 0, valueToBeIn);
@@ -281,11 +284,7 @@ const Table = (props) => {
             return;
         }
         eventEmitter.undoRedoController.saveAction({
-            action: 'ADD',
-            col: colIndex,
-            value: null,
-            table,
-            updateFunc: (index) => {
+            updateFunc: () => {
                 setTable((table) =>
                     table.map((row, index) => {
                         row.splice(colIndex, 0, index ? 0 : columnName);
@@ -293,10 +292,10 @@ const Table = (props) => {
                     })
                 );
             },
-            revertFunc: (index) => {
+            revertFunc: () => {
                 setTable((table) =>
                     table.map((row) => {
-                        row.splice(index, 1);
+                        row.splice(colIndex, 1);
                         return row;
                     })
                 );
@@ -309,27 +308,20 @@ const Table = (props) => {
             const { instance, columnName, rowKey } = event;
             const colIndex = instance.getIndexOfColumn(columnName);
             const rowIndex = instance.getIndexOfRow(rowKey);
-            console.log('handleEditingFinish', rowIndex, colIndex);
-            eventEmitter.undoRedoController.saveAction({
-                action: 'EDIT',
-                row: rowIndex + 1,
-                col: colIndex,
-                table,
-                updateFunc: (index) => {
-                    const targetValue = event.value;
-                    setTable((table) => {
-                        table[rowIndex + 1][colIndex] = targetValue;
-                        return table;
-                    });
-                },
-                revertFunc: (index) => {
-                    setTable((table) =>
-                        table.map((row) => {
-                            row.splice(index, 1);
-                            return row;
-                        })
-                    );
-                },
+            setTable((table) => {
+                const prevValue = table[rowIndex + 1][colIndex];
+                const nextValue = event.value;
+                eventEmitter.undoRedoController.saveAction({
+                    updateFunc: (index) => {
+                        table[rowIndex + 1][colIndex] = nextValue;
+                        forceUpdateTable();
+                    },
+                    revertFunc: () => {
+                        table[rowIndex + 1][colIndex] = prevValue;
+                        forceUpdateTable();
+                    },
+                });
+                return table;
             });
         },
         [tableProps]

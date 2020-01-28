@@ -18,7 +18,7 @@ class UndoRedoController {
             this.history = this.history.slice(0, this.step + 1);
         }
         this.history.push(action);
-        this.emitter.emit('modified');
+        this.emitter.emit('MODIFIED');
     }
 
     undo() {
@@ -35,11 +35,11 @@ class UndoRedoController {
 
     updateData(step, isUndo) {
         const target = this.history[step];
-        const { action, type, row, col, updateFunc, revertFunc } = target;
+        const { action, type, updateFunc, revertFunc } = target;
         if (isUndo) {
-            revertFunc(col || row);
+            revertFunc();
         } else {
-            updateFunc(col || row);
+            updateFunc();
         }
     }
     clear() {
