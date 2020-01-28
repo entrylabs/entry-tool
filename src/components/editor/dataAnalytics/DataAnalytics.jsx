@@ -5,13 +5,15 @@ import DataAnalyticsContextProvider from './context/DataAnalyticsContext';
 const DataAnalytics = (props) => {
     const { table = {} } = props;
     const { name = '', fields, origin = [], chart = [] } = table;
-    const dataTable = fields ? [fields, ...origin] : [];
+    const dataTable = fields ? [fields, ...origin] : [[]];
 
     const data = {
         title: name,
-        table: [dataTable],
+        table: dataTable,
         charts: chart,
     };
+
+    console.log(data);
 
     return (
         <DataAnalyticsContextProvider analytics={data}>

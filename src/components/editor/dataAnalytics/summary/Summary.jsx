@@ -26,9 +26,9 @@ const Summary = () => {
                 <div className={Styles.input_box}>
                     <TitleInput title={title} onChangeTitle={handleChangeTitle} />
                     <ul className={Styles.cnt_result}>
-                        <li>속성 {summary.length}개</li>
+                        <li>열 {summary.length}개</li>
                         <li>행 {table.length - 1}행</li>
-                        <li>값 {summary.length * (table.length - 1)}개</li>
+                        <li>칸 {summary.length * (table.length - 1)}개</li>
                     </ul>
                 </div>
 

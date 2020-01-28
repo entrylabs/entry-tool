@@ -151,7 +151,7 @@ const Table = (props) => {
             const colIndex = instance.getIndexOfColumn(columnName);
             return [
                 {
-                    text: '왼쪽에 속성 추가하기',
+                    text: '왼쪽에 열 추가하기',
                     callback: () => {
                         setShowPrompt({
                             showPrompt: true,
@@ -160,7 +160,7 @@ const Table = (props) => {
                     },
                 },
                 {
-                    text: '오른쪽에 속성 추가하기',
+                    text: '오른쪽에 열 추가하기',
                     callback: () => {
                         setShowPrompt({
                             showPrompt: true,
@@ -169,7 +169,7 @@ const Table = (props) => {
                     },
                 },
                 {
-                    text: '속성 삭제하기',
+                    text: '열 삭제하기',
                     callback: () => {
                         setTable((table) =>
                             table.map((row) => {
