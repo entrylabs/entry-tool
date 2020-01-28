@@ -73,11 +73,18 @@ const Table = (props) => {
         rowHeight = 40,
         rowHeaders = [{ type: 'rowNum', width: 98 }],
         needRowHeader = true,
+        eventEmitter,
     } = props;
 
     useEffect(() => {
         setTable(tableProps);
     }, [tableProps]);
+
+    const forceUpdateTable = () => {
+        setShowPrompt({
+            showPrompt: false,
+        });
+    };
 
     const handleNameChange = (index) => (name) => {
         if (name) {
@@ -86,9 +93,7 @@ const Table = (props) => {
                 return table;
             });
         }
-        setShowPrompt({
-            showPrompt: false,
-        });
+        forceUpdateTable();
     };
 
     const handleClick = useCallback(
@@ -122,26 +127,48 @@ const Table = (props) => {
                 {
                     text: '위에 행 추가하기',
                     callback: () => {
-                        setTable((table) => {
-                            table.splice(rowIndex, 0, Array(table[0].length).fill(0));
-                            return table;
+                        eventEmitter.undoRedoController.saveAction({
+                            type: 'table',
+                            action: 'ADD',
+                            row: rowIndex,
+                            table,
+                            updateFunc: (index) => {
+                                setTable((table) => {
+                                    table.splice(index, 0, Array(table[0].length).fill(0));
+                                    return table;
+                                });
+                            },
+                            revertFunc: (index) => {
+                                setTable((table) => {
+                                    table.splice(index, 1);
+                                    return table;
+                                });
+                                forceUpdateTable();
+                            },
                         });
-                        // setTable((table) => {
-                        //     table.splice(rowIndex, 0, Array(table[0].length).fill(0));
-                        //     return table;
-                        // });
                     },
                 },
                 {
                     text: '아래에 행 추가하기',
                     callback: () => {
-                        setTable((table) => {
-                            table.splice(rowIndex + 1, 0, Array(table[0].length).fill(0));
-                            return table;
-                        });
-                        setTable((table) => {
-                            table.splice(rowIndex + 1, 0, Array(table[0].length).fill(0));
-                            return table;
+                        eventEmitter.undoRedoController.saveAction({
+                            type: 'table',
+                            action: 'ADD',
+                            row: rowIndex + 1,
+                            table,
+                            updateFunc: (index) => {
+                                setTable((table) => {
+                                    table.splice(index, 0, Array(table[0].length).fill(0));
+                                    return table;
+                                });
+                            },
+                            revertFunc: (index) => {
+                                setTable((table) => {
+                                    table.splice(index, 1);
+                                    return table;
+                                });
+                                forceUpdateTable();
+                            },
                         });
                     },
                 },
@@ -149,13 +176,27 @@ const Table = (props) => {
                     text: '행 삭제하기',
                     callback: () => {
                         setTable((table) => {
-                            table.splice(rowIndex, 1);
+                            const value = table[rowIndex];
+                            eventEmitter.undoRedoController.saveAction({
+                                action: 'REMOVE',
+                                row: rowIndex,
+                                table,
+                                updateFunc: (index) => {
+                                    setTable((table) => {
+                                        table.splice(index, 1);
+                                        return table;
+                                    });
+                                },
+                                revertFunc: (index) => {
+                                    setTable((table) => {
+                                        table.splice(index, 0, value);
+                                        return table;
+                                    });
+                                    forceUpdateTable();
+                                },
+                            });
                             return table;
                         });
-                        // setTable((table) => {
-                        //     table.splice(rowIndex, 1);
-                        //     return table;
-                        // });
                     },
                 },
             ];
@@ -183,12 +224,25 @@ const Table = (props) => {
                 {
                     text: '속성 삭제하기',
                     callback: () => {
-                        setTable((table) =>
-                            table.map((row) => {
-                                row.splice(colIndex, 1);
-                                return row;
-                            })
-                        );
+                        setTable((table) => {
+                            const value = [];
+                            eventEmitter.undoRedoController.saveAction({
+                                action: 'REMOVE',
+                                row: rowIndex,
+                                table,
+                                updateFunc: (index) => {
+                                    if (value.length < table.length) {
+                                        table = [];
+                                    }
+                                    table.map((row) => {
+                                        row.splice(colIndex, 1);
+                                        return row;
+                                    });
+                                },
+                                revertFunc: (index) => {},
+                            });
+                            return table;
+                        });
                     },
                 },
             ];
@@ -221,12 +275,28 @@ const Table = (props) => {
         if (colIndex === -1 || !columnName) {
             return;
         }
-        setTable((table) =>
-            table.map((row, index) => {
-                row.splice(colIndex, 0, index ? 0 : columnName);
-                return row;
-            })
-        );
+        eventEmitter.undoRedoController.saveAction({
+            action: 'ADD',
+            col: colIndex,
+            value: null,
+            table,
+            updateFunc: (index) => {
+                setTable((table) =>
+                    table.map((row, index) => {
+                        row.splice(colIndex, 0, index ? 0 : columnName);
+                        return row;
+                    })
+                );
+            },
+            revertFunc: (index) => {
+                setTable((table) =>
+                    table.map((row) => {
+                        row.splice(index, 1);
+                        return row;
+                    })
+                );
+            },
+        });
     };
 
     const handleEditingFinish = useCallback(

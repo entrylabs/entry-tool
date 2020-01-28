@@ -34,32 +34,12 @@ class UndoRedoController {
     }
 
     updateData(step, isUndo) {
-        console.log('CALLED');
         const target = this.history[step];
-        const { action, row, col, value, table, updateFunc } = target;
-        if (!col) {
-            //row operation
-            if (isUndo) {
-                if (action === 'ADD') {
-                    updateFunc(table.splice(row, 1));
-                    updateFunc(table);
-                } else if (action === 'REMOVE') {
-                    updateFunc(table.splice(row, 0, value));
-                    updateFunc(table);
-                }
-            } else {
-                if (action === 'ADD') {
-                    updateFunc(table.splice(row, 0, value));
-                    updateFunc(table);
-                } else if (action === 'REMOVE') {
-                    updateFunc(table.splice(row, 1));
-                    updateFunc(table);
-                }
-            }
-        } else if (!row) {
-            //col operation
+        const { action, type, row, col, updateFunc, revertFunc } = target;
+        if (isUndo) {
+            revertFunc(col || row);
         } else {
-            //cell operation
+            updateFunc(col || row);
         }
     }
     clear() {
