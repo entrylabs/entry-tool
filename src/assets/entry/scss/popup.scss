@@ -1853,7 +1853,7 @@
     top: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.6);
-    z-index: 100;
+    z-index: 1040;
 
     .more_popup {
         overflow: hidden;
@@ -2805,7 +2805,8 @@
             position: absolute;
             left: 60px;
             top: 95px;
-            width: 684px;
+            width: calc(100%-200px);
+            min-width: 684px;
             height: 397px;
             background-color: #fff;
             z-index: 10;
