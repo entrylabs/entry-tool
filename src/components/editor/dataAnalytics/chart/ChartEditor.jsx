@@ -3,10 +3,10 @@ import Navigation from './Navigation';
 import TitleInput from '../TitleInput';
 import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
 
-import Styles from '@assets/entry/scss/popup.scss';
-
 import { CommonUtils } from '@utils/Common';
 import ChartLayout from './ChartLayout';
+
+import Styles from '@assets/entry/scss/popup.scss';
 const { generateHash } = CommonUtils;
 
 const ChartEditor = () => {

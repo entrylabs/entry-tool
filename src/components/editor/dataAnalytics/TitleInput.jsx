@@ -1,32 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/entry/scss/popup.scss';
 
-const TitleInput = (props) => {
-    const { title: propsTitle = '', onChangeTitle = () => {}, disabled = false } = props;
-    const [title, setTitle] = useState(propsTitle);
+const { generateHash } = CommonUtils;
 
-    const handleChange = (event) => {
-        setTitle(event.target.value);
-    };
+const TitleInput = (props) => {
+    const { title = '', onChangeTitle = () => {}, disabled = false } = props;
 
     const handleClick = (event) => {
         event.preventDefault();
         onChangeTitle('')();
-        setTitle('');
     };
+
+    const handleBlur = (event) => {
+        const { target = {} } = event;
+        const { value = '' } = target;
+        onChangeTitle(value)();
+    };
+
+    console.log(title);
 
     return (
         <div className={Styles.input_inner}>
             <input
+                key={`title_${generateHash()}`}
                 type="text"
-                value={title}
-                onChange={handleChange}
-                onBlur={onChangeTitle(title)}
+                defaultValue={title}
+                onBlur={handleBlur}
                 disabled={disabled}
             />
             <a
                 href="#"
-                className={propsTitle ? Styles.close_btn : ''}
+                className={title ? Styles.close_btn : ''}
                 role="button"
                 onClick={handleClick}
             >

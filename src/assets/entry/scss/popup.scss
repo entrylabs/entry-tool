@@ -2104,10 +2104,11 @@
             background-size: 26px auto;
             vertical-align: top;
             margin-top: -5px;
+            transform: rotate(180deg);
 
             &.fullscreen {
                 margin-top: 0px;
-                transform: rotate(180deg);
+                transform: rotate(0deg);
             }
         }
         .btn_save {
