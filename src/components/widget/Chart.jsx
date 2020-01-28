@@ -62,6 +62,7 @@ const generateOption = (option) => {
     let xs;
     let columns;
     let axisX = { type: 'category' };
+    const showLegend = type === 'pie';
 
     switch (type) {
         case 'bar':
@@ -93,7 +94,7 @@ const generateOption = (option) => {
 
     return {
         id,
-        legend: { show: false },
+        legend: { show: showLegend },
         size,
         tooltip,
         bar: {

@@ -87,7 +87,6 @@ const ChartLayout = () => {
                             table={table}
                             chart={charts[chartIndex]}
                             size={{
-                                width: 684,
                                 height: 397,
                             }}
                         />
