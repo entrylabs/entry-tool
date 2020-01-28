@@ -2458,7 +2458,7 @@
             margin: 0 auto;
             width: 64px;
             height: 64px;
-            background: url('#{$imageDir}/icon_chart_table_add.png');
+            background: url('#{$imageDir}/icon_chart_table_add.svg');
             background-size: 64px auto;
         }
         p {
@@ -2524,7 +2524,7 @@
                 a {
                     width: 44px;
                     height: 44px;
-                    background: url('#{$imageDir}/icon_chart_add.png');
+                    background: url('#{$imageDir}/icon_chart_box_add.svg');
                     background-size: 44px auto;
                 }
                 p {
@@ -2644,7 +2644,7 @@
         .data_add_box a {
             width: 44px;
             height: 44px;
-            background-image: url('#{$imageDir}/icon_cart_add.png');
+            background-image: url('#{$imageDir}/icon_cart_add.svg');
             background-size: 44px auto;
         }
         .data_add_box p {
