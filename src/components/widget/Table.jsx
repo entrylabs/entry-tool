@@ -228,18 +228,23 @@ const Table = (props) => {
                             const value = [];
                             eventEmitter.undoRedoController.saveAction({
                                 action: 'REMOVE',
-                                row: rowIndex,
+                                col: colIndex,
                                 table,
                                 updateFunc: (index) => {
-                                    if (value.length < table.length) {
-                                        table = [];
-                                    }
                                     table.map((row) => {
+                                        value.push(row[colIndex]);
                                         row.splice(colIndex, 1);
                                         return row;
                                     });
                                 },
-                                revertFunc: (index) => {},
+                                revertFunc: (index) => {
+                                    table.map((row, i) => {
+                                        const valueToBeIn = value.shift() || 0;
+                                        row.splice(colIndex, 0, valueToBeIn);
+                                        return row;
+                                    });
+                                    forceUpdateTable();
+                                },
                             });
                             return table;
                         });
@@ -304,7 +309,28 @@ const Table = (props) => {
             const { instance, columnName, rowKey } = event;
             const colIndex = instance.getIndexOfColumn(columnName);
             const rowIndex = instance.getIndexOfRow(rowKey);
-            tableProps[rowIndex][colIndex] = event.value;
+            console.log('handleEditingFinish', rowIndex, colIndex);
+            eventEmitter.undoRedoController.saveAction({
+                action: 'EDIT',
+                row: rowIndex + 1,
+                col: colIndex,
+                table,
+                updateFunc: (index) => {
+                    const targetValue = event.value;
+                    setTable((table) => {
+                        table[rowIndex + 1][colIndex] = targetValue;
+                        return table;
+                    });
+                },
+                revertFunc: (index) => {
+                    setTable((table) =>
+                        table.map((row) => {
+                            row.splice(index, 1);
+                            return row;
+                        })
+                    );
+                },
+            });
         },
         [tableProps]
     );
