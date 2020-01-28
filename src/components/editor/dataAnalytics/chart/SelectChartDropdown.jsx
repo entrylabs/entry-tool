@@ -9,7 +9,7 @@ const SelectChartDropdown = (props) => {
     };
 
     return (
-        <div className={Styles.tooltip_box} style={{ width: '240px', ...position }}>
+        <div className={Styles.tooltip_box} style={{ width: '242px', ...position }}>
             <div className={Styles.tooltip_inner} style={{ padding: '16px' }}>
                 <ul className={Styles.list}>
                     <li className={Styles.bar} onClick={onClick('bar')}>
