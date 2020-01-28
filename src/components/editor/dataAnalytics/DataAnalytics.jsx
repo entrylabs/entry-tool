@@ -13,8 +13,6 @@ const DataAnalytics = (props) => {
         charts: chart,
     };
 
-    console.log(data);
-
     return (
         <DataAnalyticsContextProvider analytics={data}>
             <DataAnalyticsEditor />
