@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-
 import Header from './Header';
 import Summary from './summary/Summary';
 import TableEditor from './TableEditor';
@@ -9,13 +8,15 @@ import { SUMMARY, TABLE, CHART, TAB_ITEMS } from './Constants';
 import Styles from '@assets/entry/scss/popup.scss';
 
 const DataAnalyticsEditor = () => {
-    const [isFullScreen, setIsFullScreen] = useState(false);
-    const { dataAnalytics } = useContext(DataAnalyticsContext);
-    const { tab, table } = dataAnalytics;
+    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
+    const { tab, table, isFullScreen } = dataAnalytics;
 
     const handleFullScreenClick = (event) => {
         event.preventDefault();
-        setIsFullScreen(!isFullScreen);
+        dispatch({
+            type: 'TOGGLE_FULLSCREEN',
+            isFullScreen: !isFullScreen,
+        });
     };
 
     let content;
@@ -45,7 +46,12 @@ const DataAnalyticsEditor = () => {
                     : `${Styles.data_detail_wrap}`
             }
         >
-            <Header selected={tab} tabItems={TAB_ITEMS} onFullScreenClick={handleFullScreenClick} />
+            <Header
+                selected={tab}
+                tabItems={TAB_ITEMS}
+                isFullScreen={isFullScreen}
+                onFullScreenClick={handleFullScreenClick}
+            />
             {content}
         </div>
     );

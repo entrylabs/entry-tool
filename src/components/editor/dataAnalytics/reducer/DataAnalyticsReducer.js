@@ -83,6 +83,11 @@ export const dataAnalyticsReducer = (state, action) => {
                 charts,
             };
         }
+        case 'TOGGLE_FULLSCREEN':
+            return {
+                ...state,
+                isFullScreen: action.isFullScreen,
+            };
         default:
             return state;
     }

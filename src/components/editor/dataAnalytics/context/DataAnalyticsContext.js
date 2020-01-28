@@ -13,6 +13,7 @@ const DataAnalyticsContextProvider = (props) => {
         charts,
         tab: SUMMARY,
         chartIndex: 0,
+        isFullScreen: false,
     });
 
     useEffect(() => {
@@ -24,6 +25,7 @@ const DataAnalyticsContextProvider = (props) => {
                 table,
                 charts,
                 chartIndex: 0,
+                isFullScreen: false,
             },
         });
     }, [analytics, dispatch]);

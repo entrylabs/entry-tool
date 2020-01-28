@@ -2090,8 +2090,12 @@
     z-index: 250;
     .detail_top {
         position: relative;
-        padding: 8px 12px 8px 8px;
+        padding: 12px 7px 13px 7px;
         background-color: #ecf8ff;
+        border-top: solid 1px #d6e9f4;
+        &.fullscreen {
+            padding: 8px 12px 8px 8px;
+        }
         .switch_btn {
             float: left;
             width: 26px;
@@ -2099,6 +2103,12 @@
             background: url('#{$imageDir}/btn_switch_link.svg') no-repeat;
             background-size: 26px auto;
             vertical-align: top;
+            margin-top: -5px;
+
+            &.fullscreen {
+                margin-top: 0px;
+                transform: rotate(180deg);
+            }
         }
         .btn_save {
             overflow: hidden;
