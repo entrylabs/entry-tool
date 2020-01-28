@@ -47,7 +47,7 @@ const Navigation = (props) => {
         charts.map((chart, index) => (
             <li
                 key={`chart_${index}`}
-                className={`${Styles[chart.type]} ${index === selected ? Styles.on : ''}`}
+                className={`${Styles[chart.type]} ${index !== selected ? Styles.disabled : ''}`}
             >
                 <a href="#" onClick={onClickItem(index)}>
                     <span className={Styles.blind}>{chartName(chart.type)}</span>
