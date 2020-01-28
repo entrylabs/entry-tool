@@ -52,7 +52,7 @@ const getCategory = (table, xIndex, yIndex, categoryIndexes, type) => {
 
 const ChartLayout = () => {
     const { dataAnalytics } = useContext(DataAnalyticsContext);
-    const { table, charts = [], chartIndex } = dataAnalytics;
+    const { table = [[]], charts = [], chartIndex } = dataAnalytics;
     const chart = charts.length ? charts[chartIndex] : {};
     const { xIndex = -1, yIndex = -1, categoryIndexes = [], type } = chart;
     const xAxis = getXAxis(table);
