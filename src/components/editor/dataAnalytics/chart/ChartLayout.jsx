@@ -84,6 +84,7 @@ const ChartLayout = () => {
                         {/* 그래프 */}
                         <Chart
                             key={`c${generateHash()}`}
+                            legend={{ show: type === 'pie' }}
                             table={table}
                             chart={charts[chartIndex]}
                             size={{

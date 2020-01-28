@@ -56,13 +56,22 @@ const scatterXs = (table, xIndex, yIndex, categoryIndex) =>
     }, {});
 
 const generateOption = (option) => {
-    const { table, type, xIndex, yIndex = -1, categoryIndexes, id, size, tooltip } = option;
+    const {
+        table,
+        type,
+        xIndex,
+        yIndex = -1,
+        categoryIndexes,
+        id,
+        size,
+        tooltip,
+        legend = { show: false },
+    } = option;
 
     let x;
     let xs;
     let columns;
     let axisX = { type: 'category' };
-    const showLegend = type === 'pie';
 
     switch (type) {
         case 'bar':
@@ -94,7 +103,7 @@ const generateOption = (option) => {
 
     return {
         id,
-        legend: { show: showLegend },
+        legend,
         size,
         tooltip,
         bar: {
