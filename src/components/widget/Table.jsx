@@ -11,6 +11,8 @@ import OutsideClick from '../common/outsideClick';
 import 'tui-grid/dist/tui-grid.css';
 import '@entrylabs/modal/dist/entry/entry-modal.css';
 
+import Styles from '@assets/entry/scss/popup.scss';
+
 const LEFT_CLICK = 1;
 const RIGHT_CLICK = 3;
 
@@ -232,7 +234,7 @@ const Table = (props) => {
     const theme = Theme.getStyle('table');
 
     return (
-        <div className={`${theme.Table} ${theme.tui_grid}`} onContextMenu={handleContextMenu}>
+        <div className={`${theme.Table} ${Styles.tui_grid}`} onContextMenu={handleContextMenu}>
             <OutsideClick
                 onOutsideClick={() => {
                     const { current = {} } = gridRef;

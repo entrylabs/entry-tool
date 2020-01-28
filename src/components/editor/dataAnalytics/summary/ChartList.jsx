@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
-import Styles from '@assets/entry/scss/popup.scss';
 import { CHART } from '../Constants';
+
+import Styles from '@assets/entry/scss/popup.scss';
 
 const ChartList = (props) => {
     const { table, charts } = props;
