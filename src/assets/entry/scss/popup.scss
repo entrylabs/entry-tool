@@ -2067,6 +2067,12 @@
     }
 }
 
+.data_detail_wrap.full {
+    position: fixed;
+    left: 0;
+    top: 43px;
+}
+
 .data_detail_wrap {
     position: absolute;
     display: -webkit-box;

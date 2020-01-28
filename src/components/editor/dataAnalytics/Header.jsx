@@ -3,11 +3,11 @@ import Styles from '@assets/entry/scss/popup.scss';
 import Tab from './Tab';
 
 const Header = (props) => {
-    const { selected, tabItems } = props;
+    const { selected, tabItems, onFullScreenClick = () => {} } = props;
 
     return (
         <div className={Styles.detail_top}>
-            <a href="#" role="button" className={Styles.switch_btn}>
+            <a href="#" role="button" className={Styles.switch_btn} onClick={onFullScreenClick}>
                 <span className={Styles.blind}>창 전환</span>
             </a>
             <Tab selected={selected} tabItems={tabItems} />
