@@ -41,7 +41,10 @@ const config = {
 
             {
                 test: /\.(css|scss)$/,
-                include: [path.resolve('./node_modules/')],
+                include: [
+                    path.resolve('./node_modules/'),
+                    path.resolve('./src/assets/entry/scss/widget/insight.css'),
+                ],
                 use: [require.resolve('style-loader'), require.resolve('css-loader')],
             },
             {
