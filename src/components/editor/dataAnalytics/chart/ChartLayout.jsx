@@ -74,7 +74,7 @@ const ChartLayout = () => {
                         {type === 'pie' ? null : (
                             <YAxis
                                 disable={!isZipable(table, xIndex)}
-                                yAxis={yAxis}
+                                yAxisIndex={yAxis}
                                 yIndex={yIndex}
                             />
                         )}

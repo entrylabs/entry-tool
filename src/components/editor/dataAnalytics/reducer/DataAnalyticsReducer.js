@@ -70,6 +70,19 @@ export const dataAnalyticsReducer = (state, action) => {
                 charts,
             };
         }
+        case 'SELECT_Y_AXIS': {
+            const charts = [...state.charts];
+            charts[state.chartIndex] = {
+                ...charts[state.chartIndex],
+                yIndex: action.index,
+                categoryIndexes: [],
+            };
+
+            return {
+                ...state,
+                charts,
+            };
+        }
         default:
             return state;
     }
