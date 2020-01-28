@@ -49,7 +49,10 @@ const config = {
             },
             {
                 test: /\.(css|s[ac]ss)$/i,
-                exclude: [path.resolve('./node_modules/')],
+                exclude: [
+                    path.resolve('./node_modules/'),
+                    path.resolve('./src/assets/entry/scss/widget/insight.css'),
+                ],
                 use: [
                     MiniCssExtractPlugin.loader,
                     {
