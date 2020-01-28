@@ -18,8 +18,6 @@ const TitleInput = (props) => {
         onChangeTitle(value)();
     };
 
-    console.log(title);
-
     return (
         <div className={Styles.input_inner}>
             <input
