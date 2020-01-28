@@ -57,7 +57,7 @@ class Dropdown extends Component {
     }
 
     getPositionOptions() {
-        const { items, autoWidth, animation = true } = this.props;
+        const { items = [], autoWidth, animation = true } = this.props;
         let { length = 1 } = items;
         length = Math.min(length, 5);
         let width = this.DROPDOWN_WIDTH;

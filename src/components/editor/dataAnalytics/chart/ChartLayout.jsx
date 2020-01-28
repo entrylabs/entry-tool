@@ -79,7 +79,7 @@ const ChartLayout = () => {
                             />
                         )}
 
-                        <XAxis xAxis={xAxis} xIndex={xIndex} />
+                        <XAxis xAxisIndex={xAxis} xIndex={xIndex} />
 
                         {/* 그래프 */}
                         <Chart
