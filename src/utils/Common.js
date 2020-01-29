@@ -273,7 +273,7 @@ const makeSummary = (row) => {
     const restRow = row.slice(1);
     const count = restRow.length;
     if (someString(restRow)) {
-        return [row[0], count, '-', '-', '-', '-', '-', '-', '-', '-'];
+        return [row[0], count, '-', '-', '-', '-', '-'];
     }
     const max = Math.max(...restRow);
     const min = Math.min(...restRow);
@@ -285,11 +285,8 @@ const makeSummary = (row) => {
         average,
         getStandardDeviation(restRow, average),
         max,
-        min + ((max - min) / 4) * 3,
-        min + (max - min) / 2,
-        min + (max - min) / 4,
-        min,
         restRow.sort((a, b) => a - b)[Math.floor((restRow.length - 1) / 2)],
+        min,
     ].map((value) => (isString(value) ? value : toFixed(value)));
 };
 export const getSummary = flow(unzip, map(makeSummary));

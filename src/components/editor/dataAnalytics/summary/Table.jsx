@@ -3,18 +3,7 @@ import TableToolTip from '@components/tooltip/TableToolTip';
 import Styles from '@assets/entry/scss/popup.scss';
 const Table = (props) => {
     const { summary } = props;
-    const header = [
-        ' ',
-        '개수',
-        '평균',
-        '표준편차',
-        '최대값',
-        '75%',
-        '50%',
-        '25%',
-        '최소값',
-        '중간값',
-    ];
+    const header = [' ', '개수', '평균', '표준편차', '최대값', '중간값', '최소값'];
 
     const tableBody = (table) =>
         table.map((row, index) => (
