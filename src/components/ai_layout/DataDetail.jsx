@@ -1270,7 +1270,7 @@ class DataDetail extends Component {
                                 </div>
                                 <div className={Styles.chart_list}>
                                     {/* {li(140px) + margin-left: 12} * n(li 갯수) 를 더한 값을 width값에 부여해주세요. */}
-                                    <ul className={Styles.list} style={{ width: '1476px' }}>
+                                    <ul className={Styles.list}>
                                         <li>
                                             {/* 그래프가 없을때 데이터 추가하기 요소가 있어야 합니다. */}
                                             <div className={Styles.data_add_box}>
@@ -1282,6 +1282,18 @@ class DataDetail extends Component {
                                                     데이터를 입력해주세요.
                                                 </p>
                                             </div>
+                                        </li>
+                                        <li>
+                                            {/* 그래프를 넣어주세요. */}
+                                        </li>
+                                        <li>
+                                            {/* 그래프를 넣어주세요. */}
+                                        </li>
+                                        <li>
+                                            {/* 그래프를 넣어주세요. */}
+                                        </li>
+                                        <li>
+                                            {/* 그래프를 넣어주세요. */}
                                         </li>
                                         <li>
                                             {/* 그래프를 넣어주세요. */}
@@ -1548,11 +1560,15 @@ class DataDetail extends Component {
                                 <div className={Styles.title_box}>
                                     <strong>차트</strong>
                                 </div>
-                                <div className={Styles.chart_list}>
+                                <div className={Styles.chart_list} >
                                     {/* {li(140px) + margin-left: 12} * n(li 갯수) 를 더한 값을 width값에 부여해주세요. */}
-                                    <ul className={Styles.list} style={{ width: '1476px' }}>
+                                    <ul className={Styles.list}>
                                         {/* 리스트가 선택되면 on 클래스 추가 */}
                                         <li className={Styles.on}>{/* 그래프를 넣어주세요 */}</li>
+                                        <li>{/* 그래프를 넣어주세요 */}</li>
+                                        <li>{/* 그래프를 넣어주세요 */}</li>
+                                        <li>{/* 그래프를 넣어주세요 */}</li>
+                                        <li>{/* 그래프를 넣어주세요 */}</li>
                                         <li>{/* 그래프를 넣어주세요 */}</li>
                                         <li>{/* 그래프를 넣어주세요 */}</li>
                                         <li>{/* 그래프를 넣어주세요 */}</li>
