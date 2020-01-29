@@ -87,17 +87,19 @@ class Dropdown extends Component {
         this.setState((prev) => {
             const { checkedIndex = [] } = prev;
             const target = checkedIndex.indexOf(index);
+            let isChecked = false;
             if (target > -1) {
                 checkedIndex.splice(target, 1);
             } else {
                 checkedIndex.push(index);
+                isChecked = true;
+            }
+            const { onChange } = this.props;
+            if (onChange) {
+                onChange(item, index, isChecked);
             }
             return { ...prev, checkedIndex };
         });
-        const { onChange } = this.props;
-        if (onChange) {
-            onChange(item, index);
-        }
     };
 
     makeDropdownItem() {
