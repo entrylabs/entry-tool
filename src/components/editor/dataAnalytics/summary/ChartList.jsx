@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
 import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
+import { CommonUtils } from '@utils/Common';
 import { CHART } from '../Constants';
 
 import Styles from '@assets/entry/scss/popup.scss';
+
+const { generateHash } = CommonUtils;
 
 const ChartList = (props) => {
     const { table, charts } = props;
@@ -45,7 +48,7 @@ const ChartList = (props) => {
 
         return charts.map((chart, index) => (
             <li
-                key={`chart_${index}`}
+                key={`chart_${generateHash()}`}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 onClick={handleClickChart(CHART, index)}
@@ -70,9 +73,7 @@ const ChartList = (props) => {
                 <strong>차트</strong>
             </div>
             <div className={Styles.chart_list}>
-                <ul className={Styles.list} style={{ width: `${252 * charts.length}px` }}>
-                    {chartList(charts)}
-                </ul>
+                <ul className={Styles.list}>{chartList(charts)}</ul>
             </div>
         </>
     );

@@ -31,7 +31,7 @@ const getNumberColumnIndexes = (table, banIndexes = []) => {
     return columnIndexes;
 };
 const getXAxis = (table, type) => {
-    if (type === 'bar') {
+    if (type === 'scatter') {
         return getNumberColumnIndexes(table);
     }
     return table[0].map((col, index) => index);
@@ -55,7 +55,7 @@ const ChartLayout = () => {
     const { table = [[]], charts = [], chartIndex } = dataAnalytics;
     const chart = charts.length ? charts[chartIndex] : {};
     const { xIndex = -1, yIndex = -1, categoryIndexes = [], type } = chart;
-    const xAxis = getXAxis(table);
+    const xAxis = getXAxis(table, type);
     const yAxis = getYAxis(table, xIndex);
     const category = getCategory(table, xIndex, yIndex, categoryIndexes, type);
 
@@ -65,15 +65,19 @@ const ChartLayout = () => {
                 {charts.length ? (
                     <>
                         <Legend
-                            disable={!categoryIndexes.length}
+                            disabled={xIndex === -1 || (type === 'scatter' && yIndex === -1)}
                             checkBox={yIndex === -1 && type !== 'pie' && type !== 'scatter'}
-                            categoryIndexes={categoryIndexes}
+                            selectedCategoryIndexes={categoryIndexes}
+                            categoryIndexes={getNumberColumnIndexes(table, [xIndex, yIndex])}
                             category={category}
                         />
 
                         {type === 'pie' ? null : (
                             <YAxis
-                                disable={!isZipable(table, xIndex)}
+                                disable={
+                                    (!isZipable(table, xIndex) && type !== 'scatter') ||
+                                    xIndex === -1
+                                }
                                 yAxisIndex={yAxis}
                                 yIndex={yIndex}
                             />

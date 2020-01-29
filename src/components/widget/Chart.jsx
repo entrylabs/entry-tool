@@ -78,10 +78,11 @@ const generateOption = (option) => {
         case 'line':
             if (yIndex !== -1) {
                 columns = pivotTable(table, xIndex, yIndex, categoryIndexes[0]);
+                x = table[0][xIndex];
             } else {
-                columns = [xIndex, ...categoryIndexes].map((index) => _.unzip(table)[index]);
+                columns = [...categoryIndexes].map((index) => _.unzip(table)[index]);
+                axisX.categories = table.slice(1).map((row) => row[xIndex]);
             }
-            x = table[0][xIndex];
             break;
         case 'pie':
             columns = pieChart(table, xIndex, categoryIndexes[0]);
@@ -176,7 +177,9 @@ const Chart = (props) => {
 
     if (xIndex === -1) {
         content = <div>가로축을 선택해주세요</div>;
-    } else if (isZipable(table, xIndex) && yIndex === -1) {
+    } else if (isZipable(table, xIndex) && yIndex === -1 && type !== 'scatter') {
+        content = <div>세로축 혹은 범례를 선택해주세요</div>;
+    } else if (yIndex === -1 && type === 'scatter') {
         content = <div>세로축을 선택해주세요</div>;
     }
 

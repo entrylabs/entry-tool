@@ -83,6 +83,18 @@ export const dataAnalyticsReducer = (state, action) => {
                 charts,
             };
         }
+        case 'SELECT_LEGEND_AXIS': {
+            const charts = [...state.charts];
+            charts[state.chartIndex] = {
+                ...charts[state.chartIndex],
+                categoryIndexes: action.indexes,
+            };
+
+            return {
+                ...state,
+                charts,
+            };
+        }
         case 'TOGGLE_FULLSCREEN':
             return {
                 ...state,

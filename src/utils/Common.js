@@ -291,7 +291,7 @@ const makeSummary = (row) => {
 };
 export const getSummary = flow(unzip, map(makeSummary));
 
-export const categoryKeys = (table, index) => _.uniq(table.slice(1).map((row) => row[index]));
+export const categoryKeys = (table, index) => (index >= 0 ? _.uniq(table.slice(1).map((row) => row[index])) : []);
 
 export const isZipable = (table, xIndex) =>
     _.uniqBy(table, (row) => row[xIndex]).length !== table.length;
