@@ -2379,6 +2379,7 @@
         overflow: auto;
         border-bottom: 1px solid #979797;
         background-color: #fff;
+        overflow-x: hidden;
 
         &.tui_grid {
             overflow: hidden;
