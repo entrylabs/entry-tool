@@ -9,7 +9,7 @@ const DetailModal = ({ theme, info = {} }) => {
     const { provider, rows = 0, name, fields, updatedAt = '', description } = info;
     const updated = moment(new Date(updatedAt)).format('YYYY-MM-DD');
     return (
-        <>
+        <div className={theme.contents}>
             <strong className={theme.more_sjt}>{name}</strong>
             <ul className={theme.more_info}>
                 <li>{`${CommonUtils.getLang('Menus.data_table_provider')} : ` + `${provider}`}</li>
@@ -31,7 +31,7 @@ const DetailModal = ({ theme, info = {} }) => {
                 </li>
             </ul>
             <p className={theme.more_dsc}>{description}</p>
-        </>
+        </div>
     );
 };
 
@@ -58,14 +58,14 @@ const TableSelectItem = ({ theme, item, upload, openModal }) => {
                     {`${CommonUtils.getLang('Menus.data_table_attribute')} : ` +
                         `${fields.length}${CommonUtils.getLang('Menus.count_ko')}`}
                 </em>
-                <p>{fields.join(', ')}</p>
+                <p className={theme.fields}>{fields.join(', ')}</p>
             </div>
             <div className={theme.info2}>
                 <em>
                     {`${CommonUtils.getLang('Menus.data_table_row')} : ` +
                         `${rows}${CommonUtils.getLang('Menus.count_ko')}`}
                 </em>
-                <p>{summary}</p>
+                <p className={theme.summary}>{summary}</p>
             </div>
             <a href="/" className={theme.text_link} onClick={handleClick}>
                 {CommonUtils.getLang('Menus.read_more')}
