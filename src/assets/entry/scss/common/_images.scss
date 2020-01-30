@@ -190,6 +190,10 @@ input[type='checkbox']:checked + .imbtn_pop_checked:before {
     background: url(#{$imageDir}/ico_pop_draw_thmb.png) no-repeat;
     background-size: 160px auto;
 }
+.imico_pop_table_thmb {
+    background: url(#{$imageDir}/ico_pop_table_thmb.svg) no-repeat;
+    background-size: 160px auto;
+}
 .imico_pop_mywrite_thmb {
     background: url(#{$imageDir}/imico_pop_mywrite_thmb.png) no-repeat;
     background-size: 160px auto;

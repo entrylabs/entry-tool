@@ -2034,6 +2034,13 @@
                         letter-spacing: -0.3px;
                         line-height: 38px;
                         cursor: pointer;
+                        .text {
+                            width: 125px;
+                            text-overflow:ellipsis;
+                            white-space:nowrap;
+                            word-wrap:normal;
+                            overflow:hidden;
+                        }
                     }
 
                     .select_link:after {

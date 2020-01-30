@@ -12,7 +12,7 @@ export default ({ theme, goDraw }) => {
         </a>`;
     return (
         <div className={theme.draw_box}>
-            <div className={classname(theme.thmb, theme.imico_pop_draw_thmb)}>
+            <div className={classname(theme.thmb, theme.imico_pop_table_thmb)}>
                 &nbsp;
             </div>
             <p className={theme.draw_dsc}>
