@@ -88,14 +88,12 @@ const Table = (props) => {
 
     const handleNameChange = (index) => (name) => {
         if (name) {
-            debugger;
             setTable((table) => {
                 const currentIndex = index;
                 const prevValue = table[0][currentIndex];
                 const nextValue = name;
                 eventEmitter.undoRedoController.saveAction({
                     updateFunc: () => {
-                        debugger;
                         table[0][currentIndex] = nextValue;
                         forceUpdateTable();
                     },
