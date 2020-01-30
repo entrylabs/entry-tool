@@ -566,7 +566,7 @@ class DataDetail extends Component {
                                                 <i />
                                             </span>
                                         </div>
-                                        <div className={Styles.lehend_scroll}>
+                                        <div className={Styles.legend_scroll}>
                                         {/* 범례 체크박스에 선택되면 활성화 시켜주세요 */}
                                             <ul className={Styles.legend_list}>
                                                 <li>

@@ -2775,9 +2775,9 @@
             .tooltip_box .chk_box input[type='checkbox']:checked + label:before {
                 background-image: url('#{$imageDir}/icon_checkbox_on.svg');
             }
-            .lehend_scroll {
+            .legend_scroll {
                 overflow-y: auto;
-                max-height: 202px; 
+                max-height: 202px;
             }
             .legend_list {
                 padding: 2px 0 12px;

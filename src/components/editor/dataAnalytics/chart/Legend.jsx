@@ -63,21 +63,24 @@ const Legend = (props) => {
                     {title}
                 </a>
                 {labels.length && selectedCategoryIndexes.length ? (
-                    <ul className={Styles.legend_list}>
-                        {labels.map((item, index) => (
-                            <li key={`cate_${generateHash()}`}>
-                                <span
-                                    className={Styles.color}
-                                    style={{
-                                        backgroundColor: GRAPH_COLOR[index % GRAPH_COLOR.length],
-                                    }}
-                                >
-                                    &nbsp;
-                                </span>
-                                {item[0]}
-                            </li>
-                        ))}
-                    </ul>
+                    <div className={Styles.legend_scroll}>
+                        <ul className={Styles.legend_list}>
+                            {labels.map((item, index) => (
+                                <li key={`cate_${generateHash()}`}>
+                                    <span
+                                        className={Styles.color}
+                                        style={{
+                                            backgroundColor:
+                                                GRAPH_COLOR[index % GRAPH_COLOR.length],
+                                        }}
+                                    >
+                                        &nbsp;
+                                    </span>
+                                    {item[0]}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 ) : null}
             </div>
 
