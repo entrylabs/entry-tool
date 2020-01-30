@@ -34,13 +34,11 @@ const ChartList = (props) => {
                 <li onClick={handleClickChart(CHART, 0)}>
                     <div className={Styles.data_add_box}>
                         <a href="#" onClick={(e) => e.preventDefault()}>
-                            <span className={Styles.blind}>데이터 추가하기</span>
+                            <span className={Styles.blind}>
+                                {CommonUtils.getLang('DataAnalytics.add_data')}}
+                            </span>
                         </a>
-                        <p>
-                            추가된 차트가 없습니다.
-                            <br />
-                            차트를 생성해주세요.
-                        </p>
+                        <p>{CommonUtils.getLang('DataAnalytics.add_chart_alert')}</p>
                     </div>
                 </li>
             );
@@ -70,7 +68,7 @@ const ChartList = (props) => {
     return (
         <>
             <div className={Styles.title_box}>
-                <strong>차트</strong>
+                <strong>{CommonUtils.getLang('DataAnalytics.chart')}</strong>
             </div>
             <div className={Styles.chart_list}>
                 <ul className={Styles.list}>{chartList(charts)}</ul>

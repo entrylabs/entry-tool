@@ -44,11 +44,12 @@ const ChartEditor = () => {
     };
 
     const selectedChart = charts[selected] || {};
-    const chartTitle = selectedChart.title || `${title}_${'차트제목'}`;
+    const chartTitle =
+        selectedChart.title || `${title}_${CommonUtils.getLang('DataAnalytics.chart_title')}`;
 
     return (
         <section className={`${Styles.detail_cont} ${Styles.chart_state}`}>
-            <h2 className={Styles.blind}>차트</h2>
+            <h2 className={Styles.blind}>{CommonUtils.getLang('DataAnalytics.chart')}</h2>
             <Navigation selected={selected} charts={charts} onClickItem={handleClickItem} />
             <div className={Styles.content_box}>
                 <div className={Styles.input_box}>
@@ -64,7 +65,7 @@ const ChartEditor = () => {
                         />
                     </div>
                     <a href="#" className={Styles.chart_del} onClick={handleClickDelete}>
-                        차트 삭제
+                        {CommonUtils.getLang('DataAnalytics.remove_chart')}
                     </a>
                 </div>
                 <ChartLayout />

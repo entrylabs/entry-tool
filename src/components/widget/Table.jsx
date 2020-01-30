@@ -4,7 +4,7 @@ import Grid from '@toast-ui/react-grid';
 import { Prompt } from '@entrylabs/modal';
 
 import Theme from '@utils/Theme';
-import { getHeader, getData } from '@utils/Common';
+import { CommonUtils, getHeader, getData } from '@utils/Common';
 import ContextMenu from '../widget/contextMenu';
 import OutsideClick from '../common/outsideClick';
 
@@ -122,7 +122,7 @@ const Table = (props) => {
             const rowIndex = instance.getIndexOfRow(rowKey) + 1;
             return [
                 {
-                    text: '위에 행 추가하기',
+                    text: CommonUtils.getLang('DataAnalytics.add_row_above'),
                     callback: () => {
                         setTable((table) => {
                             table.splice(rowIndex, 0, Array(table[0].length).fill(0));
@@ -131,7 +131,7 @@ const Table = (props) => {
                     },
                 },
                 {
-                    text: '아래에 행 추가하기',
+                    text: CommonUtils.getLang('DataAnalytics.add_row_below'),
                     callback: () => {
                         setTable((table) => {
                             table.splice(rowIndex + 1, 0, Array(table[0].length).fill(0));
@@ -140,7 +140,7 @@ const Table = (props) => {
                     },
                 },
                 {
-                    text: '행 삭제하기',
+                    text: CommonUtils.getLang('DataAnalytics.delete_row'),
                     callback: () => {
                         setTable((table) => {
                             table.splice(rowIndex, 1);
@@ -153,7 +153,7 @@ const Table = (props) => {
             const colIndex = instance.getIndexOfColumn(columnName);
             return [
                 {
-                    text: '왼쪽에 열 추가하기',
+                    text: CommonUtils.getLang('DataAnalytics.add_property_left'),
                     callback: () => {
                         setShowPrompt({
                             showPrompt: true,
@@ -162,7 +162,7 @@ const Table = (props) => {
                     },
                 },
                 {
-                    text: '오른쪽에 열 추가하기',
+                    text: CommonUtils.getLang('DataAnalytics.add_property_right'),
                     callback: () => {
                         setShowPrompt({
                             showPrompt: true,
@@ -171,7 +171,7 @@ const Table = (props) => {
                     },
                 },
                 {
-                    text: '열 삭제하기',
+                    text: CommonUtils.getLang('DataAnalytics.delete_attribute'),
                     callback: () => {
                         setTable((table) =>
                             table.map((row) => {
@@ -271,9 +271,9 @@ const Table = (props) => {
             )}
             {showPrompt && (
                 <Prompt
-                    content="content"
+                    content={CommonUtils.getLang('DataAnalytics.enter_attribute_name')}
                     defaultValue={promptText}
-                    title="title"
+                    title={CommonUtils.getLang('DataAnalytics.attribute')}
                     onEvent={(event) => {
                         if (promptFunction) {
                             promptFunction(event);
@@ -284,9 +284,11 @@ const Table = (props) => {
                         }
                     }}
                     options={{
-                        placeholder: '',
-                        negativeButtonText: 'cancel',
-                        positiveButtonText: 'ok',
+                        placeholder: CommonUtils.getLang(
+                            'DataAnalytics.placeholder_attribute_name'
+                        ),
+                        negativeButtonText: CommonUtils.getLang('DataAnalytics.cancel'),
+                        positiveButtonText: CommonUtils.getLang('DataAnalytics.confirm'),
                     }}
                 />
             )}

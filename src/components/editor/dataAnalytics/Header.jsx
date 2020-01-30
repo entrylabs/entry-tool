@@ -1,6 +1,7 @@
 import React from 'react';
-import Styles from '@assets/entry/scss/popup.scss';
 import Tab from './Tab';
+import { CommonUtils } from '@utils/Common';
+import Styles from '@assets/entry/scss/popup.scss';
 
 const Header = (props) => {
     const { selected, tabItems, isFullScreen = false, onFullScreenClick = () => {} } = props;
@@ -23,7 +24,7 @@ const Header = (props) => {
             </a>
             <Tab selected={selected} tabItems={tabItems} />
             <a href="#" className={Styles.btn_save} role="button">
-                저장하기
+                {CommonUtils.getLang('DataAnalytics.save')}
             </a>
         </div>
     );

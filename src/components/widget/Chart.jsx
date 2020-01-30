@@ -152,7 +152,9 @@ const Chart = (props) => {
         return (
             <div className={Styles.graph_cont}>
                 <div id={id} style={{ height: '100%' }}>
-                    <div className={Styles.alert}>차트 표현이 불가능합니다.</div>
+                    <div className={Styles.alert}>
+                        {CommonUtils.getLang('DataAnalytics.unable_to_express_chart')}
+                    </div>
                 </div>
             </div>
         );
@@ -178,15 +180,25 @@ const Chart = (props) => {
     let content = null;
 
     if (!categoryIndexes.length) {
-        content = <div className={Styles.alert}>범례를 선택해주세요</div>;
+        content = (
+            <div className={Styles.alert}>{CommonUtils.getLang('DataAnalytics.select_legend')}</div>
+        );
     }
 
     if (xIndex === -1) {
-        content = <div className={Styles.alert}>가로축을 선택해주세요</div>;
+        content = (
+            <div className={Styles.alert}>{CommonUtils.getLang('DataAnalytics.select_x_axis')}</div>
+        );
     } else if (isZipable(table, xIndex) && yIndex === -1 && type !== 'scatter') {
-        content = <div className={Styles.alert}>세로축 혹은 범례를 선택해주세요</div>;
+        content = (
+            <div className={Styles.alert}>
+                {CommonUtils.getLang('DataAnalytics.select_y_axis_or_legend')}
+            </div>
+        );
     } else if (yIndex === -1 && type === 'scatter') {
-        content = <div className={Styles.alert}>세로축을 선택해주세요</div>;
+        content = (
+            <div className={Styles.alert}>{CommonUtils.getLang('DataAnalytics.select_y_axis')}</div>
+        );
     }
 
     return (

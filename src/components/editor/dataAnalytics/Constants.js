@@ -7,9 +7,9 @@ export const TAB_NAME = {
     CHART,
 };
 export const TAB_ITEMS = [
-    { name: '요약', value: SUMMARY },
-    { name: '테이블', value: TABLE },
-    { name: '차트', value: CHART },
+    { name: 'DataAnalytics.dashboard', value: SUMMARY },
+    { name: 'DataAnalytics.table', value: TABLE },
+    { name: 'DataAnalytics.chart', value: CHART },
 ];
 export const GRAPH_COLOR = [
     '#4f80ff',

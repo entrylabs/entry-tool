@@ -1,6 +1,7 @@
 import React, { useContext, useState, useRef } from 'react';
 import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
 import Dropdown from '@components/widget/dropdown';
+import { CommonUtils } from '@utils/Common';
 
 import Styles from '@assets/entry/scss/popup.scss';
 
@@ -33,7 +34,7 @@ const XAxis = (props) => {
         <>
             <div className={Styles.x_legend_box}>
                 <a ref={axisRef} href="#" className={Styles.common_legend} onClick={handleClick}>
-                    {xIndex === -1 ? '가로축' : table[0][xIndex]}
+                    {xIndex === -1 ? CommonUtils.getLang('DataAnalytics.x_axis') : table[0][xIndex]}
                 </a>
             </div>
             {showDropdown && (

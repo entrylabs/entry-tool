@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { DataAnalyticsContext } from './context/DataAnalyticsContext';
+import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/entry/scss/popup.scss';
 
 const Tab = (props) => {
@@ -23,7 +24,7 @@ const Tab = (props) => {
                     key={`tab_${index}`}
                 >
                     <a href="#" onClick={handleClick(item.value)}>
-                        {item.name}
+                        {CommonUtils.getLang(item.name)}
                     </a>
                 </li>
             ))}

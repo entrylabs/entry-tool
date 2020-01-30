@@ -26,7 +26,7 @@ const Legend = (props) => {
         : category.map((name, index) => [name, index]);
     const title =
         checkBox || !table[0][selectedCategoryIndexes[0]]
-            ? '범례'
+            ? CommonUtils.getLang('DataAnalytics.legend')
             : table[0][selectedCategoryIndexes[0]];
 
     const handleSelectDropDown = (value) => {

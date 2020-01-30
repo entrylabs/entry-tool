@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
 import OutsideClick from '@components/common/outsideClick';
 import SelectChartDropdown from './SelectChartDropdown';
+import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/entry/scss/popup.scss';
 
 const Navigation = (props) => {
@@ -12,15 +13,15 @@ const Navigation = (props) => {
     const chartName = (chartType) => {
         switch (chartType) {
             case 'bar':
-                return '막대 그래프';
+                return CommonUtils.getLang('DataAnalytics.bar');
             case 'line':
-                return '꺽은선 그래프';
+                return CommonUtils.getLang('DataAnalytics.line');
             case 'pie':
-                return '원형 그래프';
+                return CommonUtils.getLang('DataAnalytics.pie');
             case 'scatter':
-                return '점 그래프';
+                return CommonUtils.getLang('DataAnalytics.scatter');
             case 'plus':
-                return '추가';
+                return CommonUtils.getLang('DataAnalytics.plus');
             default:
                 return '';
         }

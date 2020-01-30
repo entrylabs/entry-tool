@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CommonUtils } from '@utils/Common';
 
 import Styles from '@assets/entry/scss/popup.scss';
 
@@ -18,40 +19,40 @@ const TableToolTip = () => {
             <div className={Styles.tooltip_box} style={{ display: showHelp }}>
                 <div className={Styles.tooltip_inner}>
                     <strong className={Styles.sjt}>
-                        숫자가 아닌 값이 포함된 속성은 개수만 확인할 수 있습니다.
+                        {CommonUtils.getLang('DataAnalytics.data_alert')}
                     </strong>
                     <ul className={Styles.tooltip_list}>
                         <li>
-                            <em className={Styles.tit}>평균</em>
+                            <em className={Styles.tit}>
+                                {CommonUtils.getLang('DataAnalytics.average')}
+                            </em>
                             <p className={Styles.dsc}>
-                                해당 속성의 모든 값을 더한 후 속성의 개수 만큼 나눈 값
+                                {CommonUtils.getLang('DataAnalytics.average_explain')}
                             </p>
                         </li>
                         <li>
-                            <em className={Styles.tit}>표준 편차</em>
+                            <em className={Styles.tit}>
+                                {CommonUtils.getLang('DataAnalytics.standard_deviation')}
+                            </em>
                             <p className={Styles.dsc}>
-                                데이터가평균을 중심으로 얼마나 퍼져있는지 알려주는 값.
-                                <br />
-                                0에 가까울 수록 값들이 평균 근처에 집중되어 있다는 것을 의미
+                                {CommonUtils.getLang('DataAnalytics.standard_deviation_explain')}
                             </p>
                         </li>
                         <li>
-                            <em className={Styles.tit}>최댓값/최솟값</em>
-                            <p className={Styles.dsc}>해당 속성의 가장 큰 값과 가장 작은 값</p>
-                        </li>
-                        <li>
-                            <em className={Styles.tit}>하위 25, 50, 75%</em>
+                            <em className={Styles.tit}>
+                                {CommonUtils.getLang('DataAnalytics.maximum')}/
+                                {CommonUtils.getLang('DataAnalytics.minimum')}
+                            </em>
                             <p className={Styles.dsc}>
-                                해당 속성의 최솟값을 0%, 최댓값을
-                                <br />
-                                100%라고 치환했을 때 각 크기에 해당하는 값
+                                {CommonUtils.getLang('DataAnalytics.maximum_minimum_explain')}
                             </p>
                         </li>
                         <li>
-                            <em className={Styles.tit}>중간값</em>
+                            <em className={Styles.tit}>
+                                {CommonUtils.getLang('DataAnalytics.median')}
+                            </em>
                             <p className={Styles.dsc}>
-                                해당 속성의 모든 값을 크기순으로 배열했을 때<br />
-                                전체의 중앙에 위치하는 값
+                                {CommonUtils.getLang('DataAnalytics.median_explain')}
                             </p>
                         </li>
                     </ul>

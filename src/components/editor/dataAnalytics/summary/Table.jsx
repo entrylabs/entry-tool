@@ -1,9 +1,19 @@
 import React from 'react';
 import TableToolTip from '@components/tooltip/TableToolTip';
+import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/entry/scss/popup.scss';
+
 const Table = (props) => {
     const { summary } = props;
-    const header = [' ', '개수', '평균', '표준편차', '최대값', '중간값', '최소값'];
+    const header = [
+        ' ',
+        'DataAnalytics.count',
+        'DataAnalytics.average',
+        'DataAnalytics.standard_deviation',
+        'DataAnalytics.maximum',
+        'DataAnalytics.median',
+        'DataAnalytics.minimum',
+    ];
 
     const tableBody = (table) =>
         table.map((row, index) => (
@@ -27,10 +37,10 @@ const Table = (props) => {
             <th scope="col" key={`summary_th_${index}`}>
                 {index ? (
                     <div className={Styles.headtit} key={`summary_th_${index}_div`}>
-                        {name}
+                        {CommonUtils.getLang(name)}
                     </div>
                 ) : (
-                    name
+                    CommonUtils.getLang(name)
                 )}
             </th>
         ));
@@ -38,7 +48,7 @@ const Table = (props) => {
     return (
         <>
             <div className={Styles.title_box}>
-                <strong>테이블</strong>
+                <strong>{CommonUtils.getLang('DataAnalytics.table')}</strong>
                 <TableToolTip />
             </div>
             <div className={Styles.table_box}>

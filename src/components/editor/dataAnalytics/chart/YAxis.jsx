@@ -1,6 +1,7 @@
 import React, { useContext, useState, useRef } from 'react';
 import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
 import Dropdown from '@components/widget/dropdown';
+import { CommonUtils } from '@utils/Common';
 
 import Styles from '@assets/entry/scss/popup.scss';
 
@@ -48,12 +49,14 @@ const YAxis = (props) => {
                     ref={axisRef}
                 >
                     {yIndex === -1 ? (
-                        '세로축'
+                        CommonUtils.getLang('DataAnalytics.y_axis')
                     ) : (
                         <>
                             {table[0][yIndex]}
                             <a href="#" className={Styles.close_btn} onClick={handleDeleteClick}>
-                                <span className={Styles.blind}>삭제</span>
+                                <span className={Styles.blind}>
+                                    {CommonUtils.getLang('DataAnalytics.delete')}
+                                </span>
                             </a>
                         </>
                     )}
