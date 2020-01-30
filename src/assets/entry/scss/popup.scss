@@ -929,6 +929,17 @@
                         }
                         p {
                             margin-top: 4px;
+                            &.fields {
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                overflow: hidden;
+                            }
+                            &.summary {
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                display: -webkit-box;
+                                line-height: 1.2em;
+                            }
                         }
                     }
                     .info2 {
@@ -1857,6 +1868,7 @@
 
     .more_popup {
         overflow: hidden;
+        overflow-y: auto;
         position: absolute;
         left: 50%;
         top: 50%;
@@ -1887,57 +1899,55 @@
                 content: '';
             }
         }
-
-        .more_sjt {
-            display: block;
-            margin-right: 32px;
-            font-size: 18px;
-            font-weight: 600;
-            color: #2c313d;
-            letter-spacing: -0.64px;
-            line-height: 20px;
-        }
-
-        .more_info {
-            margin-top: 12px;
-            font-size: 12px;
-            color: #2c313d;
-            line-height: 18px;
-            letter-spacing: -0.5px;
-        }
-
-        .more_sub_info {
-            margin: 8px -16px 0;
-            padding: 10px 16px;
-            background-color: #f4f4f4;
-            font-size: 12px;
-            color: #2c313d;
-            line-height: 18px;
-            letter-spacing: -0.5px;
-
-            li {
-                margin-top: 6px;
-            }
-
-            li:first-child {
-                margin-top: 0;
-            }
-
-            strong {
+        .contents {
+            .more_sjt {
+                display: block;
+                margin-right: 32px;
+                font-size: 18px;
                 font-weight: 600;
+                color: #2c313d;
+                letter-spacing: -0.64px;
+                line-height: 20px;
             }
-        }
 
-        .more_dsc {
-            overflow: hidden;
-            overflow-y: auto;
-            margin-top: 11px;
-            max-height: 172px;
-            font-size: 14px;
-            color: #2c313d;
-            word-break: break-all;
-            letter-spacing: -0.5px;
-            line-height: 22px;
+            .more_info {
+                margin-top: 12px;
+                font-size: 12px;
+                color: #2c313d;
+                line-height: 18px;
+                letter-spacing: -0.5px;
+            }
+
+            .more_sub_info {
+                margin: 8px -16px 0;
+                padding: 10px 16px;
+                background-color: #f4f4f4;
+                font-size: 12px;
+                color: #2c313d;
+                line-height: 18px;
+                letter-spacing: -0.5px;
+
+                li {
+                    margin-top: 6px;
+                }
+
+                li:first-child {
+                    margin-top: 0;
+                }
+
+                strong {
+                    font-weight: 600;
+                }
+            }
+
+            .more_dsc {
+                margin-top: 11px;
+                font-size: 14px;
+                color: #2c313d;
+                word-break: break-all;
+                letter-spacing: -0.5px;
+                line-height: 22px;
+            }
         }
     }
     .center {
