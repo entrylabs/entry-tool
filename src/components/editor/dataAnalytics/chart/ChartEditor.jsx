@@ -44,7 +44,7 @@ const ChartEditor = () => {
     };
 
     const selectedChart = charts[selected] || {};
-    const chartTitle = selectedChart.title;
+    const chartTitle = selectedChart.title || `${title}_${'차트제목'}`;
 
     return (
         <section className={`${Styles.detail_cont} ${Styles.chart_state}`}>

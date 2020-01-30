@@ -149,7 +149,13 @@ const Chart = (props) => {
     const id = `c${generateHash()}`;
 
     if (!isDrawable(table)) {
-        return <div>차트 표현이 불가능합니다.</div>;
+        return (
+            <div className={Styles.graph_cont}>
+                <div id={id} style={{ height: '100%' }}>
+                    <div className={Styles.alert}>차트 표현이 불가능합니다.</div>
+                </div>
+            </div>
+        );
     }
 
     useEffect(() => {
