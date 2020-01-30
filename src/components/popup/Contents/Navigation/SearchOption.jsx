@@ -43,7 +43,9 @@ export default ({ options = [], onSelect, setDropdown, isOpenDefault, staticName
     return (
         <>
             <div className={theme.pop_selectbox} onClick={openDropDown}>
-                <div className={dropdownClass}>{text}</div>
+                <div className={dropdownClass}>
+                    <div className={theme.text}>{text}</div>
+                </div>
             </div>
         </>
     );
