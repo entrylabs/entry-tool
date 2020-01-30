@@ -2840,6 +2840,20 @@
             height: 397px;
             background-color: #fff;
             z-index: 10;
+
+            .alert {
+                font-family: NanumGothicOTF;
+                font-size: 14px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1.57;
+                letter-spacing: -0.5px;
+                text-align: center;
+                color: #4f80ff;
+                height: 397px;
+                line-height: 397px;
+            }
         }
         .legend_box .legend_link {
             font-size: 14px;

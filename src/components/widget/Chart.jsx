@@ -172,20 +172,22 @@ const Chart = (props) => {
     let content = null;
 
     if (!categoryIndexes.length) {
-        content = <div>범례를 선택해주세요</div>;
+        content = <div className={Styles.alert}>범례를 선택해주세요</div>;
     }
 
     if (xIndex === -1) {
-        content = <div>가로축을 선택해주세요</div>;
+        content = <div className={Styles.alert}>가로축을 선택해주세요</div>;
     } else if (isZipable(table, xIndex) && yIndex === -1 && type !== 'scatter') {
-        content = <div>세로축 혹은 범례를 선택해주세요</div>;
+        content = <div className={Styles.alert}>세로축 혹은 범례를 선택해주세요</div>;
     } else if (yIndex === -1 && type === 'scatter') {
-        content = <div>세로축을 선택해주세요</div>;
+        content = <div className={Styles.alert}>세로축을 선택해주세요</div>;
     }
 
     return (
         <div className={Styles.graph_cont}>
-            <div id={id}>{content}</div>
+            <div id={id} style={{ height: '100%' }}>
+                {content}
+            </div>
         </div>
     );
 };
