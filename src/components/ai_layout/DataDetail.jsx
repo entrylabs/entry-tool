@@ -510,7 +510,7 @@ class DataDetail extends Component {
                                         <a href="#" className={Styles.common_legend}>범례</a>
                                         {/* 범례 링크가 눌리면 display: block 처리 해주세요. */}
                                         <div className={Styles.tooltip_box} style={{ display: 'block' }}>
-                                            <div className={Styles.tooltip_inner}>
+                                            <div className={Styles.tooltip_inner} style= {{ overflowY: 'auto', maxHeight: '235px' }}>
                                                 <ul className={Styles.select_list}>
                                                     <li className={Styles.list_item}>
                                                         <div className={Styles.chk_box}>
@@ -530,29 +530,110 @@ class DataDetail extends Component {
                                                             <label htmlFor="chk3">범례3</label>
                                                         </div>
                                                     </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.chk_box}>
+                                                            <input type="checkbox" id="chk4" name="chk4" />
+                                                            <label htmlFor="chk4">범례4</label>
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.chk_box}>
+                                                            <input type="checkbox" id="chk5" name="chk5" />
+                                                            <label htmlFor="chk5">범례5</label>
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.chk_box}>
+                                                            <input type="checkbox" id="chk6" name="chk6" />
+                                                            <label htmlFor="chk6">범례6</label>
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.chk_box}>
+                                                            <input type="checkbox" id="chk7" name="chk7" />
+                                                            <label htmlFor="chk7">범례7</label>
+                                                        </div>
+                                                    </li>
+                                                    <li className={Styles.list_item}>
+                                                        <div className={Styles.chk_box}>
+                                                            <input type="checkbox" id="chk8" name="chk8" />
+                                                            <label htmlFor="chk8">범례5</label>
+                                                        </div>
+                                                    </li>
                                                 </ul>
                                             </div>
                                             <span className={Styles.arr}>
                                                 <i />
                                             </span>
                                         </div>
+                                        <div className={Styles.lehend_scroll}>
                                         {/* 범례 체크박스에 선택되면 활성화 시켜주세요 */}
-                                        <ul className={Styles.legend_list}>
-                                            <li>
-                                                {/* 그래프 색상 값을 넣어주세요. */}
-                                                <span 
-                                                    className={Styles.color}
-                                                    style={{ backgroundColor: '#4f80ff' }}
-                                                >&nbsp;</span>예시1
-                                            </li>
-                                            <li>
-                                                {/* 그래프 색상 값을 넣어주세요. */}
-                                                <span 
-                                                    className={Styles.color}
-                                                    style={{ backgroundColor: '#ffb500' }}
-                                                >&nbsp;</span>예시2
-                                            </li>
-                                        </ul>    
+                                            <ul className={Styles.legend_list}>
+                                                <li>
+                                                    {/* 그래프 색상 값을 넣어주세요. */}
+                                                    <span 
+                                                        className={Styles.color}
+                                                        style={{ backgroundColor: '#4f80ff' }}
+                                                    >&nbsp;</span>예시1
+                                                </li>
+                                                <li>
+                                                    {/* 그래프 색상 값을 넣어주세요. */}
+                                                    <span 
+                                                        className={Styles.color}
+                                                        style={{ backgroundColor: '#ffb500' }}
+                                                    >&nbsp;</span>예시2
+                                                </li>
+                                                <li>
+                                                    {/* 그래프 색상 값을 넣어주세요. */}
+                                                    <span 
+                                                        className={Styles.color}
+                                                        style={{ backgroundColor: '#ffb500' }}
+                                                    >&nbsp;</span>예시3
+                                                </li>
+                                                <li>
+                                                    {/* 그래프 색상 값을 넣어주세요. */}
+                                                    <span 
+                                                        className={Styles.color}
+                                                        style={{ backgroundColor: '#ffb500' }}
+                                                    >&nbsp;</span>예시2
+                                                </li>
+                                                <li>
+                                                    {/* 그래프 색상 값을 넣어주세요. */}
+                                                    <span 
+                                                        className={Styles.color}
+                                                        style={{ backgroundColor: '#ffb500' }}
+                                                    >&nbsp;</span>예시3
+                                                </li>
+                                                <li>
+                                                    {/* 그래프 색상 값을 넣어주세요. */}
+                                                    <span 
+                                                        className={Styles.color}
+                                                        style={{ backgroundColor: '#ffb500' }}
+                                                    >&nbsp;</span>예시2
+                                                </li>
+                                                <li>
+                                                    {/* 그래프 색상 값을 넣어주세요. */}
+                                                    <span 
+                                                        className={Styles.color}
+                                                        style={{ backgroundColor: '#ffb500' }}
+                                                    >&nbsp;</span>예시3
+                                                </li>
+                                                <li>
+                                                    {/* 그래프 색상 값을 넣어주세요. */}
+                                                    <span 
+                                                        className={Styles.color}
+                                                        style={{ backgroundColor: '#ffb500' }}
+                                                    >&nbsp;</span>예시2
+                                                </li>
+                                                <li>
+                                                    {/* 그래프 색상 값을 넣어주세요. */}
+                                                    <span 
+                                                        className={Styles.color}
+                                                        style={{ backgroundColor: '#ffb500' }}
+                                                    >&nbsp;</span>예시3
+                                                </li>
+                                            </ul> 
+                                        </div>  
                                     </div>
 
                                     {/* y축 범례 비활성화 경우 disabled 클래스 추가 */}

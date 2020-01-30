@@ -2314,6 +2314,9 @@
             background-color: #f9f9f9;
             color: #cbcbcb;
         }
+        &.chart_state .cont_inner {
+            overflow: visible;
+        }
     }
     .cont_inner {
         overflow: auto;
@@ -2677,6 +2680,7 @@
             box-sizing: border-box;
             padding-top: 220px;
             background-color: #f9f9f9;
+            border: 0;
             height: auto;
             min-height: 552px;
             border-radius: 6px;
@@ -2770,6 +2774,10 @@
             }
             .tooltip_box .chk_box input[type='checkbox']:checked + label:before {
                 background-image: url('#{$imageDir}/icon_checkbox_on.svg');
+            }
+            .lehend_scroll {
+                overflow-y: auto;
+                max-height: 202px; 
             }
             .legend_list {
                 padding: 2px 0 12px;
@@ -2882,12 +2890,12 @@
             vertical-align: top;
         }
         .legend_box .legend_list {
-            padding-top: 5px;
+            padding-top: 2px;
         }
         .legend_box .legend_list li {
             overflow: hidden;
             height: 16px;
-            margin-top: 8px;
+            margin-top: 10px;
             font-size: 12px;
             font-weight: 600;
             color: #2c313d;
@@ -2903,7 +2911,7 @@
         .legend_box .tooltip_box {
             display: none;
             width: 102px;
-            left: 48px;
+            left: 106px;
             top: 48px;
         }
         .legend_box .tooltip_box .chk_box {
