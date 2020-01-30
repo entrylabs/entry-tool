@@ -7,7 +7,7 @@ import { DataAnalyticsContext } from './context/DataAnalyticsContext';
 import { SUMMARY, TABLE, CHART, TAB_ITEMS } from './Constants';
 import Styles from '@assets/entry/scss/popup.scss';
 
-const DataAnalyticsEditor = () => {
+const DataAnalyticsEditor = ({ onSummitDataAnalytics }) => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { tab, table, isFullScreen } = dataAnalytics;
 
@@ -51,6 +51,7 @@ const DataAnalyticsEditor = () => {
                 tabItems={TAB_ITEMS}
                 isFullScreen={isFullScreen}
                 onFullScreenClick={handleFullScreenClick}
+                onSummitDataAnalytics={onSummitDataAnalytics}
             />
             {content}
         </div>

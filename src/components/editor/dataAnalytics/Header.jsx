@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Tab from './Tab';
+import { DataAnalyticsContext } from './context/DataAnalyticsContext';
 import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/entry/scss/popup.scss';
 
 const Header = (props) => {
-    const { selected, tabItems, isFullScreen = false, onFullScreenClick = () => {} } = props;
+    const {
+        selected,
+        tabItems,
+        isFullScreen = false,
+        onFullScreenClick = () => {},
+        onSummitDataAnalytics,
+    } = props;
+    const { dataAnalytics } = useContext(DataAnalyticsContext);
+    const handleClick = (event) => {
+        event.preventDefault();
+        onSummitDataAnalytics(dataAnalytics);
+    };
 
     return (
         <div
@@ -23,7 +35,7 @@ const Header = (props) => {
                 <span className={Styles.blind}>창 전환</span>
             </a>
             <Tab selected={selected} tabItems={tabItems} />
-            <a href="#" className={Styles.btn_save} role="button">
+            <a href="#" className={Styles.btn_save} role="button" onClick={handleClick}>
                 {CommonUtils.getLang('DataAnalytics.save')}
             </a>
         </div>

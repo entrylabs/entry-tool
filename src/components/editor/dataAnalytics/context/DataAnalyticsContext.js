@@ -6,8 +6,9 @@ export const DataAnalyticsContext = createContext();
 
 const DataAnalyticsContextProvider = (props) => {
     const { analytics = {} } = props;
-    const { title = '', table = [[]], charts = [] } = analytics;
+    const { title = '', table = [[]], charts = [], id } = analytics;
     const [dataAnalytics, dispatch] = useReducer(dataAnalyticsReducer, {
+        id,
         title,
         table,
         charts,
@@ -17,10 +18,11 @@ const DataAnalyticsContextProvider = (props) => {
     });
 
     useEffect(() => {
-        const { title = '', table = [[]], charts = [] } = analytics;
+        const { title = '', table = [[]], charts = [], id } = analytics;
         dispatch({
             type: 'SET_DATA',
             payload: {
+                id,
                 title,
                 table,
                 charts,
