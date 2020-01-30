@@ -238,6 +238,17 @@ export const CommonUtils = {
     distinct(item, index, self) {
         return self.indexOf(item) === index;
     },
+    getOrderedName(name, array = []) {
+        const maxNumber = _.max(
+            _.map(array, (item) => {
+                if (item.slice(0, name.length) !== name) {
+                    return 0;
+                }
+                return Number(item.slice(name.length));
+            })
+        );
+        return name + (maxNumber + 1);
+    },
 };
 
 export function FormAsyncException(obj) {
@@ -291,7 +302,8 @@ const makeSummary = (row) => {
 };
 export const getSummary = flow(unzip, map(makeSummary));
 
-export const categoryKeys = (table, index) => (index >= 0 ? _.uniq(table.slice(1).map((row) => row[index])) : []);
+export const categoryKeys = (table, index) =>
+    (index >= 0 ? _.uniq(table.slice(1).map((row) => row[index])) : []);
 
 export const isZipable = (table, xIndex) =>
     _.uniqBy(table, (row) => row[xIndex]).length !== table.length;

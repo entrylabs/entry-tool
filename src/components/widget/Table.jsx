@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import TuiGrid from 'tui-grid';
 import Grid from '@toast-ui/react-grid';
-import { Prompt } from '@entrylabs/modal';
+import { Prompt, Alert } from '@entrylabs/modal';
 
 import Theme from '@utils/Theme';
 import { CommonUtils, getHeader, getData } from '@utils/Common';
@@ -64,6 +64,10 @@ const Table = (props) => {
         showPrompt: false,
         promptText: '',
     });
+    const [{ showAlert, alertText }, setShowAlert] = useState({
+        showAlert: false,
+        alertText: '',
+    });
     const {
         table: tableProps = [],
         width,
@@ -82,6 +86,13 @@ const Table = (props) => {
     }, [tableProps]);
 
     const handleNameChange = (index) => (name) => {
+        if (_.some(table[0], (columnName) => columnName === name)) {
+            setShowAlert({
+                showAlert: true,
+                alertText: CommonUtils.getLang('DataAnalytics.duplicate_attribute_name'),
+            });
+            return;
+        }
         if (name) {
             setTable((table) => {
                 table[0][index] = name;
@@ -142,10 +153,13 @@ const Table = (props) => {
                 {
                     text: CommonUtils.getLang('DataAnalytics.delete_row'),
                     callback: () => {
-                        setTable((table) => {
-                            table.splice(rowIndex, 1);
-                            return table;
-                        });
+                        if (table.length > 1) {
+                            setTable((table) => {
+                                table.splice(rowIndex, 1);
+                                return table;
+                            });
+                        } else {
+                        }
                     },
                 },
             ];
@@ -208,12 +222,22 @@ const Table = (props) => {
         setShowPrompt({
             showPrompt: false,
         });
-        if (colIndex === -1 || !columnName) {
+        if (colIndex === -1) {
             return;
         }
+
         setTable((table) =>
             table.map((row, index) => {
-                row.splice(colIndex, 0, index ? 0 : columnName);
+                row.splice(
+                    colIndex,
+                    0,
+                    index
+                        ? 0
+                        : CommonUtils.getOrderedName(
+                              columnName || CommonUtils.getLang('DataAnalytics.new_attribute'),
+                              table[0]
+                          )
+                );
                 return row;
             })
         );
@@ -290,6 +314,16 @@ const Table = (props) => {
                         negativeButtonText: CommonUtils.getLang('DataAnalytics.cancel'),
                         positiveButtonText: CommonUtils.getLang('DataAnalytics.confirm'),
                     }}
+                />
+            )}
+            {showAlert && (
+                <Alert
+                    content={alertText}
+                    title="title"
+                    onEvent={() => {
+                        setShowAlert({ showAlert: false });
+                    }}
+                    options={{ positiveButtonText: '확인' }}
                 />
             )}
         </div>

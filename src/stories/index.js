@@ -349,4 +349,4 @@ storiesOf('AiLayout', module)
     .add('테이블', () => (
         <Table table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]} editor={'text'} />
     ))
-    .add('DataAnalytics', () => <DataAnalytics table={TABLE_SAMPLE2} />);
+    .add('DataAnalytics', () => <DataAnalytics table={[[]]} />);
