@@ -101,7 +101,7 @@ const ChartLayout = () => {
                         <a href="#" onClick={(event) => event.preventDefault()}>
                             <span className={Styles.blind}>차트 추가하기</span>
                         </a>
-                        <p>차트를 먼저 추가해주세요.</p>
+                        <p>{CommonUtils.getLang('DataAnalytics.add_chart_first')}</p>
                     </div>
                 )}
             </div>
