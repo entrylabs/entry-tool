@@ -4,13 +4,8 @@ import DataAnalyticsContextProvider from './context/DataAnalyticsContext';
 import { SUMMARY } from './Constants';
 
 const DataAnalytics = (props) => {
-    const {
-        tab = SUMMARY,
-        table = {},
-        onSummitDataAnalytics = () => {},
-        onToastDataAnalytics = () => {},
-    } = props;
-    const { name = '', fields, origin = [], chart = [], id } = table;
+    const { table = {}, onSummitDataAnalytics = () => {}, onToastDataAnalytics = () => {} } = props;
+    const { name = '', fields, origin = [], chart = [], id, tab = SUMMARY } = table;
     const dataTable = fields ? [fields, ...origin] : [[]];
 
     const data = {
