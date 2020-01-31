@@ -6,7 +6,14 @@ export const DataAnalyticsContext = createContext();
 
 const DataAnalyticsContextProvider = (props) => {
     const { analytics = {} } = props;
-    const { title = '', table = [[]], charts = [], id } = analytics;
+    const {
+        title = '',
+        table = [[]],
+        charts = [],
+        id,
+        onToastDataAnalytics,
+        onSummitDataAnalytics,
+    } = analytics;
     const [dataAnalytics, dispatch] = useReducer(dataAnalyticsReducer, {
         id,
         title,
@@ -15,6 +22,8 @@ const DataAnalyticsContextProvider = (props) => {
         tab: SUMMARY,
         chartIndex: 0,
         isFullScreen: false,
+        onToastDataAnalytics,
+        onSummitDataAnalytics,
     });
 
     useEffect(() => {

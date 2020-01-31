@@ -6,7 +6,7 @@ import TitleInput from './TitleInput';
 
 const TableEditor = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { table, title } = dataAnalytics;
+    const { table, title, onToastDataAnalytics } = dataAnalytics;
 
     const handleChangeTitle = (value) => (event) => {
         dispatch({
@@ -25,7 +25,7 @@ const TableEditor = () => {
 
                 <div className={Styles.cont_inner}>
                     <div className={Styles.table_cont}>
-                        <Table table={table} />
+                        <Table table={table} onToastDataAnalytics={onToastDataAnalytics} />
                     </div>
                 </div>
             </div>

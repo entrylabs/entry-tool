@@ -5,14 +5,10 @@ import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/entry/scss/popup.scss';
 
 const Header = (props) => {
-    const {
-        selected,
-        tabItems,
-        isFullScreen = false,
-        onFullScreenClick = () => {},
-        onSummitDataAnalytics,
-    } = props;
+    const { selected, tabItems, isFullScreen = false, onFullScreenClick = () => {} } = props;
     const { dataAnalytics } = useContext(DataAnalyticsContext);
+    const { onSummitDataAnalytics } = dataAnalytics;
+
     const handleClick = (event) => {
         event.preventDefault();
         onSummitDataAnalytics(dataAnalytics);
