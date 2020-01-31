@@ -2036,10 +2036,10 @@
                         cursor: pointer;
                         .text {
                             width: 125px;
-                            text-overflow:ellipsis;
-                            white-space:nowrap;
-                            word-wrap:normal;
-                            overflow:hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            word-wrap: normal;
+                            overflow: hidden;
                         }
                     }
 
@@ -2518,6 +2518,7 @@
             color: #555;
             letter-spacing: -0.5px;
             line-height: 20px;
+            white-space: pre;
         }
     }
     .chart_list {

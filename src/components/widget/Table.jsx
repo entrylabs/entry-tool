@@ -83,7 +83,12 @@ const Table = (props) => {
     }, [tableProps]);
 
     const handleNameChange = (index) => (name) => {
-        if (_.some(table[0], (columnName) => columnName === name)) {
+        if (
+            _.some(
+                tableProps[0],
+                (columnName, colIndex) => columnName === name && index !== colIndex
+            )
+        ) {
             onToastDataAnalytics({
                 title: CommonUtils.getLang('DataAnalytics.duplicate_attribute_name_title'),
                 content: CommonUtils.getLang('DataAnalytics.duplicate_attribute_name_content'),
@@ -126,6 +131,7 @@ const Table = (props) => {
 
     const makeContextMenu = (event) => {
         const { targetType, columnName, rowKey, instance } = event;
+        const a = table;
         if (targetType === 'rowHeader') {
             const rowIndex = instance.getIndexOfRow(rowKey) + 1;
             return [
@@ -178,6 +184,19 @@ const Table = (props) => {
                         setShowPrompt({
                             showPrompt: true,
                             promptFunction: handleAddColumn(colIndex + 1),
+                        });
+                    },
+                },
+                {
+                    text: CommonUtils.getLang('DataAnalytics.edit_attribute_name'),
+                    callback: () => {
+                        console.log(table, a, tableProps);
+                        const colIndex = instance.getIndexOfColumn(columnName);
+                        const [fields] = tableProps;
+                        setShowPrompt({
+                            showPrompt: true,
+                            promptText: fields[colIndex],
+                            promptFunction: handleNameChange(colIndex),
                         });
                     },
                 },
