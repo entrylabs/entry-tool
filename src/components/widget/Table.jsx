@@ -28,6 +28,12 @@ TuiGrid.applyTheme('entry', {
         focused: {
             border: '#4f80ff',
         },
+        selectedHeader: {
+            background: '#f4f4f4',
+        },
+        selectedRowHeader: {
+            background: '#fff',
+        },
     },
 });
 
