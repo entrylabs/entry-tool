@@ -1,14 +1,21 @@
 import React from 'react';
 import DataAnalyticsEditor from './DataAnalyticsEditor';
 import DataAnalyticsContextProvider from './context/DataAnalyticsContext';
+import { SUMMARY } from './Constants';
 
 const DataAnalytics = (props) => {
-    const { table = {}, onSummitDataAnalytics = () => {}, onToastDataAnalytics = () => {} } = props;
+    const {
+        tab = SUMMARY,
+        table = {},
+        onSummitDataAnalytics = () => {},
+        onToastDataAnalytics = () => {},
+    } = props;
     const { name = '', fields, origin = [], chart = [], id } = table;
     const dataTable = fields ? [fields, ...origin] : [[]];
 
     const data = {
         id,
+        tab,
         title: name,
         table: dataTable,
         charts: chart,
