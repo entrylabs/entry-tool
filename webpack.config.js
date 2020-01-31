@@ -150,6 +150,9 @@ const config = {
             filename: '[name].css',
         }),
     ],
+    optimization: {
+        sideEffects: false,
+    },
 };
 
 module.exports = config;
