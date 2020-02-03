@@ -86,10 +86,6 @@ const Table = (props) => {
 
     useEffect(() => {
         setTable(tableProps);
-        const { current = {} } = gridRef;
-        if (current.getInstance) {
-            console.log(current.getInstance());
-        }
     }, [tableProps]);
 
     const handleNameChange = (index) => (name) => {

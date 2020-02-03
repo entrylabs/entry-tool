@@ -36,7 +36,7 @@ const DataAnalyticsContextProvider = (props) => {
                 title,
                 table,
                 charts,
-                tab,
+                tab: tab || dataAnalytics.tab,
                 chartIndex: 0,
                 isFullScreen: false,
             },

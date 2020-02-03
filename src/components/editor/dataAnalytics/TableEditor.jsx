@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
-import Styles from '@assets/entry/scss/popup.scss';
 import Table from '@components/widget/Table';
 import { DataAnalyticsContext } from './context/DataAnalyticsContext';
 import TitleInput from './TitleInput';
+import { CommonUtils } from '@utils/Common';
+import Styles from '@assets/entry/scss/popup.scss';
 
 const TableEditor = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
@@ -17,7 +18,7 @@ const TableEditor = () => {
 
     return (
         <section className={`${Styles.detail_cont} ${Styles.table_state}`}>
-            <h2 className={Styles.blind}>테이블</h2>
+            <h2 className={Styles.blind}>{CommonUtils.getLang('DataAnalytics.table')}</h2>
             <div className={Styles.content_box}>
                 <div className={Styles.input_box}>
                     <TitleInput title={title} onChangeTitle={handleChangeTitle} />
