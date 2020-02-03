@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DataAnalytics from './DataAnalytics';
-import { onSummitDataAnalytics, onToastDataAnalytics } from '@actions/editor';
+import { onSubmitDataAnalytics, onToastDataAnalytics } from '@actions/editor';
 import withWrapper from '@hoc/withWrapper';
 
 class DataAnalyticsContainer extends Component {
@@ -11,7 +11,7 @@ class DataAnalyticsContainer extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    onSummitDataAnalytics: (data) => dispatch(onSummitDataAnalytics(data)),
+    onSubmitDataAnalytics: (data) => dispatch(onSubmitDataAnalytics(data)),
     onToastDataAnalytics: (data) => dispatch(onToastDataAnalytics(data)),
 });
 

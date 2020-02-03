@@ -1,9 +1,9 @@
-export const SUMMIT_DATA_ANALYTICS = 'SUMMIT_DATA_ANALYTICS';
+export const SUBMIT_DATA_ANALYTICS = 'SUBMIT_DATA_ANALYTICS';
 export const TOAST_DATA_ANALYTICS = 'TOAST_DATA_ANALYTICS';
 
-export const onSummitDataAnalytics = (data) => (dispatch) => {
+export const onSubmitDataAnalytics = (data) => (dispatch) => {
     dispatch({
-        type: SUMMIT_DATA_ANALYTICS,
+        type: SUBMIT_DATA_ANALYTICS,
         data,
     });
 };

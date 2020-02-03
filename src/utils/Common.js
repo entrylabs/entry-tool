@@ -303,6 +303,7 @@ const makeSummary = (row) => {
 export const getSummary = flow(unzip, map(makeSummary));
 
 export const categoryKeys = (table, index) =>
+    // eslint-disable-next-line prettier/prettier
     (index >= 0 ? _.uniq(table.slice(1).map((row) => row[index])) : []);
 
 export const isZipable = (table, xIndex) =>

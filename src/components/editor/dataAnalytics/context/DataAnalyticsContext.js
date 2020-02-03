@@ -13,7 +13,7 @@ const DataAnalyticsContextProvider = (props) => {
         id,
         tab,
         onToastDataAnalytics,
-        onSummitDataAnalytics,
+        onSubmitDataAnalytics,
     } = analytics;
     const [dataAnalytics, dispatch] = useReducer(dataAnalyticsReducer, {
         id,
@@ -24,7 +24,7 @@ const DataAnalyticsContextProvider = (props) => {
         chartIndex: 0,
         isFullScreen: false,
         onToastDataAnalytics,
-        onSummitDataAnalytics,
+        onSubmitDataAnalytics,
     });
 
     useEffect(() => {
