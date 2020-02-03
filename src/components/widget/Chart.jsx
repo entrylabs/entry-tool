@@ -66,12 +66,13 @@ const generateOption = (option) => {
         size,
         tooltip,
         legend = { show: false },
+        axisY,
     } = option;
 
     let x;
     let xs;
     let columns;
-    let axisX = { type: 'category' };
+    let { axisX = { type: 'category', tick: { show: true } } } = option;
 
     switch (type) {
         case 'bar':
@@ -88,15 +89,18 @@ const generateOption = (option) => {
             columns = pieChart(table, xIndex, categoryIndexes[0]);
             x = table[0][xIndex];
             break;
-        case 'scatter':
+        case 'scatter': {
             columns = scatterChart(table, xIndex, yIndex, categoryIndexes);
             xs = scatterXs(table, xIndex, yIndex, categoryIndexes);
+            const { tick = {} } = axisX;
             axisX = {
                 tick: {
+                    ...tick,
                     fit: false,
                 },
             };
             break;
+        }
         default:
             columns = [[]];
             break;
@@ -121,6 +125,12 @@ const generateOption = (option) => {
         },
         axis: {
             x: axisX,
+            y: axisY,
+        },
+        pie: {
+            label: {
+                show: false,
+            },
         },
     };
 };
@@ -143,7 +153,15 @@ const hasNumberColumn = (table) => {
 const isDrawable = (table) => table[0].length > 1 && hasNumberColumn(table);
 
 const Chart = (props) => {
-    const { table = [[]], chart = {}, size, tooltip = { grouped: false }, legend } = props;
+    const {
+        table = [[]],
+        chart = {},
+        size,
+        tooltip = { grouped: false },
+        legend,
+        axisX,
+        axisY,
+    } = props;
 
     const { type = 'bar', xIndex = -1, yIndex, categoryIndexes = [] } = chart;
     const id = `c${generateHash()}`;
@@ -172,6 +190,8 @@ const Chart = (props) => {
                 size,
                 tooltip,
                 legend,
+                axisX,
+                axisY,
             });
             option && bb.generate(option);
         }

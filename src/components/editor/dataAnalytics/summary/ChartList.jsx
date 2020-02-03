@@ -60,6 +60,14 @@ const ChartList = (props) => {
                     }}
                     legend={{ show: false }}
                     tooltip={{ show: false }}
+                    axisX={{
+                        tick: {
+                            show: false,
+                            text: {
+                                show: false,
+                            },
+                        },
+                    }}
                 />
             </li>
         ));
