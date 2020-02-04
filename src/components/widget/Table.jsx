@@ -270,7 +270,7 @@ const Table = (props) => {
             const { instance, columnName, rowKey } = event;
             const colIndex = instance.getIndexOfColumn(columnName);
             const rowIndex = instance.getIndexOfRow(rowKey);
-            tableProps[rowIndex][colIndex] = event.value;
+            tableProps[rowIndex + 1][colIndex] = event.value;
         },
         [tableProps]
     );
