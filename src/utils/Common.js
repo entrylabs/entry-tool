@@ -308,3 +308,8 @@ export const categoryKeys = (table, index) =>
 
 export const isZipable = (table, xIndex) =>
     _.uniqBy(table, (row) => row[xIndex]).length !== table.length;
+
+export const hasNumberColumn = (table) =>
+    _.some(table[0], (columnHeader, columnIndex) =>
+        _.every(table.slice(1), (row) => !isString(row[columnIndex]))
+    );

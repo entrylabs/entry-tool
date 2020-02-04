@@ -10,32 +10,21 @@ import Styles from '@assets/entry/scss/popup.scss';
 
 const { generateHash } = CommonUtils;
 
-const getNumberColumnIndexes = (table, banIndexes = []) => {
-    const columnIndexes = [];
-    table[0].forEach((label, index) => {
-        if (_.some(banIndexes, (banIndex) => index === banIndex)) {
-            return;
-        }
+const getNumberColumnIndexes = (table, banIndexes = []) =>
+    _.reduce(
+        table[0],
+        // eslint-disable-next-line no-confusing-arrow
+        (prev, curr, index) =>
+            !_.some(banIndexes, (banIndex) => index === banIndex) &&
+            !_.some(table.slice(1), (row) => isString(row[index]))
+                ? [...prev, index]
+                : prev,
+        []
+    );
 
-        let i;
-        for (i = 1; i < table.length; i++) {
-            if (isString(table[i][index])) {
-                break;
-            }
-        }
-
-        if (i === table.length) {
-            columnIndexes.push(index);
-        }
-    });
-    return columnIndexes;
-};
-const getXAxis = (table, type) => {
-    if (type === 'scatter') {
-        return getNumberColumnIndexes(table);
-    }
-    return table[0].map((col, index) => index);
-};
+const getXAxis = (table, type) =>
+    // eslint-disable-next-line prettier/prettier
+    (type === 'scatter' ? getNumberColumnIndexes(table) : table[0].map((col, index) => index));
 const getYAxis = (table, xIndex) => getNumberColumnIndexes(table, [xIndex]);
 const getCategory = (table, xIndex, yIndex, categoryIndexes, type) => {
     switch (type) {
@@ -65,7 +54,10 @@ const ChartLayout = () => {
                 {charts.length ? (
                     <>
                         <Legend
-                            disabled={xIndex === -1 || (type === 'scatter' && yIndex === -1)}
+                            disabled={
+                                category.length &&
+                                (xIndex === -1 || (type === 'scatter' && yIndex === -1))
+                            }
                             checkBox={yIndex === -1 && type !== 'pie' && type !== 'scatter'}
                             selectedCategoryIndexes={categoryIndexes}
                             categoryIndexes={getNumberColumnIndexes(table, [xIndex, yIndex])}
@@ -75,8 +67,9 @@ const ChartLayout = () => {
                         {type === 'pie' ? null : (
                             <YAxis
                                 disable={
-                                    (!isZipable(table, xIndex) && type !== 'scatter') ||
-                                    xIndex === -1
+                                    yAxis &&
+                                    ((!isZipable(table, xIndex) && type !== 'scatter') ||
+                                        xIndex === -1)
                                 }
                                 yAxisIndex={yAxis}
                                 yIndex={yIndex}

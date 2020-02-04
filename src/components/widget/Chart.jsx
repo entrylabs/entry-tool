@@ -4,7 +4,7 @@ import bb from 'billboard.js';
 import Styles from '@assets/entry/scss/popup.scss';
 import '@assets/entry/scss/widget/insight.css';
 
-import { CommonUtils, isString, categoryKeys, isZipable } from '@utils/Common';
+import { CommonUtils, hasNumberColumn, categoryKeys, isZipable } from '@utils/Common';
 const { generateHash } = CommonUtils;
 
 const pivot = (table, xIndex, yIndex, categoryIndex) =>
@@ -134,12 +134,6 @@ const generateOption = (option) => {
         },
     };
 };
-
-const hasNumberColumn = (table) =>
-    _.some(
-        table[0],
-        (columnHeader, columnIndex) => !_.some(table.slice(1), (row) => isString(row[columnIndex]))
-    );
 
 const isDrawable = (table) => table[0].length > 1 && hasNumberColumn(table);
 
