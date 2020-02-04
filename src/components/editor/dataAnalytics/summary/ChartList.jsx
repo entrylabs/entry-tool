@@ -21,11 +21,11 @@ const ChartList = (props) => {
     };
 
     const handleMouseEnter = (event) => {
-        event.currentTarget.className = Styles.on;
+        event.currentTarget.classList.add(Styles.on);
     };
 
     const handleMouseLeave = (event) => {
-        event.currentTarget.className = '';
+        event.currentTarget.classList.remove(Styles.on);
     };
 
     const chartList = (charts) => {
@@ -46,6 +46,7 @@ const ChartList = (props) => {
 
         return charts.map((chart, index) => (
             <li
+                className={Styles[chart.type]}
                 key={`chart_${generateHash()}`}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
