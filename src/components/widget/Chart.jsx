@@ -135,20 +135,11 @@ const generateOption = (option) => {
     };
 };
 
-const hasNumberColumn = (table) => {
-    for (let j = 0; j < table[0].length; j++) {
-        let i = 1;
-        for (; i < table.length; i++) {
-            if (isString(table[i][j])) {
-                break;
-            }
-        }
-        if (i === table.length) {
-            return true;
-        }
-    }
-    return false;
-};
+const hasNumberColumn = (table) =>
+    _.some(
+        table[0],
+        (columnHeader, columnIndex) => !_.some(table.slice(1), (row) => isString(row[columnIndex]))
+    );
 
 const isDrawable = (table) => table[0].length > 1 && hasNumberColumn(table);
 
