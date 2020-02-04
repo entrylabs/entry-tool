@@ -321,7 +321,7 @@ const Table = (props) => {
                     defaultValue={promptText}
                     title={CommonUtils.getLang('DataAnalytics.attribute')}
                     onEvent={(event) => {
-                        if (promptFunction) {
+                        if (event != null && promptFunction) {
                             promptFunction(event);
                         } else {
                             setShowPrompt({

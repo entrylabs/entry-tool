@@ -111,11 +111,6 @@ const generateOption = (option) => {
         legend,
         size,
         tooltip,
-        bar: {
-            width: {
-                ratio: 0.7,
-            },
-        },
         bindto: `#${id}`,
         data: {
             x,
