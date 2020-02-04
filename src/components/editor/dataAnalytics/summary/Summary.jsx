@@ -26,11 +26,11 @@ const Summary = () => {
                 <div className={Styles.input_box}>
                     <TitleInput title={title} onChangeTitle={handleChangeTitle} />
                     <ul className={Styles.cnt_result}>
+                        <li>{`${CommonUtils.getLang('DataAnalytics.row')} ${table.length -
+                            1}${CommonUtils.getLang('DataAnalytics.row_count')}`}</li>
                         <li>{`${CommonUtils.getLang('DataAnalytics.attribute')} ${
                             summary.length
                         }${CommonUtils.getLang('DataAnalytics.attribute_count')}`}</li>
-                        <li>{`${CommonUtils.getLang('DataAnalytics.row')} ${table.length -
-                            1}${CommonUtils.getLang('DataAnalytics.row_count')}`}</li>
                         <li>{`${CommonUtils.getLang('DataAnalytics.cell')} ${summary.length *
                             (table.length - 1)}${CommonUtils.getLang(
                             'DataAnalytics.cell_count'
