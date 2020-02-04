@@ -55,8 +55,9 @@ const ChartLayout = () => {
                     <>
                         <Legend
                             disabled={
-                                category.length &&
-                                (xIndex === -1 || (type === 'scatter' && yIndex === -1))
+                                !category.length ||
+                                xIndex === -1 ||
+                                (type === 'scatter' && yIndex === -1)
                             }
                             checkBox={yIndex === -1 && type !== 'pie' && type !== 'scatter'}
                             selectedCategoryIndexes={categoryIndexes}
@@ -67,9 +68,9 @@ const ChartLayout = () => {
                         {type === 'pie' ? null : (
                             <YAxis
                                 disable={
-                                    yAxis &&
-                                    ((!isZipable(table, xIndex) && type !== 'scatter') ||
-                                        xIndex === -1)
+                                    !yAxis.length ||
+                                    (!isZipable(table, xIndex) && type !== 'scatter') ||
+                                    xIndex === -1
                                 }
                                 yAxisIndex={yAxis}
                                 yIndex={yIndex}
