@@ -55,8 +55,7 @@ const ChartLayout = () => {
                     <>
                         <Legend
                             disabled={
-                                !category.length ||
-                                xIndex === -1 ||
+                                (!category.length && xIndex === -1) ||
                                 (type === 'scatter' && yIndex === -1)
                             }
                             checkBox={yIndex === -1 && type !== 'pie' && type !== 'scatter'}
