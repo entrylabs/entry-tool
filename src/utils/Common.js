@@ -242,12 +242,12 @@ export const CommonUtils = {
         const maxNumber = _.max(
             _.map(array, (item) => {
                 if (item.slice(0, name.length) !== name) {
-                    return 0;
+                    return -1;
                 }
                 return Number(item.slice(name.length));
             })
         );
-        return name + (maxNumber + 1);
+        return name + (maxNumber + 1 ? maxNumber + 1 : '');
     },
 };
 
