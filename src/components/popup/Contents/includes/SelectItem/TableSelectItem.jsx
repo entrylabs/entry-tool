@@ -18,7 +18,7 @@ const DetailModal = ({ theme, info = {} }) => {
             <ul className={theme.more_sub_info}>
                 <li>
                     <strong>
-                        {`${CommonUtils.getLang('Menus.data_table_attribute')} : ` +
+                        {`${CommonUtils.getLang('Menus.data_table_column')} : ` +
                             `${fields.length}${CommonUtils.getLang('Menus.count_ko')}`}
                     </strong>
                     <p>{fields.join(', ')}</p>
@@ -55,7 +55,7 @@ const TableSelectItem = ({ theme, item, upload, openModal }) => {
             <strong className={theme.sjt}>{name}</strong>
             <div className={theme.info}>
                 <em>
-                    {`${CommonUtils.getLang('Menus.data_table_attribute')} : ` +
+                    {`${CommonUtils.getLang('Menus.data_table_column')} : ` +
                         `${fields.length}${CommonUtils.getLang('Menus.count_ko')}`}
                 </em>
                 <p className={theme.fields}>{fields.join(', ')}</p>
