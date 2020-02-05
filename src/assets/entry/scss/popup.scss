@@ -2207,7 +2207,7 @@
             -ms-flex: 1;
             flex: 1;
             overflow: hidden;
-            padding: 30px 22px 28px;
+            padding: 30px 22px 0;
         }
         .input_box {
             overflow: hidden;
@@ -2306,7 +2306,6 @@
         }
         &.table_state .table_cont {
             margin-top: 0;
-            max-height: 552px;
         }
         &.chart_state {
             padding: 0;
@@ -2429,6 +2428,7 @@
             }
         }
         :global(.tui-grid-rside-area) {
+            width: 100%;
             :global(.tui-grid-header-area .tui-grid-cell-header) {
                 position: relative;
                 &::before {
