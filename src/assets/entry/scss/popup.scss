@@ -2129,10 +2129,9 @@
             }
         }
         .btn_save {
-            overflow: hidden;
-            position: absolute;
-            top: 8px;
-            right: 12px;
+            float: right;
+            display: inline-block;
+            overflow: hidden;            
             width: 82px;
             height: 30px;
             border-radius: 4px;
