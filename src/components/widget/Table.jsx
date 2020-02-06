@@ -137,7 +137,6 @@ const Table = (props) => {
 
     const makeContextMenu = (event) => {
         const { targetType, columnName, rowKey, instance } = event;
-        const a = table;
         if (targetType === 'rowHeader') {
             const rowIndex = instance.getIndexOfRow(rowKey) + 1;
             return [
@@ -145,8 +144,8 @@ const Table = (props) => {
                     text: CommonUtils.getLang('DataAnalytics.add_row_above'),
                     callback: () => {
                         setTable((table) => {
-                            table.splice(rowIndex, 0, Array(table[0].length).fill(0));
-                            return table;
+                            tableProps.splice(rowIndex, 0, Array(table[0].length).fill(0));
+                            return [...tableProps];
                         });
                     },
                 },
@@ -154,8 +153,8 @@ const Table = (props) => {
                     text: CommonUtils.getLang('DataAnalytics.add_row_below'),
                     callback: () => {
                         setTable((table) => {
-                            table.splice(rowIndex + 1, 0, Array(table[0].length).fill(0));
-                            return table;
+                            tableProps.splice(rowIndex + 1, 0, Array(table[0].length).fill(0));
+                            return [...tableProps];
                         });
                     },
                 },
@@ -196,7 +195,6 @@ const Table = (props) => {
                 {
                     text: CommonUtils.getLang('DataAnalytics.edit_attribute_name'),
                     callback: () => {
-                        console.log(table, a, tableProps);
                         const colIndex = instance.getIndexOfColumn(columnName);
                         const [fields] = tableProps;
                         setShowPrompt({
@@ -270,7 +268,10 @@ const Table = (props) => {
             const { instance, columnName, rowKey } = event;
             const colIndex = instance.getIndexOfColumn(columnName);
             const rowIndex = instance.getIndexOfRow(rowKey);
-            tableProps[rowIndex + 1][colIndex] = event.value;
+            setTable((table) => {
+                table[rowIndex + 1][colIndex] = event.value;
+                return [...table];
+            });
         },
         [tableProps]
     );
