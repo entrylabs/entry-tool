@@ -82,11 +82,19 @@ const Table = (props) => {
         rowHeaders = [{ type: 'rowNum', width: 98 }],
         needRowHeader = true,
         onToastDataAnalytics = () => {},
+        isFullScreen,
     } = props;
 
     useEffect(() => {
         setTable(tableProps);
     }, [tableProps]);
+
+    useEffect(() => {
+        const { current = {} } = gridRef;
+        if (current.getInstance) {
+            current.getInstance().refreshLayout();
+        }
+    }, [isFullScreen]);
 
     const handleNameChange = (index) => (name) => {
         if (
