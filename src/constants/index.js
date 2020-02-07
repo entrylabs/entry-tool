@@ -378,6 +378,10 @@ export const DEFAULT_OPTIONS = {
             title: 'Workspace.load_expansion_block',
             mainType: 'expansion',
         },
+        aiUtilize: {
+            title: 'Workspace.load_ai_utilize_block',
+            mainType: 'aiUtilize',
+        },
         projects: {
             title: 'Menus.my_project',
             mainType: 'projects',

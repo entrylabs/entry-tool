@@ -1133,6 +1133,25 @@
         margin-left: -1px;
         vertical-align: middle;
     }
+    .extend_content .extend_block .list .sponser_text {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin: 10px;
+        height: 32px;
+        border-radius: 6px;
+        background-color: #03cf5d;
+    }
+    .extend_content .extend_block .list .sponser_text_span {
+        height: 32px;
+        font-size: 12px;
+        font-weight: 800;
+        line-height: 32px;
+        letter-spacing: -0.4px;
+        text-align: center;
+        color: white;
+        padding: 5px;
+    }
     .extend_content .extend_block .list .inner_box {
         padding: 20px 16px 0;
         color: #000;
