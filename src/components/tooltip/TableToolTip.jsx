@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import OutsideClick from '../common/outsideClick';
 import { CommonUtils } from '@utils/Common';
 
 import Styles from '@assets/entry/scss/popup.scss';
@@ -12,7 +13,12 @@ const TableToolTip = () => {
     };
 
     return (
-        <div className={Styles.q_box}>
+        <OutsideClick
+            className={Styles.q_box}
+            onOutsideClick={() => {
+                setShowHelp('none');
+            }}
+        >
             <a href="#" className={Styles.ico_q} onClick={handleClickHelp}>
                 <span className={Styles.blind}>도움말</span>
             </a>
@@ -61,7 +67,7 @@ const TableToolTip = () => {
                     <i></i>
                 </span>
             </div>
-        </div>
+        </OutsideClick>
     );
 };
 
