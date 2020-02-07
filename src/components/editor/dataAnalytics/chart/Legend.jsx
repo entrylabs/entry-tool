@@ -1,7 +1,7 @@
 import React, { useContext, useState, useRef } from 'react';
 import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
 import { GRAPH_COLOR } from '@components/editor/dataAnalytics/Constants';
-import { CommonUtils } from '@utils/Common';
+import { CommonUtils, categoryKeys, getNumberColumnIndexesBySelectedColumns } from '@utils/Common';
 import Dropdown from '@components/widget/dropdown';
 
 import Styles from '@assets/entry/scss/popup.scss';
@@ -9,25 +9,24 @@ import Styles from '@assets/entry/scss/popup.scss';
 const { generateHash } = CommonUtils;
 
 const Legend = (props) => {
-    const {
-        checkBox,
-        disabled,
-        selectedCategoryIndexes,
-        categoryIndexes = [],
-        category = [],
-    } = props;
+    const { checkBox, disabled, selectedLegend, dropdownItems = [] } = props;
     const [showDropdown, setShowDropdown] = useState(false);
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const axisRef = useRef();
     const { table } = dataAnalytics;
+    const items = (checkBox
+        ? getNumberColumnIndexesBySelectedColumns(table, dropdownItems)
+        : dropdownItems
+    ).map((index) => [table[0][index], index]);
 
     const labels = checkBox
-        ? selectedCategoryIndexes.map((index) => [table[0][index], index])
-        : category.map((name, index) => [name, index]);
+        ? selectedLegend.map((index) => table[0][index])
+        : categoryKeys(table, selectedLegend[0]);
+
     const title =
-        checkBox || !table[0][selectedCategoryIndexes[0]]
+        checkBox || !table[0][selectedLegend[0]]
             ? CommonUtils.getLang('DataAnalytics.legend')
-            : table[0][selectedCategoryIndexes[0]];
+            : table[0][selectedLegend[0]];
 
     const handleSelectDropDown = (value) => {
         setShowDropdown(false);
@@ -62,7 +61,7 @@ const Legend = (props) => {
                 <a href="#" className={Styles.common_legend} onClick={handleClick} ref={axisRef}>
                     {title}
                 </a>
-                {labels.length && selectedCategoryIndexes.length ? (
+                {labels.length && selectedLegend.length ? (
                     <div className={Styles.legend_scroll}>
                         <ul className={Styles.legend_list}>
                             {labels.map((item, index) => (
@@ -76,7 +75,7 @@ const Legend = (props) => {
                                     >
                                         &nbsp;
                                     </span>
-                                    {item[0]}
+                                    {item}
                                 </li>
                             ))}
                         </ul>
@@ -87,10 +86,13 @@ const Legend = (props) => {
             {showDropdown && checkBox && (
                 <Dropdown
                     multiple
-                    checkedIndex={selectedCategoryIndexes.map((index) =>
-                        _.findIndex(categoryIndexes, (categoryIndex) => categoryIndex === index)
+                    checkedIndex={selectedLegend.map((index) =>
+                        _.findIndex(
+                            getNumberColumnIndexesBySelectedColumns(table, dropdownItems),
+                            (categoryIndex) => categoryIndex === index
+                        )
                     )}
-                    items={category.map((index) => [table[0][index], index])}
+                    items={items}
                     onSelectDropdown={() => {}}
                     onOutsideClick={handleCheckOutsideClick}
                     positionDom={axisRef.current}
@@ -99,7 +101,7 @@ const Legend = (props) => {
 
             {showDropdown && !checkBox && (
                 <Dropdown
-                    items={categoryIndexes.map((index) => [table[0][index], index])}
+                    items={items}
                     onSelectDropdown={handleSelectDropDown}
                     onOutsideClick={handleOutsideClick}
                     positionDom={axisRef.current}

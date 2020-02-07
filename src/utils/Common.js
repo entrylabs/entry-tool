@@ -313,3 +313,24 @@ export const hasNumberColumn = (table) =>
     _.some(table[0], (columnHeader, columnIndex) =>
         _.every(table.slice(1), (row) => !isString(row[columnIndex]))
     );
+
+export const getNumberColumnIndexes = (table, banIndexes = []) =>
+    _.reduce(
+        table[0],
+        // eslint-disable-next-line no-confusing-arrow
+        (prev, curr, index) =>
+            !_.some(banIndexes, (banIndex) => index === banIndex) &&
+            !_.some(table.slice(1), (row) => isString(row[index]))
+                ? [...prev, index]
+                : prev,
+        []
+    );
+
+export const getNumberColumnIndexesBySelectedColumns = (table, selectedColumns = []) =>
+    _.reduce(
+        selectedColumns,
+        // eslint-disable-next-line no-confusing-arrow
+        (prev, index) =>
+            !_.some(table.slice(1), (row) => isString(row[index])) ? [...prev, index] : prev,
+        []
+    );
