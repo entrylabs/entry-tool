@@ -86,6 +86,7 @@ const Legend = (props) => {
             {showDropdown && checkBox && (
                 <Dropdown
                     multiple
+                    showSelectAll={true}
                     checkedIndex={selectedLegend.map((index) =>
                         _.findIndex(
                             getNumberColumnIndexesBySelectedColumns(table, dropdownItems),
@@ -93,7 +94,6 @@ const Legend = (props) => {
                         )
                     )}
                     items={items}
-                    onSelectDropdown={() => {}}
                     onOutsideClick={handleCheckOutsideClick}
                     positionDom={axisRef.current}
                 />
