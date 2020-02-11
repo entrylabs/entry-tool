@@ -545,6 +545,10 @@
         }
 
         // 그리기
+        .section_cont .cont_box.draw {
+            overflow: auto;
+            height: calc(100vh - 12px);
+        }
         .section_cont .draw_box {
             padding: 59px 0 204px;
         }
