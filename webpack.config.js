@@ -36,7 +36,7 @@ const config = {
             {
                 test: /\.jsx?$|\.js?$/,
                 use: 'babel-loader',
-                exclude: [path.resolve('./node_modules/')],
+                exclude: /node_modules\/(?!(d3-[\w]*)\/.*)/,
             },
 
             {
