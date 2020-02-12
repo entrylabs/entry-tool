@@ -20,7 +20,7 @@ const Index = ({ goDraw }) => {
         <div className={theme.pop_content}>
             <div className={theme.section_cont}>
                 <h2 className={theme.blind}>DRAW</h2>
-                <div className={theme.cont_box}>
+                <div className={`${theme.cont_box} ${theme.draw}`}>
                     <div className={theme.draw_box}>
                         <div className={classname(theme.thmb, theme.imico_pop_draw_thmb)}>
                             &nbsp;
