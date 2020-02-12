@@ -122,25 +122,28 @@ const Table = (props) => {
 
     const handleClick = useCallback(
         (event) => {
-            if (!table) {
+            const { instance, columnName, nativeEvent, targetType = 'columnHeader' } = event;
+
+            if (!nativeEvent) {
                 return;
             }
-
-            const { instance, columnName, nativeEvent } = event;
             const { which } = nativeEvent;
             if (!columnName) {
                 instance.finishEditing();
             } else if (which === LEFT_CLICK && isColumnDblClick(event)) {
                 const colIndex = instance.getIndexOfColumn(columnName);
-                const [fields] = table;
-                setShowPrompt({
-                    showPrompt: true,
-                    promptText: fields[colIndex],
-                    promptFunction: handleNameChange(colIndex),
+                setTable((table = [[]]) => {
+                    const [fields] = table;
+                    setShowPrompt({
+                        showPrompt: true,
+                        promptText: fields[colIndex],
+                        promptFunction: handleNameChange(colIndex),
+                    });
+                    return table;
                 });
             }
         },
-        [table, setTable, setShowPrompt]
+        [setTable, setShowPrompt]
     );
 
     const makeContextMenu = (event) => {
@@ -281,7 +284,7 @@ const Table = (props) => {
                 return [...table];
             });
         },
-        [tableProps]
+        [setTable]
     );
 
     const data = getData(table);
