@@ -1,6 +1,7 @@
 import { VISIBLE, CLICK_BUTTON, TRIGGER_EVENT } from '@actions/index';
 import { API_FAIL } from '@actions/popup';
 import { CHANGE_COLOR_PICKER, CHANGE_LED_PICKER } from '@actions/picker';
+import { SUBMIT_DATA_ANALYTICS, TOAST_DATA_ANALYTICS } from '@actions/editor';
 import {
     SELECT_DROPDOWN,
     CHANGED_ANGLE,
@@ -61,6 +62,14 @@ export default class EmitMiddleware {
                 }
                 case CHANGE_DRAGGING: {
                     this.emitter.emit('onChangeDragging', action.data);
+                    break;
+                }
+                case SUBMIT_DATA_ANALYTICS: {
+                    this.emitter.emit('submit', action.data);
+                    break;
+                }
+                case TOAST_DATA_ANALYTICS: {
+                    this.emitter.emit('toast', action.data);
                     break;
                 }
                 default: {

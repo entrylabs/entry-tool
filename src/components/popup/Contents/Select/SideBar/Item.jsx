@@ -1,18 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { applySelected } from '@actions/popup';
-import { CommonUtils } from '@utils/Common';
 import { EMIT_TYPES as Types } from '@constants';
 import { triggerEvent } from '@actions';
 import { makeFindSelectedById } from '@selectors';
 import Theme from '@utils/Theme';
 import classname from 'classnames';
+import SelectItem from '../../includes/SelectItem';
 
-const getName = (item) => {
-    const lang = CommonUtils.getLangType();
-    const defaultName = item.label && item.label.en ? item.label.en : item.name;
-    return item.label && item.label[lang] ? item.label[lang] : defaultName;
-};
 const Index = (props) => {
     const { index, selected, applySelected, select, deselect } = props;
     const { baseUrl, type, item, multiSelect = true } = props;
@@ -36,20 +31,10 @@ const Index = (props) => {
         applySelected(selected);
     };
 
-    const { thumb, filename, imageType } = CommonUtils.getImageSummary(item);
-    const src = thumb || CommonUtils.createImageUrl(filename, baseUrl);
     return (
         <li onClick={onItemClicked} className={classname({ [theme.on]: index >= 0 })}>
             <div className={theme.link}>
-                {type === 'sound' && (
-                    <div className={classname(theme.thmb, theme.imico_pop_sound_thmb)} />
-                )}
-                {type !== 'sound' && (
-                    <div className={classname(theme.thmb, { [theme[imageType]]: !!imageType })}>
-                        <img src={src} alt={filename} />
-                    </div>
-                )}
-                <em className={theme.sjt}>{getName(item)}</em>
+                <SelectItem type={type} theme={theme} item={item} baseUrl={baseUrl} />
             </div>
         </li>
     );

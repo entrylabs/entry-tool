@@ -19,6 +19,10 @@ export default ({ menus = {}, onClick }) => {
         selectItem(list[0]).apply();
     }, [menus]);
 
+    if (!list.length) {
+        return <div />;
+    }
+
     return (
         <div className={theme.sub_menu}>
             <div className={theme.menu_inner}>

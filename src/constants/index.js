@@ -299,6 +299,7 @@ export const DEFAULT_OPTIONS = {
             },
             opt: {
                 search: { query: true },
+                showSelected: false,
                 multiSelect: false,
                 isDrawVector: true,
                 uploadAllowed: {
@@ -395,6 +396,33 @@ export const DEFAULT_OPTIONS = {
                     name: 'Menus.marked_project',
                 },
             },
+        },
+        table: {
+            title: 'Workspace.table_add',
+            mainType: 'sprite',
+            navigations: {
+                select: {
+                    name: 'Workspace.select_table',
+                },
+                upload: {
+                    name: 'Workspace.upload',
+                },
+                draw: {
+                    name: 'Workspace.draw_new_table',
+                },
+            },
+            opt: {
+                search: { query: true },
+                showSelected: false,
+                multiSelect: true,
+                uploadAllowed: {
+                    image: false,
+                    object: false,
+                    sound: false,
+                    table: true,
+                },
+            },
+            sidebar: {},
         },
     },
 };

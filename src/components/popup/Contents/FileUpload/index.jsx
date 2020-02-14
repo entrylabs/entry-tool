@@ -16,7 +16,6 @@ const Index = (props) => {
     const [excluded, setExcluded] = useState([]);
     const [isUploading, setUploadState] = useState(false);
     const theme = Theme.getStyle('popup');
-    const isSound = type === 'sound';
     const { warnExt, title, desc } = getWarnMsg(opt.uploadAllowed, theme.copyright_link);
     const getExcludedIndex = (item) => excluded.findIndex(({ _id }) => _id === item._id);
     const onItemClick = (item) => {
@@ -67,7 +66,7 @@ const Index = (props) => {
                 )}
                 <div className={theme.section_cont}>
                     <p className={classname(theme.caution, theme.imico_pop_caution)}>{warnExt}</p>
-                    <div className={classname(theme.list_area, { [theme.sound_type]: isSound })}>
+                    <div className={classname(theme.list_area, theme[`${type}_type`])}>
                         <UploadInput
                             uploadNotAllowedExt={opt.uploadNotAllowedExt}
                             uploadAllowed={opt.uploadAllowed}
@@ -78,7 +77,7 @@ const Index = (props) => {
                                 <Item
                                     key={item._id}
                                     item={item}
-                                    isSound={isSound}
+                                    type={type}
                                     baseUrl={baseUrl}
                                     onClick={onItemClick}
                                     excluded={opt.multiSelect !== getExcludedIndex(item) >= 0}
@@ -120,10 +119,7 @@ const mapDispatchToProps = (dispatch) => ({
     applyUploaded: (list) => dispatch(applyUploaded(list)),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Index);
+export default connect(mapStateToProps, mapDispatchToProps)(Index);
 
 const getWarnMsg = (allowed, copyrightClass) => {
     const result = { warnExt: '', title: '', desc: '' };
@@ -131,13 +127,15 @@ const getWarnMsg = (allowed, copyrightClass) => {
         result.warnExt = CommonUtils.getLang('Menus.sound_upload_warn_1');
         result.title = CommonUtils.getLang('Menus.file_upload_warn_title_sound');
         result.desc = CommonUtils.getLang('Menus.file_upload_warn_desc_sound');
-    }
-    if (allowed.object && allowed.image) {
+    } else if (allowed.table) {
+        result.warnExt = CommonUtils.getLang('Menus.table_upload_warn_1');
+        result.title = CommonUtils.getLang('Menus.file_upload_warn_title_table');
+        result.desc = CommonUtils.getLang('Menus.file_upload_warn_desc_table');
+    } else if (allowed.object && allowed.image) {
         result.warnExt = CommonUtils.getLang('Menus.sprite_upload_warn');
         result.title = CommonUtils.getLang('Menus.file_upload_warn_title_image');
         result.desc = CommonUtils.getLang('Menus.file_upload_warn_desc_image');
-    }
-    if (!allowed.object && allowed.image) {
+    } else if (!allowed.object && allowed.image) {
         result.warnExt = CommonUtils.getLang('Menus.picture_upload_warn_1');
         result.title = CommonUtils.getLang('Menus.file_upload_warn_title_image');
         result.desc = CommonUtils.getLang('Menus.file_upload_warn_desc_image');

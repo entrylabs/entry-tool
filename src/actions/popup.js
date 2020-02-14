@@ -4,6 +4,16 @@ export const APPLY_SELECTED_LIST = 'APPLY_SELECTED_LIST';
 export const APPLY_UPLOAD_LIST = 'APPLY_UPLOAD_LIST';
 export const INIT_STATE = 'INIT_STATE';
 export const API_FAIL = 'API_FAIL';
+export const OPEN_MODAL = 'OPEN_MODAL';
+export const CLOSE_MODAL = 'CLOSE_MODAL';
+
+export const openModal = (data) => (dispatch) => {
+    dispatch({ type: OPEN_MODAL, data });
+};
+
+export const closeModal = () => (dispatch) => {
+    dispatch({ type: CLOSE_MODAL });
+};
 
 export const closePopup = () => (dispatch) => {
     dispatch({ type: CLOSE_POPUP });

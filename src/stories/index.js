@@ -15,30 +15,45 @@ import Backpack from '../components/widget/Backpack';
 import Sortable from '../components/widget/sortable';
 import ContextMenu from '../components/widget/contextMenu';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
-import Theme from '@utils/Theme';
 import { action } from '@storybook/addon-actions';
 import httpService from '../config/axios';
+import 'tui-grid/dist/tui-grid.css';
 import {
     PROJECTS_SAMPLE,
     SPRITE_SAMPLE,
     EXPANSION_SAMPLE,
     SOUND_SAMPLE,
+    TABLE_INFO_SAMPLE,
+    TABLE_SAMPLE2,
+    TABLE_SAMPLE3,
 } from '../constants/sample';
 
 import configureStore from '../store';
+import Chart from '../components/widget/Chart';
+import Table from '../components/widget/Table';
+import ModalChart from '../components/widget/modalChart';
+
+import DataSelect from '../components/ai_layout/DataSelect';
+import DataUpload from '../components/ai_layout/DataUpload';
+import DataDetail from '../components/ai_layout/DataDetail';
+import DataAnalytics from '../components/editor/dataAnalytics/DataAnalytics';
+import Theme from '@utils/Theme';
 
 const store = configureStore();
 httpService.setupInterceptors('http://localhost:4000');
 export default function Provider({ story }) {
     return <ReduxProvider store={store}>{story}</ReduxProvider>;
 }
-Theme.type = 'entryline';
+Theme.type = 'entry';
 storiesOf('Popup', module)
     .addDecorator((story) => <Provider story={story()} />)
     .add('전체', () => <Sample />)
     .add('툴팁', () => <Tooltips />)
     .add('확장블록', () => <Popup type="expansion" data={EXPANSION_SAMPLE} />)
-    .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE} />)
+    .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE} uploads={SOUND_SAMPLE} />)
+    .add('데이터 테이블', () => (
+        <Popup type="table" data={TABLE_INFO_SAMPLE} uploads={[TABLE_SAMPLE2]} />
+    ))
     .add('오브젝트추가하기', () => <Popup type="sprite" data={SPRITE_SAMPLE} />)
     .add('모양추가', () => <Popup type="picture" data={SPRITE_SAMPLE} />)
     .add('모양 가져오기', () => <Popup type="paint" data={SPRITE_SAMPLE} />)
@@ -103,7 +118,68 @@ wigetStories
     .add('LED피커', () => <LedPicker />)
     .add('드롭다운', () => (
         <Dropdown
-            items={[[1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9]]}
+            items={[
+                [1, 1],
+                [2, 2],
+                [3, 3],
+                [4, 4],
+                [5, 5],
+                [6, 6],
+                [7, 7],
+                [8, 8],
+                [9, 9],
+            ]}
+        />
+    ))
+    .add('드롭다운(체크박스)', () => (
+        <Dropdown
+            multiple
+            checkedIndex={[1, 3, 5]}
+            items={[
+                [10, 100],
+                [20, 200],
+                [30, 300],
+                [40, 400],
+                [50, 500],
+                [60, 600],
+                [70, 700],
+                [80, 800],
+                [90, 900],
+            ]}
+            onChange={(a, b, c) => {
+                console.log(a, b, c);
+                action('onChange');
+            }}
+            onOutsideClick={(a, b, c) => {
+                console.log(a, b, c);
+                action('onOutsideClick');
+            }}
+        />
+    ))
+    .add('드롭다운(체크박스 & 모두선택)', () => (
+        <Dropdown
+            multiple
+            showSelectAll={true}
+            checkedIndex={[1, 3, 5]}
+            items={[
+                [10, 100],
+                [20, 200],
+                [30, 300],
+                [40, 400],
+                [50, 500],
+                [60, 600],
+                [70, 700],
+                [80, 800],
+                [90, 900],
+            ]}
+            onChange={(a, b, c) => {
+                console.log(a, b, c);
+                action('onChange');
+            }}
+            onOutsideClick={(a, b, c) => {
+                console.log(a, b, c);
+                action('onOutsideClick');
+            }}
         />
     ))
     .add('로딩바', () => (
@@ -230,3 +306,73 @@ wigetStories
             />
         );
     });
+
+storiesOf('AiLayout', module)
+    .addDecorator((story) => <Provider story={story()} />)
+    .add('테이블 추가하기 - 데이터 선택', () => <DataSelect />)
+    .add('테이블 추가하기 - 데이터 선택 딤드', () => <DataSelect Dimmed />)
+    .add('테이블 추가하기 - 데이터 업로드', () => <DataUpload />)
+    .add('데이터 상세 - 요약', () => <DataDetail />)
+    .add('데이터 상세 - 데이터 없음', () => <DataDetail DetailState="DataOff" />)
+    .add('데이터 상세 - 테이블', () => <DataDetail DetailState="Table" />)
+    .add('데이터 상세 - 차트', () => <DataDetail DetailState="Chart" />)
+    .add('데이터 상세 - 차트 범례 OFF', () => <DataDetail DetailState="LegendOff" />)
+    .add('데이터 상세 - 차트 범례 삭제버튼', () => <DataDetail DetailState="LegendDel" />)
+    .add('데이터 상세 - 차트 데이터 없음', () => <DataDetail DetailState="ChartDataOff" />)
+    .add('차트', () => (
+        <Chart table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} type="line" />
+    ))
+    .add('차트팝업', () => (
+        <ModalChart
+            tables={[
+                ['테이블1', 'a2vx'],
+                ['테이블2', 'ewv5'],
+            ]}
+            source={TABLE_SAMPLE2}
+        />
+    ))
+    .add('바차트', () => (
+        <Chart
+            table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]}
+            chart={{
+                type: 'bar',
+                xIndex: 0,
+                categoryIndexes: [1, 2],
+            }}
+        />
+    ))
+    .add('라인차트', () => (
+        <Chart
+            table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]}
+            chart={{
+                type: 'line',
+                xIndex: 0,
+                categoryIndexes: [1, 2],
+            }}
+        />
+    ))
+    .add('파이차트', () => (
+        <Chart
+            table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]}
+            chart={{
+                type: 'pie',
+                xIndex: 0,
+                categoryIndexes: [1],
+            }}
+        />
+    ))
+    .add('분산차트', () => (
+        <Chart
+            table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]}
+            chart={{
+                type: 'scatter',
+                xIndex: 1,
+                yIndex: 2,
+                categoryIndexes: [0],
+            }}
+        />
+    ))
+    .add('테이블', () => (
+        <Table table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]} editor={'text'} />
+    ))
+    .add('DataAnalytics', () => <DataAnalytics table={[[]]} />);

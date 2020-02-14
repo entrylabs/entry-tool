@@ -156,6 +156,10 @@ input[type='checkbox']:checked + .imbtn_pop_checked:before {
     background: url(#{$imageDir}/ico_pop_sound_thmb.png) no-repeat;
     background-size: 64px auto;
 }
+.imico_pop_data_thmb:before {
+    background: url(#{$imageDir}/ico_pop_data_thmb.png) no-repeat;
+    background-size: 64px auto;
+}
 
 .imico_entrylogo {
     background: url(#{$imageDir}/ico_pop_entrylogo.png) no-repeat;
@@ -184,6 +188,10 @@ input[type='checkbox']:checked + .imbtn_pop_checked:before {
 
 .imico_pop_draw_thmb {
     background: url(#{$imageDir}/ico_pop_draw_thmb.png) no-repeat;
+    background-size: 160px auto;
+}
+.imico_pop_table_thmb {
+    background: url(#{$imageDir}/ico_pop_table_thmb.svg) no-repeat;
     background-size: 160px auto;
 }
 .imico_pop_mywrite_thmb {

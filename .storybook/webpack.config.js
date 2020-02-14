@@ -7,12 +7,23 @@ module.exports = {
         rules: [
             {
                 test: /\.(css|scss)$/,
-                include: path.resolve('./node_modules/react-custom-scroll/'),
+                include: [
+                    path.resolve('./node_modules/react-custom-scroll/'),
+                    path.resolve('./node_modules/tui-grid/'),
+                    path.resolve('./node_modules/billboard.js/'),
+                    path.resolve('./node_modules/@entrylabs/modal/'),
+                    path.resolve('./src/assets/entry/scss/widget/insight.css'),
+                ],
                 use: [require.resolve('style-loader'), require.resolve('css-loader')],
             },
             {
-                test: /\.(css|scss)$/,
-                exclude: path.resolve('./node_modules/react-custom-scroll/'),
+                test: /\.(scss)$/,
+                exclude: [
+                    path.resolve('./node_modules/react-custom-scroll/'),
+                    path.resolve('./node_modules/tui-grid/'),
+                    path.resolve('./node_modules/billboard.js/'),
+                    path.resolve('./node_modules/@entrylabs/modal/'),
+                ],
                 use: [
                     require.resolve('style-loader'),
                     {

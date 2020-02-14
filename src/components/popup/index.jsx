@@ -13,6 +13,7 @@ import { DEFAULT_OPTIONS } from '../../constants';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 import root from 'window-or-global';
+import Modal from './Modal';
 
 class Sprite extends Component {
     constructor(props) {
@@ -57,10 +58,10 @@ class Sprite extends Component {
         root.history.back();
     }
 
-    setContent = function() {
-        const { opt = {}, writeBoxOption, data: dataObj, uploads: uploaded } = this.property;
+    setContent() {
+        const { opt = {}, writeBoxOption, data: dataObj, uploads: uploaded, type } = this.property;
         const { imageBaseUrl: expsnsionIconBaseUrl } = this.property;
-        const { isDrawVector, multiSelect, search: searchOption } = opt;
+        const { isDrawVector, multiSelect, showSelected, search: searchOption } = opt;
         const { navigation: selected } = this.state;
         const navSettings = {
             ...this.property,
@@ -77,7 +78,7 @@ class Sprite extends Component {
         let view = <div>empty</div>;
         switch (selected) {
             case 'select':
-                view = <Select {...this.property} multiSelect={multiSelect} data={data} />;
+                view = <Select {...this.property} multiSelect={multiSelect} showSelected={showSelected} data={data} />;
                 navigation = <Navigation {...navSettings} isDrawVector={isDrawVector} />;
                 break;
             case 'upload':
@@ -85,18 +86,19 @@ class Sprite extends Component {
                 navigation = <Navigation {...navSettings} searchOption={false} />;
                 break;
             case 'draw':
-                view = <Draw />;
+                view = <Draw type={type} />;
                 navigation = <Navigation {...navSettings} searchOption={false} />;
                 break;
             case 'write':
                 view = <WriteBox fontOption={writeBoxOption} />;
                 navigation = <Navigation {...navSettings} searchOption={false} />;
                 break;
-            case 'expansion':
+            case 'expansion': {
                 const url = expsnsionIconBaseUrl || '/lib/entry-js/images/hardware/';
                 navigation = null;
                 view = <Select type={'bigicon'} imageBaseUrl={url} data={data} />;
                 break;
+            }
             case 'aiUtilize':
                 const aiImageurl = expsnsionIconBaseUrl || '/lib/entry-js/images/aiUtilize/';
                 navigation = null;
@@ -116,7 +118,7 @@ class Sprite extends Component {
                 {view}
             </>
         );
-    };
+    }
 
     render() {
         return (
@@ -133,6 +135,7 @@ class Sprite extends Component {
                     </button>
                 </header>
                 {this.setContent()}
+                <Modal />
             </div>
         );
     }
@@ -147,7 +150,4 @@ const mapDispatchToProps = (dispatch) => ({
     initState: () => dispatch(initState()),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Sprite);
+export default connect(mapStateToProps, mapDispatchToProps)(Sprite);
