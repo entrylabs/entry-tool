@@ -122,7 +122,13 @@ const Table = (props) => {
 
     const handleClick = useCallback(
         (event) => {
-            const { instance, columnName, nativeEvent, targetType = 'columnHeader' } = event;
+            const {
+                instance,
+                columnName,
+                nativeEvent,
+                targetType = 'columnHeader',
+                rowKey,
+            } = event;
 
             if (!nativeEvent) {
                 return;
@@ -141,6 +147,9 @@ const Table = (props) => {
                     });
                     return table;
                 });
+            }
+            if (targetType === 'cell' && columnName && rowKey > -1) {
+                instance.startEditing(rowKey, columnName);
             }
         },
         [setTable, setShowPrompt]
