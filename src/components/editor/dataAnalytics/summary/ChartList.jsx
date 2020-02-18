@@ -47,7 +47,7 @@ const ChartList = (props) => {
         return charts.map((chart, index) => (
             <li
                 className={Styles[chart.type]}
-                key={`chart_${generateHash()}`}
+                key={`chart_li_${generateHash()}`}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 onClick={handleClickChart(CHART, index)}
@@ -69,6 +69,8 @@ const ChartList = (props) => {
                             },
                         },
                     }}
+                    shortForm={true}
+                    key={`chart_${generateHash()}`}
                 />
             </li>
         ));

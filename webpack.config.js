@@ -5,7 +5,6 @@ const SafeUmdPlugin = require('safe-umd-webpack-plugin');
 const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
-// const postcssPrefixer = require('postcss-prefixer');
 const options = {};
 if (process.env.NODE_ENV === 'watch') {
     options.watch = true;
@@ -36,7 +35,7 @@ const config = {
             {
                 test: /\.jsx?$|\.js?$/,
                 use: 'babel-loader',
-                exclude: [path.resolve('./node_modules/')],
+                exclude: /node_modules\/(?!(d3-[\w]*)\/.*)/,
             },
 
             {
@@ -88,11 +87,6 @@ const config = {
                                     remove: false,
                                 }),
                             ],
-                            // plugins: [
-                            //     postcssPrefixer({
-                            //         prefix: 'entry-modal-',
-                            //     }),
-                            // ],
                         },
                     },
                     {
@@ -120,18 +114,6 @@ const config = {
         },
     },
     externals: {
-        // react: {
-        //     commonjs: 'react',
-        //     commonjs2: 'react',
-        //     amd: 'react',
-        //     root: 'React',
-        // },
-        // 'react-dom': {
-        //     commonjs: 'react-dom',
-        //     commonjs2: 'react-dom',
-        //     amd: 'react-dom',
-        //     root: 'ReactDOM',
-        // },
         lodash: {
             commonjs: 'lodash',
             commonjs2: 'lodash',

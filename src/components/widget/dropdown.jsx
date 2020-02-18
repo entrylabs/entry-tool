@@ -8,6 +8,8 @@ import CheckBox from '@components/common/CheckBox';
 import root from 'window-or-global';
 import Theme from '@utils/Theme';
 
+const SELECT_ALL = 'SELECT_ALL';
+
 class Dropdown extends Component {
     get DROPDOWN_WIDTH_MARGIN() {
         return 25;
@@ -83,9 +85,22 @@ class Dropdown extends Component {
         }
     };
 
-    handleItemCheckChange = (item, index) => {
+    handleChange = (item, index, isChecked) => {
+        const { onChange } = this.props;
+        onChange && onChange(item, index, isChecked);
+    };
+
+    handleItemCheckChange = (item, index, value) => {
         this.setState((prev) => {
+            const { items } = this.props;
             const { checkedIndex = [] } = prev;
+            if (value === SELECT_ALL) {
+                const isChecked = checkedIndex.length === items.length;
+                this.handleChange(item, SELECT_ALL, isChecked);
+                return isChecked
+                    ? { ...prev, checkedIndex: [] }
+                    : { ...prev, checkedIndex: items.map((_item, index) => index) };
+            }
             const target = checkedIndex.indexOf(index);
             let isChecked = false;
             if (target > -1) {
@@ -94,33 +109,40 @@ class Dropdown extends Component {
                 checkedIndex.push(index);
                 isChecked = true;
             }
-            const { onChange } = this.props;
-            if (onChange) {
-                onChange(item, index, isChecked);
-            }
+            this.handleChange(item, index, isChecked);
             return { ...prev, checkedIndex };
         });
     };
 
     makeDropdownItem() {
-        const { items, multiple } = this.props;
+        const { items = [], multiple, showSelectAll } = this.props;
         const { checkedIndex = [] } = this.state;
         const handleEvent = multiple ? this.handleItemCheckChange : this.handleItemClick;
-        return items.map((item, index) => {
+        const selectAll = [CommonUtils.getLang('Workspace.select_all'), SELECT_ALL];
+        return (showSelectAll ? [selectAll, ...items] : items).map((item, index) => {
             const [text, value, style] = item;
-            const checked = checkedIndex.includes(index);
+            const indexWithoutSelectAll = showSelectAll ? index - 1 : index;
             return (
                 <div
                     key={value}
                     value={value}
-                    index={index}
+                    index={indexWithoutSelectAll}
                     style={style}
                     className={this.theme.item}
                     onClick={() => {
-                        handleEvent(item, index);
+                        handleEvent(item, indexWithoutSelectAll, value);
                     }}
                 >
-                    {multiple && <CheckBox className={this.theme.checkbox} checked={checked} />}
+                    {multiple && (
+                        <CheckBox
+                            className={this.theme.checkbox}
+                            checked={
+                                value === SELECT_ALL
+                                    ? checkedIndex.length === items.length
+                                    : checkedIndex.includes(indexWithoutSelectAll)
+                            }
+                        />
+                    )}
                     {text}
                 </div>
             );

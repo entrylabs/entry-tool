@@ -1,5 +1,4 @@
 import React, { createContext, useReducer, useEffect } from 'react';
-import { SUMMARY } from '../Constants';
 import { dataAnalyticsReducer } from '../reducer/DataAnalyticsReducer';
 
 export const DataAnalyticsContext = createContext();

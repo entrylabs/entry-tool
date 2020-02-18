@@ -5,7 +5,7 @@ import DataAnalyticsContextProvider from './context/DataAnalyticsContext';
 const DataAnalytics = (props) => {
     const { table = {}, onSubmitDataAnalytics = () => {}, onToastDataAnalytics = () => {} } = props;
     const { name = '', fields, origin = [], chart = [], id, tab } = table;
-    const dataTable = fields ? [fields, ...origin] : [[]];
+    const dataTable = fields ? [[...fields], ...origin] : [[]];
 
     const data = {
         id,

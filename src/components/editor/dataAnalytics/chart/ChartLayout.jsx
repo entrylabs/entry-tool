@@ -4,40 +4,16 @@ import YAxis from './YAxis';
 import Legend from './Legend';
 import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
-import { isString, isZipable, categoryKeys, CommonUtils } from '@utils/Common';
+import { isZipable, CommonUtils, getNumberColumnIndexes } from '@utils/Common';
 
 import Styles from '@assets/entry/scss/popup.scss';
 
 const { generateHash } = CommonUtils;
 
-const getNumberColumnIndexes = (table, banIndexes = []) =>
-    _.reduce(
-        table[0],
-        // eslint-disable-next-line no-confusing-arrow
-        (prev, curr, index) =>
-            !_.some(banIndexes, (banIndex) => index === banIndex) &&
-            !_.some(table.slice(1), (row) => isString(row[index]))
-                ? [...prev, index]
-                : prev,
-        []
-    );
-
 const getXAxis = (table, type) =>
     // eslint-disable-next-line prettier/prettier
     (type === 'scatter' ? getNumberColumnIndexes(table) : table[0].map((col, index) => index));
 const getYAxis = (table, xIndex) => getNumberColumnIndexes(table, [xIndex]);
-const getCategory = (table, xIndex, yIndex, categoryIndexes, type) => {
-    switch (type) {
-        case 'scatter':
-            return categoryKeys(table, categoryIndexes[0]);
-        case 'pie':
-            return categoryKeys(table, xIndex);
-        default:
-            return yIndex === -1
-                ? getNumberColumnIndexes(table, [xIndex])
-                : categoryKeys(table, categoryIndexes[0]);
-    }
-};
 
 const ChartLayout = () => {
     const { dataAnalytics } = useContext(DataAnalyticsContext);
@@ -46,7 +22,13 @@ const ChartLayout = () => {
     const { xIndex = -1, yIndex = -1, categoryIndexes = [], type } = chart;
     const xAxis = getXAxis(table, type);
     const yAxis = getYAxis(table, xIndex);
-    const category = getCategory(table, xIndex, yIndex, categoryIndexes, type);
+    const dropdownItems = _.reduce(
+        table[0],
+        // eslint-disable-next-line no-confusing-arrow
+        (prev, curr, index) =>
+            !_.some([xIndex, yIndex], (banIndex) => index === banIndex) ? [...prev, index] : prev,
+        []
+    );
 
     return (
         <div className={Styles.cont_inner}>
@@ -55,14 +37,13 @@ const ChartLayout = () => {
                     <>
                         <Legend
                             disabled={
-                                !category.length ||
                                 xIndex === -1 ||
-                                (type === 'scatter' && yIndex === -1)
+                                (type === 'scatter' && yIndex === -1) ||
+                                !dropdownItems.length
                             }
                             checkBox={yIndex === -1 && type !== 'pie' && type !== 'scatter'}
-                            selectedCategoryIndexes={categoryIndexes}
-                            categoryIndexes={getNumberColumnIndexes(table, [xIndex, yIndex])}
-                            category={category}
+                            selectedLegend={categoryIndexes}
+                            dropdownItems={dropdownItems}
                         />
 
                         {type === 'pie' ? null : (

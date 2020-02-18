@@ -82,11 +82,19 @@ const Table = (props) => {
         rowHeaders = [{ type: 'rowNum', width: 98 }],
         needRowHeader = true,
         onToastDataAnalytics = () => {},
+        isFullScreen,
     } = props;
 
     useEffect(() => {
         setTable(tableProps);
     }, [tableProps]);
+
+    useEffect(() => {
+        const { current = {} } = gridRef;
+        if (current.getInstance) {
+            current.getInstance().refreshLayout();
+        }
+    }, [isFullScreen]);
 
     const handleNameChange = (index) => (name) => {
         if (
@@ -114,30 +122,41 @@ const Table = (props) => {
 
     const handleClick = useCallback(
         (event) => {
-            if (!table) {
+            const {
+                instance,
+                columnName,
+                nativeEvent,
+                targetType = 'columnHeader',
+                rowKey,
+            } = event;
+
+            if (!nativeEvent) {
                 return;
             }
-
-            const { instance, columnName, nativeEvent } = event;
             const { which } = nativeEvent;
             if (!columnName) {
                 instance.finishEditing();
             } else if (which === LEFT_CLICK && isColumnDblClick(event)) {
                 const colIndex = instance.getIndexOfColumn(columnName);
-                const [fields] = table;
-                setShowPrompt({
-                    showPrompt: true,
-                    promptText: fields[colIndex],
-                    promptFunction: handleNameChange(colIndex),
+                setTable((table = [[]]) => {
+                    const [fields] = table;
+                    setShowPrompt({
+                        showPrompt: true,
+                        promptText: fields[colIndex],
+                        promptFunction: handleNameChange(colIndex),
+                    });
+                    return table;
                 });
             }
+            if (targetType === 'cell' && columnName && rowKey > -1) {
+                instance.startEditing(rowKey, columnName);
+            }
         },
-        [table, setTable, setShowPrompt]
+        [setTable, setShowPrompt]
     );
 
     const makeContextMenu = (event) => {
         const { targetType, columnName, rowKey, instance } = event;
-        const a = table;
         if (targetType === 'rowHeader') {
             const rowIndex = instance.getIndexOfRow(rowKey) + 1;
             return [
@@ -145,8 +164,8 @@ const Table = (props) => {
                     text: CommonUtils.getLang('DataAnalytics.add_row_above'),
                     callback: () => {
                         setTable((table) => {
-                            table.splice(rowIndex, 0, Array(table[0].length).fill(0));
-                            return table;
+                            tableProps.splice(rowIndex, 0, Array(table[0].length).fill(0));
+                            return [...tableProps];
                         });
                     },
                 },
@@ -154,8 +173,8 @@ const Table = (props) => {
                     text: CommonUtils.getLang('DataAnalytics.add_row_below'),
                     callback: () => {
                         setTable((table) => {
-                            table.splice(rowIndex + 1, 0, Array(table[0].length).fill(0));
-                            return table;
+                            tableProps.splice(rowIndex + 1, 0, Array(table[0].length).fill(0));
+                            return [...tableProps];
                         });
                     },
                 },
@@ -196,7 +215,6 @@ const Table = (props) => {
                 {
                     text: CommonUtils.getLang('DataAnalytics.edit_attribute_name'),
                     callback: () => {
-                        console.log(table, a, tableProps);
                         const colIndex = instance.getIndexOfColumn(columnName);
                         const [fields] = tableProps;
                         setShowPrompt({
@@ -270,9 +288,12 @@ const Table = (props) => {
             const { instance, columnName, rowKey } = event;
             const colIndex = instance.getIndexOfColumn(columnName);
             const rowIndex = instance.getIndexOfRow(rowKey);
-            tableProps[rowIndex + 1][colIndex] = event.value;
+            setTable((table) => {
+                table[rowIndex + 1][colIndex] = event.value;
+                return [...table];
+            });
         },
-        [tableProps]
+        [setTable]
     );
 
     const data = getData(table);
