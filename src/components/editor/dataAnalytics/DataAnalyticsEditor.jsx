@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import ReactDOM from 'react-dom';
 import Header from './Header';
 import Summary from './summary/Summary';
 import TableEditor from './TableEditor';
@@ -6,6 +7,11 @@ import ChartEditor from './chart/ChartEditor';
 import { DataAnalyticsContext } from './context/DataAnalyticsContext';
 import { SUMMARY, TABLE, CHART, TAB_ITEMS } from './Constants';
 import Styles from '@assets/entry/scss/popup.scss';
+
+const Portal = ({ children }) => {
+    const el = document.querySelector('body');
+    return ReactDOM.createPortal(children, el);
+};
 
 const DataAnalyticsEditor = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
@@ -19,10 +25,16 @@ const DataAnalyticsEditor = () => {
         });
     };
 
-    let content;
-    if (!table) {
-        content = null;
-    } else {
+    const header = (
+        <Header
+            selected={tab}
+            tabItems={TAB_ITEMS}
+            isFullScreen={isFullScreen}
+            onFullScreenClick={handleFullScreenClick}
+        />
+    );
+    let content = null;
+    if (table) {
         switch (tab) {
             case SUMMARY:
                 content = <Summary />;
@@ -38,20 +50,16 @@ const DataAnalyticsEditor = () => {
         }
     }
 
-    return (
-        <div
-            className={
-                isFullScreen
-                    ? `${Styles.data_detail_wrap} ${Styles.full}`
-                    : `${Styles.data_detail_wrap}`
-            }
-        >
-            <Header
-                selected={tab}
-                tabItems={TAB_ITEMS}
-                isFullScreen={isFullScreen}
-                onFullScreenClick={handleFullScreenClick}
-            />
+    return isFullScreen ? (
+        <Portal>
+            <div className={`${Styles.data_detail_wrap} ${Styles.full}`}>
+                {header}
+                {content}
+            </div>
+        </Portal>
+    ) : (
+        <div className={`${Styles.data_detail_wrap}`}>
+            {header}
             {content}
         </div>
     );
