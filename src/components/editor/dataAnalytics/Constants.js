@@ -15,7 +15,7 @@ export const GRAPH_COLOR = [
     '#4f80ff',
     '#ffb500',
     '#8274ff',
-    '#5096f5',
+    '#78D5D3',
     '#32d27d',
     '#fc7e01',
     '#4562f5',

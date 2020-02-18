@@ -147,6 +147,8 @@ const Chart = (props) => {
     const { type = 'bar', xIndex = -1, yIndex, categoryIndexes = [] } = chart;
     const id = `c${generateHash()}`;
 
+    let content = '';
+
     if (!isDrawable(table)) {
         return shortForm ? (
             <div className={Styles.data_add_box}>
@@ -187,18 +189,20 @@ const Chart = (props) => {
         }
     }, []);
 
-    let content = null;
-
-    if (!categoryIndexes.length) {
-        content = CommonUtils.getLang('DataAnalytics.select_legend');
-    }
-
     if (xIndex === -1) {
         content = CommonUtils.getLang('DataAnalytics.select_x_axis');
-    } else if (isZipable(table, xIndex) && yIndex === -1 && type !== 'scatter') {
+    } else if (
+        isZipable(table, xIndex) &&
+        yIndex === -1 &&
+        !categoryIndexes.length &&
+        type !== 'scatter' &&
+        type !== 'pie'
+    ) {
         content = CommonUtils.getLang('DataAnalytics.select_y_axis_or_legend');
     } else if (yIndex === -1 && type === 'scatter') {
         content = CommonUtils.getLang('DataAnalytics.select_y_axis');
+    } else if (!categoryIndexes.length) {
+        content = CommonUtils.getLang('DataAnalytics.select_legend');
     }
 
     if (!content) {
