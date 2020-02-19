@@ -1,3 +1,5 @@
+import { CommonUtils } from 'lib/utils/Common';
+
 export const dataAnalyticsReducer = (state, action) => {
     switch (action.type) {
         case 'SET_DATA':
@@ -37,6 +39,7 @@ export const dataAnalyticsReducer = (state, action) => {
                     ...state.charts,
                     {
                         type: action.chartType,
+                        title: `${state.title}_${CommonUtils.getLang('DataAnalytics.chart_title')}`,
                     },
                 ],
             };
