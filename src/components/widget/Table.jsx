@@ -181,13 +181,19 @@ const Table = (props) => {
                 {
                     text: CommonUtils.getLang('DataAnalytics.delete_row'),
                     callback: () => {
-                        if (table.length > 1) {
-                            setTable((table) => {
+                        setTable((table) => {
+                            if (table.length <= 2) {
+                                onToastDataAnalytics({
+                                    title: CommonUtils.getLang('DataAnalytics.do_not_delete_row'),
+                                    content: CommonUtils.getLang(
+                                        'DataAnalytics.rows_cannot_less_one'
+                                    ),
+                                });
+                            } else {
                                 table.splice(rowIndex, 1);
-                                return table;
-                            });
-                        } else {
-                        }
+                            }
+                            return table;
+                        });
                     },
                 },
             ];
