@@ -40,14 +40,6 @@ export const dataAnalyticsReducer = (state, action) => {
                     },
                 ],
             };
-        case 'EDIT_CHART': {
-            const charts = [...state.charts];
-            charts[action.index] = action.chart;
-            return {
-                ...state,
-                charts,
-            };
-        }
         case 'DELETE_CHART': {
             const charts = [...state.charts];
             return {
