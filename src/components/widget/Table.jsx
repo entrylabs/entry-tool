@@ -242,13 +242,18 @@ const Table = (props) => {
     const handleMousedown = useCallback(
         (event) => {
             const { nativeEvent } = event;
-            const { which, x, y } = nativeEvent;
+            const { which, clientX, clientY } = nativeEvent;
             if (which !== RIGHT_CLICK) {
                 return;
             }
             const contextMenu = makeContextMenu(event);
             if (contextMenu) {
-                setContextMenuOption(() => ({ x, y, contextMenu, isVisible: true }));
+                setContextMenuOption(() => ({
+                    x: clientX,
+                    y: clientY,
+                    contextMenu,
+                    isVisible: true,
+                }));
             }
         },
         [setTable]
