@@ -138,6 +138,9 @@ const Table = (props) => {
                 instance.finishEditing();
             } else if (which === LEFT_CLICK && isColumnDblClick(event)) {
                 const colIndex = instance.getIndexOfColumn(columnName);
+                if (colIndex < 0) {
+                    return;
+                }
                 setTable((table = [[]]) => {
                     const [fields] = table;
                     setShowPrompt({
