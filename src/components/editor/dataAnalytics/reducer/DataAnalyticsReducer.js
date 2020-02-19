@@ -1,4 +1,4 @@
-import { CommonUtils } from 'lib/utils/Common';
+import { CommonUtils } from '@utils/Common';
 
 export const dataAnalyticsReducer = (state, action) => {
     switch (action.type) {
