@@ -73,9 +73,6 @@ const ChartLayout = () => {
                     </>
                 ) : (
                     <div className={Styles.data_add_box}>
-                        <a href="#" onClick={(event) => event.preventDefault()}>
-                            <span className={Styles.blind}>차트 추가하기</span>
-                        </a>
                         <p>{CommonUtils.getLang('DataAnalytics.add_chart_first')}</p>
                     </div>
                 )}
