@@ -213,18 +213,14 @@ const Chart = (props) => {
         );
     }
 
-    if (shortForm) {
-        return (
-            <div className={Styles.data_add_box}>
-                <a href="#" onClick={(e) => e.preventDefault()}>
-                    <span className={Styles.blind}>{content}</span>
-                </a>
-                <p>{content}</p>
-            </div>
-        );
-    }
-
-    return (
+    return shortForm ? (
+        <div className={Styles.data_add_box}>
+            <a href="#" onClick={(e) => e.preventDefault()}>
+                <span className={Styles.blind}>{content}</span>
+            </a>
+            <p>{content}</p>
+        </div>
+    ) : (
         <div className={Styles.graph_cont}>
             <div id={id} style={{ height: '100%' }}>
                 <div className={Styles.alert}>{content}</div>
