@@ -42,8 +42,8 @@ const isChangeCharts = (before, current) => {
         ) {
             return true;
         }
-        const { categoryIndexes: beforeLegend } = beforeCharts[i];
-        const { categoryIndexes: currentLegend } = currentCharts[i];
+        const { categoryIndexes: beforeLegend = [] } = beforeCharts[i];
+        const { categoryIndexes: currentLegend = [] } = currentCharts[i];
         if (beforeLegend.length !== currentLegend.length) {
             return true;
         }
@@ -55,7 +55,7 @@ const isChangeCharts = (before, current) => {
     }
 };
 
-const isChangeDataAnaytics = (before, current) =>
+const isChangeDataAnalytics = (before, current) =>
     isChangeTitle(before, current) ||
     isChangeTable(before, current) ||
     isChangeCharts(before, current);
@@ -89,7 +89,7 @@ const DataAnalyticsContextProvider = (props) => {
 
     if (
         beforeAnalytics.id === dataAnalytics.id &&
-        isChangeDataAnaytics(beforeAnalytics, dataAnalytics)
+        isChangeDataAnalytics(beforeAnalytics, dataAnalytics)
     ) {
         onChangeDataAnalytics(dataAnalytics);
     }
