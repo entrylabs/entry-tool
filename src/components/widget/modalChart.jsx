@@ -19,7 +19,7 @@ const ModalChart = (props) => {
         select(index);
     };
     const data = [fields, ...origin];
-    const selectedChart = chart[selected];
+    const selectedChart = chart && chart[selected];
     return (
         <div className={theme.dimmed}>
             <div className={theme.center}>
