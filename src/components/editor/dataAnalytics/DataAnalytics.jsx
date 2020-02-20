@@ -3,7 +3,12 @@ import DataAnalyticsEditor from './DataAnalyticsEditor';
 import DataAnalyticsContextProvider from './context/DataAnalyticsContext';
 
 const DataAnalytics = (props) => {
-    const { table = {}, onSubmitDataAnalytics = () => {}, onToastDataAnalytics = () => {} } = props;
+    const {
+        table = {},
+        onSubmitDataAnalytics = () => {},
+        onToastDataAnalytics = () => {},
+        onChangeDataAnalytics = () => {},
+    } = props;
     const { name = '', fields, origin = [], chart = [], id, tab } = table;
     const dataTable = fields ? [[...fields], ...origin] : [[]];
 
@@ -15,6 +20,7 @@ const DataAnalytics = (props) => {
         charts: chart,
         onToastDataAnalytics,
         onSubmitDataAnalytics,
+        onChangeDataAnalytics,
     };
 
     return (

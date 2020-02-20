@@ -1,5 +1,6 @@
 export const SUBMIT_DATA_ANALYTICS = 'SUBMIT_DATA_ANALYTICS';
 export const TOAST_DATA_ANALYTICS = 'TOAST_DATA_ANALYTICS';
+export const CHANGE_DATA_ANALYTICS = 'CHANGE_DATA_ANALYTICS';
 
 export const onSubmitDataAnalytics = (data) => (dispatch) => {
     dispatch({
@@ -12,5 +13,12 @@ export const onToastDataAnalytics = (message) => (dispatch) => {
     dispatch({
         type: TOAST_DATA_ANALYTICS,
         data: message,
+    });
+};
+
+export const onChangeDataAnalytics = (data) => (dispatch) => {
+    dispatch({
+        type: CHANGE_DATA_ANALYTICS,
+        data,
     });
 };
