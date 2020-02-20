@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { pure } from 'recompose';
 import Theme from '@utils/Theme';
 import Option from '../popup/Contents/Navigation/SearchOption';
@@ -11,14 +11,15 @@ const ModalChart = (props) => {
     const { tables = [], source = {}, setTable, onClose } = props;
     const { chart = [], name, fields = [], origin = [] } = source;
     const [dropdown, setDropdown] = useState('');
-    const [selectedChart, setChart] = useState(chart && chart[0]);
+    const [selected, select] = useState(0);
     const toggleDropDown = (dropdown) => setDropdown(dropdown);
     const chartList = chart.map(({ title }, index) => [title, index]);
     const selectChart = (option) => {
         const [name, index] = option;
-        setChart(chart[index]);
+        select(index);
     };
     const data = [fields, ...origin];
+    const selectedChart = chart[selected];
     return (
         <div className={theme.dimmed}>
             <div className={theme.center}>
