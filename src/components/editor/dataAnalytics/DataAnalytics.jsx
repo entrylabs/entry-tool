@@ -16,7 +16,7 @@ const DataAnalytics = (props) => {
         id,
         tab,
         title: name,
-        table: dataTable,
+        table: dataTable.map((row) => row.map((column) => column)),
         charts: chart,
         onToastDataAnalytics,
         onSubmitDataAnalytics,
