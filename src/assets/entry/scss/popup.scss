@@ -6,6 +6,12 @@
 @import 'common/tooltip';
 
 .popup_wrap {
+    img,
+    fieldset,
+    button {
+        border: 0;
+        vertical-align: top;
+    }
     position: absolute;
     display: -webkit-box;
     display: flex;

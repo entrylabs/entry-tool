@@ -3,6 +3,12 @@
 @import '../common/variables';
 
 .Backpack {
+    img,
+    fieldset,
+    button {
+        border: 0;
+        vertical-align: top;
+    }
     width: 135px;
     height: 100%;
     border-left: 1px solid $coolgray300;
@@ -56,7 +62,7 @@
             right: 4px;
             opacity: 1;
         }
-    
+
         :global(.rcs-inner-handle) {
             border-radius: inherit;
             background-color: $coolgray400;
@@ -194,9 +200,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;    
+        flex-direction: column;
         box-sizing: border-box;
-        
+
         .icon {
             width: 32px;
             height: 32px;
@@ -204,7 +210,7 @@
             background: url('../#{$imageDir}/img_backpack_plus.svg');
             pointer-events: none;
         }
-        
+
         .desc {
             font-family: EntryFont;
             font-size: 12px;

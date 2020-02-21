@@ -6,6 +6,12 @@
 @import 'common/tooltip';
 
 .popup_wrap {
+    img,
+    fieldset,
+    button {
+        border: 0;
+        vertical-align: top;
+    }
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1211,7 +1217,13 @@
             bottom: 0;
             height: 40px;
             font-size: 0; /* Chrome10-25,Safari5.1-6 */
-            background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 1)));
+            background: -webkit-gradient(
+                linear,
+                left top,
+                left bottom,
+                from(rgba(0, 0, 0, 0)),
+                to(rgba(0, 0, 0, 1))
+            );
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
         }
         .section_cont .list .info_bar span {
@@ -2130,7 +2142,7 @@
         &.chart_state .input_inner {
             width: 400px;
         }
-        &.chart_state .input_inner input[type="text"]:disabled {
+        &.chart_state .input_inner input[type='text']:disabled {
             background-color: #f9f9f9;
             color: #cbcbcb;
         }
@@ -2317,12 +2329,14 @@
             li:first-child {
                 margin-left: 0;
             }
-            .on, li:hover {
+            .on,
+            li:hover {
                 -webkit-box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.15),
                     2px 2px 6px 0 rgba(0, 0, 0, 0.17);
                 box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.15), 2px 2px 6px 0 rgba(0, 0, 0, 0.17);
             }
-            .on:before,li:hover:before {
+            .on:before,
+            li:hover:before {
                 border-width: 2px;
                 border-color: #4f80ff;
             }
@@ -2451,7 +2465,6 @@
             height: auto;
             min-height: 552px;
             border-radius: 6px;
-
         }
         .data_add_box a {
             width: 44px;
@@ -2463,7 +2476,9 @@
             padding-top: 10px;
             color: #cbcbcb;
         }
-        .y_legend_box, .x_legend_box,.legend_box {
+        .y_legend_box,
+        .x_legend_box,
+        .legend_box {
             width: 120px;
             border: 1px solid #e2e2e2;
             border-radius: 4px;
@@ -2479,7 +2494,7 @@
             &.disabled .common_legend {
                 background-color: #f9f9f9;
                 color: #cbcbcb;
-                pointer-events: none;            
+                pointer-events: none;
             }
             &.disabled .common_legend:after {
                 background-image: url('#{$imageDir}/icon_legend_more_off.svg');
@@ -2529,14 +2544,13 @@
                 vertical-align: top;
                 content: '';
             }
-            .tooltip_box .chk_box input[type="checkbox"] {
+            .tooltip_box .chk_box input[type='checkbox'] {
                 position: absolute;
                 left: 0;
                 top: 0;
             }
-            .tooltip_box .chk_box input[type="checkbox"]:checked + label:before {
+            .tooltip_box .chk_box input[type='checkbox']:checked + label:before {
                 background-image: url('#{$imageDir}/icon_checkbox_on.svg');
-    
             }
             .legend_list {
                 padding: 2px 0 12px;
@@ -2562,9 +2576,9 @@
                 margin-right: 8px;
                 vertical-align: top;
             }
-            
         }
-        .common_legend, .del_legend {
+        .common_legend,
+        .del_legend {
             display: block;
             overflow: hidden;
             position: relative;
