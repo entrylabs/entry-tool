@@ -7,7 +7,13 @@ import Styles from '@assets/entry/scss/popup.scss';
 
 const TableEditor = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { table, title, onToastDataAnalytics, isFullScreen } = dataAnalytics;
+    const {
+        table,
+        title,
+        onToastDataAnalytics,
+        onChangeDataAnalytics,
+        isFullScreen,
+    } = dataAnalytics;
 
     const handleChangeTitle = (value) => (event) => {
         dispatch({
@@ -29,7 +35,9 @@ const TableEditor = () => {
                         <Table
                             table={table}
                             onToastDataAnalytics={onToastDataAnalytics}
+                            onChangeDataAnalytics={onChangeDataAnalytics}
                             isFullScreen={isFullScreen}
+                            dataAnalytics={dataAnalytics}
                         />
                     </div>
                 </div>

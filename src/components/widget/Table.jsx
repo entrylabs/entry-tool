@@ -82,6 +82,8 @@ const Table = (props) => {
         rowHeaders = [{ type: 'rowNum', width: 98 }],
         needRowHeader = true,
         onToastDataAnalytics = () => {},
+        onChangeDataAnalytics = () => {},
+        dataAnalytics,
         isFullScreen,
     } = props;
 
@@ -112,6 +114,7 @@ const Table = (props) => {
         if (name) {
             setTable((table) => {
                 table[0][index] = name;
+                onChangeDataAnalytics({ ...dataAnalytics, table });
                 return table;
             });
         }
@@ -148,6 +151,7 @@ const Table = (props) => {
                         promptText: fields[colIndex],
                         promptFunction: handleNameChange(colIndex),
                     });
+                    onChangeDataAnalytics({ ...dataAnalytics, table });
                     return table;
                 });
             }
@@ -167,8 +171,10 @@ const Table = (props) => {
                     text: CommonUtils.getLang('DataAnalytics.add_row_above'),
                     callback: () => {
                         setTable((table) => {
-                            tableProps.splice(rowIndex, 0, Array(table[0].length).fill(0));
-                            return [...tableProps];
+                            table.splice(rowIndex, 0, Array(table[0].length).fill(0));
+
+                            onChangeDataAnalytics({ ...dataAnalytics, table });
+                            return [...table];
                         });
                     },
                 },
@@ -176,8 +182,10 @@ const Table = (props) => {
                     text: CommonUtils.getLang('DataAnalytics.add_row_below'),
                     callback: () => {
                         setTable((table) => {
-                            tableProps.splice(rowIndex + 1, 0, Array(table[0].length).fill(0));
-                            return [...tableProps];
+                            table.splice(rowIndex + 1, 0, Array(table[0].length).fill(0));
+
+                            onChangeDataAnalytics({ ...dataAnalytics, table });
+                            return [...table];
                         });
                     },
                 },
@@ -194,6 +202,8 @@ const Table = (props) => {
                                 });
                             } else {
                                 table.splice(rowIndex, 1);
+
+                                onChangeDataAnalytics({ ...dataAnalytics, table });
                             }
                             return table;
                         });
@@ -236,12 +246,15 @@ const Table = (props) => {
                 {
                     text: CommonUtils.getLang('DataAnalytics.delete_attribute'),
                     callback: () => {
-                        setTable((table) =>
-                            table.map((row) => {
+                        setTable((table) => {
+                            const result = table.map((row) => {
                                 row.splice(colIndex, 1);
                                 return row;
-                            })
-                        );
+                            });
+
+                            onChangeDataAnalytics({ ...dataAnalytics, table: result });
+                            return result;
+                        });
                     },
                 },
             ];
@@ -280,8 +293,8 @@ const Table = (props) => {
             return;
         }
 
-        setTable((table) =>
-            table.map((row, index) => {
+        setTable((table) => {
+            const result = table.map((row, index) => {
                 row.splice(
                     colIndex,
                     0,
@@ -293,8 +306,11 @@ const Table = (props) => {
                           )
                 );
                 return row;
-            })
-        );
+            });
+
+            onChangeDataAnalytics({ ...dataAnalytics, table: result });
+            return result;
+        });
     };
 
     const handleEditingFinish = useCallback(
@@ -303,7 +319,10 @@ const Table = (props) => {
             const colIndex = instance.getIndexOfColumn(columnName);
             const rowIndex = instance.getIndexOfRow(rowKey);
             setTable((table) => {
+                const isChange = table[rowIndex + 1][colIndex] != event.value;
                 table[rowIndex + 1][colIndex] = event.value;
+
+                isChange && onChangeDataAnalytics({ ...dataAnalytics, table });
                 return [...table];
             });
         },
