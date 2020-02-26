@@ -12,7 +12,7 @@ const Index = ({ type, goDraw }) => {
         <div className={theme.pop_content}>
             <div className={theme.section_cont}>
                 <h2 className={theme.blind}>DRAW</h2>
-                <div className={theme.cont_box}>
+                <div className={`${theme.cont_box} ${theme.draw}`}>
                     <DrawContent type={type} goDraw={goDraw} theme={theme} />
                 </div>
             </div>
