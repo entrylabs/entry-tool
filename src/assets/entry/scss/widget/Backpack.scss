@@ -56,7 +56,7 @@
             right: 4px;
             opacity: 1;
         }
-    
+
         :global(.rcs-inner-handle) {
             border-radius: inherit;
             background-color: $coolgray400;
@@ -76,11 +76,7 @@
                 border-color: $lightish-blue;
                 background-color: $lightish-blue;
                 .imageWrapper {
-                    width: 76px;
-                    height: 66px;
-                    margin: 1px 1px 0;
-                    border-top-left-radius: 6px;
-                    border-top-right-radius: 6px;
+                    border: 1px solid $lightish-blue;
                 }
                 .closeButton {
                     display: block;
@@ -107,15 +103,15 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding: 5px;
-                width: 78px;
-                height: 67px;
+                box-sizing: border-box;
+                width: 88px;
+                height: 76px;
                 border-top-left-radius: 7px;
                 border-top-right-radius: 7px;
                 background-color: $white;
                 .image {
-                    max-width: 78px;
-                    max-height: 67px;
+                    max-width: 76px;
+                    max-height: 66px;
                     height: auto;
                     background-size: contain;
                     background-repeat: no-repeat;
@@ -194,9 +190,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;    
+        flex-direction: column;
         box-sizing: border-box;
-        
+
         .icon {
             width: 32px;
             height: 32px;
@@ -204,7 +200,7 @@
             background: url('../#{$imageDir}/img_backpack_plus.svg');
             pointer-events: none;
         }
-        
+
         .desc {
             font-family: EntryFont;
             font-size: 12px;

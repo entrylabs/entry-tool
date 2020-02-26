@@ -4,6 +4,7 @@
 @import 'common/reset';
 @import 'common/images';
 @import 'common/tooltip';
+@import 'colors';
 
 .popup_wrap {
     position: absolute;
@@ -1739,11 +1740,13 @@
     position: fixed;
     -webkit-transition: all ease 0.3s;
     transition: all ease 0.3s;
+    border: none;
     &.auto_width {
         width: auto;
         .tooltip_inner {
             .item {
-                padding-right: 8px;
+                padding-right: 16px;
+                margin-right: 0;
             }
         }
     }
@@ -1770,17 +1773,35 @@
             }
         }
         .item {
-            &:not(:first-child) {
-                border-top: $warmgray200 solid 1px;
+            &:hover {
+                color: $lightish-blue;
+                background-color: $coolgray200;
+                border-bottom-color: $lightish-blue;
             }
             &:not(:last-child) {
-                border-bottom: $warmgray200 solid 1px;
+                &::after {
+                    content: ' ';
+                    left: -8px;
+                    bottom: -14px;
+                    position: relative;
+                    display: block;
+                    height: 1px;
+                    width: calc(100% + 16px);
+                    box-sizing: border-box;
+                    border-bottom: 1px solid $warmgray200;
+                }
+            }
+            &:first-child {
+                border-top-left-radius: 6px;
+                border-top-right-radius: 6px;
             }
             &:last-child {
-                margin-bottom: 5px;
+                padding-bottom: 15px;
+                border-bottom-left-radius: 6px;
+                border-bottom-right-radius: 6px;
             }
-            padding: 17px 2px 14px 8px;
-            margin: 0 20px 0 8px;
+            padding: 17px 16px 14px 16px;
+            margin-right: 16px;
             font-size: 14px;
             font-weight: bold;
             color: $textColor;
@@ -1795,10 +1816,6 @@
                 cursor: auto;
                 color: $disabledTextColor;
             }
-        }
-
-        > .item {
-            margin-right: 8px;
         }
     }
 
