@@ -729,7 +729,7 @@
             border: 0;
             border: 1px solid #e2e2e2;
             border-radius: 4px;
-            line-height: 40px;
+            line-height: 38px;
             outline: 0;
             letter-spacing: -0.3px;
         }
@@ -2155,7 +2155,7 @@
             font-weight: 600;
             color: #555;
             text-align: center;
-            line-height: 30px;
+            line-height: 28px;
         }
         .tab_box {
             float: left;
@@ -2172,7 +2172,7 @@
                 font-size: 14px;
                 font-weight: 600;
                 text-align: center;
-                line-height: 30px;
+                line-height: 28px;
             }
             a {
                 display: block;
@@ -2256,7 +2256,7 @@
             font-weight: 600;
             color: #555;
             text-align: center;
-            line-height: 38px;
+            line-height: 36px;
         }
         .input_box .chart_del.disabled {
             background-color: #f9f9f9;
@@ -2279,7 +2279,7 @@
                 padding: 0 10px 0 11px;
                 font-size: 14px;
                 font-weight: 600;
-                line-height: 40px;
+                line-height: 36px;
             }
             li:after {
                 position: absolute;
@@ -2326,6 +2326,9 @@
         &.chart_state .input_inner input[type='text']:disabled {
             background-color: #f9f9f9;
             color: #cbcbcb;
+        }
+        &.chart_state .input_inner input[type='text']:disabled + .close_btn {
+            background-color: #f9f9f9;
         }
         &.chart_state .cont_inner {
             overflow: visible;

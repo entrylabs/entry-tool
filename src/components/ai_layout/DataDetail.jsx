@@ -811,6 +811,9 @@ class DataDetail extends Component {
                                 </div>
                                 <div className={Styles.input_inner}>
                                     <input type="text" id="data2" name="data2" value="비활성화 컬러 테스트" disabled />
+                                    <a href="#" className={Styles.close_btn} role="button">
+                                        <span className={Styles.blind}>입력 취소</span>
+                                    </a>
                                 </div>
                                 <a href="#" className={Styles.chart_del}>차트 삭제</a>
                             </div>
