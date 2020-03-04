@@ -23,4 +23,8 @@
         text-align: center;
         color: #2c313d;
     }
+
+    :global(.tui-grid-cell-editable:hover) {
+        background-color: rgba($color: #00a9ff, $alpha: 0.1);
+    }
 }
