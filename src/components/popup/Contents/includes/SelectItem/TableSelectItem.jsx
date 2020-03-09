@@ -67,6 +67,19 @@ const TableSelectItem = ({ theme, item, upload, openModal }) => {
                 </em>
                 <p className={theme.summary}>{summary}</p>
             </div>
+            {item.exampleurl && (
+                <a
+                    className={theme.text_url_link}
+                    href={item.exampleurl}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                    }}
+                >
+                    {CommonUtils.getLang('Menus.sample_project')}
+                </a>
+            )}
             <a href="/" className={theme.text_link} onClick={handleClick}>
                 {CommonUtils.getLang('Menus.read_more')}
             </a>
