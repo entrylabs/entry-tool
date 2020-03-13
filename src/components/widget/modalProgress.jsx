@@ -6,7 +6,7 @@ class ModalProgress extends Component {
     constructor(props) {
         super(props);
         Theme.type = props.theme;
-        this.theme = Theme.getStyle("progress");
+        this.theme = Theme.getStyle('progress');
     }
     makeProgress() {
         const { title } = this.props;
@@ -17,6 +17,15 @@ class ModalProgress extends Component {
                 <div className={this.theme.background_2} />
                 <div className={this.theme.background_3} />
                 <div className={this.theme.character} />
+            </div>
+        );
+    }
+    makeLoading() {
+        const { title } = this.props;
+        return (
+            <div className={this.theme.loading}>
+                <div className={this.theme.character} />
+                <div className={this.theme.description}>{title}</div>
             </div>
         );
     }
@@ -37,6 +46,8 @@ class ModalProgress extends Component {
         const { type } = this.props;
         if (type === 'progress') {
             return this.makeProgress();
+        } else if (type === 'loading') {
+            return this.makeLoading();
         } else if (type === 'error') {
             return this.makeError();
         } else {
@@ -44,7 +55,12 @@ class ModalProgress extends Component {
         }
     }
     render() {
-        return <div className={this.theme.modal_progress}>{this.makeView()}</div>;
+        const { type = '' } = this.props;
+        return (
+            <div className={`${this.theme.modal_progress} ${this.theme[type]}`}>
+                {this.makeView()}
+            </div>
+        );
     }
 }
 
