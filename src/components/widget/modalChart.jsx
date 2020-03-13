@@ -18,6 +18,14 @@ const ModalChart = (props) => {
         const [name, index] = option;
         select(index);
     };
+
+    // workspace가 아닌경우만 차트 실행시 스크롤 숨김처리
+    const el = document.getElementsByTagName('body');
+    const wsPath = window.location.pathname.indexOf('/ws');
+    if (wsPath === -1) {
+        el[0].style.overflow = 'hidden';
+    }
+
     const data = [fields, ...origin];
     const selectedChart = chart && chart[selected];
     return (
@@ -25,8 +33,25 @@ const ModalChart = (props) => {
             <div className={theme.center}>
                 <div className={theme.modal}>
                     <div className={theme.head}>
-                        <div className={theme.text}>차트 보기</div>
-                        <div className={theme.close} onClick={onClose} />
+                        <div className={theme.text}>
+                            {CommonUtils.getLang('DataAnalytics.show_chart')}
+                        </div>
+                        <div
+                            className={theme.close}
+                            id="chart_btn"
+                            onClick={() => {
+                                if (
+                                    wsPath === -1 &&
+                                    el[0] &&
+                                    el[0].style &&
+                                    el[0].style.overflow === 'hidden'
+                                ) {
+                                    el[0].removeAttribute('style');
+                                }
+
+                                onClose();
+                            }}
+                        />
                     </div>
                     <div className={theme.body}>
                         <div className={theme.content}>
