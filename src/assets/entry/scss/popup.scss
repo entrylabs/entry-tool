@@ -1821,7 +1821,6 @@
                 border-bottom-right-radius: 6px;
             }
             padding: 17px 16px 14px 16px;
-            margin-right: 16px;
             font-size: 14px;
             font-weight: bold;
             color: $textColor;
@@ -1835,6 +1834,13 @@
             &.disabled {
                 cursor: auto;
                 color: $disabledTextColor;
+            }
+        }
+        :global(.rcs-inner-container) {
+            .item {
+                margin-right: 16px;
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 0px;
             }
         }
     }
