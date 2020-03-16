@@ -182,3 +182,49 @@
         }
     }
 }
+
+.modal_progress_minimize {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    user-select: none;
+    height: calc(100% - 34px);
+
+    &.loading {
+        background-color: rgba(214, 233, 244, 0.95);
+    }
+    .loading {
+        @keyframes play {
+            100% {
+                background-position: -376px;
+            }
+        }
+        .character {
+            height: 84px;
+            width: 62px;
+            margin: 0 auto 13px;
+            background: url(#{$imageDir}/progress/loading_animation.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            animation: play 0.7s steps(6) infinite alternate;
+        }
+        .description {
+            font-family: NanumGothic;
+            font-size: 14px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.43;
+            letter-spacing: -0.32px;
+            text-align: center;
+            color: $warmgray800;
+            white-space: pre-line;
+        }
+    }
+}

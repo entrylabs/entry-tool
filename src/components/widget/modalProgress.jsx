@@ -29,6 +29,15 @@ class ModalProgress extends Component {
             </div>
         );
     }
+    makeLoadingMinimized() {
+        const { title } = this.props;
+        return (
+            <div className={this.theme.loading}>
+                <div className={this.theme.character} />
+                <div className={this.theme.description}>{title}</div>
+            </div>
+        );
+    }
     makeError() {
         const { title, description, onClose } = this.props;
         return (
@@ -54,8 +63,22 @@ class ModalProgress extends Component {
             return null;
         }
     }
+
+    makeMinimizeView() {
+        const { type } = this.props;
+        if (type === 'loading') {
+            return this.makeLoadingMinimized();
+        }
+    }
     render() {
         const { type = '' } = this.props;
+        if (this.props.mode === 'minimize') {
+            return (
+                <div className={`${this.theme.modal_progress_minimize} ${this.theme[type]}`}>
+                    {this.makeMinimizeView()}
+                </div>
+            );
+        }
         return (
             <div className={`${this.theme.modal_progress} ${this.theme[type]}`}>
                 {this.makeView()}
