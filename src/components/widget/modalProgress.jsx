@@ -52,10 +52,6 @@ class ModalProgress extends Component {
             return this.makeLoading();
         } else if (type === 'error') {
             return this.makeError();
-        } else if (type === 'audioReception') {
-            return this.makeAudioReceptioning();
-        } else if (type === 'audioProcessing') {
-            return this.makeAudioProcessing();
         } else {
             return null;
         }
