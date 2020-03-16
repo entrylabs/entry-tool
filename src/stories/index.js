@@ -63,6 +63,7 @@ storiesOf('Popup', module)
 const progressType = {
     progress: 'Progress',
     error: 'Error',
+    loading: 'Loading',
     null: null,
 };
 const wigetStories = storiesOf('Widget', module);
@@ -208,6 +209,19 @@ wigetStories
                     '문제가 계속된다면<br>entry@connect.or.kr 로 문의해주세요.'
                 )}
                 type={select('type', progressType, 'error')}
+                onClose={() => {
+                    alert('닫힘');
+                }}
+            />
+        </div>
+    ))
+    .add('로딩 팝업', () => (
+        <div>
+            <ColorPicker color="#FF0000" onChangeColorPicker={action} />
+            <ModalProgress
+                title={text('Title', '업로드에 실패했습니다.')}
+                description={text('description', '로딩중입니다. 잠시만 기다려주세요')}
+                type={select('type', progressType, 'loading')}
                 onClose={() => {
                     alert('닫힘');
                 }}
