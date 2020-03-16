@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { pure } from 'recompose';
 import Theme from '@utils/Theme';
+import { CommonUtils } from '@utils/Common';
 
 class ModalProgress extends Component {
     constructor(props) {
@@ -51,8 +52,15 @@ class ModalProgress extends Component {
             </div>
         );
     }
+
     makeView() {
-        const { type } = this.props;
+        const { type, mode } = this.props;
+        if (mode === 'minimize') {
+            if (type === 'loading') {
+                return this.makeLoadingMinimized();
+            }
+            // TOTO- migrate audio shade panel to here;
+        }
         if (type === 'progress') {
             return this.makeProgress();
         } else if (type === 'loading') {
@@ -64,26 +72,14 @@ class ModalProgress extends Component {
         }
     }
 
-    makeMinimizeView() {
-        const { type } = this.props;
-        if (type === 'loading') {
-            return this.makeLoadingMinimized();
-        }
-    }
     render() {
         const { type = '' } = this.props;
-        if (this.props.mode === 'minimize') {
-            return (
-                <div className={`${this.theme.modal_progress_minimize} ${this.theme[type]}`}>
-                    {this.makeMinimizeView()}
-                </div>
-            );
-        }
-        return (
-            <div className={`${this.theme.modal_progress} ${this.theme[type]}`}>
-                {this.makeView()}
-            </div>
-        );
+        const modalType =
+            this.props.mode === 'minimize'
+                ? this.theme.modal_progress_minimize
+                : this.theme.modal_progress;
+
+        return <div className={`${modalType} ${this.theme[type]}`}>{this.makeView()}</div>;
     }
 }
 
