@@ -30,15 +30,6 @@ class ModalProgress extends Component {
             </div>
         );
     }
-    makeLoadingMinimized() {
-        const { title } = this.props;
-        return (
-            <div className={this.theme.loading}>
-                <div className={this.theme.character} />
-                <div className={this.theme.description}>{title}</div>
-            </div>
-        );
-    }
     makeError() {
         const { title, description, onClose } = this.props;
         return (
@@ -55,18 +46,16 @@ class ModalProgress extends Component {
 
     makeView() {
         const { type, mode } = this.props;
-        if (mode === 'minimize') {
-            if (type === 'loading') {
-                return this.makeLoadingMinimized();
-            }
-            // TOTO- migrate audio shade panel to here;
-        }
         if (type === 'progress') {
             return this.makeProgress();
         } else if (type === 'loading') {
             return this.makeLoading();
         } else if (type === 'error') {
             return this.makeError();
+        } else if (type === 'audioReception') {
+            return this.makeAudioReceptioning();
+        } else if (type === 'audioProcessing') {
+            return this.makeAudioProcessing();
         } else {
             return null;
         }
