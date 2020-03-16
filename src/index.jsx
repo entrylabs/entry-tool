@@ -15,6 +15,7 @@ export { default as LedPicker } from './components/ledPicker/ledPickerContainer'
 export { default as DataAnalytics } from './components/editor/dataAnalytics/DataAnalyticsContainer';
 export { default as Chart } from './components/widget/Chart';
 export { default as ModalChart } from './components/widget/modalChartContainer';
+export { default as ModalProgress } from './components/widget/modalProgressContainer';
 export { default as Dropper } from './components/widget/DropperContainer';
 export { default as Sortable } from './components/widget/sortableContainer';
 export { default as Draggable } from './components/widget/draggableContainer';
