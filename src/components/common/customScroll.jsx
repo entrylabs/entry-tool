@@ -3,6 +3,7 @@ import _debounce from 'lodash/debounce';
 import EntryEvent from '@entrylabs/event';
 import Theme from '../../utils/Theme';
 // import Styles from '@assets/entry/scss/customScroll.scss';
+Theme.type = 'entryline';
 const Styles = Theme.getStyle('customScroll');
 
 function getScaleNumber(num, inMin, inMax, outMin, outMax) {
@@ -32,6 +33,7 @@ const CustomScroll = (props, ref) => {
             trailing: false,
         }
     );
+
     const setDebounceHide = _debounce(() => {
         setIndicatorShow(false);
     }, 500);

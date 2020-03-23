@@ -1,7 +1,4 @@
 @charset "UTF-8";
-$imageDir: '../../entry/images';
-$lineImageDir: '../images';
-@import '../../entry/scss/customScroll';
 
 .customScrollWrapper {
     height: 100%;
@@ -51,7 +48,7 @@ $lineImageDir: '../images';
         top: 0;
         right: 4px;
         opacity: 0;
-        background-color: #aaaaaa !important;
+        background-color: #bcbcbc !important;
         border-radius: 2.5px !important;
         pointer-events: none;
         z-index: 1;
