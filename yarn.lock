@@ -1038,12 +1038,19 @@
     react-split-pane "^0.1.77"
     react-treebeard "^2.1.0"
 
-"@toast-ui/react-grid@^4.8.1":
-  version "4.8.1"
-  resolved "https://registry.yarnpkg.com/@toast-ui/react-grid/-/react-grid-4.8.1.tgz#3fe74eab8d1e1852a0377515657ecc36e98ae170"
-  integrity sha512-7GCFItVjRn3bAmzPLv3SZ5yvgCtP6m/g8OfBlCXKXlTVJyaFFunuaPMytKpkXNxTLo5SB4uRX7cHssOIyokuWQ==
+"@toast-ui/react-grid@^4.10.1":
+  version "4.10.1"
+  resolved "https://registry.yarnpkg.com/@toast-ui/react-grid/-/react-grid-4.10.1.tgz#937177a1f7d02cb40390ce9526a7c3c5c10239d9"
+  integrity sha512-wycpTXTpYhVhH/+EFaT8MmsJi3+PvmemyntNiNoh9NvpNItpxnx9R7EoOicd9v4/sZioFR54Tfr2fsD4K4Iagg==
   dependencies:
-    tui-grid "^4.8.1"
+    tui-grid "^4.10.1"
+
+"@toast-ui/select-box@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@toast-ui/select-box/-/select-box-1.0.0.tgz#c27981f763c918e7d9f8d5d3d17116836a0a21f8"
+  integrity sha512-DFA979yUEPEx5PqBoq2McAdhyzE0jH/Kqa+G74Uj6iRbqYGqREqyi7f9i3CR1gue44KB6mfjxeZHSVl0kwg56g==
+  dependencies:
+    tui-code-snippet "^2.0.0"
 
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
@@ -12323,6 +12330,11 @@ tui-code-snippet@^1.5.0:
   resolved "https://registry.yarnpkg.com/tui-code-snippet/-/tui-code-snippet-1.5.2.tgz#f4b8f0f1ac996b0b5b621f77c9507af19a0de238"
   integrity sha512-6UqTlQaaC1KLcmC0HAoq5dtl1G4Fib+R+NC7pmaV7kiIlZ7JqKhUmnOoGRcreAyzd81UTK/vCvhrw9QJskpCFQ==
 
+tui-code-snippet@^2.0.0:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/tui-code-snippet/-/tui-code-snippet-2.3.1.tgz#d11d9838c90a2e14decb10deba595758731c66de"
+  integrity sha512-HopmhYTLLHAF0aUnGN+ICQzX0j6T2dXhLeW+oupH58MktsWes19vW5BbUgFjONsq2gDT8+B1lOKdRliRAqnKXg==
+
 tui-date-picker@^3.3.3:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/tui-date-picker/-/tui-date-picker-3.3.4.tgz#e3422ce6e38e6d86579823a3d7153eb83e850109"
@@ -12332,11 +12344,12 @@ tui-date-picker@^3.3.3:
     tui-code-snippet "^1.5.0"
     tui-time-picker "^1.3.0"
 
-tui-grid@^4.8.1:
-  version "4.8.1"
-  resolved "https://registry.yarnpkg.com/tui-grid/-/tui-grid-4.8.1.tgz#c8baf171935e86e32eeee01799fb1ebe78034e65"
-  integrity sha512-uAlbxVVg/yZaakoD7XfvdxfyVliBMWmxT4SSb7TL6Deg1dFyEAxH4gZar/x/31t9DSsCBIrX8LPUHOF5mMDaZg==
+tui-grid@^4.10.1:
+  version "4.10.1"
+  resolved "https://registry.yarnpkg.com/tui-grid/-/tui-grid-4.10.1.tgz#7ceca154a445c13f921a4e07e5379beac8108951"
+  integrity sha512-qRAb+2EBEjjtTcPSZKTswpImYsDpCrFawVNCXVq8m5DVsgJWquOSerL45YUg2/K8oU5HO+63cUqhiqBVH740HA==
   dependencies:
+    "@toast-ui/select-box" "^1.0.0"
     preact "^8.4.2"
     tslib "^1.10.0"
     tui-date-picker "^3.3.3"

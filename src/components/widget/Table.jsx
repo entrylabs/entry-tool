@@ -41,6 +41,8 @@ const handleContextMenu = (event) => {
     event.preventDefault();
 };
 
+let beforeValue = null;
+
 let lastColumnName;
 const isColumnDblClick = ({ nativeEvent, columnName, targetType }) => {
     const { which } = nativeEvent;
@@ -313,9 +315,21 @@ const Table = (props) => {
         });
     };
 
+    const handleEditingStart = useCallback((event) => {
+        const { value = '' } = event;
+        if (beforeValue != null) {
+            beforeValue = value;
+            handleEditingFinish(event);
+        }
+    });
+
     const handleEditingFinish = useCallback(
         (event) => {
-            const { instance, columnName, rowKey } = event;
+            const { instance, columnName, rowKey, value } = event;
+            if (beforeValue == null || beforeValue == value) {
+                beforeValue = null;
+                return;
+            }
             const colIndex = instance.getIndexOfColumn(columnName);
             const rowIndex = instance.getIndexOfRow(rowKey);
             setTable((table) => {
@@ -356,6 +370,7 @@ const Table = (props) => {
                     rowHeaders={needRowHeader ? rowHeaders : {}}
                     onMousedown={handleMousedown}
                     onClick={handleClick}
+                    onEditingStart={handleEditingStart}
                     onEditingFinish={handleEditingFinish}
                 />
             </OutsideClick>
