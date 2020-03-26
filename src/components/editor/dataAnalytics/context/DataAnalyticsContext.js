@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useReducer, useEffect, useRef } from 'react';
 import { dataAnalyticsReducer } from '../reducer/DataAnalyticsReducer';
 
 export const DataAnalyticsContext = createContext();
@@ -64,6 +64,7 @@ const getTable = ({ table = [[]] }) => table.map((row) => [...row]);
 
 const DataAnalyticsContextProvider = (props) => {
     const { analytics = {} } = props;
+    const gridRef = useRef();
     const {
         title = '',
         table = [[]],
@@ -85,6 +86,7 @@ const DataAnalyticsContextProvider = (props) => {
         onToastDataAnalytics,
         onSubmitDataAnalytics,
         onChangeDataAnalytics,
+        gridRef,
     });
 
     if (

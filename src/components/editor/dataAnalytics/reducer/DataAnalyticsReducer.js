@@ -1,4 +1,5 @@
-import { CommonUtils } from '@utils/Common';
+import { CommonUtils, makeTableByGrid } from '@utils/Common';
+import { TABLE } from '../Constants';
 
 export const dataAnalyticsReducer = (state, action) => {
     switch (action.type) {
@@ -7,12 +8,19 @@ export const dataAnalyticsReducer = (state, action) => {
                 ...state,
                 ...action.payload,
             };
-        case 'SET_TAB':
+        case 'SET_TAB': {
+            let { table } = state;
+            if (state.tab === TABLE && state.tab !== action.tab) {
+                const { gridRef = {} } = state;
+                table = makeTableByGrid(gridRef);
+            }
             return {
                 ...state,
+                table,
                 tab: action.tab,
                 chartIndex: action.index === undefined ? state.chartIndex : action.index,
             };
+        }
         case 'SET_CHART_INDEX':
             return {
                 ...state,

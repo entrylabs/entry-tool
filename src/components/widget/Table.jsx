@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import TuiGrid from 'tui-grid';
 import Grid from '@toast-ui/react-grid';
 import { Prompt } from '@entrylabs/modal';
@@ -61,7 +61,6 @@ const isColumnDblClick = ({ nativeEvent, columnName, targetType }) => {
 
 const Table = (props) => {
     const [table, setTable] = useState();
-    const gridRef = useRef();
     const [{ x, y, isVisible, contextMenu }, setContextMenuOption] = useState({
         x: 0,
         y: 0,
@@ -87,6 +86,7 @@ const Table = (props) => {
         onChangeDataAnalytics = () => {},
         dataAnalytics,
         isFullScreen,
+        gridRef,
     } = props;
 
     useEffect(() => {
