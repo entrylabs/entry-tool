@@ -334,3 +334,14 @@ export const getNumberColumnIndexesBySelectedColumns = (table, selectedColumns =
             !_.some(table.slice(1), (row) => isString(row[index])) ? [...prev, index] : prev,
         []
     );
+
+export const makeTableByGrid = (gridRef) => {
+    const { current = {} } = gridRef;
+    const instance = (current.getInstance && current.getInstance()) || {};
+    const data = (instance.getData && instance.getData()) || {};
+    const columns = (instance.getColumns && instance.getColumns()) || {};
+    return [
+        columns.map((column) => column.name),
+        ...data.map((row) => columns.map((column) => row[column.name])),
+    ];
+};

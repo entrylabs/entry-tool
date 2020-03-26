@@ -13,6 +13,7 @@ const TableEditor = () => {
         onToastDataAnalytics,
         onChangeDataAnalytics,
         isFullScreen,
+        gridRef,
     } = dataAnalytics;
 
     const handleChangeTitle = (value) => (event) => {
@@ -38,6 +39,7 @@ const TableEditor = () => {
                             onChangeDataAnalytics={onChangeDataAnalytics}
                             isFullScreen={isFullScreen}
                             dataAnalytics={dataAnalytics}
+                            gridRef={gridRef}
                         />
                     </div>
                 </div>
