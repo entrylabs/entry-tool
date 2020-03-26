@@ -26,7 +26,10 @@ class ModalProgress extends Component {
         return (
             <div className={this.theme.loading}>
                 <div className={this.theme.character} />
-                <div className={this.theme.description}>{title}</div>
+                <div
+                    className={this.theme.description}
+                    dangerouslySetInnerHTML={{ __html: title }}
+                ></div>
             </div>
         );
     }
