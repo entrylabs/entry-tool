@@ -31,7 +31,9 @@ const Index = (props) => {
                     );
                 })}
             </ul>
-            {searchOption && <SearchBox searchOption={searchOption} options={projectNavOptions} />}
+            {searchOption && (
+                <SearchBox searchOption={searchOption} projectNavOptions={projectNavOptions} />
+            )}
             {isDrawVector && (
                 <div
                     className={classname(theme.vector, { [theme.on]: isVectorOnly })}
@@ -52,7 +54,4 @@ const mapDispatchToProps = (dispatch) => ({
     toggleVector: () => dispatch(toggleVector()),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Index);
+export default connect(mapStateToProps, mapDispatchToProps)(Index);
