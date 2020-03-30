@@ -76,7 +76,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(Index);
-
+//TODO: Theme.type == 'entryline' 이면 @web/config.category 사용.
 const defaultOptions = {
     category: [
         [CommonUtils.getLang('EntryStatic.art_category_all'), 'art_category_all'],
