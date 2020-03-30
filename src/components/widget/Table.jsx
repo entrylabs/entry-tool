@@ -85,6 +85,8 @@ const Table = (props) => {
         dataAnalytics,
         isFullScreen,
         gridRef,
+        addColumn,
+        deleteColumn,
     } = props;
 
     useEffect(() => {
@@ -246,15 +248,14 @@ const Table = (props) => {
                 {
                     text: CommonUtils.getLang('DataAnalytics.delete_attribute'),
                     callback: () => {
-                        setTable((table) => {
-                            const result = table.map((row) => {
-                                row.splice(colIndex, 1);
-                                return row;
-                            });
-
-                            onChangeDataAnalytics({ ...dataAnalytics, table: result });
-                            return result;
-                        });
+                        deleteColumn
+                            ? deleteColumn(colIndex)
+                            : setTable((table) =>
+                                  table.map((row) => {
+                                      row.splice(colIndex, 1);
+                                      return row;
+                                  })
+                              );
                     },
                 },
             ];
@@ -293,24 +294,24 @@ const Table = (props) => {
             return;
         }
 
-        setTable((table) => {
-            const result = table.map((row, index) => {
-                row.splice(
-                    colIndex,
-                    0,
-                    index
-                        ? 0
-                        : CommonUtils.getOrderedName(
-                              columnName || CommonUtils.getLang('DataAnalytics.new_attribute'),
-                              table[0]
-                          )
-                );
-                return row;
-            });
-
-            onChangeDataAnalytics({ ...dataAnalytics, table: result });
-            return result;
-        });
+        addColumn
+            ? addColumn(colIndex, columnName)
+            : setTable((table) =>
+                  table.map((row, index) => {
+                      row.splice(
+                          colIndex,
+                          0,
+                          index
+                              ? 0
+                              : CommonUtils.getOrderedName(
+                                    columnName ||
+                                        CommonUtils.getLang('DataAnalytics.new_attribute'),
+                                    table[0]
+                                )
+                      );
+                      return row;
+                  })
+              );
     };
 
     const handleEditingFinish = useCallback(
