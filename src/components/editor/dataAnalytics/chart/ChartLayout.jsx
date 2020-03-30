@@ -19,7 +19,7 @@ const ChartLayout = () => {
     const { dataAnalytics } = useContext(DataAnalyticsContext);
     const { table = [[]], charts = [], chartIndex } = dataAnalytics;
     const chart = charts.length ? charts[chartIndex] : {};
-    const { xIndex = -1, yIndex = -1, categoryIndexes = [], type } = chart;
+    const { xIndex = -1, yIndex = -1, type } = chart;
     const xAxis = getXAxis(table, type);
     const yAxis = getYAxis(table, xIndex);
     const dropdownItems = _.reduce(
@@ -29,6 +29,19 @@ const ChartLayout = () => {
             !_.some([xIndex, yIndex], (banIndex) => index === banIndex) ? [...prev, index] : prev,
         []
     );
+    chart.categoryIndexes = chart.categoryIndexes || [];
+    if (chart.xIndex > _.max(xAxis)) {
+        chart.xIndex = -1;
+        chart.yIndex = -1;
+        chart.categoryIndexes = [];
+    } else if (chart.yIndex > _.max(yAxis)) {
+        chart.yIndex = -1;
+        chart.categoryIndexes = [];
+    } else if (
+        _.max(chart.categoryIndexes.length ? chart.categoryIndexes : [-1]) > _.max(dropdownItems)
+    ) {
+        chart.categoryIndexes = [];
+    }
 
     return (
         <div className={Styles.cont_inner}>
@@ -37,12 +50,12 @@ const ChartLayout = () => {
                     <>
                         <Legend
                             disabled={
-                                xIndex === -1 ||
-                                (type === 'scatter' && yIndex === -1) ||
+                                chart.xIndex === -1 ||
+                                (type === 'scatter' && chart.yIndex === -1) ||
                                 !dropdownItems.length
                             }
-                            checkBox={yIndex === -1 && type !== 'pie' && type !== 'scatter'}
-                            selectedLegend={categoryIndexes}
+                            checkBox={chart.yIndex === -1 && type !== 'pie' && type !== 'scatter'}
+                            selectedLegend={chart.categoryIndexes}
                             dropdownItems={dropdownItems}
                         />
 
@@ -50,15 +63,15 @@ const ChartLayout = () => {
                             <YAxis
                                 disable={
                                     !yAxis.length ||
-                                    (!isZipable(table, xIndex) && type !== 'scatter') ||
-                                    xIndex === -1
+                                    (!isZipable(table, chart.xIndex) && type !== 'scatter') ||
+                                    chart.xIndex === -1
                                 }
                                 yAxisIndex={yAxis}
-                                yIndex={yIndex}
+                                yIndex={chart.yIndex}
                             />
                         )}
 
-                        <XAxis xAxisIndex={xAxis} xIndex={xIndex} />
+                        <XAxis xAxisIndex={xAxis} xIndex={chart.xIndex} />
 
                         {/* 그래프 */}
                         <Chart

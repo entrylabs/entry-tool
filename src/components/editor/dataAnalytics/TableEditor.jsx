@@ -23,6 +23,21 @@ const TableEditor = () => {
         });
     };
 
+    const addColumn = (columnIndex, columnName) => {
+        dispatch({
+            type: 'ADD_COLUMN',
+            columnIndex,
+            columnName,
+        });
+    };
+
+    const deleteColumn = (columnIndex) => {
+        dispatch({
+            type: 'DELETE_COLUMN',
+            columnIndex,
+        });
+    };
+
     return (
         <section className={`${Styles.detail_cont} ${Styles.table_state}`}>
             <h2 className={Styles.blind}>{CommonUtils.getLang('DataAnalytics.table')}</h2>
@@ -40,6 +55,8 @@ const TableEditor = () => {
                             isFullScreen={isFullScreen}
                             dataAnalytics={dataAnalytics}
                             gridRef={gridRef}
+                            addColumn={addColumn}
+                            deleteColumn={deleteColumn}
                         />
                     </div>
                 </div>
