@@ -356,6 +356,7 @@ const Table = (props) => {
                     rowHeaders={needRowHeader ? rowHeaders : {}}
                     onMousedown={handleMousedown}
                     onClick={handleClick}
+                    tabMode="move"
                     onEditingFinish={handleEditingFinish}
                 />
             </OutsideClick>
