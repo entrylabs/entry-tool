@@ -8,9 +8,8 @@ export default ({ item, isSelected, onClick, avatarImgUrl }) => {
     const { _id, username, avatarImage } = user;
     if (!avatarImgUrl) {
         if (Theme.type == 'entryline') {
-            if (avatarImage) {
-                const id = String(_id);
-                avatarImgUrl = `/uploads/${id.substr(0, 2)}/${id.substr(2, 2)}/profile/${id}.png`;
+            if (user.profileImage) {
+                avatarImgUrl = `/uploads/${user.profileImage}`;
             } else {
                 avatarImgUrl = '/static/img/pf/profile/img-profile-default-medium@2x.png';
             }
