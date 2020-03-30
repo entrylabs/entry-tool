@@ -7,14 +7,22 @@ export default ({ item, isSelected, onClick, avatarImgUrl }) => {
     const { thumb, name, likeCnt = 0, comment = 0, visit = 0, user = {} } = item;
     const { _id, username, avatarImage } = user;
     if (!avatarImgUrl) {
-        if (avatarImage) {
-            const id = String(_id);
-            avatarImgUrl = `/uploads/profile/${id.substr(0, 2)}/${id.substr(
-                2,
-                2
-            )}/avatar_${id}.png`;
+        if (Theme.type == 'entryline') {
+            if (user.profileImage) {
+                avatarImgUrl = `/uploads/${user.profileImage}`;
+            } else {
+                avatarImgUrl = '/static/img/pf/profile/img-profile-default-medium@2x.png';
+            }
         } else {
-            avatarImgUrl = '/img/assets/avatar_img.png';
+            if (avatarImage) {
+                const id = String(_id);
+                avatarImgUrl = `/uploads/profile/${id.substr(0, 2)}/${id.substr(
+                    2,
+                    2
+                )}/avatar_${id}.png`;
+            } else {
+                avatarImgUrl = '/img/assets/avatar_img.png';
+            }
         }
     }
     const theme = Theme.getStyle('popup');
