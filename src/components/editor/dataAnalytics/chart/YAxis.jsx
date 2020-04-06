@@ -39,13 +39,23 @@ const YAxis = (props) => {
             index: -1,
         });
     };
+    console.log(disable, props);
 
     return (
-        <>
-            <div className={`${Styles.y_legend_box} ${disable ? Styles.disabled : ''}`}>
-                <span
-                    className={isSelected ? `${Styles.del_legend}` : `${Styles.common_legend}`}
-                    onClick={handleClick}
+        <div className={Styles.legend_cell}>
+            <strong className={Styles.cell_sjt}>
+                {CommonUtils.getLang('DataAnalytics.y_axis')}
+            </strong>
+            <div className={`${Styles.pop_selectbox} ${disable ? Styles.disabled : ''}`}>
+                <div
+                    className={`${Styles.select_link} ${
+                        isSelected ? Styles.del_legend : Styles.common_legend
+                    } ${
+                        showDropdown
+                            ? Styles.imico_pop_select_arr_up
+                            : Styles.imico_pop_select_arr_down
+                    }`}
+                    onClick={disable ? () => {} : handleClick}
                     ref={axisRef}
                 >
                     {yIndex === -1 ? (
@@ -60,7 +70,7 @@ const YAxis = (props) => {
                             </a>
                         </>
                     )}
-                </span>
+                </div>
             </div>
 
             {showDropdown && (
@@ -71,7 +81,7 @@ const YAxis = (props) => {
                     positionDom={axisRef.current}
                 />
             )}
-        </>
+        </div>
     );
 };
 
