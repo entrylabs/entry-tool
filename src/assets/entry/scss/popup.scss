@@ -1015,7 +1015,7 @@
                 padding-top: 24px;
                 font-size: 16px;
                 font-weight: 600;
-                color: #424b50;          
+                color: #424b50;
                 letter-spacing: -0.37px;
                 line-height: 20px;
             }
@@ -2484,7 +2484,7 @@
             }
         }
         .cnt_result {
-            margin-top: 13px;            
+            margin-top: 13px;
         }
         .cnt_result li {
             float: left;
@@ -2849,20 +2849,19 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        .legend_box .legend_cell .pop_selectbox .tooltip_box {
-            width: 208px;
-            top: 56px;
-            font-size: 14px;
-        }
-        .legend_box .legend_cell .pop_selectbox .tooltip_inner {
-            height: 235px;
-            overflow-y: auto;
-        }
-        .legend_box .legend_cell .pop_selectbox .list_link {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
+        // .legend_box .legend_cell .pop_selectbox .tooltip_box {
+        //     width: 208px;
+        //     top: 56px;
+        //     font-size: 14px;
+        // }
+        // .legend_box .legend_cell .pop_selectbox .tooltip_inner {
+        //     overflow-y: auto;
+        // }
+        // .legend_box .legend_cell .pop_selectbox .list_link {
+        //     overflow: hidden;
+        //     text-overflow: ellipsis;
+        //     white-space: nowrap;
+        // }
         .data_add_box {
             overflow: hidden;
             box-sizing: border-box;
@@ -2892,7 +2891,7 @@
             min-width: 684px;
             height: 397px;
             background-color: #fff;
-            z-index: 10;
+            z-index: 9;
 
             .alert {
                 font-family: NanumGothicOTF;
@@ -2956,7 +2955,6 @@
         .pie_legend .list {
             overflow: hidden;
             padding: 4px 0 0 20px;
-
         }
         .pie_legend .list li {
             height: 14px;
@@ -2988,7 +2986,7 @@
             top: 1px;
             width: 1px;
             height: 11px;
-            background-color :#d8d8d8;
+            background-color: #d8d8d8;
             content: '';
         }
         .pie_legend .list .cnt:last-child:after {
@@ -3035,13 +3033,12 @@
                 content: '';
             }
         }
-        .scatter_legend input[type="checkbox"]:checked + .switch_box {
+        .scatter_legend input[type='checkbox']:checked + .switch_box {
             border-color: #4f80ff;
         }
-        .scatter_legend input[type="checkbox"]:checked + .switch_box:before {
+        .scatter_legend input[type='checkbox']:checked + .switch_box:before {
             left: 15px;
-            background-color: #4f80ff;;
+            background-color: #4f80ff;
         }
-
     }
 }
