@@ -46,23 +46,25 @@ const Navigation = (props) => {
 
     const navigationList = (charts) =>
         charts.map((chart, index) => (
-            <li
+            <a
                 key={`chart_${index}`}
-                className={`${Styles[chart.type]} ${index !== selected ? Styles.disabled : ''}`}
+                href="#"
+                className={`${Styles.chart_link} ${Styles[chart.type]} ${
+                    index !== selected ? Styles.disabled : ''
+                }`}
+                onClick={onClickItem(index)}
             >
-                <a href="#" onClick={onClickItem(index)}>
-                    <span className={Styles.blind}>{chartName(chart.type)}</span>
-                </a>
-            </li>
+                <span className={Styles.blind}>{chartName(chart.type)}</span>
+            </a>
         ));
 
     return (
         <div className={Styles.chart_navi}>
-            <ul className={Styles.list}>{navigationList(charts)}</ul>
+            {navigationList(charts)}
 
             {charts.length < 10 ? (
-                <div className={Styles.chart_add_box}>
-                    <a href="#" className={Styles.chart_add} onClick={handleAClick}>
+                <div className={Styles.add_link_box}>
+                    <a href="#" className={Styles.add_link} onClick={handleAClick} role="button">
                         <span className={Styles.blind}>{chartName('plus')}</span>
                     </a>
 
