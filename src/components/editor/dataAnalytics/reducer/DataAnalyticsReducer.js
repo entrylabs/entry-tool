@@ -48,6 +48,9 @@ export const dataAnalyticsReducer = (state, action) => {
                     {
                         type: action.chartType,
                         title: `${state.title}_${CommonUtils.getLang('DataAnalytics.chart_title')}`,
+                        xIndex: -1,
+                        yIndex: -1,
+                        categoryIndexes: [],
                     },
                 ],
             };
