@@ -48,30 +48,34 @@ const ChartLayout = () => {
             <div className={Styles.chart_box}>
                 {charts.length ? (
                     <>
-                        <Legend
-                            disabled={
-                                chart.xIndex === -1 ||
-                                (type === 'scatter' && chart.yIndex === -1) ||
-                                !dropdownItems.length
-                            }
-                            checkBox={chart.yIndex === -1 && type !== 'pie' && type !== 'scatter'}
-                            selectedLegend={chart.categoryIndexes}
-                            dropdownItems={dropdownItems}
-                        />
+                        <div className={Styles.legend_box}>
+                            <XAxis xAxisIndex={xAxis} xIndex={chart.xIndex} />
 
-                        {type === 'pie' ? null : (
-                            <YAxis
-                                disable={
-                                    !yAxis.length ||
-                                    (!isZipable(table, chart.xIndex) && type !== 'scatter') ||
-                                    chart.xIndex === -1
+                            {type === 'pie' ? null : (
+                                <YAxis
+                                    disable={
+                                        !yAxis.length ||
+                                        (!isZipable(table, chart.xIndex) && type !== 'scatter') ||
+                                        chart.xIndex === -1
+                                    }
+                                    yAxisIndex={yAxis}
+                                    yIndex={chart.yIndex}
+                                />
+                            )}
+
+                            <Legend
+                                disabled={
+                                    chart.xIndex === -1 ||
+                                    (type === 'scatter' && chart.yIndex === -1) ||
+                                    !dropdownItems.length
                                 }
-                                yAxisIndex={yAxis}
-                                yIndex={chart.yIndex}
+                                checkBox={
+                                    chart.yIndex === -1 && type !== 'pie' && type !== 'scatter'
+                                }
+                                selectedLegend={chart.categoryIndexes}
+                                dropdownItems={dropdownItems}
                             />
-                        )}
-
-                        <XAxis xAxisIndex={xAxis} xIndex={chart.xIndex} />
+                        </div>
 
                         {/* 그래프 */}
                         <Chart
