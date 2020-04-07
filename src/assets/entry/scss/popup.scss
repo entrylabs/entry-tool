@@ -2919,6 +2919,7 @@
         .chart_area {
             position: relative;
             min-height: 452px;
+            padding: 40px 44px 34px 44px;
         }
         .pie_legend {
             position: absolute;
@@ -2995,7 +2996,7 @@
         .scatter_legend {
             position: absolute;
             right: 30px;
-            top: 30px;
+            top: 94px;
             cursor: pointer;
         }
         .scatter_legend .sjt {

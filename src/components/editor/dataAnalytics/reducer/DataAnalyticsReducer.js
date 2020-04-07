@@ -184,6 +184,18 @@ export const dataAnalyticsReducer = (state, action) => {
                 charts: resultCharts,
             };
         }
+        case 'TOGGLE_VISIBLE_LEGEND': {
+            const charts = [...state.charts];
+            charts[state.chartIndex] = {
+                ...charts[state.chartIndex],
+                visibleLegend: action.visible,
+            };
+
+            return {
+                ...state,
+                charts,
+            };
+        }
         default:
             return state;
     }

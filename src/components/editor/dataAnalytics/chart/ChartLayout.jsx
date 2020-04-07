@@ -16,10 +16,10 @@ const getXAxis = (table, type) =>
 const getYAxis = (table, xIndex) => getNumberColumnIndexes(table, [xIndex]);
 
 const ChartLayout = () => {
-    const { dataAnalytics } = useContext(DataAnalyticsContext);
+    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { table = [[]], charts = [], chartIndex } = dataAnalytics;
     const chart = charts.length ? charts[chartIndex] : {};
-    const { xIndex = -1, yIndex = -1, type } = chart;
+    const { xIndex = -1, yIndex = -1, type, visibleLegend } = chart;
     const xAxis = getXAxis(table, type);
     const yAxis = getYAxis(table, xIndex);
     const dropdownItems = _.reduce(
@@ -29,6 +29,13 @@ const ChartLayout = () => {
             !_.some([xIndex, yIndex], (banIndex) => index === banIndex) ? [...prev, index] : prev,
         []
     );
+    const handleClick = () => {
+        dispatch({
+            type: 'TOGGLE_VISIBLE_LEGEND',
+            visible: !visibleLegend,
+        });
+    };
+
     chart.categoryIndexes = chart.categoryIndexes || [];
     if (chart.xIndex > _.max(xAxis)) {
         chart.xIndex = -1;
@@ -80,13 +87,27 @@ const ChartLayout = () => {
                         {/* 그래프 */}
                         <Chart
                             key={`c${generateHash()}`}
-                            legend={{ show: type === 'pie' }}
+                            legend={{ position: type === 'pie' ? 'right' : 'bottom' }}
                             table={table}
                             chart={charts[chartIndex]}
                             size={{
-                                height: 397,
+                                height: 378,
                             }}
                         />
+                        {type === 'scatter' ? (
+                            <label htmlFor="switch" className={Styles.scatter_legend}>
+                                <span className={Styles.sjt}>표현 값</span>
+                                <input
+                                    type="checkbox"
+                                    id="switch"
+                                    name="switch"
+                                    className={Styles.blind}
+                                    value={visibleLegend}
+                                    onClick={handleClick}
+                                />
+                                <span className={Styles.switch_box}></span>
+                            </label>
+                        ) : null}
                     </>
                 ) : (
                     <div className={Styles.data_add_box}>
