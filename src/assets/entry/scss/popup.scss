@@ -2922,7 +2922,7 @@
         }
         .chart_area {
             position: relative;
-            min-height: 452px;
+            min-height: 378px;
         }
         .pie_legend {
             position: absolute;
@@ -2998,6 +2998,8 @@
             max-height: 81px;
             margin-bottom: 30px;
             text-align: center;
+            padding-left: 100px;
+            padding-right: 100px;
         }
         .horizontal_legend_box .legend {
             display: inline-block;

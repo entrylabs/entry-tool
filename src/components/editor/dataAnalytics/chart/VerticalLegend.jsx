@@ -1,8 +1,11 @@
 import React, { useContext } from 'react';
 import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
 import { GRAPH_COLOR } from '../Constants';
+import { CommonUtils } from '@utils/Common';
 
 import Styles from '@assets/entry/scss/popup.scss';
+
+const { generateHash } = CommonUtils;
 
 const VerticalLegend = () => {
     const { dataAnalytics } = useContext(DataAnalyticsContext);
@@ -30,7 +33,7 @@ const VerticalLegend = () => {
             <div className={Styles.scroll_box}>
                 <ul className={Styles.list}>
                     {category.map((item, index) => (
-                        <li>
+                        <li key={`legend_${generateHash()}`}>
                             <span
                                 className={Styles.bg}
                                 style={{

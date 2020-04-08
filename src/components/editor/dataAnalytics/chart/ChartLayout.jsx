@@ -120,7 +120,7 @@ const ChartLayout = () => {
                                     id="switch"
                                     name="switch"
                                     className={Styles.blind}
-                                    value={visibleLegend}
+                                    checked={visibleLegend ? 'ckecked' : ''}
                                     onClick={handleClick}
                                 />
                                 <span className={Styles.switch_box}></span>
