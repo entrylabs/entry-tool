@@ -57,18 +57,7 @@ const YAxis = (props) => {
                     onClick={disable ? () => {} : handleClick}
                     ref={axisRef}
                 >
-                    {yIndex === -1 ? (
-                        CommonUtils.getLang('DataAnalytics.y_axis')
-                    ) : (
-                        <>
-                            {table[0][yIndex]}
-                            <a href="#" className={Styles.close_btn} onClick={handleDeleteClick}>
-                                <span className={Styles.blind}>
-                                    {CommonUtils.getLang('DataAnalytics.delete')}
-                                </span>
-                            </a>
-                        </>
-                    )}
+                    {yIndex === -1 ? CommonUtils.getLang('DataAnalytics.y_axis') : table[0][yIndex]}
                 </div>
             </div>
 
