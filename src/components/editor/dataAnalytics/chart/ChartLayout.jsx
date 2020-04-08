@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import XAxis from './XAxis';
 import YAxis from './YAxis';
 import Legend from './Legend';
+import LegendList from './LegendList';
 import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
 import { isZipable, CommonUtils, getNumberColumnIndexes } from '@utils/Common';
@@ -83,11 +84,14 @@ const ChartLayout = () => {
                                 dropdownItems={dropdownItems}
                             />
                         </div>
+                        {chart.categoryIndexes.length && (type !== 'scatter' || visibleLegend) ? (
+                            <LegendList />
+                        ) : null}
 
                         {/* 그래프 */}
                         <Chart
                             key={`c${generateHash()}`}
-                            legend={{ position: type === 'pie' ? 'right' : 'bottom' }}
+                            legend={{ show: false }}
                             table={table}
                             chart={charts[chartIndex]}
                             size={{

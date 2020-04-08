@@ -2743,19 +2743,15 @@
         }
         .chart_link.bar.disabled {
             background-image: url('#{$imageDir}/icon_chart_sel01_off.svg');
-            pointer-events: none;
         }
         .chart_link.line.disabled {
             background-image: url('#{$imageDir}/icon_chart_sel02_off.svg');
-            pointer-events: none;
         }
         .chart_link.pie.disabled {
             background-image: url('#{$imageDir}/icon_chart_sel03_off.svg');
-            pointer-events: none;
         }
         .chart_link.scatter.disabled {
             background-image: url('#{$imageDir}/icon_chart_sel04_off.svg');
-            pointer-events: none;
         }
         .chart_link ~ .add_link_box {
             margin-left: 20px;
