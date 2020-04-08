@@ -333,7 +333,8 @@ storiesOf('AiLayout', module)
     .add('데이터 상세 - 테이블', () => <DataDetail DetailState="Table" />)
     .add('데이터 상세 - 차트추가', () => <DataDetail DetailState="ChartAdd" />)
     .add('데이터 상세 - 기본 차트 문구', () => <DataDetail DetailState="Chart" />)
-    .add('데이터 상세 - 원형 차트 범례', () => <DataDetail DetailState="PieChart" />)
+    .add('데이터 상세 - 차트 세로형 범례', () => <DataDetail DetailState="VerticalChart" />)
+    .add('데이터 상세 - 차트 가로형 범례', () => <DataDetail DetailState="HorizontalChart" />)
     .add('데이터 상세 - 방사형 차트 범례', () => <DataDetail DetailState="ScatterChart" />)
     .add('차트', () => (
         <Chart table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} type="line" />

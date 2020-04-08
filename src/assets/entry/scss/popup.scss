@@ -2912,10 +2912,19 @@
             letter-spacing: -0.5px;
             line-height: 22px;
         }
+        .chart_group {
+            position: relative;
+            padding: 40px 44px 34px 44px;
+        }
+        .chart_group.vertical {
+            padding-right: 244px
+        }
+        .chart_group.horizontal {
+            padding: 20px 44px 34px 44px;
+        }
         .chart_area {
             position: relative;
             min-height: 452px;
-            padding: 40px 44px 34px 44px;
         }
         .pie_legend {
             position: absolute;
@@ -2989,6 +2998,33 @@
         .pie_legend .list .cnt:last-child:after {
             display: none;
         }
+        .horizontal_legend_box {
+            overflow-y: auto;
+            max-height: 81px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .horizontal_legend_box .legend {
+            display: inline-block;
+            vertical-align: top;
+            margin: 10px 10px 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c313d;
+            letter-spacing: -0.5px;
+            line-height: 17px;
+        }
+        .horizontal_legend_box .legend em {
+            display: inline-block;
+            width: 17px;
+            height: 17px;
+            margin-right: 6px;
+            vertical-align: top;
+        }
+
+
+
+
         .scatter_legend {
             position: absolute;
             right: 30px;
