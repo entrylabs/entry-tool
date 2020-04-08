@@ -39,7 +39,6 @@ const YAxis = (props) => {
             index: -1,
         });
     };
-    console.log(disable, props);
 
     return (
         <div className={Styles.legend_cell}>
