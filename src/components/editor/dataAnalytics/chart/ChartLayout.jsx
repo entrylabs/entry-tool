@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import XAxis from './XAxis';
 import YAxis from './YAxis';
 import Legend from './Legend';
-import LegendList from './LegendList';
+import VerticalLegend from './VerticalLegend';
+import HorizontalLegend from './HorizontalLegend';
 import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
 import { isZipable, CommonUtils, getNumberColumnIndexes } from '@utils/Common';
@@ -30,6 +31,8 @@ const ChartLayout = () => {
             !_.some([xIndex, yIndex], (banIndex) => index === banIndex) ? [...prev, index] : prev,
         []
     );
+    const isHorizontalLegend = type !== 'pie';
+
     const handleClick = () => {
         dispatch({
             type: 'TOGGLE_VISIBLE_LEGEND',
@@ -84,20 +87,31 @@ const ChartLayout = () => {
                                 dropdownItems={dropdownItems}
                             />
                         </div>
-                        {chart.categoryIndexes.length && (type !== 'scatter' || visibleLegend) ? (
-                            <LegendList />
-                        ) : null}
+                        <div
+                            className={`${Styles.chart_group} ${
+                                isHorizontalLegend ? Styles.horizontal : Styles.vertical
+                            }`}
+                        >
+                            {chart.categoryIndexes.length &&
+                            isHorizontalLegend &&
+                            (type !== 'scatter' || visibleLegend) ? (
+                                <HorizontalLegend />
+                            ) : null}
 
-                        {/* 그래프 */}
-                        <Chart
-                            key={`c${generateHash()}`}
-                            legend={{ show: false }}
-                            table={table}
-                            chart={charts[chartIndex]}
-                            size={{
-                                height: 378,
-                            }}
-                        />
+                            {/* 그래프 */}
+                            <Chart
+                                key={`c${generateHash()}`}
+                                legend={{ show: false }}
+                                table={table}
+                                chart={charts[chartIndex]}
+                                size={{
+                                    height: 378,
+                                }}
+                            />
+                            {chart.categoryIndexes.length && !isHorizontalLegend ? (
+                                <VerticalLegend />
+                            ) : null}
+                        </div>
                         {type === 'scatter' ? (
                             <label htmlFor="switch" className={Styles.scatter_legend}>
                                 <span className={Styles.sjt}>표현 값</span>

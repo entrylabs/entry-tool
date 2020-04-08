@@ -2881,8 +2881,6 @@
         .graph_cont {
             overflow: hidden;
             position: absolute;
-            left: 60px;
-            top: 95px;
             width: calc(100% - 230px);
             min-width: 684px;
             height: 397px;
@@ -2917,7 +2915,7 @@
             padding: 40px 44px 34px 44px;
         }
         .chart_group.vertical {
-            padding-right: 244px
+            padding-right: 244px;
         }
         .chart_group.horizontal {
             padding: 20px 44px 34px 44px;
@@ -2967,11 +2965,8 @@
             margin-top: 12px;
             font-size: 12px;
             font-weight: 600;
-            color: #cbcbcb;
-            line-height: 14px;
-        }
-        .pie_legend .list li:first-child {
             color: #2c313d;
+            line-height: 14px;
         }
         .pie_legend .list .bg {
             float: left;
@@ -3021,9 +3016,6 @@
             margin-right: 6px;
             vertical-align: top;
         }
-
-
-
 
         .scatter_legend {
             position: absolute;
