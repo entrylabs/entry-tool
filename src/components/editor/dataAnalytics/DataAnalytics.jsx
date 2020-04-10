@@ -9,12 +9,13 @@ const DataAnalytics = (props) => {
         onToastDataAnalytics = () => {},
         onChangeDataAnalytics = () => {},
     } = props;
-    const { name = '', fields, origin = [], chart = [], id, tab } = table;
+    const { name = '', fields, origin = [], chart = [], id, tab, summary } = table;
     const dataTable = fields ? [[...fields], ...origin] : [[]];
 
     const data = {
         id,
         tab,
+        summary,
         title: name,
         table: dataTable.map((row) => row.map((column) => column)),
         charts: chart,

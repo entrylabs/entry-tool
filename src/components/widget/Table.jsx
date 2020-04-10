@@ -31,6 +31,9 @@ TuiGrid.applyTheme('entry', {
         selectedHeader: {
             background: '#f4f4f4',
         },
+        rowHeader: {
+            background: '#f4f4f4',
+        },
         selectedRowHeader: {
             background: '#fff',
         },

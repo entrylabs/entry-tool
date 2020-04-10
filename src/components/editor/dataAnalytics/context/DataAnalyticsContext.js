@@ -71,6 +71,7 @@ const DataAnalyticsContextProvider = (props) => {
         charts = [],
         id,
         tab,
+        summary,
         onToastDataAnalytics,
         onSubmitDataAnalytics,
         onChangeDataAnalytics,
@@ -81,6 +82,7 @@ const DataAnalyticsContextProvider = (props) => {
         table,
         charts,
         tab,
+        summary,
         chartIndex: 0,
         isFullScreen: false,
         onToastDataAnalytics,
@@ -99,7 +101,7 @@ const DataAnalyticsContextProvider = (props) => {
 
     useEffect(() => {
         beforeAnalytics = { ...analytics };
-        const { title = '', table = [[]], charts = [], id } = analytics;
+        const { title = '', table = [[]], charts = [], id, summary } = analytics;
         dispatch({
             type: 'SET_DATA',
             payload: {
@@ -107,6 +109,7 @@ const DataAnalyticsContextProvider = (props) => {
                 title,
                 table,
                 charts,
+                summary,
                 tab: tab || dataAnalytics.tab,
                 chartIndex: 0,
                 isFullScreen: false,

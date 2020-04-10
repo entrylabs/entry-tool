@@ -48,6 +48,9 @@ export const dataAnalyticsReducer = (state, action) => {
                     {
                         type: action.chartType,
                         title: `${state.title}_${CommonUtils.getLang('DataAnalytics.chart_title')}`,
+                        xIndex: -1,
+                        yIndex: -1,
+                        categoryIndexes: [],
                     },
                 ],
             };
@@ -179,6 +182,18 @@ export const dataAnalyticsReducer = (state, action) => {
                 ...state,
                 table: resultTable,
                 charts: resultCharts,
+            };
+        }
+        case 'TOGGLE_VISIBLE_LEGEND': {
+            const charts = [...state.charts];
+            charts[state.chartIndex] = {
+                ...charts[state.chartIndex],
+                visibleLegend: action.visible,
+            };
+
+            return {
+                ...state,
+                charts,
             };
         }
         default:

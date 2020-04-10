@@ -1015,7 +1015,7 @@
                 padding-top: 24px;
                 font-size: 16px;
                 font-weight: 600;
-                color: #424b50;          
+                color: #424b50;
                 letter-spacing: -0.37px;
                 line-height: 20px;
             }
@@ -2484,7 +2484,7 @@
             }
         }
         .cnt_result {
-            margin-top: 13px;            
+            margin-top: 13px;
         }
         .cnt_result li {
             float: left;
@@ -2673,6 +2673,10 @@
                     padding-top: 9px;
                     margin-left: -8px;
                 }
+                .chart_area {
+                    padding-top: 9px;
+                    margin-left: -8px;
+                }
             }
             li.pie .graph_cont {
                 padding-top: 0px;
@@ -2743,19 +2747,15 @@
         }
         .chart_link.bar.disabled {
             background-image: url('#{$imageDir}/icon_chart_sel01_off.svg');
-            pointer-events: none;
         }
         .chart_link.line.disabled {
             background-image: url('#{$imageDir}/icon_chart_sel02_off.svg');
-            pointer-events: none;
         }
         .chart_link.pie.disabled {
             background-image: url('#{$imageDir}/icon_chart_sel03_off.svg');
-            pointer-events: none;
         }
         .chart_link.scatter.disabled {
             background-image: url('#{$imageDir}/icon_chart_sel04_off.svg');
-            pointer-events: none;
         }
         .chart_link ~ .add_link_box {
             margin-left: 20px;
@@ -2849,20 +2849,19 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        .legend_box .legend_cell .pop_selectbox .tooltip_box {
-            width: 208px;
-            top: 56px;
-            font-size: 14px;
-        }
-        .legend_box .legend_cell .pop_selectbox .tooltip_inner {
-            height: 235px;
-            overflow-y: auto;
-        }
-        .legend_box .legend_cell .pop_selectbox .list_link {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
+        // .legend_box .legend_cell .pop_selectbox .tooltip_box {
+        //     width: 208px;
+        //     top: 56px;
+        //     font-size: 14px;
+        // }
+        // .legend_box .legend_cell .pop_selectbox .tooltip_inner {
+        //     overflow-y: auto;
+        // }
+        // .legend_box .legend_cell .pop_selectbox .list_link {
+        //     overflow: hidden;
+        //     text-overflow: ellipsis;
+        //     white-space: nowrap;
+        // }
         .data_add_box {
             overflow: hidden;
             box-sizing: border-box;
@@ -2886,13 +2885,11 @@
         .graph_cont {
             overflow: hidden;
             position: absolute;
-            left: 60px;
-            top: 95px;
             width: calc(100% - 230px);
             min-width: 684px;
             height: 397px;
             background-color: #fff;
-            z-index: 10;
+            z-index: 9;
 
             .alert {
                 font-family: NanumGothicOTF;
@@ -2917,9 +2914,19 @@
             letter-spacing: -0.5px;
             line-height: 22px;
         }
+        .chart_group {
+            position: relative;
+            padding: 40px 44px 34px 44px;
+        }
+        .chart_group.vertical {
+            padding-right: 244px;
+        }
+        .chart_group.horizontal {
+            padding: 20px 44px 34px 44px;
+        }
         .chart_area {
             position: relative;
-            min-height: 452px;
+            min-height: 378px;
         }
         .pie_legend {
             position: absolute;
@@ -2956,18 +2963,14 @@
         .pie_legend .list {
             overflow: hidden;
             padding: 4px 0 0 20px;
-
         }
         .pie_legend .list li {
             height: 14px;
             margin-top: 12px;
             font-size: 12px;
             font-weight: 600;
-            color: #cbcbcb;
-            line-height: 14px;
-        }
-        .pie_legend .list li:first-child {
             color: #2c313d;
+            line-height: 14px;
         }
         .pie_legend .list .bg {
             float: left;
@@ -2988,16 +2991,42 @@
             top: 1px;
             width: 1px;
             height: 11px;
-            background-color :#d8d8d8;
+            background-color: #d8d8d8;
             content: '';
         }
         .pie_legend .list .cnt:last-child:after {
             display: none;
         }
+        .horizontal_legend_box {
+            overflow-y: auto;
+            max-height: 81px;
+            margin-bottom: 30px;
+            text-align: center;
+            padding-left: 100px;
+            padding-right: 100px;
+        }
+        .horizontal_legend_box .legend {
+            display: inline-block;
+            vertical-align: top;
+            margin: 10px 10px 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c313d;
+            letter-spacing: -0.5px;
+            line-height: 17px;
+        }
+        .horizontal_legend_box .legend em {
+            display: inline-block;
+            width: 17px;
+            height: 17px;
+            margin-right: 6px;
+            vertical-align: top;
+        }
+
         .scatter_legend {
             position: absolute;
             right: 30px;
-            top: 30px;
+            top: 94px;
             cursor: pointer;
         }
         .scatter_legend .sjt {
@@ -3035,13 +3064,12 @@
                 content: '';
             }
         }
-        .scatter_legend input[type="checkbox"]:checked + .switch_box {
+        .scatter_legend input[type='checkbox']:checked + .switch_box {
             border-color: #4f80ff;
         }
-        .scatter_legend input[type="checkbox"]:checked + .switch_box:before {
+        .scatter_legend input[type='checkbox']:checked + .switch_box:before {
             left: 15px;
-            background-color: #4f80ff;;
+            background-color: #4f80ff;
         }
-
     }
 }

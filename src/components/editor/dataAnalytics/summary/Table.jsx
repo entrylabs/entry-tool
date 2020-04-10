@@ -4,7 +4,7 @@ import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/entry/scss/popup.scss';
 
 const Table = (props) => {
-    const { summary } = props;
+    const { summary, title, table } = props;
     const header = [
         ' ',
         'DataAnalytics.count',
@@ -50,7 +50,18 @@ const Table = (props) => {
             <div className={Styles.title_box}>
                 <strong>{CommonUtils.getLang('DataAnalytics.table')}</strong>
                 <TableToolTip />
+                <p className={Styles.title_dsc}>{title}</p>
             </div>
+
+            <ul className={Styles.cnt_result}>
+                <li>{`${CommonUtils.getLang('DataAnalytics.row')} ${table.length -
+                    1}${CommonUtils.getLang('DataAnalytics.row_count')}`}</li>
+                <li>{`${CommonUtils.getLang('DataAnalytics.attribute')} ${
+                    summary.length
+                }${CommonUtils.getLang('DataAnalytics.attribute_count')}`}</li>
+                <li>{`${CommonUtils.getLang('DataAnalytics.cell')} ${summary.length *
+                    (table.length - 1)}${CommonUtils.getLang('DataAnalytics.cell_count')}`}</li>
+            </ul>
             <div className={Styles.table_box}>
                 <table className={Styles.table}>
                     <colgroup>

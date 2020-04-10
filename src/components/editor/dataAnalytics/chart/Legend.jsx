@@ -1,12 +1,9 @@
 import React, { useContext, useState, useRef } from 'react';
 import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
-import { GRAPH_COLOR } from '@components/editor/dataAnalytics/Constants';
-import { CommonUtils, categoryKeys, getNumberColumnIndexesBySelectedColumns } from '@utils/Common';
+import { CommonUtils, getNumberColumnIndexesBySelectedColumns } from '@utils/Common';
 import Dropdown from '@components/widget/dropdown';
 
 import Styles from '@assets/entry/scss/popup.scss';
-
-const { generateHash } = CommonUtils;
 
 const Legend = (props) => {
     const { checkBox, disabled, selectedLegend, dropdownItems = [] } = props;
@@ -19,14 +16,20 @@ const Legend = (props) => {
         : dropdownItems
     ).map((index) => [table[0][index], index]);
 
-    const labels = checkBox
-        ? selectedLegend.map((index) => table[0][index])
-        : categoryKeys(table, selectedLegend[0]);
-
-    const title =
-        checkBox || !table[0][selectedLegend[0]]
+    const getTitle = () => {
+        if (checkBox) {
+            if (!selectedLegend.length) {
+                return CommonUtils.getLang('DataAnalytics.legend');
+            }
+            if (selectedLegend.length === 1) {
+                return table[0][selectedLegend[0]];
+            }
+            return `${table[0][selectedLegend[0]]} 외 ${selectedLegend.length - 1}건`;
+        }
+        return !table[0][selectedLegend[0]]
             ? CommonUtils.getLang('DataAnalytics.legend')
             : table[0][selectedLegend[0]];
+    };
 
     const handleSelectDropDown = (value) => {
         setShowDropdown(false);
@@ -54,33 +57,26 @@ const Legend = (props) => {
     };
 
     return (
-        <>
+        <div className={Styles.legend_cell}>
+            <strong className={Styles.cell_sjt}>
+                {CommonUtils.getLang('DataAnalytics.legend')}
+            </strong>
             <div
-                className={disabled ? `${Styles.legend_box} ${Styles.disabled}` : Styles.legend_box}
+                className={
+                    disabled ? `${Styles.pop_selectbox} ${Styles.disabled}` : Styles.pop_selectbox
+                }
             >
-                <a href="#" className={Styles.common_legend} onClick={handleClick} ref={axisRef}>
-                    {title}
-                </a>
-                {labels.length && selectedLegend.length ? (
-                    <div className={Styles.legend_scroll}>
-                        <ul className={Styles.legend_list}>
-                            {labels.map((item, index) => (
-                                <li key={`cate_${generateHash()}`}>
-                                    <span
-                                        className={Styles.color}
-                                        style={{
-                                            backgroundColor:
-                                                GRAPH_COLOR[index % GRAPH_COLOR.length],
-                                        }}
-                                    >
-                                        &nbsp;
-                                    </span>
-                                    {item}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                ) : null}
+                <div
+                    className={`${Styles.select_link} ${
+                        showDropdown
+                            ? Styles.imico_pop_select_arr_up
+                            : Styles.imico_pop_select_arr_down
+                    }`}
+                    onClick={disabled ? () => {} : handleClick}
+                    ref={axisRef}
+                >
+                    {getTitle()}
+                </div>
             </div>
 
             {showDropdown && checkBox && (
@@ -107,7 +103,7 @@ const Legend = (props) => {
                     positionDom={axisRef.current}
                 />
             )}
-        </>
+        </div>
     );
 };
 
