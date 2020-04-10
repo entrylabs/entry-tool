@@ -19,9 +19,7 @@ const Summary = () => {
                         <h2 className={Styles.tit}>
                             {CommonUtils.getLang('DataAnalytics.summary')}
                         </h2>
-                        <p className={Styles.tit_dsc}>
-                            {CommonUtils.getLang('DataAnalytics.title_descript')}
-                        </p>
+                        <p className={Styles.tit_dsc}>{info}</p>
                     </div>
                 ) : null}
 
