@@ -7,8 +7,8 @@ import Styles from '@assets/entry/scss/popup.scss';
 const { generateHash } = CommonUtils;
 
 const VerticalLegend = (props) => {
-    const { table = [[]], charts = [], chartIndex } = props;
-    const chart = charts.length ? charts[chartIndex] : {};
+    const { table = [[]], charts = [], chartIndex, chart: chartProp } = props;
+    const chart = chartProp || (charts.length ? charts[chartIndex] : {});
     const { xIndex = -1, categoryIndexes } = chart;
     const categoryIndex = categoryIndexes[0];
 

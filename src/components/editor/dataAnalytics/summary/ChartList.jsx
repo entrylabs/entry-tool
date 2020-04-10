@@ -69,6 +69,11 @@ const ChartList = (props) => {
                             },
                         },
                     }}
+                    axisY={{
+                        tick: {
+                            culling: true,
+                        },
+                    }}
                     shortForm={true}
                     key={`chart_${generateHash()}`}
                 />

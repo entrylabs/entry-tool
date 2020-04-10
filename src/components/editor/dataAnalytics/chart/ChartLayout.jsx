@@ -89,7 +89,11 @@ const ChartLayout = () => {
                         </div>
                         <div
                             className={`${Styles.chart_group} ${
-                                isHorizontalLegend ? Styles.horizontal : Styles.vertical
+                                chart.categoryIndexes.length
+                                    ? isHorizontalLegend
+                                        ? Styles.horizontal
+                                        : Styles.vertical
+                                    : ''
                             }`}
                         >
                             {chart.categoryIndexes.length &&
