@@ -60,7 +60,7 @@ const ChartLayout = () => {
                 {charts.length ? (
                     <>
                         <div className={Styles.legend_box}>
-                            <XAxis xAxisIndex={xAxis} xIndex={chart.xIndex} />
+                            <XAxis xAxisIndex={xAxis} xIndex={chart.xIndex} type={type} />
 
                             {type === 'pie' ? null : (
                                 <YAxis
@@ -95,7 +95,11 @@ const ChartLayout = () => {
                             {chart.categoryIndexes.length &&
                             isHorizontalLegend &&
                             (type !== 'scatter' || visibleLegend) ? (
-                                <HorizontalLegend />
+                                <HorizontalLegend
+                                    table={table}
+                                    charts={charts}
+                                    chartIndex={chartIndex}
+                                />
                             ) : null}
 
                             {/* 그래프 */}
@@ -109,12 +113,18 @@ const ChartLayout = () => {
                                 }}
                             />
                             {chart.categoryIndexes.length && !isHorizontalLegend ? (
-                                <VerticalLegend />
+                                <VerticalLegend
+                                    table={table}
+                                    charts={charts}
+                                    chartIndex={chartIndex}
+                                />
                             ) : null}
                         </div>
                         {type === 'scatter' ? (
                             <label htmlFor="switch" className={Styles.scatter_legend}>
-                                <span className={Styles.sjt}>표현 값</span>
+                                <span className={Styles.sjt}>
+                                    {CommonUtils.getLang('DataAnalytics.legend')}
+                                </span>
                                 <input
                                     type="checkbox"
                                     id="switch"

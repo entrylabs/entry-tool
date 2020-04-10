@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
+import React from 'react';
 import { CommonUtils, categoryKeys } from '@utils/Common';
 import { GRAPH_COLOR } from '../Constants';
 
@@ -7,9 +6,8 @@ import Styles from '@assets/entry/scss/popup.scss';
 
 const { generateHash } = CommonUtils;
 
-const HorizontalLegend = () => {
-    const { dataAnalytics } = useContext(DataAnalyticsContext);
-    const { table = [[]], charts = [], chartIndex } = dataAnalytics;
+const HorizontalLegend = (props) => {
+    const { table = [[]], charts = [], chartIndex } = props;
     const chart = charts.length ? charts[chartIndex] : {};
     const { type, categoryIndexes } = chart;
 

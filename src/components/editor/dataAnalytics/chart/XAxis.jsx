@@ -6,7 +6,7 @@ import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/entry/scss/popup.scss';
 
 const XAxis = (props) => {
-    const { xAxisIndex = [], xIndex = -1 } = props;
+    const { xAxisIndex = [], xIndex = -1, type } = props;
     const [showDropdown, setShowDropdown] = useState(false);
     const axisRef = useRef();
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
@@ -33,7 +33,9 @@ const XAxis = (props) => {
     return (
         <div className={Styles.legend_cell}>
             <strong className={Styles.cell_sjt}>
-                {CommonUtils.getLang('DataAnalytics.x_axis')}
+                {type === 'pie'
+                    ? CommonUtils.getLang('DataAnalytics.column_name')
+                    : CommonUtils.getLang('DataAnalytics.x_axis')}
             </strong>
             <div ref={axisRef} className={`${Styles.pop_selectbox} ${Styles.on}`}>
                 <div

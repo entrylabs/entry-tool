@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
+import React from 'react';
 import { GRAPH_COLOR } from '../Constants';
 import { CommonUtils } from '@utils/Common';
 
@@ -7,9 +6,8 @@ import Styles from '@assets/entry/scss/popup.scss';
 
 const { generateHash } = CommonUtils;
 
-const VerticalLegend = () => {
-    const { dataAnalytics } = useContext(DataAnalyticsContext);
-    const { table = [[]], charts = [], chartIndex } = dataAnalytics;
+const VerticalLegend = (props) => {
+    const { table = [[]], charts = [], chartIndex } = props;
     const chart = charts.length ? charts[chartIndex] : {};
     const { xIndex = -1, categoryIndexes } = chart;
     const categoryIndex = categoryIndexes[0];
