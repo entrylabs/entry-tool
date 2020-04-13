@@ -3,18 +3,22 @@ import { pure } from 'recompose';
 import Theme from '@utils/Theme';
 import Option from '../popup/Contents/Navigation/SearchOption';
 import Chart from '@components/widget/Chart';
+import VerticalLegend from '../editor/dataAnalytics/chart/VerticalLegend';
+import HorizontalLegend from '../editor/dataAnalytics/chart//HorizontalLegend';
 import { CommonUtils } from '@utils/Common';
 const { generateHash } = CommonUtils;
 
 const ModalChart = (props) => {
     const theme = Theme.getStyle('popup');
-    const { tables = [], source = {}, setTable, onClose } = props;
-    const { chart = [], name, fields = [], origin = [] } = source;
+    const { source = {}, onClose } = props;
+    const { tables = [] } = source;
     const [dropdown, setDropdown] = useState('');
     const [selected, select] = useState(0);
     const toggleDropDown = (dropdown) => setDropdown(dropdown);
-    const chartList = chart.map(({ title }, index) => [title, index]);
+    const chartList = tables.map(({ chart }, index) => [chart.title, index]);
+    const { table = [], chart = {} } = tables[selected] || {};
     const selectChart = (option) => {
+        // eslint-disable-next-line no-unused-vars
         const [name, index] = option;
         select(index);
     };
@@ -26,8 +30,8 @@ const ModalChart = (props) => {
         el[0].style.overflow = 'hidden';
     }
 
-    const data = [fields, ...origin];
-    const selectedChart = chart && chart[selected];
+    const data = table;
+    const isHorizontalLegend = chart.type !== 'pie';
     return (
         <div className={theme.dimmed}>
             <div className={theme.center}>
@@ -56,27 +60,63 @@ const ModalChart = (props) => {
                     <div className={theme.body}>
                         <div className={theme.content}>
                             <Option
-                                onSelect={setTable}
-                                options={tables}
-                                setDropdown={toggleDropDown}
-                                isOpenDefault={!!dropdown}
-                                staticName={name}
-                            />
-                            <Option
                                 onSelect={selectChart}
                                 options={chartList}
                                 setDropdown={toggleDropDown}
                                 isOpenDefault={!!dropdown}
                             />
-                            <div className={theme.chart_area}>
-                                {selectedChart && (
+                            <div className={theme.summary}>
+                                <span className={`${theme.text} ${theme.bold}`}>
+                                    {isHorizontalLegend
+                                        ? CommonUtils.getLang('DataAnalytics.x_axis')
+                                        : CommonUtils.getLang('DataAnalytics.column_name')}
+                                </span>
+                                <span className={`${theme.text} ${theme.cnt}`}>
+                                    {table[0][chart.xIndex]}
+                                </span>
+                                {isHorizontalLegend && chart.yIndex !== -1 ? (
+                                    <>
+                                        <span className={`${theme.text} ${theme.bold}`}>
+                                            {CommonUtils.getLang('DataAnalytics.y_axis')}
+                                        </span>
+                                        <span className={`${theme.text} ${theme.cnt}`}>
+                                            {table[0][chart.yIndex]}
+                                        </span>
+                                    </>
+                                ) : null}
+                                <span className={`${theme.text} ${theme.bold}`}>
+                                    {CommonUtils.getLang('DataAnalytics.legend')}
+                                </span>
+                                <span className={`${theme.text} ${theme.cnt}`}>
+                                    {chart.categoryIndexes.length === 1
+                                        ? table[0][chart.categoryIndexes[0]]
+                                        : `${table[0][chart.categoryIndexes[0]]} 외 ${chart
+                                              .categoryIndexes.length - 1}건`}
+                                </span>
+                            </div>
+                            {chart.categoryIndexes.length &&
+                            isHorizontalLegend &&
+                            chart.type !== 'scatter' ? (
+                                <HorizontalLegend table={data} chart={chart} />
+                            ) : null}
+
+                            <div
+                                className={`${theme.chart_area} ${
+                                    isHorizontalLegend ? '' : theme.vertical
+                                }`}
+                            >
+                                {chart && (
                                     <Chart
                                         key={`c${generateHash()}`}
                                         table={data}
-                                        chart={selectedChart}
+                                        chart={chart}
+                                        size={{ width: isHorizontalLegend ? '' : 448 }}
                                     />
                                 )}
                             </div>
+                            {chart.categoryIndexes.length && !isHorizontalLegend ? (
+                                <VerticalLegend table={data} chart={chart} />
+                            ) : null}
                         </div>
                     </div>
                 </div>
