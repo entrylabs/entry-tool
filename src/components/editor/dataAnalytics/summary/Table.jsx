@@ -65,7 +65,7 @@ const Table = (props) => {
             <div className={Styles.table_box}>
                 <table className={Styles.table}>
                     <colgroup>
-                        <col style={{ width: '99px' }} />
+                        <col style={{ width: '175px' }} />
                         <col style={{ width: 'auto' }} />
                     </colgroup>
                     <thead>

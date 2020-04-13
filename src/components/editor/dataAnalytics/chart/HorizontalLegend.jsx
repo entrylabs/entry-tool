@@ -7,8 +7,8 @@ import Styles from '@assets/entry/scss/popup.scss';
 const { generateHash } = CommonUtils;
 
 const HorizontalLegend = (props) => {
-    const { table = [[]], charts = [], chartIndex } = props;
-    const chart = charts.length ? charts[chartIndex] : {};
+    const { table = [[]], charts = [], chartIndex, chart: chartProp } = props;
+    const chart = chartProp || (charts.length ? charts[chartIndex] : {});
     const { type, categoryIndexes } = chart;
 
     const labels =

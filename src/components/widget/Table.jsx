@@ -35,7 +35,7 @@ TuiGrid.applyTheme('entry', {
             background: '#f4f4f4',
         },
         selectedRowHeader: {
-            background: '#fff',
+            background: '#f4f4f4',
         },
     },
 });
