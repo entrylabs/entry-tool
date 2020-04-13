@@ -1,4 +1,5 @@
 import { CommonUtils } from './Common';
+import _ from 'lodash';
 
 export default class AutoScroller {
     constructor(container, onScrollCallback) {

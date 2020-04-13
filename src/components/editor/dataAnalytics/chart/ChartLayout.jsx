@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext } from 'react';\
+import _ from 'lodash';
 import XAxis from './XAxis';
 import YAxis from './YAxis';
 import Legend from './Legend';
