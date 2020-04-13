@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { pure } from 'recompose';
 import Draggable from './draggable';
 import LimitedInput from '../common/LimitedInput';
@@ -20,7 +21,7 @@ class Backpack extends Component {
         this.eventWindow = new EntryEvent(window);
         this.input = React.createRef();
         this.refsList = [];
-        this.theme = Theme.getStyle("backpack");
+        this.theme = Theme.getStyle('backpack');
     }
 
     get itemShadowStyle() {

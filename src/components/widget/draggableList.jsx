@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import EntryEvent from '@entrylabs/event';
 import produce from 'immer';
 import CustomScroll from '../common/customScroll';
