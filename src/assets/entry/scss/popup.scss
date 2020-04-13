@@ -2964,9 +2964,10 @@
         }
         .pie_legend .list {
             overflow: hidden;
-            padding: 4px 0 0 20px;
+            padding: 4px 0 0 10px;
         }
         .pie_legend .list li {
+            overflow: hidden;
             height: 14px;
             margin-top: 12px;
             font-size: 12px;
@@ -2978,13 +2979,17 @@
             float: left;
             width: 14px;
             height: 14px;
-            margin: -1px 4px 0 0;
+            margin: -1px 2px 0 0;
             vertical-align: middle;
         }
         .pie_legend .list .cnt {
             float: left;
+            overflow: hidden;
             position: relative;
-            padding: 0 6px;
+            max-width: 54px;
+            padding: 0 4px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
             line-height: 14px;
         }
         .pie_legend .list .cnt:after {
