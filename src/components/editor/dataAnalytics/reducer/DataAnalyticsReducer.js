@@ -48,6 +48,9 @@ export const dataAnalyticsReducer = (state, action) => {
                     {
                         type: action.chartType,
                         title: `${state.title}_${CommonUtils.getLang('DataAnalytics.chart_title')}`,
+                        xIndex: -1,
+                        yIndex: -1,
+                        categoryIndexes: [],
                     },
                 ],
             };
@@ -103,6 +106,96 @@ export const dataAnalyticsReducer = (state, action) => {
                 ...state,
                 isFullScreen: action.isFullScreen,
             };
+        case 'ADD_COLUMN': {
+            const { table, charts = [] } = state;
+            const { columnIndex, columnName } = action;
+
+            const resultTable = table.map((row, index) => {
+                row.splice(
+                    columnIndex,
+                    0,
+                    index
+                        ? 0
+                        : CommonUtils.getOrderedName(
+                              columnName || CommonUtils.getLang('DataAnalytics.new_attribute'),
+                              table[0]
+                          )
+                );
+                return row;
+            });
+
+            const resultCharts = charts.map((chart) => {
+                if (chart.xIndex >= columnIndex) {
+                    chart.xIndex++;
+                }
+                if (chart.yIndex >= columnIndex) {
+                    chart.yIndex++;
+                }
+                for (let i = 0; i < chart.categoryIndexes.length; i++) {
+                    if (chart.categoryIndexes[i] >= columnIndex) {
+                        chart.categoryIndexes[i]++;
+                    }
+                }
+                return chart;
+            });
+
+            return {
+                ...state,
+                table: resultTable,
+                charts: resultCharts,
+            };
+        }
+        case 'DELETE_COLUMN': {
+            const { table, charts = [] } = state;
+            const { columnIndex } = action;
+
+            const resultTable = table.map((row) => {
+                row.splice(columnIndex, 1);
+                return row;
+            });
+
+            const resultCharts = charts.map((chart) => {
+                if (chart.xIndex == columnIndex) {
+                    chart.xIndex = -1;
+                    chart.yIndex = -1;
+                    chart.categoryIndexes = [];
+                } else if (chart.xIndex > columnIndex) {
+                    chart.xIndex--;
+                }
+                if (chart.yIndex == columnIndex) {
+                    chart.yIndex = -1;
+                    chart.categoryIndexes = [];
+                } else if (chart.yIndex > columnIndex) {
+                    chart.yIndex--;
+                }
+                for (let i = 0; i < chart.categoryIndexes.length; i++) {
+                    if (chart.categoryIndexes[i] == columnIndex) {
+                        chart.categoryIndexes.splice(i, 1);
+                    } else if (chart.categoryIndexes[i] > columnIndex) {
+                        chart.categoryIndexes[i]--;
+                    }
+                }
+                return chart;
+            });
+
+            return {
+                ...state,
+                table: resultTable,
+                charts: resultCharts,
+            };
+        }
+        case 'TOGGLE_VISIBLE_LEGEND': {
+            const charts = [...state.charts];
+            charts[state.chartIndex] = {
+                ...charts[state.chartIndex],
+                visibleLegend: action.visible,
+            };
+
+            return {
+                ...state,
+                charts,
+            };
+        }
         default:
             return state;
     }

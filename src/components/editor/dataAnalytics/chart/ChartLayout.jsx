@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import XAxis from './XAxis';
 import YAxis from './YAxis';
 import Legend from './Legend';
+import VerticalLegend from './VerticalLegend';
+import HorizontalLegend from './HorizontalLegend';
 import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
 import { isZipable, CommonUtils, getNumberColumnIndexes } from '@utils/Common';
@@ -16,10 +18,10 @@ const getXAxis = (table, type) =>
 const getYAxis = (table, xIndex) => getNumberColumnIndexes(table, [xIndex]);
 
 const ChartLayout = () => {
-    const { dataAnalytics } = useContext(DataAnalyticsContext);
+    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { table = [[]], charts = [], chartIndex } = dataAnalytics;
     const chart = charts.length ? charts[chartIndex] : {};
-    const { xIndex = -1, yIndex = -1, categoryIndexes = [], type } = chart;
+    const { xIndex = -1, yIndex = -1, type, visibleLegend } = chart;
     const xAxis = getXAxis(table, type);
     const yAxis = getYAxis(table, xIndex);
     const dropdownItems = _.reduce(
@@ -29,47 +31,115 @@ const ChartLayout = () => {
             !_.some([xIndex, yIndex], (banIndex) => index === banIndex) ? [...prev, index] : prev,
         []
     );
+    const isHorizontalLegend = type !== 'pie';
+
+    const handleClick = () => {
+        dispatch({
+            type: 'TOGGLE_VISIBLE_LEGEND',
+            visible: !visibleLegend,
+        });
+    };
+
+    chart.categoryIndexes = chart.categoryIndexes || [];
+    if (chart.xIndex > _.max(xAxis)) {
+        chart.xIndex = -1;
+        chart.yIndex = -1;
+        chart.categoryIndexes = [];
+    } else if (chart.yIndex > _.max(yAxis)) {
+        chart.yIndex = -1;
+        chart.categoryIndexes = [];
+    } else if (
+        _.max(chart.categoryIndexes.length ? chart.categoryIndexes : [-1]) > _.max(dropdownItems)
+    ) {
+        chart.categoryIndexes = [];
+    }
 
     return (
         <div className={Styles.cont_inner}>
             <div className={Styles.chart_box}>
                 {charts.length ? (
                     <>
-                        <Legend
-                            disabled={
-                                xIndex === -1 ||
-                                (type === 'scatter' && yIndex === -1) ||
-                                !dropdownItems.length
-                            }
-                            checkBox={yIndex === -1 && type !== 'pie' && type !== 'scatter'}
-                            selectedLegend={categoryIndexes}
-                            dropdownItems={dropdownItems}
-                        />
+                        <div className={Styles.legend_box}>
+                            <XAxis xAxisIndex={xAxis} xIndex={chart.xIndex} type={type} />
 
-                        {type === 'pie' ? null : (
-                            <YAxis
-                                disable={
-                                    !yAxis.length ||
-                                    (!isZipable(table, xIndex) && type !== 'scatter') ||
-                                    xIndex === -1
+                            {type === 'pie' ? null : (
+                                <YAxis
+                                    disable={
+                                        !yAxis.length ||
+                                        (!isZipable(table, chart.xIndex) && type !== 'scatter') ||
+                                        chart.xIndex === -1
+                                    }
+                                    yAxisIndex={yAxis}
+                                    yIndex={chart.yIndex}
+                                />
+                            )}
+
+                            <Legend
+                                disabled={
+                                    chart.xIndex === -1 ||
+                                    (type === 'scatter' && chart.yIndex === -1) ||
+                                    !dropdownItems.length
                                 }
-                                yAxisIndex={yAxis}
-                                yIndex={yIndex}
+                                checkBox={
+                                    chart.yIndex === -1 && type !== 'pie' && type !== 'scatter'
+                                }
+                                selectedLegend={chart.categoryIndexes}
+                                dropdownItems={dropdownItems}
                             />
-                        )}
+                        </div>
+                        <div
+                            className={`${Styles.chart_group} ${
+                                chart.categoryIndexes.length
+                                    ? isHorizontalLegend
+                                        ? Styles.horizontal
+                                        : Styles.vertical
+                                    : ''
+                            }`}
+                        >
+                            {chart.categoryIndexes.length &&
+                            isHorizontalLegend &&
+                            (type !== 'scatter' || visibleLegend) ? (
+                                <HorizontalLegend
+                                    table={table}
+                                    charts={charts}
+                                    chartIndex={chartIndex}
+                                />
+                            ) : null}
 
-                        <XAxis xAxisIndex={xAxis} xIndex={xIndex} />
-
-                        {/* 그래프 */}
-                        <Chart
-                            key={`c${generateHash()}`}
-                            legend={{ show: type === 'pie' }}
-                            table={table}
-                            chart={charts[chartIndex]}
-                            size={{
-                                height: 397,
-                            }}
-                        />
+                            {/* 그래프 */}
+                            <Chart
+                                key={`c${generateHash()}`}
+                                legend={{ show: false }}
+                                table={table}
+                                chart={charts[chartIndex]}
+                                size={{
+                                    height: 378,
+                                }}
+                            />
+                            {chart.categoryIndexes.length && !isHorizontalLegend ? (
+                                <VerticalLegend
+                                    table={table}
+                                    charts={charts}
+                                    chartIndex={chartIndex}
+                                />
+                            ) : null}
+                        </div>
+                        {type === 'scatter' ? (
+                            <label htmlFor="switch" className={Styles.scatter_legend}>
+                                <span className={Styles.sjt}>
+                                    {CommonUtils.getLang('DataAnalytics.legend')}
+                                </span>
+                                <input
+                                    type="checkbox"
+                                    id="switch"
+                                    name="switch"
+                                    className={Styles.blind}
+                                    checked={visibleLegend ? 'ckecked' : ''}
+                                    onClick={handleClick}
+                                />
+                                <span className={Styles.switch_box}></span>
+                            </label>
+                        ) : null}
                     </>
                 ) : (
                     <div className={Styles.data_add_box}>

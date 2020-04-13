@@ -207,7 +207,7 @@ const Chart = (props) => {
 
     if (!content) {
         return (
-            <div className={Styles.graph_cont}>
+            <div className={Styles.chart_area}>
                 <div id={id} style={{ height: '100%' }} />
             </div>
         );

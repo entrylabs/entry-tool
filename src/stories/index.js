@@ -37,6 +37,7 @@ import DataSelect from '../components/ai_layout/DataSelect';
 import DataUpload from '../components/ai_layout/DataUpload';
 import DataDetail from '../components/ai_layout/DataDetail';
 import DataAnalytics from '../components/editor/dataAnalytics/DataAnalytics';
+import DataEmpty from '../components/ai_layout/DataEmpty';
 import Theme from '@utils/Theme';
 
 const store = configureStore();
@@ -325,14 +326,16 @@ storiesOf('AiLayout', module)
     .addDecorator((story) => <Provider story={story()} />)
     .add('테이블 추가하기 - 데이터 선택', () => <DataSelect />)
     .add('테이블 추가하기 - 데이터 선택 딤드', () => <DataSelect Dimmed />)
+    .add('테이블 추가하기 - 데이터 결과없음', () => <DataEmpty />)
     .add('테이블 추가하기 - 데이터 업로드', () => <DataUpload />)
     .add('데이터 상세 - 요약', () => <DataDetail />)
     .add('데이터 상세 - 데이터 없음', () => <DataDetail DetailState="DataOff" />)
     .add('데이터 상세 - 테이블', () => <DataDetail DetailState="Table" />)
-    .add('데이터 상세 - 차트', () => <DataDetail DetailState="Chart" />)
-    .add('데이터 상세 - 차트 범례 OFF', () => <DataDetail DetailState="LegendOff" />)
-    .add('데이터 상세 - 차트 범례 삭제버튼', () => <DataDetail DetailState="LegendDel" />)
-    .add('데이터 상세 - 차트 데이터 없음', () => <DataDetail DetailState="ChartDataOff" />)
+    .add('데이터 상세 - 차트추가', () => <DataDetail DetailState="ChartAdd" />)
+    .add('데이터 상세 - 기본 차트 문구', () => <DataDetail DetailState="Chart" />)
+    .add('데이터 상세 - 차트 세로형 범례', () => <DataDetail DetailState="VerticalChart" />)
+    .add('데이터 상세 - 차트 가로형 범례', () => <DataDetail DetailState="HorizontalChart" />)
+    .add('데이터 상세 - 방사형 차트 범례', () => <DataDetail DetailState="ScatterChart" />)
     .add('차트', () => (
         <Chart table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} type="line" />
     ))

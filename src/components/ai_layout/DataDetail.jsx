@@ -29,25 +29,17 @@ class DataDetail extends Component {
                         </a>
                     </div>
                     <section className={`${Styles.detail_cont} ${Styles.table_state}`}>
-                        {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                        <h2 className={Styles.blind}>테이블</h2>
                         <div className={Styles.content_box}>
-                            <div className={Styles.input_box}>
-                                <div className={Styles.input_inner}>
-                                    <input type="text" id="data1" name="data1" />
-                                    {/* 인풋에 내용이 들어가면 close_btn을 활성화 해주세요 */}
-                                    <a href="#" className={Styles.close_btn} role="button">
-                                        <span className={Styles.blind}>입력 취소</span>
-                                    </a>
-                                </div>
-                            </div>
-
                             <div className={Styles.cont_inner}>
-                                <div className={Styles.table_box}>
+                                <div className={Styles.title_box}>
+                                    <strong>인천시내 학교 현황</strong>
+                                </div>
+                                {/* 높이값은 브라우저 높이 대비 -38px(하단 여뱍) 으로 넣어주세요 */}
+                                <div className={Styles.table_box} style={{ height: 660 }}>
                                     {/* 여기 테이블은 더미 데이터 입니다. */}
                                     <table className={Styles.table}>
                                         <colgroup>
-                                            <col style={{ width: '99px' }} />
+                                            <col style={{ width: 100 }} />
                                             <col style={{ width: 'auto' }} />
                                         </colgroup>
                                         <thead>
@@ -57,34 +49,34 @@ class DataDetail extends Component {
                                                     <div className={Styles.headtit}>개수</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>평균</div>
+                                                    <div className={Styles.headtit}>학교명</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>표준편차</div>
+                                                    <div className={Styles.headtit}>학생수</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>최대값</div>
+                                                    <div className={Styles.headtit}>주소</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>75%</div>
+                                                    <div className={Styles.headtit}>주소2</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>50%</div>
+                                                    <div className={Styles.headtit}>주소3</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>25%</div>
+                                                    <div className={Styles.headtit}>주소4</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>최소값</div>
+                                                    <div className={Styles.headtit}>주소5</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>중간값</div>
+                                                    <div className={Styles.headtit}>주소6</div>
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th scope="row">구분</th>
+                                                <th scope="row">개수</th>
                                                 <td>99</td>
                                                 <td>99</td>
                                                 <td>99</td>
@@ -96,172 +88,88 @@ class DataDetail extends Component {
                                                 <td>99</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">학교명</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
+                                                <th scope="row">평균</th>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">학생수</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
+                                                <th scope="row">표준편차</th>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">주소</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
+                                                <th scope="row">최대값</th>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">교무실</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
+                                                <th scope="row">75%</th>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">행정실</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
+                                                <th scope="row">50%</th>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">행정실</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
+                                                <th scope="row">25%</th>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">교무실</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">행정실</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">행정실</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">교무실</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">행정실</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">행정실</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">행정실</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">행정실</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
+                                                <th scope="row">0%</th>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -271,7 +179,7 @@ class DataDetail extends Component {
                     </section>
                 </div>
             );
-        } else if (DetailState == 'ChartDataOff') {
+        } else if (DetailState == 'ChartAdd') {
             return (
                 <div className={Styles.data_detail_wrap}>
                     <div className={Styles.detail_top}>
@@ -294,103 +202,66 @@ class DataDetail extends Component {
                         </a>
                     </div>
                     <section className={`${Styles.detail_cont} ${Styles.chart_state}`}>
-                        {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                        <h2 className={Styles.blind}>차트</h2>
-                        <div className={Styles.chart_navi}>
-                            {/* 차트가 추가되면 리스트 노출 시켜주세요. */}
-                            <ul className={Styles.list} style={{ display: 'none' }}>
-                                {/* 선택된 그래프를 제외한 그래프는 disabled 클래스 추가 */}
-                                <li className={Styles.bar}>
-                                    <a href="#">
-                                        <span className={Styles.blind}>막대 그래프</span>
-                                    </a>
-                                </li>
-                                <li className={`${Styles.line} ${Styles.disabled}`}>
-                                    <a href="#">
-                                        <span className={Styles.blind}>꺽은선 그래프</span>
-                                    </a>
-                                </li>
-                                <li className={`${Styles.pie} ${Styles.disabled}`}>
-                                    <a href="#">
-                                        <span className={Styles.blind}>원형 그래프</span>
-                                    </a>
-                                </li>
-                                <li className={`${Styles.scatter} ${Styles.disabled}`}>
-                                    <a href="#">
-                                        <span className={Styles.blind}>분산형 그래프</span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div className={Styles.chart_add_box}>
-                                <a href="#" className={Styles.chart_add}>
-                                    <span className={Styles.blind}>차트 추가하기</span>
+                        <div className={Styles.content_box}>
+                            <h2 className={Styles.blind}>차트</h2>
+                            <div className={Styles.chart_navi}>
+                                {/* 그패프는 최대 10개까지 노출 */}
+                                <a href="#" className={`${Styles.chart_link} ${Styles.bar} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>막대형</span>
                                 </a>
-                                {/* 차트 추가하기 링크 누르면 display: block 처리 해주세요. */}
-                                <div
-                                    className={Styles.tooltip_box}
-                                    style={{ width: '240px', left: '-3px', top: '55px', display: 'block' }}
-                                >
-                                    <div className={Styles.tooltip_inner} style={{ padding: '16px' }}>
-                                        <ul className={Styles.list}>                                            
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.pie} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>원형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.scatter} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>방사형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.bar}`}>
+                                    <span className={Styles.blind}>막대형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.pie}`}>
+                                    <span className={Styles.blind}>원형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.scatter}`}>
+                                    <span className={Styles.blind}>방사형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <div className={Styles.add_link_box}>
+                                    <a href="#" className={Styles.add_link} role="button">
+                                        <span className={Styles.blind}>추가하기</span>
+                                    </a>
+                                    {/* 추가하기 링크가 클릭되면 display: block 처리 해주세요 */}
+                                    <div className={Styles.vertical_tooltip} style={{ left: '56px', display: 'block' }}>
+                                        <ul className={Styles.graph_list}>
                                             <li className={Styles.bar}>
-                                                <a href="#">
-                                                    막대<span className={Styles.blind}>그래프</span>
-                                                </a>
+                                                <a href="#" role="button">막대</a>
                                             </li>
                                             <li className={Styles.line}>
-                                                <a href="#">
-                                                    꺽은선<span className={Styles.blind}>그래프</span>
-                                                </a>
+                                                <a href="#" role="button">꺽은선</a>
                                             </li>
                                             <li className={Styles.pie}>
-                                                <a href="#">
-                                                    원형<span className={Styles.blind}>그래프</span>
-                                                </a>
+                                                <a href="#" role="button">원형</a>
                                             </li>
                                             <li className={Styles.scatter}>
-                                                <a href="#">
-                                                    분산형<span className={Styles.blind}>그래프</span>
-                                                </a>
+                                                <a href="#" role="button">방사형</a>
                                             </li>
                                         </ul>
+                                        <span className={Styles.arr}><i></i></span>
                                     </div>
-                                    <span
-                                        className={`${Styles.arr} ${Styles.free}`}
-                                        style={{ left: '6px' }}
-                                    >
-                                    <i />
-                                    </span>
                                 </div>
-                            </div>
-                        </div>
-                        <div className={Styles.content_box}>
-                            
-                            <div className={Styles.input_box}>
-                                <div className={Styles.input_inner}>
-                                    <input type="text" id="data1" name="data1" />
-                                    {/* 인풋에 내용이 들어가면 close_btn을 활성화 해주세요 */}
-                                    <a href="#" className={Styles.close_btn} role="button">
-                                        <span className={Styles.blind}>입력 취소</span>
-                                    </a>
-                                </div>
-                                <div className={Styles.input_inner}>
-                                    {/* 인풋 비활성화는 disabled 요소 추가 */}
-                                    <input type="text" id="data2" name="data2" value="비활성화 컬러 테스트" disabled />
-                                </div>
-                                {/* 버튼 비활성화는 disabled 클래스 추가 */}
-                                <a href="#" className={`${Styles.chart_del} ${Styles.disabled}`}>차트 삭제</a>
                             </div>
                             <div className={Styles.cont_inner}>
-                                <div className={Styles.chart_box}>
-                                    <div className={Styles.data_add_box}>
-                                        <a href="#">
-                                            <span className={Styles.blind}>차트 추가하기</span>
-                                        </a>
-                                        <p>
-                                            차트를 먼저 추가해주세요.
-                                        </p>
-                                    </div>
-                                </div>
+                                <a href="#" className={Styles.chart_add_link} role="button">차트를 먼저 추가해주세요.</a>
                             </div>
                         </div>
                     </section>
@@ -419,77 +290,64 @@ class DataDetail extends Component {
                         </a>
                     </div>
                     <section className={`${Styles.detail_cont} ${Styles.chart_state}`}>
-                        {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                        <h2 className={Styles.blind}>차트</h2>
-                        <div className={Styles.chart_navi}>
-                            {/* 차트가 추가되면 리스트 노출 시켜주세요. */}
-                            <ul className={Styles.list} style={{ display: 'block' }}>
-                                {/* 선택된 그래프를 제외한 그래프는 disabled 클래스 추가 */}
-                                <li className={Styles.bar}>
-                                    <a href="#">
-                                        <span className={Styles.blind}>막대 그래프</span>
-                                    </a>
-                                </li>
-                                <li className={`${Styles.line} ${Styles.disabled}`}>
-                                    <a href="#">
-                                        <span className={Styles.blind}>꺽은선 그래프</span>
-                                    </a>
-                                </li>
-                                <li className={`${Styles.pie} ${Styles.disabled}`}>
-                                    <a href="#">
-                                        <span className={Styles.blind}>원형 그래프</span>
-                                    </a>
-                                </li>
-                                <li className={`${Styles.scatter} ${Styles.disabled}`}>
-                                    <a href="#">
-                                        <span className={Styles.blind}>분산형 그래프</span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div className={Styles.chart_add_box}>
-                                <a href="#" className={Styles.chart_add}>
-                                    <span className={Styles.blind}>차트 추가하기</span>
+                        <div className={Styles.content_box}>
+                            <h2 className={Styles.blind}>차트</h2>
+                            <div className={Styles.chart_navi}>
+                                {/* 그패프는 최대 10개까지 노출 */}
+                                <a href="#" className={`${Styles.chart_link} ${Styles.bar} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>막대형</span>
                                 </a>
-                                {/* 차트 추가하기 링크 누르면 display: block 처리 해주세요. */}
-                                <div
-                                    className={Styles.tooltip_box}
-                                    style={{ width: '240px', left: '-3px', top: '55px', display: 'none' }}
-                                >
-                                    <div className={Styles.tooltip_inner} style={{ padding: '16px' }}>
-                                        <ul className={Styles.list}>                                            
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.pie} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>원형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.scatter} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>방사형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.bar}`}>
+                                    <span className={Styles.blind}>막대형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.pie}`}>
+                                    <span className={Styles.blind}>원형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.scatter}`}>
+                                    <span className={Styles.blind}>방사형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <div className={Styles.add_link_box}>
+                                    <a href="#" className={Styles.add_link} role="button">
+                                        <span className={Styles.blind}>추가하기</span>
+                                    </a>
+                                    {/* 추가하기 링크가 클릭되면 display: block 처리 해주세요 */}
+                                    <div className={Styles.vertical_tooltip} style={{ left: '56px', display: 'none' }}>
+                                        <ul className={Styles.graph_list}>
                                             <li className={Styles.bar}>
-                                                <a href="#">
-                                                    막대<span className={Styles.blind}>그래프</span>
-                                                </a>
+                                                <a href="#" role="button">막대</a>
                                             </li>
                                             <li className={Styles.line}>
-                                                <a href="#">
-                                                    꺽은선<span className={Styles.blind}>그래프</span>
-                                                </a>
+                                                <a href="#" role="button">꺽은선</a>
                                             </li>
                                             <li className={Styles.pie}>
-                                                <a href="#">
-                                                    원형<span className={Styles.blind}>그래프</span>
-                                                </a>
+                                                <a href="#" role="button">원형</a>
                                             </li>
                                             <li className={Styles.scatter}>
-                                                <a href="#">
-                                                    분산형<span className={Styles.blind}>그래프</span>
-                                                </a>
+                                                <a href="#" role="button">방사형</a>
                                             </li>
                                         </ul>
+                                        <span className={Styles.arr}><i></i></span>
                                     </div>
-                                    <span
-                                        className={`${Styles.arr} ${Styles.free}`}
-                                        style={{ left: '6px' }}
-                                    >
-                                    <i />
-                                    </span>
                                 </div>
                             </div>
-                        </div>
-                        <div className={Styles.content_box}>
-                            
                             <div className={Styles.input_box}>
                                 <div className={Styles.input_inner}>
                                     <input type="text" id="data1" name="data1" />
@@ -498,216 +356,168 @@ class DataDetail extends Component {
                                         <span className={Styles.blind}>입력 취소</span>
                                     </a>
                                 </div>
-                                <div className={Styles.input_inner}>
-                                    <input type="text" id="data2" name="data2" value="비활성화 컬러 테스트" disabled />
-                                </div>
                                 <a href="#" className={Styles.chart_del}>차트 삭제</a>
                             </div>
                             <div className={Styles.cont_inner}>
                                 <div className={Styles.chart_box}>
-                                    {/* 범례 비활성화 경우 disabled 클래스 추가 */}
                                     <div className={Styles.legend_box}>
-                                        <a href="#" className={Styles.common_legend}>범례</a>
-                                        {/* 범례 링크가 눌리면 display: block 처리 해주세요. */}
-                                        <div className={Styles.tooltip_box} style={{ display: 'block' }}>
-                                            <div className={Styles.tooltip_inner} style= {{ overflowY: 'auto', maxHeight: '235px' }}>
-                                                <ul className={Styles.select_list}>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.chk_box}>
-                                                            <input type="checkbox" id="chk1" name="chk1" />
-                                                            <label htmlFor="chk1">범례1</label>
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.chk_box}>
-                                                            <input type="checkbox" id="chk2" name="chk2" />
-                                                            <label htmlFor="chk2">범례2</label>
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.chk_box}>
-                                                            <input type="checkbox" id="chk3" name="chk3" />
-                                                            <label htmlFor="chk3">범례3</label>
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.chk_box}>
-                                                            <input type="checkbox" id="chk4" name="chk4" />
-                                                            <label htmlFor="chk4">범례4</label>
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.chk_box}>
-                                                            <input type="checkbox" id="chk5" name="chk5" />
-                                                            <label htmlFor="chk5">범례5</label>
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.chk_box}>
-                                                            <input type="checkbox" id="chk6" name="chk6" />
-                                                            <label htmlFor="chk6">범례6</label>
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.chk_box}>
-                                                            <input type="checkbox" id="chk7" name="chk7" />
-                                                            <label htmlFor="chk7">범례7</label>
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.chk_box}>
-                                                            <input type="checkbox" id="chk8" name="chk8" />
-                                                            <label htmlFor="chk8">범례5</label>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                        <div className={Styles.legend_cell}>
+                                            <strong className={Styles.cell_sjt}>가로축</strong>
+                                            <div className={`${Styles.pop_selectbox} ${Styles.on}`}>
+                                                {/* [D] on 클래스가 들어오면  imico_pop_select_arr_up 으로 바꿔주세요 */}
+                                                <div className={`${Styles.select_link} ${Styles.imico_pop_select_arr_up}`}>선택</div>
+                                                {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                                <div className={Styles.tooltip_box}>
+                                                    <div className={Styles.tooltip_inner}>
+                                                        <ul className={Styles.select_list}>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    일자
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간발표시간발표시간발표시간발표시간발표시간발표시간
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <span className={Styles.arr}>
+                                                        <i />
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <span className={Styles.arr}>
-                                                <i />
-                                            </span>
                                         </div>
-                                        <div className={Styles.legend_scroll}>
-                                        {/* 범례 체크박스에 선택되면 활성화 시켜주세요 */}
-                                            <ul className={Styles.legend_list}>
-                                                <li>
-                                                    {/* 그래프 색상 값을 넣어주세요. */}
-                                                    <span 
-                                                        className={Styles.color}
-                                                        style={{ backgroundColor: '#4f80ff' }}
-                                                    >&nbsp;</span>예시1
-                                                </li>
-                                                <li>
-                                                    {/* 그래프 색상 값을 넣어주세요. */}
-                                                    <span 
-                                                        className={Styles.color}
-                                                        style={{ backgroundColor: '#ffb500' }}
-                                                    >&nbsp;</span>예시2
-                                                </li>
-                                                <li>
-                                                    {/* 그래프 색상 값을 넣어주세요. */}
-                                                    <span 
-                                                        className={Styles.color}
-                                                        style={{ backgroundColor: '#ffb500' }}
-                                                    >&nbsp;</span>예시3
-                                                </li>
-                                                <li>
-                                                    {/* 그래프 색상 값을 넣어주세요. */}
-                                                    <span 
-                                                        className={Styles.color}
-                                                        style={{ backgroundColor: '#ffb500' }}
-                                                    >&nbsp;</span>예시2
-                                                </li>
-                                                <li>
-                                                    {/* 그래프 색상 값을 넣어주세요. */}
-                                                    <span 
-                                                        className={Styles.color}
-                                                        style={{ backgroundColor: '#ffb500' }}
-                                                    >&nbsp;</span>예시3
-                                                </li>
-                                                <li>
-                                                    {/* 그래프 색상 값을 넣어주세요. */}
-                                                    <span 
-                                                        className={Styles.color}
-                                                        style={{ backgroundColor: '#ffb500' }}
-                                                    >&nbsp;</span>예시2
-                                                </li>
-                                                <li>
-                                                    {/* 그래프 색상 값을 넣어주세요. */}
-                                                    <span 
-                                                        className={Styles.color}
-                                                        style={{ backgroundColor: '#ffb500' }}
-                                                    >&nbsp;</span>예시3
-                                                </li>
-                                                <li>
-                                                    {/* 그래프 색상 값을 넣어주세요. */}
-                                                    <span 
-                                                        className={Styles.color}
-                                                        style={{ backgroundColor: '#ffb500' }}
-                                                    >&nbsp;</span>예시2
-                                                </li>
-                                                <li>
-                                                    {/* 그래프 색상 값을 넣어주세요. */}
-                                                    <span 
-                                                        className={Styles.color}
-                                                        style={{ backgroundColor: '#ffb500' }}
-                                                    >&nbsp;</span>예시3
-                                                </li>
-                                            </ul> 
-                                        </div>  
-                                    </div>
-
-                                    {/* y축 범례 비활성화 경우 disabled 클래스 추가 */}
-                                    <div className={Styles.y_legend_box}>
-                                        {/* 비활성화 경우 disabled 클래스 추가 */}
-                                        <a href="#" className={Styles.common_legend}>세로축세로축세로축</a>
-                                        {/* 세로축 링크가 눌리면 display: block 처리 해주세요. */}
-                                        <div className={Styles.tooltip_box} style={{ display: 'block' }}>
-                                            <div className={Styles.tooltip_inner}>
-                                                <ul className={Styles.select_list}>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            국어점수
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            수학점수
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            영어점수
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                        <div className={Styles.legend_cell}>
+                                            <strong className={Styles.cell_sjt}>세로축</strong>
+                                            <div className={`${Styles.pop_selectbox} ${Styles.disabled}`}>
+                                                {/* [D] on 클래스가 들어오면  imico_pop_select_arr_up 으로 바꿔주세요 */}
+                                                <div className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}>선택</div>
+                                                {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                                <div className={Styles.tooltip_box}>
+                                                    <div className={Styles.tooltip_inner}>
+                                                        <ul className={Styles.select_list}>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    일자
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간발표시간발표시간발표시간발표시간발표시간발표시간
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <span className={Styles.arr}>
+                                                        <i />
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <span className={Styles.arr}>
-                                                <i />
-                                            </span>
+                                        </div>
+                                        <div className={Styles.legend_cell}>
+                                            <strong className={Styles.cell_sjt}>표현 값</strong>
+                                            <div className={Styles.pop_selectbox}>
+                                                {/* [D] on 클래스가 들어오면  imico_pop_select_arr_up 으로 바꿔주세요 */}
+                                                <div className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}>선택</div>
+                                                {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                                <div className={Styles.tooltip_box}>
+                                                    <div className={Styles.tooltip_inner}>
+                                                        <ul className={Styles.select_list}>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    일자
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간발표시간발표시간발표시간발표시간발표시간발표시간
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <span className={Styles.arr}>
+                                                        <i />
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-
-                                    {/* x축 범례 비활성화 경우 disabled 클래스 추가 */}
-                                    <div className={Styles.x_legend_box}>
-                                        <a href="#" className={Styles.common_legend}>가로축</a>
-                                        {/* 가로축 링크가 눌리면 display: block 처리 해주세요. */}
-                                        <div className={`${Styles.tooltip_box} ${Styles.down}`} style={{ display: 'block' }}>
-                                            <div className={Styles.tooltip_inner}>
-                                                <ul className={Styles.select_list}>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            이름
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            수학점수
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            영어점수
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <span className={Styles.arr}>
-                                                <i />
-                                            </span>
+                                    <div className={Styles.caution_dsc}>
+                                        가로축을 선택해주세요.
+                                    </div>
+                                    {/* 
+                                        <div className={Styles.chart_area}>
+                                            이곳에 차트를 넣어주세요
                                         </div>
-                                    </div>
-                                
-                                    {/* 그래프 */}
-                                    <div className={Styles.graph_cont} style={{ backgroundColor: 'orange' }}>
-                                        그래프 영역 개발 해주실때 배경색 지워주세요.
-                                    </div>
+                                     */}
                                 </div>
                             </div>
                         </div>
                     </section>
                 </div>
             );
-        } else if (DetailState == 'LegendOff') {
+        } else if (DetailState == 'VerticalChart') {
             return (
                 <div className={Styles.data_detail_wrap}>
                     <div className={Styles.detail_top}>
@@ -730,77 +540,64 @@ class DataDetail extends Component {
                         </a>
                     </div>
                     <section className={`${Styles.detail_cont} ${Styles.chart_state}`}>
-                        {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                        <h2 className={Styles.blind}>차트</h2>
-                        <div className={Styles.chart_navi}>
-                            {/* 차트가 추가되면 리스트 노출 시켜주세요. */}
-                            <ul className={Styles.list} style={{ display: 'block' }}>
-                                {/* 선택된 그래프를 제외한 그래프는 disabled 클래스 추가 */}
-                                <li className={Styles.bar}>
-                                    <a href="#">
-                                        <span className={Styles.blind}>막대 그래프</span>
-                                    </a>
-                                </li>
-                                <li className={`${Styles.line} ${Styles.disabled}`}>
-                                    <a href="#">
-                                        <span className={Styles.blind}>꺽은선 그래프</span>
-                                    </a>
-                                </li>
-                                <li className={`${Styles.pie} ${Styles.disabled}`}>
-                                    <a href="#">
-                                        <span className={Styles.blind}>원형 그래프</span>
-                                    </a>
-                                </li>
-                                <li className={`${Styles.scatter} ${Styles.disabled}`}>
-                                    <a href="#">
-                                        <span className={Styles.blind}>분산형 그래프</span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div className={Styles.chart_add_box}>
-                                <a href="#" className={Styles.chart_add}>
-                                    <span className={Styles.blind}>차트 추가하기</span>
+                        <div className={Styles.content_box}>
+                            <h2 className={Styles.blind}>차트</h2>
+                            <div className={Styles.chart_navi}>
+                                {/* 그패프는 최대 10개까지 노출 */}
+                                <a href="#" className={`${Styles.chart_link} ${Styles.bar} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>막대형</span>
                                 </a>
-                                {/* 차트 추가하기 링크 누르면 display: block 처리 해주세요. */}
-                                <div
-                                    className={Styles.tooltip_box}
-                                    style={{ width: '240px', left: '-3px', top: '55px', display: 'none' }}
-                                >
-                                    <div className={Styles.tooltip_inner} style={{ padding: '16px' }}>
-                                        <ul className={Styles.list}>                                            
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.pie} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>원형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.scatter} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>방사형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.bar}`}>
+                                    <span className={Styles.blind}>막대형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.pie}`}>
+                                    <span className={Styles.blind}>원형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.scatter}`}>
+                                    <span className={Styles.blind}>방사형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <div className={Styles.add_link_box}>
+                                    <a href="#" className={Styles.add_link} role="button">
+                                        <span className={Styles.blind}>추가하기</span>
+                                    </a>
+                                    {/* 추가하기 링크가 클릭되면 display: block 처리 해주세요 */}
+                                    <div className={Styles.vertical_tooltip} style={{ left: '56px', display: 'none' }}>
+                                        <ul className={Styles.graph_list}>
                                             <li className={Styles.bar}>
-                                                <a href="#">
-                                                    막대<span className={Styles.blind}>그래프</span>
-                                                </a>
+                                                <a href="#" role="button">막대</a>
                                             </li>
                                             <li className={Styles.line}>
-                                                <a href="#">
-                                                    꺽은선<span className={Styles.blind}>그래프</span>
-                                                </a>
+                                                <a href="#" role="button">꺽은선</a>
                                             </li>
                                             <li className={Styles.pie}>
-                                                <a href="#">
-                                                    원형<span className={Styles.blind}>그래프</span>
-                                                </a>
+                                                <a href="#" role="button">원형</a>
                                             </li>
                                             <li className={Styles.scatter}>
-                                                <a href="#">
-                                                    분산형<span className={Styles.blind}>그래프</span>
-                                                </a>
+                                                <a href="#" role="button">방사형</a>
                                             </li>
                                         </ul>
+                                        <span className={Styles.arr}><i></i></span>
                                     </div>
-                                    <span
-                                        className={`${Styles.arr} ${Styles.free}`}
-                                        style={{ left: '6px' }}
-                                    >
-                                    <i />
-                                    </span>
                                 </div>
                             </div>
-                        </div>
-                        <div className={Styles.content_box}>
-                            
                             <div className={Styles.input_box}>
                                 <div className={Styles.input_inner}>
                                     <input type="text" id="data1" name="data1" />
@@ -809,140 +606,319 @@ class DataDetail extends Component {
                                         <span className={Styles.blind}>입력 취소</span>
                                     </a>
                                 </div>
-                                <div className={Styles.input_inner}>
-                                    <input type="text" id="data2" name="data2" value="비활성화 컬러 테스트" disabled />
-                                    <a href="#" className={Styles.close_btn} role="button">
-                                        <span className={Styles.blind}>입력 취소</span>
-                                    </a>
-                                </div>
                                 <a href="#" className={Styles.chart_del}>차트 삭제</a>
                             </div>
                             <div className={Styles.cont_inner}>
                                 <div className={Styles.chart_box}>
-                                    {/* 범례 비활성화 경우 disabled 클래스 추가 */}
-                                    <div className={`${Styles.legend_box} ${Styles.disabled}`}>
-                                        <a href="#" className={Styles.common_legend}>범례</a>
-                                        {/* 범례 링크가 눌리면 display: block 처리 해주세요. */}
-                                        <div className={Styles.tooltip_box} style={{ display: 'none' }}>
-                                            <div className={Styles.tooltip_inner}>
-                                                <ul className={Styles.select_list}>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.chk_box}>
-                                                            <input type="checkbox" id="chk1" name="chk1" />
-                                                            <label htmlFor="chk1">범례1</label>
-                                                        </div>
+                                    <div className={Styles.legend_box}>
+                                        <div className={Styles.legend_cell}>
+                                            <strong className={Styles.cell_sjt}>가로축</strong>
+                                            <div className={Styles.pop_selectbox}>
+                                                {/* [D] on 클래스가 들어오면  imico_pop_select_arr_up 으로 바꿔주세요 */}
+                                                <div className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}>선택</div>
+                                                {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                                <div className={Styles.tooltip_box}>
+                                                    <div className={Styles.tooltip_inner}>
+                                                        <ul className={Styles.select_list}>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    일자
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간발표시간발표시간발표시간발표시간발표시간발표시간
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <span className={Styles.arr}>
+                                                        <i />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className={Styles.legend_cell}>
+                                            <strong className={Styles.cell_sjt}>세로축</strong>
+                                            <div className={`${Styles.pop_selectbox} ${Styles.disabled}`}>
+                                                {/* [D] on 클래스가 들어오면  imico_pop_select_arr_up 으로 바꿔주세요 */}
+                                                <div className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}>선택</div>
+                                                {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                                <div className={Styles.tooltip_box}>
+                                                    <div className={Styles.tooltip_inner}>
+                                                        <ul className={Styles.select_list}>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    일자
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간발표시간발표시간발표시간발표시간발표시간발표시간
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <span className={Styles.arr}>
+                                                        <i />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className={Styles.legend_cell}>
+                                            <strong className={Styles.cell_sjt}>표현 값</strong>
+                                            <div className={Styles.pop_selectbox}>
+                                                {/* [D] on 클래스가 들어오면  imico_pop_select_arr_up 으로 바꿔주세요 */}
+                                                <div className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}>선택</div>
+                                                {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                                <div className={Styles.tooltip_box}>
+                                                    <div className={Styles.tooltip_inner}>
+                                                        <ul className={Styles.select_list}>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    일자
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간발표시간발표시간발표시간발표시간발표시간발표시간
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <span className={Styles.arr}>
+                                                        <i />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* 
+                                        세로 범례가 들어올 경우 vertical 클래스 추가  
+                                        가로 범례가 들어올 경우 horizontal 클래스 추가
+                                    */}
+                                    <div className={`${Styles.chart_group} ${Styles.vertical}`}>
+                                        <div className={Styles.chart_area}>
+                                            이곳에 차트를 넣어주세요
+                                        </div>
+                                        <div className={Styles.pie_legend}>
+                                            <strong className={Styles.legend_sjt}>
+                                                <em>종합</em>200,000
+                                            </strong>
+                                            <div className={Styles.scroll_box}>
+                                                <ul className={Styles.list}>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#4f80ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
                                                     </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.chk_box}>
-                                                            <input type="checkbox" id="chk2" name="chk2" />
-                                                            <label htmlFor="chk2">범례2</label>
-                                                        </div>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#8274ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
                                                     </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.chk_box}>
-                                                            <input type="checkbox" id="chk3" name="chk3" />
-                                                            <label htmlFor="chk3">범례3</label>
-                                                        </div>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#4f80ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
+                                                    </li>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#8274ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
+                                                    </li>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#4f80ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
+                                                    </li>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#8274ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
+                                                    </li>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#4f80ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
+                                                    </li>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#8274ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
+                                                    </li>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#4f80ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
+                                                    </li>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#8274ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
+                                                    </li>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#4f80ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
+                                                    </li>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#8274ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
+                                                    </li>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#4f80ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
+                                                    </li>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#8274ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
+                                                    </li>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#4f80ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
+                                                    </li>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#8274ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
+                                                    </li>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#4f80ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
+                                                    </li>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#8274ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
+                                                    </li>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#4f80ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
+                                                    </li>
+                                                    <li>
+                                                        {/* 범례에 맞는 컬러를 넣어주세요 */}
+                                                        <span className={Styles.bg} style={{backgroundColor: '#8274ff'}}>&nbsp;</span>
+                                                        <span className={Styles.cnt}>2018.02</span>
+                                                        <span className={Styles.cnt}>999</span>
+                                                        <span className={Styles.cnt}>99%</span>
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <span className={Styles.arr}>
-                                                <i />
-                                            </span>
-                                        </div>
-                                        
-                                        {/* 범례 체크박스에 선택되면 활성화 시켜주세요 */}
-                                        <ul className={Styles.legend_list} style={{ display: 'none' }}>
-                                            <li>
-                                                {/* 그래프 색상 값을 넣어주세요. */}
-                                                <span 
-                                                    className={Styles.color}
-                                                    style={{ backgroundColor: '#4f80ff' }}
-                                                >&nbsp;</span>예시1
-                                            </li>
-                                            <li>
-                                                {/* 그래프 색상 값을 넣어주세요. */}
-                                                <span 
-                                                    className={Styles.color}
-                                                    style={{ backgroundColor: '#ffb500' }}
-                                                >&nbsp;</span>예시2
-                                            </li>
-                                        </ul>
-                                        
-                                    </div>
-
-                                    {/* y축 범례 비활성화 경우 disabled 클래스 추가 */}
-                                    <div className={`${Styles.y_legend_box} ${Styles.disabled}`}>
-                                        {/* 비활성화 경우 disabled 클래스 추가 */}
-                                        <a href="#" className={Styles.common_legend}>세로축세로축세로축</a>
-                                        {/* 세로축 링크가 눌리면 display: block 처리 해주세요. */}
-                                        <div className={Styles.tooltip_box} style={{ display: 'none' }}>
-                                            <div className={Styles.tooltip_inner}>
-                                                <ul className={Styles.select_list}>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            국어점수
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            수학점수
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            영어점수
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <span className={Styles.arr}>
-                                                <i />
-                                            </span>
                                         </div>
                                     </div>
-
-                                    {/* x축 범례 비활성화 경우 disabled 클래스 추가 */}
-                                    <div className={`${Styles.x_legend_box} ${Styles.disabled}`}>
-                                        <a href="#" className={Styles.common_legend}>가로축</a>
-                                        {/* 가로축 링크가 눌리면 display: block 처리 해주세요. */}
-                                        <div className={`${Styles.tooltip_box} ${Styles.down}`} style={{ display: 'none' }}>
-                                            <div className={Styles.tooltip_inner}>
-                                                <ul className={Styles.select_list}>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            이름
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            수학점수
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            영어점수
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <span className={Styles.arr}>
-                                                <i />
-                                            </span>
-                                        </div>
-                                    </div>
-                                
-                                    {/* 그래프 */}
-                                    <div className={Styles.graph_cont} style={{ backgroundColor: 'orange' }}>
-                                        그래프 영역 개발 해주실때 배경색 지워주세요.
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
                     </section>
                 </div>
             );
-        } else if (DetailState == 'LegendDel') {
+        } else if (DetailState == 'HorizontalChart') {
             return (
                 <div className={Styles.data_detail_wrap}>
                     <div className={Styles.detail_top}>
@@ -965,77 +941,64 @@ class DataDetail extends Component {
                         </a>
                     </div>
                     <section className={`${Styles.detail_cont} ${Styles.chart_state}`}>
-                        {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                        <h2 className={Styles.blind}>차트</h2>
-                        <div className={Styles.chart_navi}>
-                            {/* 차트가 추가되면 리스트 노출 시켜주세요. */}
-                            <ul className={Styles.list} style={{ display: 'block' }}>
-                                {/* 선택된 그래프를 제외한 그래프는 disabled 클래스 추가 */}
-                                <li className={Styles.bar}>
-                                    <a href="#">
-                                        <span className={Styles.blind}>막대 그래프</span>
-                                    </a>
-                                </li>
-                                <li className={`${Styles.line} ${Styles.disabled}`}>
-                                    <a href="#">
-                                        <span className={Styles.blind}>꺽은선 그래프</span>
-                                    </a>
-                                </li>
-                                <li className={`${Styles.pie} ${Styles.disabled}`}>
-                                    <a href="#">
-                                        <span className={Styles.blind}>원형 그래프</span>
-                                    </a>
-                                </li>
-                                <li className={`${Styles.scatter} ${Styles.disabled}`}>
-                                    <a href="#">
-                                        <span className={Styles.blind}>분산형 그래프</span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div className={Styles.chart_add_box}>
-                                <a href="#" className={Styles.chart_add}>
-                                    <span className={Styles.blind}>차트 추가하기</span>
+                        <div className={Styles.content_box}>
+                            <h2 className={Styles.blind}>차트</h2>
+                            <div className={Styles.chart_navi}>
+                                {/* 그패프는 최대 10개까지 노출 */}
+                                <a href="#" className={`${Styles.chart_link} ${Styles.bar} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>막대형</span>
                                 </a>
-                                {/* 차트 추가하기 링크 누르면 display: block 처리 해주세요. */}
-                                <div
-                                    className={Styles.tooltip_box}
-                                    style={{ width: '240px', left: '-3px', top: '55px', display: 'none' }}
-                                >
-                                    <div className={Styles.tooltip_inner} style={{ padding: '16px' }}>
-                                        <ul className={Styles.list}>                                            
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.pie} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>원형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.scatter} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>방사형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.bar}`}>
+                                    <span className={Styles.blind}>막대형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.pie}`}>
+                                    <span className={Styles.blind}>원형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.scatter}`}>
+                                    <span className={Styles.blind}>방사형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <div className={Styles.add_link_box}>
+                                    <a href="#" className={Styles.add_link} role="button">
+                                        <span className={Styles.blind}>추가하기</span>
+                                    </a>
+                                    {/* 추가하기 링크가 클릭되면 display: block 처리 해주세요 */}
+                                    <div className={Styles.vertical_tooltip} style={{ left: '56px', display: 'none' }}>
+                                        <ul className={Styles.graph_list}>
                                             <li className={Styles.bar}>
-                                                <a href="#">
-                                                    막대<span className={Styles.blind}>그래프</span>
-                                                </a>
+                                                <a href="#" role="button">막대</a>
                                             </li>
                                             <li className={Styles.line}>
-                                                <a href="#">
-                                                    꺽은선<span className={Styles.blind}>그래프</span>
-                                                </a>
+                                                <a href="#" role="button">꺽은선</a>
                                             </li>
                                             <li className={Styles.pie}>
-                                                <a href="#">
-                                                    원형<span className={Styles.blind}>그래프</span>
-                                                </a>
+                                                <a href="#" role="button">원형</a>
                                             </li>
                                             <li className={Styles.scatter}>
-                                                <a href="#">
-                                                    분산형<span className={Styles.blind}>그래프</span>
-                                                </a>
+                                                <a href="#" role="button">방사형</a>
                                             </li>
                                         </ul>
+                                        <span className={Styles.arr}><i></i></span>
                                     </div>
-                                    <span
-                                        className={`${Styles.arr} ${Styles.free}`}
-                                        style={{ left: '6px' }}
-                                    >
-                                    <i />
-                                    </span>
                                 </div>
                             </div>
-                        </div>
-                        <div className={Styles.content_box}>
-                            
                             <div className={Styles.input_box}>
                                 <div className={Styles.input_inner}>
                                     <input type="text" id="data1" name="data1" />
@@ -1044,141 +1007,536 @@ class DataDetail extends Component {
                                         <span className={Styles.blind}>입력 취소</span>
                                     </a>
                                 </div>
+                                <a href="#" className={Styles.chart_del}>차트 삭제</a>
+                            </div>
+                            <div className={Styles.cont_inner}>
+                                <div className={Styles.chart_box}>
+                                    <div className={Styles.legend_box}>
+                                        <div className={Styles.legend_cell}>
+                                            <strong className={Styles.cell_sjt}>가로축</strong>
+                                            <div className={Styles.pop_selectbox}>
+                                                {/* [D] on 클래스가 들어오면  imico_pop_select_arr_up 으로 바꿔주세요 */}
+                                                <div className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}>선택</div>
+                                                {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                                <div className={Styles.tooltip_box}>
+                                                    <div className={Styles.tooltip_inner}>
+                                                        <ul className={Styles.select_list}>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    일자
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간발표시간발표시간발표시간발표시간발표시간발표시간
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <span className={Styles.arr}>
+                                                        <i />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className={Styles.legend_cell}>
+                                            <strong className={Styles.cell_sjt}>세로축</strong>
+                                            <div className={`${Styles.pop_selectbox} ${Styles.disabled}`}>
+                                                {/* [D] on 클래스가 들어오면  imico_pop_select_arr_up 으로 바꿔주세요 */}
+                                                <div className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}>선택</div>
+                                                {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                                <div className={Styles.tooltip_box}>
+                                                    <div className={Styles.tooltip_inner}>
+                                                        <ul className={Styles.select_list}>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    일자
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간발표시간발표시간발표시간발표시간발표시간발표시간
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <span className={Styles.arr}>
+                                                        <i />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className={Styles.legend_cell}>
+                                            <strong className={Styles.cell_sjt}>표현 값</strong>
+                                            <div className={Styles.pop_selectbox}>
+                                                {/* [D] on 클래스가 들어오면  imico_pop_select_arr_up 으로 바꿔주세요 */}
+                                                <div className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}>선택</div>
+                                                {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                                <div className={Styles.tooltip_box}>
+                                                    <div className={Styles.tooltip_inner}>
+                                                        <ul className={Styles.select_list}>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    일자
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간발표시간발표시간발표시간발표시간발표시간발표시간
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <span className={Styles.arr}>
+                                                        <i />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* 
+                                        세로 범례가 들어올 경우 vertical 클래스 추가  
+                                        가로 범례가 들어올 경우 horizontal 클래스 추가
+                                    */}
+                                    <div className={`${Styles.chart_group} ${Styles.horizontal}`}>
+                                        <div className={Styles.horizontal_legend_box}>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#4f80ff'}}>&nbsp;</em>강원도
+                                            </span>
+                                            <span className={Styles.legend}>
+                                                <em style={{backgroundColor: '#8274ff'}}>&nbsp;</em>경기도
+                                            </span>
+                                        </div>
+                                        <div className={Styles.chart_area}>
+                                            이곳에 차트를 넣어주세요
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            );
+        } else if (DetailState == 'ScatterChart') {
+            return (
+                <div className={Styles.data_detail_wrap}>
+                    <div className={Styles.detail_top}>
+                        <a href="#" role="button" class={Styles.switch_btn}>
+                            <span className={Styles.blind}>창 전환</span>
+                        </a>
+                        <ul className={Styles.tab_box}>
+                            <li>
+                                <a href="#">요약</a>
+                            </li>
+                            <li>
+                                <a href="#">테이블</a>
+                            </li>
+                            <li className={Styles.on}>
+                                <a href="#">차트</a>
+                            </li>
+                        </ul>
+                        <a href="#" className={Styles.btn_save} role="button">
+                            저장하기
+                        </a>
+                    </div>
+                    <section className={`${Styles.detail_cont} ${Styles.chart_state}`}>
+                        <div className={Styles.content_box}>
+                            <h2 className={Styles.blind}>차트</h2>
+                            <div className={Styles.chart_navi}>
+                                {/* 그패프는 최대 10개까지 노출 */}
+                                <a href="#" className={`${Styles.chart_link} ${Styles.bar} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>막대형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.pie} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>원형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.scatter} ${Styles.disabled}`}>
+                                    <span className={Styles.blind}>방사형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.bar}`}>
+                                    <span className={Styles.blind}>막대형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.pie}`}>
+                                    <span className={Styles.blind}>원형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.scatter}`}>
+                                    <span className={Styles.blind}>방사형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <a href="#" className={`${Styles.chart_link} ${Styles.line}`}>
+                                    <span className={Styles.blind}>꺽은선형</span>
+                                </a>
+                                <div className={Styles.add_link_box}>
+                                    <a href="#" className={Styles.add_link} role="button">
+                                        <span className={Styles.blind}>추가하기</span>
+                                    </a>
+                                    {/* 추가하기 링크가 클릭되면 display: block 처리 해주세요 */}
+                                    <div className={Styles.vertical_tooltip} style={{ left: '56px', display: 'none' }}>
+                                        <ul className={Styles.graph_list}>
+                                            <li className={Styles.bar}>
+                                                <a href="#" role="button">막대</a>
+                                            </li>
+                                            <li className={Styles.line}>
+                                                <a href="#" role="button">꺽은선</a>
+                                            </li>
+                                            <li className={Styles.pie}>
+                                                <a href="#" role="button">원형</a>
+                                            </li>
+                                            <li className={Styles.scatter}>
+                                                <a href="#" role="button">방사형</a>
+                                            </li>
+                                        </ul>
+                                        <span className={Styles.arr}><i></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={Styles.input_box}>
                                 <div className={Styles.input_inner}>
-                                    <input type="text" id="data2" name="data2" value="비활성화 컬러 테스트" disabled />
+                                    <input type="text" id="data1" name="data1" />
+                                    {/* 인풋에 내용이 들어가면 close_btn을 활성화 해주세요 */}
+                                    <a href="#" className={Styles.close_btn} role="button">
+                                        <span className={Styles.blind}>입력 취소</span>
+                                    </a>
                                 </div>
                                 <a href="#" className={Styles.chart_del}>차트 삭제</a>
                             </div>
                             <div className={Styles.cont_inner}>
                                 <div className={Styles.chart_box}>
-                                    {/* 범례 비활성화 경우 disabled 클래스 추가 */}
-                                    <div className={`${Styles.legend_box} ${Styles.disabled}`}>
-                                        <a href="#" className={Styles.common_legend}>범례</a>
-                                        {/* 범례 링크가 눌리면 display: block 처리 해주세요. */}
-                                        <div className={Styles.tooltip_box} style={{ display: 'none' }}>
-                                            <div className={Styles.tooltip_inner}>
-                                                <ul className={Styles.select_list}>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.chk_box}>
-                                                            <input type="checkbox" id="chk1" name="chk1" />
-                                                            <label htmlFor="chk1">범례1</label>
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.chk_box}>
-                                                            <input type="checkbox" id="chk2" name="chk2" />
-                                                            <label htmlFor="chk2">범례2</label>
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.chk_box}>
-                                                            <input type="checkbox" id="chk3" name="chk3" />
-                                                            <label htmlFor="chk3">범례3</label>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                    <div className={Styles.legend_box}>
+                                        <div className={Styles.legend_cell}>
+                                            <strong className={Styles.cell_sjt}>가로축</strong>
+                                            <div className={Styles.pop_selectbox}>
+                                                {/* [D] on 클래스가 들어오면  imico_pop_select_arr_up 으로 바꿔주세요 */}
+                                                <div className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}>선택</div>
+                                                {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                                <div className={Styles.tooltip_box}>
+                                                    <div className={Styles.tooltip_inner}>
+                                                        <ul className={Styles.select_list}>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    일자
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간발표시간발표시간발표시간발표시간발표시간발표시간
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <span className={Styles.arr}>
+                                                        <i />
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <span className={Styles.arr}>
-                                                <i />
-                                            </span>
                                         </div>
-                                        
-                                        {/* 범례 체크박스에 선택되면 활성화 시켜주세요 */}
-                                        <ul className={Styles.legend_list} style={{ display: 'none' }}>
-                                            <li>
-                                                {/* 그래프 색상 값을 넣어주세요. */}
-                                                <span 
-                                                    className={Styles.color}
-                                                    style={{ backgroundColor: '#4f80ff' }}
-                                                >&nbsp;</span>예시1
-                                            </li>
-                                            <li>
-                                                {/* 그래프 색상 값을 넣어주세요. */}
-                                                <span 
-                                                    className={Styles.color}
-                                                    style={{ backgroundColor: '#ffb500' }}
-                                                >&nbsp;</span>예시2
-                                            </li>
-                                        </ul>
-                                        
-                                    </div>
-
-                                    {/* y축 범례 비활성화 경우 disabled 클래스 추가 */}
-                                    <div className={Styles.y_legend_box}>
-                                        {/* 삭제 버튼일 경우 common_legend 클래스 대신 del_legend 클래스 추가 */}
-                                        <span className={Styles.del_legend}>
-                                            국어점수
-                                            <a href="#" className={Styles.close_btn}>
-                                                <span className={Styles.blind}>삭제</span>
-                                            </a>
-                                        </span>
-                                        {/* 세로축 링크가 눌리면 display: block 처리 해주세요. */}
-                                        <div className={Styles.tooltip_box} style={{ display: 'block' }}>
-                                            <div className={Styles.tooltip_inner}>
-                                                <ul className={Styles.select_list}>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            국어점수
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            수학점수
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            영어점수
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                        <div className={Styles.legend_cell}>
+                                            <strong className={Styles.cell_sjt}>세로축</strong>
+                                            <div className={`${Styles.pop_selectbox} ${Styles.disabled}`}>
+                                                {/* [D] on 클래스가 들어오면  imico_pop_select_arr_up 으로 바꿔주세요 */}
+                                                <div className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}>선택</div>
+                                                {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                                <div className={Styles.tooltip_box}>
+                                                    <div className={Styles.tooltip_inner}>
+                                                        <ul className={Styles.select_list}>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    일자
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간발표시간발표시간발표시간발표시간발표시간발표시간
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <span className={Styles.arr}>
+                                                        <i />
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <span className={Styles.arr}>
-                                                <i />
-                                            </span>
                                         </div>
-                                    </div>
-
-                                    {/* x축 범례 비활성화 경우 disabled 클래스 추가 */}
-                                    <div className={`${Styles.x_legend_box} ${Styles.disabled}`}>
-                                        {/* 삭제 버튼일 경우 common_legend 클래스 대신 del_legend 클래스 추가 */}
-                                        <span className={Styles.del_legend}>
-                                            국어점수
-                                            <a href="#" className={Styles.close_btn}>
-                                                <span className={Styles.blind}>삭제</span>
-                                            </a>
-                                        </span>
-                                        {/* 가로축 링크가 눌리면 display: block 처리 해주세요. */}
-                                        <div className={`${Styles.tooltip_box} ${Styles.down}`} style={{ display: 'block' }}>
-                                            <div className={Styles.tooltip_inner}>
-                                                <ul className={Styles.select_list}>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            이름
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            수학점수
-                                                        </div>
-                                                    </li>
-                                                    <li className={Styles.list_item}>
-                                                        <div className={Styles.list_link}>
-                                                            영어점수
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                        <div className={Styles.legend_cell}>
+                                            <strong className={Styles.cell_sjt}>표현 값</strong>
+                                            <div className={Styles.pop_selectbox}>
+                                                {/* [D] on 클래스가 들어오면  imico_pop_select_arr_up 으로 바꿔주세요 */}
+                                                <div className={`${Styles.select_link} ${Styles.imico_pop_select_arr_down}`}>선택</div>
+                                                {/* 공통 툴팁의 화살표 기본 위치는 가운데 입니다. */}
+                                                <div className={Styles.tooltip_box}>
+                                                    <div className={Styles.tooltip_inner}>
+                                                        <ul className={Styles.select_list}>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    일자
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간
+                                                                </div>
+                                                            </li>
+                                                            <li className={Styles.list_item}>
+                                                                <div className={Styles.list_link}>
+                                                                    발표시간발표시간발표시간발표시간발표시간발표시간발표시간
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <span className={Styles.arr}>
+                                                        <i />
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <span className={Styles.arr}>
-                                                <i />
-                                            </span>
                                         </div>
                                     </div>
-                                
-                                    {/* 그래프 */}
-                                    <div className={Styles.graph_cont} style={{ backgroundColor: 'orange' }}>
-                                        그래프 영역 개발 해주실때 배경색 지워주세요.
+                                    <div className={Styles.chart_area}>
+                                        이곳에 차트를 넣어주세요
+                                        <label htmlFor="switch" className={Styles.scatter_legend}>
+                                            <span className={Styles.sjt}>표현 값</span>
+                                            <input type="checkbox" id="switch" name="switch" className={Styles.blind} />
+                                            <span className={Styles.switch_box}></span>
+                                        </label>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1208,24 +1566,7 @@ class DataDetail extends Component {
                         </a>
                     </div>
                     <section className={Styles.detail_cont}>
-                        {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                        <h2 className={Styles.blind}>요약</h2>
                         <div className={Styles.content_box}>
-                            <div className={Styles.input_box}>
-                                <div className={Styles.input_inner}>
-                                    <input type="text" id="data1" name="data1" />
-                                    {/* 인풋에 내용이 들어가면 close_btn을 활성화 해주세요 */}
-                                    <a href="#" className={Styles.close_btn} role="button">
-                                        <span className={Styles.blind}>입력 취소</span>
-                                    </a>
-                                </div>
-                                <ul className={Styles.cnt_result}>
-                                    <li>속성 1000개</li>
-                                    <li>행 10,000행</li>
-                                    <li>값 100,000개</li>
-                                </ul>
-                            </div>
-
                             <div className={Styles.cont_inner}>
                                 <div className={Styles.title_box}>
                                     <strong>테이블</strong>
@@ -1298,43 +1639,34 @@ class DataDetail extends Component {
                                             </span>
                                         </div>
                                     </div>
+                                    <p className={Styles.title_dsc}>인천시내 학교 현황</p>
                                 </div>
-                                <div className={Styles.table_box}>
+                                <div className={Styles.table_box} style={{ height: 222 }}>
                                     {/* 데이터가 없을때 DataOffTable 클래스 추가 */}
-                                    <table className={`${Styles.table} ${Styles.DataOffTable}`} >
+                                    {/* 추가되는 셀 하나당 220px 입니다. */}
+                                    <table className={`${Styles.table} ${Styles.DataOffTable}`}>
                                         <colgroup>
-                                            <col style={{ width: '99px' }} />
-                                            <col style={{ width: 'auto' }} />
+                                             {/* 가로 셀이 추가될때 col 요소도 같이 추가 되어야 합니다. */}
+                                             <col style={{ width: 100 }} />
+                                            <col style={{ width: 220 }} />
+                                            <col style={{ width: 220 }} />
+                                            <col style={{ width: 220 }} />
+                                            <col style={{ width: 220 }} />
                                         </colgroup>
                                         <thead>
                                             <tr>
-                                                <th scope="col">속성</th>
+                                                <th scope="col">&nbsp;</th>
                                                 <th scope="col">
                                                     <div className={Styles.headtit}>개수</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>평균</div>
+                                                    <div className={Styles.headtit}>학교명</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>표준편차</div>
+                                                    <div className={Styles.headtit}>학생수</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>최대값</div>
-                                                </th>
-                                                <th scope="col">
-                                                    <div className={Styles.headtit}>75%</div>
-                                                </th>
-                                                <th scope="col">
-                                                    <div className={Styles.headtit}>50%</div>
-                                                </th>
-                                                <th scope="col">
-                                                    <div className={Styles.headtit}>25%</div>
-                                                </th>
-                                                <th scope="col">
-                                                    <div className={Styles.headtit}>최소값</div>
-                                                </th>
-                                                <th scope="col">
-                                                    <div className={Styles.headtit}>중간값</div>
+                                                    <div className={Styles.headtit}>주소</div>
                                                 </th>
                                             </tr>
                                         </thead>
@@ -1349,7 +1681,7 @@ class DataDetail extends Component {
                                         </p>
                                     </div>
                                 </div>
-                                <div className={Styles.title_box}>
+                                <div className={`${Styles.title_box} ${Styles.DataOffTable}`}>
                                     <strong>차트</strong>
                                 </div>
                                 <div className={Styles.chart_list}>
@@ -1366,33 +1698,6 @@ class DataDetail extends Component {
                                                     데이터를 입력해주세요.
                                                 </p>
                                             </div>
-                                        </li>
-                                        <li>
-                                            {/* 그래프를 넣어주세요. */}
-                                        </li>
-                                        <li>
-                                            {/* 그래프를 넣어주세요. */}
-                                        </li>
-                                        <li>
-                                            {/* 그래프를 넣어주세요. */}
-                                        </li>
-                                        <li>
-                                            {/* 그래프를 넣어주세요. */}
-                                        </li>
-                                        <li>
-                                            {/* 그래프를 넣어주세요. */}
-                                        </li>
-                                        <li>
-                                            {/* 그래프를 넣어주세요. */}
-                                        </li>
-                                        <li>
-                                            {/* 그래프를 넣어주세요. */}
-                                        </li>
-                                        <li>
-                                            {/* 그래프를 넣어주세요. */}
-                                        </li>
-                                        <li>
-                                            {/* 그래프를 넣어주세요. */}
                                         </li>
                                     </ul>
                                 </div>
@@ -1424,35 +1729,24 @@ class DataDetail extends Component {
                         </a>
                     </div>
                     <section className={Styles.detail_cont}>
-                        {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                        <h2 className={Styles.blind}>요약</h2>
                         <div className={Styles.content_box}>
-                            <div className={Styles.input_box}>
-                                <div className={Styles.input_inner}>
-                                    <input type="text" id="data1" name="data1" />
-                                    {/* 인풋에 내용이 들어가면 close_btn을 활성화 해주세요 */}
-                                    <a href="#" className={Styles.close_btn} role="button">
-                                        <span className={Styles.blind}>입력 취소</span>
-                                    </a>
-                                </div>
-                                <ul className={Styles.cnt_result}>
-                                    <li>속성 1000개</li>
-                                    <li>행 10,000행</li>
-                                    <li>값 100,000개</li>
-                                </ul>
+                            <div className={Styles.depth_title_box}>
+                                <h2 className={Styles.tit}>요약</h2>
+                                <p className={Styles.tit_dsc}>
+                                    2019년 한 해동안 월 단위로 나눈 각 시도별 평균 기온입니다.(℃)
+                                </p>
                             </div>
-
                             <div className={Styles.cont_inner}>
                                 <div className={Styles.title_box}>
                                     <strong>테이블</strong>
                                     <div className={Styles.q_box}>
-                                        <a href="#" className={Styles.ico_q}>
+                                        <a href="#" className={Styles.ico_q} role="button">
                                             <span className={Styles.blind}>도움말</span>
                                         </a>
                                         {/* 도움말을 클릭하면 display: block 처리 해주세요 */}
                                         <div
                                             className={Styles.tooltip_box}
-                                            style={{ display: 'block' }}
+                                            style={{ display: 'none' }}
                                         >
                                             <div className={Styles.tooltip_inner}>
                                                 <strong className={Styles.sjt}>
@@ -1514,12 +1808,29 @@ class DataDetail extends Component {
                                             </span>
                                         </div>
                                     </div>
+                                    <p className={Styles.title_dsc}>인천시내 학교 현황</p>
                                 </div>
+                                <ul className={Styles.cnt_result}>
+                                    <li><em>행</em>1,000개</li>
+                                    <li><em>열</em>1,000개</li>
+                                    <li><em>칸</em>1,000개</li>
+                                </ul>
                                 <div className={Styles.table_box}>
-                                    <table className={Styles.table}>
+                                    {/* 추가되는 셀 하나당 220px 입니다. */}
+                                    <table className={Styles.table} style={{ width: 2300 }}>
                                         <colgroup>
-                                            <col style={{ width: '99px' }} />
-                                            <col style={{ width: 'auto' }} />
+                                            {/* 가로 셀이 추가될때 col 요소도 같이 추가 되어야 합니다. */}
+                                            <col style={{ width: 100 }} />
+                                            <col style={{ width: 220 }} />
+                                            <col style={{ width: 220 }} />
+                                            <col style={{ width: 220 }} />
+                                            <col style={{ width: 220 }} />
+                                            <col style={{ width: 220 }} />
+                                            <col style={{ width: 220 }} />
+                                            <col style={{ width: 220 }} />
+                                            <col style={{ width: 220 }} />
+                                            <col style={{ width: 220 }} />
+                                            <col style={{ width: 220 }} />
                                         </colgroup>
                                         <thead>
                                             <tr>
@@ -1528,34 +1839,38 @@ class DataDetail extends Component {
                                                     <div className={Styles.headtit}>개수</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>평균</div>
+                                                    <div className={Styles.headtit}>학교명</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>표준편차</div>
+                                                    <div className={Styles.headtit}>학생수</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>최대값</div>
+                                                    <div className={Styles.headtit}>주소</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>75%</div>
+                                                    <div className={Styles.headtit}>주소2</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>50%</div>
+                                                    <div className={Styles.headtit}>주소3</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>25%</div>
+                                                    <div className={Styles.headtit}>주소4</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>최소값</div>
+                                                    <div className={Styles.headtit}>주소5</div>
                                                 </th>
                                                 <th scope="col">
-                                                    <div className={Styles.headtit}>중간값</div>
+                                                    <div className={Styles.headtit}>주소6</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div className={Styles.headtit}>주소7</div>
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th scope="row">구분</th>
+                                                <th scope="row">개수</th>
+                                                <td>99</td>
                                                 <td>99</td>
                                                 <td>99</td>
                                                 <td>99</td>
@@ -1567,76 +1882,95 @@ class DataDetail extends Component {
                                                 <td>99</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">학교명</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
+                                                <th scope="row">평균</th>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">학생수</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
+                                                <th scope="row">표준편차</th>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">주소</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
+                                                <th scope="row">최대값</th>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">교무실</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
+                                                <th scope="row">75%</th>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">행정실</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
+                                                <th scope="row">50%</th>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">행정실</th>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>-</td>
+                                                <th scope="row">25%</th>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">0%</th>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
+                                                <td>99</td>
                                             </tr>
                                         </tbody>
                                     </table>

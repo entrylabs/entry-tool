@@ -13,13 +13,6 @@ const ChartEditor = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { charts, title, chartIndex: selected = 0 } = dataAnalytics;
 
-    const handleChangeTitle = (value) => (event) => {
-        dispatch({
-            type: 'EDIT_TITLE',
-            title: value,
-        });
-    };
-
     const handleChangeChartTitle = (value) => (event) => {
         dispatch({
             type: 'EDIT_CHART_TITLE',
@@ -49,24 +42,25 @@ const ChartEditor = () => {
 
     return (
         <section className={`${Styles.detail_cont} ${Styles.chart_state}`}>
-            <h2 className={Styles.blind}>{CommonUtils.getLang('DataAnalytics.chart')}</h2>
-            <Navigation selected={selected} charts={charts} onClickItem={handleClickItem} />
             <div className={Styles.content_box}>
+                <h2 className={Styles.blind}>{CommonUtils.getLang('DataAnalytics.chart')}</h2>
+                <Navigation selected={selected} charts={charts} onClickItem={handleClickItem} />
                 <div className={Styles.input_box}>
-                    <div className={Styles.input_inner}>
-                        <TitleInput title={title} onChangeTitle={handleChangeTitle} />
-                    </div>
-                    <div className={Styles.input_inner}>
-                        <TitleInput
-                            key={`c${generateHash()}`}
-                            title={chartTitle}
-                            onChangeTitle={handleChangeChartTitle}
-                            disabled={!charts.length}
-                        />
-                    </div>
-                    <a href="#" className={Styles.chart_del} onClick={handleClickDelete}>
-                        {CommonUtils.getLang('DataAnalytics.remove_chart')}
-                    </a>
+                    {charts.length ? (
+                        <>
+                            <div className={Styles.input_inner}>
+                                <TitleInput
+                                    key={`c${generateHash()}`}
+                                    title={chartTitle}
+                                    onChangeTitle={handleChangeChartTitle}
+                                    disabled={!charts.length}
+                                />
+                            </div>
+                            <a href="#" className={Styles.chart_del} onClick={handleClickDelete}>
+                                {CommonUtils.getLang('DataAnalytics.remove_chart')}
+                            </a>
+                        </>
+                    ) : null}
                 </div>
                 <ChartLayout />
             </div>

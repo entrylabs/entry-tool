@@ -56,8 +56,8 @@ const ChartList = (props) => {
                     chart={chart}
                     table={table}
                     size={{
-                        width: 236,
-                        height: 140,
+                        width: 180,
+                        height: 106,
                     }}
                     legend={{ show: false }}
                     tooltip={{ show: false }}
@@ -67,6 +67,11 @@ const ChartList = (props) => {
                             text: {
                                 show: false,
                             },
+                        },
+                    }}
+                    axisY={{
+                        tick: {
+                            culling: true,
                         },
                     }}
                     shortForm={true}

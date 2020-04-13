@@ -999,6 +999,27 @@
                 }
             }
         }
+        .section_cont .empty_box {
+            padding: 182px 0;
+            text-align: center;
+            &:before {
+                display: inline-block;
+                width: 160px;
+                height: 160px;
+                background: url('#{$imageDir}/thmb_no_result.svg') no-repeat;
+                background-size: 160px auto;
+                vertical-align: top;
+                content: '';
+            }
+            .empty_dsc {
+                padding-top: 24px;
+                font-size: 16px;
+                font-weight: 600;
+                color: #424b50;
+                letter-spacing: -0.37px;
+                line-height: 20px;
+            }
+        }
     }
     // 파일 올리기 리스트
     .file_add_list_content,
@@ -1694,63 +1715,73 @@
             color: #f00;
         }
     }
-    //공통 셀렉트 박스
-    .pop_selectbox {
-        position: relative;
-        .select_link {
-            display: block;
-            position: relative;
-            box-sizing: border-box;
-            width: 142px;
-            height: 40px;
-            padding: 0 12px;
-            border: 1px solid #e2e2e2;
-            background-color: #fff;
-            border-radius: 4px;
-            font-weight: 600;
-            color: #555;
-            letter-spacing: -0.3px;
-            line-height: 38px;
-            cursor: pointer;
-        }
-        .select_link:after {
-            @include PositionRT(absolute, 16px, 50%);
-            width: 8px;
-            height: 6px;
-            margin-top: -3px;
-            vertical-align: top;
-            content: '';
-        }
-        & + .pop_selectbox {
-            margin-top: 40px;
-        }
-        & + .on {
-            z-index: 10;
-        }
-        & + .pop_inpt_text {
-            margin-top: 40px;
-        }
-        &.error .select_link {
-            border-color: #f00;
-        }
-    }
-    .pop_selectbox * {
-        box-sizing: content-box;
-    }
-    .pop_selectbox .tooltip_box {
-        display: none;
-    }
-    .pop_selectbox.on .tooltip_box {
-        display: block;
-        z-index: 10;
-        top: 52px;
-    }
 
     // 데이터 추가하기 - 데이터 선택
     .data_select_content {
     }
 }
 
+//공통 셀렉트 박스
+.pop_selectbox {
+    position: relative;
+    .select_link {
+        display: block;
+        position: relative;
+        box-sizing: border-box;
+        width: 142px;
+        height: 40px;
+        padding: 0 12px;
+        border: 1px solid #e2e2e2;
+        background-color: #fff;
+        border-radius: 4px;
+        font-weight: 600;
+        color: #555;
+        letter-spacing: -0.3px;
+        line-height: 38px;
+        cursor: pointer;
+    }
+    .select_link:after {
+        @include PositionRT(absolute, 16px, 50%);
+        width: 8px;
+        height: 6px;
+        margin-top: -3px;
+        vertical-align: top;
+        content: '';
+    }
+    & + .pop_selectbox {
+        margin-top: 40px;
+    }
+    & + .on {
+        z-index: 10;
+    }
+    & + .pop_inpt_text {
+        margin-top: 40px;
+    }
+    &.error .select_link {
+        border-color: #f00;
+    }
+}
+.pop_selectbox * {
+    box-sizing: content-box;
+}
+.pop_selectbox .tooltip_box {
+    display: none;
+}
+.pop_selectbox.on .tooltip_box {
+    display: block;
+    z-index: 10;
+    top: 52px;
+}
+.pop_selectbox.disabled {
+    .select_link {
+        background-color: #f9f9f9;
+        border-color: #f2f2f2;
+        color: #cbcbcb;
+        &:after {
+            opacity: 0.2;
+        }
+    }
+}
 //드롭다운
 .tooltip_box.dropdown,
 .sortable.dropdown {
@@ -1901,7 +1932,7 @@
 }
 
 .dimmed {
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
     top: 0;
@@ -2159,19 +2190,14 @@
         }
         .switch_btn {
             float: left;
-            width: 26px;
-            height: 26px;
-            background: url('#{$imageDir}/btn_switch_link.svg') no-repeat;
-            background-size: 26px auto;
+            width: 32px;
+            height: 32px;
+            background-image: url('#{$imageDir}/btn_switch_link.svg');
+            background-size: 32px auto;
             vertical-align: top;
-            margin-top: -5px;
-            -webkit-transform: rotate(180deg);
-            transform: rotate(180deg);
 
             &.fullscreen {
-                margin-top: 0px;
-                -webkit-transform: rotate(0deg);
-                transform: rotate(0deg);
+                background-image: url('#{$imageDir}/btn_switch_link_fold.svg');
             }
         }
         .btn_save {
@@ -2249,9 +2275,39 @@
             overflow: hidden;
             padding: 30px 22px 0;
         }
-        .input_box {
+        .depth_title_box {
+            padding-bottom: 15px;
+            border-bottom: 1px solid #aac5d5;
+            color: #2c313d;
+            line-height: 20px;
+        }
+        .depth_title_box:after {
+            display: block;
+            clear: both;
+            content: '';
+        }
+        .depth_title_box .tit {
+            float: left;
+            padding-right: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: -0.57px;
+        }
+        .depth_title_box .tit_dsc {
             overflow: hidden;
+            font-size: 14px;
+            letter-spacing: -0.5px;
+        }
+        .depth_title_box + .cont_inner {
+            margin-top: 20px;
+        }
+        .input_box {
             min-width: 908px;
+        }
+        .input_box:after {
+            display: block;
+            clear: both;
+            content: '';
         }
         .input_box .input_inner {
             float: left;
@@ -2295,38 +2351,6 @@
             color: #cbcbcb;
             pointer-events: none;
         }
-        .input_box .cnt_result {
-            float: left;
-            overflow: hidden;
-            margin-left: 11px;
-            padding: 0 2px 0 1px;
-            background-color: #f2f2f2;
-            border: 1px solid #d8d8d8;
-            border-radius: 4px;
-            li {
-                overflow: hidden;
-                float: left;
-                position: relative;
-                height: 38px;
-                padding: 0 10px 0 11px;
-                font-size: 14px;
-                font-weight: 600;
-                line-height: 36px;
-            }
-            li:after {
-                position: absolute;
-                left: 0;
-                top: 50%;
-                width: 1px;
-                height: 16px;
-                margin-top: -8px;
-                background-color: #d8d8d8;
-                content: '';
-            }
-            li:first-child:after {
-                display: none;
-            }
-        }
         .input_box .close_btn {
             position: absolute;
             right: 1px;
@@ -2343,17 +2367,20 @@
                 content: '';
             }
         }
-        &.table_state .table_cont {
+        &.table_state .cont_inner {
             margin-top: 0;
         }
         &.chart_state {
             padding: 0;
         }
         &.chart_state .content_box {
-            padding: 30px 30px 28px;
+            padding: 24px 22px 28px;
+        }
+        &.chart_state .input_box {
+            margin-top: 12px;
         }
         &.chart_state .input_inner {
-            width: 388px;
+            width: 743px;
         }
         &.chart_state .input_inner input[type='text']:disabled {
             background-color: #f9f9f9;
@@ -2364,6 +2391,7 @@
         }
         &.chart_state .cont_inner {
             overflow: visible;
+            margin-top: 12px;
         }
     }
     .cont_inner {
@@ -2375,17 +2403,18 @@
         flex-direction: column;
         flex: 1 1;
         -webkit-box-flex: 1;
-        margin-top: 22px;
         .title_box {
             position: relative;
             strong {
                 font-size: 16px;
                 font-weight: 600;
                 letter-spacing: -0.57px;
+                line-height: 20px;
             }
             .q_box {
                 display: inline-block;
                 position: relative;
+                margin-top: 1px;
                 vertical-align: top;
             }
             .ico_q {
@@ -2396,8 +2425,18 @@
                 background: url('#{$imageDir}/ico_layer_q.svg') no-repeat;
                 vertical-align: top;
             }
+            .title_dsc {
+                display: inline-block;
+                padding-left: 16px;
+                font-size: 14px;
+                letter-spacing: -0.5px;
+                line-height: 20px;
+            }
             & ~ .title_box {
-                margin-top: 24px;
+                margin-top: 20px;
+            }
+            &.DataOffTable {
+                margin-top: 75px;
             }
         }
         .title_box .tooltip_box {
@@ -2412,6 +2451,7 @@
         .title_box .tooltip_box .tooltip_inner {
             padding: 17px 12px 0;
             background-color: #f5fbff;
+            border-radius: 6px;
         }
         .title_box .tooltip_box .sjt {
             display: block;
@@ -2443,15 +2483,42 @@
                 overflow: hidden;
             }
         }
+        .cnt_result {
+            margin-top: 13px;
+        }
+        .cnt_result li {
+            float: left;
+            position: relative;
+            padding: 0 8px 0 9px;
+            font-size: 12px;
+            line-height: 14px;
+        }
+        .cnt_result li:before {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1px;
+            height: 12px;
+            background-color: #979797;
+            content: '';
+        }
+        .cnt_result li:first-of-type {
+            padding-left: 0;
+        }
+        .cnt_result li:first-of-type:before {
+            display: none;
+        }
+        .cnt_result li em {
+            padding-right: 6px;
+        }
     }
     .table_box {
-        margin-top: 10px;
-        height: 329px;
+        margin-top: 12px;
+        height: 252px;
         overflow: auto;
-        border-bottom: 1px solid #979797;
+        border: 1px solid #979797;
+        border-width: 1px 0;
         background-color: #fff;
-        overflow-x: hidden;
-
         &.tui_grid {
             overflow: hidden;
         }
@@ -2489,20 +2556,31 @@
         table-layout: fixed;
         font-size: 14px;
         border-collapse: collapse;
-        thead th {
-            width: 97px;
-            height: 40px;
-            border: 1px solid #979797;
-            border-width: 1px 0;
-            font-weight: 600;
-
-            background-color: #f4f4f4;
+        .col_width1 {
+            width: 100px;
         }
-        tbody th,
+        .col_width2 {
+            width: auto;
+        }
+        thead th {
+            font-weight: 600;
+            height: 36px;
+            background-color: #f4f4f4;
+            border-bottom: 1px solid #979797;
+        }
+        thead th:last-child {
+            border-right: 1px solid #f4f4f4;
+        }
         tbody td {
-            height: 40px;
+            height: 36px;
             border: 1px solid #f4f4f4;
             background-color: #fff;
+            font-weight: 600;
+            text-align: center;
+        }
+        tbody th {
+            border-top: 1px solid #e2e2e2;
+            background-color: #f4f4f4;
             font-weight: 600;
             text-align: center;
         }
@@ -2510,12 +2588,14 @@
         tbody tr:first-child td {
             border-top: 0;
         }
-
+        tbody tr:last-child th,
+        tbody tr:last-child td {
+            border-bottom: 0;
+        }
         .headtit {
             position: relative;
-            height: 40px;
-            line-height: 40px;
-            min-width: 97px;
+            height: 36px;
+            line-height: 36px;
         }
         .headtit:before {
             position: absolute;
@@ -2537,11 +2617,9 @@
         }
     }
     .data_add_box {
-        height: 287px;
         box-sizing: border-box;
-        padding-top: 80px;
+        padding-top: 33px;
         background-color: #fff;
-        border-bottom: 1px solid #979797;
         text-align: center;
         a {
             display: block;
@@ -2552,7 +2630,7 @@
             background-size: 64px auto;
         }
         p {
-            padding-top: 18px;
+            padding-top: 16px;
             font-size: 14px;
             font-weight: 600;
             color: #555;
@@ -2564,21 +2642,20 @@
     .chart_list {
         overflow: auto;
         position: relative;
-        margin-top: 10px;
         -webkit-box-flex: 1;
         flex: 1 1;
-        margin-bottom: -16px;
+        margin-top: 10px;
         .list {
             overflow: hidden;
-            margin: -2px 0 0 -12px;
+            margin: -10px 0 0 -20px;
             padding-bottom: 7px;
             li {
                 overflow: hidden;
                 float: left;
                 position: relative;
-                width: 236px;
-                height: 140px;
-                margin: 12px 0 0 12px;
+                width: 180px;
+                height: 106px;
+                margin: 10px 0 0 20px;
                 border-radius: 6px;
                 background-color: #fff;
                 cursor: pointer;
@@ -2593,12 +2670,20 @@
                     content: '';
                 }
                 .graph_cont {
-                    padding-top: 9px;
-                    margin-left: -8px;
+                    padding-top: 11px;
+                    margin-left: -10px;
+                }
+                .chart_area {
+                    padding-top: 11px;
+                    margin-left: -10px;
                 }
             }
             li.pie .graph_cont {
-                padding-top: 0px;
+                padding-top: 3px;
+                margin-left: 0px;
+            }
+            li.pie .chart_area {
+                padding-top: 3px;
                 margin-left: 0px;
             }
             .on,
@@ -2616,8 +2701,8 @@
                 content: '';
             }
             .data_add_box {
-                height: 148px;
-                padding-top: 26px;
+                height: 106px;
+                padding-top: 12px;
                 border: 0;
                 a {
                     width: 44px;
@@ -2626,109 +2711,161 @@
                     background-size: 44px auto;
                 }
                 p {
-                    padding-top: 10px;
-                    line-height: 18px;
+                    padding-top: 6px;
+                    font-size: 12px;
+                    line-height: 16px;
                 }
             }
         }
     }
     .chart_navi {
         position: relative;
-        overflow: visible;
-        -webkit-box-flex: 0;
-        flex: none;
-        width: 56px;
-        background-color: #f9f9f9;
-        border-right: 1px solid #e2e2e2;
-        z-index: 30;
-        .list {
-            overflow: hidden;
-            margin-left: 8px;
+        z-index: 20;
+        &:after {
+            display: block;
+            clear: both;
+            content: '';
         }
-        .list li {
-            overflow: hidden;
-            margin-top: 10px;
+        .chart_link {
+            display: inline-block;
             width: 40px;
             height: 40px;
-            background-repeat: no-repeat;
+            margin-left: 10px;
             background-size: 40px auto;
+            vertical-align: top;
         }
-        .list a {
-            display: block;
-            height: 40px;
+        .chart_link:first-child {
+            margin-left: 0;
         }
-        .bar {
+        .chart_link.bar {
             background-image: url('#{$imageDir}/icon_chart_sel01_on.svg');
         }
-        .bar.disabled {
-            background-image: url('#{$imageDir}/icon_chart_sel01_off.svg');
-        }
-        .line {
+        .chart_link.line {
             background-image: url('#{$imageDir}/icon_chart_sel02_on.svg');
         }
-        .line.disabled {
-            background-image: url('#{$imageDir}/icon_chart_sel02_off.svg');
-        }
-        .pie {
+        .chart_link.pie {
             background-image: url('#{$imageDir}/icon_chart_sel03_on.svg');
         }
-        .pie.disabled {
-            background-image: url('#{$imageDir}/icon_chart_sel03_off.svg');
-        }
-        .scatter {
+        .chart_link.scatter {
             background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
         }
-        .scatter.disabled {
+        .chart_link.bar.disabled {
+            background-image: url('#{$imageDir}/icon_chart_sel01_off.svg');
+        }
+        .chart_link.line.disabled {
+            background-image: url('#{$imageDir}/icon_chart_sel02_off.svg');
+        }
+        .chart_link.pie.disabled {
+            background-image: url('#{$imageDir}/icon_chart_sel03_off.svg');
+        }
+        .chart_link.scatter.disabled {
             background-image: url('#{$imageDir}/icon_chart_sel04_off.svg');
         }
-        .chart_add_box {
+        .chart_link ~ .add_link_box {
+            margin-left: 10px;
+        }
+        .add_link_box {
+            display: inline-block;
             position: relative;
             width: 40px;
             height: 40px;
-            margin: 10px auto 0;
+            vertical-align: top;
         }
-        .chart_add_box .chart_add {
+        .add_link_box .add_link {
             display: block;
-            width: 40px;
             height: 40px;
-            background: url('#{$imageDir}/icon_chart_add.svg') no-repeat;
-            background-size: 40px auto;
+            background-image: url('#{$imageDir}/icon_chart_sel05.svg');
+            vertical-align: top;
         }
-        .chart_add_box .list {
-            margin: 0;
-        }
-        .chart_add_box .list li {
-            float: left;
-            height: auto;
-            margin: 0 0 0 16px;
-        }
-        .chart_add_box .list li:first-child {
-            margin-left: 0;
-        }
-        .chart_add_box .list a {
-            height: auto;
-            font-size: 14px;
-            font-weight: bold;
-            color: #2c313d;
-            text-align: center;
-            letter-spacing: -0.5px;
-            line-height: 15px;
-        }
-        .chart_add_box .list a:before {
+    }
+    .chart_add_link {
+        position: relative;
+        min-width: 908px;
+        padding: 235px 0;
+        border-radius: 6px;
+        background-color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        color: #2c313d;
+        line-height: 18px;
+        letter-spacing: -0.5px;
+        text-align: center;
+
+        &:before {
             display: block;
-            height: 50px;
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 16px;
+            background: url('#{$imageDir}/icon_chart_table_add.svg');
+            background-size: 64px auto;
             content: '';
         }
-        .plus a {
-            background-image: url('#{$imageDir}/icon_chart_sel05.svg');
-        }
+    }
+    .chart_add_box {
+        position: relative;
+        min-width: 908px;
+        min-height: 568px;
+        border-radius: 6px;
+        background-color: #fff;
     }
     .chart_box {
         position: relative;
         min-width: 908px;
-        min-height: 552px;
+        min-height: 516px;
         border-radius: 6px;
         background-color: #fff;
+        .legend_box {
+            position: relative;
+            padding: 12px 16px;
+            border-radius: 6px 6px 0 0;
+            background-color: #ecf8ff;
+        }
+        .legend_box:after {
+            display: block;
+            clear: both;
+            content: '';
+        }
+        .legend_box .legend_cell {
+            float: left;
+            margin-left: 20px;
+        }
+        .legend_box .legend_cell:first-child {
+            margin-left: 0;
+        }
+        .legend_box .legend_cell .cell_sjt {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c313d;
+            letter-spacing: -0.33px;
+            vertical-align: top;
+            line-height: 40px;
+        }
+        .legend_box .legend_cell .pop_selectbox {
+            display: inline-block;
+            margin-left: 12px;
+        }
+        .legend_box .legend_cell .pop_selectbox .select_link {
+            width: 208px;
+            padding-right: 36px;
+            font-size: 14px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        // .legend_box .legend_cell .pop_selectbox .tooltip_box {
+        //     width: 208px;
+        //     top: 56px;
+        //     font-size: 14px;
+        // }
+        // .legend_box .legend_cell .pop_selectbox .tooltip_inner {
+        //     overflow-y: auto;
+        // }
+        // .legend_box .legend_cell .pop_selectbox .list_link {
+        //     overflow: hidden;
+        //     text-overflow: ellipsis;
+        //     white-space: nowrap;
+        // }
         .data_add_box {
             overflow: hidden;
             box-sizing: border-box;
@@ -2749,169 +2886,12 @@
             padding-top: 10px;
             color: #cbcbcb;
         }
-        .y_legend_box,
-        .x_legend_box,
-        .legend_box {
-            width: 120px;
-            border: 1px solid #e2e2e2;
-            border-radius: 4px;
-            background-color: #fff;
-            z-index: 20;
-            .tooltip_box {
-                width: 120px;
-                top: 58px;
-                left: 50%;
-                margin-left: -60px;
-                font-size: 14px;
-            }
-            &.disabled .common_legend {
-                background-color: #f9f9f9;
-                color: #cbcbcb;
-                pointer-events: none;
-            }
-            &.disabled .common_legend:after {
-                background-image: url('#{$imageDir}/icon_legend_more_off.svg');
-            }
-        }
-        .y_legend_box {
-            position: absolute;
-            left: 20px;
-            top: 20px;
-        }
-        .x_legend_box {
-            position: absolute;
-            right: 20px;
-            bottom: 44px;
-            .tooltip_box {
-                top: auto;
-                bottom: 58px;
-            }
-        }
-        // .chart_area {
-        //     width: calc(100% - 150px);
-        //     min-width: 740px;
-        // }
-        .legend_box {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            .common_legend {
-                text-align: left;
-            }
-            .tooltip_box .chk_box {
-                position: relative;
-                overflow: hidden;
-            }
-            .tooltip_box .chk_box label {
-                display: block;
-                height: 15px;
-                padding: 15px 0 16px 7px;
-                font-size: 14px;
-                font-weight: 600;
-                color: #2c313d;
-                cursor: pointer;
-            }
-            .tooltip_box .chk_box label:before {
-                display: inline-block;
-                margin-right: 8px;
-                width: 16px;
-                height: 16px;
-                background-image: url('#{$imageDir}/icon_checkbox_off.svg');
-                background-size: 16px auto;
-                vertical-align: top;
-                content: '';
-            }
-            .tooltip_box .chk_box input[type='checkbox'] {
-                position: absolute;
-                left: 0;
-                top: 0;
-            }
-            .tooltip_box .chk_box input[type='checkbox']:checked + label:before {
-                background-image: url('#{$imageDir}/icon_checkbox_on.svg');
-            }
-            .legend_scroll {
-                overflow-y: auto;
-                max-height: 202px;
-            }
-            .legend_list {
-                padding: 2px 0 12px;
-                margin: 0 8px;
-                border-top: 1px solid #f2f2f2;
-            }
-            .legend_list li {
-                overflow: hidden;
-                height: 16px;
-                margin-top: 10px;
-                font-size: 14px;
-                font-weight: 600;
-                color: #2c313d;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                word-break: break-all;
-                line-height: 18px;
-            }
-            .legend_list .color {
-                display: inline-block;
-                width: 16px;
-                height: 16px;
-                margin-right: 8px;
-                vertical-align: top;
-            }
-        }
-        .common_legend,
-        .del_legend {
-            display: block;
-            overflow: hidden;
-            position: relative;
-            padding: 13px 44px 11px 12px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 4px;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            word-break: break-all;
-            color: #2c313d;
-            line-height: 18px;
-            &:after {
-                position: absolute;
-                right: 12px;
-                top: 12px;
-                width: 20px;
-                height: 20px;
-                background-image: url('#{$imageDir}/icon_legend_more_on.svg');
-                background-size: 20px auto;
-                content: '';
-            }
-        }
-        .del_legend:after {
-            display: none;
-        }
-        .del_legend .close_btn {
-            position: absolute;
-            right: 2px;
-            top: 2px;
-            padding: 8px;
-            background-color: #fff;
-            border-radius: 4px;
-            &:after {
-                display: block;
-                width: 22px;
-                height: 22px;
-                background: url('#{$imageDir}/btn_input_close.svg') no-repeat;
-                background-size: 22px auto;
-                content: '';
-            }
-        }
         .graph_cont {
-            overflow: hidden;
-            position: absolute;
-            left: 60px;
-            top: 95px;
-            width: calc(100% - 230px);
+            width: 100%;
             min-width: 684px;
             height: 397px;
             background-color: #fff;
-            z-index: 10;
+            z-index: 9;
 
             .alert {
                 font-family: NanumGothicOTF;
@@ -2927,107 +2907,176 @@
                 line-height: 397px;
             }
         }
-        .legend_box .legend_link {
+        .caution_dsc {
+            padding: 215px 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4f80ff;
+            text-align: center;
+            letter-spacing: -0.5px;
+            line-height: 22px;
+        }
+        .chart_group {
+            position: relative;
+            padding: 40px 44px 34px 44px;
+        }
+        .chart_group.vertical {
+            padding-right: 244px;
+        }
+        .chart_group.horizontal {
+            padding: 20px 44px 34px 44px;
+        }
+        .chart_area {
+            position: relative;
+            min-height: 378px;
+        }
+        .pie_legend {
+            position: absolute;
+            right: 16px;
+            top: 16px;
+            bottom: 16px;
+            width: 210px;
+            background-color: #f9f9f9;
+            border: 1px solid #f2f2f2;
+            overflow-y: auto;
+            z-index: 30;
+        }
+        .pie_legend .legend_sjt {
+            display: block;
+            padding: 0 20px;
+            height: 50px;
             font-size: 14px;
             font-weight: 600;
             color: #2c313d;
-            line-height: 20px;
+            line-height: 50px;
         }
-        .legend_box .btn_more {
+        .pie_legend .legend_sjt em {
+            padding-right: 10px;
+        }
+        .pie_legend .scroll_box {
             position: absolute;
-            right: 8px;
-            top: 13px;
-            width: 20px;
-            height: 20px;
-            background: url('#{$imageDir}/icon_chart_setting.svg') no-repeat;
-            background-size: 20px auto;
-            vertical-align: top;
+            left: 0;
+            right: 0;
+            top: 50px;
+            bottom: 0;
+            overflow-y: auto;
+            border-top: 1px solid #f2f2f2;
         }
-        .legend_box .legend_list {
-            padding-top: 2px;
-        }
-        .legend_box .legend_list li {
+        .pie_legend .list {
             overflow: hidden;
-            height: 16px;
-            margin-top: 10px;
+            padding: 4px 0 0 10px;
+        }
+        .pie_legend .list li {
+            overflow: hidden;
+            height: 14px;
+            margin-top: 12px;
             font-size: 12px;
             font-weight: 600;
             color: #2c313d;
-            line-height: 18px;
+            line-height: 14px;
         }
-        .legend_box .legend_list .color {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            margin-right: 8px;
-            vertical-align: top;
+        .pie_legend .list .bg {
+            float: left;
+            width: 14px;
+            height: 14px;
+            margin: -1px 2px 0 0;
+            vertical-align: middle;
         }
-        .legend_box .tooltip_box {
-            display: none;
-            width: 102px;
-            left: 106px;
-            top: 48px;
-        }
-        .legend_box .tooltip_box .chk_box {
-            position: relative;
+        .pie_legend .list .cnt {
+            float: left;
             overflow: hidden;
+            position: relative;
+            max-width: 54px;
+            padding: 0 4px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 14px;
         }
-        .legend_box .tooltip_box .chk_box label {
-            display: block;
-            height: 15px;
-            padding: 15px 0 16px 7px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #2c313d;
-            cursor: pointer;
-        }
-        .legend_box .tooltip_box .chk_box label:before {
-            display: inline-block;
-            margin-right: 8px;
-            width: 16px;
-            height: 16px;
-            background-image: url('#{$imageDir}/icon_checkbox_off.svg');
-            background-size: 16px auto;
-            vertical-align: top;
+        .pie_legend .list .cnt:after {
+            position: absolute;
+            right: 0;
+            top: 1px;
+            width: 1px;
+            height: 11px;
+            background-color: #d8d8d8;
             content: '';
         }
-        .legend_box .tooltip_box .chk_box input[type='checkbox'] {
-            position: absolute;
-            left: 0;
-            top: 0;
+        .pie_legend .list .cnt:last-child:after {
+            display: none;
         }
-        .legend_box .tooltip_box .chk_box input[type='checkbox']:checked + label:before {
-            background-image: url('#{$imageDir}/icon_checkbox_on.svg');
+        .horizontal_legend_box {
+            overflow-y: auto;
+            max-height: 81px;
+            margin-bottom: 30px;
+            text-align: center;
+            padding-left: 100px;
+            margin-right: 100px;
         }
-        .x_legend {
-            position: absolute;
-            right: 55px;
-            bottom: 20px;
-            z-index: 100;
-        }
-        .x_legend em {
-            font-size: 18px;
+        .horizontal_legend_box .legend {
+            display: inline-block;
+            vertical-align: top;
+            margin: 10px 10px 0;
+            font-size: 14px;
             font-weight: 600;
             color: #2c313d;
-            line-height: 20px;
+            letter-spacing: -0.5px;
+            line-height: 17px;
         }
-        .x_legend .more_btn {
+        .horizontal_legend_box .legend em {
             display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin: -1px 0 0 6px;
-            background: url('#{$imageDir}/icon_chart_setting.svg') no-repeat;
-            background-size: 20px auto;
+            width: 17px;
+            height: 17px;
+            margin-right: 6px;
             vertical-align: top;
         }
-        .x_legend .tooltip_box {
-            display: none;
-            width: 102px;
-            left: 11px;
-            top: -206px;
+
+        .scatter_legend {
+            position: absolute;
+            right: 30px;
+            top: 94px;
+            cursor: pointer;
         }
-        .tooltip_box .select_list .list_link {
+        .scatter_legend .sjt {
+            display: inline-block;
+            height: 24px;
             font-size: 14px;
+            font-weight: 600;
+            color: #2c313d;
+            letter-spacing: -0.5px;
+            line-height: 24px;
+            vertical-align: top;
+        }
+        .scatter_legend .switch_box {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            box-sizing: border-box;
+            width: 38px;
+            height: 24px;
+            border: 1px solid #cbcbcb;
+            background-color: #fff;
+            border-radius: 24px;
+            margin-left: 12px;
+            vertical-align: top;
+            transition: 0.1s;
+            &:before {
+                position: absolute;
+                top: 1px;
+                left: 1px;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background-color: #979797;
+                transition: 0.1s;
+                content: '';
+            }
+        }
+        .scatter_legend input[type='checkbox']:checked + .switch_box {
+            border-color: #4f80ff;
+        }
+        .scatter_legend input[type='checkbox']:checked + .switch_box:before {
+            left: 15px;
+            background-color: #4f80ff;
         }
     }
 }
