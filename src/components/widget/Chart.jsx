@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import _ from 'lodash';
 import bb from 'billboard.js';
 
 import Styles from '@assets/entry/scss/popup.scss';

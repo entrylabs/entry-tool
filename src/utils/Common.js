@@ -1,4 +1,5 @@
 import root from 'window-or-global';
+import _ from 'lodash';
 import { DEFAULT_OPTIONS } from '../constants/index';
 import get from 'lodash/get';
 import _some from 'lodash/some';
