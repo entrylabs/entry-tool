@@ -31,15 +31,6 @@ const YAxis = (props) => {
         setShowDropdown(true);
     };
 
-    const handleDeleteClick = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        dispatch({
-            type: 'SELECT_Y_AXIS',
-            index: -1,
-        });
-    };
-
     return (
         <div className={Styles.legend_cell}>
             <strong className={Styles.cell_sjt}>

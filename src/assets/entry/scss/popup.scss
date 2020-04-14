@@ -2038,7 +2038,7 @@
     .modal {
         background: #fff;
         width: 680px;
-        height: 472px;
+        min-height: 472px;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         border-bottom-left-radius: 7px;
@@ -2089,6 +2089,137 @@
                 margin: 14px 0;
                 display: table;
 
+                .summary {
+                    padding-top: 14px;
+                    padding-bottom: 30px;
+                    padding-left: 10px;
+                    height: 20px;
+                    font-family: NanumGothicOTF;
+                    font-size: 14px;
+                    color: #2c313d;
+
+                    .bold {
+                        font-weight: bold;
+                        padding-right: 6px;
+                    }
+
+                    .cnt {
+                        padding-right: 10px;
+                    }
+
+                    .cnt::after {
+                        margin-left: 10px;
+                        width: 1px;
+                        padding-right: 1px;
+                        height: 14px;
+                        background-color: #d8d8d8;
+                        content: '';
+                    }
+
+                    .cnt:last-child:after {
+                        display: none;
+                    }
+                }
+
+                .vertical {
+                    float: left;
+                }
+
+                .horizontal_legend_box {
+                    overflow-y: auto;
+                    max-height: 81px;
+                    margin-bottom: 30px;
+                    text-align: center;
+                }
+                .horizontal_legend_box .legend {
+                    display: inline-block;
+                    vertical-align: top;
+                    margin: 10px 10px 0;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #2c313d;
+                    letter-spacing: -0.5px;
+                    line-height: 17px;
+                }
+                .horizontal_legend_box .legend em {
+                    display: inline-block;
+                    width: 17px;
+                    height: 17px;
+                    margin-right: 6px;
+                    vertical-align: top;
+                }
+
+                .pie_legend {
+                    width: 210px;
+                    height: 360px;
+                    background-color: #f9f9f9;
+                    border: 1px solid #f2f2f2;
+                    overflow-y: auto;
+                    z-index: 30;
+                }
+                .pie_legend .legend_sjt {
+                    display: block;
+                    padding: 0 20px;
+                    height: 50px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #2c313d;
+                    line-height: 50px;
+                    width: 200px;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+                .pie_legend .legend_sjt em {
+                    padding-right: 10px;
+                }
+                .pie_legend .scroll_box {
+                    padding-bottom: 18px;
+                    overflow-y: auto;
+                    border-top: 1px solid #f2f2f2;
+                }
+                .pie_legend .list {
+                    overflow: hidden;
+                    padding: 4px 0 0 10px;
+                }
+                .pie_legend .list li {
+                    overflow: hidden;
+                    height: 14px;
+                    margin-top: 12px;
+                    font-size: 12px;
+                    font-weight: 600;
+                    color: #2c313d;
+                    line-height: 14px;
+                }
+                .pie_legend .list .bg {
+                    float: left;
+                    width: 14px;
+                    height: 14px;
+                    margin: -1px 2px 0 0;
+                    vertical-align: middle;
+                }
+                .pie_legend .list .cnt {
+                    float: left;
+                    overflow: hidden;
+                    position: relative;
+                    max-width: 54px;
+                    padding: 0 4px;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    line-height: 14px;
+                }
+                .pie_legend .list .cnt:after {
+                    position: absolute;
+                    right: 0;
+                    top: 1px;
+                    width: 1px;
+                    height: 11px;
+                    background-color: #d8d8d8;
+                    content: '';
+                }
+                .pie_legend .list .cnt:last-child:after {
+                    display: none;
+                }
+
                 .chart_area {
                     margin-top: 21px;
                 }
@@ -2101,7 +2232,7 @@
                         display: block;
                         position: relative;
                         box-sizing: border-box;
-                        width: 168px;
+                        width: 400px;
                         height: 40px;
                         padding: 0 12px;
                         border: 1px solid #e2e2e2;
@@ -2113,7 +2244,7 @@
                         line-height: 38px;
                         cursor: pointer;
                         .text {
-                            width: 125px;
+                            width: 350px;
                             text-overflow: ellipsis;
                             white-space: nowrap;
                             word-wrap: normal;
@@ -2931,15 +3062,15 @@
             min-height: 378px;
         }
         .pie_legend {
-            position: absolute;
-            right: 16px;
-            top: 16px;
-            bottom: 16px;
+            right: 20px;
+            bottom: 22px;
             width: 210px;
             background-color: #f9f9f9;
             border: 1px solid #f2f2f2;
             overflow-y: auto;
             z-index: 30;
+            border: solid 1px #f2f2f2;
+            background-color: #f9f9f9;
         }
         .pie_legend .legend_sjt {
             display: block;
@@ -2949,6 +3080,9 @@
             font-weight: 600;
             color: #2c313d;
             line-height: 50px;
+            width: 200px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
         .pie_legend .legend_sjt em {
             padding-right: 10px;
