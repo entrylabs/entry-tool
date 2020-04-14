@@ -2155,6 +2155,7 @@
                     background-color: #f9f9f9;
                     border: 1px solid #f2f2f2;
                     overflow-y: auto;
+                    overflow-x: hidden;
                     z-index: 30;
                 }
                 .pie_legend .legend_sjt {
@@ -2201,11 +2202,12 @@
                     float: left;
                     overflow: hidden;
                     position: relative;
-                    max-width: 54px;
+                    width: 54px;
                     padding: 0 4px;
                     text-overflow: ellipsis;
                     white-space: nowrap;
                     line-height: 14px;
+                    text-align: center;
                 }
                 .pie_legend .list .cnt:after {
                     position: absolute;
@@ -3062,15 +3064,15 @@
             min-height: 378px;
         }
         .pie_legend {
-            right: 20px;
-            bottom: 22px;
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            bottom: 16px;
             width: 210px;
             background-color: #f9f9f9;
             border: 1px solid #f2f2f2;
             overflow-y: auto;
             z-index: 30;
-            border: solid 1px #f2f2f2;
-            background-color: #f9f9f9;
         }
         .pie_legend .legend_sjt {
             display: block;
@@ -3120,11 +3122,12 @@
             float: left;
             overflow: hidden;
             position: relative;
-            max-width: 54px;
+            width: 54px;
             padding: 0 4px;
             text-overflow: ellipsis;
             white-space: nowrap;
             line-height: 14px;
+            text-align: center;
         }
         .pie_legend .list .cnt:after {
             position: absolute;

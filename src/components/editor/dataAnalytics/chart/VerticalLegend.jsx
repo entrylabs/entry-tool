@@ -26,7 +26,7 @@ const VerticalLegend = (props) => {
     return (
         <div className={Styles.pie_legend}>
             <strong className={Styles.legend_sjt}>
-                <em>종합</em>
+                <em>{CommonUtils.getLang('DataAnalytics.total')}</em>
                 {sum}
             </strong>
             <div className={Styles.scroll_box}>

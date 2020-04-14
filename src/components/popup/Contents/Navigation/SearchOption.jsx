@@ -30,6 +30,7 @@ export default ({ options = [], onSelect, setDropdown, isOpenDefault, staticName
                 items={options}
                 positionDom={e.target}
                 outsideExcludeDom={[e.target]}
+                autoWidth={400}
                 onOutsideClick={closeDropDown}
                 onSelectDropdown={async (value) => {
                     select(value);
