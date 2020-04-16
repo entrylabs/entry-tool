@@ -16,7 +16,7 @@ const ModalChart = (props) => {
     const [selected, select] = useState(0);
     const toggleDropDown = (dropdown) => setDropdown(dropdown);
     const chartList = tables.map(({ chart }, index) => [chart.title, index]);
-    const { table = [], chart = {} } = tables[selected] || {};
+    const { table = [[]], chart = {} } = tables[selected] || {};
     const selectChart = (option) => {
         // eslint-disable-next-line no-unused-vars
         const [name, index] = option;
@@ -87,14 +87,21 @@ const ModalChart = (props) => {
                                 <span className={`${theme.text} ${theme.bold}`}>
                                     {CommonUtils.getLang('DataAnalytics.legend')}
                                 </span>
-                                <span className={`${theme.text} ${theme.cnt}`}>
-                                    {chart.categoryIndexes.length === 1
-                                        ? table[0][chart.categoryIndexes[0]]
-                                        : `${table[0][chart.categoryIndexes[0]]} 외 ${chart
-                                              .categoryIndexes.length - 1}건`}
-                                </span>
+                                {chart.categoryIndexes ? (
+                                    <span className={`${theme.text} ${theme.cnt}`}>
+                                        {chart.categoryIndexes.length <= 1
+                                            ? table[0][chart.categoryIndexes[0]]
+                                            : `${
+                                                  table[0][chart.categoryIndexes[0]]
+                                              } ${CommonUtils.getLang('DataAnalytics.and')} ${chart
+                                                  .categoryIndexes.length - 1}${CommonUtils.getLang(
+                                                  'DataAnalytics.other'
+                                              )}`}
+                                    </span>
+                                ) : null}
                             </div>
-                            {chart.categoryIndexes.length &&
+                            {chart.categoryIndexes &&
+                            chart.categoryIndexes.length &&
                             isHorizontalLegend &&
                             chart.type !== 'scatter' ? (
                                 <HorizontalLegend table={data} chart={chart} />
@@ -114,7 +121,9 @@ const ModalChart = (props) => {
                                     />
                                 )}
                             </div>
-                            {chart.categoryIndexes.length && !isHorizontalLegend ? (
+                            {chart.categoryIndexes &&
+                            chart.categoryIndexes.length &&
+                            !isHorizontalLegend ? (
                                 <VerticalLegend table={data} chart={chart} />
                             ) : null}
                         </div>
