@@ -59,9 +59,7 @@ class LedPicker extends Component {
     }
 
     alignPosition(updateState) {
-        this.setState(() => {
-            return Object.assign(this.getAlignPosition(), updateState);
-        });
+        this.setState(() => Object.assign(this.getAlignPosition(), updateState));
     }
 
     handleWindowResize = debounce(() => {
@@ -170,7 +168,7 @@ class LedPicker extends Component {
     _handleLedStatusChange = ({ x, y, isReset }) => {
         const { onChangeLedPicker } = this.props;
 
-        let status = this.state.ledStatus;
+        const status = this.state.ledStatus;
         if (isReset) {
             for (let i = 0; i < status.length; i++) {
                 const row = status[i];
@@ -232,20 +230,18 @@ class LedPicker extends Component {
                     }`}
                 >
                     <div className={this.theme.led_picker_inner}>
-                        {ledStatus.map((leds, x) => {
-                            return leds.map((led, y) => {
-                                return (
-                                    <div
-                                        className={`${this.theme.led_item} ${led > 0 &&
-                                            this.theme.led_item_selected}`}
-                                        key={`led${x}${y}`}
-                                        onClick={() =>
-                                            this._handleLedStatusChange({ x, y, isReset: false })
-                                        }
-                                    />
-                                );
-                            });
-                        })}
+                        {ledStatus.map((leds, x) =>
+                            leds.map((led, y) => (
+                                <div
+                                    className={`${this.theme.led_item} ${led > 0 &&
+                                        this.theme.led_item_selected}`}
+                                    key={`led${x}${y}`}
+                                    onClick={() =>
+                                        this._handleLedStatusChange({ x, y, isReset: false })
+                                    }
+                                />
+                            ))
+                        )}
                     </div>
                     <div
                         className={this.theme.led_clear}
@@ -253,7 +249,9 @@ class LedPicker extends Component {
                     >
                         <p className={this.theme.led_clear_text}>
                             <span className={this.theme.led_clear_text_content}>
-                                {Lang.Msgs.microbit_led_erase_all}
+                                {Lang && Lang.Msgs
+                                    ? Lang.Msgs.microbit_led_erase_all
+                                    : '모두 지우기'}
                             </span>
                         </p>
                     </div>

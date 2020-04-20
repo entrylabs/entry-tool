@@ -1,6 +1,7 @@
 :global(.rcs-custom-scroll) {
     min-height: 0;
     min-width: 0;
+    width: 100%;
 }
 :global(.rcs-custom-scroll .rcs-outer-container) {
     overflow: hidden;
