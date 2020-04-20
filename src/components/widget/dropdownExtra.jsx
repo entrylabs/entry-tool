@@ -157,7 +157,7 @@ class DropdownExtra extends Component {
             onOutsideClick,
             eventTypes = ['mouseup', 'touchend', 'wheel'],
             outsideExcludeDom,
-            animation = true,
+            animation = false,
             multiple,
         } = this.props;
         const { isUpStyle, arrowLeft, componentPosition } = this.state;
@@ -190,7 +190,7 @@ class DropdownExtra extends Component {
                 >
                     <div className={this.theme.tooltip_inner}>
                         <Scrollbars
-                            heightRelativeToParent="260px"
+                            heightRelativeToParent="392px"
                             className={this.theme.scrollbar}
                             style={{ width: '100%' }}
                         >
