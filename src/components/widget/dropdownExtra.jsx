@@ -189,7 +189,11 @@ class DropdownExtra extends Component {
                     style={{ ...componentPosition, ...animationStyle }}
                 >
                     <div className={this.theme.tooltip_inner}>
-                        <Scrollbars heightRelativeToParent="260px" className={this.theme.scrollbar}>
+                        <Scrollbars
+                            heightRelativeToParent="260px"
+                            className={this.theme.scrollbar}
+                            style={{ width: '100%' }}
+                        >
                             {this.makeDropdownItem()}
                         </Scrollbars>
                     </div>
