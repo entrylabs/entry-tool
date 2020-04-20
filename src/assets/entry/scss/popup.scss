@@ -2291,6 +2291,46 @@
                 }
             }
         }
+        .footer {
+            border-top: 1px #e2e2e2 solid;
+            box-sizing: border-box;
+            .content {
+                width: fit-content;
+                margin: 20px auto;
+                .chart_button {
+                    display: inline-block;
+                    width: 100px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    font-stretch: normal;
+                    font-style: normal;
+                    line-height: 1;
+                    letter-spacing: -0.5px;
+                    color: #4f80ff;
+                    user-select: none;
+                    padding-left: 20px;
+                    &:before {
+                        position: absolute;
+                        height: 14px;
+                        width: 14px;
+                        margin-right: 8px;
+                        content: '';
+                        vertical-align: middle;
+                    }
+                    &.stop {
+                        margin-right:40px;
+                        background: url(#{$imageDir}/imico_pop_footer_stop.svg) no-repeat;
+                    }
+                    &.pause {
+                        background: url(#{$imageDir}/imico_pop_footer_pause.svg) no-repeat;
+                    }
+                    &.start {
+                        background: url(#{$imageDir}/imico_pop_footer_start.svg) no-repeat;
+                    }
+                }
+            }
+
+        }
     }
 }
 

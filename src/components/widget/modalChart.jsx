@@ -6,11 +6,13 @@ import Chart from '@components/widget/Chart';
 import VerticalLegend from '../editor/dataAnalytics/chart/VerticalLegend';
 import HorizontalLegend from '../editor/dataAnalytics/chart//HorizontalLegend';
 import { CommonUtils } from '@utils/Common';
+import cn from 'classnames';
 const { generateHash } = CommonUtils;
 
 const ModalChart = (props) => {
     const theme = Theme.getStyle('popup');
-    const { source = {}, onClose } = props;
+    const { source = {}, onClose, togglePause, stop } = props;
+    const [isPaused, setPause] = useState(false);
     const [dropdown, setDropdown] = useState('');
     const [selected, select] = useState(0);
     const toggleDropDown = (dropdown) => setDropdown(dropdown);
@@ -127,6 +129,34 @@ const ModalChart = (props) => {
                             !isHorizontalLegend ? (
                                 <VerticalLegend table={data} chart={chart} />
                             ) : null}
+                        </div>
+                    </div>
+                    <div className={theme.footer}>
+                        <div className={theme.content}>
+                            <div
+                                className={cn(theme.chart_button, theme.stop)}
+                                onClick={() => {
+                                    onClose();
+                                    stop();
+                                }}
+                            >
+                                {CommonUtils.getLang('DataAnalytics.stop')}
+                            </div>
+                            <div
+                                className={cn(
+                                    theme.chart_button,
+                                    { [theme.pause]: !isPaused },
+                                    { [theme.start]: isPaused }
+                                )}
+                                onClick={() => {
+                                    setPause(!isPaused);
+                                    togglePause();
+                                }}
+                            >
+                                {CommonUtils.getLang(
+                                    isPaused ? 'DataAnalytics.restart' : 'DataAnalytics.pause'
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
