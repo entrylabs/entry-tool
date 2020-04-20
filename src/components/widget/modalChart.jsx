@@ -11,12 +11,13 @@ const { generateHash } = CommonUtils;
 const ModalChart = (props) => {
     const theme = Theme.getStyle('popup');
     const { source = {}, onClose } = props;
-    const { tables = [] } = source;
     const [dropdown, setDropdown] = useState('');
     const [selected, select] = useState(0);
     const toggleDropDown = (dropdown) => setDropdown(dropdown);
-    const chartList = tables.map(({ chart }, index) => [chart.title, index]);
-    const { table = [[]], chart = {} } = tables[selected] || {};
+    const { fields = [], origin = [], chart: charts = [] } = source;
+    const chartList = charts.map(({ title }, index) => [title, index]);
+    const table = [fields, ...origin];
+    const chart = charts[selected] || {};
     const selectChart = (option) => {
         // eslint-disable-next-line no-unused-vars
         const [name, index] = option;
