@@ -384,11 +384,20 @@ storiesOf('AiLayout', module)
     ))
     .add('차트팝업', () => (
         <ModalChart
-            tables={[
-                ['테이블1', 'a2vx'],
-                ['테이블2', 'ewv5'],
-            ]}
-            source={TABLE_SAMPLE2}
+            onClose={action('close')}
+            source={{
+                tables: [
+                    {
+                        table: [TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin],
+                        chart: {
+                            title: 'Sample1',
+                            type: 'bar',
+                            xIndex: 0,
+                            categoryIndexes: [1, 2],
+                        },
+                    },
+                ],
+            }}
         />
     ))
     .add('바차트', () => (
