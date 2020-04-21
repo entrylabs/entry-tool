@@ -1902,7 +1902,7 @@
     * {
         box-sizing: content-box;
     }
-    width: 500px;
+    width: 409px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -1976,8 +1976,10 @@
             // }
 
             border: 1px solid $coolgray200;
-            width: 18.3%;
-            padding: 17px 3px 14px 3px;
+            width: 23%;
+            margin: 0;
+            padding: 14px 3px 14px 3px;
+            vertical-align: middle;
             font-size: 14px;
             font-weight: bold;
             color: $textColor;
@@ -2438,7 +2440,7 @@
                         vertical-align: middle;
                     }
                     &.stop {
-                        margin-right:40px;
+                        margin-right: 40px;
                         background: url(#{$imageDir}/imico_pop_footer_stop.svg) no-repeat;
                     }
                     &.pause {
@@ -2449,7 +2451,6 @@
                     }
                 }
             }
-
         }
     }
 }
