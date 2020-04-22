@@ -86,6 +86,7 @@ const Table = (props) => {
         needRowHeader = true,
         onToastDataAnalytics = () => {},
         onChangeDataAnalytics = () => {},
+        onAlertDataAnalytics = () => {},
         dataAnalytics,
         isFullScreen,
         gridRef,
@@ -187,6 +188,12 @@ const Table = (props) => {
                 {
                     text: CommonUtils.getLang('DataAnalytics.add_row_below'),
                     callback: () => {
+                        if (tableProps.length + 1 > 3000) {
+                            onAlertDataAnalytics(
+                                CommonUtils.getLang('DataAnalytics.max_row_count_error')
+                            );
+                            return;
+                        }
                         setTable((table) => {
                             table.splice(rowIndex + 1, 0, Array(table[0].length).fill(0));
 

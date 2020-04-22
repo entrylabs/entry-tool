@@ -75,6 +75,7 @@ const DataAnalyticsContextProvider = (props) => {
         onToastDataAnalytics,
         onSubmitDataAnalytics,
         onChangeDataAnalytics,
+        onAlertDataAnalytics,
     } = analytics;
     const [dataAnalytics, dispatch] = useReducer(dataAnalyticsReducer, {
         id,
@@ -88,6 +89,7 @@ const DataAnalyticsContextProvider = (props) => {
         onToastDataAnalytics,
         onSubmitDataAnalytics,
         onChangeDataAnalytics,
+        onAlertDataAnalytics,
         gridRef,
     });
 

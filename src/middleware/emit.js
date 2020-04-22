@@ -5,6 +5,7 @@ import {
     SUBMIT_DATA_ANALYTICS,
     TOAST_DATA_ANALYTICS,
     CHANGE_DATA_ANALYTICS,
+    ALERT_DATA_ANALYTICS
 } from '@actions/editor';
 import {
     SELECT_DROPDOWN,
@@ -70,6 +71,8 @@ export default class EmitMiddleware {
                 case CHANGE_DATA_ANALYTICS:
                     this.emitter.emit('change', action.data);
                     break;
+                case ALERT_DATA_ANALYTICS:
+                    this.emitter.emit('alert', action.data);
                 default: {
                     break;
                 }
