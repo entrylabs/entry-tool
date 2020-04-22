@@ -190,9 +190,9 @@ const Table = (props) => {
                     text: CommonUtils.getLang('DataAnalytics.add_row_below'),
                     callback: () => {
                         if (tableProps.length + 1 > TABLE_MAX_ROW) {
-                            onAlertDataAnalytics(
-                                CommonUtils.getLang('DataAnalytics.max_row_count_error')
-                            );
+                            onAlertDataAnalytics({
+                                message: CommonUtils.getLang('DataAnalytics.max_row_count_error'),
+                            });
                         }
                         setTable((table) => {
                             table.splice(rowIndex + 1, 0, Array(table[0].length).fill(0));
