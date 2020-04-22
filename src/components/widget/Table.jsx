@@ -16,6 +16,7 @@ import Styles from '@assets/entry/scss/popup.scss';
 
 const LEFT_CLICK = 1;
 const RIGHT_CLICK = 3;
+const TABLE_MAX_ROW = 5000;
 
 TuiGrid.applyTheme('entry', {
     cell: {
@@ -188,7 +189,7 @@ const Table = (props) => {
                 {
                     text: CommonUtils.getLang('DataAnalytics.add_row_below'),
                     callback: () => {
-                        if (tableProps.length + 1 > 3000) {
+                        if (tableProps.length + 1 > TABLE_MAX_ROW) {
                             onAlertDataAnalytics(
                                 CommonUtils.getLang('DataAnalytics.max_row_count_error')
                             );
