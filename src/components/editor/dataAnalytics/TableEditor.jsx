@@ -11,6 +11,7 @@ const TableEditor = () => {
         title,
         onToastDataAnalytics,
         onChangeDataAnalytics,
+        onAlertDataAnalytics,
         isFullScreen,
         gridRef,
     } = dataAnalytics;
@@ -43,6 +44,7 @@ const TableEditor = () => {
                         table={table}
                         onToastDataAnalytics={onToastDataAnalytics}
                         onChangeDataAnalytics={onChangeDataAnalytics}
+                        onAlertDataAnalytics={onAlertDataAnalytics}
                         isFullScreen={isFullScreen}
                         dataAnalytics={dataAnalytics}
                         gridRef={gridRef}
