@@ -193,7 +193,6 @@ const Table = (props) => {
                             onAlertDataAnalytics(
                                 CommonUtils.getLang('DataAnalytics.max_row_count_error')
                             );
-                            return;
                         }
                         setTable((table) => {
                             table.splice(rowIndex + 1, 0, Array(table[0].length).fill(0));
