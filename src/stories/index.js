@@ -9,6 +9,7 @@ import ColorPicker from '../components/picker/color';
 import LedPicker from '../components/ledPicker/ledPicker';
 import Number from '../components/widget/number';
 import Dropdown from '../components/widget/dropdown';
+import DropdownExtra from '../components/widget/dropdownExtra';
 import ModalProgress from '../components/widget/modalProgress';
 import Angle from '../components/widget/angle';
 import Backpack from '../components/widget/Backpack';
@@ -122,6 +123,48 @@ wigetStories
         <Dropdown
             items={[
                 [1, 1],
+                [2, 2],
+                [3, 3],
+                [4, 4],
+                [5, 5],
+                [6, 6],
+                [7, 7],
+                [8, 8],
+                [9, 9],
+            ]}
+        />
+    ))
+    .add('드롭다운 Extra', () => (
+        <DropdownExtra
+            items={[
+                ['11111111111111111111111111111111111111111111', 1],
+                [2, 2],
+                [3, 3],
+                [4, 4],
+                [5, 5],
+                [6, 6],
+                [7, 7],
+                [8, 8],
+                [9, 9],
+                ['11111111111111111111111111111111111111111111', 1],
+                [2, 2],
+                [3, 3],
+                [4, 4],
+                [5, 5],
+                [6, 6],
+                [7, 7],
+                [8, 8],
+                [9, 9],
+                ['11111111111111111111111111111111111111111111', 1],
+                [2, 2],
+                [3, 3],
+                [4, 4],
+                [5, 5],
+                [6, 6],
+                [7, 7],
+                [8, 8],
+                [9, 9],
+                ['11111111111111111111111111111111111111111111', 1],
                 [2, 2],
                 [3, 3],
                 [4, 4],
@@ -341,11 +384,20 @@ storiesOf('AiLayout', module)
     ))
     .add('차트팝업', () => (
         <ModalChart
-            tables={[
-                ['테이블1', 'a2vx'],
-                ['테이블2', 'ewv5'],
-            ]}
-            source={TABLE_SAMPLE2}
+            onClose={action('close')}
+            source={{
+                tables: [
+                    {
+                        table: [TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin],
+                        chart: {
+                            title: 'Sample1',
+                            type: 'bar',
+                            xIndex: 0,
+                            categoryIndexes: [1, 2],
+                        },
+                    },
+                ],
+            }}
         />
     ))
     .add('바차트', () => (

@@ -5,6 +5,7 @@ import {
     onSubmitDataAnalytics,
     onToastDataAnalytics,
     onChangeDataAnalytics,
+    onAlertDataAnalytics,
 } from '@actions/editor';
 import withWrapper from '@hoc/withWrapper';
 
@@ -18,6 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
     onSubmitDataAnalytics: (data) => dispatch(onSubmitDataAnalytics(data)),
     onToastDataAnalytics: (data) => dispatch(onToastDataAnalytics(data)),
     onChangeDataAnalytics: (data) => dispatch(onChangeDataAnalytics(data)),
+    onAlertDataAnalytics: (data) => dispatch(onAlertDataAnalytics(data)),
 });
 
 export default withWrapper({ type: 'editor' })(
