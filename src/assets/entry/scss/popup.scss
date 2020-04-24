@@ -2421,7 +2421,7 @@
                 margin: 20px auto;
                 .chart_button {
                     display: inline-block;
-                    width: 105px;
+                    width: 120px;
                     font-size: 14px;
                     font-weight: bold;
                     font-stretch: normal;
@@ -2440,7 +2440,7 @@
                         vertical-align: middle;
                     }
                     &.stop {
-                        margin-right: 40px;
+                        margin-right: 10px;
                         background: url(#{$imageDir}/imico_pop_footer_stop.svg) no-repeat;
                     }
                     &.pause {
