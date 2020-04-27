@@ -32,6 +32,18 @@ const ModalChart = (props) => {
     if (wsPath === -1) {
         el[0].style.overflow = 'hidden';
     }
+    const closeAction = () => {
+        if (
+            wsPath === -1 &&
+            el[0] &&
+            el[0].style &&
+            el[0].style.overflow === 'hidden'
+        ) {
+            el[0].removeAttribute('style');
+        }
+
+        onClose();
+    }
 
     const data = table;
     const isHorizontalLegend = chart.type !== 'pie';
@@ -47,16 +59,7 @@ const ModalChart = (props) => {
                             className={theme.close}
                             id="chart_btn"
                             onClick={() => {
-                                if (
-                                    wsPath === -1 &&
-                                    el[0] &&
-                                    el[0].style &&
-                                    el[0].style.overflow === 'hidden'
-                                ) {
-                                    el[0].removeAttribute('style');
-                                }
-
-                                onClose();
+                                closeAction();
                             }}
                         />
                     </div>
@@ -136,8 +139,8 @@ const ModalChart = (props) => {
                             <div
                                 className={cn(theme.chart_button, theme.stop)}
                                 onClick={() => {
-                                    onClose();
                                     stop();
+                                    closeAction();
                                 }}
                             >
                                 {CommonUtils.getLang('DataAnalytics.stop')}
