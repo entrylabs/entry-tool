@@ -2418,6 +2418,7 @@
             box-sizing: border-box;
             .content {
                 width: fit-content;
+                max-width: 300px;
                 margin: 20px auto;
                 .chart_button {
                     display: inline-block;
