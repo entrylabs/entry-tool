@@ -64,7 +64,7 @@ const ModalChart = (props) => {
                         />
                     </div>
                     <div className={theme.body}>
-                        <div className={theme.content}>
+                        <div className={theme.content} style={{ minHeight: '440px' }}>
                             <Option
                                 onSelect={selectChart}
                                 options={chartList}
