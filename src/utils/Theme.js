@@ -1,4 +1,5 @@
 import EntryPopupStyle from '@assets/entry/scss/popup.scss';
+import EntryLecturePopupStyle from '@assets/entry/scss/lecture-popup.scss';
 import EntryBackpackStyle from '@assets/entry/scss/widget/Backpack.scss';
 import EntryDropper from '@assets/entry/scss/widget/Dropper.scss';
 import EntryProgress from '@assets/entry/scss/progress.scss';
@@ -16,6 +17,15 @@ class Theme {
         this.styles = {
             entry: {
                 popup: EntryPopupStyle,
+                backpack: EntryBackpackStyle,
+                progress: EntryProgress,
+                draggable: EntryDraggable,
+                dropper: EntryDropper,
+                customScroll: EntryCustomScroll,
+                table: EntryTableStyle,
+            },
+            lecture: {
+                popup: EntryLecturePopupStyle,
                 backpack: EntryBackpackStyle,
                 progress: EntryProgress,
                 draggable: EntryDraggable,
