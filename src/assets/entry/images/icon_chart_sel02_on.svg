@@ -1,8 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
-    <g fill="none" fill-rule="evenodd">
-        <path fill="#FFF" fill-rule="nonzero" stroke="#4F80FF" d="M4 .5A3.5 3.5 0 0 0 .5 4v32A3.5 3.5 0 0 0 4 39.5h32a3.5 3.5 0 0 0 3.5-3.5V4A3.5 3.5 0 0 0 36 .5H4z"/>
-        <path fill="#4F80FF" fill-rule="nonzero" d="M7 9v21h27v1H6V9h1z"/>
-        <path stroke="#4F80FF" d="M11 21l6-5 6 8 7-4"/>
-        <path fill="#FFB500" d="M23 22a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm-12-3a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm19-1a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm-13-4a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/>
-    </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><g fill="none" fill-rule="evenodd"><path fill="#FFF" fill-rule="nonzero" stroke="#4F80FF" d="M4 .5A3.5 3.5 0 0 0 .5 4v32A3.5 3.5 0 0 0 4 39.5h32a3.5 3.5 0 0 0 3.5-3.5V4A3.5 3.5 0 0 0 36 .5H4z"/><path fill="#4F80FF" fill-rule="nonzero" d="M7 9v21h27v1H6V9h1z"/><path stroke="#4F80FF" d="M11 21l6-5 6 8 7-4"/><path fill="#FFB500" d="M23 22a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm-12-3a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm19-1a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm-13-4a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></g></svg>
