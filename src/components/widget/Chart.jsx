@@ -56,6 +56,15 @@ const scatterXs = (table, xIndex, yIndex, categoryIndex) =>
         return prev;
     }, {});
 
+const tabString = '&emsp;';
+
+const addValueToKey = (table) => [
+    table[0],
+    ...table
+        .slice(1)
+        .map((item) => [`${item[0]}${tabString}|${tabString}${item[1]}${tabString}|`, item[1]]),
+];
+
 const generateOption = (option) => {
     const {
         table,
@@ -87,7 +96,7 @@ const generateOption = (option) => {
             }
             break;
         case 'pie':
-            columns = pieChart(table, xIndex, categoryIndexes[0]);
+            columns = addValueToKey(pieChart(table, xIndex, categoryIndexes[0]));
             x = table[0][xIndex];
             break;
         case 'scatter': {
