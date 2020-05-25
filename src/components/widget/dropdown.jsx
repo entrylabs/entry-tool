@@ -28,6 +28,9 @@ class Dropdown extends Component {
     }
     constructor(props) {
         super(props);
+        if (props.theme) {
+            Theme.type = props.theme;
+        }
         this.theme = Theme.getStyle('popup');
         const { checkedIndex = [] } = props;
         this.state = {
