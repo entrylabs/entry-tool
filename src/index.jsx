@@ -2,12 +2,14 @@ import Dropdown from './components/widget/dropdown';
 import ModalProgress from './components/widget/modalProgress';
 import ColorPicker from './components/picker/color';
 import Backpack from './components/widget/Backpack';
+import Number from './components/widget/number';
 
 export const Component = {
     Dropdown,
     ModalProgress,
     ColorPicker,
     Backpack,
+    Number,
 };
 
 export { default as ColorPicker } from './components/picker/colorContainer';
