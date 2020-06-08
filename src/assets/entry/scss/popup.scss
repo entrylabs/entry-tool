@@ -927,6 +927,7 @@
                                 text-overflow: ellipsis;
                                 white-space: nowrap;
                                 overflow: hidden;
+                                color: #979797;
                             }
                             &.summary {
                                 overflow: hidden;
@@ -977,7 +978,6 @@
                         }
                     }
                     .text_url_link {
-                        position: absolute;
                         left: 12px;
                         bottom: 12px;
                         font-size: 12px;
