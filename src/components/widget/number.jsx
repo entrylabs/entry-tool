@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { pure } from 'recompose';
 import { CommonUtils } from '@utils/Common';
 import OutsideClick from '../common/outsideClick';
-import { debounce } from 'lodash';
+import { debounce, camelCase } from 'lodash';
 import root from 'window-or-global';
 import Theme from '@utils/Theme';
 
@@ -76,6 +76,11 @@ class Number extends Component {
 
         if (emitter) {
             emitter.emit('click', type, value);
+        } else {
+            const event = camelCase(`on-${type}`);
+            if (typeof this.props[event] === 'function') {
+                this.props[event](value);
+            }
         }
     }
 
