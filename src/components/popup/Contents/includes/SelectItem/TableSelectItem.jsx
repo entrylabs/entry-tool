@@ -50,35 +50,38 @@ const TableSelectItem = ({ theme, item, upload, openModal }) => {
         e.stopPropagation();
         openModal(<DetailModal theme={theme} info={item} />);
     };
+
+    const createFieldsText = (fields) => {
+        const showCount = 3;
+        if (fields.length > showCount) {
+            return CommonUtils.getLang('DataAnalytics.attributes_text').replace('%1', fields.slice(0, showCount).join(', ')).replace('%2', fields.length - showCount);
+        }
+        return fields.join(', ');
+    };
+
     return (
         <>
             <strong className={theme.sjt}>{name}</strong>
-            <div className={theme.info}>
-                <em>
-                    {`${CommonUtils.getLang('Menus.data_table_column')} : ` +
-                        `${fields.length}${CommonUtils.getLang('Menus.count_ko')}`}
-                </em>
-                <p className={theme.fields}>{fields.join(', ')}</p>
-            </div>
             <div className={theme.info2}>
-                <em>
-                    {`${CommonUtils.getLang('Menus.data_table_row')} : ` +
-                        `${rows}${CommonUtils.getLang('Menus.count_ko')}`}
-                </em>
                 <p className={theme.summary}>{summary}</p>
             </div>
+            <div className={theme.info}>
+                <p className={theme.fields}>{createFieldsText(fields)}</p>
+            </div>
             {item.exampleurl && (
-                <a
-                    className={theme.text_url_link}
-                    href={item.exampleurl}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    onClick={(e) => {
-                        e.stopPropagation();
-                    }}
-                >
-                    {CommonUtils.getLang('Menus.sample_project')}
-                </a>
+                <div className={theme.info}>
+                    <a
+                        className={theme.text_url_link}
+                        href={item.exampleurl}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                        }}
+                    >
+                        {item.linkText || CommonUtils.getLang('Menus.sample_project')}
+                    </a>
+                </div>
             )}
             <a href="/" className={theme.text_link} onClick={handleClick}>
                 {CommonUtils.getLang('Menus.read_more')}
