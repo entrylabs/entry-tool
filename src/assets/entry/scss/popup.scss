@@ -927,6 +927,7 @@
                                 text-overflow: ellipsis;
                                 white-space: nowrap;
                                 overflow: hidden;
+                                color: #979797;
                             }
                             &.summary {
                                 overflow: hidden;
@@ -944,7 +945,7 @@
                             overflow: hidden;
                             max-height: 54px;
                             margin-top: 12px;
-                            -webkit-line-clamp: 3;
+                            -webkit-line-clamp: 2;
                             -webkit-box-orient: vertical;
                             word-wrap: break-word;
                         }
@@ -977,7 +978,6 @@
                         }
                     }
                     .text_url_link {
-                        position: absolute;
                         left: 12px;
                         bottom: 12px;
                         font-size: 12px;
