@@ -1,6 +1,6 @@
 /*!
  * ENTRY TOOL by @entrylabs
- * @version v1.1.9 | Wed Jun 17 2020
+ * @version v1.1.9 | Mon Jun 29 2020
  * @author undefined
  * @license MIT
  */
