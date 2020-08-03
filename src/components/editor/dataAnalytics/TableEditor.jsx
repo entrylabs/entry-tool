@@ -31,6 +31,20 @@ const TableEditor = () => {
         });
     };
 
+    const addRow = (rowIndex) => {
+        dispatch({
+            type: 'ADD_ROW',
+            rowIndex,
+        });
+    };
+
+    const deleteRow = (rowIndex) => {
+        dispatch({
+            type: 'DELETE_ROW',
+            rowIndex,
+        });
+    };
+
     return (
         <section className={`${Styles.detail_cont} ${Styles.table_state}`}>
             <h2 className={Styles.blind}>{CommonUtils.getLang('DataAnalytics.table')}</h2>
@@ -50,6 +64,8 @@ const TableEditor = () => {
                         gridRef={gridRef}
                         addColumn={addColumn}
                         deleteColumn={deleteColumn}
+                        addRow={addRow}
+                        deleteRow={deleteRow}
                     />
                 </div>
             </div>
