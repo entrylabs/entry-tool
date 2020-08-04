@@ -93,6 +93,8 @@ const Table = (props) => {
         gridRef,
         addColumn,
         deleteColumn,
+        addRow,
+        deleteRow,
     } = props;
 
     useEffect(() => {
@@ -178,12 +180,14 @@ const Table = (props) => {
                 {
                     text: CommonUtils.getLang('DataAnalytics.add_row_above'),
                     callback: () => {
-                        setTable((table) => {
-                            table.splice(rowIndex, 0, Array(table[0].length).fill(0));
+                        addRow
+                            ? addRow(rowIndex)
+                            : setTable((table) => {
+                                  table.splice(rowIndex, 0, Array(table[0].length).fill(0));
 
-                            onChangeDataAnalytics({ ...dataAnalytics, table });
-                            return [...table];
-                        });
+                                  onChangeDataAnalytics({ ...dataAnalytics, table });
+                                  return [...table];
+                              });
                     },
                 },
                 {
@@ -194,32 +198,38 @@ const Table = (props) => {
                                 message: CommonUtils.getLang('DataAnalytics.max_row_count_error'),
                             });
                         }
-                        setTable((table) => {
-                            table.splice(rowIndex + 1, 0, Array(table[0].length).fill(0));
+                        addRow
+                            ? addRow(rowIndex + 1)
+                            : setTable((table) => {
+                                  table.splice(rowIndex + 1, 0, Array(table[0].length).fill(0));
 
-                            onChangeDataAnalytics({ ...dataAnalytics, table });
-                            return [...table];
-                        });
+                                  onChangeDataAnalytics({ ...dataAnalytics, table });
+                                  return [...table];
+                              });
                     },
                 },
                 {
                     text: CommonUtils.getLang('DataAnalytics.delete_row'),
                     callback: () => {
-                        setTable((table) => {
-                            if (table.length <= 2) {
-                                onToastDataAnalytics({
-                                    title: CommonUtils.getLang('DataAnalytics.do_not_delete_row'),
-                                    content: CommonUtils.getLang(
-                                        'DataAnalytics.rows_cannot_less_one'
-                                    ),
-                                });
-                            } else {
-                                table.splice(rowIndex, 1);
+                        deleteRow
+                            ? deleteRow(rowIndex)
+                            : setTable((table) => {
+                                  if (table.length <= 2) {
+                                      onToastDataAnalytics({
+                                          title: CommonUtils.getLang(
+                                              'DataAnalytics.do_not_delete_row'
+                                          ),
+                                          content: CommonUtils.getLang(
+                                              'DataAnalytics.rows_cannot_less_one'
+                                          ),
+                                      });
+                                  } else {
+                                      table.splice(rowIndex, 1);
 
-                                onChangeDataAnalytics({ ...dataAnalytics, table });
-                            }
-                            return table;
-                        });
+                                      onChangeDataAnalytics({ ...dataAnalytics, table });
+                                  }
+                                  return table;
+                              });
                     },
                 },
             ];
@@ -307,8 +317,8 @@ const Table = (props) => {
 
         addColumn
             ? addColumn(colIndex, columnName)
-            : setTable((table) =>
-                  table.map((row, index) => {
+            : setTable((table) => {
+                  return table.map((row, index) => {
                       row.splice(
                           colIndex,
                           0,
@@ -321,8 +331,8 @@ const Table = (props) => {
                                 )
                       );
                       return row;
-                  })
-              );
+                  });
+              });
     };
 
     const handleEditingFinish = useCallback(
