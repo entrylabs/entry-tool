@@ -184,6 +184,29 @@ export const dataAnalyticsReducer = (state, action) => {
                 charts: resultCharts,
             };
         }
+        case 'ADD_ROW': {
+            const { table } = state;
+            const { rowIndex } = action;
+
+            const resultTable = [...table];
+            resultTable.splice(rowIndex, 0, Array(table[0].length).fill(0));
+
+            return {
+                ...state,
+                table: resultTable,
+            };
+        }
+        case 'DELETE_ROW': {
+            const { table } = state;
+            const { rowIndex } = action;
+            const resultTable = [...table];
+            resultTable.splice(rowIndex, 1);
+
+            return {
+                ...state,
+                table: resultTable,
+            };
+        }
         case 'TOGGLE_VISIBLE_LEGEND': {
             const charts = [...state.charts];
             charts[state.chartIndex] = {
