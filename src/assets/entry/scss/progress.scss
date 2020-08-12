@@ -156,17 +156,17 @@
     .loading {
         @keyframes play {
             100% {
-                background-position: -376px;
+                background-position: -502px;
             }
         }
         .character {
             height: 84px;
-            width: 62px;
+            width: 72px;
             margin: 0 auto 13px;
             background: url(#{$imageDir}/progress/loading_animation.png);
             background-size: cover;
             background-repeat: no-repeat;
-            animation: play 0.7s steps(6) infinite alternate;
+            animation: play 0.9s steps(8) infinite alternate;
         }
         .description {
             font-family: NanumGothic;
@@ -202,17 +202,17 @@
     .loading {
         @keyframes play {
             100% {
-                background-position: -376px;
+                background-position: -502px;
             }
         }
         .character {
             height: 84px;
-            width: 62px;
+            width: 72px;
             margin: 0 auto 13px;
             background: url(#{$imageDir}/progress/loading_animation.png);
             background-size: cover;
             background-repeat: no-repeat;
-            animation: play 0.7s steps(6) infinite alternate;
+            animation: play 0.9s steps(8) infinite alternate;
         }
         .description {
             font-family: NanumGothic;
