@@ -41,7 +41,7 @@ const Index = (props) => {
 };
 
 const mapStateToProps = (state, props) => {
-    const getIndex = makeFindSelectedById(props.item._id);
+    const getIndex = makeFindSelectedById(props.item._id || props.item.id);
     return {
         selected: state.popupReducer.selected,
         index: getIndex(state),
@@ -54,7 +54,4 @@ const mapDispatchToProps = (dispatch) => ({
     deselect: (id) => dispatch(triggerEvent(Types.itemoff, { id }, false)),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Index);
+export default connect(mapStateToProps, mapDispatchToProps)(Index);

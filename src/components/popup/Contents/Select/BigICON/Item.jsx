@@ -67,7 +67,4 @@ const mapDispatchToProps = (dispatch) => ({
     deselect: (data, callback) => dispatch(triggerEvent(Types.itemoff, { data, callback }, false)),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Index);
+export default connect(mapStateToProps, mapDispatchToProps)(Index);
