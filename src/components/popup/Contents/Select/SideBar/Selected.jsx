@@ -60,10 +60,7 @@ const mapDispatchToProps = (dispatch) => ({
     applySelected: (list) => dispatch(applySelected(list)),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Index);
+export default connect(mapStateToProps, mapDispatchToProps)(Index);
 
 const CustomSlide = ({ item, onClick, theme, type, baseUrl }) => {
     const deleteClass = classname(theme.btn_del, theme.imbtn_pop_chk_del);
