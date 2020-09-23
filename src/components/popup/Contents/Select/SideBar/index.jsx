@@ -13,18 +13,27 @@ import PopupList from '../../includes/PopupList';
 import _isEmpty from 'lodash/isEmpty';
 
 const Index = (props) => {
-    const { data, type, sidebar, multiSelect = true, showSelected = true, isVectorOnly = false, fetch, baseUrl } = props;
+    const {
+        data,
+        type,
+        sidebar,
+        multiSelect = true,
+        showSelected = true,
+        isVectorOnly = false,
+        fetch,
+        baseUrl,
+    } = props;
     const [selectedSidebar, selectSidebar] = useState(Object.keys(sidebar)[0]);
     const [selectedSubMenu, selectSubMenu] = useState(null);
     const theme = Theme.getStyle('popup');
     const isEmpty = _isEmpty(sidebar);
-    const subMenu = sidebar[selectedSidebar] && sidebar[selectedSidebar].sub || {};
+    const subMenu = (sidebar[selectedSidebar] && sidebar[selectedSidebar].sub) || {};
     const drawItems = () =>
         data
             .filter((item) => !isVectorOnly || CommonUtils.isVectorItem(item))
-            .map((item, index) => (
+            .map((item) => (
                 <Item
-                    key={index}
+                    key={item._id || item.id}
                     item={item}
                     multiSelect={multiSelect}
                     type={type}
@@ -71,7 +80,4 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(triggerEvent(Types.fetch, { type, sidebar, subMenu }, false)),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Index);
+export default connect(mapStateToProps, mapDispatchToProps)(Index);

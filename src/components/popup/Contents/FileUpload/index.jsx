@@ -75,7 +75,7 @@ const Index = (props) => {
                         <ul className={theme.obj_list}>
                             {uploadedItems.map((item) => (
                                 <Item
-                                    key={item._id}
+                                    key={item._id || item.id}
                                     item={item}
                                     type={type}
                                     baseUrl={baseUrl}
