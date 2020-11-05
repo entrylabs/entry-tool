@@ -4,7 +4,7 @@ import Theme from '@utils/Theme';
 import Option from '../popup/Contents/Navigation/SearchOption';
 import Chart from '@components/widget/Chart';
 import VerticalLegend from '../editor/dataAnalytics/chart/VerticalLegend';
-import HorizontalLegend from '../editor/dataAnalytics/chart//HorizontalLegend';
+import HorizontalLegend from '../editor/dataAnalytics/chart/HorizontalLegend';
 import { CommonUtils } from '@utils/Common';
 import cn from 'classnames';
 const { generateHash } = CommonUtils;
@@ -33,17 +33,12 @@ const ModalChart = (props) => {
         el[0].style.overflow = 'hidden';
     }
     const closeAction = () => {
-        if (
-            wsPath === -1 &&
-            el[0] &&
-            el[0].style &&
-            el[0].style.overflow === 'hidden'
-        ) {
+        if (wsPath === -1 && el[0] && el[0].style && el[0].style.overflow === 'hidden') {
             el[0].removeAttribute('style');
         }
 
         onClose();
-    }
+    };
 
     const data = table;
     const isHorizontalLegend = chart.type !== 'pie';

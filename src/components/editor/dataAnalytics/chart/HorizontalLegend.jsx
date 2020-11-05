@@ -1,12 +1,10 @@
 import React from 'react';
 import { CommonUtils, categoryKeys } from '@utils/Common';
 import { GRAPH_COLOR } from '../Constants';
-
-import Styles from '@assets/entry/scss/popup.scss';
-
-const { generateHash } = CommonUtils;
+import Theme from '@utils/Theme';
 
 const HorizontalLegend = (props) => {
+    const theme = Theme.getStyle('popup');
     const { table = [[]], charts = [], chartIndex, chart: chartProp } = props;
     const chart = chartProp || (charts.length ? charts[chartIndex] : {});
     const { type, categoryIndexes } = chart;
@@ -17,9 +15,9 @@ const HorizontalLegend = (props) => {
             : categoryKeys(table, categoryIndexes[0]);
 
     return (
-        <div className={Styles.horizontal_legend_box}>
+        <div className={theme.horizontal_legend_box}>
             {labels.map((item, index) => (
-                <span key={`legend_${generateHash()}`} className={Styles.legend}>
+                <span key={`legend_${index}`} className={theme.legend}>
                     <em style={{ backgroundColor: GRAPH_COLOR[index % GRAPH_COLOR.length] }}>
                         &nbsp;
                     </em>
