@@ -11,6 +11,7 @@ const { generateHash } = CommonUtils;
 
 const ModalChart = (props) => {
     const theme = Theme.getStyle('popup');
+
     const { source = {}, onClose, togglePause, stop } = props;
     const [isPaused, setPause] = useState(false);
     const [dropdown, setDropdown] = useState('');
