@@ -3,6 +3,10 @@
     background: url(#{$imageDir}/btn_pop_back.png) no-repeat;
     background-size: 40px auto;
 }
+.imbtn_pop_close {
+    background: url(#{$imageDir }/btn_pop_close.svg) no-repeat;
+    background-size: 40px auto;
+}
 .imbtn_pop_srch {
     background: url(#{$imageDir}/btn_pop_srch.png) no-repeat;
     background-size: 21px auto;

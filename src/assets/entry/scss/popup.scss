@@ -5,6 +5,9 @@
 @import 'common/images';
 @import 'common/tooltip';
 @import 'colors';
+@import 'components/TableAdd';
+@import 'components/TableChart';
+@import 'components/TableSummary';
 
 .popup_wrap {
     img,
@@ -882,7 +885,7 @@
                 margin-top: 12px;
                 overflow: hidden;
                 overflow-y: auto;
-                padding-left: 13px;
+                padding-left: 23px;
                 margin-top: -4px;
                 .list {
                     overflow: hidden;
@@ -978,9 +981,11 @@
                         }
                     }
                     .text_url_link {
+                        position: absolute;
                         left: 12px;
                         bottom: 12px;
                         font-size: 12px;
+                        padding-right: 12px; 
                         font-weight: 600;
                         color: #4f80ff;
                         letter-spacing: -0.43px;
@@ -989,35 +994,22 @@
                         cursor: pointer;
                         &:after {
                             content: '';
+                            position: absolute;
+                            right: 0;
+                            top: 1px;
                             width: 6px;
                             height: 9px;
-                            background: url('#{$imageDir}/ico_arrow_right.png') no-repeat;
-                            position: absolute;
-                            margin: 5px 0px 0px 6px;
+                            background: url('#{$imageDir}/ico_arrow_right.svg') no-repeat;
                         }
                     }
+                    li.active {
+                        border-color: #4f80ff;
+                    }
+                    li.active strong {
+                        background-color: #4f80ff;
+                        color: #fff;
+                    }
                 }
-            }
-        }
-        .section_cont .empty_box {
-            padding: 182px 0;
-            text-align: center;
-            &:before {
-                display: inline-block;
-                width: 160px;
-                height: 160px;
-                background: url('#{$imageDir}/thmb_no_result.svg') no-repeat;
-                background-size: 160px auto;
-                vertical-align: top;
-                content: '';
-            }
-            .empty_dsc {
-                padding-top: 24px;
-                font-size: 16px;
-                font-weight: 600;
-                color: #424b50;
-                letter-spacing: -0.37px;
-                line-height: 20px;
             }
         }
     }
@@ -1109,7 +1101,6 @@
     .file_add_list_box .obj_list li:first-child {
         margin-left: 156px;
     }
-
     // 확장 블록 불러오기
     .extend_content {
         overflow: auto;
@@ -1716,9 +1707,6 @@
         }
     }
 
-    // 데이터 추가하기 - 데이터 선택
-    .data_select_content {
-    }
 }
 
 //공통 셀렉트 박스
@@ -2698,125 +2686,6 @@
         flex-direction: column;
         flex: 1 1;
         -webkit-box-flex: 1;
-        .title_box {
-            position: relative;
-            strong {
-                font-size: 16px;
-                font-weight: 600;
-                letter-spacing: -0.57px;
-                line-height: 20px;
-            }
-            .q_box {
-                display: inline-block;
-                position: relative;
-                margin-top: 1px;
-                vertical-align: top;
-            }
-            .ico_q {
-                display: block;
-                width: 16px;
-                height: 16px;
-                margin-left: 8px;
-                background: url('#{$imageDir}/ico_layer_q.svg') no-repeat;
-                vertical-align: top;
-            }
-            .title_dsc {
-                display: inline-block;
-                padding-left: 16px;
-                font-size: 14px;
-                letter-spacing: -0.5px;
-                line-height: 20px;
-            }
-            & ~ .title_box {
-                margin-top: 20px;
-            }
-            &.DataOffTable {
-                margin-top: 75px;
-            }
-        }
-        .title_box .tooltip_box {
-            width: 464px;
-            left: -41px;
-            top: 28px;
-            z-index: 10;
-        }
-        .title_box .tooltip_box .arr i {
-            background-color: #f5fbff;
-        }
-        .title_box .tooltip_box .tooltip_inner {
-            padding: 17px 12px 0;
-            background-color: #f5fbff;
-            border-radius: 6px;
-        }
-        .title_box .tooltip_box .sjt {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            line-height: 20px;
-        }
-        .title_box .tooltip_box .tooltip_list {
-            overflow: hidden;
-            margin-top: 8px;
-            li {
-                overflow: hidden;
-                padding: 10px 0;
-                border-top: 1px solid #d6e9f4;
-                font-size: 14px;
-                letter-spacing: 0;
-                line-height: 20px;
-            }
-            li:first-child {
-                border-top: 0;
-            }
-            .tit {
-                float: left;
-                margin-right: 10px;
-                font-weight: 600;
-            }
-            .dsc {
-                white-space: pre;
-                overflow: hidden;
-            }
-        }
-        .cnt_result {
-            margin-top: 13px;
-        }
-        .cnt_result li {
-            float: left;
-            position: relative;
-            padding: 0 8px 0 9px;
-            font-size: 12px;
-            line-height: 14px;
-        }
-        .cnt_result li:before {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 1px;
-            height: 12px;
-            background-color: #979797;
-            content: '';
-        }
-        .cnt_result li:first-of-type {
-            padding-left: 0;
-        }
-        .cnt_result li:first-of-type:before {
-            display: none;
-        }
-        .cnt_result li em {
-            padding-right: 6px;
-        }
-    }
-    .table_box {
-        margin-top: 12px;
-        height: 252px;
-        overflow: auto;
-        border: 1px solid #979797;
-        border-width: 1px 0;
-        background-color: #fff;
-        &.tui_grid {
-            overflow: hidden;
-        }
     }
     :global(.tui-grid-show-lside-area) {
         :global(.tui-grid-lside-area) {
@@ -2846,535 +2715,95 @@
             }
         }
     }
-    .table {
-        width: 100%;
-        table-layout: fixed;
-        font-size: 14px;
-        border-collapse: collapse;
-        .col_width1 {
-            width: 100px;
-        }
-        .col_width2 {
-            width: auto;
-        }
-        thead th {
-            font-weight: 600;
-            height: 36px;
-            background-color: #f4f4f4;
-            border-bottom: 1px solid #979797;
-        }
-        thead th:last-child {
-            border-right: 1px solid #f4f4f4;
-        }
-        tbody td {
-            height: 36px;
-            border: 1px solid #f4f4f4;
-            background-color: #fff;
-            font-weight: 600;
-            text-align: center;
-        }
-        tbody th {
-            border-top: 1px solid #e2e2e2;
-            background-color: #f4f4f4;
-            font-weight: 600;
-            text-align: center;
-        }
-        tbody tr:first-child th,
-        tbody tr:first-child td {
-            border-top: 0;
-        }
-        tbody tr:last-child th,
-        tbody tr:last-child td {
-            border-bottom: 0;
-        }
-        .headtit {
-            position: relative;
-            height: 36px;
-            line-height: 36px;
-        }
-        .headtit:before {
-            position: absolute;
-            left: 0;
-            top: 50%;
-            width: 1px;
-            height: 20px;
-            margin-top: -10px;
-            background-color: #cbcbcb;
-            content: '';
-        }
-        &.DataOffTable {
-            .headtit {
-                color: #cbcbcb;
-            }
-            .headtit:before {
-                background-color: #cbcbcb;
-            }
-        }
-    }
-    .data_add_box {
-        box-sizing: border-box;
-        padding-top: 33px;
-        background-color: #fff;
-        text-align: center;
+}
+
+// aside 
+.aside {
+    position: relative;
+    overflow: auto;
+    -webkit-box-flex: 0;
+    flex: none;
+    width: 258px;
+    box-sizing: border-box;
+    background-color: #ecf8ff;
+    border: 1px solid #d6e9f4;
+    border-radius: 0 0 0 6px;
+    .add_btn_box {
+        padding: 12px 18px;
+        border-bottom: 1px solid #d6e9f4;
         a {
             display: block;
-            margin: 0 auto;
-            width: 64px;
-            height: 64px;
-            background: url('#{$imageDir}/icon_chart_table_add.svg');
-            background-size: 64px auto;
-        }
-        p {
-            padding-top: 16px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #555;
-            letter-spacing: -0.5px;
-            line-height: 20px;
-            white-space: pre;
-        }
-    }
-    .chart_list {
-        overflow: auto;
-        position: relative;
-        -webkit-box-flex: 1;
-        flex: 1 1;
-        margin-top: 10px;
-        .list {
-            overflow: hidden;
-            margin: -10px 0 0 -20px;
-            padding-bottom: 7px;
-            li {
-                overflow: hidden;
-                float: left;
-                position: relative;
-                width: 180px;
-                height: 106px;
-                margin: 10px 0 0 20px;
-                border-radius: 6px;
-                background-color: #fff;
-                cursor: pointer;
-                &:before {
-                    position: absolute;
-                    left: 0;
-                    right: 0;
-                    top: 0;
-                    bottom: 0;
-                    border-radius: 6px;
-                    border: 1px solid #e2e2e2;
-                    content: '';
-                }
-                .graph_cont {
-                    padding-top: 11px;
-                    margin-left: -10px;
-                }
-                .chart_area {
-                    padding-top: 11px;
-                    margin-left: -10px;
-                }
-            }
-            li.pie .graph_cont {
-                padding-top: 3px;
-                margin-left: 0px;
-            }
-            li.pie .chart_area {
-                padding-top: 3px;
-                margin-left: 0px;
-            }
-            .on,
-            li:hover {
-                box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.15), 2px 2px 6px 0 rgba(0, 0, 0, 0.17);
-            }
-            .on:before,
-            li:hover:before {
-                border-width: 2px;
-                border-color: #4f80ff;
-            }
-            &:after {
-                display: block;
-                clear: both;
-                content: '';
-            }
-            .data_add_box {
-                height: 106px;
-                padding-top: 12px;
-                border: 0;
-                a {
-                    width: 44px;
-                    height: 44px;
-                    background: url('#{$imageDir}/icon_chart_box_add.svg');
-                    background-size: 44px auto;
-                }
-                p {
-                    padding-top: 6px;
-                    font-size: 12px;
-                    line-height: 16px;
-                }
-            }
-        }
-    }
-    .chart_navi {
-        position: relative;
-        z-index: 20;
-        &:after {
-            display: block;
-            clear: both;
-            content: '';
-        }
-        .chart_link {
-            display: inline-block;
-            width: 40px;
             height: 40px;
-            margin-left: 10px;
-            background-size: 40px auto;
-            vertical-align: top;
-        }
-        .chart_link:first-child {
-            margin-left: 0;
-        }
-        .chart_link.bar {
-            background-image: url('#{$imageDir}/icon_chart_sel01_on.svg');
-        }
-        .chart_link.line {
-            background-image: url('#{$imageDir}/icon_chart_sel02_on.svg');
-        }
-        .chart_link.pie {
-            background-image: url('#{$imageDir}/icon_chart_sel03_on.svg');
-        }
-        .chart_link.scatter {
-            background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
-        }
-        .chart_link.bar.disabled {
-            background-image: url('#{$imageDir}/icon_chart_sel01_off.svg');
-        }
-        .chart_link.line.disabled {
-            background-image: url('#{$imageDir}/icon_chart_sel02_off.svg');
-        }
-        .chart_link.pie.disabled {
-            background-image: url('#{$imageDir}/icon_chart_sel03_off.svg');
-        }
-        .chart_link.scatter.disabled {
-            background-image: url('#{$imageDir}/icon_chart_sel04_off.svg');
-        }
-        .chart_link ~ .add_link_box {
-            margin-left: 10px;
-        }
-        .add_link_box {
-            display: inline-block;
-            position: relative;
-            width: 40px;
-            height: 40px;
-            vertical-align: top;
-        }
-        .add_link_box .add_link {
-            display: block;
-            height: 40px;
-            background-image: url('#{$imageDir}/icon_chart_sel05.svg');
-            vertical-align: top;
-        }
-    }
-    .chart_add_link {
-        position: relative;
-        min-width: 908px;
-        padding: 235px 0;
-        border-radius: 6px;
-        background-color: #fff;
-        font-size: 14px;
-        font-weight: 600;
-        color: #2c313d;
-        line-height: 18px;
-        letter-spacing: -0.5px;
-        text-align: center;
-
-        &:before {
-            display: block;
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 16px;
-            background: url('#{$imageDir}/icon_chart_table_add.svg');
-            background-size: 64px auto;
-            content: '';
-        }
-    }
-    .chart_add_box {
-        position: relative;
-        min-width: 908px;
-        min-height: 568px;
-        border-radius: 6px;
-        background-color: #fff;
-    }
-    .chart_box {
-        position: relative;
-        min-width: 908px;
-        min-height: 516px;
-        border-radius: 6px;
-        background-color: #fff;
-        .legend_box {
-            position: relative;
-            padding: 12px 16px;
-            border-radius: 6px 6px 0 0;
-            background-color: #ecf8ff;
-        }
-        .legend_box:after {
-            display: block;
-            clear: both;
-            content: '';
-        }
-        .legend_box .legend_cell {
-            float: left;
-            margin-left: 20px;
-        }
-        .legend_box .legend_cell:first-child {
-            margin-left: 0;
-        }
-        .legend_box .legend_cell .cell_sjt {
-            display: inline-block;
-            font-size: 14px;
-            font-weight: 600;
-            color: #2c313d;
-            letter-spacing: -0.33px;
-            vertical-align: top;
-            line-height: 40px;
-        }
-        .legend_box .legend_cell .pop_selectbox {
-            display: inline-block;
-            margin-left: 12px;
-        }
-        .legend_box .legend_cell .pop_selectbox .select_link {
-            width: 208px;
-            padding-right: 36px;
-            font-size: 14px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        // .legend_box .legend_cell .pop_selectbox .tooltip_box {
-        //     width: 208px;
-        //     top: 56px;
-        //     font-size: 14px;
-        // }
-        // .legend_box .legend_cell .pop_selectbox .tooltip_inner {
-        //     overflow-y: auto;
-        // }
-        // .legend_box .legend_cell .pop_selectbox .list_link {
-        //     overflow: hidden;
-        //     text-overflow: ellipsis;
-        //     white-space: nowrap;
-        // }
-        .data_add_box {
-            overflow: hidden;
-            box-sizing: border-box;
-            padding-top: 220px;
-            background-color: #f9f9f9;
-            border: 0;
-            height: auto;
-            min-height: 552px;
-            border-radius: 6px;
-        }
-        .data_add_box a {
-            width: 44px;
-            height: 44px;
-            background-image: url('#{$imageDir}/icon_cart_add.svg');
-            background-size: 44px auto;
-        }
-        .data_add_box p {
-            padding-top: 10px;
-            color: #cbcbcb;
-        }
-        .graph_cont {
-            width: 100%;
-            min-width: 684px;
-            height: 397px;
+            border: 1px solid #4f80ff;
+            border-radius: 4px;
             background-color: #fff;
-            z-index: 9;
-
-            .alert {
-                font-family: NanumGothicOTF;
-                font-size: 14px;
-                font-weight: bold;
-                font-stretch: normal;
-                font-style: normal;
-                line-height: 1.57;
-                letter-spacing: -0.5px;
-                text-align: center;
-                color: #4f80ff;
-                height: 397px;
-                line-height: 397px;
-            }
-        }
-        .caution_dsc {
-            padding: 215px 0;
             font-size: 14px;
             font-weight: 600;
             color: #4f80ff;
             text-align: center;
-            letter-spacing: -0.5px;
-            line-height: 22px;
+            letter-spacing: -0.32px;
+            line-height: 40px;
         }
-        .chart_group {
+    }
+    .list {
+        & > li {
             position: relative;
-            padding: 40px 44px 34px 44px;
-        }
-        .chart_group.vertical {
-            padding-right: 244px;
-        }
-        .chart_group.horizontal {
-            padding: 20px 44px 34px 44px;
-        }
-        .chart_area {
-            position: relative;
-            min-height: 378px;
-        }
-        .pie_legend {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            bottom: 16px;
-            width: 210px;
-            background-color: #f9f9f9;
-            border: 1px solid #f2f2f2;
-            overflow-y: auto;
-            z-index: 30;
-        }
-        .pie_legend .legend_sjt {
-            display: block;
-            padding: 0 20px;
-            height: 50px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #2c313d;
-            line-height: 50px;
-            width: 200px;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-        .pie_legend .legend_sjt em {
-            padding-right: 10px;
-        }
-        .pie_legend .scroll_box {
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 50px;
-            bottom: 0;
-            overflow-y: auto;
-            border-top: 1px solid #f2f2f2;
-        }
-        .pie_legend .list {
-            overflow: hidden;
-            padding: 4px 0 0 10px;
-        }
-        .pie_legend .list li {
-            overflow: hidden;
-            height: 14px;
-            margin-top: 12px;
+            padding: 13px 52px;
+            height: 22px;
             font-size: 12px;
             font-weight: 600;
             color: #2c313d;
-            line-height: 14px;
-        }
-        .pie_legend .list .bg {
-            float: left;
-            width: 14px;
-            height: 14px;
-            margin: -1px 2px 0 0;
-            vertical-align: middle;
-        }
-        .pie_legend .list .cnt {
-            float: left;
-            overflow: hidden;
-            position: relative;
-            width: 54px;
-            padding: 0 4px;
+            background-color: #ecf8ff;
+            border-bottom: 1px solid #d6e9f4;
             text-overflow: ellipsis;
             white-space: nowrap;
-            line-height: 14px;
-            text-align: center;
-        }
-        .pie_legend .list .cnt:after {
-            position: absolute;
-            right: 0;
-            top: 1px;
-            width: 1px;
-            height: 11px;
-            background-color: #d8d8d8;
-            content: '';
-        }
-        .pie_legend .list .cnt:last-child:after {
-            display: none;
-        }
-        .horizontal_legend_box {
-            overflow-y: auto;
-            max-height: 81px;
-            text-align: center;
-            padding-left: 100px;
-            margin-right: 100px;
-        }
-        .horizontal_legend_box .legend {
-            display: inline-block;
-            vertical-align: top;
-            margin: 10px 10px 0;
-            font-size: 14px;
-            font-weight: 600;
-            color: #2c313d;
-            letter-spacing: -0.5px;
-            line-height: 17px;
-        }
-        .horizontal_legend_box .legend em {
-            display: inline-block;
-            width: 17px;
-            height: 17px;
-            margin-right: 6px;
-            vertical-align: top;
-        }
-
-        .scatter_legend {
-            position: absolute;
-            right: 30px;
-            top: 94px;
-            cursor: pointer;
-        }
-        .scatter_legend .sjt {
-            display: inline-block;
-            height: 24px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #2c313d;
-            letter-spacing: -0.5px;
-            line-height: 24px;
-            vertical-align: top;
-        }
-        .scatter_legend .switch_box {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            box-sizing: border-box;
-            width: 38px;
-            height: 24px;
-            border: 1px solid #cbcbcb;
-            background-color: #fff;
-            border-radius: 24px;
-            margin-left: 12px;
-            vertical-align: top;
-            transition: 0.1s;
+            word-break: break-all;
+            line-height: 22px;
             &:before {
                 position: absolute;
-                top: 1px;
-                left: 1px;
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                background-color: #979797;
-                transition: 0.1s;
+                left: 18px;
+                top: 50%;
+                width: 22px;
+                height: 22px;
+                background-image: url('#{$imageDir}/IconTableList.svg');
+                transform: translateY(-50%);
+                vertical-align: top;
                 content: '';
             }
+            &.active {
+                background-color: #fff;
+                z-index: 10;
+            }
+            .btn_close {
+                position: absolute;
+                right: 18px;
+                top: 50%;
+                width: 24px;
+                height: 24px;
+                background-image: url('#{$imageDir}/IconListDel.svg');
+                transform: translateY(-50%);
+            }
         }
-        .scatter_legend input[type='checkbox']:checked + .switch_box {
-            border-color: #4f80ff;
-        }
-        .scatter_legend input[type='checkbox']:checked + .switch_box:before {
-            left: 15px;
-            background-color: #4f80ff;
+
+        
+    }
+    .split_bar {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        width: 16px;
+        height: 40px;
+        background-image: url('#{$imageDir}/IconSplitBar.svg');
+        background-size: 16px auto;
+        transform: translateY(-50%);
+        z-index: 10;
+        content: '';
+    }
+    &.fold {
+        overflow: hidden;
+        width: 16px;
+        .split_bar {
+            transform: rotate(180deg);
         }
     }
 }
