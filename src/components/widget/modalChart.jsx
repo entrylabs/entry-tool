@@ -11,7 +11,8 @@ const { generateHash } = CommonUtils;
 
 const ModalChart = (props) => {
     const theme = Theme.getStyle('popup');
-    const { source = {}, onClose, togglePause, stop } = props;
+
+    const { source = {}, onClose, togglePause, stop, isIframe } = props;
     const [isPaused, setPause] = useState(false);
     const [dropdown, setDropdown] = useState('');
     const [selected, select] = useState(0);
@@ -44,7 +45,7 @@ const ModalChart = (props) => {
     const isHorizontalLegend = chart.type !== 'pie';
     return (
         <div className={theme.dimmed}>
-            <div className={theme.center}>
+            <div className={isIframe ? theme.center_chart : theme.center}>
                 <div className={theme.modal}>
                     <div className={theme.head}>
                         <div className={theme.text}>
