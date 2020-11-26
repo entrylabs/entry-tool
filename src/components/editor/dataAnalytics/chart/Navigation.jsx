@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import OutsideClick from '@components/common/outsideClick';
 import SelectChartDropdown from './SelectChartDropdown';
 import { CommonUtils } from '@utils/Common';

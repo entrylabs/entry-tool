@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import Tab from './Tab';
-import { DataAnalyticsContext } from './context/DataAnalyticsContext';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/entry/scss/popup.scss';
 

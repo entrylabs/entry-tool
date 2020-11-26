@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef } from 'react';
-import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import Dropdown from '@components/widget/dropdown';
 import { CommonUtils } from '@utils/Common';
 

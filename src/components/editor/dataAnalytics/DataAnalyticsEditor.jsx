@@ -4,8 +4,8 @@ import Header from './Header';
 import Summary from './summary/Summary';
 import TableEditor from './TableEditor';
 import ChartEditor from './chart/ChartEditor';
-import { DataAnalyticsContext } from './context/DataAnalyticsContext';
-import { SUMMARY, TABLE, CHART, TAB_ITEMS } from './Constants';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
+import { SUMMARY, TABLE, CHART, TAB_ITEMS } from '@constants/dataAnalytics';
 import Styles from '@assets/entry/scss/popup.scss';
 
 const Portal = ({ children }) => {
@@ -111,7 +111,7 @@ const DataAnalyticsEditor = (props) => {
                             </a>
                         </li>
                     </ul>
-                    <a href="/" role="button" className={Styles.split_bar}>
+                    <a role="button" className={Styles.split_bar}>
                         <span className={Styles.blind}>창 조절하기</span>
                     </a>
                 </section>
@@ -173,37 +173,6 @@ const DataAnalyticsEditor = (props) => {
                                     <a href="#" className={Styles.add_link} role="button">
                                         <span className={Styles.blind}>추가하기</span>
                                     </a>
-                                    {/* 추가하기 링크가 클릭되면 display: block 처리 해주세요 */}
-                                    <div
-                                        className={Styles.vertical_tooltip}
-                                        style={{ left: '56px', display: 'block' }}
-                                    >
-                                        <ul className={Styles.graph_list}>
-                                            <li className={Styles.bar}>
-                                                <a href="#" role="button">
-                                                    막대
-                                                </a>
-                                            </li>
-                                            <li className={Styles.line}>
-                                                <a href="#" role="button">
-                                                    선
-                                                </a>
-                                            </li>
-                                            <li className={Styles.pie}>
-                                                <a href="#" role="button">
-                                                    원
-                                                </a>
-                                            </li>
-                                            <li className={Styles.scatter}>
-                                                <a href="#" role="button">
-                                                    점
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <span className={Styles.arr}>
-                                            <i></i>
-                                        </span>
-                                    </div>
                                 </div>
                             </div>
                             {/* 테이블 차트 입력폼 */}

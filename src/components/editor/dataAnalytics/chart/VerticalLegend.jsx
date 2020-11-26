@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import { GRAPH_COLOR } from '../Constants';
+import { GRAPH_COLOR } from '@constants/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 
 import Styles from '@assets/entry/scss/popup.scss';

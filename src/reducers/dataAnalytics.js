@@ -1,5 +1,5 @@
 import { CommonUtils, makeTableByGrid } from '@utils/Common';
-import { TABLE } from '../Constants';
+import { TABLE } from '@constants/dataAnalytics';
 
 export const dataAnalyticsReducer = (state, action) => {
     switch (action.type) {

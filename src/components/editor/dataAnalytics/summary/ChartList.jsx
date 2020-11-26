@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import Chart from '@components/widget/Chart';
-import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
-import { CHART } from '../Constants';
+import { CHART } from '@constants/dataAnalytics';
 
 import Styles from '@assets/entry/scss/popup.scss';
 
@@ -33,9 +33,9 @@ const ChartList = (props) => {
             return (
                 <li onClick={handleClickChart(CHART, 0)}>
                     <div className={Styles.data_add_box}>
-                        <a href="#" onClick={(e) => e.preventDefault()}>
+                        <a onClick={(e) => e.preventDefault()}>
                             <span className={Styles.blind}>
-                                {CommonUtils.getLang('DataAnalytics.add_data')}}
+                                {CommonUtils.getLang('DataAnalytics.add_data')}
                             </span>
                         </a>
                         <p>{CommonUtils.getLang('DataAnalytics.add_chart_alert')}</p>

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useRef } from 'react';
 import _ from 'lodash';
-import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils, getNumberColumnIndexesBySelectedColumns } from '@utils/Common';
 import Dropdown from '@components/widget/dropdown';
 

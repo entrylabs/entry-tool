@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Navigation from './Navigation';
 import TitleInput from '../TitleInput';
-import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 
 import { CommonUtils } from '@utils/Common';
 import ChartLayout from './ChartLayout';

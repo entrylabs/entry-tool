@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Styles from '@assets/entry/scss/popup.scss';
 import Table from './Table';
 import ChartList from './ChartList';
-import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils, getSummary } from '@utils/Common';
 
 const Summary = () => {

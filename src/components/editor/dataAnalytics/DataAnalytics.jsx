@@ -1,6 +1,6 @@
 import React from 'react';
 import DataAnalyticsEditor from './DataAnalyticsEditor';
-import DataAnalyticsContextProvider from './context/DataAnalyticsContext';
+import DataAnalyticsContextProvider from '@contexts/dataAnalytics';
 
 const DataAnalytics = (props) => {
     const {

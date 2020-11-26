@@ -6,7 +6,7 @@ import Legend from './Legend';
 import VerticalLegend from './VerticalLegend';
 import HorizontalLegend from './HorizontalLegend';
 import Chart from '@components/widget/Chart';
-import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { isZipable, CommonUtils, getNumberColumnIndexes } from '@utils/Common';
 
 import Styles from '@assets/entry/scss/popup.scss';
@@ -15,7 +15,7 @@ const { generateHash } = CommonUtils;
 
 const getXAxis = (table, type) =>
     // eslint-disable-next-line prettier/prettier
-    (type === 'scatter' ? getNumberColumnIndexes(table) : table[0].map((col, index) => index));
+    type === 'scatter' ? getNumberColumnIndexes(table) : table[0].map((col, index) => index);
 const getYAxis = (table, xIndex) => getNumberColumnIndexes(table, [xIndex]);
 
 const ChartLayout = () => {

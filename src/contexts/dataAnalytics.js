@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useEffect, useRef } from 'react';
-import { dataAnalyticsReducer } from '../reducer/DataAnalyticsReducer';
+import { dataAnalyticsReducer } from '@reducers/dataAnalytics';
 
 export const DataAnalyticsContext = createContext();
 
