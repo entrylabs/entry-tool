@@ -76,6 +76,7 @@ const DataAnalyticsContextProvider = (props) => {
         onSubmitDataAnalytics,
         onChangeDataAnalytics,
         onAlertDataAnalytics,
+        onCloseButtonClick,
     } = analytics;
     const [dataAnalytics, dispatch] = useReducer(dataAnalyticsReducer, {
         id,
@@ -90,6 +91,7 @@ const DataAnalyticsContextProvider = (props) => {
         onSubmitDataAnalytics,
         onChangeDataAnalytics,
         onAlertDataAnalytics,
+        onCloseButtonClick,
         gridRef,
     });
 

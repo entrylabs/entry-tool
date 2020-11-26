@@ -89,14 +89,10 @@ const Index = (props) => {
                 </div>
             </section>
             <div className={theme.pop_btn_box}>
-                <a href="#NULL" onClick={CommonUtils.handleClick(closePopup)}>
+                <a onClick={CommonUtils.handleClick(closePopup)}>
                     {CommonUtils.getLang('Buttons.cancel')}
                 </a>
-                <a
-                    href="#NULL"
-                    className={theme.active}
-                    onClick={CommonUtils.handleClick(onSubmit)}
-                >
+                <a className={theme.active} onClick={CommonUtils.handleClick(onSubmit)}>
                     {CommonUtils.getLang('Buttons.add')}
                 </a>
             </div>

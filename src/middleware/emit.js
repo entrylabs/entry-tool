@@ -5,7 +5,8 @@ import {
     SUBMIT_DATA_ANALYTICS,
     TOAST_DATA_ANALYTICS,
     CHANGE_DATA_ANALYTICS,
-    ALERT_DATA_ANALYTICS
+    ALERT_DATA_ANALYTICS,
+    CLOSE_BUTTON_CLICK,
 } from '@actions/editor';
 import {
     SELECT_DROPDOWN,
@@ -73,6 +74,8 @@ export default class EmitMiddleware {
                     break;
                 case ALERT_DATA_ANALYTICS:
                     this.emitter.emit('alert', action.data);
+                case CLOSE_BUTTON_CLICK:
+                    this.emitter.emit('close');
                 default: {
                     break;
                 }

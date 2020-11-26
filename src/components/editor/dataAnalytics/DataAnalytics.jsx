@@ -9,6 +9,7 @@ const DataAnalytics = (props) => {
         onToastDataAnalytics = () => {},
         onChangeDataAnalytics = () => {},
         onAlertDataAnalytics = () => {},
+        onCloseButtonClick = () => {},
     } = props;
     const { name = '', fields, origin = [], chart = [], id, tab, summary } = table;
     const dataTable = fields ? [[...fields], ...origin] : [[]];
@@ -24,6 +25,7 @@ const DataAnalytics = (props) => {
         onSubmitDataAnalytics,
         onChangeDataAnalytics,
         onAlertDataAnalytics,
+        onCloseButtonClick,
     };
 
     return (

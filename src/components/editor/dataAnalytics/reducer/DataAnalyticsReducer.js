@@ -101,11 +101,6 @@ export const dataAnalyticsReducer = (state, action) => {
                 charts,
             };
         }
-        case 'TOGGLE_FULLSCREEN':
-            return {
-                ...state,
-                isFullScreen: action.isFullScreen,
-            };
         case 'ADD_COLUMN': {
             const { table, charts = [] } = state;
             const { columnIndex, columnName } = action;

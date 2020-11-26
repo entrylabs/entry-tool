@@ -5,7 +5,8 @@ import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/entry/scss/popup.scss';
 
 const Header = (props) => {
-    const { selected, tabItems, isFullScreen = false, onFullScreenClick = () => {} } = props;
+    // const { selected, tabItems, isFullScreen = false, onFullScreenClick = () => {} } = props;
+    const { selected, tabItems } = props;
     const { dataAnalytics } = useContext(DataAnalyticsContext);
     const { onSubmitDataAnalytics } = dataAnalytics;
 
@@ -17,10 +18,11 @@ const Header = (props) => {
     return (
         <div
             className={
-                isFullScreen ? `${Styles.detail_top} ${Styles.fullscreen}` : Styles.detail_top
+                // isFullScreen ? `${Styles.detail_top} ${Styles.fullscreen}` : Styles.detail_top
+                `${Styles.detail_top} ${Styles.fullscreen}`
             }
         >
-            <a
+            {/* <a
                 href="#"
                 role="button"
                 className={
@@ -29,9 +31,9 @@ const Header = (props) => {
                 onClick={onFullScreenClick}
             >
                 <span className={Styles.blind}>창 전환</span>
-            </a>
+            </a> */}
             <Tab selected={selected} tabItems={tabItems} />
-            <a href="#" className={Styles.btn_save} role="button" onClick={handleClick}>
+            <a className={Styles.btn_save} role="button" onClick={handleClick}>
                 {CommonUtils.getLang('DataAnalytics.save')}
             </a>
         </div>
