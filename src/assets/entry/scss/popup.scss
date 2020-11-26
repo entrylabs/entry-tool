@@ -2145,6 +2145,18 @@
         right: 0;
         bottom: 0;
     }
+    .center_chart {
+        position: fixed;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
     .modal {
         background: #fff;
         width: 680px;
