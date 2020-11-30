@@ -8,8 +8,52 @@ export const dataAnalyticsReducer = (state, action) => {
                 ...state,
                 ...action.payload,
             };
+        case 'REMOVE_TABLE': {
+            const { list, selectedIndex = 0 } = state;
+            const { index } = action;
+            let changedList = [];
+            let changedIndex = selectedIndex;
+            if (index > 0 && index < list.length) {
+                changedList = list.slice(0, index);
+            }
+            changedList = [...changedList, ...list.slice(index + 1)];
+            if (selectedIndex >= index) {
+                changedIndex = selectedIndex - 1;
+            }
+            changedIndex = selectedIndex === index ? 0 : changedIndex;
+            return {
+                selected: list[changedIndex],
+                selectedIndex: changedIndex,
+                list: changedList,
+            };
+        }
+        case 'FOLD':
+            return {
+                ...state,
+                fold: !state.fold,
+            };
+        case 'CHANGE_TABLE_TITLE': {
+            const { selected } = state;
+            return {
+                ...state,
+                selected: {
+                    ...selected,
+                    name: action.value,
+                },
+            };
+        }
+        case 'SELECT_TABLE': {
+            const { index } = action;
+            const { list } = state;
+            return {
+                ...state,
+                selected: list[index],
+                selectedIndex: index,
+            };
+        }
         case 'SET_TAB': {
-            let { table } = state;
+            const { selected } = state;
+            let { table } = selected;
             if (state.tab === TABLE && state.tab !== action.tab) {
                 const { gridRef = {} } = state;
                 table = makeTableByGrid(gridRef);

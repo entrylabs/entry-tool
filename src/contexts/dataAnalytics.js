@@ -66,32 +66,27 @@ const DataAnalyticsContextProvider = (props) => {
     const { analytics = {} } = props;
     const gridRef = useRef();
     const {
-        title = '',
-        table = [[]],
-        charts = [],
-        id,
-        tab,
-        summary,
+        selected,
+        selcetedIndex,
+        list,
         onToastDataAnalytics,
         onSubmitDataAnalytics,
         onChangeDataAnalytics,
         onAlertDataAnalytics,
         onCloseButtonClick,
+        onAddTableButtonClick,
     } = analytics;
     const [dataAnalytics, dispatch] = useReducer(dataAnalyticsReducer, {
-        id,
-        title,
-        table,
-        charts,
-        tab,
-        summary,
-        chartIndex: 0,
+        selected,
+        selcetedIndex,
+        list,
         isFullScreen: false,
         onToastDataAnalytics,
         onSubmitDataAnalytics,
         onChangeDataAnalytics,
         onAlertDataAnalytics,
         onCloseButtonClick,
+        onAddTableButtonClick,
         gridRef,
     });
 
@@ -105,18 +100,13 @@ const DataAnalyticsContextProvider = (props) => {
 
     useEffect(() => {
         beforeAnalytics = { ...analytics };
-        const { title = '', table = [[]], charts = [], id, summary } = analytics;
+        const { selected, selcetedIndex, list } = analytics;
         dispatch({
             type: 'SET_DATA',
             payload: {
-                id,
-                title,
-                table,
-                charts,
-                summary,
-                tab: tab || dataAnalytics.tab,
-                chartIndex: 0,
-                isFullScreen: false,
+                selected,
+                selcetedIndex,
+                list,
             },
         });
     }, [analytics, dispatch]);
