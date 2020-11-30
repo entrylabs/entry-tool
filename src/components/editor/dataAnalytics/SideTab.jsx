@@ -44,20 +44,18 @@ const SideTab = () => {
                 </a>
             </div>
             <ul className={Styles.list}>
-                {list.map(({ name, id }, index) => {
-                    return (
-                        <li
-                            key={`side_tab_${id}`}
-                            className={index === selectedIndex ? Styles.active : ''}
-                            onClick={handleClick(index)}
-                        >
-                            {name}
-                            <a onClick={handleRemoveClick} className={Styles.btn_close}>
-                                <span className={Styles.blind}>삭제</span>
-                            </a>
-                        </li>
-                    );
-                })}
+                {list.map(({ name, id }, index) => (
+                    <li
+                        key={`side_tab_${id}`}
+                        className={index === selectedIndex ? Styles.active : ''}
+                        onClick={handleClick(index)}
+                    >
+                        {name}
+                        <a onClick={handleRemoveClick} className={Styles.btn_close}>
+                            <span className={Styles.blind}>삭제</span>
+                        </a>
+                    </li>
+                ))}
             </ul>
             <a role="button" className={Styles.split_bar} onClick={handleFoldButtonClick}>
                 <span className={Styles.blind}>창 조절하기</span>
