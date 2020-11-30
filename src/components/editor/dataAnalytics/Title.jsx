@@ -4,8 +4,8 @@ import Styles from '@assets/entry/scss/popup.scss';
 
 const Title = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { selected } = dataAnalytics;
-    const { name } = selected;
+    const { selected = {} } = dataAnalytics;
+    const { name = '' } = selected;
     const [title, setTitle] = useState(name);
 
     const handleChange = useCallback((event) => {

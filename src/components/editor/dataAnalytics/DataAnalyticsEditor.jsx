@@ -13,11 +13,22 @@ import Styles from '@assets/entry/scss/popup.scss';
 
 const DataAnalyticsEditor = (props) => {
     const { dataAnalytics } = useContext(DataAnalyticsContext);
-    const { selected, onCloseButtonClick } = dataAnalytics;
+    const { tab, selected, onCloseButtonClick } = dataAnalytics;
     const handleButtonClick = (event) => {
         event.preventDefault();
         onCloseButtonClick();
     };
+
+    let sectionCSS = Styles.summary_content;
+    switch (tab) {
+        case TABLE:
+        case CHART:
+            sectionCSS = Styles.chart_content;
+            break;
+        case SUMMARY:
+            sectionCSS = Styles.summary_content;
+            break;
+    }
     return (
         <div className={Styles.popup_wrap}>
             <header className={Styles.pop_header}>
@@ -29,7 +40,7 @@ const DataAnalyticsEditor = (props) => {
                     <span className={Styles.blind}>뒤로가기</span>
                 </button>
             </header>
-            <section className={`${Styles.pop_content} ${Styles.chart_content}`}>
+            <section className={`${Styles.pop_content} ${sectionCSS}`}>
                 {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
                 {/* 창 조절하기 버튼을 누르면 fold 클래스 추가 */}
                 <SideTab />
@@ -38,8 +49,8 @@ const DataAnalyticsEditor = (props) => {
                         <Title key={`title_${selected ? selected.id : 'null'}`} />
                         <Tab />
                     </div>
+                    <Summary />
                 </div>
-                <Summary />
             </section>
         </div>
     );

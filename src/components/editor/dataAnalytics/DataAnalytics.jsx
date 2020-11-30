@@ -14,21 +14,12 @@ const DataAnalytics = (props) => {
         onCloseButtonClick = () => {},
         onAddTableButtonClick = () => {},
     } = props;
-    const { name = '', fields, origin = [], chart = [], id, summary } = list[0] || {};
-    const dataTable = fields ? [[...fields], ...origin] : [[]];
 
     const data = {
         tab,
         list,
         selectedIndex: 0,
-        selected: {
-            id,
-            tab,
-            summary,
-            title: name,
-            table: dataTable.map((row) => row.map((column) => column)),
-            charts: chart,
-        },
+        selected: list[0],
         fold: false,
         onToastDataAnalytics,
         onSubmitDataAnalytics,

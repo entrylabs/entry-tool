@@ -23,3 +23,11 @@ export const GRAPH_COLOR = [
     '#67b100',
     '#dd47d8',
 ];
+export const SUMMARY_HEADER = [
+    ' ',
+    'DataAnalytics.average',
+    'DataAnalytics.standard_deviation',
+    'DataAnalytics.maximum',
+    'DataAnalytics.median',
+    'DataAnalytics.minimum',
+];
