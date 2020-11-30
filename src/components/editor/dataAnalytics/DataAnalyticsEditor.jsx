@@ -64,7 +64,7 @@ const DataAnalyticsEditor = (props) => {
                                     <span className={Styles.blind}>방사형</span>
                                 </a>
                                 <div className={Styles.add_link_box}>
-                                    <a href="#" className={Styles.add_link} role="button">
+                                    <a className={Styles.add_link} role="button">
                                         <span className={Styles.blind}>추가하기</span>
                                     </a>
                                 </div>

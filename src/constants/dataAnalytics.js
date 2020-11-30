@@ -2,14 +2,14 @@ export const SUMMARY = 'summary';
 export const TABLE = 'table';
 export const CHART = 'chart';
 export const TAB_NAME = {
-    SUMMARY,
     TABLE,
     CHART,
+    SUMMARY,
 };
 export const TAB_ITEMS = [
-    { name: 'DataAnalytics.dashboard', value: SUMMARY },
     { name: 'DataAnalytics.table', value: TABLE },
     { name: 'DataAnalytics.chart', value: CHART },
+    { name: 'DataAnalytics.dashboard', value: SUMMARY },
 ];
 export const GRAPH_COLOR = [
     '#4f80ff',

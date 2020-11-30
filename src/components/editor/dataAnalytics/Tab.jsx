@@ -6,8 +6,7 @@ import { SUMMARY, TABLE, CHART, TAB_ITEMS } from '@constants/dataAnalytics';
 
 const Tab = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { selected } = dataAnalytics;
-    const { tab } = selected || {};
+    const { tab } = dataAnalytics;
 
     const handleClick = (value) => (event) => {
         event.preventDefault();
