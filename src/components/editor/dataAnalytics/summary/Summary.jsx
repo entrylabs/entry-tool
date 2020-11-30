@@ -7,7 +7,30 @@ import { CommonUtils, getSummary } from '@utils/Common';
 
 const Summary = () => {
     const { dataAnalytics } = useContext(DataAnalyticsContext);
-    const { table, title, charts, summary: info } = dataAnalytics;
+    const { selected } = dataAnalytics;
+    const { table, title, charts, summary: info } = selected;
+
+    const summary = getSummary(table);
+    return (
+        <div className={Styles.chart_box}>
+            <h2 className={Styles.blind}>정보</h2>
+            <div className={Styles.inner}>
+                <Table />
+                <div className={Styles.category_box}>
+                    <div className={Styles.table_sjt}>
+                        <strong>차트</strong>
+                        <p className={Styles.title_dsc}>추가한 차트가 없습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const Summary2 = () => {
+    const { dataAnalytics } = useContext(DataAnalyticsContext);
+    const { selected } = dataAnalytics;
+    const { table, title, charts, summary: info } = selected;
 
     const summary = getSummary(table);
 

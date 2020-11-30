@@ -4,7 +4,7 @@ import Styles from '@assets/entry/scss/popup.scss';
 
 const SideTab = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { selectedIndex, list, onAddTableButtonClick } = dataAnalytics;
+    const { selectedIndex, list, fold, onAddTableButtonClick } = dataAnalytics;
 
     const handleClick = useCallback(
         (index) => (event) => {
@@ -36,7 +36,7 @@ const SideTab = () => {
     }, []);
 
     return (
-        <section className={Styles.aside}>
+        <section className={`${Styles.aside} ${fold ? Styles.fold : ''}`}>
             <h2 className={Styles.blind}>테이블 추가하기</h2>
             <div className={Styles.add_btn_box}>
                 <a onClick={handleAddTableClick} role="button">
