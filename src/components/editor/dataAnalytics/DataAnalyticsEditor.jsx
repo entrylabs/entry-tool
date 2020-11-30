@@ -13,7 +13,7 @@ import Styles from '@assets/entry/scss/popup.scss';
 
 const DataAnalyticsEditor = (props) => {
     const { dataAnalytics } = useContext(DataAnalyticsContext);
-    const { onCloseButtonClick } = dataAnalytics;
+    const { selected, onCloseButtonClick } = dataAnalytics;
     const handleButtonClick = (event) => {
         event.preventDefault();
         onCloseButtonClick();
@@ -35,7 +35,7 @@ const DataAnalyticsEditor = (props) => {
                 <SideTab />
                 <div className={Styles.section_cont}>
                     <div className={Styles.sheet_form_box}>
-                        <Title />
+                        <Title key={`title_${selected ? selected.id : 'null'}`} />
                         <Tab />
                     </div>
                     <div className={Styles.chart_box}>
@@ -44,25 +44,21 @@ const DataAnalyticsEditor = (props) => {
                             {/* 테이블 선택 */}
                             <div className={Styles.chart_navi}>
                                 <a
-                                    href="#"
                                     className={`${Styles.chart_link} ${Styles.bar} ${Styles.disabled}`}
                                 >
                                     <span className={Styles.blind}>막대형</span>
                                 </a>
                                 <a
-                                    href="#"
                                     className={`${Styles.chart_link} ${Styles.line} ${Styles.disabled}`}
                                 >
                                     <span className={Styles.blind}>꺽은선형</span>
                                 </a>
                                 <a
-                                    href="#"
                                     className={`${Styles.chart_link} ${Styles.pie} ${Styles.disabled}`}
                                 >
                                     <span className={Styles.blind}>원형</span>
                                 </a>
                                 <a
-                                    href="#"
                                     className={`${Styles.chart_link} ${Styles.scatter} ${Styles.disabled}`}
                                 >
                                     <span className={Styles.blind}>방사형</span>
