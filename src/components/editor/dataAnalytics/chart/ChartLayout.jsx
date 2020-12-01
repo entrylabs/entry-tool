@@ -31,7 +31,7 @@ const ChartLayout = () => {
                 <div className={Styles.input_inner}>
                     <XAxis />
                     {type === 'scatter' ? <YAxis /> : ''}
-                    {/* <Legend /> */}
+                    <Legend />
                     {/* <div className={Styles.select_group}>
                         <label htmlFor="ChartName" className={Styles.tit_label}>
                             가로축

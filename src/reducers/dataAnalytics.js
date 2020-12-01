@@ -156,15 +156,20 @@ export const dataAnalyticsReducer = (state, action) => {
             };
         }
         case 'SELECT_LEGEND_AXIS': {
-            const charts = [...state.charts];
-            charts[state.chartIndex] = {
-                ...charts[state.chartIndex],
+            const { selected } = state;
+            const { chartIndex } = selected;
+            const chart = [...selected.chart];
+            chart[chartIndex] = {
+                ...chart[chartIndex],
                 categoryIndexes: action.indexes,
             };
 
             return {
                 ...state,
-                charts,
+                selected: {
+                    ...selected,
+                    chart,
+                },
             };
         }
         case 'ADD_COLUMN': {

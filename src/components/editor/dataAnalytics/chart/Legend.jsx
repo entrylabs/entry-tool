@@ -1,21 +1,32 @@
 import React, { useContext, useState, useRef } from 'react';
-import _ from 'lodash';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils, getNumberColumnIndexesBySelectedColumns } from '@utils/Common';
 import Dropdown from '@components/widget/dropdown';
-
+import _some from 'lodash/some';
+import _reduce from 'lodash/reduce';
 import Styles from '@assets/entry/scss/popup.scss';
 
-const Legend = (props) => {
-    const { checkBox, disabled, selectedLegend, dropdownItems = [] } = props;
-    const [showDropdown, setShowDropdown] = useState(false);
+const Legend = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
+    const [showDropdown, setShowDropdown] = useState(false);
     const axisRef = useRef();
-    const { table } = dataAnalytics;
+    const { selected = {} } = dataAnalytics;
+    const { fields = [], origin = [], chart, chartIndex } = selected;
+    const { yIndex = 0, xIndex, categoryIndexes: selectedLegend, type } = chart[chartIndex];
+    const table = [[...fields], ...origin];
+    const checkBox = type === 'bar' || type === 'line';
+    const dropdownItems = _reduce(
+        table[0],
+        (prev, __, index) =>
+            !_some([xIndex, yIndex], (banIndex) => index === banIndex) ? [...prev, index] : prev,
+        []
+    );
     const items = (checkBox
         ? getNumberColumnIndexesBySelectedColumns(table, dropdownItems)
         : dropdownItems
     ).map((index) => [table[0][index], index]);
+    const disabled =
+        chart.xIndex === -1 || (type === 'scatter' && chart.yIndex === -1) || !dropdownItems.length;
 
     const getTitle = () => {
         if (checkBox) {
@@ -58,14 +69,14 @@ const Legend = (props) => {
     };
 
     return (
-        <div className={Styles.legend_cell}>
-            <strong className={Styles.cell_sjt}>
+        <div className={Styles.select_group}>
+            <label htmlFor="ChartName" className={Styles.tit_label}>
                 {CommonUtils.getLang('DataAnalytics.legend')}
-            </strong>
+            </label>
             <div
-                className={
-                    disabled ? `${Styles.pop_selectbox} ${Styles.disabled}` : Styles.pop_selectbox
-                }
+                ref={axisRef}
+                className={`${Styles.pop_selectbox} ${disabled ? Styles.disabled : ''}`}
+                style={{ width: 153 }}
             >
                 <div
                     className={`${Styles.select_link} ${
@@ -74,7 +85,6 @@ const Legend = (props) => {
                             : Styles.imico_pop_select_arr_down
                     }`}
                     onClick={disabled ? () => {} : handleClick}
-                    ref={axisRef}
                 >
                     {getTitle()}
                 </div>
