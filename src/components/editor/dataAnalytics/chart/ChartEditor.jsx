@@ -11,15 +11,20 @@ import Styles from '@assets/entry/scss/popup.scss';
 const ChartEditor = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { selected } = dataAnalytics;
+    const { chartIndex } = selected;
 
     return (
         <div className={Styles.chart_box}>
             <h2 className={Styles.blind}>차트</h2>
             <div className={Styles.inner}>
                 <Navigation />
-                <div className={Styles.chart_no_result}>
-                    <p className={Styles.dsc}>차트를 먼저 추가해 주세요.</p>
-                </div>
+                {isNaN(chartIndex) ? (
+                    <div className={Styles.chart_no_result}>
+                        <p className={Styles.dsc}>차트를 먼저 추가해 주세요.</p>
+                    </div>
+                ) : (
+                    <ChartLayout />
+                )}
             </div>
         </div>
     );

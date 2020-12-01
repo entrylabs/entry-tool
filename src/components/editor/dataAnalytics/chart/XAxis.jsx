@@ -4,10 +4,7 @@ import Dropdown from '@components/widget/dropdown';
 import { CommonUtils, getNumberColumnIndexes } from '@utils/Common';
 import Styles from '@assets/entry/scss/popup.scss';
 
-const getXAxis = (table, type) =>
-    type === 'scatter' ? getNumberColumnIndexes(table) : table[0].map((col, index) => index);
-
-const XAxis = (props) => {
+const XAxis = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const [showDropdown, setShowDropdown] = useState(false);
     const axisRef = useRef();
@@ -15,9 +12,12 @@ const XAxis = (props) => {
     const { fields = [], origin = [], chart, chartIndex } = selected;
     const { type, xIndex = 0 } = chart[chartIndex];
     const table = [[...fields], ...origin];
-    const xAxis = fields.map((item, index) => [item, index]);
+    const xAxis =
+        type === 'scatter'
+            ? getNumberColumnIndexes(table).map((index) => [fields[index], index])
+            : fields.map((item, index) => [item, index]);
 
-    const handleSelectDropDown = (value) => {
+    const handleSelectDropdown = (value) => {
         dispatch({
             type: 'SELECT_X_AXIS',
             index: value[1],
@@ -60,7 +60,7 @@ const XAxis = (props) => {
             {showDropdown && (
                 <Dropdown
                     items={xAxis}
-                    onSelectDropdown={handleSelectDropDown}
+                    onSelectDropdown={handleSelectDropdown}
                     onOutsideClick={handleOutsideClick}
                     positionDom={axisRef.current}
                 />

@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import _ from 'lodash';
 import XAxis from './XAxis';
 import YAxis from './YAxis';
 import Legend from './Legend';
@@ -12,6 +11,9 @@ import Styles from '@assets/entry/scss/popup.scss';
 
 const ChartLayout = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
+    const { selected = {} } = dataAnalytics;
+    const { chart = [], chartIndex = -1 } = selected;
+    const { type } = chart[chartIndex] || {};
     return (
         <>
             <div className={Styles.form_box}>
@@ -28,8 +30,8 @@ const ChartLayout = () => {
                 </div>
                 <div className={Styles.input_inner}>
                     <XAxis />
-                    {/* <YAxis />
-                    <Legend /> */}
+                    {type === 'scatter' ? <YAxis /> : ''}
+                    {/* <Legend /> */}
                     {/* <div className={Styles.select_group}>
                         <label htmlFor="ChartName" className={Styles.tit_label}>
                             가로축
