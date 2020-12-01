@@ -5,7 +5,7 @@ import { TABLE } from '@constants/dataAnalytics';
 
 const DataAnalytics = (props) => {
     const {
-        tab = TABLE,
+        tab,
         list = [],
         onSubmitDataAnalytics = () => {},
         onToastDataAnalytics = () => {},
@@ -16,7 +16,7 @@ const DataAnalytics = (props) => {
     } = props;
 
     const data = {
-        tab,
+        tab: tab || (list[0] && TABLE),
         list,
         selectedIndex: 0,
         selected: list[0],

@@ -5,10 +5,11 @@ import SelectChartDropdown from './SelectChartDropdown';
 import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/entry/scss/popup.scss';
 
-const Navigation = (props) => {
-    const { charts, onClickItem, selected } = props;
+const Navigation = () => {
     const [showDropdown, setShowDropdown] = useState(false);
-    const { dispatch } = useContext(DataAnalyticsContext);
+    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
+    const { selected: selectedTable = {} } = dataAnalytics;
+    const { chart = [], chartIndex: selected = 0 } = selectedTable;
 
     const chartName = (chartType) => {
         switch (chartType) {
@@ -25,6 +26,14 @@ const Navigation = (props) => {
             default:
                 return '';
         }
+    };
+
+    const handleClickItem = (index) => (event) => {
+        event.preventDefault();
+        dispatch({
+            type: 'SET_CHART_INDEX',
+            index,
+        });
     };
 
     const handleOutsideClick = () => {
@@ -44,27 +53,22 @@ const Navigation = (props) => {
         setShowDropdown(false);
     };
 
-    const navigationList = (charts) =>
-        charts.map((chart, index) => (
-            <a
-                key={`chart_${index}`}
-                href="#"
-                className={`${Styles.chart_link} ${Styles[chart.type]} ${
-                    index !== selected ? Styles.disabled : ''
-                }`}
-                onClick={onClickItem(index)}
-            >
-                <span className={Styles.blind}>{chartName(chart.type)}</span>
-            </a>
-        ));
-
     return (
         <div className={Styles.chart_navi}>
-            {navigationList(charts)}
-
-            {charts.length < 10 ? (
+            {chart.map((chart, index) => (
+                <a
+                    key={`chart_${index}`}
+                    className={`${Styles.chart_link} ${Styles[chart.type]} ${
+                        index !== selected ? Styles.disabled : ''
+                    }`}
+                    onClick={handleClickItem(index)}
+                >
+                    <span className={Styles.blind}>{chartName(chart.type)}</span>
+                </a>
+            ))}
+            {chart.length < 10 ? (
                 <div className={Styles.add_link_box}>
-                    <a href="#" className={Styles.add_link} onClick={handleAClick} role="button">
+                    <a className={Styles.add_link} onClick={handleAClick} role="button">
                         <span className={Styles.blind}>{chartName('plus')}</span>
                     </a>
 

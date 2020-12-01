@@ -13,7 +13,6 @@ const Table = () => {
     const table = [[...fields], ...rows];
     const summary = getSummary(table) || [];
 
-    console.log({ selected, summary, table });
     return (
         <div className={Styles.category_box}>
             <div className={Styles.table_sjt}>

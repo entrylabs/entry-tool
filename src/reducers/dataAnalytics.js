@@ -69,7 +69,10 @@ export const dataAnalyticsReducer = (state, action) => {
         case 'SET_CHART_INDEX':
             return {
                 ...state,
-                chartIndex: action.index,
+                selected: {
+                    ...state.selcted,
+                    chartIndex: action.index,
+                },
             };
         case 'EDIT_TITLE':
             return {
@@ -84,21 +87,29 @@ export const dataAnalyticsReducer = (state, action) => {
                 charts,
             };
         }
-        case 'ADD_CHART':
+        case 'ADD_CHART': {
+            const { selected = {} } = state;
+            const { chart = [] } = selected;
             return {
                 ...state,
-                chartIndex: state.charts.length,
-                charts: [
-                    ...state.charts,
-                    {
-                        type: action.chartType,
-                        title: `${state.title}_${CommonUtils.getLang('DataAnalytics.chart_title')}`,
-                        xIndex: -1,
-                        yIndex: -1,
-                        categoryIndexes: [],
-                    },
-                ],
+                selected: {
+                    ...selected,
+                    chartIndex: chart.length,
+                    chart: [
+                        ...chart,
+                        {
+                            type: action.chartType,
+                            title: `${state.title}_${CommonUtils.getLang(
+                                'DataAnalytics.chart_title'
+                            )}`,
+                            xIndex: -1,
+                            yIndex: -1,
+                            categoryIndexes: [],
+                        },
+                    ],
+                },
             };
+        }
         case 'DELETE_CHART': {
             const charts = [...state.charts];
             return {

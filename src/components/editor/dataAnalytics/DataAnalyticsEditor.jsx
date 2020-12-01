@@ -7,6 +7,7 @@ import ChartEditor from './chart/ChartEditor';
 import SideTab from './SideTab';
 import Tab from './Tab';
 import Title from './Title';
+import EmptyContents from './EmptyContents';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { SUMMARY, TABLE, CHART, TAB_ITEMS } from '@constants/dataAnalytics';
 import Styles from '@assets/entry/scss/popup.scss';
@@ -19,13 +20,18 @@ const DataAnalyticsEditor = (props) => {
         onCloseButtonClick();
     };
 
-    let sectionCSS = Styles.summary_content;
+    let sectionCSS = Styles.chart_content;
+    let Contents = EmptyContents;
+
     switch (tab) {
         case TABLE:
+            Contents = TableEditor;
+            break;
         case CHART:
-            sectionCSS = Styles.chart_content;
+            Contents = ChartEditor;
             break;
         case SUMMARY:
+            Contents = Summary;
             sectionCSS = Styles.summary_content;
             break;
     }
@@ -49,7 +55,7 @@ const DataAnalyticsEditor = (props) => {
                         <Title key={`title_${selected ? selected.id : 'null'}`} />
                         <Tab />
                     </div>
-                    <Summary />
+                    <Contents />
                 </div>
             </section>
         </div>

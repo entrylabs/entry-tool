@@ -54,7 +54,7 @@ const TableEditor = () => {
                 </div>
 
                 <div className={Styles.table_box} style={{ height: 555 }}>
-                    <Table
+                    {/* <Table
                         table={table}
                         onToastDataAnalytics={onToastDataAnalytics}
                         onChangeDataAnalytics={onChangeDataAnalytics}
@@ -66,7 +66,7 @@ const TableEditor = () => {
                         deleteColumn={deleteColumn}
                         addRow={addRow}
                         deleteRow={deleteRow}
-                    />
+                    /> */}
                 </div>
             </div>
         </section>
