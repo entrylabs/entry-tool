@@ -119,9 +119,11 @@ export const dataAnalyticsReducer = (state, action) => {
             };
         }
         case 'SELECT_X_AXIS': {
-            const charts = [...state.charts];
-            charts[state.chartIndex] = {
-                ...charts[state.chartIndex],
+            const { selected } = state;
+            const { chartIndex } = selected;
+            const chart = [...selected.chart];
+            chart[chartIndex] = {
+                ...chart[chartIndex],
                 xIndex: action.index,
                 yIndex: -1,
                 categoryIndexes: [],
@@ -129,7 +131,10 @@ export const dataAnalyticsReducer = (state, action) => {
 
             return {
                 ...state,
-                charts,
+                selected: {
+                    ...selected,
+                    chart,
+                },
             };
         }
         case 'SELECT_Y_AXIS': {

@@ -9,8 +9,8 @@ import _map from 'lodash/map';
 const Table = () => {
     const { dataAnalytics } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
-    const { fields = [], rows = [] } = selected;
-    const table = [[...fields], ...rows];
+    const { fields = [], origin = [] } = selected;
+    const table = [[...fields], ...origin];
     const summary = getSummary(table) || [];
 
     return (
