@@ -75,10 +75,13 @@ export default class EmitMiddleware {
                     break;
                 case ALERT_DATA_ANALYTICS:
                     this.emitter.emit('alert', action.data);
+                    break;
                 case CLOSE_BUTTON_CLICK:
                     this.emitter.emit('close');
+                    break;
                 case ADD_TABLE_CLICK:
                     this.emitter.emit('addTable');
+                    break;
                 default: {
                     break;
                 }
