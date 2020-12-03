@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import Styles from '@assets/entry/scss/popup.scss';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import TableToolTip from '@components/tooltip/TableToolTip';
 import { CommonUtils, getSummary } from '@utils/Common';
 import { SUMMARY_HEADER } from '@constants/dataAnalytics';
 import _map from 'lodash/map';
+import Theme from '@utils/Theme';
 
 const Table = () => {
+    const theme = Theme.getStyle('popup');
     const { dataAnalytics } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
     const { fields = [], origin = [] } = selected;
@@ -14,15 +15,15 @@ const Table = () => {
     const summary = getSummary(table) || [];
 
     return (
-        <div className={Styles.category_box}>
-            <div className={Styles.table_sjt}>
+        <div className={theme.category_box}>
+            <div className={theme.table_sjt}>
                 <strong>{CommonUtils.getLang('DataAnalytics.table')}</strong>
                 <TableToolTip />
-                <p className={Styles.title_dsc}>
+                <p className={theme.title_dsc}>
                     새로운 테이블에서 열을 기준으로 한 기초 통계량입니다.
                 </p>
             </div>
-            <ul className={Styles.table_info}>
+            <ul className={theme.table_info}>
                 <li>{`${CommonUtils.getLang('DataAnalytics.row')} ${table.length -
                     1}${CommonUtils.getLang('DataAnalytics.row_count')}`}</li>
                 <li>{`${CommonUtils.getLang('DataAnalytics.attribute')} ${
@@ -31,8 +32,8 @@ const Table = () => {
                 <li>{`${CommonUtils.getLang('DataAnalytics.cell')} ${summary.length *
                     (table.length - 1)}${CommonUtils.getLang('DataAnalytics.cell_count')}`}</li>
             </ul>
-            <div className={Styles.table_box}>
-                <table className={Styles.table}>
+            <div className={theme.table_box}>
+                <table className={theme.table}>
                     <colgroup>
                         <col style={{ width: 140 }} />
                         <col style={{ width: 150 }} />
@@ -46,7 +47,7 @@ const Table = () => {
                         {_map(SUMMARY_HEADER, (name, index) => (
                             <th scope="col" key={`summary_th_${index}`}>
                                 {index ? (
-                                    <div className={Styles.headtit} key={`summary_th_${index}_div`}>
+                                    <div className={theme.headtit} key={`summary_th_${index}_div`}>
                                         {CommonUtils.getLang(name)}
                                     </div>
                                 ) : (

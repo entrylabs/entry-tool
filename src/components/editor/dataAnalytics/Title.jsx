@@ -1,8 +1,9 @@
 import React, { useState, useContext, useCallback } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
-import Styles from '@assets/entry/scss/popup.scss';
+import Theme from '@utils/Theme';
 
 const Title = () => {
+    const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
     const { name = '' } = selected;
@@ -28,7 +29,7 @@ const Title = () => {
         <input
             type="text"
             name="sheet_sjt"
-            className={Styles.input}
+            className={theme.input}
             defaultValue={title}
             disabled={!selected.id}
             onChange={handleChange}

@@ -1,6 +1,11 @@
 export const SUMMARY = 'summary';
 export const TABLE = 'table';
 export const CHART = 'chart';
+export const BAR = 'bar';
+export const LINE = 'line';
+export const PIE = 'pie';
+export const SCATTER = 'scatter';
+export const NONE = 'none';
 export const TAB_NAME = {
     TABLE,
     CHART,

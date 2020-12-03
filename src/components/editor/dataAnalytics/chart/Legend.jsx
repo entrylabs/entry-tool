@@ -4,9 +4,10 @@ import { CommonUtils, getNumberColumnIndexesBySelectedColumns } from '@utils/Com
 import Dropdown from '@components/widget/dropdown';
 import _some from 'lodash/some';
 import _reduce from 'lodash/reduce';
-import Styles from '@assets/entry/scss/popup.scss';
+import Theme from '@utils/Theme';
 
 const Legend = () => {
+    const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const [showDropdown, setShowDropdown] = useState(false);
     const axisRef = useRef();
@@ -69,20 +70,20 @@ const Legend = () => {
     };
 
     return (
-        <div className={Styles.select_group}>
-            <label htmlFor="ChartName" className={Styles.tit_label}>
+        <div className={theme.select_group}>
+            <label htmlFor="ChartName" className={theme.tit_label}>
                 {CommonUtils.getLang('DataAnalytics.legend')}
             </label>
             <div
                 ref={axisRef}
-                className={`${Styles.pop_selectbox} ${disabled ? Styles.disabled : ''}`}
+                className={`${theme.pop_selectbox} ${disabled ? theme.disabled : ''}`}
                 style={{ width: 153 }}
             >
                 <div
-                    className={`${Styles.select_link} ${
+                    className={`${theme.select_link} ${
                         showDropdown
-                            ? Styles.imico_pop_select_arr_up
-                            : Styles.imico_pop_select_arr_down
+                            ? theme.imico_pop_select_arr_up
+                            : theme.imico_pop_select_arr_down
                     }`}
                     onClick={disabled ? () => {} : handleClick}
                 >

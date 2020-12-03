@@ -1,10 +1,9 @@
 import React from 'react';
 import { CommonUtils } from '@utils/Common';
-import Styles from '@assets/entry/scss/popup.scss';
-
-const { generateHash } = CommonUtils;
+import Theme from '@utils/Theme';
 
 const TitleInput = (props) => {
+    const theme = Theme.getStyle('popup');
     const { title = '', onChangeTitle = () => {}, disabled = false } = props;
 
     const handleClick = (event) => {
@@ -19,21 +18,10 @@ const TitleInput = (props) => {
     };
 
     return (
-        <div className={Styles.input_inner}>
-            <input
-                key={`title_${generateHash()}`}
-                type="text"
-                defaultValue={title}
-                onBlur={handleBlur}
-                disabled={disabled}
-            />
-            <a
-                href="#"
-                className={title ? Styles.close_btn : ''}
-                role="button"
-                onClick={handleClick}
-            >
-                <span className={Styles.blind}>입력 취소</span>
+        <div className={theme.input_inner}>
+            <input type="text" defaultValue={title} onBlur={handleBlur} disabled={disabled} />
+            <a className={title ? theme.close_btn : ''} role="button" onClick={handleClick}>
+                <span className={theme.blind}>입력 취소</span>
             </a>
         </div>
     );

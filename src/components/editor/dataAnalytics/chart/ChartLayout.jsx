@@ -7,47 +7,87 @@ import HorizontalLegend from './HorizontalLegend';
 import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { isZipable, CommonUtils, getNumberColumnIndexes } from '@utils/Common';
-import Styles from '@assets/entry/scss/popup.scss';
+import { BAR, LINE, SCATTER, PIE, NONE } from '@constants/dataAnalytics';
+import Theme from '@utils/Theme';
+
+const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes } = {}) =>
+    type !== NONE && xIndex !== -1 && categoryIndexes.length && (type !== SCATTER || yIndex !== -1);
+
+const getNoResultText = ({ type = NONE, xIndex, yIndex, categoryIndexes = [] } = {}) => {
+    let content;
+    console.log({ type, xIndex, yIndex, categoryIndexes });
+    if (xIndex === -1) {
+        content = CommonUtils.getLang('DataAnalytics.select_x_axis');
+    } else if (yIndex === -1 && type === SCATTER) {
+        content = CommonUtils.getLang('DataAnalytics.select_y_axis');
+    } else if (!categoryIndexes.length) {
+        content = CommonUtils.getLang('DataAnalytics.select_legend');
+    }
+    return content;
+};
 
 const ChartLayout = () => {
+    const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
-    const { chart = [], chartIndex = -1 } = selected;
-    const { type } = chart[chartIndex] || {};
+    const { chart = [], chartIndex = -1, fields = [], origin = [] } = selected;
+    const table = [[...fields], ...origin];
+    const selectedChart = chart[chartIndex] || {};
+    const { type, visibleLegend, categoryIndexes = [] } = selectedChart || {};
+    const isHorizontalLegend = type !== 'pie';
+
     return (
         <>
-            <div className={Styles.form_box}>
-                <div className={Styles.input_inner}>
-                    <label htmlFor="ChartName" className={Styles.tit_label}>
+            <div className={theme.form_box}>
+                <div className={theme.input_inner}>
+                    <label htmlFor="ChartName" className={theme.tit_label}>
                         차트 이름
                     </label>
-                    <div className={Styles.input_box}>
+                    <div className={theme.input_box}>
                         <input type="text" id="ChartName" name="ChartName" />
                     </div>
-                    <a role="button" className={Styles.del_btn}>
+                    <a role="button" className={theme.del_btn}>
                         차트 삭제
                     </a>
                 </div>
-                <div className={Styles.input_inner}>
+                <div className={theme.input_inner}>
                     <XAxis />
                     {type === 'scatter' ? <YAxis /> : ''}
                     <Legend />
-                    {/* <div className={Styles.select_group}>
-                        <label htmlFor="ChartName" className={Styles.tit_label}>
-                            가로축
-                        </label>
-                    </div>
-                    <div className={Styles.select_group} style={{ marginLeft: 45 }}>
-                        <label htmlFor="ChartName" className={Styles.tit_label}>
-                            계열
-                        </label>
-                    </div> */}
                 </div>
             </div>
-            {/* 테이블 차트 입력폼 */}
-            <div className={Styles.chart_no_result} style={{ backgroundColor: '#fff' }}>
-                <p className={Styles.dsc}>{}</p>
-            </div>
+            {isDrawable(selectedChart) ? (
+                <div
+                    className={`${theme.chart_group} ${
+                        !(categoryIndexes.length && isHorizontalLegend)
+                            ? theme.vertical
+                            : theme.horizontal
+                    }`}
+                    style={{ backgroundColor: '#fff', height: '100%' }}
+                >
+                    {categoryIndexes.length &&
+                    isHorizontalLegend &&
+                    (type !== 'scatter' || visibleLegend) ? (
+                        <HorizontalLegend table={table} chart={selectedChart} />
+                    ) : null}
+                    <Chart
+                        // key={`c${generateHash()}`}
+                        legend={{ show: false }}
+                        table={table}
+                        chart={chart[chartIndex]}
+                        size={{
+                            height: 378,
+                        }}
+                    />
+                    {categoryIndexes.length && !isHorizontalLegend ? (
+                        <VerticalLegend table={table} chart={selectedChart} />
+                    ) : null}
+                </div>
+            ) : (
+                <div className={theme.chart_no_result} style={{ backgroundColor: '#fff' }}>
+                    <p className={theme.dsc}>{getNoResultText(selectedChart)}</p>
+                </div>
+            )}
         </>
     );
 };

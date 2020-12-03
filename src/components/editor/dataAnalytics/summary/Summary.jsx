@@ -1,24 +1,27 @@
 import React, { useContext } from 'react';
-import Styles from '@assets/entry/scss/popup.scss';
 import Table from './Table';
 import ChartList from './ChartList';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils, getSummary } from '@utils/Common';
+import Theme from '@utils/Theme';
 
-const Summary = () => (
-    <div className={Styles.chart_box}>
-        <h2 className={Styles.blind}>정보</h2>
-        <div className={Styles.inner}>
-            <Table />
-            {/* <div className={Styles.category_box}>
+const Summary = () => {
+    const theme = Theme.getStyle('popup');
+    return (
+        <div className={theme.chart_box}>
+            <h2 className={theme.blind}>정보</h2>
+            <div className={theme.inner}>
+                <Table />
+                {/* <div className={Styles.category_box}>
                     <div className={Styles.table_sjt}>
                         <strong>차트</strong>
                         <p className={Styles.title_dsc}>추가한 차트가 없습니다.</p>
                     </div>
                 </div> */}
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 const Summary2 = () => {
     const { dataAnalytics } = useContext(DataAnalyticsContext);

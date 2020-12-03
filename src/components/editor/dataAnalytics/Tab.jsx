@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
-import Styles from '@assets/entry/scss/popup.scss';
 import { TAB_ITEMS } from '@constants/dataAnalytics';
+import Theme from '@utils/Theme';
 
 const Tab = () => {
+    const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { tab, selected } = dataAnalytics;
 
@@ -20,20 +21,20 @@ const Tab = () => {
     };
 
     return (
-        <div className={Styles.btn_box}>
-            <div className={Styles.tab}>
+        <div className={theme.btn_box}>
+            <div className={theme.tab}>
                 {TAB_ITEMS.map(({ value, name }) => (
                     <a
                         key={`tab_${value}`}
                         role="button"
                         onClick={handleClick(value)}
-                        className={tab === value ? Styles.active : ''}
+                        className={tab === value ? theme.active : ''}
                     >
                         {CommonUtils.getLang(name)}
                     </a>
                 ))}
             </div>
-            <a role="button" className={Styles.btn_save}>
+            <a role="button" className={theme.btn_save}>
                 저장하기
             </a>
         </div>

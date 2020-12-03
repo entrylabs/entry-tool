@@ -2,9 +2,10 @@ import React, { useContext, useState, useRef } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import Dropdown from '@components/widget/dropdown';
 import { CommonUtils, getNumberColumnIndexes } from '@utils/Common';
-import Styles from '@assets/entry/scss/popup.scss';
+import Theme from '@utils/Theme';
 
 const YAxis = () => {
+    const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const [showDropdown, setShowDropdown] = useState(false);
     const axisRef = useRef();
@@ -34,22 +35,22 @@ const YAxis = () => {
     };
 
     return (
-        <div className={Styles.select_group}>
-            <label htmlFor="ChartName" className={Styles.tit_label}>
+        <div className={theme.select_group}>
+            <label htmlFor="ChartName" className={theme.tit_label}>
                 {CommonUtils.getLang('DataAnalytics.y_axis')}
             </label>
             <div
                 ref={axisRef}
-                className={`${Styles.pop_selectbox} ${disabled ? Styles.disabled : ''}`}
+                className={`${theme.pop_selectbox} ${disabled ? theme.disabled : ''}`}
                 style={{ width: 153 }}
             >
                 <div
-                    className={`${Styles.select_link} ${
-                        yIndex !== -1 ? Styles.del_legend : Styles.common_legend
+                    className={`${theme.select_link} ${
+                        yIndex !== -1 ? theme.del_legend : theme.common_legend
                     } ${
                         showDropdown
-                            ? Styles.imico_pop_select_arr_up
-                            : Styles.imico_pop_select_arr_down
+                            ? theme.imico_pop_select_arr_up
+                            : theme.imico_pop_select_arr_down
                     }`}
                     onClick={disabled ? () => {} : handleClick}
                 >

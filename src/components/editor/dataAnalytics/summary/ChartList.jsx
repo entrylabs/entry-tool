@@ -3,12 +3,12 @@ import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 import { CHART } from '@constants/dataAnalytics';
-
-import Styles from '@assets/entry/scss/popup.scss';
+import Theme from '@utils/Theme';
 
 const { generateHash } = CommonUtils;
 
 const ChartList = (props) => {
+    const theme = Theme.getStyle('popup');
     const { table, charts } = props;
     const { dispatch } = useContext(DataAnalyticsContext);
 
@@ -21,20 +21,20 @@ const ChartList = (props) => {
     };
 
     const handleMouseEnter = (event) => {
-        event.currentTarget.classList.add(Styles.on);
+        event.currentTarget.classList.add(theme.on);
     };
 
     const handleMouseLeave = (event) => {
-        event.currentTarget.classList.remove(Styles.on);
+        event.currentTarget.classList.remove(theme.on);
     };
 
     const chartList = (charts) => {
         if (charts.length === 0) {
             return (
                 <li onClick={handleClickChart(CHART, 0)}>
-                    <div className={Styles.data_add_box}>
+                    <div className={theme.data_add_box}>
                         <a onClick={(e) => e.preventDefault()}>
-                            <span className={Styles.blind}>
+                            <span className={theme.blind}>
                                 {CommonUtils.getLang('DataAnalytics.add_data')}
                             </span>
                         </a>
@@ -46,7 +46,7 @@ const ChartList = (props) => {
 
         return charts.map((chart, index) => (
             <li
-                className={Styles[chart.type]}
+                className={theme[chart.type]}
                 key={`chart_li_${generateHash()}`}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
@@ -83,11 +83,11 @@ const ChartList = (props) => {
 
     return (
         <>
-            <div className={Styles.title_box}>
+            <div className={theme.title_box}>
                 <strong>{CommonUtils.getLang('DataAnalytics.chart')}</strong>
             </div>
-            <div className={Styles.chart_list}>
-                <ul className={Styles.list}>{chartList(charts)}</ul>
+            <div className={theme.chart_list}>
+                <ul className={theme.list}>{chartList(charts)}</ul>
             </div>
         </>
     );

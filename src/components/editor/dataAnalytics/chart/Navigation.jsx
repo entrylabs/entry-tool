@@ -3,9 +3,10 @@ import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import OutsideClick from '@components/common/outsideClick';
 import SelectChartDropdown from './SelectChartDropdown';
 import { CommonUtils } from '@utils/Common';
-import Styles from '@assets/entry/scss/popup.scss';
+import Theme from '@utils/Theme';
 
 const Navigation = () => {
+    const theme = Theme.getStyle('popup');
     const [showDropdown, setShowDropdown] = useState(false);
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { selected: selectedTable = {} } = dataAnalytics;
@@ -54,22 +55,22 @@ const Navigation = () => {
     };
 
     return (
-        <div className={Styles.chart_navi}>
+        <div className={theme.chart_navi}>
             {chart.map((chart, index) => (
                 <a
                     key={`chart_${index}`}
-                    className={`${Styles.chart_link} ${Styles[chart.type]} ${
-                        index !== selected ? Styles.disabled : ''
+                    className={`${theme.chart_link} ${theme[chart.type]} ${
+                        index !== selected ? theme.disabled : ''
                     }`}
                     onClick={handleClickItem(index)}
                 >
-                    <span className={Styles.blind}>{chartName(chart.type)}</span>
+                    <span className={theme.blind}>{chartName(chart.type)}</span>
                 </a>
             ))}
             {chart.length < 10 ? (
-                <div className={Styles.add_link_box}>
-                    <a className={Styles.add_link} onClick={handleAClick} role="button">
-                        <span className={Styles.blind}>{chartName('plus')}</span>
+                <div className={theme.add_link_box}>
+                    <a className={theme.add_link} onClick={handleAClick} role="button">
+                        <span className={theme.blind}>{chartName('plus')}</span>
                     </a>
 
                     {showDropdown ? (

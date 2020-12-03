@@ -2,9 +2,10 @@ import React, { useContext, useState, useRef } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import Dropdown from '@components/widget/dropdown';
 import { CommonUtils, getNumberColumnIndexes } from '@utils/Common';
-import Styles from '@assets/entry/scss/popup.scss';
+import Theme from '@utils/Theme';
 
 const XAxis = () => {
+    const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const [showDropdown, setShowDropdown] = useState(false);
     const axisRef = useRef();
@@ -35,22 +36,22 @@ const XAxis = () => {
     };
 
     return (
-        <div className={Styles.select_group}>
-            <label htmlFor="ChartName" className={Styles.tit_label}>
+        <div className={theme.select_group}>
+            <label htmlFor="ChartName" className={theme.tit_label}>
                 {type === 'pie'
                     ? CommonUtils.getLang('DataAnalytics.column_name')
                     : CommonUtils.getLang('DataAnalytics.x_axis')}
             </label>
             <div
                 ref={axisRef}
-                className={`${Styles.pop_selectbox} ${Styles.on}`}
+                className={`${theme.pop_selectbox} ${theme.on}`}
                 style={{ width: 208 }}
             >
                 <div
-                    className={`${Styles.select_link} ${
+                    className={`${theme.select_link} ${
                         showDropdown
-                            ? Styles.imico_pop_select_arr_up
-                            : Styles.imico_pop_select_arr_down
+                            ? theme.imico_pop_select_arr_up
+                            : theme.imico_pop_select_arr_down
                     }`}
                     onClick={handleClick}
                 >

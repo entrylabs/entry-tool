@@ -10,9 +10,10 @@ import Title from './Title';
 import EmptyContents from './EmptyContents';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { SUMMARY, TABLE, CHART, TAB_ITEMS } from '@constants/dataAnalytics';
-import Styles from '@assets/entry/scss/popup.scss';
+import Theme from '@utils/Theme';
 
 const DataAnalyticsEditor = (props) => {
+    const theme = Theme.getStyle('popup');
     const { dataAnalytics } = useContext(DataAnalyticsContext);
     const { tab, selected, onCloseButtonClick } = dataAnalytics;
     const handleButtonClick = (event) => {
@@ -20,7 +21,7 @@ const DataAnalyticsEditor = (props) => {
         onCloseButtonClick();
     };
 
-    let sectionCSS = Styles.chart_content;
+    let sectionCSS = theme.chart_content;
     let Contents = EmptyContents;
 
     switch (tab) {
@@ -32,26 +33,26 @@ const DataAnalyticsEditor = (props) => {
             break;
         case SUMMARY:
             Contents = Summary;
-            sectionCSS = Styles.summary_content;
+            sectionCSS = theme.summary_content;
             break;
     }
     return (
-        <div className={Styles.popup_wrap}>
-            <header className={Styles.pop_header}>
+        <div className={theme.popup_wrap}>
+            <header className={theme.pop_header}>
                 <h1>테이블 불러오기</h1>
                 <button
                     onClick={handleButtonClick}
-                    className={`${Styles.btn_back} ${Styles.imbtn_pop_close}`}
+                    className={`${theme.btn_back} ${theme.imbtn_pop_close}`}
                 >
-                    <span className={Styles.blind}>뒤로가기</span>
+                    <span className={theme.blind}>뒤로가기</span>
                 </button>
             </header>
-            <section className={`${Styles.pop_content} ${sectionCSS}`}>
+            <section className={`${theme.pop_content} ${sectionCSS}`}>
                 {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
                 {/* 창 조절하기 버튼을 누르면 fold 클래스 추가 */}
                 <SideTab />
-                <div className={Styles.section_cont}>
-                    <div className={Styles.sheet_form_box}>
+                <div className={theme.section_cont}>
+                    <div className={theme.sheet_form_box}>
                         <Title key={`title_${selected ? selected.id : 'null'}`} />
                         <Tab />
                     </div>
