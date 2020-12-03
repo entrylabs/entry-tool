@@ -7,10 +7,12 @@ import Theme from '@utils/Theme';
 
 const { generateHash } = CommonUtils;
 
-const ChartList = (props) => {
+const ChartList = () => {
     const theme = Theme.getStyle('popup');
-    const { table, charts } = props;
-    const { dispatch } = useContext(DataAnalyticsContext);
+    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
+    const { selected } = dataAnalytics;
+    const { fields = [], origin, chart: charts = [], chartIndex = 0 } = selected;
+    const table = [[...fields], ...origin];
 
     const handleClickChart = (tab, index) => () => {
         dispatch({
@@ -28,68 +30,59 @@ const ChartList = (props) => {
         event.currentTarget.classList.remove(theme.on);
     };
 
-    const chartList = (charts) => {
-        if (charts.length === 0) {
-            return (
-                <li onClick={handleClickChart(CHART, 0)}>
-                    <div className={theme.data_add_box}>
-                        <a onClick={(e) => e.preventDefault()}>
-                            <span className={theme.blind}>
-                                {CommonUtils.getLang('DataAnalytics.add_data')}
-                            </span>
-                        </a>
-                        <p>{CommonUtils.getLang('DataAnalytics.add_chart_alert')}</p>
-                    </div>
-                </li>
-            );
-        }
-
-        return charts.map((chart, index) => (
-            <li
-                className={theme[chart.type]}
-                key={`chart_li_${generateHash()}`}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                onClick={handleClickChart(CHART, index)}
-            >
-                <Chart
-                    chart={chart}
-                    table={table}
-                    size={{
-                        width: 180,
-                        height: 106,
-                    }}
-                    legend={{ show: false }}
-                    tooltip={{ show: false }}
-                    axisX={{
-                        tick: {
-                            show: false,
-                            text: {
-                                show: false,
-                            },
-                        },
-                    }}
-                    axisY={{
-                        tick: {
-                            culling: true,
-                        },
-                    }}
-                    shortForm={true}
-                    key={`chart_${generateHash()}`}
-                />
-            </li>
-        ));
-    };
-
     return (
-        <>
-            <div className={theme.title_box}>
-                <strong>{CommonUtils.getLang('DataAnalytics.chart')}</strong>
-            </div>
-            <div className={theme.chart_list}>
-                <ul className={theme.list}>{chartList(charts)}</ul>
-            </div>
-        </>
+        <div className={theme.category_box}>
+            <ul className={theme.chart_list}>
+                {charts.length === 0 ? (
+                    <li onClick={handleClickChart(CHART, 0)}>
+                        <div className={theme.data_add_box}>
+                            <a onClick={(e) => e.preventDefault()}>
+                                <span className={theme.blind}>
+                                    {CommonUtils.getLang('DataAnalytics.add_data')}
+                                </span>
+                            </a>
+                            <p>{CommonUtils.getLang('DataAnalytics.add_chart_alert')}</p>
+                        </div>
+                    </li>
+                ) : (
+                    charts.map((chart, index) => (
+                        <li
+                            key={`summary_chart_${index}`}
+                            className={theme[chart.type]}
+                            onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave}
+                            onClick={handleClickChart(CHART, index)}
+                        >
+                            <Chart
+                                chart={chart}
+                                table={table}
+                                size={{
+                                    width: 180,
+                                    height: 106,
+                                }}
+                                legend={{ show: false }}
+                                tooltip={{ show: false }}
+                                axisX={{
+                                    tick: {
+                                        show: false,
+                                        text: {
+                                            show: false,
+                                        },
+                                    },
+                                }}
+                                axisY={{
+                                    tick: {
+                                        culling: true,
+                                    },
+                                }}
+                                shortForm={true}
+                                key={`chart_${generateHash()}`}
+                            />
+                        </li>
+                    ))
+                )}
+            </ul>
+        </div>
     );
 };
 
