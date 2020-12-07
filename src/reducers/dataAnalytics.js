@@ -1,5 +1,5 @@
 import { CommonUtils, makeTableByGrid } from '@utils/Common';
-import { TABLE } from '../Constants';
+import { TABLE } from '@constants/dataAnalytics';
 
 export const dataAnalyticsReducer = (state, action) => {
     switch (action.type) {
@@ -8,23 +8,76 @@ export const dataAnalyticsReducer = (state, action) => {
                 ...state,
                 ...action.payload,
             };
+        case 'REMOVE_TABLE': {
+            const { list, selectedIndex = 0 } = state;
+            const { index } = action;
+            let changedList = [];
+            let changedIndex = selectedIndex;
+            if (index > 0 && index < list.length) {
+                changedList = list.slice(0, index);
+            }
+            changedList = [...changedList, ...list.slice(index + 1)];
+            if (selectedIndex >= index) {
+                changedIndex = selectedIndex - 1;
+            }
+            changedIndex = selectedIndex === index ? 0 : changedIndex;
+            return {
+                selected: list[changedIndex],
+                selectedIndex: changedIndex,
+                list: changedList,
+            };
+        }
+        case 'FOLD':
+            return {
+                ...state,
+                fold: !state.fold,
+            };
+        case 'CHANGE_TABLE_TITLE': {
+            const { selected } = state;
+            return {
+                ...state,
+                selected: {
+                    ...selected,
+                    name: action.value,
+                },
+            };
+        }
+        case 'SELECT_TABLE': {
+            const { index } = action;
+            const { list } = state;
+            return {
+                ...state,
+                selected: list[index],
+                selectedIndex: index,
+            };
+        }
         case 'SET_TAB': {
-            let { table } = state;
-            if (state.tab === TABLE && state.tab !== action.tab) {
-                const { gridRef = {} } = state;
-                table = makeTableByGrid(gridRef);
+            const { selected, tab } = state;
+            const { chartIndex, gridRef } = selected;
+            let { fields, origin } = selected;
+            if (tab === TABLE && tab !== action.tab) {
+                const [header, ...rows] = action.table;
+                fields = header;
+                origin = rows;
             }
             return {
                 ...state,
-                table,
                 tab: action.tab,
-                chartIndex: action.index === undefined ? state.chartIndex : action.index,
+                selected: {
+                    ...selected,
+                    fields,
+                    origin,
+                    chartIndex: action.index === undefined ? chartIndex : action.index,
+                },
             };
         }
         case 'SET_CHART_INDEX':
             return {
                 ...state,
-                chartIndex: action.index,
+                selected: {
+                    ...state.selcted,
+                    chartIndex: action.index,
+                },
             };
         case 'EDIT_TITLE':
             return {
@@ -39,21 +92,27 @@ export const dataAnalyticsReducer = (state, action) => {
                 charts,
             };
         }
-        case 'ADD_CHART':
+        case 'ADD_CHART': {
+            const { selected = {} } = state;
+            const { chart = [], name } = selected;
             return {
                 ...state,
-                chartIndex: state.charts.length,
-                charts: [
-                    ...state.charts,
-                    {
-                        type: action.chartType,
-                        title: `${state.title}_${CommonUtils.getLang('DataAnalytics.chart_title')}`,
-                        xIndex: -1,
-                        yIndex: -1,
-                        categoryIndexes: [],
-                    },
-                ],
+                selected: {
+                    ...selected,
+                    chartIndex: chart.length,
+                    chart: [
+                        ...chart,
+                        {
+                            type: action.chartType,
+                            title: `${name}_${CommonUtils.getLang('DataAnalytics.chart_title')}`,
+                            xIndex: -1,
+                            yIndex: -1,
+                            categoryIndexes: [],
+                        },
+                    ],
+                },
             };
+        }
         case 'DELETE_CHART': {
             const charts = [...state.charts];
             return {
@@ -63,9 +122,11 @@ export const dataAnalyticsReducer = (state, action) => {
             };
         }
         case 'SELECT_X_AXIS': {
-            const charts = [...state.charts];
-            charts[state.chartIndex] = {
-                ...charts[state.chartIndex],
+            const { selected } = state;
+            const { chartIndex } = selected;
+            const chart = [...selected.chart];
+            chart[chartIndex] = {
+                ...chart[chartIndex],
                 xIndex: action.index,
                 yIndex: -1,
                 categoryIndexes: [],
@@ -73,39 +134,47 @@ export const dataAnalyticsReducer = (state, action) => {
 
             return {
                 ...state,
-                charts,
+                selected: {
+                    ...selected,
+                    chart,
+                },
             };
         }
         case 'SELECT_Y_AXIS': {
-            const charts = [...state.charts];
-            charts[state.chartIndex] = {
-                ...charts[state.chartIndex],
+            const { selected } = state;
+            const { chartIndex } = selected;
+            const chart = [...selected.chart];
+            chart[chartIndex] = {
+                ...chart[chartIndex],
                 yIndex: action.index,
                 categoryIndexes: [],
             };
 
             return {
                 ...state,
-                charts,
+                selected: {
+                    ...selected,
+                    chart,
+                },
             };
         }
         case 'SELECT_LEGEND_AXIS': {
-            const charts = [...state.charts];
-            charts[state.chartIndex] = {
-                ...charts[state.chartIndex],
+            const { selected } = state;
+            const { chartIndex } = selected;
+            const chart = [...selected.chart];
+            chart[chartIndex] = {
+                ...chart[chartIndex],
                 categoryIndexes: action.indexes,
             };
 
             return {
                 ...state,
-                charts,
+                selected: {
+                    ...selected,
+                    chart,
+                },
             };
         }
-        case 'TOGGLE_FULLSCREEN':
-            return {
-                ...state,
-                isFullScreen: action.isFullScreen,
-            };
         case 'ADD_COLUMN': {
             const { table, charts = [] } = state;
             const { columnIndex, columnName } = action;

@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import Chart from '@components/widget/Chart';
-import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
-import { CHART } from '../Constants';
+import { CHART } from '@constants/dataAnalytics';
+import Theme from '@utils/Theme';
 
-import Styles from '@assets/entry/scss/popup.scss';
-
-const { generateHash } = CommonUtils;
-
-const ChartList = (props) => {
-    const { table, charts } = props;
-    const { dispatch } = useContext(DataAnalyticsContext);
+const ChartList = () => {
+    const theme = Theme.getStyle('popup');
+    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
+    const { selected } = dataAnalytics;
+    const { fields = [], origin, chart: charts = [], chartIndex = 0 } = selected;
+    const table = [[...fields], ...origin];
 
     const handleClickChart = (tab, index) => () => {
         dispatch({
@@ -21,75 +21,66 @@ const ChartList = (props) => {
     };
 
     const handleMouseEnter = (event) => {
-        event.currentTarget.classList.add(Styles.on);
+        event.currentTarget.classList.add(theme.on);
     };
 
     const handleMouseLeave = (event) => {
-        event.currentTarget.classList.remove(Styles.on);
-    };
-
-    const chartList = (charts) => {
-        if (charts.length === 0) {
-            return (
-                <li onClick={handleClickChart(CHART, 0)}>
-                    <div className={Styles.data_add_box}>
-                        <a href="#" onClick={(e) => e.preventDefault()}>
-                            <span className={Styles.blind}>
-                                {CommonUtils.getLang('DataAnalytics.add_data')}}
-                            </span>
-                        </a>
-                        <p>{CommonUtils.getLang('DataAnalytics.add_chart_alert')}</p>
-                    </div>
-                </li>
-            );
-        }
-
-        return charts.map((chart, index) => (
-            <li
-                className={Styles[chart.type]}
-                key={`chart_li_${generateHash()}`}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                onClick={handleClickChart(CHART, index)}
-            >
-                <Chart
-                    chart={chart}
-                    table={table}
-                    size={{
-                        width: 180,
-                        height: 106,
-                    }}
-                    legend={{ show: false }}
-                    tooltip={{ show: false }}
-                    axisX={{
-                        tick: {
-                            show: false,
-                            text: {
-                                show: false,
-                            },
-                        },
-                    }}
-                    axisY={{
-                        tick: {
-                            culling: true,
-                        },
-                    }}
-                    shortForm={true}
-                    key={`chart_${generateHash()}`}
-                />
-            </li>
-        ));
+        event.currentTarget.classList.remove(theme.on);
     };
 
     return (
-        <>
-            <div className={Styles.title_box}>
-                <strong>{CommonUtils.getLang('DataAnalytics.chart')}</strong>
-            </div>
-            <div className={Styles.chart_list}>
-                <ul className={Styles.list}>{chartList(charts)}</ul>
-            </div>
-        </>
+        <div className={theme.category_box}>
+            <ul className={theme.chart_list}>
+                {charts.length === 0 ? (
+                    <li onClick={handleClickChart(CHART, 0)}>
+                        <div className={theme.data_add_box}>
+                            <a onClick={(e) => e.preventDefault()}>
+                                <span className={theme.blind}>
+                                    {CommonUtils.getLang('DataAnalytics.add_data')}
+                                </span>
+                            </a>
+                            <p>{CommonUtils.getLang('DataAnalytics.add_chart_alert')}</p>
+                        </div>
+                    </li>
+                ) : (
+                    charts.map((chart, index) => (
+                        <li
+                            key={`summary_chart_${index}`}
+                            className={theme[chart.type]}
+                            onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave}
+                            onClick={handleClickChart(CHART, index)}
+                        >
+                            <Chart
+                                chart={chart}
+                                table={table}
+                                size={{
+                                    width: 180,
+                                    height: 106,
+                                }}
+                                legend={{ show: false }}
+                                tooltip={{ show: false }}
+                                axisX={{
+                                    tick: {
+                                        show: false,
+                                        text: {
+                                            show: false,
+                                        },
+                                    },
+                                }}
+                                axisY={{
+                                    tick: {
+                                        culling: true,
+                                    },
+                                }}
+                                shortForm={true}
+                                key={`chart_${index}`}
+                            />
+                        </li>
+                    ))
+                )}
+            </ul>
+        </div>
     );
 };
 

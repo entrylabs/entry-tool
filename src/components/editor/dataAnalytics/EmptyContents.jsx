@@ -1,19 +1,17 @@
 import React from 'react';
-import Table from './Table';
-import ChartList from './ChartList';
 import Theme from '@utils/Theme';
 
-const Summary = () => {
+const EmptyContents = () => {
     const theme = Theme.getStyle('popup');
     return (
         <div className={theme.chart_box}>
-            <h2 className={theme.blind}>정보</h2>
             <div className={theme.inner}>
-                <Table />
-                <ChartList />
+                <div className={theme.chart_no_result}>
+                    <p className={theme.dsc}>테이블을 먼저 추가해 주세요.</p>
+                </div>
             </div>
         </div>
     );
 };
 
-export default Summary;
+export default EmptyContents;

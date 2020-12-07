@@ -1,15 +1,20 @@
 export const SUMMARY = 'summary';
 export const TABLE = 'table';
 export const CHART = 'chart';
+export const BAR = 'bar';
+export const LINE = 'line';
+export const PIE = 'pie';
+export const SCATTER = 'scatter';
+export const NONE = 'none';
 export const TAB_NAME = {
-    SUMMARY,
     TABLE,
     CHART,
+    SUMMARY,
 };
 export const TAB_ITEMS = [
-    { name: 'DataAnalytics.dashboard', value: SUMMARY },
     { name: 'DataAnalytics.table', value: TABLE },
     { name: 'DataAnalytics.chart', value: CHART },
+    { name: 'DataAnalytics.dashboard', value: SUMMARY },
 ];
 export const GRAPH_COLOR = [
     '#4f80ff',
@@ -22,4 +27,12 @@ export const GRAPH_COLOR = [
     '#ef6d6d',
     '#67b100',
     '#dd47d8',
+];
+export const SUMMARY_HEADER = [
+    ' ',
+    'DataAnalytics.average',
+    'DataAnalytics.standard_deviation',
+    'DataAnalytics.maximum',
+    'DataAnalytics.median',
+    'DataAnalytics.minimum',
 ];

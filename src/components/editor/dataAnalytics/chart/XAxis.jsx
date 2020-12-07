@@ -1,19 +1,24 @@
 import React, { useContext, useState, useRef } from 'react';
-import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import Dropdown from '@components/widget/dropdown';
-import { CommonUtils } from '@utils/Common';
+import { CommonUtils, getNumberColumnIndexes } from '@utils/Common';
+import Theme from '@utils/Theme';
 
-import Styles from '@assets/entry/scss/popup.scss';
-
-const XAxis = (props) => {
-    const { xAxisIndex = [], xIndex = -1, type } = props;
+const XAxis = () => {
+    const theme = Theme.getStyle('popup');
+    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const [showDropdown, setShowDropdown] = useState(false);
     const axisRef = useRef();
-    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { table } = dataAnalytics;
-    const xAxis = xAxisIndex.map((index) => [table[0][index], index]);
+    const { selected = {} } = dataAnalytics;
+    const { fields = [], origin = [], chart, chartIndex } = selected;
+    const { type, xIndex = 0 } = chart[chartIndex];
+    const table = [[...fields], ...origin];
+    const xAxis =
+        type === 'scatter'
+            ? getNumberColumnIndexes(table).map((index) => [fields[index], index])
+            : fields.map((item, index) => [item, index]);
 
-    const handleSelectDropDown = (value) => {
+    const handleSelectDropdown = (value) => {
         dispatch({
             type: 'SELECT_X_AXIS',
             index: value[1],
@@ -31,32 +36,36 @@ const XAxis = (props) => {
     };
 
     return (
-        <div className={Styles.legend_cell}>
-            <strong className={Styles.cell_sjt}>
+        <div className={theme.select_group}>
+            <label htmlFor="ChartName" className={theme.tit_label}>
                 {type === 'pie'
                     ? CommonUtils.getLang('DataAnalytics.column_name')
                     : CommonUtils.getLang('DataAnalytics.x_axis')}
-            </strong>
-            <div ref={axisRef} className={`${Styles.pop_selectbox} ${Styles.on}`}>
+            </label>
+            <div
+                ref={axisRef}
+                className={`${theme.pop_selectbox} ${theme.on}`}
+                style={{ width: 208 }}
+            >
                 <div
-                    className={`${Styles.select_link} ${
+                    className={`${theme.select_link} ${
                         showDropdown
-                            ? Styles.imico_pop_select_arr_up
-                            : Styles.imico_pop_select_arr_down
+                            ? theme.imico_pop_select_arr_up
+                            : theme.imico_pop_select_arr_down
                     }`}
                     onClick={handleClick}
                 >
-                    {xIndex === -1 ? CommonUtils.getLang('DataAnalytics.x_axis') : table[0][xIndex]}
+                    {xIndex === -1 ? CommonUtils.getLang('DataAnalytics.x_axis') : fields[xIndex]}
                 </div>
-                {showDropdown && (
-                    <Dropdown
-                        items={xAxis}
-                        onSelectDropdown={handleSelectDropDown}
-                        onOutsideClick={handleOutsideClick}
-                        positionDom={axisRef.current}
-                    />
-                )}
             </div>
+            {showDropdown && (
+                <Dropdown
+                    items={xAxis}
+                    onSelectDropdown={handleSelectDropdown}
+                    onOutsideClick={handleOutsideClick}
+                    positionDom={axisRef.current}
+                />
+            )}
         </div>
     );
 };

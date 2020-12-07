@@ -15,7 +15,7 @@ import Theme from '@utils/Theme';
 import root from 'window-or-global';
 import Modal from './Modal';
 
-class Sprite extends Component {
+class Popup extends Component {
     constructor(props) {
         super(props);
         this.theme = Theme.getStyle('popup');
@@ -78,7 +78,14 @@ class Sprite extends Component {
         let view = <div>empty</div>;
         switch (selected) {
             case 'select':
-                view = <Select {...this.property} multiSelect={multiSelect} showSelected={showSelected} data={data} />;
+                view = (
+                    <Select
+                        {...this.property}
+                        multiSelect={multiSelect}
+                        showSelected={showSelected}
+                        data={data}
+                    />
+                );
                 navigation = <Navigation {...navSettings} isDrawVector={isDrawVector} />;
                 break;
             case 'upload':
@@ -150,4 +157,4 @@ const mapDispatchToProps = (dispatch) => ({
     initState: () => dispatch(initState()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sprite);
+export default connect(mapStateToProps, mapDispatchToProps)(Popup);

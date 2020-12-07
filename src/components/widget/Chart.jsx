@@ -162,7 +162,7 @@ const Chart = (props) => {
     if (!isDrawable(table)) {
         return shortForm ? (
             <div className={Styles.data_add_box}>
-                <a href="#" onClick={(e) => e.preventDefault()}>
+                <a onClick={(e) => e.preventDefault()}>
                     <span className={Styles.blind}>
                         {CommonUtils.getLang('DataAnalytics.add_data')}
                     </span>
@@ -225,7 +225,7 @@ const Chart = (props) => {
 
     return shortForm ? (
         <div className={Styles.data_add_box}>
-            <a href="#" onClick={(e) => e.preventDefault()}>
+            <a onClick={(e) => e.preventDefault()}>
                 <span className={Styles.blind}>{content}</span>
             </a>
             <p>{content}</p>
