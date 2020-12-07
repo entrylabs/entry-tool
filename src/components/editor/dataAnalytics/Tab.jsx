@@ -7,16 +7,18 @@ import Theme from '@utils/Theme';
 const Tab = () => {
     const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { tab, selected } = dataAnalytics;
+    const { tab, selected, gridRef } = dataAnalytics;
 
     const handleClick = (value) => (event) => {
         event.preventDefault();
         if (!selected) {
             return;
         }
+
         dispatch({
             type: 'SET_TAB',
             tab: value,
+            table: gridRef?.current?.getSheetData().data,
         });
     };
 

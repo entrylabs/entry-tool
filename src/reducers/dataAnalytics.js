@@ -52,13 +52,21 @@ export const dataAnalyticsReducer = (state, action) => {
             };
         }
         case 'SET_TAB': {
-            const { selected } = state;
-            const { chartIndex } = selected;
+            const { selected, tab } = state;
+            const { chartIndex, gridRef } = selected;
+            let { fields, origin } = selected;
+            if (tab === TABLE && tab !== action.tab) {
+                const [header, ...rows] = action.table;
+                fields = header;
+                origin = rows;
+            }
             return {
                 ...state,
                 tab: action.tab,
                 selected: {
                     ...selected,
+                    fields,
+                    origin,
                     chartIndex: action.index === undefined ? chartIndex : action.index,
                 },
             };

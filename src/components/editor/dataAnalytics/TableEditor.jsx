@@ -28,7 +28,7 @@ const TableEditor = () => {
     //     isFullScreen,
     //     gridRef,
     // } = dataAnalytics;
-    const { selected = {} } = dataAnalytics;
+    const { selected = {}, gridRef } = dataAnalytics;
     const { fields = [], origin = [] } = selected;
     const table = [[...fields], ...origin];
 
@@ -75,6 +75,7 @@ const TableEditor = () => {
                     option={{
                         type: 'EDITOR',
                     }}
+                    ref={gridRef}
                 />
             </div>
         </div>
