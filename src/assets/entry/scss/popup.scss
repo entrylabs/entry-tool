@@ -2750,15 +2750,8 @@
             position: relative;
             padding: 13px 52px;
             height: 22px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #2c313d;
             background-color: #ecf8ff;
             border-bottom: 1px solid #d6e9f4;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            word-break: break-all;
-            line-height: 22px;
             &:before {
                 position: absolute;
                 left: 18px;
@@ -2769,6 +2762,17 @@
                 transform: translateY(-50%);
                 vertical-align: top;
                 content: '';
+            }
+            .text {
+                display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: 12px;
+                font-weight: 600;
+                color: #2c313d;
+                white-space: nowrap;
+                word-break: break-all;
+                line-height: 22px;
             }
             &.active {
                 background-color: #fff;
