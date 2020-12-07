@@ -2466,6 +2466,24 @@
 .pie_legend .list .cnt:last-child:after {
     display: none;
 }
+.sheet_box {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    .inner {
+        margin-left: -27px;
+        position: relative;
+        -webkit-box-flex: 1;
+        flex: 1 1;
+        overflow: auto;
+    }
+}
 
 .data_detail_wrap {
     position: absolute;

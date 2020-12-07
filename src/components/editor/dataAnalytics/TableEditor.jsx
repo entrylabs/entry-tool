@@ -3,21 +3,34 @@ import EntrySheet from 'entry-sheet';
 import Table from '@components/widget/Table';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
+import _map from 'lodash/map';
 import Theme from '@utils/Theme';
+import { Array } from 'window-or-global';
+
+const getTableData = (table) => {
+    const rows = table.length < 10 ? new Array(10).fill('') : table;
+    return _map(rows, (row) => {
+        const cols = row.length < 10 ? new Array(10).fill('') : row;
+        return _map(cols, (__, index) => row[index] || '');
+    });
+};
 
 const TableEditor = () => {
     const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const tableRef = useRef();
-    const {
-        table,
-        title,
-        onToastDataAnalytics,
-        onChangeDataAnalytics,
-        onAlertDataAnalytics,
-        isFullScreen,
-        gridRef,
-    } = dataAnalytics;
+    // const tableRef = useRef();
+    // const {
+    //     table,
+    //     title,
+    //     onToastDataAnalytics,
+    //     onChangeDataAnalytics,
+    //     onAlertDataAnalytics,
+    //     isFullScreen,
+    //     gridRef,
+    // } = dataAnalytics;
+    const { selected = {} } = dataAnalytics;
+    const { fields = [], origin = [] } = selected;
+    const table = [[...fields], ...origin];
 
     const addColumn = (columnIndex, columnName) => {
         dispatch({
@@ -48,21 +61,23 @@ const TableEditor = () => {
         });
     };
 
-    // return <>hihi</>;
     return (
-        <EntrySheet
-            sheetData={{
-                fields: {
-                    cols: [],
-                    rows: [],
-                },
-                data: [
-                    [1, 2, 3],
-                    [4, 5, 6],
-                    [7, 8, 9],
-                ],
-            }}
-        />
+        <div className={theme.sheet_box}>
+            <div className={theme.inner}>
+                <EntrySheet
+                    sheetData={{
+                        fields: {
+                            cols: [],
+                            rows: [],
+                        },
+                        data: getTableData(table),
+                    }}
+                    option={{
+                        type: 'EDITOR',
+                    }}
+                />
+            </div>
+        </div>
     );
 
     // return (
