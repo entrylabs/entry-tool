@@ -5,8 +5,6 @@ import { CommonUtils } from '@utils/Common';
 import { CHART } from '@constants/dataAnalytics';
 import Theme from '@utils/Theme';
 
-const { generateHash } = CommonUtils;
-
 const ChartList = () => {
     const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
@@ -76,7 +74,7 @@ const ChartList = () => {
                                     },
                                 }}
                                 shortForm={true}
-                                key={`chart_${generateHash()}`}
+                                key={`chart_${index}`}
                             />
                         </li>
                     ))

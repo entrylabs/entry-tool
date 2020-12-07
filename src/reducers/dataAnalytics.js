@@ -53,17 +53,14 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'SET_TAB': {
             const { selected } = state;
-            // const { chartIndex } = selected;
-            // let { table } = selected;
-            // if (tab === TABLE && tab !== action.tab) {
-            //     const { gridRef = {} } = selected;
-            //     table = makeTableByGrid(gridRef);
-            // }
+            const { chartIndex } = selected;
             return {
                 ...state,
                 tab: action.tab,
-                // table,
-                // chartIndex: action.index === undefined ? chartIndex : action.index,
+                selected: {
+                    ...selected,
+                    chartIndex: action.index === undefined ? chartIndex : action.index,
+                },
             };
         }
         case 'SET_CHART_INDEX':
