@@ -94,7 +94,7 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'ADD_CHART': {
             const { selected = {} } = state;
-            const { chart = [] } = selected;
+            const { chart = [], name } = selected;
             return {
                 ...state,
                 selected: {
@@ -104,9 +104,7 @@ export const dataAnalyticsReducer = (state, action) => {
                         ...chart,
                         {
                             type: action.chartType,
-                            title: `${state.title}_${CommonUtils.getLang(
-                                'DataAnalytics.chart_title'
-                            )}`,
+                            title: `${name}_${CommonUtils.getLang('DataAnalytics.chart_title')}`,
                             xIndex: -1,
                             yIndex: -1,
                             categoryIndexes: [],
