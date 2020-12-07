@@ -44,17 +44,22 @@ const Table = () => {
                     </colgroup>
 
                     <thead>
-                        {_map(SUMMARY_HEADER, (name, index) => (
-                            <th scope="col" key={`summary_th_${index}`}>
-                                {index ? (
-                                    <div className={theme.headtit} key={`summary_th_${index}_div`}>
-                                        {CommonUtils.getLang(name)}
-                                    </div>
-                                ) : (
-                                    CommonUtils.getLang(name)
-                                )}
-                            </th>
-                        ))}
+                        <tr>
+                            {_map(SUMMARY_HEADER, (name, index) => (
+                                <th scope="col" key={`summary_th_${index}`}>
+                                    {index ? (
+                                        <div
+                                            className={theme.headtit}
+                                            key={`summary_th_${index}_div`}
+                                        >
+                                            {CommonUtils.getLang(name)}
+                                        </div>
+                                    ) : (
+                                        CommonUtils.getLang(name)
+                                    )}
+                                </th>
+                            ))}
+                        </tr>
                     </thead>
 
                     <tbody>

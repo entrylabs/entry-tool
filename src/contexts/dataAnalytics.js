@@ -63,32 +63,10 @@ export const DataAnalyticsContext = createContext();
 // const getTable = ({ table = [[]] }) => table.map((row) => [...row]);
 
 const DataAnalyticsContextProvider = (props) => {
-    const { analytics = {} } = props;
     const gridRef = useRef();
-    const {
-        tab,
-        list,
-        selected,
-        selcetedIndex,
-        onToastDataAnalytics,
-        onSubmitDataAnalytics,
-        onChangeDataAnalytics,
-        onAlertDataAnalytics,
-        onCloseButtonClick,
-        onAddTableButtonClick,
-    } = analytics;
+    const { analytics = {} } = props;
     const [dataAnalytics, dispatch] = useReducer(dataAnalyticsReducer, {
-        tab,
-        list,
-        selected,
-        selcetedIndex,
-        isFullScreen: false,
-        onToastDataAnalytics,
-        onSubmitDataAnalytics,
-        onChangeDataAnalytics,
-        onAlertDataAnalytics,
-        onCloseButtonClick,
-        onAddTableButtonClick,
+        ...analytics,
         gridRef,
     });
 

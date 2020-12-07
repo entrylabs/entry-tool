@@ -7,6 +7,7 @@ const DataAnalytics = (props) => {
     const {
         tab,
         list = [],
+        selectedIndex = 0,
         onSubmitDataAnalytics = () => {},
         onToastDataAnalytics = () => {},
         onChangeDataAnalytics = () => {},
@@ -15,11 +16,13 @@ const DataAnalytics = (props) => {
         onAddTableButtonClick = () => {},
     } = props;
 
+    const index = selectedIndex || list.length - 1;
+
     const data = {
         tab: tab || (list[0] && TABLE),
         list,
-        selectedIndex: 0,
-        selected: list[0],
+        selectedIndex: index,
+        selected: list[index],
         fold: false,
         onToastDataAnalytics,
         onSubmitDataAnalytics,

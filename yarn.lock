@@ -6297,9 +6297,9 @@ entities@^2.0.0:
   resolved "https://registry.yarnpkg.com/entities/-/entities-2.1.0.tgz#992d3129cf7df6870b96c57858c249a120f8b8b5"
   integrity sha512-hCx1oky9PFrJ611mf0ifBLBRW8lUUVRlFolb5gWRfIELabBlbp9xZvrqZLZAs+NxFnbfQoeGd8wDkygjg7U85w==
 
-"entry-sheet@git+https://oss.navercorp.com/sungchun-cho/entry_sheet#v0.0.0.1":
+"entry-sheet@git+https://oss.navercorp.com/sungchun-cho/entry_sheet#v0.0.0.2":
   version "1.0.0"
-  resolved "git+https://oss.navercorp.com/sungchun-cho/entry_sheet#8cf6d953cb113366ea4c871207f715c966494337"
+  resolved "git+https://oss.navercorp.com/sungchun-cho/entry_sheet#49f46c090409a3b2473ae3450ec1be8e6c661f55"
   dependencies:
     "@emotion/core" "^10.1.1"
     "@emotion/styled" "^10.0.27"
