@@ -28,7 +28,7 @@ const getNoResultText = ({ type = NONE, xIndex, yIndex, categoryIndexes = [] } =
 
 const ChartLayout = () => {
     const theme = Theme.getStyle('popup');
-    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
+    const { dataAnalytics } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
     const { chart = [], chartIndex = -1, fields = [], origin = [] } = selected;
     const table = [[...fields], ...origin];
@@ -71,6 +71,7 @@ const ChartLayout = () => {
                         <HorizontalLegend table={table} chart={selectedChart} />
                     ) : null}
                     <Chart
+                        key={`chart_${chartIndex}`}
                         legend={{ show: false }}
                         table={table}
                         chart={chart[chartIndex]}
