@@ -29,14 +29,14 @@ class TableSummary extends Component {
                                 </div>
                                 <ul className={Styles.list}>
                                     <li>
-                                        새로운 테이블
+                                        <span className={Styles.text}>새로운 테이블</span>
                                         <a href="/" className={Styles.btn_close}>
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
                                     </li>
                                     {/* 활성화 시 active 클래스 추가 */}
                                     <li className={Styles.active}>
-                                        새로운 테이블
+                                        <span className={Styles.text}>새로운 테이블</span>
                                         <a href="/" className={Styles.btn_close}>
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -56,7 +56,7 @@ class TableSummary extends Component {
                                         </div>
                                     </li>
                                     <li>
-                                        새로운 테이블
+                                        <span className={Styles.text}>새로운 테이블</span>
                                         <a href="/" className={Styles.btn_close}>
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -411,14 +411,14 @@ class TableSummary extends Component {
                                 </div>
                                 <ul className={Styles.list}>
                                     <li>
-                                        새로운 테이블
+                                        <span className={Styles.text}>새로운 테이블</span>
                                         <a href="/" className={Styles.btn_close}>
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
                                     </li>
                                     {/* 활성화 시 active 클래스 추가 */}
                                     <li className={Styles.active}>
-                                        새로운 테이블
+                                        <span className={Styles.text}>새로운 테이블</span>
                                         <a href="/" className={Styles.btn_close}>
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
@@ -438,7 +438,7 @@ class TableSummary extends Component {
                                         </div>
                                     </li>
                                     <li>
-                                        새로운 테이블
+                                        <span className={Styles.text}>새로운 테이블</span>
                                         <a href="/" className={Styles.btn_close}>
                                             <span className={Styles.blind}>삭제</span>
                                         </a>
