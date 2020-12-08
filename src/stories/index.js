@@ -33,6 +33,7 @@ import configureStore from '../store';
 import Chart from '../components/widget/Chart';
 import Table from '../components/widget/Table';
 import ModalChart from '../components/widget/modalChart';
+import BillBoard from '../components/widget/BillBoard';
 
 import DataSelect from '../components/ai_layout/DataSelect';
 import DataUpload from '../components/ai_layout/DataUpload';
@@ -398,6 +399,22 @@ storiesOf('AiLayout', module)
                     },
                 ],
             }}
+        />
+    ))
+    .add('billboard', () => (
+        <BillBoard
+            onClose={action('close')}
+            source={{
+                data: {
+                    type: 'line',
+                    columns: [
+                        ['data1', 1,2,3,4],
+                        ['data2', 4,3,2,1]
+                    ]
+                }
+            }}
+            title={'billboard chart'}
+            description={'description'}
         />
     ))
     .add('바차트', () => (
