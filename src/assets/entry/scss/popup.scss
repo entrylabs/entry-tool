@@ -2142,6 +2142,16 @@
                 letter-spacing: -0.5px;
                 line-height: 22px;
             }
+            
+            .graph_box {
+                width: 194px;
+                height: 150px;
+                margin: 18px 0 18px;
+            }
+            
+            .graph_box svg {
+                width: 200px !important;
+            }
         }
     }
     .center {
