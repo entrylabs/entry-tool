@@ -41,6 +41,7 @@ export const dataAnalyticsReducer = (state, action) => {
             };
         }
         case 'FOLD':
+            window.dispatchEvent(new Event('resize'));
             return {
                 ...state,
                 fold: !state.fold,
