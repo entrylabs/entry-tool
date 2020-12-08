@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
-import { CommonUtils } from '@utils/Common';
 import { CHART } from '@constants/dataAnalytics';
 import Theme from '@utils/Theme';
 
