@@ -75,7 +75,7 @@ export const dataAnalyticsReducer = (state, action) => {
             return {
                 ...state,
                 selected: {
-                    ...state.selcted,
+                    ...state.selected,
                     chartIndex: action.index,
                 },
             };

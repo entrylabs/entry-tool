@@ -2791,6 +2791,7 @@
             height: 22px;
             background-color: #ecf8ff;
             border-bottom: 1px solid #d6e9f4;
+            box-sizing: content-box;
             &:before {
                 position: absolute;
                 left: 18px;

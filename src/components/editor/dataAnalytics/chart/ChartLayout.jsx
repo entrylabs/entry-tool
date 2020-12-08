@@ -16,7 +16,6 @@ const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes } = {}) =>
 
 const getNoResultText = ({ type = NONE, xIndex, yIndex, categoryIndexes = [] } = {}) => {
     let content;
-    console.log({ type, xIndex, yIndex, categoryIndexes });
     if (xIndex === -1) {
         content = CommonUtils.getLang('DataAnalytics.select_x_axis');
     } else if (yIndex === -1 && type === SCATTER) {

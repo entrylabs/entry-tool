@@ -17,7 +17,7 @@
             outline: 0;
             font-size: 14px;
             font-weight: 600;
-            color:#2c313d;
+            color: #2c313d;
             letter-spacing: -0.33px;
         }
         .btn_box {
@@ -63,7 +63,7 @@
             font-size: 14px;
             font-weight: 600;
             color: #555;
-            text-align: center;;
+            text-align: center;
             line-height: 32px;
         }
     }
@@ -217,7 +217,7 @@
             border-bottom: 1px solid #cbcbcb;
         }
         .table thead th,
-        .table tbody th, {
+        .table tbody th {
             font-weight: 600;
             height: 36px;
             background-color: #f4f4f4;
@@ -226,7 +226,7 @@
             border-top: 1px solid #e2e2e2;
         }
         .table tbody td {
-            border-top: 1px solid #f4f4f4
+            border-top: 1px solid #f4f4f4;
         }
         .table tbody td {
             height: 36px;
@@ -294,6 +294,14 @@
         }
         .chart_list li img {
             vertical-align: top;
+        }
+        .chart_list li.bar .chart_area,
+        .chart_list li.line .chart_area,
+        .chart_list li.scatter .chart_area {
+            padding-top: 9px;
+        }
+        .chart_list li.pie .chart_area {
+            padding-left: 15px;
         }
     }
 }

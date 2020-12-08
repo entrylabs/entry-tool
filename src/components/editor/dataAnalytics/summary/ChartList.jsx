@@ -30,56 +30,52 @@ const ChartList = () => {
 
     return (
         <div className={theme.category_box}>
-            <ul className={theme.chart_list}>
-                {charts.length === 0 ? (
-                    <li onClick={handleClickChart(CHART, 0)}>
-                        <div className={theme.data_add_box}>
-                            <a onClick={(e) => e.preventDefault()}>
-                                <span className={theme.blind}>
-                                    {CommonUtils.getLang('DataAnalytics.add_data')}
-                                </span>
-                            </a>
-                            <p>{CommonUtils.getLang('DataAnalytics.add_chart_alert')}</p>
-                        </div>
-                    </li>
-                ) : (
-                    charts.map((chart, index) => (
-                        <li
-                            key={`summary_chart_${index}`}
-                            className={theme[chart.type]}
-                            onMouseEnter={handleMouseEnter}
-                            onMouseLeave={handleMouseLeave}
-                            onClick={handleClickChart(CHART, index)}
-                        >
-                            <Chart
-                                chart={chart}
-                                table={table}
-                                size={{
-                                    width: 180,
-                                    height: 106,
-                                }}
-                                legend={{ show: false }}
-                                tooltip={{ show: false }}
-                                axisX={{
-                                    tick: {
-                                        show: false,
-                                        text: {
+            {charts.length ? (
+                <div className={theme.chart_list}>
+                    <ul className={theme.list}>
+                        {charts.map((chart, index) => (
+                            <li
+                                key={`summary_chart_${index}`}
+                                className={theme[chart.type]}
+                                onMouseEnter={handleMouseEnter}
+                                onMouseLeave={handleMouseLeave}
+                                onClick={handleClickChart(CHART, index)}
+                            >
+                                <Chart
+                                    chart={chart}
+                                    table={table}
+                                    size={{
+                                        width: 190,
+                                        height: 128,
+                                    }}
+                                    legend={{ show: false }}
+                                    tooltip={{ show: false }}
+                                    axisX={{
+                                        tick: {
                                             show: false,
+                                            text: {
+                                                show: false,
+                                            },
                                         },
-                                    },
-                                }}
-                                axisY={{
-                                    tick: {
-                                        culling: true,
-                                    },
-                                }}
-                                shortForm={true}
-                                key={`chart_${index}`}
-                            />
-                        </li>
-                    ))
-                )}
-            </ul>
+                                    }}
+                                    axisY={{
+                                        tick: {
+                                            culling: true,
+                                        },
+                                    }}
+                                    shortForm={true}
+                                    key={`chart_${index}`}
+                                />
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ) : (
+                <div className={theme.table_sjt}>
+                    <strong>차트</strong>
+                    <p className={theme.title_dsc}>추가한 차트가 없습니다.</p>
+                </div>
+            )}
         </div>
     );
 };

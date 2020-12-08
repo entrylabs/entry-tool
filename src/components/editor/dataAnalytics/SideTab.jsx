@@ -51,7 +51,7 @@ const SideTab = () => {
                         className={index === selectedIndex ? theme.active : ''}
                         onClick={handleClick(index)}
                     >
-                        {name}
+                        <span className={theme.text}>{name}</span>
                         <a onClick={handleRemoveClick} className={theme.btn_close}>
                             <span className={theme.blind}>삭제</span>
                         </a>
