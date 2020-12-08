@@ -27,7 +27,7 @@ const Legend = () => {
         : dropdownItems
     ).map((index) => [table[0][index], index]);
     const disabled =
-        chart.xIndex === -1 || (type === 'scatter' && chart.yIndex === -1) || !dropdownItems.length;
+        xIndex === -1 || (type === 'scatter' && yIndex === -1) || !dropdownItems.length;
 
     const getTitle = () => {
         if (checkBox) {
