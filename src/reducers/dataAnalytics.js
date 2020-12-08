@@ -1,4 +1,5 @@
-import { CommonUtils, makeTableByGrid } from '@utils/Common';
+import { CommonUtils } from '@utils/Common';
+import _cloneDeep from 'lodash/cloneDeep';
 import { TABLE } from '@constants/dataAnalytics';
 
 export const dataAnalyticsReducer = (state, action) => {
@@ -22,9 +23,21 @@ export const dataAnalyticsReducer = (state, action) => {
             }
             changedIndex = selectedIndex === index ? 0 : changedIndex;
             return {
+                ...state,
                 selected: list[changedIndex],
                 selectedIndex: changedIndex,
                 list: changedList,
+            };
+        }
+        case 'COPY_TALBE': {
+            const { list } = state;
+            const { index } = action;
+            const copiedTable = _cloneDeep(list[index]);
+            return {
+                ...state,
+                selected: copiedTable,
+                selectedIndex: list.length,
+                list: [...list, copiedTable],
             };
         }
         case 'FOLD':
