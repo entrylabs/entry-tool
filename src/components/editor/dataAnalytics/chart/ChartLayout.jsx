@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import XAxis from './XAxis';
 import YAxis from './YAxis';
 import Legend from './Legend';
@@ -28,13 +28,18 @@ const getNoResultText = ({ type = NONE, xIndex, yIndex, categoryIndexes = [] } =
 
 const ChartLayout = () => {
     const theme = Theme.getStyle('popup');
-    const { dataAnalytics } = useContext(DataAnalyticsContext);
+    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
     const { chart = [], chartIndex = -1, fields = [], origin = [] } = selected;
     const table = [[...fields], ...origin];
     const selectedChart = chart[chartIndex] || {};
     const { type, visibleLegend, categoryIndexes = [] } = selectedChart || {};
     const isHorizontalLegend = type !== 'pie';
+
+    const handleRemoveClick = useCallback((event) => {
+        event.preventDefault();
+        dispatch({ type: 'REMOVE_CHART' });
+    }, []);
 
     return (
         <>
@@ -46,7 +51,7 @@ const ChartLayout = () => {
                     <div className={theme.input_box}>
                         <TitleInput />
                     </div>
-                    <a role="button" className={theme.del_btn}>
+                    <a role="button" className={theme.del_btn} onClick={handleRemoveClick}>
                         차트 삭제
                     </a>
                 </div>

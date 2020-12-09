@@ -40,6 +40,13 @@ export const dataAnalyticsReducer = (state, action) => {
                 list: [...list, copiedTable],
             };
         }
+        case 'COLUMN_EDIT': {
+            const { clipboard = [] } = state;
+            return {
+                ...state,
+                clipboard: [...clipboard, action.data],
+            };
+        }
         case 'FOLD':
             window.dispatchEvent(new Event('resize'));
             return {
@@ -61,13 +68,13 @@ export const dataAnalyticsReducer = (state, action) => {
             const { list } = state;
             return {
                 ...state,
-                selected: list[index],
+                selected: _cloneDeep(list[index]),
                 selectedIndex: index,
             };
         }
         case 'SET_TAB': {
             const { selected, tab } = state;
-            const { chartIndex, gridRef } = selected;
+            const { chartIndex } = selected;
             let { fields, origin } = selected;
             if (tab === TABLE && tab !== action.tab) {
                 const [header, ...rows] = action.table;
@@ -127,12 +134,16 @@ export const dataAnalyticsReducer = (state, action) => {
                 },
             };
         }
-        case 'DELETE_CHART': {
-            const charts = [...state.charts];
+        case 'REMOVE_CHART': {
+            const { selected = {} } = state;
+            const { chart = [], chartIndex } = selected;
             return {
                 ...state,
-                charts: charts.filter((chart, index) => index !== action.selected),
-                chartIndex: 0,
+                selected: {
+                    ...selected,
+                    chart: chart.filter((__, index) => index !== chartIndex),
+                    chartIndex: 0,
+                },
             };
         }
         case 'SELECT_X_AXIS': {

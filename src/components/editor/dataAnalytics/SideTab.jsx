@@ -79,7 +79,7 @@ const SideTab = () => {
                 </a>
             </div>
             <ul className={theme.list}>
-                {list.map(({ name, id }, index) => (
+                {list.map(({ name }, index) => (
                     <li
                         key={`side_tab_${index}`}
                         className={index === selectedIndex ? theme.active : ''}

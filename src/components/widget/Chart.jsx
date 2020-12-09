@@ -129,7 +129,12 @@ const generateOption = (option) => {
             type,
         },
         axis: {
-            x: axisX,
+            x: {
+                ...axisX,
+                tick: {
+                    culling: true,
+                },
+            },
             y: axisY,
         },
         pie: {

@@ -1,4 +1,5 @@
 import React from 'react';
+import _cloneDeep from 'lodash/cloneDeep';
 import DataAnalyticsEditor from './DataAnalyticsEditor';
 import DataAnalyticsContextProvider from '@contexts/dataAnalytics';
 import { TABLE } from '@constants/dataAnalytics';
@@ -22,7 +23,7 @@ const DataAnalytics = (props) => {
         tab: tab || (list[0] && TABLE),
         list,
         selectedIndex: index,
-        selected: list[index],
+        selected: _cloneDeep(list[index]),
         fold: false,
         onToastDataAnalytics,
         onSubmitDataAnalytics,
