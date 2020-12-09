@@ -1,9 +1,11 @@
 import React, { useContext, useState, useRef } from 'react';
-import { DataAnalyticsContext } from '@contexts/dataAnalytics';
-import { CommonUtils, getNumberColumnIndexesBySelectedColumns } from '@utils/Common';
-import Dropdown from '@components/widget/dropdown';
 import _some from 'lodash/some';
 import _reduce from 'lodash/reduce';
+import _findIndex from 'lodash/findIndex';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
+import { CommonUtils } from '@utils/Common';
+import { getNumberColumnIndexesBySelectedColumns, getTrimedTable } from '@utils/dataAnalytics';
+import Dropdown from '@components/widget/dropdown';
 import Theme from '@utils/Theme';
 
 const Legend = () => {
@@ -14,7 +16,7 @@ const Legend = () => {
     const { selected = {} } = dataAnalytics;
     const { fields = [], origin = [], chart, chartIndex } = selected;
     const { yIndex = 0, xIndex, categoryIndexes: selectedLegend, type } = chart[chartIndex];
-    const table = [[...fields], ...origin];
+    const table = getTrimedTable([[...fields], ...origin]);
     const checkBox = type === 'bar' || type === 'line';
     const dropdownItems = _reduce(
         table[0],
@@ -22,9 +24,9 @@ const Legend = () => {
             !_some([xIndex, yIndex], (banIndex) => index === banIndex) ? [...prev, index] : prev,
         []
     );
-    const items = (checkBox
-        ? getNumberColumnIndexesBySelectedColumns(table, dropdownItems)
-        : dropdownItems
+    const items = (type === 'scatter'
+        ? dropdownItems
+        : getNumberColumnIndexesBySelectedColumns(table, dropdownItems)
     ).map((index) => [table[0][index], index]);
     const disabled =
         xIndex === -1 || (type === 'scatter' && yIndex === -1) || !dropdownItems.length;
@@ -96,7 +98,7 @@ const Legend = () => {
                     multiple
                     showSelectAll={true}
                     checkedIndex={selectedLegend.map((index) =>
-                        _.findIndex(
+                        _findIndex(
                             getNumberColumnIndexesBySelectedColumns(table, dropdownItems),
                             (categoryIndex) => categoryIndex === index
                         )

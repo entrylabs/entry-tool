@@ -5,7 +5,8 @@ import bb from 'billboard.js';
 import Styles from '@assets/entry/scss/popup.scss';
 import '@assets/entry/scss/widget/insight.css';
 
-import { CommonUtils, hasNumberColumn, categoryKeys, isZipable } from '@utils/Common';
+import { CommonUtils } from '@utils/Common';
+import { hasNumberColumn, categoryKeys, isZipable } from '@utils/dataAnalytics';
 const { generateHash } = CommonUtils;
 
 const pivot = (table, xIndex, yIndex, categoryIndex) =>

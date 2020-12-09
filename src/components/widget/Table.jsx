@@ -5,7 +5,8 @@ import Grid from '@toast-ui/react-grid';
 import { Prompt } from '@entrylabs/modal';
 
 import Theme from '@utils/Theme';
-import { CommonUtils, getHeader, getData } from '@utils/Common';
+import { CommonUtils } from '@utils/Common';
+import { getHeader, getData } from '@utils/dataAnalytics';
 import ContextMenu from '../widget/contextMenu';
 import OutsideClick from '../common/outsideClick';
 

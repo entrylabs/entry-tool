@@ -1,7 +1,8 @@
 import React, { useContext, useState, useRef } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import Dropdown from '@components/widget/dropdown';
-import { CommonUtils, getNumberColumnIndexes } from '@utils/Common';
+import { CommonUtils } from '@utils/Common';
+import { getNumberColumnIndexes, getTrimedTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const XAxis = () => {
@@ -12,7 +13,7 @@ const XAxis = () => {
     const { selected = {} } = dataAnalytics;
     const { fields = [], origin = [], chart, chartIndex } = selected;
     const { type, xIndex = 0 } = chart[chartIndex];
-    const table = [[...fields], ...origin];
+    const table = getTrimedTable([[...fields], ...origin]);
     const xAxis =
         type === 'scatter'
             ? getNumberColumnIndexes(table).map((index) => [fields[index], index])

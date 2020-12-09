@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CHART } from '@constants/dataAnalytics';
+import { getTrimedTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const ChartList = () => {
@@ -9,7 +10,7 @@ const ChartList = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { selected } = dataAnalytics;
     const { fields = [], origin, chart: charts = [], chartIndex = 0 } = selected;
-    const table = [[...fields], ...origin];
+    const table = getTrimedTable([[...fields], ...origin]);
 
     const handleClickChart = (tab, index) => () => {
         dispatch({

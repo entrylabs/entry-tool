@@ -8,6 +8,7 @@ import HorizontalLegend from './HorizontalLegend';
 import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
+import { getTrimedTable } from '@utils/dataAnalytics';
 import { SCATTER, NONE } from '@constants/dataAnalytics';
 import Theme from '@utils/Theme';
 
@@ -31,7 +32,7 @@ const ChartLayout = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
     const { chart = [], chartIndex = -1, fields = [], origin = [] } = selected;
-    const table = [[...fields], ...origin];
+    const table = getTrimedTable([[...fields], ...origin]);
     const selectedChart = chart[chartIndex] || {};
     const { type, visibleLegend, categoryIndexes = [] } = selectedChart || {};
     const isHorizontalLegend = type !== 'pie';
