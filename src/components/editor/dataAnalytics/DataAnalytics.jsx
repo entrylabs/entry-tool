@@ -17,7 +17,7 @@ const DataAnalytics = (props) => {
         onAddTableButtonClick = () => {},
     } = props;
 
-    const index = selectedIndex || list.length - 1;
+    const index = selectedIndex == 0 ? 0 : list.length - 1;
 
     const data = {
         tab: tab || (list[0] && TABLE),

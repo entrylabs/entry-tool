@@ -64,30 +64,32 @@ const ChartLayout = () => {
             </div>
             {isDrawable(selectedChart) ? (
                 <div
-                    className={`${theme.chart_group} ${
+                    className={`${theme.graph_box} ${
                         !(categoryIndexes.length && isHorizontalLegend)
                             ? theme.vertical
                             : theme.horizontal
                     }`}
                     style={{ backgroundColor: '#fff', height: '100%' }}
                 >
-                    {categoryIndexes.length &&
-                    isHorizontalLegend &&
-                    (type !== 'scatter' || visibleLegend) ? (
-                        <HorizontalLegend table={table} chart={selectedChart} />
-                    ) : null}
-                    <Chart
-                        key={`chart_${chartIndex}`}
-                        legend={{ show: false }}
-                        table={table}
-                        chart={chart[chartIndex]}
-                        size={{
-                            height: 378,
-                        }}
-                    />
-                    {categoryIndexes.length && !isHorizontalLegend ? (
-                        <VerticalLegend table={table} chart={selectedChart} />
-                    ) : null}
+                    <div style={{ height: 500 }}>
+                        {categoryIndexes.length &&
+                        isHorizontalLegend &&
+                        (type !== 'scatter' || visibleLegend) ? (
+                            <HorizontalLegend table={table} chart={selectedChart} />
+                        ) : null}
+                        <Chart
+                            key={`chart_${chartIndex}`}
+                            legend={{ show: false }}
+                            table={table}
+                            chart={chart[chartIndex]}
+                            size={{
+                                height: 378,
+                            }}
+                        />
+                        {categoryIndexes.length && !isHorizontalLegend ? (
+                            <VerticalLegend table={table} chart={selectedChart} />
+                        ) : null}
+                    </div>
                 </div>
             ) : (
                 <div className={theme.chart_no_result} style={{ backgroundColor: '#fff' }}>

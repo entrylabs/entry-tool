@@ -1,4 +1,5 @@
 import React, { useState, useContext, useCallback, useMemo } from 'react';
+import XLSX from 'xlsx';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import ContextMenu from '@components/widget/contextMenu';
 import Theme from '@utils/Theme';
@@ -19,7 +20,19 @@ const SideTab = () => {
                 text: '삭제',
                 callback: () => dispatch({ type: 'REMOVE_TABLE', index: clickedIndex }),
             },
-            { text: 'PC에 저장', callback: () => {} },
+            {
+                text: 'PC에 저장',
+                callback: () => {
+                    const dataTable = list[clickedIndex];
+                    const { fields, origin, name } = dataTable;
+                    const table = [[...fields], ...origin];
+                    const worksheet = XLSX.utils.aoa_to_sheet(table);
+                    const workbook = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(workbook, worksheet);
+
+                    XLSX.writeFile(workbook, `${name}.xlsx`);
+                },
+            },
         ],
         [clickedIndex]
     );

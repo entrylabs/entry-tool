@@ -122,13 +122,14 @@
         "billboard.js": "^1.11.1",
         "chroma-js": "^1.4.0",
         "classnames": "^2.2.6",
-        "entry-sheet": "git+https://oss.navercorp.com/sungchun-cho/entry_sheet#v0.0.0.2",
+        "entry-sheet": "git+https://oss.navercorp.com/sungchun-cho/entry_sheet#v0.0.0.3",
         "jest": "^26.0.1",
         "moment": "^2.24.0",
         "react-cookies": "^0.1.0",
         "react-outside-click-handler": "^1.2.2",
         "react-slick": "^0.23.2",
         "redux-form": "^7.4.2",
-        "reselect": "^4.0.0"
+        "reselect": "^4.0.0",
+        "xlsx": "^0.16.9"
     }
 }
