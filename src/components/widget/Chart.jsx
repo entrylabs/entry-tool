@@ -83,6 +83,7 @@ const generateOption = (option) => {
     let x;
     let xs;
     let columns;
+    let grid;
     let { axisX = { type: 'category', tick: { show: true } } } = option;
 
     switch (type) {
@@ -110,6 +111,14 @@ const generateOption = (option) => {
                     fit: false,
                 },
             };
+            grid = {
+                x: {
+                    show: true,
+                },
+                y: {
+                    show: true,
+                },
+            };
             break;
         }
         default:
@@ -122,6 +131,7 @@ const generateOption = (option) => {
         legend,
         size,
         tooltip,
+        grid,
         bindto: `#${id}`,
         data: {
             x,
