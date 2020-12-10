@@ -9,7 +9,7 @@ import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 import { getTrimedTable } from '@utils/dataAnalytics';
-import { SCATTER, NONE } from '@constants/dataAnalytics';
+import { SCATTER, PIE, NONE } from '@constants/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes } = {}) =>
@@ -81,7 +81,8 @@ const ChartLayout = () => {
                             table={table}
                             chart={chart[chartIndex]}
                             size={{
-                                height: 378,
+                                width: type === PIE ? 500 : '',
+                                height: type === PIE ? 500 : 378,
                             }}
                         />
                         {categoryIndexes.length && !isHorizontalLegend ? (

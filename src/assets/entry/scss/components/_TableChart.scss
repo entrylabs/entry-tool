@@ -18,7 +18,7 @@
             outline: 0;
             font-size: 14px;
             font-weight: 600;
-            color:#2c313d;
+            color: #2c313d;
             letter-spacing: -0.33px;
         }
         .btn_box {
@@ -64,7 +64,7 @@
             font-size: 14px;
             font-weight: 600;
             color: #555;
-            text-align: center;;
+            text-align: center;
             line-height: 32px;
         }
     }
@@ -164,7 +164,6 @@
                 text-align: center;
                 transform: translate(-50%, -50%);
                 line-height: 18px;
-                
             }
         }
         .graph_box {
@@ -174,6 +173,15 @@
             flex: 1 1;
             overflow: auto;
             background-color: #fff;
+            .chart_area {
+                .fit {
+                    padding-top: 30px;
+                    padding-right: 230px;
+                }
+                svg {
+                    margin: auto;
+                }
+            }
         }
     }
     .form_box {
@@ -201,7 +209,7 @@
             overflow: hidden;
             padding-right: 110px;
         }
-        .input_inner input[type="text"] {
+        .input_inner input[type='text'] {
             box-sizing: border-box;
             width: 100%;
             height: 40px;
@@ -229,7 +237,7 @@
             color: #555;
             letter-spacing: -0.33px;
             text-align: center;
-            line-height: 40px;;
+            line-height: 40px;
         }
         .input_inner + .input_inner {
             margin-top: 12px;
@@ -288,7 +296,7 @@
             background-size: 16px auto;
             vertical-align: top;
         }
-        .select_group .check_inner input[type="checkbox"]:checked + span {
+        .select_group .check_inner input[type='checkbox']:checked + span {
             background-image: url('#{$imageDir}/ico_checked.svg');
         }
     }

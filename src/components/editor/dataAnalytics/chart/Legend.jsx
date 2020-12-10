@@ -79,7 +79,7 @@ const Legend = () => {
             <div
                 ref={axisRef}
                 className={`${theme.pop_selectbox} ${disabled ? theme.disabled : ''}`}
-                style={{ width: 153 }}
+                style={{ width: 208 }}
             >
                 <div
                     className={`${theme.select_link} ${
