@@ -106,11 +106,15 @@ export const dataAnalyticsReducer = (state, action) => {
                 title: action.title,
             };
         case 'EDIT_CHART_TITLE': {
-            const charts = [...state.charts];
-            charts[state.chartIndex].title = action.title;
+            const { selected } = state;
+            const { chart = [], chartIndex } = selected;
+            chart[chartIndex].title = action.title;
             return {
                 ...state,
-                charts,
+                selected: {
+                    ...selected,
+                    chart,
+                },
             };
         }
         case 'ADD_CHART': {
@@ -201,7 +205,7 @@ export const dataAnalyticsReducer = (state, action) => {
             };
         }
         case 'ADD_COLUMN': {
-            const { table, charts = [] } = state;
+            const { table, chart = [] } = state;
             const { columnIndex, columnName } = action;
 
             const resultTable = table.map((row, index) => {
@@ -218,7 +222,7 @@ export const dataAnalyticsReducer = (state, action) => {
                 return row;
             });
 
-            const resultCharts = charts.map((chart) => {
+            const resultCharts = chart.map((chart) => {
                 if (chart.xIndex >= columnIndex) {
                     chart.xIndex++;
                 }
@@ -236,7 +240,7 @@ export const dataAnalyticsReducer = (state, action) => {
             return {
                 ...state,
                 table: resultTable,
-                charts: resultCharts,
+                chart: resultCharts,
             };
         }
         case 'DELETE_COLUMN': {

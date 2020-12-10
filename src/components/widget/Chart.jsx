@@ -84,7 +84,17 @@ const generateOption = (option) => {
     let xs;
     let columns;
     let grid;
-    let { axisX = { type: 'category', tick: { show: true } } } = option;
+    let {
+        axisX = {
+            type: 'category',
+            tick: {
+                fit: true,
+                multiline: false,
+                autorotate: true,
+                culling: true,
+            },
+        },
+    } = option;
 
     switch (type) {
         case 'bar':
@@ -142,9 +152,6 @@ const generateOption = (option) => {
         axis: {
             x: {
                 ...axisX,
-                tick: {
-                    culling: true,
-                },
             },
             y: axisY,
         },
