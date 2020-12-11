@@ -7,18 +7,18 @@ import ChartEditor from './chart/ChartEditor';
 import SideTab from './SideTab';
 import Tab from './Tab';
 import Title from './Title';
-import Confirm from './Confirm';
+import SaveConfirm from './SaveConfirm';
 import EmptyContents from './EmptyContents';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { SUMMARY, TABLE, CHART } from '@constants/dataAnalytics';
 import { getTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
 
-const DataAnalyticsEditor = (props) => {
+const DataAnalyticsEditor = () => {
     const theme = Theme.getStyle('popup');
     const [showConfirm, setShowConfirm] = useState(false);
     const { dataAnalytics } = useContext(DataAnalyticsContext);
-    const { tab, selected, onCloseButtonClick, isChanged = true, gridRef } = dataAnalytics;
+    const { tab, selected = {}, onCloseButtonClick, isChanged = true, gridRef } = dataAnalytics;
     const table = getTable(selected);
     const handleButtonClick = (event) => {
         event.preventDefault();
@@ -74,7 +74,7 @@ const DataAnalyticsEditor = (props) => {
                     <Contents />
                 </div>
             </section>
-            {showConfirm && <Confirm onClick={handleConfirmClick} />}
+            {showConfirm && <SaveConfirm onClick={handleConfirmClick} />}
         </div>
     );
 };

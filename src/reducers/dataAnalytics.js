@@ -3,6 +3,13 @@ import _cloneDeep from 'lodash/cloneDeep';
 import { TABLE } from '@constants/dataAnalytics';
 
 export const dataAnalyticsReducer = (state, action) => {
+    const { tab, onChangeDataAnalytics } = state;
+    if (tab === TABLE) {
+        const { gridRef, selected } = state;
+        const [fields, ...data] = gridRef?.current?.getSheetData().data;
+        selected.fields = fields;
+        selected.data = data;
+    }
     switch (action.type) {
         case 'SET_DATA':
             return {
@@ -22,31 +29,37 @@ export const dataAnalyticsReducer = (state, action) => {
                 changedIndex = selectedIndex - 1;
             }
             changedIndex = selectedIndex === index ? 0 : changedIndex;
+            onChangeDataAnalytics(changedList);
             return {
                 ...state,
                 selected: list[changedIndex],
                 selectedIndex: changedIndex,
                 list: changedList,
+                isChanged: true,
             };
         }
         case 'COPY_TALBE': {
             const { list } = state;
             const { index } = action;
             const copiedTable = _cloneDeep(list[index]);
+            const changedList = [...list, copiedTable];
+            onChangeDataAnalytics(changedList);
             return {
                 ...state,
                 selected: copiedTable,
                 selectedIndex: list.length,
-                list: [...list, copiedTable],
+                list: changedList,
+                isChanged: true,
             };
         }
-        case 'COLUMN_EDIT': {
-            const { clipboard = [] } = state;
-            return {
-                ...state,
-                clipboard: [...clipboard, action.data],
-            };
-        }
+        // case 'COLUMN_EDIT': {
+        //     const { clipboard = [] } = state;
+        //     onChangeDataAnalytics(changedList);
+        //     return {
+        //         ...state,
+        //         clipboard: [...clipboard, action.data],
+        //     };
+        // }
         case 'FOLD':
             window.dispatchEvent(new Event('resize'));
             return {
@@ -54,13 +67,20 @@ export const dataAnalyticsReducer = (state, action) => {
                 fold: !state.fold,
             };
         case 'CHANGE_TABLE_TITLE': {
-            const { selected } = state;
+            const { list, selectedIndex, selected } = state;
+            const changedList = _cloneDeep(list);
+            const changedSelected = _cloneDeep(selected);
+            changedSelected.name = action.value;
+            changedList[selectedIndex] = changedSelected;
+
+            onChangeDataAnalytics(changedList);
             return {
                 ...state,
                 selected: {
                     ...selected,
                     name: action.value,
                 },
+                isChanged: true,
             };
         }
         case 'SELECT_TABLE': {
@@ -70,10 +90,11 @@ export const dataAnalyticsReducer = (state, action) => {
                 ...state,
                 selected: _cloneDeep(list[index]),
                 selectedIndex: index,
+                isChanged: false,
             };
         }
         case 'SET_TAB': {
-            const { selected, tab } = state;
+            const { selected } = state;
             const { chartIndex } = selected;
             let { fields, origin } = selected;
             if (tab === TABLE && tab !== action.tab) {
@@ -100,108 +121,139 @@ export const dataAnalyticsReducer = (state, action) => {
                     chartIndex: action.index,
                 },
             };
-        case 'EDIT_TITLE':
-            return {
-                ...state,
-                title: action.title,
-            };
         case 'EDIT_CHART_TITLE': {
-            const { selected } = state;
+            const { list, selectedIndex, selected } = state;
             const { chart = [], chartIndex } = selected;
             chart[chartIndex].title = action.title;
+            const changedList = _cloneDeep(list);
+            const changedSelected = _cloneDeep(selected);
+            changedList[selectedIndex] = changedSelected;
+            onChangeDataAnalytics(changedList);
             return {
                 ...state,
                 selected: {
                     ...selected,
                     chart,
                 },
+                isChanged: true,
             };
         }
         case 'ADD_CHART': {
-            const { selected = {} } = state;
-            const { chart = [], name } = selected;
+            const { list, selectedIndex, selected = {} } = state;
+            const changedList = _cloneDeep(list);
+            let changedSelected = _cloneDeep(selected);
+            const { chart = [], name } = changedSelected;
+            changedSelected = {
+                ...changedSelected,
+                chartIndex: chart.length,
+                chart: [
+                    ...chart,
+                    {
+                        type: action.chartType,
+                        title: `${name}_${CommonUtils.getLang('DataAnalytics.chart_title')}`,
+                        xIndex: -1,
+                        yIndex: -1,
+                        categoryIndexes: [],
+                    },
+                ],
+            };
+            changedList[selectedIndex] = changedSelected;
+            onChangeDataAnalytics(changedList);
             return {
                 ...state,
-                selected: {
-                    ...selected,
-                    chartIndex: chart.length,
-                    chart: [
-                        ...chart,
-                        {
-                            type: action.chartType,
-                            title: `${name}_${CommonUtils.getLang('DataAnalytics.chart_title')}`,
-                            xIndex: -1,
-                            yIndex: -1,
-                            categoryIndexes: [],
-                        },
-                    ],
-                },
+                selected: changedSelected,
+                isChanged: true,
             };
         }
         case 'REMOVE_CHART': {
-            const { selected = {} } = state;
-            const { chart = [], chartIndex } = selected;
+            const { list, selectedIndex, selected = {} } = state;
+            const changedList = _cloneDeep(list);
+            let changedSelected = _cloneDeep(selected);
+            const { chart = [], chartIndex } = changedSelected;
+            changedSelected = {
+                ...changedSelected,
+                chart: chart.filter((__, index) => index !== chartIndex),
+                chartIndex: 0,
+            };
+            changedList[selectedIndex] = changedSelected;
+            onChangeDataAnalytics(changedList);
             return {
                 ...state,
-                selected: {
-                    ...selected,
-                    chart: chart.filter((__, index) => index !== chartIndex),
-                    chartIndex: 0,
-                },
+                selected: changedSelected,
+                isChanged: true,
             };
         }
         case 'SELECT_X_AXIS': {
-            const { selected } = state;
-            const { chartIndex } = selected;
-            const chart = [...selected.chart];
+            const { list, selected, selectedIndex } = state;
+            const changedList = _cloneDeep(list);
+            let changedSelected = _cloneDeep(selected);
+            const { chartIndex } = changedSelected;
+            const chart = [...changedSelected.chart];
             chart[chartIndex] = {
                 ...chart[chartIndex],
                 xIndex: action.index,
                 yIndex: -1,
                 categoryIndexes: [],
             };
+            changedSelected = {
+                ...changedSelected,
+                chart,
+            };
+            changedList[selectedIndex] = changedSelected;
 
+            onChangeDataAnalytics(changedList);
             return {
                 ...state,
-                selected: {
-                    ...selected,
-                    chart,
-                },
+                selected: changedSelected,
+                isChanged: true,
             };
         }
         case 'SELECT_Y_AXIS': {
-            const { selected } = state;
-            const { chartIndex } = selected;
-            const chart = [...selected.chart];
+            const { list, selected, selectedIndex } = state;
+            const changedList = _cloneDeep(list);
+            let changedSelected = _cloneDeep(selected);
+            const { chartIndex } = changedSelected;
+            const chart = [...changedSelected.chart];
             chart[chartIndex] = {
                 ...chart[chartIndex],
                 yIndex: action.index,
                 categoryIndexes: [],
             };
-
+            changedSelected = {
+                ...changedSelected,
+                chart,
+            };
+            changedList[selectedIndex] = changedSelected;
+            onChangeDataAnalytics(changedList);
             return {
                 ...state,
-                selected: {
-                    ...selected,
-                    chart,
-                },
+                selected: changedSelected,
+                isChanged: true,
             };
         }
         case 'SELECT_LEGEND_AXIS': {
-            const { selected } = state;
-            const { chartIndex } = selected;
-            const chart = [...selected.chart];
+            const { list, selected, selectedIndex } = state;
+            const changedList = _cloneDeep(list);
+            let changedSelected = _cloneDeep(selected);
+            const { chartIndex } = changedSelected;
+            const chart = [...changedSelected.chart];
             chart[chartIndex] = {
                 ...chart[chartIndex],
                 categoryIndexes: action.indexes,
             };
-
+            changedSelected = {
+                ...selected,
+                chart,
+            };
+            changedList[selectedIndex] = changedSelected;
+            onChangeDataAnalytics(changedList);
             return {
                 ...state,
                 selected: {
                     ...selected,
                     chart,
                 },
+                isChanged: true,
             };
         }
         case 'ADD_COLUMN': {
@@ -282,29 +334,6 @@ export const dataAnalyticsReducer = (state, action) => {
                 charts: resultCharts,
             };
         }
-        case 'ADD_ROW': {
-            const { table } = state;
-            const { rowIndex } = action;
-
-            const resultTable = [...table];
-            resultTable.splice(rowIndex, 0, Array(table[0].length).fill(0));
-
-            return {
-                ...state,
-                table: resultTable,
-            };
-        }
-        case 'DELETE_ROW': {
-            const { table } = state;
-            const { rowIndex } = action;
-            const resultTable = [...table];
-            resultTable.splice(rowIndex, 1);
-
-            return {
-                ...state,
-                table: resultTable,
-            };
-        }
         case 'TOGGLE_VISIBLE_LEGEND': {
             const charts = [...state.charts];
             charts[state.chartIndex] = {
@@ -317,6 +346,11 @@ export const dataAnalyticsReducer = (state, action) => {
                 charts,
             };
         }
+        case 'SAVE':
+            return {
+                ...state,
+                isChanged: false,
+            };
         default:
             return state;
     }

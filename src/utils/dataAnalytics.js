@@ -40,7 +40,7 @@ const makeSummary = (row) => {
     const restRow = row.slice(1);
     const count = restRow.length;
     if (someString(restRow)) {
-        return [row[0], count, '-', '-', '-', '-', '-'];
+        return [row[0], count, '-', '-', '-', '-'];
     }
     const max = Math.max(...restRow);
     const min = Math.min(...restRow);

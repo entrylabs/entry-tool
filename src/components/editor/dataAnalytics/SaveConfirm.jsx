@@ -3,10 +3,9 @@ import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { TABLE } from '@constants/dataAnalytics';
 import { Confirm as ConfirmModal } from '@entrylabs/modal';
 import '@entrylabs/modal/dist/entry/entry-modal.css';
-import Theme from '@utils/Theme';
 
 const Confirm = ({ onClick }) => {
-    const { dataAnalytics } = useContext(DataAnalyticsContext);
+    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { tab, selected, gridRef, onSubmitDataAnalytics, selectedIndex } = dataAnalytics;
 
     return (
@@ -21,11 +20,11 @@ const Confirm = ({ onClick }) => {
                         selectedDataAnalytics.data = data;
                         selectedDataAnalytics.fields = fields;
                     }
-                    console.log({ selectedDataAnalytics });
                     onSubmitDataAnalytics({
                         selected: selectedDataAnalytics,
                         index: selectedIndex,
                     });
+                    dispatch({ type: 'SAVE' });
                 }
                 onClick?.();
             }}

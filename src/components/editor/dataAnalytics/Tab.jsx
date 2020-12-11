@@ -1,7 +1,7 @@
 import React, { useContext, useState, useCallback } from 'react';
 import _every from 'lodash/every';
 import _difference from 'lodash/difference';
-import Confirm from './Confirm';
+import SaveConfirm from './SaveConfirm';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 import { TAB_ITEMS, TABLE } from '@constants/dataAnalytics';
@@ -63,7 +63,7 @@ const Tab = () => {
             <a role="button" className={theme.btn_save} onClick={handleSaveClick}>
                 저장하기
             </a>
-            {showConfirm && <Confirm onClick={handleConfirmClick} />}
+            {showConfirm && <SaveConfirm onClick={handleConfirmClick} />}
         </div>
     );
 };

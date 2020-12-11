@@ -3,7 +3,7 @@ import _every from 'lodash/every';
 import _difference from 'lodash/difference';
 import XLSX from 'xlsx';
 import ContextMenu from '@components/widget/contextMenu';
-import Confirm from './Confirm';
+import SaveConfirm from './SaveConfirm';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { getTable } from '@utils/dataAnalytics';
 import { TABLE } from '@constants/dataAnalytics';
@@ -146,7 +146,7 @@ const SideTab = () => {
                     coordinate={{ x, y }}
                 />
             )}
-            {showConfirm && <Confirm onClick={handleConfirmClick} />}
+            {showConfirm && <SaveConfirm onClick={handleConfirmClick} />}
             <a role="button" className={theme.split_bar} onClick={handleFoldButtonClick}>
                 <span className={theme.blind}>창 조절하기</span>
             </a>

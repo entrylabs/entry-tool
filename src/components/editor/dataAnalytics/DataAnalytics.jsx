@@ -23,7 +23,7 @@ const DataAnalytics = (props) => {
         tab: tab || (list[0] && TABLE),
         list,
         selectedIndex: index,
-        selected: _cloneDeep(list[index]),
+        selected: _cloneDeep(list[index]) || {},
         fold: false,
         onToastDataAnalytics,
         onSubmitDataAnalytics,
