@@ -25,7 +25,7 @@ const DataAnalyticsEditor = () => {
         if (!isChanged && tab === TABLE) {
             const grid = gridRef?.current?.getSheetData().data;
             if (_every(table, (row, index) => _difference(row, grid[index]))) {
-                return;
+                return onCloseButtonClick();
             }
         }
         setShowConfirm(true);
@@ -63,8 +63,6 @@ const DataAnalyticsEditor = () => {
                 </button>
             </header>
             <section className={`${theme.pop_content} ${sectionCSS}`}>
-                {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                {/* 창 조절하기 버튼을 누르면 fold 클래스 추가 */}
                 <SideTab />
                 <div className={theme.section_cont}>
                     <div className={theme.sheet_form_box}>
