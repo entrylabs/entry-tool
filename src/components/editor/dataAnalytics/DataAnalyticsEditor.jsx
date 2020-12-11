@@ -1,23 +1,40 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
+import _every from 'lodash/every';
+import _difference from 'lodash/difference';
 import Summary from './summary/Summary';
 import TableEditor from './TableEditor';
 import ChartEditor from './chart/ChartEditor';
 import SideTab from './SideTab';
 import Tab from './Tab';
 import Title from './Title';
+import Confirm from './Confirm';
 import EmptyContents from './EmptyContents';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
-import { SUMMARY, TABLE, CHART, TAB_ITEMS } from '@constants/dataAnalytics';
+import { SUMMARY, TABLE, CHART } from '@constants/dataAnalytics';
+import { getTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const DataAnalyticsEditor = (props) => {
     const theme = Theme.getStyle('popup');
+    const [showConfirm, setShowConfirm] = useState(false);
     const { dataAnalytics } = useContext(DataAnalyticsContext);
-    const { tab, selected, onCloseButtonClick } = dataAnalytics;
+    const { tab, selected, onCloseButtonClick, isChanged = true, gridRef } = dataAnalytics;
+    const table = getTable(selected);
     const handleButtonClick = (event) => {
         event.preventDefault();
-        onCloseButtonClick();
+        if (!isChanged && tab === TABLE) {
+            const grid = gridRef?.current?.getSheetData().data;
+            if (_every(table, (row, index) => _difference(row, grid[index]))) {
+                return;
+            }
+        }
+        setShowConfirm(true);
     };
+
+    const handleConfirmClick = useCallback(() => {
+        setShowConfirm(false);
+        onCloseButtonClick();
+    }, []);
 
     let sectionCSS = theme.chart_content;
     let Contents = EmptyContents;
@@ -57,6 +74,7 @@ const DataAnalyticsEditor = (props) => {
                     <Contents />
                 </div>
             </section>
+            {showConfirm && <Confirm onClick={handleConfirmClick} />}
         </div>
     );
 };

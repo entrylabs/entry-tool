@@ -1,8 +1,12 @@
 import React, { useState, useContext, useCallback, useMemo } from 'react';
+import _every from 'lodash/every';
+import _difference from 'lodash/difference';
 import XLSX from 'xlsx';
-import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import ContextMenu from '@components/widget/contextMenu';
+import Confirm from './Confirm';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { getTable } from '@utils/dataAnalytics';
+import { TABLE } from '@constants/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const SideTab = () => {
@@ -15,14 +19,15 @@ const SideTab = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const {
         tab,
+        fold,
+        list,
         gridRef,
         selected,
+        isChanged,
         selectedIndex,
-        list,
-        fold,
         onAddTableButtonClick,
-        onSubmitDataAnalytics,
     } = dataAnalytics;
+    const table = getTable(selected);
 
     const contextMenu = useMemo(
         () => [
@@ -51,7 +56,19 @@ const SideTab = () => {
     const handleClick = useCallback(
         (index) => (event) => {
             event.preventDefault();
-            dispatch({ type: 'SELECT_TABLE', index });
+
+            if (!isChanged) {
+                if (tab === TABLE) {
+                    const grid = gridRef?.current?.getSheetData().data;
+                    if (_every(table, (row, index) => _difference(row, grid[index]))) {
+                        console.log('hihi');
+                        return dispatch({ type: 'SELECT_TABLE', index });
+                    }
+                }
+                return dispatch({ type: 'SELECT_TABLE', index });
+            }
+            setClickedIndex(index);
+            setShowConfirm(true);
         },
         []
     );
@@ -94,6 +111,11 @@ const SideTab = () => {
         setVisible(false);
     }, []);
 
+    const handleConfirmClick = useCallback(() => {
+        setShowConfirm(false);
+        dispatch({ type: 'SELECT_TABLE', index: clickedIndex });
+    }, [clickedIndex]);
+
     return (
         <section className={`${theme.aside} ${fold ? theme.fold : ''}`}>
             <h2 className={theme.blind}>테이블 추가하기</h2>
@@ -124,31 +146,7 @@ const SideTab = () => {
                     coordinate={{ x, y }}
                 />
             )}
-            {showConfirm && (
-                <Confirm
-                    content="변경된 테이블과 차트를 저장할까요?"
-                    title="확인"
-                    onEvent={(data) => {
-                        console.log({ data });
-                        if (data) {
-                            const selectedDataAnalytics = selected;
-                            if (tab === TABLE) {
-                                selectedDataAnalytics.table = gridRef?.current?.getSheetData().data;
-                            }
-                            console.log({ selectedDataAnalytics });
-                            onSubmitDataAnalytics({
-                                selected: selectedDataAnalytics,
-                                index: selectedIndex,
-                            });
-                        }
-                        setShowConfirm(false);
-                    }}
-                    options={{
-                        negativeButtonText: '취소',
-                        positiveButtonText: '확인',
-                    }}
-                />
-            )}
+            {showConfirm && <Confirm onClick={handleConfirmClick} />}
             <a role="button" className={theme.split_bar} onClick={handleFoldButtonClick}>
                 <span className={theme.blind}>창 조절하기</span>
             </a>
