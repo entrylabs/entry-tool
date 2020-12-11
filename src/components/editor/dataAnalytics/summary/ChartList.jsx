@@ -2,15 +2,15 @@ import React, { useContext } from 'react';
 import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CHART } from '@constants/dataAnalytics';
-import { getTrimedTable } from '@utils/dataAnalytics';
+import { getTrimedTable, getTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const ChartList = () => {
     const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { selected } = dataAnalytics;
-    const { fields = [], origin, chart: charts = [], chartIndex = 0 } = selected;
-    const table = getTrimedTable([[...fields], ...origin]);
+    const { chart: charts = [] } = selected;
+    const table = getTrimedTable(getTable(selected));
 
     const handleClickChart = (tab, index) => () => {
         dispatch({

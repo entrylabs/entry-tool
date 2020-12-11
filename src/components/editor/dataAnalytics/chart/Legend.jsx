@@ -4,7 +4,11 @@ import _reduce from 'lodash/reduce';
 import _findIndex from 'lodash/findIndex';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
-import { getNumberColumnIndexesBySelectedColumns, getTrimedTable } from '@utils/dataAnalytics';
+import {
+    getNumberColumnIndexesBySelectedColumns,
+    getTrimedTable,
+    getTable,
+} from '@utils/dataAnalytics';
 import Dropdown from '@components/widget/dropdown';
 import Theme from '@utils/Theme';
 
@@ -14,9 +18,9 @@ const Legend = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const axisRef = useRef();
     const { selected = {} } = dataAnalytics;
-    const { fields = [], origin = [], chart, chartIndex } = selected;
+    const { chart, chartIndex } = selected;
     const { yIndex = 0, xIndex, categoryIndexes: selectedLegend, type } = chart[chartIndex];
-    const table = getTrimedTable([[...fields], ...origin]);
+    const table = getTrimedTable(getTable(selected));
     const checkBox = type === 'bar' || type === 'line';
     const dropdownItems = _reduce(
         table[0],
@@ -79,7 +83,7 @@ const Legend = () => {
             <div
                 ref={axisRef}
                 className={`${theme.pop_selectbox} ${disabled ? theme.disabled : ''}`}
-                style={{ width: 208 }}
+                style={{ width: 153 }}
             >
                 <div
                     className={`${theme.select_link} ${

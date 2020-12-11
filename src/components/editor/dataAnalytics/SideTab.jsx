@@ -2,6 +2,7 @@ import React, { useState, useContext, useCallback, useMemo } from 'react';
 import XLSX from 'xlsx';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import ContextMenu from '@components/widget/contextMenu';
+import { getTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const SideTab = () => {
@@ -9,9 +10,19 @@ const SideTab = () => {
     const [x, setX] = useState(0);
     const [y, setY] = useState(0);
     const [visible, setVisible] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
     const [clickedIndex, setClickedIndex] = useState(0);
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { selectedIndex, list, fold, onAddTableButtonClick } = dataAnalytics;
+    const {
+        tab,
+        gridRef,
+        selected,
+        selectedIndex,
+        list,
+        fold,
+        onAddTableButtonClick,
+        onSubmitDataAnalytics,
+    } = dataAnalytics;
 
     const contextMenu = useMemo(
         () => [
@@ -24,8 +35,8 @@ const SideTab = () => {
                 text: 'PC에 저장',
                 callback: () => {
                     const dataTable = list[clickedIndex];
-                    const { fields, origin, name } = dataTable;
-                    const table = [[...fields], ...origin];
+                    const { name } = dataTable;
+                    const table = getTable(dataTable);
                     const worksheet = XLSX.utils.aoa_to_sheet(table);
                     const workbook = XLSX.utils.book_new();
                     XLSX.utils.book_append_sheet(workbook, worksheet);
@@ -111,6 +122,31 @@ const SideTab = () => {
                     onOutsideClick={handleOutsideClick}
                     items={contextMenu}
                     coordinate={{ x, y }}
+                />
+            )}
+            {showConfirm && (
+                <Confirm
+                    content="변경된 테이블과 차트를 저장할까요?"
+                    title="확인"
+                    onEvent={(data) => {
+                        console.log({ data });
+                        if (data) {
+                            const selectedDataAnalytics = selected;
+                            if (tab === TABLE) {
+                                selectedDataAnalytics.table = gridRef?.current?.getSheetData().data;
+                            }
+                            console.log({ selectedDataAnalytics });
+                            onSubmitDataAnalytics({
+                                selected: selectedDataAnalytics,
+                                index: selectedIndex,
+                            });
+                        }
+                        setShowConfirm(false);
+                    }}
+                    options={{
+                        negativeButtonText: '취소',
+                        positiveButtonText: '확인',
+                    }}
                 />
             )}
             <a role="button" className={theme.split_bar} onClick={handleFoldButtonClick}>

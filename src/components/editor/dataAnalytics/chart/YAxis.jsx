@@ -2,7 +2,7 @@ import React, { useContext, useState, useRef } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import Dropdown from '@components/widget/dropdown';
 import { CommonUtils } from '@utils/Common';
-import { getNumberColumnIndexes, getTrimedTable } from '@utils/dataAnalytics';
+import { getNumberColumnIndexes, getTrimedTable, getTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const YAxis = () => {
@@ -11,9 +11,9 @@ const YAxis = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const axisRef = useRef();
     const { selected = {} } = dataAnalytics;
-    const { fields = [], origin = [], chart, chartIndex } = selected;
+    const { fields = [], chart, chartIndex } = selected;
     const { yIndex = 0, xIndex } = chart[chartIndex];
-    const table = getTrimedTable([[...fields], ...origin]);
+    const table = getTrimedTable(getTable(selected));
     const disabled = xIndex === -1;
     const yAxisIndex = disabled ? [] : getNumberColumnIndexes(table, [xIndex]);
     const yAxis = yAxisIndex.map((index) => [fields[index], index]);
@@ -43,7 +43,7 @@ const YAxis = () => {
             <div
                 ref={axisRef}
                 className={`${theme.pop_selectbox} ${disabled ? theme.disabled : ''}`}
-                style={{ width: 208 }}
+                style={{ width: 153 }}
             >
                 <div
                     className={`${theme.select_link} ${

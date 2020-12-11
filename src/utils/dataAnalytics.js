@@ -155,3 +155,8 @@ export const getTrimedTable = (table) => {
     }
     return trimedTable;
 };
+
+export const getTable = ({ fields = [], data = [] }) => [
+    [...fields],
+    ...data.map((row) => (row instanceof Array ? row : row.value)),
+];
