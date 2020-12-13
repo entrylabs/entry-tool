@@ -68,12 +68,10 @@ export const dataAnalyticsReducer = (state, action) => {
             };
         case 'CHANGE_TABLE_TITLE': {
             const { list, selectedIndex, selected } = state;
-            const changedList = _cloneDeep(list);
-            const changedSelected = _cloneDeep(selected);
-            changedSelected.name = action.value;
-            changedList[selectedIndex] = changedSelected;
+            selected.name = action.value;
+            list[selectedIndex] = selected;
 
-            onChangeDataAnalytics(changedList);
+            onChangeDataAnalytics(list);
             return {
                 ...state,
                 selected: {
@@ -88,7 +86,7 @@ export const dataAnalyticsReducer = (state, action) => {
             const { list } = state;
             return {
                 ...state,
-                selected: _cloneDeep(list[index]),
+                selected: list[index],
                 selectedIndex: index,
                 isChanged: false,
             };
@@ -125,10 +123,8 @@ export const dataAnalyticsReducer = (state, action) => {
             const { list, selectedIndex, selected } = state;
             const { chart = [], chartIndex } = selected;
             chart[chartIndex].title = action.title;
-            const changedList = _cloneDeep(list);
-            const changedSelected = _cloneDeep(selected);
-            changedList[selectedIndex] = changedSelected;
-            onChangeDataAnalytics(changedList);
+            list[selectedIndex] = selected;
+            onChangeDataAnalytics(list);
             return {
                 ...state,
                 selected: {
@@ -140,119 +136,85 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'ADD_CHART': {
             const { list, selectedIndex, selected = {} } = state;
-            const changedList = _cloneDeep(list);
-            let changedSelected = _cloneDeep(selected);
-            const { chart = [], name } = changedSelected;
-            changedSelected = {
-                ...changedSelected,
-                chartIndex: chart.length,
-                chart: [
-                    ...chart,
-                    {
-                        type: action.chartType,
-                        title: `${name}_${CommonUtils.getLang('DataAnalytics.chart_title')}`,
-                        xIndex: -1,
-                        yIndex: -1,
-                        categoryIndexes: [],
-                    },
-                ],
-            };
-            changedList[selectedIndex] = changedSelected;
-            onChangeDataAnalytics(changedList);
+            const { chart = [], name } = selected;
+            selected.chartIndex = chart.length;
+            selected.chart = [
+                ...chart,
+                {
+                    type: action.chartType,
+                    title: `${name}_${CommonUtils.getLang('DataAnalytics.chart_title')}`,
+                    xIndex: -1,
+                    yIndex: -1,
+                    categoryIndexes: [],
+                },
+            ];
+            list[selectedIndex] = selected;
+            onChangeDataAnalytics(list);
             return {
                 ...state,
-                selected: changedSelected,
+                selected,
                 isChanged: true,
             };
         }
         case 'REMOVE_CHART': {
             const { list, selectedIndex, selected = {} } = state;
-            const changedList = _cloneDeep(list);
-            let changedSelected = _cloneDeep(selected);
-            const { chart = [], chartIndex } = changedSelected;
-            changedSelected = {
-                ...changedSelected,
-                chart: chart.filter((__, index) => index !== chartIndex),
-                chartIndex: 0,
-            };
-            changedList[selectedIndex] = changedSelected;
-            onChangeDataAnalytics(changedList);
+            const { chart = [], chartIndex } = selected;
+            selected.chart = chart.filter((__, index) => index !== chartIndex);
+            selected.chartIndex = 0;
+            list[selectedIndex] = selected;
+            onChangeDataAnalytics(list);
             return {
                 ...state,
-                selected: changedSelected,
+                selected,
                 isChanged: true,
             };
         }
         case 'SELECT_X_AXIS': {
             const { list, selected, selectedIndex } = state;
-            const changedList = _cloneDeep(list);
-            let changedSelected = _cloneDeep(selected);
-            const { chartIndex } = changedSelected;
-            const chart = [...changedSelected.chart];
-            chart[chartIndex] = {
+            const { chart, chartIndex } = selected;
+            selected.chart[chartIndex] = {
                 ...chart[chartIndex],
                 xIndex: action.index,
                 yIndex: -1,
                 categoryIndexes: [],
             };
-            changedSelected = {
-                ...changedSelected,
-                chart,
-            };
-            changedList[selectedIndex] = changedSelected;
+            list[selectedIndex] = selected;
 
-            onChangeDataAnalytics(changedList);
+            onChangeDataAnalytics(list);
             return {
                 ...state,
-                selected: changedSelected,
+                selected,
                 isChanged: true,
             };
         }
         case 'SELECT_Y_AXIS': {
             const { list, selected, selectedIndex } = state;
-            const changedList = _cloneDeep(list);
-            let changedSelected = _cloneDeep(selected);
-            const { chartIndex } = changedSelected;
-            const chart = [...changedSelected.chart];
-            chart[chartIndex] = {
+            const { chart, chartIndex } = selected;
+            selected.chart[chartIndex] = {
                 ...chart[chartIndex],
                 yIndex: action.index,
                 categoryIndexes: [],
             };
-            changedSelected = {
-                ...changedSelected,
-                chart,
-            };
-            changedList[selectedIndex] = changedSelected;
-            onChangeDataAnalytics(changedList);
+            list[selectedIndex] = selected;
+            onChangeDataAnalytics(list);
             return {
                 ...state,
-                selected: changedSelected,
+                selected,
                 isChanged: true,
             };
         }
         case 'SELECT_LEGEND_AXIS': {
             const { list, selected, selectedIndex } = state;
-            const changedList = _cloneDeep(list);
-            let changedSelected = _cloneDeep(selected);
-            const { chartIndex } = changedSelected;
-            const chart = [...changedSelected.chart];
-            chart[chartIndex] = {
+            const { chart, chartIndex } = selected;
+            selected.chart[chartIndex] = {
                 ...chart[chartIndex],
                 categoryIndexes: action.indexes,
             };
-            changedSelected = {
-                ...selected,
-                chart,
-            };
-            changedList[selectedIndex] = changedSelected;
-            onChangeDataAnalytics(changedList);
+            list[selectedIndex] = selected;
+            onChangeDataAnalytics(list);
             return {
                 ...state,
-                selected: {
-                    ...selected,
-                    chart,
-                },
+                selected,
                 isChanged: true,
             };
         }
