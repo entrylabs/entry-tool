@@ -5,7 +5,7 @@ import XLSX from 'xlsx';
 import ContextMenu from '@components/widget/contextMenu';
 import SaveConfirm from './SaveConfirm';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
-import { getTable } from '@utils/dataAnalytics';
+import { isChangeTable } from '@utils/dataAnalytics';
 import { TABLE } from '@constants/dataAnalytics';
 import Theme from '@utils/Theme';
 
@@ -16,6 +16,7 @@ const SideTab = () => {
     const [visible, setVisible] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
     const [clickedIndex, setClickedIndex] = useState(0);
+    const [confirmType, setConfirmType] = useState('');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const {
         tab,
@@ -27,7 +28,7 @@ const SideTab = () => {
         selectedIndex,
         onAddTableButtonClick,
     } = dataAnalytics;
-    const table = getTable(selected);
+    const { table = [[]] } = selected;
 
     const contextMenu = useMemo(
         () => [
@@ -40,8 +41,7 @@ const SideTab = () => {
                 text: 'PC에 저장',
                 callback: () => {
                     const dataTable = list[clickedIndex];
-                    const { name } = dataTable;
-                    const table = getTable(dataTable);
+                    const { name, table } = dataTable;
                     const worksheet = XLSX.utils.aoa_to_sheet(table);
                     const workbook = XLSX.utils.book_new();
                     XLSX.utils.book_append_sheet(workbook, worksheet);
@@ -60,17 +60,17 @@ const SideTab = () => {
             if (!isChanged) {
                 if (tab === TABLE) {
                     const grid = gridRef?.current?.getSheetData().data;
-                    if (_every(table, (row, index) => _difference(row, grid[index]))) {
-                        console.log('hihi');
+                    if (isChangeTable(table, grid)) {
                         return dispatch({ type: 'SELECT_TABLE', index });
                     }
                 }
                 return dispatch({ type: 'SELECT_TABLE', index });
             }
             setClickedIndex(index);
+            setConfirmType('SELECT_TABLE');
             setShowConfirm(true);
         },
-        []
+        [tab, gridRef, isChanged, table]
     );
 
     const handleContext = useCallback(
@@ -86,26 +86,38 @@ const SideTab = () => {
         []
     );
 
-    const handleRemoveClick = useCallback(
-        (index) => (event) => {
-            event.preventDefault();
-            dispatch({
-                type: 'REMOVE_TABLE',
-                index,
-            });
-        },
-        []
-    );
+    const handleRemoveClick = (index) => (event) => {
+        event.preventDefault();
+        console.log({ index });
+        dispatch({
+            type: 'REMOVE_TABLE',
+            index,
+        });
+    };
 
     const handleFoldButtonClick = useCallback((event) => {
         event.preventDefault();
         dispatch({ type: 'FOLD' });
     }, []);
 
-    const handleAddTableClick = useCallback((event) => {
-        event.preventDefault();
-        onAddTableButtonClick();
-    }, []);
+    const handleAddTableClick = useCallback(
+        (event) => {
+            event.preventDefault();
+
+            if (!isChanged) {
+                if (tab === TABLE) {
+                    const grid = gridRef?.current?.getSheetData().data;
+                    if (isChangeTable(table, grid)) {
+                        return onAddTableButtonClick();
+                    }
+                }
+                return onAddTableButtonClick();
+            }
+            setConfirmType('SAVE');
+            setShowConfirm(true);
+        },
+        [tab, gridRef, isChanged]
+    );
 
     const handleOutsideClick = useCallback((event) => {
         setVisible(false);
@@ -113,7 +125,9 @@ const SideTab = () => {
 
     const handleConfirmClick = useCallback(() => {
         setShowConfirm(false);
-        dispatch({ type: 'SELECT_TABLE', index: clickedIndex });
+        if (confirmType !== 'SAVE') {
+            dispatch({ type: 'SELECT_TABLE', index: clickedIndex });
+        }
     }, [clickedIndex]);
 
     return (

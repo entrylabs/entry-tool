@@ -9,8 +9,8 @@ const ChartList = () => {
     const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { selected } = dataAnalytics;
-    const { chart: charts = [] } = selected;
-    const table = getTrimedTable(getTable(selected));
+    const { table: selectedTable, chart: charts = [] } = selected;
+    const table = getTrimedTable(selectedTable);
 
     const handleClickChart = (tab, index) => () => {
         dispatch({

@@ -5,7 +5,7 @@ import Theme from '@utils/Theme';
 const Title = () => {
     const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { selected = {} } = dataAnalytics;
+    const { selected = {}, list } = dataAnalytics;
     const { name = '' } = selected;
     const [title, setTitle] = useState(name);
 
@@ -31,7 +31,7 @@ const Title = () => {
             name="sheet_sjt"
             className={theme.input}
             defaultValue={title}
-            disabled={!selected.id}
+            disabled={!list.length}
             onChange={handleChange}
             onBlur={handleBlur}
         />

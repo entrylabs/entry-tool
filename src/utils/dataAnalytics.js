@@ -7,6 +7,7 @@ import _chain from 'lodash/chain';
 import _reduce from 'lodash/reduce';
 import _uniqBy from 'lodash/uniqBy';
 import _zipObject from 'lodash/zipObject';
+import _difference from 'lodash/difference';
 
 import flow from 'lodash/fp/flow';
 import map from 'lodash/fp/map';
@@ -71,7 +72,7 @@ export const hasNumberColumn = (table) =>
 export const getNumberColumnIndexes = (table, banIndexes = []) =>
     _reduce(
         table[0],
-        (prev, curr, index) =>
+        (prev, __, index) =>
             !_some(banIndexes, (banIndex) => index === banIndex) &&
             !_some(table.slice(1), (row) => isString(row[index]))
                 ? [...prev, index]
@@ -156,7 +157,6 @@ export const getTrimedTable = (table) => {
     return trimedTable;
 };
 
-export const getTable = ({ fields = [], data = [] }) => [
-    [...fields],
-    ...data.map((row) => (row instanceof Array ? row : row.value)),
-];
+export const isChangeTable = (origin, current) =>
+    origin.length !== current.length ||
+    _some(origin, (row, index) => _difference(row, current[index]).length);

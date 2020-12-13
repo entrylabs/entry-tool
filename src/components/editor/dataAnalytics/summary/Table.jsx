@@ -11,7 +11,8 @@ const Table = () => {
     const theme = Theme.getStyle('popup');
     const { dataAnalytics } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
-    const table = getTrimedTable(getTable(selected));
+    const { table: selectedTable } = selected;
+    const table = getTrimedTable(selectedTable);
     const summary = getSummary(table) || [];
 
     return (

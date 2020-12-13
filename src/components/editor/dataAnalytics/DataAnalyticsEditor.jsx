@@ -11,7 +11,7 @@ import SaveConfirm from './SaveConfirm';
 import EmptyContents from './EmptyContents';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { SUMMARY, TABLE, CHART } from '@constants/dataAnalytics';
-import { getTable } from '@utils/dataAnalytics';
+import { isChangeTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const DataAnalyticsEditor = () => {
@@ -19,12 +19,12 @@ const DataAnalyticsEditor = () => {
     const [showConfirm, setShowConfirm] = useState(false);
     const { dataAnalytics } = useContext(DataAnalyticsContext);
     const { tab, selected = {}, onCloseButtonClick, isChanged = true, gridRef } = dataAnalytics;
-    const table = getTable(selected);
+    const { table = [[]] } = selected;
     const handleButtonClick = (event) => {
         event.preventDefault();
         if (!isChanged && tab === TABLE) {
             const grid = gridRef?.current?.getSheetData().data;
-            if (_every(table, (row, index) => _difference(row, grid[index]))) {
+            if (isChangeTable(table, grid)) {
                 return onCloseButtonClick();
             }
         }

@@ -6,7 +6,7 @@ import '@entrylabs/modal/dist/entry/entry-modal.css';
 
 const Confirm = ({ onClick }) => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { tab, selected, gridRef, onSubmitDataAnalytics, selectedIndex } = dataAnalytics;
+    const { tab, gridRef } = dataAnalytics;
 
     return (
         <ConfirmModal
@@ -14,17 +14,11 @@ const Confirm = ({ onClick }) => {
             title="확인"
             onEvent={(data) => {
                 if (data) {
-                    const selectedDataAnalytics = selected;
+                    let table;
                     if (tab === TABLE) {
-                        const [fields, ...data] = gridRef?.current?.getSheetData().data;
-                        selectedDataAnalytics.data = data;
-                        selectedDataAnalytics.fields = fields;
+                        table = gridRef?.current?.getSheetData().data;
                     }
-                    onSubmitDataAnalytics({
-                        selected: selectedDataAnalytics,
-                        index: selectedIndex,
-                    });
-                    dispatch({ type: 'SAVE' });
+                    dispatch({ type: 'SAVE', table });
                 }
                 onClick?.();
             }}

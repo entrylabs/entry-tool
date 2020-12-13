@@ -18,9 +18,9 @@ const Legend = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const axisRef = useRef();
     const { selected = {} } = dataAnalytics;
-    const { chart, chartIndex } = selected;
+    const { table: selectedTable, chart, chartIndex = 0 } = selected;
     const { yIndex = 0, xIndex, categoryIndexes: selectedLegend, type } = chart[chartIndex];
-    const table = getTrimedTable(getTable(selected));
+    const table = getTrimedTable(selectedTable);
     const checkBox = type === 'bar' || type === 'line';
     const dropdownItems = _reduce(
         table[0],

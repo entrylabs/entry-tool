@@ -6,7 +6,7 @@ const TitleInput = (props) => {
     const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
-    const { chart = [], chartIndex } = selected;
+    const { chart = [], chartIndex = 0 } = selected;
     const { title = '' } = chart[chartIndex] || {};
 
     const onChangeTitle = (value) => {

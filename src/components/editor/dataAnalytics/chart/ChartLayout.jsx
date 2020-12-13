@@ -31,8 +31,8 @@ const ChartLayout = () => {
     const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
-    const { chart = [], chartIndex = -1 } = selected;
-    const table = getTrimedTable(getTable(selected));
+    const { chart = [], chartIndex = 0, table: selectedTable } = selected;
+    const table = getTrimedTable(selectedTable);
     const selectedChart = chart[chartIndex] || {};
     const { type, categoryIndexes = [] } = selectedChart || {};
     const isHorizontalLegend = type !== 'pie';

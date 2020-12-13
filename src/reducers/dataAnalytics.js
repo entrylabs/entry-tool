@@ -29,7 +29,6 @@ export const dataAnalyticsReducer = (state, action) => {
                 changedIndex = selectedIndex - 1;
             }
             changedIndex = selectedIndex === index ? 0 : changedIndex;
-            onChangeDataAnalytics(changedList);
             return {
                 ...state,
                 selected: list[changedIndex],
@@ -43,7 +42,6 @@ export const dataAnalyticsReducer = (state, action) => {
             const { index } = action;
             const copiedTable = _cloneDeep(list[index]);
             const changedList = [...list, copiedTable];
-            onChangeDataAnalytics(changedList);
             return {
                 ...state,
                 selected: copiedTable,
@@ -52,14 +50,6 @@ export const dataAnalyticsReducer = (state, action) => {
                 isChanged: true,
             };
         }
-        // case 'COLUMN_EDIT': {
-        //     const { clipboard = [] } = state;
-        //     onChangeDataAnalytics(changedList);
-        //     return {
-        //         ...state,
-        //         clipboard: [...clipboard, action.data],
-        //     };
-        // }
         case 'FOLD':
             window.dispatchEvent(new Event('resize'));
             return {
@@ -67,11 +57,9 @@ export const dataAnalyticsReducer = (state, action) => {
                 fold: !state.fold,
             };
         case 'CHANGE_TABLE_TITLE': {
-            const { list, selectedIndex, selected } = state;
+            const { selected } = state;
             selected.name = action.value;
-            list[selectedIndex] = selected;
 
-            onChangeDataAnalytics(list);
             return {
                 ...state,
                 selected: {
@@ -86,7 +74,7 @@ export const dataAnalyticsReducer = (state, action) => {
             const { list } = state;
             return {
                 ...state,
-                selected: list[index],
+                selected: _cloneDeep(list[index]),
                 selectedIndex: index,
                 isChanged: false,
             };
@@ -94,62 +82,45 @@ export const dataAnalyticsReducer = (state, action) => {
         case 'SET_TAB': {
             const { selected } = state;
             const { chartIndex } = selected;
-            let { fields, origin } = selected;
             if (tab === TABLE && tab !== action.tab) {
-                const [header, ...rows] = action.table;
-                fields = header;
-                origin = rows;
+                selected.table = action.table;
             }
+            selected.chartIndex = action.index === undefined ? chartIndex : action.index;
             return {
                 ...state,
+                selected,
                 tab: action.tab,
-                selected: {
-                    ...selected,
-                    fields,
-                    origin,
-                    chartIndex: action.index === undefined ? chartIndex : action.index,
-                },
             };
         }
-        case 'SET_CHART_INDEX':
+        case 'SET_CHART_INDEX': {
+            const { selected } = state;
+            selected.chartIndex = action.index;
             return {
                 ...state,
-                selected: {
-                    ...state.selected,
-                    chartIndex: action.index,
-                },
+                selected,
             };
+        }
         case 'EDIT_CHART_TITLE': {
-            const { list, selectedIndex, selected } = state;
-            const { chart = [], chartIndex } = selected;
-            chart[chartIndex].title = action.title;
-            list[selectedIndex] = selected;
-            onChangeDataAnalytics(list);
+            const { selected } = state;
+            const { chartIndex } = selected;
+            selected.chart[chartIndex].title = action.title;
             return {
                 ...state,
-                selected: {
-                    ...selected,
-                    chart,
-                },
+                selected,
                 isChanged: true,
             };
         }
         case 'ADD_CHART': {
-            const { list, selectedIndex, selected = {} } = state;
+            const { selected = {} } = state;
             const { chart = [], name } = selected;
             selected.chartIndex = chart.length;
-            selected.chart = [
-                ...chart,
-                {
-                    type: action.chartType,
-                    title: `${name}_${CommonUtils.getLang('DataAnalytics.chart_title')}`,
-                    xIndex: -1,
-                    yIndex: -1,
-                    categoryIndexes: [],
-                },
-            ];
-            list[selectedIndex] = selected;
-            onChangeDataAnalytics(list);
+            selected.chart.push({
+                type: action.chartType,
+                title: `${name}_${CommonUtils.getLang('DataAnalytics.chart_title')}`,
+                xIndex: -1,
+                yIndex: -1,
+                categoryIndexes: [],
+            });
             return {
                 ...state,
                 selected,
@@ -157,12 +128,10 @@ export const dataAnalyticsReducer = (state, action) => {
             };
         }
         case 'REMOVE_CHART': {
-            const { list, selectedIndex, selected = {} } = state;
+            const { selected = {} } = state;
             const { chart = [], chartIndex } = selected;
             selected.chart = chart.filter((__, index) => index !== chartIndex);
             selected.chartIndex = 0;
-            list[selectedIndex] = selected;
-            onChangeDataAnalytics(list);
             return {
                 ...state,
                 selected,
@@ -170,7 +139,7 @@ export const dataAnalyticsReducer = (state, action) => {
             };
         }
         case 'SELECT_X_AXIS': {
-            const { list, selected, selectedIndex } = state;
+            const { selected } = state;
             const { chart, chartIndex } = selected;
             selected.chart[chartIndex] = {
                 ...chart[chartIndex],
@@ -178,9 +147,6 @@ export const dataAnalyticsReducer = (state, action) => {
                 yIndex: -1,
                 categoryIndexes: [],
             };
-            list[selectedIndex] = selected;
-
-            onChangeDataAnalytics(list);
             return {
                 ...state,
                 selected,
@@ -196,7 +162,6 @@ export const dataAnalyticsReducer = (state, action) => {
                 categoryIndexes: [],
             };
             list[selectedIndex] = selected;
-            onChangeDataAnalytics(list);
             return {
                 ...state,
                 selected,
@@ -204,14 +169,12 @@ export const dataAnalyticsReducer = (state, action) => {
             };
         }
         case 'SELECT_LEGEND_AXIS': {
-            const { list, selected, selectedIndex } = state;
+            const { selected } = state;
             const { chart, chartIndex } = selected;
             selected.chart[chartIndex] = {
                 ...chart[chartIndex],
                 categoryIndexes: action.indexes,
             };
-            list[selectedIndex] = selected;
-            onChangeDataAnalytics(list);
             return {
                 ...state,
                 selected,
@@ -219,32 +182,19 @@ export const dataAnalyticsReducer = (state, action) => {
             };
         }
         case 'ADD_COLUMN': {
-            const { table, chart = [] } = state;
-            const { columnIndex, columnName } = action;
+            const { selected } = state;
+            const { chart: charts = [] } = selected;
+            const { index } = action;
 
-            const resultTable = table.map((row, index) => {
-                row.splice(
-                    columnIndex,
-                    0,
-                    index
-                        ? 0
-                        : CommonUtils.getOrderedName(
-                              columnName || CommonUtils.getLang('DataAnalytics.new_attribute'),
-                              table[0]
-                          )
-                );
-                return row;
-            });
-
-            const resultCharts = chart.map((chart) => {
-                if (chart.xIndex >= columnIndex) {
+            selected.chart = charts.map((chart) => {
+                if (chart.xIndex >= index) {
                     chart.xIndex++;
                 }
-                if (chart.yIndex >= columnIndex) {
+                if (chart.yIndex >= index) {
                     chart.yIndex++;
                 }
                 for (let i = 0; i < chart.categoryIndexes.length; i++) {
-                    if (chart.categoryIndexes[i] >= columnIndex) {
+                    if (chart.categoryIndexes[i] >= index) {
                         chart.categoryIndexes[i]++;
                     }
                 }
@@ -253,37 +203,33 @@ export const dataAnalyticsReducer = (state, action) => {
 
             return {
                 ...state,
-                table: resultTable,
-                chart: resultCharts,
+                selected,
+                isChanged: false,
             };
         }
         case 'DELETE_COLUMN': {
-            const { table, charts = [] } = state;
-            const { columnIndex } = action;
+            const { selected } = state;
+            const { chart: charts = [] } = selected;
+            const { index } = action;
 
-            const resultTable = table.map((row) => {
-                row.splice(columnIndex, 1);
-                return row;
-            });
-
-            const resultCharts = charts.map((chart) => {
-                if (chart.xIndex == columnIndex) {
+            selected.chart = charts.map((chart) => {
+                if (chart.xIndex == index) {
                     chart.xIndex = -1;
                     chart.yIndex = -1;
                     chart.categoryIndexes = [];
-                } else if (chart.xIndex > columnIndex) {
+                } else if (chart.xIndex > index) {
                     chart.xIndex--;
                 }
-                if (chart.yIndex == columnIndex) {
+                if (chart.yIndex == index) {
                     chart.yIndex = -1;
                     chart.categoryIndexes = [];
-                } else if (chart.yIndex > columnIndex) {
+                } else if (chart.yIndex > index) {
                     chart.yIndex--;
                 }
                 for (let i = 0; i < chart.categoryIndexes.length; i++) {
-                    if (chart.categoryIndexes[i] == columnIndex) {
+                    if (chart.categoryIndexes[i] == index) {
                         chart.categoryIndexes.splice(i, 1);
-                    } else if (chart.categoryIndexes[i] > columnIndex) {
+                    } else if (chart.categoryIndexes[i] > index) {
                         chart.categoryIndexes[i]--;
                     }
                 }
@@ -292,27 +238,27 @@ export const dataAnalyticsReducer = (state, action) => {
 
             return {
                 ...state,
-                table: resultTable,
-                charts: resultCharts,
-            };
-        }
-        case 'TOGGLE_VISIBLE_LEGEND': {
-            const charts = [...state.charts];
-            charts[state.chartIndex] = {
-                ...charts[state.chartIndex],
-                visibleLegend: action.visible,
-            };
-
-            return {
-                ...state,
-                charts,
-            };
-        }
-        case 'SAVE':
-            return {
-                ...state,
+                selected,
                 isChanged: false,
             };
+        }
+        case 'SAVE': {
+            const { list, selectedIndex, selected, onSubmitDataAnalytics } = state;
+            const { table } = action;
+            if (table) {
+                selected.table = table;
+            }
+            list[selectedIndex] = selected;
+            onSubmitDataAnalytics({
+                selected,
+                index: selectedIndex,
+            });
+            return {
+                ...state,
+                list,
+                isChanged: false,
+            };
+        }
         default:
             return state;
     }
