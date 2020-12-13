@@ -22,11 +22,14 @@ const DataAnalyticsEditor = () => {
     const { table = [[]] } = selected;
     const handleButtonClick = (event) => {
         event.preventDefault();
-        if (!isChanged && tab === TABLE) {
-            const grid = gridRef?.current?.getSheetData().data;
-            if (isChangeTable(table, grid)) {
-                return onCloseButtonClick();
+        if (!isChanged) {
+            if (tab === TABLE) {
+                const grid = gridRef?.current?.getSheetData().data;
+                if (isChangeTable(table, grid)) {
+                    return onCloseButtonClick();
+                }
             }
+            return onCloseButtonClick();
         }
         setShowConfirm(true);
     };
