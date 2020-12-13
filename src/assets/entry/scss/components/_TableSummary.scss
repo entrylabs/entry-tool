@@ -303,5 +303,15 @@
         .chart_list li.pie .chart_area {
             padding-left: 15px;
         }
+        .chart_list .data_add_box {
+            height: 106px;
+            padding-top: 12px;
+            border: 0;
+            text-align: center;
+            p {
+                padding-top: 6px;
+                line-height: 88px;
+            }
+        }
     }
 }

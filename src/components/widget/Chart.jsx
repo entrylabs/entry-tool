@@ -186,11 +186,6 @@ const Chart = (props) => {
     if (!isDrawable(table)) {
         return shortForm ? (
             <div className={theme.data_add_box}>
-                <a onClick={(e) => e.preventDefault()}>
-                    <span className={theme.blind}>
-                        {CommonUtils.getLang('DataAnalytics.add_data')}
-                    </span>
-                </a>
                 <p>{CommonUtils.getLang('DataAnalytics.unable_to_express_chart')}</p>
             </div>
         ) : (
@@ -249,9 +244,6 @@ const Chart = (props) => {
 
     return shortForm ? (
         <div className={theme.data_add_box}>
-            <a onClick={(e) => e.preventDefault()}>
-                <span className={theme.blind}>{content}</span>
-            </a>
             <p>{content}</p>
         </div>
     ) : (
