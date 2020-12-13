@@ -4,11 +4,7 @@ import _reduce from 'lodash/reduce';
 import _findIndex from 'lodash/findIndex';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
-import {
-    getNumberColumnIndexesBySelectedColumns,
-    getTrimedTable,
-    getTable,
-} from '@utils/dataAnalytics';
+import { getNumberColumnIndexesBySelectedColumns, getTrimedTable } from '@utils/dataAnalytics';
 import Dropdown from '@components/widget/dropdown';
 import Theme from '@utils/Theme';
 

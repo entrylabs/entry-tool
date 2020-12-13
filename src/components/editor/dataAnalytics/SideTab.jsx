@@ -16,8 +16,8 @@ const SideTab = () => {
     const [y, setY] = useState(0);
     const [visible, setVisible] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
-    const [clickedIndex, setClickedIndex] = useState(0);
     const [confirmType, setConfirmType] = useState('');
+    const [clickedIndex, setClickedIndex] = useState(0);
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const {
         tab,

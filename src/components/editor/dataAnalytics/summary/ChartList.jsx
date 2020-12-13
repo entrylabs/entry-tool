@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CHART } from '@constants/dataAnalytics';
-import { getTrimedTable, getTable } from '@utils/dataAnalytics';
+import { getTrimedTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
 import { CommonUtils } from '@utils/Common';
 

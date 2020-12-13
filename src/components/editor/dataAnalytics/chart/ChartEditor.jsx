@@ -7,9 +7,9 @@ import { CommonUtils } from '@utils/Common';
 
 const ChartEditor = () => {
     const theme = Theme.getStyle('popup');
-    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
+    const { dataAnalytics } = useContext(DataAnalyticsContext);
     const { selected } = dataAnalytics;
-    const { chart = [], chartIndex = 0 } = selected;
+    const { chart = [] } = selected;
 
     return (
         <div className={theme.chart_box}>
