@@ -3,6 +3,7 @@ import Navigation from './Navigation';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import ChartLayout from './ChartLayout';
 import Theme from '@utils/Theme';
+import { CommonUtils } from '@utils/Common';
 
 const ChartEditor = () => {
     const theme = Theme.getStyle('popup');
@@ -12,14 +13,16 @@ const ChartEditor = () => {
 
     return (
         <div className={theme.chart_box}>
-            <h2 className={theme.blind}>차트</h2>
+            <h2 className={theme.blind}>{CommonUtils.getLang('DataAnalytics.chart')}</h2>
             <div className={theme.inner}>
                 <Navigation />
                 {chart.length ? (
                     <ChartLayout />
                 ) : (
                     <div className={theme.chart_no_result}>
-                        <p className={theme.dsc}>차트를 먼저 추가해 주세요.</p>
+                        <p className={theme.dsc}>
+                            {CommonUtils.getLang('DataAnalytics.please_add_chart')}
+                        </p>
                     </div>
                 )}
             </div>

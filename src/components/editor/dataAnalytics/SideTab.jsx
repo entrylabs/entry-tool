@@ -6,6 +6,7 @@ import ContextMenu from '@components/widget/contextMenu';
 import SaveConfirm from './SaveConfirm';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { isChangeTable } from '@utils/dataAnalytics';
+import { CommonUtils } from '@utils/Common';
 import { TABLE } from '@constants/dataAnalytics';
 import Theme from '@utils/Theme';
 
@@ -32,13 +33,16 @@ const SideTab = () => {
 
     const contextMenu = useMemo(
         () => [
-            { text: '복제', callback: () => dispatch({ type: 'COPY_TALBE', index: clickedIndex }) },
             {
-                text: '삭제',
+                text: CommonUtils.getLang('DataAnalytics.save'),
+                callback: () => dispatch({ type: 'COPY_TALBE', index: clickedIndex }),
+            },
+            {
+                text: CommonUtils.getLang('DataAnalytics.delete'),
                 callback: () => dispatch({ type: 'REMOVE_TABLE', index: clickedIndex }),
             },
             {
-                text: 'PC에 저장',
+                text: CommonUtils.getLang('DataAnalytics.download'),
                 callback: () => {
                     const dataTable = list[clickedIndex];
                     const { name, table } = dataTable;
@@ -132,10 +136,10 @@ const SideTab = () => {
 
     return (
         <section className={`${theme.aside} ${fold ? theme.fold : ''}`}>
-            <h2 className={theme.blind}>테이블 추가하기</h2>
+            <h2 className={theme.blind}>{CommonUtils.getLang('DataAnalytics.add_table')}</h2>
             <div className={theme.add_btn_box}>
                 <a onClick={handleAddTableClick} role="button">
-                    테이블 추가하기
+                    {CommonUtils.getLang('DataAnalytics.add_table')}
                 </a>
             </div>
             <ul className={theme.list}>
@@ -148,7 +152,9 @@ const SideTab = () => {
                     >
                         <span className={theme.text}>{name}</span>
                         <a onClick={handleRemoveClick} className={theme.btn_close}>
-                            <span className={theme.blind}>삭제</span>
+                            <span className={theme.blind}>
+                                {CommonUtils.getLang('DataAnalytics.delete')}
+                            </span>
                         </a>
                     </li>
                 ))}

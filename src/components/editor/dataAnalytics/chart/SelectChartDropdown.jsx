@@ -4,7 +4,7 @@ import Theme from '@utils/Theme';
 
 const SelectChartDropdown = (props) => {
     const theme = Theme.getStyle('popup');
-    const { position = { left: '-3px', top: '55px' }, onClick = () => {} } = props;
+    const { onClick = () => {} } = props;
 
     const handleAClick = (event) => {
         event.preventDefault();

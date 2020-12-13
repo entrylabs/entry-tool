@@ -61,7 +61,7 @@ const Tab = () => {
                 ))}
             </div>
             <a role="button" className={theme.btn_save} onClick={handleSaveClick}>
-                저장하기
+                {CommonUtils.getLang('DataAnalytics.save')}
             </a>
             {showConfirm && <SaveConfirm onClick={handleConfirmClick} />}
         </div>

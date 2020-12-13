@@ -47,13 +47,13 @@ const ChartLayout = () => {
             <div className={theme.form_box}>
                 <div className={theme.input_inner}>
                     <label htmlFor="ChartName" className={theme.tit_label}>
-                        차트 이름
+                        {CommonUtils.getLang('DataAnalytics.chart_name')}
                     </label>
                     <div className={theme.input_box}>
                         <TitleInput />
                     </div>
                     <a role="button" className={theme.del_btn} onClick={handleRemoveClick}>
-                        차트 삭제
+                        {CommonUtils.getLang('DataAnalytics.remove_chart')}
                     </a>
                 </div>
                 <div className={theme.input_inner}>

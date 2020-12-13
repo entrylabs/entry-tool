@@ -21,7 +21,7 @@ const Table = () => {
                 <strong>{CommonUtils.getLang('DataAnalytics.table')}</strong>
                 <TableToolTip />
                 <p className={theme.title_dsc}>
-                    새로운 테이블에서 열을 기준으로 한 기초 통계량입니다.
+                    {CommonUtils.getLang('DataAnalytics.summary_table_description')}
                 </p>
             </div>
             <ul className={theme.table_info}>

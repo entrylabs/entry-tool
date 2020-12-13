@@ -13,6 +13,7 @@ import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { SUMMARY, TABLE, CHART } from '@constants/dataAnalytics';
 import { isChangeTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
+import { CommonUtils } from '@utils/Common';
 
 const DataAnalyticsEditor = () => {
     const theme = Theme.getStyle('popup');
@@ -57,7 +58,7 @@ const DataAnalyticsEditor = () => {
     return (
         <div className={theme.popup_wrap}>
             <header className={theme.pop_header}>
-                <h1>테이블 불러오기</h1>
+                <h1>{CommonUtils.getLang('DataAnalytics.load_data_analytics')}</h1>
                 <button
                     onClick={handleButtonClick}
                     className={`${theme.btn_back} ${theme.imbtn_pop_close}`}

@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { TABLE } from '@constants/dataAnalytics';
 import { Confirm as ConfirmModal } from '@entrylabs/modal';
+import { CommonUtils } from '@utils/Common';
 import '@entrylabs/modal/dist/entry/entry-modal.css';
 
 const Confirm = ({ onClick }) => {
@@ -10,8 +11,8 @@ const Confirm = ({ onClick }) => {
 
     return (
         <ConfirmModal
-            content="변경된 테이블과 차트를 저장할까요?"
-            title="확인"
+            content={CommonUtils.getLang('DataAnalytics.confirm_content')}
+            title={CommonUtils.getLang('DataAnalytics.confirm')}
             onEvent={(data) => {
                 if (data) {
                     let table;
@@ -23,8 +24,8 @@ const Confirm = ({ onClick }) => {
                 onClick?.();
             }}
             options={{
-                negativeButtonText: '취소',
-                positiveButtonText: '확인',
+                negativeButtonText: CommonUtils.getLang('DataAnalytics.cancel'),
+                positiveButtonText: CommonUtils.getLang('DataAnalytics.confirm'),
             }}
         />
     );

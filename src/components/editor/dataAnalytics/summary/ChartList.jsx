@@ -4,6 +4,7 @@ import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CHART } from '@constants/dataAnalytics';
 import { getTrimedTable, getTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
+import { CommonUtils } from '@utils/Common';
 
 const ChartList = () => {
     const theme = Theme.getStyle('popup');
@@ -72,8 +73,10 @@ const ChartList = () => {
                 </div>
             ) : (
                 <div className={theme.table_sjt}>
-                    <strong>차트</strong>
-                    <p className={theme.title_dsc}>추가한 차트가 없습니다.</p>
+                    <strong>{CommonUtils.getLang('DataAnalytics.chart')}</strong>
+                    <p className={theme.title_dsc}>
+                        {CommonUtils.getLang('DataAnalytics.not_exist_chart')}
+                    </p>
                 </div>
             )}
         </div>
