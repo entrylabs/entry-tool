@@ -1,6 +1,6 @@
 import React from 'react';
-import { CommonUtils, categoryKeys } from '@utils/Common';
-import { GRAPH_COLOR } from '../Constants';
+import { categoryKeys } from '@utils/dataAnalytics';
+import { GRAPH_COLOR } from '@constants/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const HorizontalLegend = (props) => {

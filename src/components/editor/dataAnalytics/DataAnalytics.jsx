@@ -1,29 +1,36 @@
 import React from 'react';
+import _cloneDeep from 'lodash/cloneDeep';
 import DataAnalyticsEditor from './DataAnalyticsEditor';
-import DataAnalyticsContextProvider from './context/DataAnalyticsContext';
+import DataAnalyticsContextProvider from '@contexts/dataAnalytics';
+import { TABLE } from '@constants/dataAnalytics';
 
 const DataAnalytics = (props) => {
     const {
-        table = {},
+        tab,
+        list = [],
+        selectedIndex = 0,
         onSubmitDataAnalytics = () => {},
         onToastDataAnalytics = () => {},
         onChangeDataAnalytics = () => {},
         onAlertDataAnalytics = () => {},
+        onCloseButtonClick = () => {},
+        onAddTableButtonClick = () => {},
     } = props;
-    const { name = '', fields, origin = [], chart = [], id, tab, summary } = table;
-    const dataTable = fields ? [[...fields], ...origin] : [[]];
+
+    const index = selectedIndex == 0 ? 0 : list.length - 1;
 
     const data = {
-        id,
-        tab,
-        summary,
-        title: name,
-        table: dataTable.map((row) => row.map((column) => column)),
-        charts: chart,
+        tab: tab || (list[0] && TABLE),
+        list,
+        selectedIndex: index,
+        selected: _cloneDeep(list[index]) || {},
+        fold: false,
         onToastDataAnalytics,
         onSubmitDataAnalytics,
         onChangeDataAnalytics,
         onAlertDataAnalytics,
+        onCloseButtonClick,
+        onAddTableButtonClick,
     };
 
     return (

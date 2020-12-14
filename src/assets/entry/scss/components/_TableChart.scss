@@ -1,0 +1,303 @@
+@charset "UTF-8";
+
+// 데이터 차트.
+.popup_wrap .pop_content.chart_content {
+    .section_cont {
+        background-color: #fff;
+        padding: 0 27px 27px;
+    }
+    .sheet_form_box {
+        padding: 18px 0;
+        .input {
+            box-sizing: border-box;
+            width: 100%;
+            height: 40px;
+            padding: 0 16px;
+            border: 1px solid #e2e2e2;
+            border-radius: 4px;
+            outline: 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c313d;
+            letter-spacing: -0.33px;
+        }
+        .btn_box {
+            position: relative;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+        .tab {
+            display: inline-block;
+            overflow: hidden;
+            border: 1px solid #4f80ff;
+            border-radius: 4px;
+            vertical-align: top;
+            & > a {
+                float: left;
+                overflow: hidden;
+                width: 70px;
+                height: 30px;
+                border-left: 1px solid #4f80ff;
+                font-size: 14px;
+                font-weight: 600;
+                color: #4f80ff;
+                text-align: center;
+                line-height: 32px;
+            }
+            & > a:first-of-type {
+                border-left: 0;
+            }
+            .active {
+                color: #fff;
+                background-color: #4f80ff;
+            }
+        }
+        .btn_save {
+            position: absolute;
+            overflow: hidden;
+            top: 0;
+            right: 0;
+            height: 30px;
+            padding: 0 18px;
+            border: 1px solid #e2e2e2;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+            text-align: center;
+            line-height: 32px;
+        }
+    }
+    .chart_box {
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        -webkit-box-flex: 1;
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+        .inner {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            flex-direction: column;
+            -webkit-box-flex: 1;
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e2e2e2;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .chart_navi {
+            position: relative;
+            padding: 12px 16px;
+            border-bottom: 1px solid #e2e2e2;
+            z-index: 10;
+        }
+        .add_link_box {
+            display: inline-block;
+            position: relative;
+            width: 40px;
+            height: 40px;
+            vertical-align: top;
+        }
+        .add_link_box .add_link {
+            display: block;
+            height: 40px;
+            background-image: url('#{$imageDir}/icon_chart_sel05.svg');
+            vertical-align: top;
+        }
+        .chart_link {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            background-size: 40px auto;
+            vertical-align: top;
+        }
+        .chart_link:first-child {
+            margin-left: 0;
+        }
+        .chart_link.bar {
+            background-image: url('#{$imageDir}/icon_chart_sel01_on.svg');
+        }
+        .chart_link.line {
+            background-image: url('#{$imageDir}/icon_chart_sel02_on.svg');
+        }
+        .chart_link.pie {
+            background-image: url('#{$imageDir}/icon_chart_sel03_on.svg');
+        }
+        .chart_link.scatter {
+            background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
+        }
+        .chart_link.bar.disabled {
+            background-image: url('#{$imageDir}/icon_chart_sel01_off.svg');
+        }
+        .chart_link.line.disabled {
+            background-image: url('#{$imageDir}/icon_chart_sel02_off.svg');
+        }
+        .chart_link.pie.disabled {
+            background-image: url('#{$imageDir}/icon_chart_sel03_off.svg');
+        }
+        .chart_link.scatter.disabled {
+            background-image: url('#{$imageDir}/icon_chart_sel04_off.svg');
+        }
+        .chart_link ~ .add_link_box {
+            margin-left: 12px;
+        }
+        .chart_no_result {
+            position: relative;
+            -webkit-box-flex: 1;
+            flex: 1 1;
+            overflow: auto;
+            .dsc {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                font-size: 16px;
+                font-weight: 600;
+                color: #4f80ff;
+                text-align: center;
+                transform: translate(-50%, -50%);
+                line-height: 18px;
+            }
+        }
+        .graph_box {
+            position: relative;
+            position: relative;
+            -webkit-box-flex: 1;
+            flex: 1 1;
+            overflow: auto;
+            background-color: #fff;
+            .chart_area {
+                .fit {
+                    padding-top: 30px;
+                    padding-right: 230px;
+                }
+                svg {
+                    margin: auto;
+                }
+            }
+        }
+    }
+    .form_box {
+        padding: 18px 16px;
+        border-bottom: 1px solid #e2e2e2;
+        .input_inner {
+            position: relative;
+        }
+        .input_inner:after {
+            display: block;
+            clear: both;
+            content: '';
+        }
+        .input_inner .tit_label {
+            float: left;
+            width: 70px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c313d;
+            letter-spacing: -0.33px;
+            vertical-align: top;
+            line-height: 40px;
+        }
+        .input_box {
+            overflow: hidden;
+            padding-right: 110px;
+        }
+        .input_inner input[type='text'] {
+            box-sizing: border-box;
+            width: 100%;
+            height: 40px;
+            padding: 0 14px;
+            border: 1px solid #e2e2e2;
+            border-radius: 4px;
+            background-color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c313d;
+            letter-spacing: -0.33px;
+        }
+        .input_inner .del_btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            box-sizing: border-box;
+            width: 94px;
+            height: 40px;
+            border: 1px solid #e2e2e2;
+            border-radius: 4px;
+            background-color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+            letter-spacing: -0.33px;
+            text-align: center;
+            line-height: 40px;
+        }
+        .input_inner + .input_inner {
+            margin-top: 12px;
+        }
+        .select_group {
+            float: left;
+            margin-left: 30px;
+        }
+        .select_group:first-of-type {
+            margin-left: 0;
+        }
+        .select_group:first-of-type .tit_label {
+            width: 70px;
+        }
+        .select_group:first-of-type .pop_selectbox {
+            margin-left: 0;
+        }
+        .select_group .tit_label {
+            width: auto;
+        }
+        .select_group .pop_selectbox {
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 12px;
+        }
+        .select_group .pop_selectbox .select_link {
+            width: auto;
+            font-size: 14px;
+        }
+        .select_group .pop_selectbox .tooltip_box {
+            top: 57px;
+            width: auto;
+        }
+        .select_group .pop_selectbox .tooltip_inner {
+            height: 248px;
+            overflow-y: auto;
+        }
+        .select_group .check_inner {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            padding: 16px 0 14px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c313d;
+            line-height: 16px;
+        }
+        .select_group .check_inner .text {
+            padding-left: 8px;
+        }
+        .select_group .check_inner > span {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-image: url('#{$imageDir}/ico_unchecked.svg');
+            background-size: 16px auto;
+            vertical-align: top;
+        }
+        .select_group .check_inner input[type='checkbox']:checked + span {
+            background-image: url('#{$imageDir}/ico_checked.svg');
+        }
+    }
+}

@@ -24,7 +24,7 @@ const Index = (props) => {
                                 onClicked && onClicked(item);
                             }}
                         >
-                            <a href="#NULL" onClick={preventDefault}>
+                            <a onClick={preventDefault}>
                                 {CommonUtils.getLang(navigations[item].name)}
                             </a>
                         </li>

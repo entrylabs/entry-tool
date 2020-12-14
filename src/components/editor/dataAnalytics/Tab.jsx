@@ -1,34 +1,70 @@
-import React, { useContext } from 'react';
-import { DataAnalyticsContext } from './context/DataAnalyticsContext';
+import React, { useContext, useState, useCallback } from 'react';
+import _every from 'lodash/every';
+import _difference from 'lodash/difference';
+import SaveConfirm from './SaveConfirm';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
-import Styles from '@assets/entry/scss/popup.scss';
+import { TAB_ITEMS, TABLE } from '@constants/dataAnalytics';
+import { isChangeTable } from '@utils/dataAnalytics';
+import '@entrylabs/modal/dist/entry/entry-modal.css';
+import Theme from '@utils/Theme';
 
-const Tab = (props) => {
-    const { selected, tabItems = [] } = props;
-    const { dispatch } = useContext(DataAnalyticsContext);
+const Tab = () => {
+    const theme = Theme.getStyle('popup');
+    const [showConfirm, setShowConfirm] = useState(false);
+    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
+    const { tab, selected, gridRef, isChanged = true } = dataAnalytics;
+    const { table } = selected;
 
-    const handleClick = (value) => (event) => {
-        event.preventDefault();
-        dispatch({
-            type: 'SET_TAB',
-            tab: value,
-        });
-    };
+    const handleClick = useCallback(
+        (value) => (event) => {
+            event.preventDefault();
+            if (!selected) {
+                return;
+            }
+
+            dispatch({
+                type: 'SET_TAB',
+                tab: value,
+                table: gridRef?.current?.getSheetData().data,
+            });
+        },
+        []
+    );
+
+    const handleSaveClick = useCallback(() => {
+        if (!isChanged && tab === TABLE) {
+            const grid = gridRef?.current?.getSheetData().data;
+            if (isChangeTable(table, grid)) {
+                return;
+            }
+        }
+        setShowConfirm(true);
+    }, [isChanged, selected]);
+
+    const handleConfirmClick = useCallback(() => {
+        setShowConfirm(false);
+    }, []);
 
     return (
-        <ul className={Styles.tab_box}>
-            {tabItems.map((item, index) => (
-                <li
-                    className={selected === item.value ? Styles.on : ''}
-                    value={item.value}
-                    key={`tab_${index}`}
-                >
-                    <a href="#" onClick={handleClick(item.value)}>
-                        {CommonUtils.getLang(item.name)}
+        <div className={theme.btn_box}>
+            <div className={theme.tab}>
+                {TAB_ITEMS.map(({ value, name }) => (
+                    <a
+                        key={`tab_${value}`}
+                        role="button"
+                        onClick={handleClick(value)}
+                        className={tab === value ? theme.active : ''}
+                    >
+                        {CommonUtils.getLang(name)}
                     </a>
-                </li>
-            ))}
-        </ul>
+                ))}
+            </div>
+            <a role="button" className={theme.btn_save} onClick={handleSaveClick}>
+                {CommonUtils.getLang('DataAnalytics.save')}
+            </a>
+            {showConfirm && <SaveConfirm onClick={handleConfirmClick} />}
+        </div>
     );
 };
 

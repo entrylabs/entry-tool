@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import _ from 'lodash';
 import bb from 'billboard.js';
 
-import Styles from '@assets/entry/scss/popup.scss';
+import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';
 
-import { CommonUtils, hasNumberColumn, categoryKeys, isZipable } from '@utils/Common';
+import { CommonUtils } from '@utils/Common';
+import { hasNumberColumn, categoryKeys, isZipable } from '@utils/dataAnalytics';
 const { generateHash } = CommonUtils;
 
 const pivot = (table, xIndex, yIndex, categoryIndex) =>
@@ -82,7 +83,18 @@ const generateOption = (option) => {
     let x;
     let xs;
     let columns;
-    let { axisX = { type: 'category', tick: { show: true } } } = option;
+    let grid;
+    let {
+        axisX = {
+            type: 'category',
+            tick: {
+                fit: true,
+                multiline: false,
+                autorotate: true,
+                culling: true,
+            },
+        },
+    } = option;
 
     switch (type) {
         case 'bar':
@@ -109,6 +121,14 @@ const generateOption = (option) => {
                     fit: false,
                 },
             };
+            grid = {
+                x: {
+                    show: true,
+                },
+                y: {
+                    show: true,
+                },
+            };
             break;
         }
         default:
@@ -121,6 +141,7 @@ const generateOption = (option) => {
         legend,
         size,
         tooltip,
+        grid,
         bindto: `#${id}`,
         data: {
             x,
@@ -129,7 +150,9 @@ const generateOption = (option) => {
             type,
         },
         axis: {
-            x: axisX,
+            x: {
+                ...axisX,
+            },
             y: axisY,
         },
         pie: {
@@ -143,6 +166,7 @@ const generateOption = (option) => {
 const isDrawable = (table) => table[0].length > 1 && hasNumberColumn(table);
 
 const Chart = (props) => {
+    const theme = Theme.getStyle('popup');
     const {
         table = [[]],
         chart = {},
@@ -161,18 +185,13 @@ const Chart = (props) => {
 
     if (!isDrawable(table)) {
         return shortForm ? (
-            <div className={Styles.data_add_box}>
-                <a href="#" onClick={(e) => e.preventDefault()}>
-                    <span className={Styles.blind}>
-                        {CommonUtils.getLang('DataAnalytics.add_data')}
-                    </span>
-                </a>
+            <div className={theme.data_add_box}>
                 <p>{CommonUtils.getLang('DataAnalytics.unable_to_express_chart')}</p>
             </div>
         ) : (
-            <div className={Styles.graph_cont}>
+            <div className={theme.graph_cont}>
                 <div id={id} style={{ height: '100%' }}>
-                    <div className={Styles.alert}>
+                    <div className={theme.alert}>
                         {CommonUtils.getLang('DataAnalytics.unable_to_express_chart')}
                     </div>
                 </div>
@@ -217,23 +236,20 @@ const Chart = (props) => {
 
     if (!content) {
         return (
-            <div className={Styles.chart_area}>
-                <div id={id} style={{ height: '100%' }} />
+            <div className={theme.chart_area}>
+                <div id={id} className={theme.fit} style={{ height: '100%' }} />
             </div>
         );
     }
 
     return shortForm ? (
-        <div className={Styles.data_add_box}>
-            <a href="#" onClick={(e) => e.preventDefault()}>
-                <span className={Styles.blind}>{content}</span>
-            </a>
+        <div className={theme.data_add_box}>
             <p>{content}</p>
         </div>
     ) : (
-        <div className={Styles.graph_cont}>
+        <div className={theme.graph_cont}>
             <div id={id} style={{ height: '100%' }}>
-                <div className={Styles.alert}>{content}</div>
+                <div className={theme.alert}>{content}</div>
             </div>
         </div>
     );

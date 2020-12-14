@@ -37,9 +37,9 @@ import BillBoard from '../components/widget/BillBoard';
 
 import DataSelect from '../components/ai_layout/DataSelect';
 import DataUpload from '../components/ai_layout/DataUpload';
-import DataDetail from '../components/ai_layout/DataDetail';
 import DataAnalytics from '../components/editor/dataAnalytics/DataAnalytics';
-import DataEmpty from '../components/ai_layout/DataEmpty';
+import TableChart from '../components/ai_layout/TableChart';
+import TableSummary from '../components/ai_layout/TableSummary';
 import Theme from '@utils/Theme';
 
 const store = configureStore();
@@ -370,16 +370,18 @@ storiesOf('AiLayout', module)
     .addDecorator((story) => <Provider story={story()} />)
     .add('테이블 추가하기 - 데이터 선택', () => <DataSelect />)
     .add('테이블 추가하기 - 데이터 선택 딤드', () => <DataSelect Dimmed />)
-    .add('테이블 추가하기 - 데이터 결과없음', () => <DataEmpty />)
-    .add('테이블 추가하기 - 데이터 업로드', () => <DataUpload />)
-    .add('데이터 상세 - 요약', () => <DataDetail />)
-    .add('데이터 상세 - 데이터 없음', () => <DataDetail DetailState="DataOff" />)
-    .add('데이터 상세 - 테이블', () => <DataDetail DetailState="Table" />)
-    .add('데이터 상세 - 차트추가', () => <DataDetail DetailState="ChartAdd" />)
-    .add('데이터 상세 - 기본 차트 문구', () => <DataDetail DetailState="Chart" />)
-    .add('데이터 상세 - 차트 세로형 범례', () => <DataDetail DetailState="VerticalChart" />)
-    .add('데이터 상세 - 차트 가로형 범례', () => <DataDetail DetailState="HorizontalChart" />)
-    .add('데이터 상세 - 방사형 차트 범례', () => <DataDetail DetailState="ScatterChart" />)
+    .add('파일 올리기 - 업로드 기본', () => <DataUpload UploadState="Default" />)
+    .add('파일 올리기 - 업로드 리스트', () => <DataUpload UploadState="List" />)
+    .add('파일 올리기 - 새로 만들기', () => <DataUpload UploadState="NewAdd" />)
+    .add('데이터 차트 - 차트 추가 기본', () => <TableChart ChartState="Default" />)
+    .add('데이터 차트 - Aside 접기', () => <TableChart />)
+    .add('데이터 차트 - 2차 가로', () => <TableChart ChartState="Depth2" NoResultText="가로축을 먼저 선택해 주세요." />)
+    .add('데이터 차트 - 2차 계열', () => <TableChart ChartState="Depth2" NoResultText="계열을 선택해 주세요." />)
+    .add('데이터 차트 - 2차 그래프', () => <TableChart ChartState="Depth2Graph" />)
+    .add('데이터 차트 - 3차 계열', () => <TableChart ChartState="Depth3" NoResultText="계열을 선택해 주세요." />)
+    .add('데이터 차트 - 3차 그래프', () => <TableChart ChartState="Depth3Graph" />)
+    .add('데이터 차트 - 요약', () => <TableSummary />)
+    .add('데이터 차트 - 요약 모두', () => <TableSummary SummaryState="Total" />)
     .add('차트', () => (
         <Chart table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} type="line" />
     ))
