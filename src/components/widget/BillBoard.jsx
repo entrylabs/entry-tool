@@ -64,8 +64,8 @@ const BillBoard = (props) => {
                         />
                     </div>
                     <div className={theme.body}>
-                        <div className={theme.content} style={{ minHeight: '440px' }}>
-                            {description}
+                        <div className={cn(theme.content, theme.billboard)} style={{ minHeight: '300px' }}>
+                            <div className={theme.description} dangerouslySetInnerHTML={ {__html: description} } />
                             <div className={theme.graph_box} ref={chartRef} />
                         </div>
                     </div>

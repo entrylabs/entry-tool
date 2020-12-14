@@ -2129,16 +2129,6 @@
                 letter-spacing: -0.5px;
                 line-height: 22px;
             }
-            
-            .graph_box {
-                width: 194px;
-                height: 150px;
-                margin: 18px 0 18px;
-            }
-            
-            .graph_box svg {
-                width: 200px !important;
-            }
         }
     }
     .center {
@@ -2322,6 +2312,25 @@
                     display: block;
                     z-index: 10;
                     top: 52px;
+                }
+
+                &.billboard {
+                    display: block;
+                    .description {
+                        margin-bottom: 10px;
+                        em {
+                            font-weight: bold;
+                        }
+                    }
+                    .graph_box {
+                        width: 100%;
+                        height: 100%;
+                        :global(.chart_handle_wrapper) {
+                            display: block;
+                            background-color: white;
+                            box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+                        }
+                    }
                 }
             }
         }
