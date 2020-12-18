@@ -43,6 +43,7 @@
                 color: #4f80ff;
                 text-align: center;
                 line-height: 32px;
+                cursor: pointer;
             }
             & > a:first-of-type {
                 border-left: 0;
@@ -66,6 +67,7 @@
             color: #555;
             text-align: center;
             line-height: 32px;
+            cursor: pointer;
         }
     }
     .chart_box {
@@ -110,6 +112,7 @@
             height: 40px;
             background-image: url('#{$imageDir}/icon_chart_sel05.svg');
             vertical-align: top;
+            cursor: pointer;
         }
         .chart_link {
             display: inline-block;
@@ -118,6 +121,7 @@
             margin-left: 10px;
             background-size: 40px auto;
             vertical-align: top;
+            cursor: pointer;
         }
         .chart_link:first-child {
             margin-left: 0;
@@ -238,6 +242,7 @@
             letter-spacing: -0.33px;
             text-align: center;
             line-height: 40px;
+            cursor: pointer;
         }
         .input_inner + .input_inner {
             margin-top: 12px;
