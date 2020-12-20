@@ -11,7 +11,8 @@ const YAxis = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const axisRef = useRef();
     const { selected = {} } = dataAnalytics;
-    const { table: selectedTable, fields = [], chart, chartIndex = 0 } = selected;
+    const { table: selectedTable, chart, chartIndex = 0 } = selected;
+    const [fields = []] = table;
     const { yIndex = 0, xIndex } = chart[chartIndex];
     const table = getTrimedTable(selectedTable);
     const disabled = xIndex === -1;
