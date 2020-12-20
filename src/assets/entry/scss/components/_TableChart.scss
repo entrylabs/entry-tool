@@ -172,20 +172,20 @@
         }
         .graph_box {
             position: relative;
-            position: relative;
             -webkit-box-flex: 1;
             flex: 1 1;
             overflow: auto;
             background-color: #fff;
+            padding-top: 30px;
             .chart_area {
-                .fit {
-                    padding-top: 30px;
-                    padding-right: 230px;
-                }
                 svg {
                     margin: auto;
                 }
             }
+        }
+        .graph_box.pie {
+            padding-top: 30px;
+            padding-right: 230px;
         }
     }
     .form_box {

@@ -68,13 +68,20 @@ const ChartLayout = () => {
                         !(categoryIndexes.length && isHorizontalLegend)
                             ? theme.vertical
                             : theme.horizontal
-                    }`}
+                    } ${theme[type]}
+                    `}
                     style={{ backgroundColor: '#fff', height: '100%' }}
                 >
-                    <div style={{ height: 500 }}>
-                        {categoryIndexes.length && isHorizontalLegend ? (
-                            <HorizontalLegend table={table} chart={selectedChart} />
-                        ) : null}
+                    {categoryIndexes.length && isHorizontalLegend ? (
+                        <HorizontalLegend table={table} chart={selectedChart} />
+                    ) : null}
+                    <div
+                        style={{
+                            width: type === PIE ? 500 : '',
+                            height: type === PIE ? 500 : 378,
+                            margin: 'auto',
+                        }}
+                    >
                         <Chart
                             key={`chart_${chartIndex}`}
                             legend={{ show: false }}
@@ -85,10 +92,10 @@ const ChartLayout = () => {
                                 height: type === PIE ? 500 : 378,
                             }}
                         />
-                        {categoryIndexes.length && !isHorizontalLegend ? (
-                            <VerticalLegend table={table} chart={selectedChart} />
-                        ) : null}
                     </div>
+                    {categoryIndexes.length && !isHorizontalLegend ? (
+                        <VerticalLegend table={table} chart={selectedChart} />
+                    ) : null}
                 </div>
             ) : (
                 <div className={theme.chart_no_result} style={{ backgroundColor: '#fff' }}>

@@ -237,7 +237,7 @@ const Chart = (props) => {
     if (!content) {
         return (
             <div className={theme.chart_area}>
-                <div id={id} className={theme.fit} style={{ height: '100%' }} />
+                <div id={id} style={{ height: '100%' }} />
             </div>
         );
     }
