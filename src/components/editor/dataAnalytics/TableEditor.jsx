@@ -48,7 +48,7 @@ const TableEditor = () => {
                 }}
                 option={{
                     type: 'EDITOR',
-                    // callBack: { onColumnEdit: handleColumnEdit },
+                    callBack: { onColumnEdit: handleColumnEdit },
                 }}
             />
         </div>

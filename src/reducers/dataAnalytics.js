@@ -3,12 +3,10 @@ import _cloneDeep from 'lodash/cloneDeep';
 import { TABLE } from '@constants/dataAnalytics';
 
 export const dataAnalyticsReducer = (state, action) => {
-    const { tab, onChangeDataAnalytics } = state;
+    const { tab } = state;
     if (tab === TABLE) {
         const { gridRef, selected } = state;
-        const [fields, ...data] = gridRef?.current?.getSheetData().data;
-        selected.fields = fields;
-        selected.data = data;
+        selected.table = gridRef?.current?.getSheetData().data;
     }
     switch (action.type) {
         case 'SET_DATA':
