@@ -2,10 +2,11 @@ import React, { useContext, useState, useRef } from 'react';
 import _some from 'lodash/some';
 import _reduce from 'lodash/reduce';
 import _findIndex from 'lodash/findIndex';
-import { DataAnalyticsContext } from '@contexts/dataAnalytics';
-import { CommonUtils } from '@utils/Common';
-import { getNumberColumnIndexesBySelectedColumns, getTrimedTable } from '@utils/dataAnalytics';
 import Dropdown from '@components/widget/dropdown';
+import { CommonUtils } from '@utils/Common';
+import { PIE, BAR, LINE, SCATTER } from '@constants/dataAnalytics';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
+import { getNumberColumnIndexesBySelectedColumns, getTrimedTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const Legend = () => {
@@ -17,32 +18,34 @@ const Legend = () => {
     const { table: selectedTable, chart, chartIndex = 0 } = selected;
     const { yIndex = 0, xIndex, categoryIndexes: selectedLegend, type } = chart[chartIndex];
     const table = getTrimedTable(selectedTable);
-    const checkBox = type === 'bar' || type === 'line';
+    const checkBox = type === BAR || type === LINE;
     const dropdownItems = _reduce(
         table[0],
         (prev, __, index) =>
             !_some([xIndex, yIndex], (banIndex) => index === banIndex) ? [...prev, index] : prev,
         []
     );
-    const items = (type === 'scatter'
+    const items = (type === SCATTER
         ? dropdownItems
         : getNumberColumnIndexesBySelectedColumns(table, dropdownItems)
     ).map((index) => [table[0][index], index]);
-    const disabled = xIndex === -1 || (type === 'scatter' && yIndex === -1) || !items.length;
+    const disabled = xIndex === -1 || (type === SCATTER && yIndex === -1) || !items.length;
+    const titleLabel =
+        type === PIE
+            ? CommonUtils.getLang('DataAnalytics.value')
+            : CommonUtils.getLang('DataAnalytics.legend');
 
     const getTitle = () => {
         if (checkBox) {
             if (!selectedLegend.length) {
-                return CommonUtils.getLang('DataAnalytics.legend');
+                return titleLabel;
             }
             if (selectedLegend.length === 1) {
                 return table[0][selectedLegend[0]];
             }
             return `${table[0][selectedLegend[0]]} 외 ${selectedLegend.length - 1}건`;
         }
-        return !table[0][selectedLegend[0]]
-            ? CommonUtils.getLang('DataAnalytics.legend')
-            : table[0][selectedLegend[0]];
+        return !table[0][selectedLegend[0]] ? titleLabel : table[0][selectedLegend[0]];
     };
 
     const handleSelectDropDown = (value) => {
@@ -73,7 +76,7 @@ const Legend = () => {
     return (
         <div className={theme.select_group}>
             <label htmlFor="ChartName" className={theme.tit_label}>
-                {CommonUtils.getLang('DataAnalytics.legend')}
+                {titleLabel}
             </label>
             <div
                 ref={axisRef}
