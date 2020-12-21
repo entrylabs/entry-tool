@@ -43,7 +43,7 @@ export const dataAnalyticsReducer = (state, action) => {
                 isChanged: true,
             };
         }
-        case 'COPY_TALBE': {
+        case 'COPY_TABLE': {
             const { list } = state;
             const { index } = action;
             const copiedTable = _cloneDeep(list[index]);

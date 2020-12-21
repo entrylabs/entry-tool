@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect, useRef } from 'react';
+import React, { createContext, useReducer, useRef } from 'react';
 import { dataAnalyticsReducer } from '@reducers/dataAnalytics';
 
 export const DataAnalyticsContext = createContext();

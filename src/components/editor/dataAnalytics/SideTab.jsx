@@ -35,7 +35,7 @@ const SideTab = () => {
         () => [
             {
                 text: CommonUtils.getLang('DataAnalytics.save'),
-                callback: () => dispatch({ type: 'COPY_TALBE', index: clickedIndex }),
+                callback: () => dispatch({ type: 'COPY_TABLE', index: clickedIndex }),
             },
             {
                 text: CommonUtils.getLang('DataAnalytics.delete'),
@@ -92,7 +92,7 @@ const SideTab = () => {
 
     const handleRemoveClick = (index) => (event) => {
         event.preventDefault();
-        console.log({ index });
+        event.stopPropagation();
         dispatch({
             type: 'REMOVE_TABLE',
             index,
@@ -153,7 +153,7 @@ const SideTab = () => {
                         onContextMenu={handleContext(index)}
                     >
                         <span className={theme.text}>{name}</span>
-                        <a onClick={handleRemoveClick} className={theme.btn_close}>
+                        <a onClick={handleRemoveClick(index)} className={theme.btn_close}>
                             <span className={theme.blind}>
                                 {CommonUtils.getLang('DataAnalytics.delete')}
                             </span>
