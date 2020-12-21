@@ -252,7 +252,6 @@ export const dataAnalyticsReducer = (state, action) => {
             const { list, selectedIndex, selected, onSubmitDataAnalytics } = state;
             const { table } = action;
             if (!list.length) {
-                console.log({ state });
                 onSubmitDataAnalytics({
                     list: [],
                 });
