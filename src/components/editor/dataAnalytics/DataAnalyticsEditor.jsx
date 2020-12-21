@@ -21,6 +21,7 @@ const DataAnalyticsEditor = () => {
     const { dataAnalytics } = useContext(DataAnalyticsContext);
     const { tab, selected = {}, onCloseButtonClick, isChanged = true, gridRef } = dataAnalytics;
     const { table = [[]] } = selected;
+
     const handleButtonClick = (event) => {
         event.preventDefault();
         if (!isChanged) {
@@ -55,6 +56,7 @@ const DataAnalyticsEditor = () => {
             sectionCSS = theme.summary_content;
             break;
     }
+
     return (
         <div className={theme.popup_wrap}>
             <header className={theme.pop_header}>
