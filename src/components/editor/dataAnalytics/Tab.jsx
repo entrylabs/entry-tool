@@ -1,34 +1,45 @@
 import React, { useContext } from 'react';
-import { DataAnalyticsContext } from './context/DataAnalyticsContext';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
-import Styles from '@assets/entry/scss/popup.scss';
+import { TAB_ITEMS } from '@constants/dataAnalytics';
+import Theme from '@utils/Theme';
 
-const Tab = (props) => {
-    const { selected, tabItems = [] } = props;
-    const { dispatch } = useContext(DataAnalyticsContext);
+const Tab = () => {
+    const theme = Theme.getStyle('popup');
+    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
+    const { tab, selected, gridRef } = dataAnalytics;
 
     const handleClick = (value) => (event) => {
         event.preventDefault();
+        if (!selected) {
+            return;
+        }
+
         dispatch({
             type: 'SET_TAB',
             tab: value,
+            table: gridRef?.current?.getSheetData().data,
         });
     };
 
     return (
-        <ul className={Styles.tab_box}>
-            {tabItems.map((item, index) => (
-                <li
-                    className={selected === item.value ? Styles.on : ''}
-                    value={item.value}
-                    key={`tab_${index}`}
-                >
-                    <a href="#" onClick={handleClick(item.value)}>
-                        {CommonUtils.getLang(item.name)}
+        <div className={theme.btn_box}>
+            <div className={theme.tab}>
+                {TAB_ITEMS.map(({ value, name }) => (
+                    <a
+                        key={`tab_${value}`}
+                        role="button"
+                        onClick={handleClick(value)}
+                        className={tab === value ? theme.active : ''}
+                    >
+                        {CommonUtils.getLang(name)}
                     </a>
-                </li>
-            ))}
-        </ul>
+                ))}
+            </div>
+            <a role="button" className={theme.btn_save}>
+                저장하기
+            </a>
+        </div>
     );
 };
 

@@ -1,29 +1,32 @@
 import React from 'react';
 import DataAnalyticsEditor from './DataAnalyticsEditor';
-import DataAnalyticsContextProvider from './context/DataAnalyticsContext';
+import DataAnalyticsContextProvider from '@contexts/dataAnalytics';
+import { TABLE } from '@constants/dataAnalytics';
 
 const DataAnalytics = (props) => {
     const {
-        table = {},
+        tab,
+        list = [],
         onSubmitDataAnalytics = () => {},
         onToastDataAnalytics = () => {},
         onChangeDataAnalytics = () => {},
         onAlertDataAnalytics = () => {},
+        onCloseButtonClick = () => {},
+        onAddTableButtonClick = () => {},
     } = props;
-    const { name = '', fields, origin = [], chart = [], id, tab, summary } = table;
-    const dataTable = fields ? [[...fields], ...origin] : [[]];
 
     const data = {
-        id,
-        tab,
-        summary,
-        title: name,
-        table: dataTable.map((row) => row.map((column) => column)),
-        charts: chart,
+        tab: tab || (list[0] && TABLE),
+        list,
+        selectedIndex: 0,
+        selected: list[0],
+        fold: false,
         onToastDataAnalytics,
         onSubmitDataAnalytics,
         onChangeDataAnalytics,
         onAlertDataAnalytics,
+        onCloseButtonClick,
+        onAddTableButtonClick,
     };
 
     return (

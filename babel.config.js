@@ -24,6 +24,8 @@ module.exports = function(api) {
                         '@utils': './src/utils',
                         '@constants': './src/constants',
                         '@selectors': './src/selectors',
+                        '@contexts': './src/contexts',
+                        '@reducers': './src/reducers',
                     },
                 },
             ],

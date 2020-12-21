@@ -10,11 +10,10 @@ const Index = ({ selected, closePopup, submit }) => {
     const theme = Theme.getStyle('popup');
     return (
         <div className={theme.pop_btn_box}>
-            <a href={'#NULL'} onClick={CommonUtils.handleClick(closePopup)}>
+            <a onClick={CommonUtils.handleClick(closePopup)}>
                 {CommonUtils.getLang('Buttons.cancel')}
             </a>
             <a
-                href={'#NULL'}
                 className={theme.active}
                 onClick={CommonUtils.handleClick(() => submit({ selected }))}
             >
@@ -36,7 +35,4 @@ const mapDispatchToProps = (dispatch) => ({
     closePopup: () => dispatch(closePopup()),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Index);
+export default connect(mapStateToProps, mapDispatchToProps)(Index);

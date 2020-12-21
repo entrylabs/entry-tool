@@ -2156,6 +2156,18 @@
         right: 0;
         bottom: 0;
     }
+    .center_chart {
+        position: fixed;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
     .modal {
         background: #fff;
         width: 680px;
@@ -2244,103 +2256,6 @@
 
                 .vertical {
                     float: left;
-                }
-
-                .horizontal_legend_box {
-                    overflow-y: auto;
-                    max-height: 81px;
-                    margin-bottom: 30px;
-                    text-align: center;
-                }
-                .horizontal_legend_box .legend {
-                    display: inline-block;
-                    vertical-align: top;
-                    margin: 10px 10px 0;
-                    font-size: 14px;
-                    font-weight: 600;
-                    color: #2c313d;
-                    letter-spacing: -0.5px;
-                    line-height: 17px;
-                }
-                .horizontal_legend_box .legend em {
-                    display: inline-block;
-                    width: 17px;
-                    height: 17px;
-                    margin-right: 6px;
-                    vertical-align: top;
-                }
-
-                .pie_legend {
-                    width: 210px;
-                    height: 360px;
-                    background-color: #f9f9f9;
-                    border: 1px solid #f2f2f2;
-                    overflow-y: auto;
-                    overflow-x: hidden;
-                    z-index: 30;
-                }
-                .pie_legend .legend_sjt {
-                    display: block;
-                    padding: 0 20px;
-                    height: 50px;
-                    font-size: 14px;
-                    font-weight: 600;
-                    color: #2c313d;
-                    line-height: 50px;
-                    width: 200px;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
-                }
-                .pie_legend .legend_sjt em {
-                    padding-right: 10px;
-                }
-                .pie_legend .scroll_box {
-                    padding-bottom: 18px;
-                    overflow-y: auto;
-                    border-top: 1px solid #f2f2f2;
-                }
-                .pie_legend .list {
-                    overflow: hidden;
-                    padding: 4px 0 0 10px;
-                }
-                .pie_legend .list li {
-                    overflow: hidden;
-                    height: 14px;
-                    margin-top: 12px;
-                    font-size: 12px;
-                    font-weight: 600;
-                    color: #2c313d;
-                    line-height: 14px;
-                }
-                .pie_legend .list .bg {
-                    float: left;
-                    width: 14px;
-                    height: 14px;
-                    margin: -1px 2px 0 0;
-                    vertical-align: middle;
-                }
-                .pie_legend .list .cnt {
-                    float: left;
-                    overflow: hidden;
-                    position: relative;
-                    width: 54px;
-                    padding: 0 4px;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    line-height: 14px;
-                    text-align: center;
-                }
-                .pie_legend .list .cnt:after {
-                    position: absolute;
-                    right: 0;
-                    top: 1px;
-                    width: 1px;
-                    height: 11px;
-                    background-color: #d8d8d8;
-                    content: '';
-                }
-                .pie_legend .list .cnt:last-child:after {
-                    display: none;
                 }
 
                 .chart_area {
@@ -2451,6 +2366,122 @@
                 }
             }
         }
+    }
+}
+.horizontal_legend_box {
+    overflow-y: auto;
+    max-height: 81px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.horizontal_legend_box .legend {
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px 10px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c313d;
+    letter-spacing: -0.5px;
+    line-height: 17px;
+}
+.horizontal_legend_box .legend em {
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    margin-right: 6px;
+    vertical-align: top;
+}
+
+.pie_legend {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    bottom: 16px;
+    width: 210px;
+    background-color: #f9f9f9;
+    border: 1px solid #f2f2f2;
+    overflow-y: auto;
+    z-index: 30;
+}
+.pie_legend .legend_sjt {
+    display: block;
+    padding: 0 20px;
+    height: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c313d;
+    line-height: 50px;
+    width: 200px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.pie_legend .legend_sjt em {
+    padding-right: 10px;
+}
+.pie_legend .scroll_box {
+    padding-bottom: 18px;
+    overflow-y: auto;
+    border-top: 1px solid #f2f2f2;
+}
+.pie_legend .list {
+    overflow: hidden;
+    padding: 4px 0 0 10px;
+}
+.pie_legend .list li {
+    overflow: hidden;
+    height: 14px;
+    margin-top: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2c313d;
+    line-height: 14px;
+}
+.pie_legend .list .bg {
+    float: left;
+    width: 14px;
+    height: 14px;
+    margin: -1px 2px 0 0;
+    vertical-align: middle;
+}
+.pie_legend .list .cnt {
+    float: left;
+    overflow: hidden;
+    position: relative;
+    width: 54px;
+    padding: 0 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 14px;
+    text-align: center;
+}
+.pie_legend .list .cnt:after {
+    position: absolute;
+    right: 0;
+    top: 1px;
+    width: 1px;
+    height: 11px;
+    background-color: #d8d8d8;
+    content: '';
+}
+.pie_legend .list .cnt:last-child:after {
+    display: none;
+}
+.sheet_box {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    .inner {
+        margin-left: -27px;
+        position: relative;
+        -webkit-box-flex: 1;
+        flex: 1 1;
+        overflow: auto;
     }
 }
 
@@ -3375,4 +3406,15 @@
             background-color: #4f80ff;
         }
     }
+}
+
+.chart_group {
+    position: relative;
+    padding: 40px 44px 34px 44px;
+}
+.chart_group.vertical {
+    padding-right: 244px;
+}
+.chart_group.horizontal {
+    padding: 20px 44px 34px 44px;
 }
