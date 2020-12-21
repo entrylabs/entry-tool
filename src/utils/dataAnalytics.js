@@ -6,8 +6,9 @@ import _every from 'lodash/every';
 import _chain from 'lodash/chain';
 import _reduce from 'lodash/reduce';
 import _uniqBy from 'lodash/uniqBy';
+import _toString from 'lodash/toString';
 import _zipObject from 'lodash/zipObject';
-import _difference from 'lodash/difference';
+import _differenceBy from 'lodash/differenceBy';
 
 import flow from 'lodash/fp/flow';
 import map from 'lodash/fp/map';
@@ -157,6 +158,11 @@ export const getTrimedTable = (table) => {
     return trimedTable;
 };
 
-export const isChangeTable = (origin, current) =>
-    origin.length !== current.length ||
-    _some(origin, (row, index) => _difference(row, current[index]).length);
+export const isChangeTable = (originProp, currentProp) => {
+    const origin = getTrimedTable(originProp);
+    const current = getTrimedTable(currentProp);
+    return (
+        origin.length !== current.length ||
+        _some(origin, (row, index) => _differenceBy(row, current[index], _toString).length)
+    );
+};

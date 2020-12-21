@@ -34,11 +34,12 @@ const DataAnalyticsEditor = () => {
         if (!isChanged) {
             if (tab === TABLE) {
                 const grid = gridRef?.current?.getSheetData().data;
-                if (isChangeTable(table, grid)) {
+                if (!isChangeTable(table, grid)) {
                     return onCloseButtonClick();
                 }
+            } else {
+                return onCloseButtonClick();
             }
-            return onCloseButtonClick();
         }
         setShowConfirm(true);
     };

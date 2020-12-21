@@ -60,15 +60,19 @@ const SideTab = () => {
     const handleClick = useCallback(
         (index) => (event) => {
             event.preventDefault();
+            if (index === selectedIndex) {
+                return;
+            }
 
             if (!isChanged) {
                 if (tab === TABLE) {
                     const grid = gridRef?.current?.getSheetData().data;
-                    if (isChangeTable(table, grid)) {
+                    if (!isChangeTable(table, grid)) {
                         return dispatch({ type: 'SELECT_TABLE', index });
                     }
+                } else {
+                    return dispatch({ type: 'SELECT_TABLE', index });
                 }
-                return dispatch({ type: 'SELECT_TABLE', index });
             }
             setClickedIndex(index);
             setConfirmType('SELECT_TABLE');
@@ -111,11 +115,12 @@ const SideTab = () => {
             if (!isChanged) {
                 if (tab === TABLE) {
                     const grid = gridRef?.current?.getSheetData().data;
-                    if (isChangeTable(table, grid)) {
+                    if (!isChangeTable(table, grid)) {
                         return onAddTableButtonClick();
                     }
+                } else {
+                    return onAddTableButtonClick();
                 }
-                return onAddTableButtonClick();
             }
             setConfirmType('SAVE');
             setShowConfirm(true);
