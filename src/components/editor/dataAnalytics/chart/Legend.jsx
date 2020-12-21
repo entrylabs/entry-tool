@@ -28,8 +28,7 @@ const Legend = () => {
         ? dropdownItems
         : getNumberColumnIndexesBySelectedColumns(table, dropdownItems)
     ).map((index) => [table[0][index], index]);
-    const disabled =
-        xIndex === -1 || (type === 'scatter' && yIndex === -1) || !dropdownItems.length;
+    const disabled = xIndex === -1 || (type === 'scatter' && yIndex === -1) || !items.length;
 
     const getTitle = () => {
         if (checkBox) {

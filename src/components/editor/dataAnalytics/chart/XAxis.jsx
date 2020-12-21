@@ -19,6 +19,7 @@ const XAxis = () => {
         type === 'scatter'
             ? getNumberColumnIndexes(table).map((index) => [fields[index], index])
             : fields.map((item, index) => [item, index]);
+    const disabled = !xAxis.length;
 
     const handleSelectDropdown = (value) => {
         dispatch({
@@ -34,7 +35,9 @@ const XAxis = () => {
 
     const handleClick = (event) => {
         event.preventDefault();
-        setShowDropdown(true);
+        if (xAxis.length) {
+            setShowDropdown(true);
+        }
     };
 
     return (
@@ -46,7 +49,7 @@ const XAxis = () => {
             </label>
             <div
                 ref={axisRef}
-                className={`${theme.pop_selectbox} ${theme.on}`}
+                className={`${theme.pop_selectbox} ${theme.on} ${disabled ? theme.disabled : ''}`}
                 style={{ width: 153 }}
             >
                 <div
