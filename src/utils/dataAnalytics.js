@@ -141,14 +141,14 @@ export const getChartAfterRemoveColumn = (charts, columnIndex) =>
 
 export const getTrimedTable = (table) => {
     let trimedTable = [...table];
-    for (let i = trimedTable.length - 1; i >= 0; i--) {
+    for (let i = trimedTable.length - 1; i >= 1; i--) {
         if (_some(trimedTable[i])) {
             break;
         }
         trimedTable = _slice(trimedTable, 0, trimedTable.length - 1);
     }
 
-    for (let i = trimedTable[0].length - 1; i >= 0; i--) {
+    for (let i = trimedTable[0].length - 1; i >= 1; i--) {
         if (_some(trimedTable, (row) => row[i])) {
             break;
         }
