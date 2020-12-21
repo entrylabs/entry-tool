@@ -52,7 +52,6 @@ const DataAnalyticsEditor = () => {
     let sectionCSS = theme.chart_content;
     let Contents = EmptyContents;
 
-    console.log({ selectedIndex });
     if (selectedIndex !== -1) {
         switch (tab) {
             case TABLE:
