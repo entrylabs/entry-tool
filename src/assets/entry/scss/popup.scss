@@ -2316,10 +2316,16 @@
 
                 &.billboard {
                     display: block;
+                    position: relative;
                     .description {
                         margin-bottom: 10px;
                         em {
                             font-weight: bold;
+                        }
+                        .chart_info {
+                            position: absolute;
+                            right: 0px;
+                            top: 10px;
                         }
                     }
                     .graph_box {
