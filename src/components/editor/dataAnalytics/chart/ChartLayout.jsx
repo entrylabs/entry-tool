@@ -34,8 +34,9 @@ const ChartLayout = () => {
     const { chart = [], chartIndex = 0, table: selectedTable } = selected;
     const table = getTrimedTable(selectedTable);
     const selectedChart = chart[chartIndex] || {};
-    const { type, categoryIndexes = [] } = selectedChart || {};
+    const { type, xIndex, yIndex, categoryIndexes = [] } = selectedChart || {};
     const isHorizontalLegend = type !== 'pie';
+    const key = `chart_${chartIndex}_${xIndex}_${yIndex}_${categoryIndexes.toString()}`;
 
     const handleRemoveClick = useCallback((event) => {
         event.preventDefault();
@@ -83,7 +84,7 @@ const ChartLayout = () => {
                         }}
                     >
                         <Chart
-                            key={`chart_${chartIndex}`}
+                            key={key}
                             legend={{ show: false }}
                             table={table}
                             chart={chart[chartIndex]}
