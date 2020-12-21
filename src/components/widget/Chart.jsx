@@ -160,6 +160,9 @@ const generateOption = (option) => {
                 show: false,
             },
         },
+        tooltip: {
+            grouped: false,
+        },
     };
 };
 
