@@ -8,7 +8,7 @@ const DataAnalytics = (props) => {
     const {
         tab,
         list = [],
-        selectedIndex = 0,
+        selectedIndex = -1,
         onSubmitDataAnalytics = () => {},
         onToastDataAnalytics = () => {},
         onChangeDataAnalytics = () => {},

@@ -29,7 +29,7 @@ const SideTab = () => {
         selectedIndex,
         onAddTableButtonClick,
     } = dataAnalytics;
-    const { table = [[]] } = selected;
+    const { table = [[]] } = selected || {};
 
     const contextMenu = useMemo(
         () => [
@@ -131,8 +131,10 @@ const SideTab = () => {
         setShowConfirm(false);
         if (confirmType !== 'SAVE') {
             dispatch({ type: 'SELECT_TABLE', index: clickedIndex });
+        } else {
+            onAddTableButtonClick();
         }
-    }, [clickedIndex]);
+    }, [clickedIndex, confirmType]);
 
     return (
         <section className={`${theme.aside} ${fold ? theme.fold : ''}`}>

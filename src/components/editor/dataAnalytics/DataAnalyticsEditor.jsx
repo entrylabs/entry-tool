@@ -19,7 +19,14 @@ const DataAnalyticsEditor = () => {
     const theme = Theme.getStyle('popup');
     const [showConfirm, setShowConfirm] = useState(false);
     const { dataAnalytics } = useContext(DataAnalyticsContext);
-    const { tab, selected = {}, onCloseButtonClick, isChanged = true, gridRef } = dataAnalytics;
+    const {
+        tab,
+        selected = {},
+        selectedIndex,
+        onCloseButtonClick,
+        isChanged = true,
+        gridRef,
+    } = dataAnalytics;
     const { table = [[]] } = selected;
 
     const handleButtonClick = (event) => {
@@ -44,17 +51,20 @@ const DataAnalyticsEditor = () => {
     let sectionCSS = theme.chart_content;
     let Contents = EmptyContents;
 
-    switch (tab) {
-        case TABLE:
-            Contents = TableEditor;
-            break;
-        case CHART:
-            Contents = ChartEditor;
-            break;
-        case SUMMARY:
-            Contents = Summary;
-            sectionCSS = theme.summary_content;
-            break;
+    console.log({ selectedIndex });
+    if (selectedIndex !== -1) {
+        switch (tab) {
+            case TABLE:
+                Contents = TableEditor;
+                break;
+            case CHART:
+                Contents = ChartEditor;
+                break;
+            case SUMMARY:
+                Contents = Summary;
+                sectionCSS = theme.summary_content;
+                break;
+        }
     }
 
     return (
@@ -70,13 +80,19 @@ const DataAnalyticsEditor = () => {
             </header>
             <section className={`${theme.pop_content} ${sectionCSS}`}>
                 <SideTab />
-                <div className={theme.section_cont}>
-                    <div className={theme.sheet_form_box}>
-                        <Title key={`title_${selected ? selected.id : 'null'}`} />
-                        <Tab />
+                {selectedIndex === -1 ? (
+                    <section className={theme.content}>
+                        <p className={theme.caution_dsc}>먼저 테이블을 추가해 주세요.</p>
+                    </section>
+                ) : (
+                    <div className={theme.section_cont}>
+                        <div className={theme.sheet_form_box}>
+                            <Title key={`title_${selected ? selected.id : 'null'}`} />
+                            <Tab />
+                        </div>
+                        <Contents />
                     </div>
-                    <Contents />
-                </div>
+                )}
             </section>
             {showConfirm && <SaveConfirm onClick={handleConfirmClick} />}
         </div>
