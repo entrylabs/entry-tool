@@ -1714,16 +1714,20 @@
     position: relative;
     .select_link {
         display: block;
+        overflow: hidden;
         position: relative;
         box-sizing: border-box;
         width: 142px;
         height: 40px;
-        padding: 0 12px;
+        padding: 0 36px 0 12px;
         border: 1px solid #e2e2e2;
         background-color: #fff;
         border-radius: 4px;
         font-weight: 600;
         color: #555;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
         letter-spacing: -0.3px;
         line-height: 38px;
         cursor: pointer;
@@ -2238,6 +2242,7 @@
                 .horizontal_legend_box {
                     overflow-y: auto;
                     max-height: 81px;
+                    padding-top: 20px;
                     margin-bottom: 30px;
                     text-align: center;
                 }
@@ -2807,7 +2812,7 @@
         overflow: hidden;
         width: 16px;
         .split_bar {
-            transform: rotate(180deg);
+            background-image: url('#{$imageDir}/IconSplitBarFold.svg');
         }
     }
 }

@@ -421,8 +421,7 @@ class TableChart extends Component {
                         </div>
                     </section>
                     <div className={Styles.pop_btn_box}>
-                        <div>취소</div>
-                        <div className={Styles.active}>추가하기</div>
+                        <div className={Styles.active} style={{ width: '180px' }}>추가하기</div>
                     </div>
                     {/* 딤드 영역 */}
                     <div className={Styles.dimmed}>
@@ -884,8 +883,7 @@ class TableChart extends Component {
                         </div>
                     </section>
                     <div className={Styles.pop_btn_box}>
-                        <div>취소</div>
-                        <div className={Styles.active}>추가하기</div>
+                        <div className={Styles.active} style={{ width: '180px' }}>추가하기</div>
                     </div>
                 </div>
             )
