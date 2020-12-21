@@ -12,9 +12,9 @@ const YAxis = () => {
     const axisRef = useRef();
     const { selected = {} } = dataAnalytics;
     const { table: selectedTable, chart, chartIndex = 0 } = selected;
-    const [fields = []] = table;
     const { yIndex = 0, xIndex } = chart[chartIndex];
     const table = getTrimedTable(selectedTable);
+    const [fields = []] = table;
     const disabled = xIndex === -1;
     const yAxisIndex = disabled ? [] : getNumberColumnIndexes(table, [xIndex]);
     const yAxis = yAxisIndex.map((index) => [fields[index], index]);
