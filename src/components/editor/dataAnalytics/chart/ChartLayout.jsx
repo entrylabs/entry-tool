@@ -34,8 +34,9 @@ const ChartLayout = () => {
     const { chart = [], chartIndex = 0, table: selectedTable } = selected;
     const table = getTrimedTable(selectedTable);
     const selectedChart = chart[chartIndex] || {};
-    const { type, categoryIndexes = [] } = selectedChart || {};
+    const { type, xIndex, yIndex, categoryIndexes = [] } = selectedChart || {};
     const isHorizontalLegend = type !== 'pie';
+    const key = `chart_${chartIndex}_${xIndex}_${yIndex}_${categoryIndexes.toString()}`;
 
     const handleRemoveClick = useCallback((event) => {
         event.preventDefault();
@@ -68,15 +69,22 @@ const ChartLayout = () => {
                         !(categoryIndexes.length && isHorizontalLegend)
                             ? theme.vertical
                             : theme.horizontal
-                    }`}
+                    } ${theme[type]}
+                    `}
                     style={{ backgroundColor: '#fff', height: '100%' }}
                 >
-                    <div style={{ height: 500 }}>
-                        {categoryIndexes.length && isHorizontalLegend ? (
-                            <HorizontalLegend table={table} chart={selectedChart} />
-                        ) : null}
+                    {categoryIndexes.length && isHorizontalLegend ? (
+                        <HorizontalLegend table={table} chart={selectedChart} />
+                    ) : null}
+                    <div
+                        style={{
+                            width: type === PIE ? 500 : '',
+                            height: type === PIE ? 500 : 378,
+                            margin: 'auto',
+                        }}
+                    >
                         <Chart
-                            key={`chart_${chartIndex}`}
+                            key={key}
                             legend={{ show: false }}
                             table={table}
                             chart={chart[chartIndex]}
@@ -85,10 +93,10 @@ const ChartLayout = () => {
                                 height: type === PIE ? 500 : 378,
                             }}
                         />
-                        {categoryIndexes.length && !isHorizontalLegend ? (
-                            <VerticalLegend table={table} chart={selectedChart} />
-                        ) : null}
                     </div>
+                    {categoryIndexes.length && !isHorizontalLegend ? (
+                        <VerticalLegend table={table} chart={selectedChart} />
+                    ) : null}
                 </div>
             ) : (
                 <div className={theme.chart_no_result} style={{ backgroundColor: '#fff' }}>

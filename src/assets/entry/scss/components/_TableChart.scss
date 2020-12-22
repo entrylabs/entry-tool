@@ -6,6 +6,30 @@
         background-color: #fff;
         padding: 0 27px 27px;
     }
+    .content {
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        -webkit-box-flex: 1;
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+        background-color: #fff;
+        border-radius: 0 0 6px 0;
+        .caution_dsc {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            font-weight: 600;
+            color: $DefaultBlue;
+            text-align: center;
+            line-height: 18px;
+        }
+    }
     .sheet_form_box {
         padding: 18px 0;
         .input {
@@ -43,6 +67,7 @@
                 color: #4f80ff;
                 text-align: center;
                 line-height: 32px;
+                cursor: pointer;
             }
             & > a:first-of-type {
                 border-left: 0;
@@ -66,6 +91,7 @@
             color: #555;
             text-align: center;
             line-height: 32px;
+            cursor: pointer;
         }
     }
     .chart_box {
@@ -110,6 +136,7 @@
             height: 40px;
             background-image: url('#{$imageDir}/icon_chart_sel05.svg');
             vertical-align: top;
+            cursor: pointer;
         }
         .chart_link {
             display: inline-block;
@@ -118,6 +145,7 @@
             margin-left: 10px;
             background-size: 40px auto;
             vertical-align: top;
+            cursor: pointer;
         }
         .chart_link:first-child {
             margin-left: 0;
@@ -168,20 +196,20 @@
         }
         .graph_box {
             position: relative;
-            position: relative;
             -webkit-box-flex: 1;
             flex: 1 1;
             overflow: auto;
             background-color: #fff;
+            padding-top: 30px;
             .chart_area {
-                .fit {
-                    padding-top: 30px;
-                    padding-right: 230px;
-                }
                 svg {
                     margin: auto;
                 }
             }
+        }
+        .graph_box.pie {
+            padding-top: 30px;
+            padding-right: 230px;
         }
     }
     .form_box {
@@ -238,6 +266,7 @@
             letter-spacing: -0.33px;
             text-align: center;
             line-height: 40px;
+            cursor: pointer;
         }
         .input_inner + .input_inner {
             margin-top: 12px;

@@ -11,12 +11,13 @@ const YAxis = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const axisRef = useRef();
     const { selected = {} } = dataAnalytics;
-    const { table: selectedTable, fields = [], chart, chartIndex = 0 } = selected;
+    const { table: selectedTable, chart, chartIndex = 0 } = selected;
     const { yIndex = 0, xIndex } = chart[chartIndex];
     const table = getTrimedTable(selectedTable);
-    const disabled = xIndex === -1;
+    const [fields = []] = table;
     const yAxisIndex = disabled ? [] : getNumberColumnIndexes(table, [xIndex]);
     const yAxis = yAxisIndex.map((index) => [fields[index], index]);
+    const disabled = xIndex === -1 || !yAxis.length;
 
     const handleSelectDropdown = (value) => {
         dispatch({

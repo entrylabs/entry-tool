@@ -3,12 +3,10 @@ import _cloneDeep from 'lodash/cloneDeep';
 import { TABLE } from '@constants/dataAnalytics';
 
 export const dataAnalyticsReducer = (state, action) => {
-    const { tab, onChangeDataAnalytics } = state;
+    const { tab } = state;
     if (tab === TABLE) {
         const { gridRef, selected } = state;
-        const [fields, ...data] = gridRef?.current?.getSheetData().data;
-        selected.fields = fields;
-        selected.data = data;
+        selected.table = gridRef?.current?.getSheetData().data;
     }
     switch (action.type) {
         case 'SET_DATA':
@@ -17,10 +15,11 @@ export const dataAnalyticsReducer = (state, action) => {
                 ...action.payload,
             };
         case 'REMOVE_TABLE': {
-            const { list, selectedIndex = 0 } = state;
+            const { list, selected, selectedIndex = 0 } = state;
             const { index } = action;
             let changedList = [];
             let changedIndex = selectedIndex;
+            let changedSelected = selected;
             if (index > 0 && index < list.length) {
                 changedList = list.slice(0, index);
             }
@@ -29,15 +28,22 @@ export const dataAnalyticsReducer = (state, action) => {
                 changedIndex = selectedIndex - 1;
             }
             changedIndex = selectedIndex === index ? 0 : changedIndex;
+            if (!changedList.length) {
+                changedIndex = -1;
+                changedSelected = {};
+            } else {
+                changedSelected = _cloneDeep(changedList[changedIndex]);
+            }
+
             return {
                 ...state,
-                selected: list[changedIndex],
+                selected: changedSelected,
                 selectedIndex: changedIndex,
                 list: changedList,
                 isChanged: true,
             };
         }
-        case 'COPY_TALBE': {
+        case 'COPY_TABLE': {
             const { list } = state;
             const { index } = action;
             const copiedTable = _cloneDeep(list[index]);
@@ -245,6 +251,12 @@ export const dataAnalyticsReducer = (state, action) => {
         case 'SAVE': {
             const { list, selectedIndex, selected, onSubmitDataAnalytics } = state;
             const { table } = action;
+            if (!list.length) {
+                onSubmitDataAnalytics({
+                    list: [],
+                });
+                return state;
+            }
             if (table) {
                 selected.table = table;
             }

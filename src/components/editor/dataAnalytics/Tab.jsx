@@ -5,7 +5,6 @@ import SaveConfirm from './SaveConfirm';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 import { TAB_ITEMS, TABLE } from '@constants/dataAnalytics';
-import { isChangeTable } from '@utils/dataAnalytics';
 import '@entrylabs/modal/dist/entry/entry-modal.css';
 import Theme from '@utils/Theme';
 
@@ -14,7 +13,6 @@ const Tab = () => {
     const [showConfirm, setShowConfirm] = useState(false);
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { tab, selected, gridRef, isChanged = true } = dataAnalytics;
-    const { table } = selected;
 
     const handleClick = useCallback(
         (value) => (event) => {
@@ -33,12 +31,6 @@ const Tab = () => {
     );
 
     const handleSaveClick = useCallback(() => {
-        if (!isChanged && tab === TABLE) {
-            const grid = gridRef?.current?.getSheetData().data;
-            if (isChangeTable(table, grid)) {
-                return;
-            }
-        }
         setShowConfirm(true);
     }, [isChanged, selected]);
 
