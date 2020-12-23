@@ -5,7 +5,7 @@ import Theme from '@utils/Theme';
 const TitleInput = (props) => {
     const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { selected = {} } = dataAnalytics;
+    const { selected = {}, selectedIndex } = dataAnalytics;
     const { chart = [], chartIndex = 0 } = selected;
     const { title = '' } = chart[chartIndex] || {};
 
@@ -21,7 +21,7 @@ const TitleInput = (props) => {
         onChangeTitle('');
     };
 
-    const handleBlur = (event) => {
+    const handleChange = (event) => {
         const { target = {} } = event;
         const { value = '' } = target;
         onChangeTitle(value);
@@ -29,7 +29,13 @@ const TitleInput = (props) => {
 
     return (
         <div className={theme.input_inner}>
-            <input type="text" defaultValue={title} onBlur={handleBlur} disabled={!chart.length} />
+            <input
+                key={`chart_title_${selectedIndex}_${chartIndex}`}
+                onChange={handleChange}
+                type="text"
+                defaultValue={title}
+                disabled={!chart.length}
+            />
             <a className={title ? theme.close_btn : ''} role="button" onClick={handleClick}>
                 <span className={theme.blind}>입력 취소</span>
             </a>

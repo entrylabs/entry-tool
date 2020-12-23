@@ -87,7 +87,7 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'SET_TAB': {
             const { selected } = state;
-            const { chartIndex } = selected;
+            const { chartIndex = 0 } = selected;
             if (tab === TABLE && tab !== action.tab) {
                 selected.table = action.table;
             }
@@ -108,7 +108,7 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'EDIT_CHART_TITLE': {
             const { selected } = state;
-            const { chartIndex } = selected;
+            const { chartIndex = 0 } = selected;
             selected.chart[chartIndex].title = action.title;
             return {
                 ...state,
@@ -135,7 +135,7 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'REMOVE_CHART': {
             const { selected = {} } = state;
-            const { chart = [], chartIndex } = selected;
+            const { chart = [], chartIndex = 0 } = selected;
             selected.chart = chart.filter((__, index) => index !== chartIndex);
             selected.chartIndex = 0;
             return {
@@ -146,7 +146,7 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'SELECT_X_AXIS': {
             const { selected } = state;
-            const { chart, chartIndex } = selected;
+            const { chart, chartIndex = 0 } = selected;
             selected.chart[chartIndex] = {
                 ...chart[chartIndex],
                 xIndex: action.index,
@@ -161,7 +161,7 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'SELECT_Y_AXIS': {
             const { list, selected, selectedIndex } = state;
-            const { chart, chartIndex } = selected;
+            const { chart, chartIndex = 0 } = selected;
             selected.chart[chartIndex] = {
                 ...chart[chartIndex],
                 yIndex: action.index,
@@ -176,7 +176,7 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'SELECT_LEGEND_AXIS': {
             const { selected } = state;
-            const { chart, chartIndex } = selected;
+            const { chart, chartIndex = 0 } = selected;
             selected.chart[chartIndex] = {
                 ...chart[chartIndex],
                 categoryIndexes: action.indexes,

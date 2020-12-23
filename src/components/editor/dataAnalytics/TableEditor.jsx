@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import EntrySheet from 'entry-sheet';
+import EntrySheet from 'entry_sheet';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { getTrimedTable, getTable } from '@utils/dataAnalytics';
 import _map from 'lodash/map';
@@ -10,7 +10,7 @@ const getTableData = (table) => {
     const rows = table.length < 10 ? new Array(10).fill('') : table;
     return _map(rows, (row) => {
         const cols = row.length < 10 ? new Array(10).fill('') : row;
-        return _map(cols, (__, index) => row[index] || '');
+        return _map(cols, (__, index) => row[index]);
     });
 };
 
