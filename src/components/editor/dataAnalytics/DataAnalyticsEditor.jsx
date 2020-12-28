@@ -21,6 +21,7 @@ const DataAnalyticsEditor = () => {
     const { dataAnalytics } = useContext(DataAnalyticsContext);
     const {
         tab,
+        list,
         selected = {},
         selectedIndex,
         onCloseButtonClick,
@@ -31,6 +32,9 @@ const DataAnalyticsEditor = () => {
 
     const handleButtonClick = (event) => {
         event.preventDefault();
+        if (!list.length) {
+            return onCloseButtonClick();
+        }
         if (!isChanged) {
             if (tab === TABLE) {
                 const grid = gridRef?.current?.getSheetData().data;
