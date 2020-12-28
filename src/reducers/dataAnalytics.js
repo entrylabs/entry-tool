@@ -252,12 +252,6 @@ export const dataAnalyticsReducer = (state, action) => {
         case 'SAVE': {
             const { list, selectedIndex, selected, onSubmitDataAnalytics } = state;
             const { table } = action;
-            if (!list.length) {
-                onSubmitDataAnalytics({
-                    list: [],
-                });
-                return state;
-            }
             if (table) {
                 selected.table = table;
             }
@@ -269,6 +263,7 @@ export const dataAnalyticsReducer = (state, action) => {
             return {
                 ...state,
                 list,
+                selected,
                 isChanged: false,
             };
         }
