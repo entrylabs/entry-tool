@@ -4,6 +4,7 @@ export const CHANGE_DATA_ANALYTICS = 'CHANGE_DATA_ANALYTICS';
 export const ALERT_DATA_ANALYTICS = 'ALERT_DATA_ANALYTICS';
 export const CLOSE_BUTTON_CLICK = 'CLOSE_BUTTON_CLICK';
 export const ADD_TABLE_CLICK = 'ADD_TABLE_CLICK';
+export const REMOVE_TABLE = 'REMOVE_TABLE';
 
 export const onSubmitDataAnalytics = (data) => (dispatch) => {
     dispatch({
@@ -39,4 +40,8 @@ export const onCloseButtonClick = () => (dispatch) => {
 
 export const onAddTableButtonClick = () => (dispatch) => {
     dispatch({ type: ADD_TABLE_CLICK });
+};
+
+export const onRemoveTable = (data) => (dispatch) => {
+    dispatch({ type: REMOVE_TABLE, data });
 };

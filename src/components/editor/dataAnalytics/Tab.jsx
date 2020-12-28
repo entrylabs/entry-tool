@@ -12,7 +12,7 @@ const Tab = () => {
     const theme = Theme.getStyle('popup');
     const [showConfirm, setShowConfirm] = useState(false);
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { tab, selected, gridRef, isChanged = true } = dataAnalytics;
+    const { tab, selected, gridRef, isChanged } = dataAnalytics;
 
     const handleClick = useCallback(
         (value) => (event) => {

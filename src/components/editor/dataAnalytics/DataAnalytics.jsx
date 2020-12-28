@@ -15,6 +15,7 @@ const DataAnalytics = (props) => {
         onAlertDataAnalytics = () => {},
         onCloseButtonClick = () => {},
         onAddTableButtonClick = () => {},
+        onRemoveTable = () => {},
     } = props;
 
     const index = selectedIndex == 0 ? 0 : list.length - 1;
@@ -31,6 +32,7 @@ const DataAnalytics = (props) => {
         onAlertDataAnalytics,
         onCloseButtonClick,
         onAddTableButtonClick,
+        onRemoveTable,
     };
 
     return (

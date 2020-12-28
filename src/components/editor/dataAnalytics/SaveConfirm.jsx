@@ -5,14 +5,14 @@ import { Confirm as ConfirmModal } from '@entrylabs/modal';
 import { CommonUtils } from '@utils/Common';
 import '@entrylabs/modal/dist/entry/entry-modal.css';
 
-const Confirm = ({ onClick }) => {
+const SaveConfirm = ({ onClick }) => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { tab, gridRef } = dataAnalytics;
 
     return (
         <ConfirmModal
-            content={CommonUtils.getLang('DataAnalytics.confirm_content')}
             title={CommonUtils.getLang('DataAnalytics.confirm')}
+            content={CommonUtils.getLang('DataAnalytics.confirm_content')}
             onEvent={(data) => {
                 if (data) {
                     let table;
@@ -31,4 +31,4 @@ const Confirm = ({ onClick }) => {
     );
 };
 
-export default Confirm;
+export default SaveConfirm;

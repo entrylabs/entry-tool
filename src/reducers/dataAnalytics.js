@@ -15,7 +15,7 @@ export const dataAnalyticsReducer = (state, action) => {
                 ...action.payload,
             };
         case 'REMOVE_TABLE': {
-            const { list, selected, selectedIndex = 0 } = state;
+            const { list, selected, selectedIndex = 0, onRemoveTable } = state;
             const { index } = action;
             let changedList = [];
             let changedIndex = selectedIndex;
@@ -34,13 +34,14 @@ export const dataAnalyticsReducer = (state, action) => {
             } else {
                 changedSelected = _cloneDeep(changedList[changedIndex]);
             }
+            onRemoveTable(index);
 
             return {
                 ...state,
                 selected: changedSelected,
                 selectedIndex: changedIndex,
                 list: changedList,
-                isChanged: true,
+                isChanged: false,
             };
         }
         case 'COPY_TABLE': {
@@ -53,7 +54,7 @@ export const dataAnalyticsReducer = (state, action) => {
                 selected: copiedTable,
                 selectedIndex: list.length,
                 list: changedList,
-                isChanged: true,
+                isChanged: false,
             };
         }
         case 'FOLD':
@@ -210,7 +211,7 @@ export const dataAnalyticsReducer = (state, action) => {
             return {
                 ...state,
                 selected,
-                isChanged: false,
+                isChanged: true,
             };
         }
         case 'DELETE_COLUMN': {
@@ -245,7 +246,7 @@ export const dataAnalyticsReducer = (state, action) => {
             return {
                 ...state,
                 selected,
-                isChanged: false,
+                isChanged: true,
             };
         }
         case 'SAVE': {

@@ -24,7 +24,7 @@ const DataAnalyticsEditor = () => {
         selected = {},
         selectedIndex,
         onCloseButtonClick,
-        isChanged = true,
+        isChanged,
         gridRef,
     } = dataAnalytics;
     const { table = [[]] } = selected;
