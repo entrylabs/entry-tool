@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import EntrySheet from 'entry_sheet';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
-import { getTrimedTable, getTable } from '@utils/dataAnalytics';
 import _map from 'lodash/map';
 import Theme from '@utils/Theme';
 import { Array } from 'window-or-global';
@@ -18,8 +17,7 @@ const TableEditor = () => {
     const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { selected = {}, gridRef } = dataAnalytics;
-    const { table: selectedTable = [[]] } = selected;
-    const table = getTrimedTable(selectedTable);
+    const { table = [[]] } = selected;
 
     const handleColumnEdit = ({ editType, index }) => {
         if (editType === 'ADD') {
