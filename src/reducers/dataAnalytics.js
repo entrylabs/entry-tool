@@ -1,6 +1,7 @@
 import { CommonUtils } from '@utils/Common';
 import _cloneDeep from 'lodash/cloneDeep';
 import { TABLE } from '@constants/dataAnalytics';
+import { getTrimedTable } from '@utils/dataAnalytics';
 
 export const dataAnalyticsReducer = (state, action) => {
     const { tab } = state;
@@ -253,7 +254,7 @@ export const dataAnalyticsReducer = (state, action) => {
             const { list, selectedIndex, selected, onSubmitDataAnalytics } = state;
             const { table } = action;
             if (table) {
-                selected.table = table;
+                selected.table = getTrimedTable(table);
             }
             list[selectedIndex] = selected;
             onSubmitDataAnalytics({

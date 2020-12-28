@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import _ from 'lodash';
+import _slice from 'lodash/slice';
+import _forEach from 'lodash/forEach';
 import bb from 'billboard.js';
 
 import Theme from '@utils/Theme';
@@ -66,6 +68,22 @@ const addValueToKey = (table) => [
         .map((item) => [`${item[0]}${tabString}|${tabString}${item[1]}${tabString}|`, item[1]]),
 ];
 
+const deduplicationColumn = (columns) =>
+    columns.map((column, index) => {
+        const [head, ...ext] = column;
+        const prev = _slice(columns, 0, index);
+        let count = 0;
+        _forEach(prev, ([prevHead]) => {
+            if (prevHead == head) {
+                count++;
+            }
+        });
+        if (count) {
+            return [`${head} (${count})`, ...ext];
+        }
+        return [head, ...ext];
+    });
+
 const generateOption = (option) => {
     const {
         table,
@@ -99,20 +117,19 @@ const generateOption = (option) => {
     switch (type) {
         case 'bar':
         case 'line':
-            if (yIndex !== -1) {
-                columns = pivotTable(table, xIndex, yIndex, categoryIndexes[0]);
-                x = table[0][xIndex];
-            } else {
-                columns = [...categoryIndexes].map((index) => _.unzip(table)[index]);
-                axisX.categories = table.slice(1).map((row) => row[xIndex]);
-            }
+            columns = deduplicationColumn(
+                [...categoryIndexes].map((index) => _.unzip(table)[index])
+            );
+            axisX.categories = table.slice(1).map((row) => row[xIndex]);
             break;
         case 'pie':
-            columns = addValueToKey(pieChart(table, xIndex, categoryIndexes[0]));
+            columns = deduplicationColumn(
+                addValueToKey(pieChart(table, xIndex, categoryIndexes[0]))
+            );
             x = table[0][xIndex];
             break;
         case 'scatter': {
-            columns = scatterChart(table, xIndex, yIndex, categoryIndexes);
+            columns = deduplicationColumn(scatterChart(table, xIndex, yIndex, categoryIndexes));
             xs = scatterXs(table, xIndex, yIndex, categoryIndexes);
             const { tick = {} } = axisX;
             axisX = {
