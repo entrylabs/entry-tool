@@ -237,6 +237,7 @@ export const dataAnalyticsReducer = (state, action) => {
                 for (let i = 0; i < chart.categoryIndexes.length; i++) {
                     if (chart.categoryIndexes[i] == index) {
                         chart.categoryIndexes.splice(i, 1);
+                        i--;
                     } else if (chart.categoryIndexes[i] > index) {
                         chart.categoryIndexes[i]--;
                     }
