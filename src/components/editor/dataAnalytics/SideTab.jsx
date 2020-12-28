@@ -4,6 +4,7 @@ import _difference from 'lodash/difference';
 import XLSX from 'xlsx';
 import ContextMenu from '@components/widget/contextMenu';
 import SaveConfirm from './SaveConfirm';
+import { Confirm as ConfirmModal } from '@entrylabs/modal';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { isChangeTable } from '@utils/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
@@ -15,9 +16,10 @@ const SideTab = () => {
     const [x, setX] = useState(0);
     const [y, setY] = useState(0);
     const [visible, setVisible] = useState(false);
-    const [showConfirm, setShowConfirm] = useState(false);
     const [confirmType, setConfirmType] = useState('');
     const [clickedIndex, setClickedIndex] = useState(0);
+    const [showSaveConfirm, setShowSaveConfirm] = useState(false);
+    const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const {
         tab,
@@ -39,7 +41,7 @@ const SideTab = () => {
             },
             {
                 text: CommonUtils.getLang('DataAnalytics.delete'),
-                callback: () => dispatch({ type: 'REMOVE_TABLE', index: clickedIndex }),
+                callback: () => setShowDeleteConfirm(true),
             },
             {
                 text: CommonUtils.getLang('DataAnalytics.download'),
@@ -76,7 +78,7 @@ const SideTab = () => {
             }
             setClickedIndex(index);
             setConfirmType('SELECT_TABLE');
-            setShowConfirm(true);
+            setShowSaveConfirm(true);
         },
         [tab, gridRef, isChanged, table]
     );
@@ -97,10 +99,8 @@ const SideTab = () => {
     const handleRemoveClick = (index) => (event) => {
         event.preventDefault();
         event.stopPropagation();
-        dispatch({
-            type: 'REMOVE_TABLE',
-            index,
-        });
+        setClickedIndex(index);
+        setShowDeleteConfirm(true);
     };
 
     const handleFoldButtonClick = useCallback((event) => {
@@ -123,7 +123,7 @@ const SideTab = () => {
                 }
             }
             setConfirmType('SAVE');
-            setShowConfirm(true);
+            setShowSaveConfirm(true);
         },
         [tab, gridRef, isChanged]
     );
@@ -133,7 +133,7 @@ const SideTab = () => {
     }, []);
 
     const handleConfirmClick = useCallback(() => {
-        setShowConfirm(false);
+        setShowSaveConfirm(false);
         if (confirmType !== 'SAVE') {
             dispatch({ type: 'SELECT_TABLE', index: clickedIndex });
         } else {
@@ -173,7 +173,26 @@ const SideTab = () => {
                     coordinate={{ x, y }}
                 />
             )}
-            {showConfirm && <SaveConfirm onClick={handleConfirmClick} />}
+            {showSaveConfirm && <SaveConfirm onClick={handleConfirmClick} />}
+            {showDeleteConfirm && (
+                <ConfirmModal
+                    title={CommonUtils.getLang('DataAnalytics.confirm')}
+                    content={CommonUtils.getLang('DataAnalytics.remove_confirm_content')}
+                    onEvent={(data) => {
+                        if (data) {
+                            dispatch({
+                                type: 'REMOVE_TABLE',
+                                index: clickedIndex,
+                            });
+                        }
+                        setShowDeleteConfirm(false);
+                    }}
+                    options={{
+                        negativeButtonText: CommonUtils.getLang('DataAnalytics.cancel'),
+                        positiveButtonText: CommonUtils.getLang('DataAnalytics.confirm'),
+                    }}
+                />
+            )}
             <a role="button" className={theme.split_bar} onClick={handleFoldButtonClick}>
                 <span className={theme.blind}>창 조절하기</span>
             </a>

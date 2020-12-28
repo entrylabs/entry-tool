@@ -8,6 +8,7 @@ import {
     ALERT_DATA_ANALYTICS,
     CLOSE_BUTTON_CLICK,
     ADD_TABLE_CLICK,
+    REMOVE_TABLE,
 } from '@actions/editor';
 import {
     SELECT_DROPDOWN,
@@ -16,7 +17,6 @@ import {
     CHANGE_DRAGGING,
     PICK_COLOR,
 } from '@actions/widget';
-import root from 'window-or-global';
 
 export default class EmitMiddleware {
     constructor(emitter) {
@@ -81,6 +81,9 @@ export default class EmitMiddleware {
                     break;
                 case ADD_TABLE_CLICK:
                     this.emitter.emit('addTable');
+                    break;
+                case REMOVE_TABLE:
+                    this.emitter.emit('removeTable', action.data);
                     break;
                 default: {
                     break;

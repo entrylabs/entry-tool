@@ -15,7 +15,7 @@ export const dataAnalyticsReducer = (state, action) => {
                 ...action.payload,
             };
         case 'REMOVE_TABLE': {
-            const { list, selected, selectedIndex = 0 } = state;
+            const { list, selected, selectedIndex = 0, onRemoveTable } = state;
             const { index } = action;
             let changedList = [];
             let changedIndex = selectedIndex;
@@ -34,13 +34,14 @@ export const dataAnalyticsReducer = (state, action) => {
             } else {
                 changedSelected = _cloneDeep(changedList[changedIndex]);
             }
+            onRemoveTable(index);
 
             return {
                 ...state,
                 selected: changedSelected,
                 selectedIndex: changedIndex,
                 list: changedList,
-                isChanged: true,
+                isChanged: false,
             };
         }
         case 'COPY_TABLE': {
@@ -53,7 +54,7 @@ export const dataAnalyticsReducer = (state, action) => {
                 selected: copiedTable,
                 selectedIndex: list.length,
                 list: changedList,
-                isChanged: true,
+                isChanged: false,
             };
         }
         case 'FOLD':
@@ -87,7 +88,7 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'SET_TAB': {
             const { selected } = state;
-            const { chartIndex } = selected;
+            const { chartIndex = 0 } = selected;
             if (tab === TABLE && tab !== action.tab) {
                 selected.table = action.table;
             }
@@ -108,7 +109,7 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'EDIT_CHART_TITLE': {
             const { selected } = state;
-            const { chartIndex } = selected;
+            const { chartIndex = 0 } = selected;
             selected.chart[chartIndex].title = action.title;
             return {
                 ...state,
@@ -135,7 +136,7 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'REMOVE_CHART': {
             const { selected = {} } = state;
-            const { chart = [], chartIndex } = selected;
+            const { chart = [], chartIndex = 0 } = selected;
             selected.chart = chart.filter((__, index) => index !== chartIndex);
             selected.chartIndex = 0;
             return {
@@ -146,7 +147,7 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'SELECT_X_AXIS': {
             const { selected } = state;
-            const { chart, chartIndex } = selected;
+            const { chart, chartIndex = 0 } = selected;
             selected.chart[chartIndex] = {
                 ...chart[chartIndex],
                 xIndex: action.index,
@@ -161,7 +162,7 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'SELECT_Y_AXIS': {
             const { list, selected, selectedIndex } = state;
-            const { chart, chartIndex } = selected;
+            const { chart, chartIndex = 0 } = selected;
             selected.chart[chartIndex] = {
                 ...chart[chartIndex],
                 yIndex: action.index,
@@ -176,7 +177,7 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'SELECT_LEGEND_AXIS': {
             const { selected } = state;
-            const { chart, chartIndex } = selected;
+            const { chart, chartIndex = 0 } = selected;
             selected.chart[chartIndex] = {
                 ...chart[chartIndex],
                 categoryIndexes: action.indexes,
@@ -210,7 +211,7 @@ export const dataAnalyticsReducer = (state, action) => {
             return {
                 ...state,
                 selected,
-                isChanged: false,
+                isChanged: true,
             };
         }
         case 'DELETE_COLUMN': {
@@ -245,18 +246,12 @@ export const dataAnalyticsReducer = (state, action) => {
             return {
                 ...state,
                 selected,
-                isChanged: false,
+                isChanged: true,
             };
         }
         case 'SAVE': {
             const { list, selectedIndex, selected, onSubmitDataAnalytics } = state;
             const { table } = action;
-            if (!list.length) {
-                onSubmitDataAnalytics({
-                    list: [],
-                });
-                return state;
-            }
             if (table) {
                 selected.table = table;
             }
@@ -268,6 +263,7 @@ export const dataAnalyticsReducer = (state, action) => {
             return {
                 ...state,
                 list,
+                selected,
                 isChanged: false,
             };
         }
