@@ -112,6 +112,10 @@ const SideTab = () => {
         (event) => {
             event.preventDefault();
 
+            if (!list.length) {
+                return onAddTableButtonClick();
+            }
+
             if (!isChanged) {
                 if (tab === TABLE) {
                     const grid = gridRef?.current?.getSheetData().data;
@@ -125,7 +129,7 @@ const SideTab = () => {
             setConfirmType('SAVE');
             setShowSaveConfirm(true);
         },
-        [tab, gridRef, isChanged]
+        [tab, gridRef, isChanged, list]
     );
 
     const handleOutsideClick = useCallback((event) => {
