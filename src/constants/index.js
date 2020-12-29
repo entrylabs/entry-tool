@@ -404,7 +404,7 @@ export const DEFAULT_OPTIONS = {
                 select: {
                     name: 'Workspace.select_table',
                 },
-                upload: {
+                dragUpload: {
                     name: 'Workspace.upload',
                 },
                 draw: {
