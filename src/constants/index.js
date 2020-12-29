@@ -423,6 +423,7 @@ export const DEFAULT_OPTIONS = {
                 },
             },
             sidebar: {},
+            cancelButton: false,
         },
     },
 };
