@@ -922,7 +922,13 @@
                             font-weight: 600;
                         }
                         p {
+                            display: -webkit-box;
                             margin-top: 4px;
+                            max-height: 37px;
+                            word-wrap: break-word;
+                            overflow: hidden;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
                             &.fields {
                                 text-overflow: ellipsis;
                                 white-space: nowrap;
