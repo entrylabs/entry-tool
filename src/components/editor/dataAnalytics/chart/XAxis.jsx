@@ -1,7 +1,9 @@
 import React, { useContext, useState, useRef } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import Dropdown from '@components/widget/dropdown';
-import { CommonUtils, getNumberColumnIndexes } from '@utils/Common';
+import { CommonUtils } from '@utils/Common';
+import { PIE, SCATTER } from '@constants/dataAnalytics';
+import { getNumberColumnIndexes, getTrimedTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const XAxis = () => {
@@ -10,13 +12,19 @@ const XAxis = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const axisRef = useRef();
     const { selected = {} } = dataAnalytics;
-    const { fields = [], origin = [], chart, chartIndex } = selected;
+    const { table: selectedTable, chart, chartIndex = 0 } = selected;
     const { type, xIndex = 0 } = chart[chartIndex];
-    const table = [[...fields], ...origin];
+    const table = getTrimedTable(selectedTable);
+    const [fields = []] = table;
     const xAxis =
-        type === 'scatter'
+        type === SCATTER
             ? getNumberColumnIndexes(table).map((index) => [fields[index], index])
             : fields.map((item, index) => [item, index]);
+    const disabled = !xAxis.length;
+    const titleLabel =
+        type === PIE
+            ? CommonUtils.getLang('DataAnalytics.legend')
+            : CommonUtils.getLang('DataAnalytics.x_axis');
 
     const handleSelectDropdown = (value) => {
         dispatch({
@@ -32,20 +40,20 @@ const XAxis = () => {
 
     const handleClick = (event) => {
         event.preventDefault();
-        setShowDropdown(true);
+        if (xAxis.length) {
+            setShowDropdown(true);
+        }
     };
 
     return (
         <div className={theme.select_group}>
             <label htmlFor="ChartName" className={theme.tit_label}>
-                {type === 'pie'
-                    ? CommonUtils.getLang('DataAnalytics.column_name')
-                    : CommonUtils.getLang('DataAnalytics.x_axis')}
+                {titleLabel}
             </label>
             <div
                 ref={axisRef}
-                className={`${theme.pop_selectbox} ${theme.on}`}
-                style={{ width: 208 }}
+                className={`${theme.pop_selectbox} ${theme.on} ${disabled ? theme.disabled : ''}`}
+                style={{ width: 153 }}
             >
                 <div
                     className={`${theme.select_link} ${
@@ -55,7 +63,7 @@ const XAxis = () => {
                     }`}
                     onClick={handleClick}
                 >
-                    {xIndex === -1 ? CommonUtils.getLang('DataAnalytics.x_axis') : fields[xIndex]}
+                    {xIndex === -1 ? titleLabel : fields[xIndex]}
                 </div>
             </div>
             {showDropdown && (

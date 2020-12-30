@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
 import _ from 'lodash';
+import _slice from 'lodash/slice';
+import _forEach from 'lodash/forEach';
 import bb from 'billboard.js';
 
-import Styles from '@assets/entry/scss/popup.scss';
+import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';
 
-import { CommonUtils, hasNumberColumn, categoryKeys, isZipable } from '@utils/Common';
+import { CommonUtils } from '@utils/Common';
+import { hasNumberColumn, categoryKeys, isZipable } from '@utils/dataAnalytics';
 const { generateHash } = CommonUtils;
 
 const pivot = (table, xIndex, yIndex, categoryIndex) =>
@@ -65,6 +68,22 @@ const addValueToKey = (table) => [
         .map((item) => [`${item[0]}${tabString}|${tabString}${item[1]}${tabString}|`, item[1]]),
 ];
 
+const deduplicationColumn = (columns) =>
+    columns.map((column, index) => {
+        const [head, ...ext] = column;
+        const prev = _slice(columns, 0, index);
+        let count = 0;
+        _forEach(prev, ([prevHead]) => {
+            if (prevHead == head) {
+                count++;
+            }
+        });
+        if (count) {
+            return [`${head} (${count})`, ...ext];
+        }
+        return [head, ...ext];
+    });
+
 const generateOption = (option) => {
     const {
         table,
@@ -82,31 +101,49 @@ const generateOption = (option) => {
     let x;
     let xs;
     let columns;
-    let { axisX = { type: 'category', tick: { show: true } } } = option;
+    let grid;
+    let {
+        axisX = {
+            type: 'category',
+            tick: {
+                fit: true,
+                multiline: false,
+                autorotate: true,
+                culling: true,
+            },
+        },
+    } = option;
 
     switch (type) {
         case 'bar':
         case 'line':
-            if (yIndex !== -1) {
-                columns = pivotTable(table, xIndex, yIndex, categoryIndexes[0]);
-                x = table[0][xIndex];
-            } else {
-                columns = [...categoryIndexes].map((index) => _.unzip(table)[index]);
-                axisX.categories = table.slice(1).map((row) => row[xIndex]);
-            }
+            columns = deduplicationColumn(
+                [...categoryIndexes].map((index) => _.unzip(table)[index])
+            );
+            axisX.categories = table.slice(1).map((row) => row[xIndex]);
             break;
         case 'pie':
-            columns = addValueToKey(pieChart(table, xIndex, categoryIndexes[0]));
+            columns = deduplicationColumn(
+                addValueToKey(pieChart(table, xIndex, categoryIndexes[0]))
+            );
             x = table[0][xIndex];
             break;
         case 'scatter': {
-            columns = scatterChart(table, xIndex, yIndex, categoryIndexes);
+            columns = deduplicationColumn(scatterChart(table, xIndex, yIndex, categoryIndexes));
             xs = scatterXs(table, xIndex, yIndex, categoryIndexes);
             const { tick = {} } = axisX;
             axisX = {
                 tick: {
                     ...tick,
                     fit: false,
+                },
+            };
+            grid = {
+                x: {
+                    show: true,
+                },
+                y: {
+                    show: true,
                 },
             };
             break;
@@ -121,6 +158,7 @@ const generateOption = (option) => {
         legend,
         size,
         tooltip,
+        grid,
         bindto: `#${id}`,
         data: {
             x,
@@ -137,12 +175,16 @@ const generateOption = (option) => {
                 show: false,
             },
         },
+        tooltip: {
+            grouped: false,
+        },
     };
 };
 
 const isDrawable = (table) => table[0].length > 1 && hasNumberColumn(table);
 
 const Chart = (props) => {
+    const theme = Theme.getStyle('popup');
     const {
         table = [[]],
         chart = {},
@@ -161,18 +203,13 @@ const Chart = (props) => {
 
     if (!isDrawable(table)) {
         return shortForm ? (
-            <div className={Styles.data_add_box}>
-                <a onClick={(e) => e.preventDefault()}>
-                    <span className={Styles.blind}>
-                        {CommonUtils.getLang('DataAnalytics.add_data')}
-                    </span>
-                </a>
+            <div className={theme.data_add_box}>
                 <p>{CommonUtils.getLang('DataAnalytics.unable_to_express_chart')}</p>
             </div>
         ) : (
-            <div className={Styles.graph_cont}>
+            <div className={theme.graph_cont}>
                 <div id={id} style={{ height: '100%' }}>
-                    <div className={Styles.alert}>
+                    <div className={theme.alert}>
                         {CommonUtils.getLang('DataAnalytics.unable_to_express_chart')}
                     </div>
                 </div>
@@ -217,23 +254,20 @@ const Chart = (props) => {
 
     if (!content) {
         return (
-            <div className={Styles.chart_area}>
+            <div className={theme.chart_area}>
                 <div id={id} style={{ height: '100%' }} />
             </div>
         );
     }
 
     return shortForm ? (
-        <div className={Styles.data_add_box}>
-            <a onClick={(e) => e.preventDefault()}>
-                <span className={Styles.blind}>{content}</span>
-            </a>
+        <div className={theme.data_add_box}>
             <p>{content}</p>
         </div>
     ) : (
-        <div className={Styles.graph_cont}>
+        <div className={theme.graph_cont}>
             <div id={id} style={{ height: '100%' }}>
-                <div className={Styles.alert}>{content}</div>
+                <div className={theme.alert}>{content}</div>
             </div>
         </div>
     );

@@ -5,6 +5,30 @@
         background-color: #fff;
         padding: 0 27px 27px;
     }
+    .content {
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        -webkit-box-flex: 1;
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+        background-color: #fff;
+        border-radius: 0 0 6px 0;
+        .caution_dsc {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            font-weight: 600;
+            color: $DefaultBlue;
+            text-align: center;
+            line-height: 18px;
+        }
+    }
     .sheet_form_box {
         padding: 18px 0;
         .input {
@@ -17,7 +41,7 @@
             outline: 0;
             font-size: 14px;
             font-weight: 600;
-            color:#2c313d;
+            color: #2c313d;
             letter-spacing: -0.33px;
         }
         .btn_box {
@@ -42,6 +66,7 @@
                 color: #4f80ff;
                 text-align: center;
                 line-height: 32px;
+                cursor: pointer;
             }
             & > a:first-of-type {
                 border-left: 0;
@@ -63,8 +88,9 @@
             font-size: 14px;
             font-weight: 600;
             color: #555;
-            text-align: center;;
+            text-align: center;
             line-height: 32px;
+            cursor: pointer;
         }
     }
     .chart_box {
@@ -217,7 +243,7 @@
             border-bottom: 1px solid #cbcbcb;
         }
         .table thead th,
-        .table tbody th, {
+        .table tbody th {
             font-weight: 600;
             height: 36px;
             background-color: #f4f4f4;
@@ -226,7 +252,7 @@
             border-top: 1px solid #e2e2e2;
         }
         .table tbody td {
-            border-top: 1px solid #f4f4f4
+            border-top: 1px solid #f4f4f4;
         }
         .table tbody td {
             height: 36px;
@@ -294,6 +320,24 @@
         }
         .chart_list li img {
             vertical-align: top;
+        }
+        .chart_list li.bar .chart_area,
+        .chart_list li.line .chart_area,
+        .chart_list li.scatter .chart_area {
+            padding-top: 9px;
+        }
+        .chart_list li.pie .chart_area {
+            padding-left: 15px;
+        }
+        .chart_list .data_add_box {
+            height: 106px;
+            padding-top: 12px;
+            border: 0;
+            text-align: center;
+            p {
+                padding-top: 6px;
+                line-height: 88px;
+            }
         }
     }
 }

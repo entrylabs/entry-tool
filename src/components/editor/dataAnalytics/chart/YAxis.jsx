@@ -1,7 +1,8 @@
 import React, { useContext, useState, useRef } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import Dropdown from '@components/widget/dropdown';
-import { CommonUtils, getNumberColumnIndexes } from '@utils/Common';
+import { CommonUtils } from '@utils/Common';
+import { getNumberColumnIndexes, getTrimedTable, getTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const YAxis = () => {
@@ -10,12 +11,13 @@ const YAxis = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const axisRef = useRef();
     const { selected = {} } = dataAnalytics;
-    const { fields = [], origin = [], chart, chartIndex } = selected;
+    const { table: selectedTable, chart, chartIndex = 0 } = selected;
     const { yIndex = 0, xIndex } = chart[chartIndex];
-    const table = [[...fields], ...origin];
-    const disabled = xIndex === -1;
+    const table = getTrimedTable(selectedTable);
+    const [fields = []] = table;
     const yAxisIndex = disabled ? [] : getNumberColumnIndexes(table, [xIndex]);
     const yAxis = yAxisIndex.map((index) => [fields[index], index]);
+    const disabled = xIndex === -1 || !yAxis.length;
 
     const handleSelectDropdown = (value) => {
         dispatch({

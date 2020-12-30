@@ -1,7 +1,14 @@
-import { CommonUtils, makeTableByGrid } from '@utils/Common';
+import { CommonUtils } from '@utils/Common';
+import _cloneDeep from 'lodash/cloneDeep';
 import { TABLE } from '@constants/dataAnalytics';
+import { getTrimedTable } from '@utils/dataAnalytics';
 
 export const dataAnalyticsReducer = (state, action) => {
+    const { tab } = state;
+    if (tab === TABLE) {
+        const { gridRef, selected } = state;
+        selected.table = gridRef?.current?.getSheetData().data;
+    }
     switch (action.type) {
         case 'SET_DATA':
             return {
@@ -9,10 +16,11 @@ export const dataAnalyticsReducer = (state, action) => {
                 ...action.payload,
             };
         case 'REMOVE_TABLE': {
-            const { list, selectedIndex = 0 } = state;
+            const { list, selected, selectedIndex = 0, onRemoveTable } = state;
             const { index } = action;
             let changedList = [];
             let changedIndex = selectedIndex;
+            let changedSelected = selected;
             if (index > 0 && index < list.length) {
                 changedList = list.slice(0, index);
             }
@@ -21,25 +29,52 @@ export const dataAnalyticsReducer = (state, action) => {
                 changedIndex = selectedIndex - 1;
             }
             changedIndex = selectedIndex === index ? 0 : changedIndex;
+            if (!changedList.length) {
+                changedIndex = -1;
+                changedSelected = {};
+            } else {
+                changedSelected = _cloneDeep(changedList[changedIndex]);
+            }
+            onRemoveTable(index);
+
             return {
-                selected: list[changedIndex],
+                ...state,
+                selected: changedSelected,
                 selectedIndex: changedIndex,
                 list: changedList,
+                isChanged: false,
+            };
+        }
+        case 'COPY_TABLE': {
+            const { list } = state;
+            const { index } = action;
+            const copiedTable = _cloneDeep(list[index]);
+            const changedList = [...list, copiedTable];
+            return {
+                ...state,
+                selected: copiedTable,
+                selectedIndex: list.length,
+                list: changedList,
+                isChanged: false,
             };
         }
         case 'FOLD':
+            window.dispatchEvent(new Event('resize'));
             return {
                 ...state,
                 fold: !state.fold,
             };
         case 'CHANGE_TABLE_TITLE': {
             const { selected } = state;
+            selected.name = action.value;
+
             return {
                 ...state,
                 selected: {
                     ...selected,
                     name: action.value,
                 },
+                isChanged: true,
             };
         }
         case 'SELECT_TABLE': {
@@ -47,161 +82,127 @@ export const dataAnalyticsReducer = (state, action) => {
             const { list } = state;
             return {
                 ...state,
-                selected: list[index],
+                selected: _cloneDeep(list[index]),
                 selectedIndex: index,
+                isChanged: false,
             };
         }
         case 'SET_TAB': {
-            const { selected, tab } = state;
-            const { chartIndex, gridRef } = selected;
-            let { fields, origin } = selected;
+            const { selected } = state;
+            const { chartIndex = 0 } = selected;
             if (tab === TABLE && tab !== action.tab) {
-                const [header, ...rows] = action.table;
-                fields = header;
-                origin = rows;
+                selected.table = action.table;
             }
+            selected.chartIndex = action.index === undefined ? chartIndex : action.index;
             return {
                 ...state,
+                selected,
                 tab: action.tab,
-                selected: {
-                    ...selected,
-                    fields,
-                    origin,
-                    chartIndex: action.index === undefined ? chartIndex : action.index,
-                },
             };
         }
-        case 'SET_CHART_INDEX':
+        case 'SET_CHART_INDEX': {
+            const { selected } = state;
+            selected.chartIndex = action.index;
             return {
                 ...state,
-                selected: {
-                    ...state.selcted,
-                    chartIndex: action.index,
-                },
+                selected,
             };
-        case 'EDIT_TITLE':
-            return {
-                ...state,
-                title: action.title,
-            };
+        }
         case 'EDIT_CHART_TITLE': {
-            const charts = [...state.charts];
-            charts[state.chartIndex].title = action.title;
+            const { selected } = state;
+            const { chartIndex = 0 } = selected;
+            selected.chart[chartIndex].title = action.title;
             return {
                 ...state,
-                charts,
+                selected,
+                isChanged: true,
             };
         }
         case 'ADD_CHART': {
             const { selected = {} } = state;
             const { chart = [], name } = selected;
+            selected.chartIndex = chart.length;
+            selected.chart.push({
+                type: action.chartType,
+                title: `${name}_${CommonUtils.getLang('DataAnalytics.chart_title')}`,
+                xIndex: -1,
+                yIndex: -1,
+                categoryIndexes: [],
+            });
             return {
                 ...state,
-                selected: {
-                    ...selected,
-                    chartIndex: chart.length,
-                    chart: [
-                        ...chart,
-                        {
-                            type: action.chartType,
-                            title: `${name}_${CommonUtils.getLang('DataAnalytics.chart_title')}`,
-                            xIndex: -1,
-                            yIndex: -1,
-                            categoryIndexes: [],
-                        },
-                    ],
-                },
+                selected,
+                isChanged: true,
             };
         }
-        case 'DELETE_CHART': {
-            const charts = [...state.charts];
+        case 'REMOVE_CHART': {
+            const { selected = {} } = state;
+            const { chart = [], chartIndex = 0 } = selected;
+            selected.chart = chart.filter((__, index) => index !== chartIndex);
+            selected.chartIndex = 0;
             return {
                 ...state,
-                charts: charts.filter((chart, index) => index !== action.selected),
-                chartIndex: 0,
+                selected,
+                isChanged: true,
             };
         }
         case 'SELECT_X_AXIS': {
             const { selected } = state;
-            const { chartIndex } = selected;
-            const chart = [...selected.chart];
-            chart[chartIndex] = {
+            const { chart, chartIndex = 0 } = selected;
+            selected.chart[chartIndex] = {
                 ...chart[chartIndex],
                 xIndex: action.index,
                 yIndex: -1,
                 categoryIndexes: [],
             };
-
             return {
                 ...state,
-                selected: {
-                    ...selected,
-                    chart,
-                },
+                selected,
+                isChanged: true,
             };
         }
         case 'SELECT_Y_AXIS': {
-            const { selected } = state;
-            const { chartIndex } = selected;
-            const chart = [...selected.chart];
-            chart[chartIndex] = {
+            const { list, selected, selectedIndex } = state;
+            const { chart, chartIndex = 0 } = selected;
+            selected.chart[chartIndex] = {
                 ...chart[chartIndex],
                 yIndex: action.index,
                 categoryIndexes: [],
             };
-
+            list[selectedIndex] = selected;
             return {
                 ...state,
-                selected: {
-                    ...selected,
-                    chart,
-                },
+                selected,
+                isChanged: true,
             };
         }
         case 'SELECT_LEGEND_AXIS': {
             const { selected } = state;
-            const { chartIndex } = selected;
-            const chart = [...selected.chart];
-            chart[chartIndex] = {
+            const { chart, chartIndex = 0 } = selected;
+            selected.chart[chartIndex] = {
                 ...chart[chartIndex],
                 categoryIndexes: action.indexes,
             };
-
             return {
                 ...state,
-                selected: {
-                    ...selected,
-                    chart,
-                },
+                selected,
+                isChanged: true,
             };
         }
         case 'ADD_COLUMN': {
-            const { table, charts = [] } = state;
-            const { columnIndex, columnName } = action;
+            const { selected } = state;
+            const { chart: charts = [] } = selected;
+            const { index } = action;
 
-            const resultTable = table.map((row, index) => {
-                row.splice(
-                    columnIndex,
-                    0,
-                    index
-                        ? 0
-                        : CommonUtils.getOrderedName(
-                              columnName || CommonUtils.getLang('DataAnalytics.new_attribute'),
-                              table[0]
-                          )
-                );
-                return row;
-            });
-
-            const resultCharts = charts.map((chart) => {
-                if (chart.xIndex >= columnIndex) {
+            selected.chart = charts.map((chart) => {
+                if (chart.xIndex >= index) {
                     chart.xIndex++;
                 }
-                if (chart.yIndex >= columnIndex) {
+                if (chart.yIndex >= index) {
                     chart.yIndex++;
                 }
                 for (let i = 0; i < chart.categoryIndexes.length; i++) {
-                    if (chart.categoryIndexes[i] >= columnIndex) {
+                    if (chart.categoryIndexes[i] >= index) {
                         chart.categoryIndexes[i]++;
                     }
                 }
@@ -210,37 +211,34 @@ export const dataAnalyticsReducer = (state, action) => {
 
             return {
                 ...state,
-                table: resultTable,
-                charts: resultCharts,
+                selected,
+                isChanged: true,
             };
         }
         case 'DELETE_COLUMN': {
-            const { table, charts = [] } = state;
-            const { columnIndex } = action;
+            const { selected } = state;
+            const { chart: charts = [] } = selected;
+            const { index } = action;
 
-            const resultTable = table.map((row) => {
-                row.splice(columnIndex, 1);
-                return row;
-            });
-
-            const resultCharts = charts.map((chart) => {
-                if (chart.xIndex == columnIndex) {
+            selected.chart = charts.map((chart) => {
+                if (chart.xIndex == index) {
                     chart.xIndex = -1;
                     chart.yIndex = -1;
                     chart.categoryIndexes = [];
-                } else if (chart.xIndex > columnIndex) {
+                } else if (chart.xIndex > index) {
                     chart.xIndex--;
                 }
-                if (chart.yIndex == columnIndex) {
+                if (chart.yIndex == index) {
                     chart.yIndex = -1;
                     chart.categoryIndexes = [];
-                } else if (chart.yIndex > columnIndex) {
+                } else if (chart.yIndex > index) {
                     chart.yIndex--;
                 }
                 for (let i = 0; i < chart.categoryIndexes.length; i++) {
-                    if (chart.categoryIndexes[i] == columnIndex) {
+                    if (chart.categoryIndexes[i] == index) {
                         chart.categoryIndexes.splice(i, 1);
-                    } else if (chart.categoryIndexes[i] > columnIndex) {
+                        i--;
+                    } else if (chart.categoryIndexes[i] > index) {
                         chart.categoryIndexes[i]--;
                     }
                 }
@@ -249,43 +247,26 @@ export const dataAnalyticsReducer = (state, action) => {
 
             return {
                 ...state,
-                table: resultTable,
-                charts: resultCharts,
+                selected,
+                isChanged: true,
             };
         }
-        case 'ADD_ROW': {
-            const { table } = state;
-            const { rowIndex } = action;
-
-            const resultTable = [...table];
-            resultTable.splice(rowIndex, 0, Array(table[0].length).fill(0));
-
+        case 'SAVE': {
+            const { list, selectedIndex, selected, onSubmitDataAnalytics } = state;
+            const { table } = action;
+            if (table) {
+                selected.table = getTrimedTable(table);
+            }
+            list[selectedIndex] = selected;
+            onSubmitDataAnalytics({
+                selected,
+                index: selectedIndex,
+            });
             return {
                 ...state,
-                table: resultTable,
-            };
-        }
-        case 'DELETE_ROW': {
-            const { table } = state;
-            const { rowIndex } = action;
-            const resultTable = [...table];
-            resultTable.splice(rowIndex, 1);
-
-            return {
-                ...state,
-                table: resultTable,
-            };
-        }
-        case 'TOGGLE_VISIBLE_LEGEND': {
-            const charts = [...state.charts];
-            charts[state.chartIndex] = {
-                ...charts[state.chartIndex],
-                visibleLegend: action.visible,
-            };
-
-            return {
-                ...state,
-                charts,
+                list,
+                selected,
+                isChanged: false,
             };
         }
         default:

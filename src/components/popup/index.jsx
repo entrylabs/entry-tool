@@ -6,6 +6,7 @@ import classname from 'classnames';
 import Navigation from './Contents/Navigation';
 import Select from './Contents/Select';
 import FileUpload from './Contents/FileUpload/index';
+import FileDragUpload from './Contents/FileDragUpload/index';
 import WriteBox from './Contents/WriteBox';
 import Draw from './Contents/Draw';
 import Projects from './Contents/Projects/index';
@@ -92,6 +93,10 @@ class Popup extends Component {
                 view = <FileUpload {...this.property} uploads={uploads} />;
                 navigation = <Navigation {...navSettings} searchOption={false} />;
                 break;
+            case 'dragUpload':
+                view = <FileDragUpload {...this.property} uploads={uploads} />;
+                navigation = <Navigation {...navSettings} searchOption={false} />;
+                break;
             case 'draw':
                 view = <Draw type={type} />;
                 navigation = <Navigation {...navSettings} searchOption={false} />;
@@ -106,11 +111,12 @@ class Popup extends Component {
                 view = <Select type={'bigicon'} imageBaseUrl={url} data={data} />;
                 break;
             }
-            case 'aiUtilize':
+            case 'aiUtilize': {
                 const aiImageurl = expsnsionIconBaseUrl || '/lib/entry-js/images/aiUtilize/';
                 navigation = null;
                 view = <Select type={'bigicon'} imageBaseUrl={aiImageurl} data={data} />;
                 break;
+            }
             case 'projects':
             case 'favorites':
                 view = <Projects type={selected} data={data} />;

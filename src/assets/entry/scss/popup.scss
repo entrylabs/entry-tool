@@ -45,6 +45,7 @@
             height: 40px;
             margin-top: -20px;
             vertical-align: top;
+            cursor: pointer;
         }
     }
     .section_navi {
@@ -925,7 +926,13 @@
                             font-weight: 600;
                         }
                         p {
+                            display: -webkit-box;
                             margin-top: 4px;
+                            max-height: 37px;
+                            word-wrap: break-word;
+                            overflow: hidden;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
                             &.fields {
                                 text-overflow: ellipsis;
                                 white-space: nowrap;
@@ -2133,6 +2140,16 @@
                 letter-spacing: -0.5px;
                 line-height: 22px;
             }
+
+            .graph_box {
+                width: 194px;
+                height: 150px;
+                margin: 18px 0 18px;
+            }
+
+            .graph_box svg {
+                width: 200px !important;
+            }
         }
     }
     .center {
@@ -2413,6 +2430,39 @@
                     z-index: 10;
                     top: 52px;
                 }
+
+                &.billboard {
+                    display: block;
+                    position: relative;
+                    .description {
+                        margin-bottom: 18px;
+                        margin-top: 18px;
+                        margin-left: 21px;
+                        em {
+                            font-weight: bold;
+                            &:not(:first-child) {
+                                margin: 0 8px;
+                                border-left: solid #d8d8d8 1px;
+                                padding-left: 8px;
+                            }
+                        }
+                        .chart_info {
+                            position: absolute;
+                            right: 0px;
+                            top: 10px;
+                        }
+                    }
+                    .graph_box {
+                        width: 577px;
+                        height: 308px;
+                        margin-left: 36px;
+                        :global(.chart_handle_wrapper) {
+                            display: block;
+                            background-color: white;
+                            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+                        }
+                    }
+                }
             }
         }
         .footer {
@@ -2575,8 +2625,8 @@
     flex: 1;
     position: relative;
     overflow: hidden;
+    margin-left: -27px;
     .inner {
-        margin-left: -27px;
         position: relative;
         -webkit-box-flex: 1;
         flex: 1 1;
@@ -2882,6 +2932,7 @@
             text-align: center;
             letter-spacing: -0.32px;
             line-height: 40px;
+            cursor: pointer;
         }
     }
     .list {
@@ -2891,6 +2942,7 @@
             height: 22px;
             background-color: #ecf8ff;
             border-bottom: 1px solid #d6e9f4;
+            box-sizing: content-box;
             &:before {
                 position: absolute;
                 left: 18px;
@@ -2925,6 +2977,7 @@
                 height: 24px;
                 background-image: url('#{$imageDir}/IconListDel.svg');
                 transform: translateY(-50%);
+                cursor: pointer;
             }
         }
     }

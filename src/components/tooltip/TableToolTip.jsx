@@ -19,7 +19,7 @@ const TableToolTip = () => {
                 setShowHelp('none');
             }}
         >
-            <a href="#" className={Styles.ico_q} onClick={handleClickHelp}>
+            <a className={Styles.ico_q} onClick={handleClickHelp}>
                 <span className={Styles.blind}>도움말</span>
             </a>
             <div className={Styles.tooltip_box} style={{ display: showHelp }}>

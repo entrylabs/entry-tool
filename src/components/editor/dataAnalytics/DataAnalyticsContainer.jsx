@@ -8,6 +8,7 @@ import {
     onAlertDataAnalytics,
     onCloseButtonClick,
     onAddTableButtonClick,
+    onRemoveTable,
 } from '@actions/editor';
 import withWrapper from '@hoc/withWrapper';
 
@@ -24,6 +25,7 @@ const mapDispatchToProps = (dispatch) => ({
     onAlertDataAnalytics: (data) => dispatch(onAlertDataAnalytics(data)),
     onCloseButtonClick: () => dispatch(onCloseButtonClick()),
     onAddTableButtonClick: () => dispatch(onAddTableButtonClick()),
+    onRemoveTable: (data) => dispatch(onRemoveTable(data)),
 });
 
 export default withWrapper({ type: 'editor' })(

@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import TableToolTip from '@components/tooltip/TableToolTip';
-import { CommonUtils, getSummary } from '@utils/Common';
+import { getSummary, getTrimedTable, getTable } from '@utils/dataAnalytics';
+import { CommonUtils } from '@utils/Common';
 import { SUMMARY_HEADER } from '@constants/dataAnalytics';
 import _map from 'lodash/map';
 import Theme from '@utils/Theme';
@@ -10,8 +11,8 @@ const Table = () => {
     const theme = Theme.getStyle('popup');
     const { dataAnalytics } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
-    const { fields = [], origin = [] } = selected;
-    const table = [[...fields], ...origin];
+    const { table: selectedTable } = selected;
+    const table = getTrimedTable(selectedTable);
     const summary = getSummary(table) || [];
 
     return (
@@ -20,7 +21,7 @@ const Table = () => {
                 <strong>{CommonUtils.getLang('DataAnalytics.table')}</strong>
                 <TableToolTip />
                 <p className={theme.title_dsc}>
-                    새로운 테이블에서 열을 기준으로 한 기초 통계량입니다.
+                    {CommonUtils.getLang('DataAnalytics.summary_table_description')}
                 </p>
             </div>
             <ul className={theme.table_info}>
@@ -44,17 +45,22 @@ const Table = () => {
                     </colgroup>
 
                     <thead>
-                        {_map(SUMMARY_HEADER, (name, index) => (
-                            <th scope="col" key={`summary_th_${index}`}>
-                                {index ? (
-                                    <div className={theme.headtit} key={`summary_th_${index}_div`}>
-                                        {CommonUtils.getLang(name)}
-                                    </div>
-                                ) : (
-                                    CommonUtils.getLang(name)
-                                )}
-                            </th>
-                        ))}
+                        <tr>
+                            {_map(SUMMARY_HEADER, (name, index) => (
+                                <th scope="col" key={`summary_th_${index}`}>
+                                    {index ? (
+                                        <div
+                                            className={theme.headtit}
+                                            key={`summary_th_${index}_div`}
+                                        >
+                                            {CommonUtils.getLang(name)}
+                                        </div>
+                                    ) : (
+                                        CommonUtils.getLang(name)
+                                    )}
+                                </th>
+                            ))}
+                        </tr>
                     </thead>
 
                     <tbody>
