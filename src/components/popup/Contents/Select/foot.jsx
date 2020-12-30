@@ -6,13 +6,17 @@ import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 import { EMIT_TYPES as Types } from '@constants';
 
-const Index = ({ selected, closePopup, submit }) => {
+const Foot = ({ selected, closePopup, submit, hasCancelButton }) => {
     const theme = Theme.getStyle('popup');
     return (
         <div className={theme.pop_btn_box}>
-            <a onClick={CommonUtils.handleClick(closePopup)}>
-                {CommonUtils.getLang('Buttons.cancel')}
-            </a>
+            {hasCancelButton ? (
+                <a onClick={CommonUtils.handleClick(closePopup)}>
+                    {CommonUtils.getLang('Buttons.cancel')}
+                </a>
+            ) : (
+                ''
+            )}
             <a
                 className={theme.active}
                 onClick={CommonUtils.handleClick(() => submit({ selected }))}
@@ -35,4 +39,4 @@ const mapDispatchToProps = (dispatch) => ({
     closePopup: () => dispatch(closePopup()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index);
+export default connect(mapStateToProps, mapDispatchToProps)(Foot);

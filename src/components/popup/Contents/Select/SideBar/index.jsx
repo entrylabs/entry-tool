@@ -22,6 +22,7 @@ const Index = (props) => {
         isVectorOnly = false,
         fetch,
         baseUrl,
+        cancelButton = true,
     } = props;
     const [selectedSidebar, selectSidebar] = useState(Object.keys(sidebar)[0]);
     const [selectedSubMenu, selectSubMenu] = useState(null);
@@ -66,7 +67,7 @@ const Index = (props) => {
                     {showSelected && <Selected type={type} baseUrl={baseUrl} />}
                 </div>
             </div>
-            <Foot />
+            <Foot hasCancelButton={cancelButton} />
         </>
     );
 };
