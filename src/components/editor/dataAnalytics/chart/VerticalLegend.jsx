@@ -41,8 +41,6 @@ const VerticalLegend = (props) => {
                                 &nbsp;
                             </span>
                             <span className={theme.cnt}>{item[0]}</span>
-                            <span className={theme.cnt}>{item[1]}</span>
-                            <span className={theme.cnt}>{((item[1] / sum) * 100).toFixed(1)}%</span>
                         </li>
                     ))}
                 </ul>
