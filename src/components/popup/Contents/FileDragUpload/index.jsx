@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Theme from '@utils/Theme';
 import { CommonUtils } from '@utils/Common';
-import classname from 'classnames';
 import Item from './Item';
 import Warn from './Warn';
 import UploadInput from './UploadInput';
@@ -59,15 +58,47 @@ const FileDragUpload = (props) => {
 
     return (
         <section className={`${theme.pop_content} ${theme.table_file_add}`}>
-            {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-            <h2 className={theme.blind}>파일 올리기</h2>
+            <h2 className={theme.blind}>file upload</h2>
             <div className={theme.section_cont}>
                 <div className={theme.file_add_box}>
                     <p className={`${theme.caution} ${theme.imico_pop_caution}`}>{warnExt}</p>
                     {uploadedItems.length ? (
-                        ''
+                        <div className={theme.file_list_box}>
+                            <div className={theme.list_file_add}>
+                                <UploadInput
+                                    uploadNotAllowedExt={opt.uploadNotAllowedExt}
+                                    uploadAllowed={opt.uploadAllowed}
+                                    setUploadState={(state) => setUploadState(state)}
+                                />
+                            </div>
+                            <div
+                                className={theme.list_inner}
+                                style={{ width: uploadedItems.length * 132 + 10 }}
+                            >
+                                <ul className={theme.obj_list}>
+                                    {uploadedItems.map((item) => (
+                                        <Item
+                                            key={item._id || item.id}
+                                            item={item}
+                                            type={type}
+                                            baseUrl={baseUrl}
+                                            onClick={onItemClick}
+                                            excluded={
+                                                opt.multiSelect !== getExcludedIndex(item) >= 0
+                                            }
+                                        />
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
                     ) : (
-                        <DragArea title={dragTitle} description={dragDesc} />
+                        <DragArea
+                            title={dragTitle}
+                            description={dragDesc}
+                            uploadNotAllowedExt={opt.uploadNotAllowedExt}
+                            uploadAllowed={opt.uploadAllowed}
+                            setUploadState={(state) => setUploadState(state)}
+                        />
                     )}
                 </div>
                 <Warn title={title} desc1={desc1} desc2={desc2} />

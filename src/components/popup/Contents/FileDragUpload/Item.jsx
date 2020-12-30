@@ -2,15 +2,20 @@ import React from 'react';
 import Theme from '@utils/Theme';
 import { CommonUtils } from '@utils/Common';
 import classname from 'classnames';
-import SelectItem from '../includes/SelectItem';
 
-export default ({ type, excluded, item = {}, onClick, baseUrl }) => {
+export default ({ excluded, item = {}, onClick }) => {
     const theme = Theme.getStyle('popup');
+    const { name } = CommonUtils.getImageSummary(item);
     return (
-        <li className={classname({ [theme.on]: excluded, [theme.active]: excluded })}>
-            <a className={theme.link} onClick={CommonUtils.handleClick(() => onClick(item))}>
-                <SelectItem type={type} theme={theme} item={item} baseUrl={baseUrl} upload />
-            </a>
+        <li
+            className={classname({ [theme.on]: excluded })}
+            onClick={CommonUtils.handleClick(() => onClick(item))}
+        >
+            <div className={theme.link}>
+                <div className={theme.thmb}>&nbsp;</div>
+                <em className={theme.sjt}>{name}</em>
+            </div>
+            <label className={classname(theme.check, { [theme.active]: excluded })} />
         </li>
     );
 };

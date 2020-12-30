@@ -49,6 +49,7 @@ const DragArea = ({
                     type="file"
                     id="file_add"
                     name="file_add"
+                    multiple="multiple"
                     className={theme.blind}
                     onChange={onInputChanged}
                 />

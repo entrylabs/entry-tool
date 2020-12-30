@@ -43,6 +43,7 @@ const Index = ({ uploadNotAllowedExt, uploadAllowed, uploadFail, upload, setUplo
                 multiple="multiple"
                 onChange={onInputChanged}
                 style={{ fontSize: 0 }}
+                className={theme.blind}
             />
         </div>
     );
