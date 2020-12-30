@@ -53,6 +53,7 @@
         .tab {
             display: inline-block;
             overflow: hidden;
+            box-sizing: border-box;
             border: 1px solid #4f80ff;
             border-radius: 4px;
             vertical-align: top;
@@ -66,7 +67,7 @@
                 font-weight: 600;
                 color: #4f80ff;
                 text-align: center;
-                line-height: 32px;
+                line-height: 30px;
                 cursor: pointer;
             }
             & > a:first-of-type {
@@ -80,9 +81,10 @@
         .btn_save {
             position: absolute;
             overflow: hidden;
+            box-sizing: border-box;
             top: 0;
             right: 0;
-            height: 30px;
+            height: 32px;
             padding: 0 18px;
             border: 1px solid #e2e2e2;
             border-radius: 4px;
@@ -90,7 +92,7 @@
             font-weight: 600;
             color: #555;
             text-align: center;
-            line-height: 32px;
+            line-height: 30px;
             cursor: pointer;
         }
     }
@@ -273,7 +275,7 @@
         }
         .select_group {
             float: left;
-            margin-left: 30px;
+            margin-left: 22px;
         }
         .select_group:first-of-type {
             margin-left: 0;

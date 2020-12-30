@@ -3,15 +3,6 @@ import EntrySheet from 'entry_sheet';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import _map from 'lodash/map';
 import Theme from '@utils/Theme';
-import { Array } from 'window-or-global';
-
-const getTableData = (table = [[]]) => {
-    const rows = table.length < 10 ? new Array(10).fill('') : table;
-    return _map(rows, (row, rIndex) => {
-        const cols = row.length < 10 ? new Array(10).fill('') : row;
-        return _map(cols, (__, index) => (table[rIndex] || [])[index]);
-    });
-};
 
 const TableEditor = () => {
     const theme = Theme.getStyle('popup');
@@ -42,7 +33,7 @@ const TableEditor = () => {
                         cols: [],
                         rows: [],
                     },
-                    data: getTableData(table),
+                    data: table,
                 }}
                 option={{
                     type: 'EDITOR',
