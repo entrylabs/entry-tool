@@ -190,6 +190,22 @@ const generateOption = (option) => {
         tooltip: {
             grouped: false,
         },
+        color: {
+            pattern: [
+                '#2d51ac',
+                '#4f80ff',
+                '#9fbaff',
+                '#a23941',
+                '#f16670',
+                '#fcad93',
+                '#423496',
+                '#6e5ae6',
+                '#c5b4ff',
+                '#2a7d7f',
+                '#00b6b1',
+                '#b3c3cd',
+            ],
+        },
     };
 };
 
