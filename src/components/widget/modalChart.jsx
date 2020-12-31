@@ -15,7 +15,7 @@ const ModalChart = (props) => {
     const { source = {}, onClose, togglePause, stop, isIframe, chartIndex = 0 } = props;
     const [isPaused, setPause] = useState(false);
     const [dropdown, setDropdown] = useState('');
-    const [selected, select] = useState(chartIndex);
+    const [selected, select] = useState(chartIndex || 0);
     const toggleDropDown = (dropdown) => setDropdown(dropdown);
     const { fields = [], origin = [], chart: charts = [] } = source;
     const chartList = charts.map(({ title }, index) => [title, index]);
