@@ -2573,7 +2573,7 @@
 }
 .pie_legend .list {
     overflow: hidden;
-    padding: 4px 0 0 10px;
+    padding: 4px 0 0 20px;
 }
 .pie_legend .list li {
     overflow: hidden;
@@ -2595,7 +2595,6 @@
     float: left;
     overflow: hidden;
     position: relative;
-    width: 54px;
     padding: 0 4px;
     text-overflow: ellipsis;
     white-space: nowrap;

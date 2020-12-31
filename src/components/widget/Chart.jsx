@@ -9,6 +9,7 @@ import '@assets/entry/scss/widget/insight.css';
 
 import { CommonUtils } from '@utils/Common';
 import { hasNumberColumn, categoryKeys, isZipable } from '@utils/dataAnalytics';
+import { GRAPH_COLOR } from '@constants/dataAnalytics';
 const { generateHash } = CommonUtils;
 
 const pivot = (table, xIndex, yIndex, categoryIndex) =>
@@ -102,6 +103,7 @@ const generateOption = (option) => {
     let xs;
     let columns;
     let grid;
+    let point;
     let {
         axisX = {
             type: 'category',
@@ -146,6 +148,16 @@ const generateOption = (option) => {
                     show: true,
                 },
             };
+            point = {
+                pattern: [
+                    '<g transform="translate(-336 -457) translate(336 457)"><circle cx="4" cy="4" r="3"/></g>',
+                    '<path d="M1 1H7V7H1z" transform="translate(-384 -457) translate(384 457)"/>',
+                    '<path d="M5.937 2.766h-3.6v3.6h3.6v-3.6z" transform="translate(-432 -457) translate(432 456) translate(0 .2) rotate(45 4.137 4.566)"/>',
+                    '<path d="M4 2.236L1.618 7h4.764L4 2.236z" transform="translate(-480 -457) translate(480 457)"/>',
+                    '<path d="M7.2.8L.8 7.2M7.2 7.2L.8.8" transform="translate(-528 -457) translate(528 457)"/>',
+                    '<path d="M0 3.714L8 3.714M4 0L4 8" transform="translate(-576 -457) translate(576 457)"/>',
+                ],
+            };
             break;
         }
         default:
@@ -155,11 +167,15 @@ const generateOption = (option) => {
 
     return {
         id,
-        legend,
-        size,
-        tooltip,
         grid,
+        size,
+        point,
+        legend,
+        tooltip,
         bindto: `#${id}`,
+        color: {
+            pattern: GRAPH_COLOR[type],
+        },
         data: {
             x,
             xs,
