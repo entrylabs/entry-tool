@@ -12,7 +12,7 @@ const { generateHash } = CommonUtils;
 const ModalChart = (props) => {
     const theme = Theme.getStyle('popup');
 
-    const { source = {}, onClose, togglePause, stop, isIframe, chartIndex } = props;
+    const { source = {}, onClose, togglePause, stop, isIframe, chartIndex = 0 } = props;
     const [isPaused, setPause] = useState(false);
     const [dropdown, setDropdown] = useState('');
     const [selected, select] = useState(chartIndex);
