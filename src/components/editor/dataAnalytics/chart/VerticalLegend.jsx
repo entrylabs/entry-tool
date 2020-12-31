@@ -1,7 +1,7 @@
 import React from 'react';
 import _toPairs from 'lodash/toPairs';
 import _sumBy from 'lodash/sumBy';
-import { GRAPH_COLOR } from '@constants/dataAnalytics';
+import { GRAPH_COLOR, PIE } from '@constants/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 
@@ -9,7 +9,7 @@ const VerticalLegend = (props) => {
     const theme = Theme.getStyle('popup');
     const { table = [[]], charts = [], chartIndex, chart: chartProp } = props;
     const chart = chartProp || (charts.length ? charts[chartIndex] : {});
-    const { xIndex = -1, categoryIndexes } = chart;
+    const { type, xIndex = -1, categoryIndexes } = chart;
     const categoryIndex = categoryIndexes[0];
 
     const category = _toPairs(
@@ -35,7 +35,8 @@ const VerticalLegend = (props) => {
                             <span
                                 className={theme.bg}
                                 style={{
-                                    backgroundColor: GRAPH_COLOR[index % GRAPH_COLOR.length],
+                                    backgroundColor:
+                                        GRAPH_COLOR[type][index % GRAPH_COLOR[type].length],
                                 }}
                             >
                                 &nbsp;
