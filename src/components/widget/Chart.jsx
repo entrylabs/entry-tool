@@ -41,12 +41,36 @@ const pieChart = (table, xIndex, categoryIndex) => [
 const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
     _.map(
         table.slice(1).reduce((prev, row) => {
-            prev[`${row[categoryIndex]}-${table[0][yIndex]}`] =
-                prev[`${row[categoryIndex]}-${table[0][yIndex]}`] || [];
-            prev[`${row[categoryIndex]}-${table[0][yIndex]}`].push(row[yIndex]);
-            prev[`${row[categoryIndex]}-${table[0][xIndex]}`] =
-                prev[`${row[categoryIndex]}-${table[0][xIndex]}`] || [];
-            prev[`${row[categoryIndex]}-${table[0][xIndex]}`].push(row[xIndex]);
+            prev[
+                `${row[categoryIndex]}-${table[0][yIndex]}`
+                    .replaceAll(' ', '_')
+                    .replaceAll('.', '_')
+            ] =
+                prev[
+                    `${row[categoryIndex]}-${table[0][yIndex]}`
+                        .replaceAll(' ', '_')
+                        .replaceAll('.', '_')
+                ] || [];
+            prev[
+                `${row[categoryIndex]}-${table[0][yIndex]}`
+                    .replaceAll(' ', '_')
+                    .replaceAll('.', '_')
+            ].push(row[yIndex]);
+            prev[
+                `${row[categoryIndex]}-${table[0][xIndex]}`
+                    .replaceAll(' ', '_')
+                    .replaceAll('.', '_')
+            ] =
+                prev[
+                    `${row[categoryIndex]}-${table[0][xIndex]}`
+                        .replaceAll(' ', '_')
+                        .replaceAll('.', '_')
+                ] || [];
+            prev[
+                `${row[categoryIndex]}-${table[0][xIndex]}`
+                    .replaceAll(' ', '_')
+                    .replaceAll('.', '_')
+            ].push(row[xIndex]);
             return prev;
         }, {}),
         (value, index) => [index, ...value]
@@ -55,8 +79,8 @@ const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
 const scatterXs = (table, xIndex, yIndex, categoryIndex) =>
     table.slice(1).reduce((prev, row) => {
         prev[
-            `${row[categoryIndex]}-${table[0][yIndex]}`
-        ] = `${row[categoryIndex]}-${table[0][xIndex]}`;
+            `${row[categoryIndex]}-${table[0][yIndex]}`.replaceAll(' ', '_').replaceAll('.', '_')
+        ] = `${row[categoryIndex]}-${table[0][xIndex]}`.replaceAll(' ', '_').replaceAll('.', '_');
         return prev;
     }, {});
 
