@@ -1,6 +1,6 @@
 import React from 'react';
-import { CommonUtils, categoryKeys } from '@utils/Common';
-import { GRAPH_COLOR } from '../Constants';
+import { categoryKeys } from '@utils/dataAnalytics';
+import { GRAPH_COLOR } from '@constants/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const HorizontalLegend = (props) => {
@@ -18,7 +18,11 @@ const HorizontalLegend = (props) => {
         <div className={theme.horizontal_legend_box}>
             {labels.map((item, index) => (
                 <span key={`legend_${index}`} className={theme.legend}>
-                    <em style={{ backgroundColor: GRAPH_COLOR[index % GRAPH_COLOR.length] }}>
+                    <em
+                        style={{
+                            backgroundColor: GRAPH_COLOR[type][index % GRAPH_COLOR[type].length],
+                        }}
+                    >
                         &nbsp;
                     </em>
                     {item}

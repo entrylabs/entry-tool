@@ -36,7 +36,7 @@ const handle = (e, cb) => {
 class Input extends Component {
     constructor(props) {
         super(props);
-        this.theme = Theme.getStyle("popup");
+        this.theme = Theme.getStyle('popup');
         this.state = {
             active: false,
             text: '',
@@ -62,9 +62,7 @@ class Input extends Component {
             if (effect.apply) {
                 /* eslint-disable no-prototype-builtins */
                 if (effect.css.hasOwnProperty('textDecoration') && css.textDecoration) {
-                    css.textDecoration = `${css.textDecoration} ${
-                        effect.css.textDecoration
-                    }`;
+                    css.textDecoration = `${css.textDecoration} ${effect.css.textDecoration}`;
                 } else {
                     css = { ...css, ...effect.css };
                 }
@@ -110,7 +108,7 @@ class Input extends Component {
 class WriteBox extends Component {
     constructor(props) {
         super(props);
-        this.theme = Theme.getStyle("popup");
+        this.theme = Theme.getStyle('popup');
         this.fonts = CommonUtils.getFonts();
         this.state = {
             writeType: 'one',
@@ -131,8 +129,13 @@ class WriteBox extends Component {
             const backgroundColor = isColor ? effect.css[key] : null;
             const isColorOn = this.state.colorPicker && this.state.colorPicker.props.target === key;
             const isOn = isColor ? isColorOn : effect.apply;
-            const clear = CommonUtils.toggleClass(backgroundColor === '#ffffff' || backgroundColor === 'transparent', this.theme.clear);
-            const className = `${CommonUtils.toggleClass(!isColor, this.theme.style_link)} ${this.theme[`imbtn_pop_font_${key.toLowerCase()}`]} ${CommonUtils.toggleClass(isOn, this.theme.on)} ${clear}`;
+            const clear = CommonUtils.toggleClass(
+                backgroundColor === '#ffffff' || backgroundColor === 'transparent',
+                this.theme.clear
+            );
+            const className = `${CommonUtils.toggleClass(!isColor, this.theme.style_link)} ${
+                this.theme[`imbtn_pop_font_${key.toLowerCase()}`]
+            } ${CommonUtils.toggleClass(isOn, this.theme.on)} ${clear}`;
             return (
                 <div
                     key={key}
@@ -187,7 +190,7 @@ class WriteBox extends Component {
                     e.target,
                     effect.css[effectName],
                     effects,
-                    effectName,
+                    effectName
                 );
                 this.setState({ colorPicker });
                 break;
@@ -264,7 +267,7 @@ class WriteBox extends Component {
                                             } ${CommonUtils.toggleClass(
                                                 this.state.dropDown,
                                                 this.theme.imico_pop_select_arr_up,
-                                                this.theme.imico_pop_select_arr_down,
+                                                this.theme.imico_pop_select_arr_down
                                             )}`}
                                             onClick={this.onFontBoxClicked}
                                             title={CommonUtils.getLang('Workspace.font_family')}
@@ -282,28 +285,28 @@ class WriteBox extends Component {
                                     <div className={this.theme.write_type_box}>
                                         {/* 링크가 클릭되면 on 클래스 토글 */}
                                         <a
-                                            href="#NULL"
                                             className={CommonUtils.toggleClass(
                                                 this.state.writeType === 'one',
-                                                this.theme.on,
+                                                this.theme.on
                                             )}
                                             onClick={(e) => {
+                                                e.preventDefault();
                                                 handle(e, () =>
-                                                    this.setState({ writeType: 'one' }),
+                                                    this.setState({ writeType: 'one' })
                                                 );
                                             }}
                                         >
                                             {CommonUtils.getLang('Buttons.single_line')}
                                         </a>
                                         <a
-                                            href="#NULL"
                                             className={CommonUtils.toggleClass(
                                                 this.state.writeType === 'multi',
-                                                this.theme.on,
+                                                this.theme.on
                                             )}
                                             onClick={(e) => {
+                                                e.preventDefault();
                                                 handle(e, () =>
-                                                    this.setState({ writeType: 'multi' }),
+                                                    this.setState({ writeType: 'multi' })
                                                 );
                                             }}
                                         >
@@ -327,7 +330,6 @@ class WriteBox extends Component {
                 </section>
                 <div className={this.theme.pop_btn_box}>
                     <a
-                        href="#NULL"
                         onClick={(e) => {
                             e.preventDefault();
                             this.props.closePopup();
@@ -335,7 +337,7 @@ class WriteBox extends Component {
                     >
                         {CommonUtils.getLang('Buttons.cancel')}
                     </a>
-                    <a href="#NULL" className={this.theme.active} onClick={this.onSubmitBtnClicked}>
+                    <a className={this.theme.active} onClick={this.onSubmitBtnClicked}>
                         {CommonUtils.getLang('Buttons.apply')}
                     </a>
                 </div>
@@ -352,7 +354,4 @@ const mapDispatchToProps = (dispatch) => ({
     closePopup: () => dispatch(closePopup()),
 });
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(WriteBox);
+export default connect(null, mapDispatchToProps)(WriteBox);

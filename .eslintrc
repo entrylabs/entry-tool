@@ -1,15 +1,18 @@
 {
     "plugins": ["prettier"],
-    "extends": ["react-app", "plugin:prettier/recommended"],
+    "extends": ["plugin:prettier/recommended"],
+    "env": {
+        "es6": true,
+        "browser": true,
+        "jquery": true
+    },
+    "parser": "babel-eslint",
     "parserOptions": {
-        "ecmaVersion": 8,
+        "ecmaVersion": 2017,
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true
         }
-    },
-    "env": {
-        "browser": true
     },
     "rules": {
         "prefer-const": "warn",
@@ -40,7 +43,6 @@
         "prefer-spread": "warn",
         "arrow-spacing": "warn",
         "arrow-body-style": ["warn", "as-needed"],
-        "no-confusing-arrow": ["warn", { "allowParens": true }],
         "no-useless-constructor": "warn",
         "no-dupe-class-members": "warn",
         "no-duplicate-imports": "warn",
@@ -73,6 +75,7 @@
         "keyword-spacing": "warn"
     },
     "globals": {
+        "$": true,
         "_": true,
         "arcon": true,
         "goog": true,
@@ -101,6 +104,7 @@
         "entrylms": true,
         "require": true,
         "module": true,
+        "Symbol": true,
         "process": true
     }
 }

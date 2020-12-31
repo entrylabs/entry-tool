@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
 import _ from 'lodash';
+import _slice from 'lodash/slice';
+import _forEach from 'lodash/forEach';
 import bb from 'billboard.js';
 
-import Styles from '@assets/entry/scss/popup.scss';
+import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';
 
-import { CommonUtils, hasNumberColumn, categoryKeys, isZipable } from '@utils/Common';
+import { CommonUtils } from '@utils/Common';
+import { hasNumberColumn, categoryKeys, isZipable } from '@utils/dataAnalytics';
+import { GRAPH_COLOR } from '@constants/dataAnalytics';
 const { generateHash } = CommonUtils;
 
 const pivot = (table, xIndex, yIndex, categoryIndex) =>
@@ -37,12 +41,36 @@ const pieChart = (table, xIndex, categoryIndex) => [
 const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
     _.map(
         table.slice(1).reduce((prev, row) => {
-            prev[`${row[categoryIndex]}-${table[0][yIndex]}`] =
-                prev[`${row[categoryIndex]}-${table[0][yIndex]}`] || [];
-            prev[`${row[categoryIndex]}-${table[0][yIndex]}`].push(row[yIndex]);
-            prev[`${row[categoryIndex]}-${table[0][xIndex]}`] =
-                prev[`${row[categoryIndex]}-${table[0][xIndex]}`] || [];
-            prev[`${row[categoryIndex]}-${table[0][xIndex]}`].push(row[xIndex]);
+            prev[
+                `${row[categoryIndex]}-${table[0][yIndex]}`
+                    .replaceAll(' ', '_')
+                    .replaceAll('.', '_')
+            ] =
+                prev[
+                    `${row[categoryIndex]}-${table[0][yIndex]}`
+                        .replaceAll(' ', '_')
+                        .replaceAll('.', '_')
+                ] || [];
+            prev[
+                `${row[categoryIndex]}-${table[0][yIndex]}`
+                    .replaceAll(' ', '_')
+                    .replaceAll('.', '_')
+            ].push(row[yIndex]);
+            prev[
+                `${row[categoryIndex]}-${table[0][xIndex]}`
+                    .replaceAll(' ', '_')
+                    .replaceAll('.', '_')
+            ] =
+                prev[
+                    `${row[categoryIndex]}-${table[0][xIndex]}`
+                        .replaceAll(' ', '_')
+                        .replaceAll('.', '_')
+                ] || [];
+            prev[
+                `${row[categoryIndex]}-${table[0][xIndex]}`
+                    .replaceAll(' ', '_')
+                    .replaceAll('.', '_')
+            ].push(row[xIndex]);
             return prev;
         }, {}),
         (value, index) => [index, ...value]
@@ -51,8 +79,8 @@ const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
 const scatterXs = (table, xIndex, yIndex, categoryIndex) =>
     table.slice(1).reduce((prev, row) => {
         prev[
-            `${row[categoryIndex]}-${table[0][yIndex]}`
-        ] = `${row[categoryIndex]}-${table[0][xIndex]}`;
+            `${row[categoryIndex]}-${table[0][yIndex]}`.replaceAll(' ', '_').replaceAll('.', '_')
+        ] = `${row[categoryIndex]}-${table[0][xIndex]}`.replaceAll(' ', '_').replaceAll('.', '_');
         return prev;
     }, {});
 
@@ -64,6 +92,22 @@ const addValueToKey = (table) => [
         .slice(1)
         .map((item) => [`${item[0]}${tabString}|${tabString}${item[1]}${tabString}|`, item[1]]),
 ];
+
+const deduplicationColumn = (columns) =>
+    columns.map((column, index) => {
+        const [head, ...ext] = column;
+        const prev = _slice(columns, 0, index);
+        let count = 0;
+        _forEach(prev, ([prevHead]) => {
+            if (prevHead == head) {
+                count++;
+            }
+        });
+        if (count) {
+            return [`${head} (${count})`, ...ext];
+        }
+        return [head, ...ext];
+    });
 
 const generateOption = (option) => {
     const {
@@ -82,25 +126,36 @@ const generateOption = (option) => {
     let x;
     let xs;
     let columns;
-    let { axisX = { type: 'category', tick: { show: true } } } = option;
+    let grid;
+    let point;
+    let {
+        axisX = {
+            type: 'category',
+            tick: {
+                fit: true,
+                multiline: false,
+                autorotate: true,
+                culling: true,
+            },
+        },
+    } = option;
 
     switch (type) {
         case 'bar':
         case 'line':
-            if (yIndex !== -1) {
-                columns = pivotTable(table, xIndex, yIndex, categoryIndexes[0]);
-                x = table[0][xIndex];
-            } else {
-                columns = [...categoryIndexes].map((index) => _.unzip(table)[index]);
-                axisX.categories = table.slice(1).map((row) => row[xIndex]);
-            }
+            columns = deduplicationColumn(
+                [...categoryIndexes].map((index) => _.unzip(table)[index])
+            );
+            axisX.categories = table.slice(1).map((row) => row[xIndex]);
             break;
         case 'pie':
-            columns = addValueToKey(pieChart(table, xIndex, categoryIndexes[0]));
+            columns = deduplicationColumn(
+                addValueToKey(pieChart(table, xIndex, categoryIndexes[0]))
+            );
             x = table[0][xIndex];
             break;
         case 'scatter': {
-            columns = scatterChart(table, xIndex, yIndex, categoryIndexes);
+            columns = deduplicationColumn(scatterChart(table, xIndex, yIndex, categoryIndexes));
             xs = scatterXs(table, xIndex, yIndex, categoryIndexes);
             const { tick = {} } = axisX;
             axisX = {
@@ -108,6 +163,24 @@ const generateOption = (option) => {
                     ...tick,
                     fit: false,
                 },
+            };
+            grid = {
+                x: {
+                    show: true,
+                },
+                y: {
+                    show: true,
+                },
+            };
+            point = {
+                pattern: [
+                    '<g transform="translate(-336 -457) translate(336 457)"><circle cx="4" cy="4" r="3"/></g>',
+                    '<path d="M1 1H7V7H1z" transform="translate(-384 -457) translate(384 457)"/>',
+                    '<path d="M5.937 2.766h-3.6v3.6h3.6v-3.6z" transform="translate(-432 -457) translate(432 456) translate(0 .2) rotate(45 4.137 4.566)"/>',
+                    '<path d="M4 2.236L1.618 7h4.764L4 2.236z" transform="translate(-480 -457) translate(480 457)"/>',
+                    '<path d="M7.2.8L.8 7.2M7.2 7.2L.8.8" transform="translate(-528 -457) translate(528 457)"/>',
+                    '<path d="M0 3.714L8 3.714M4 0L4 8" transform="translate(-576 -457) translate(576 457)"/>',
+                ],
             };
             break;
         }
@@ -118,10 +191,15 @@ const generateOption = (option) => {
 
     return {
         id,
-        legend,
+        grid,
         size,
+        point,
+        legend,
         tooltip,
         bindto: `#${id}`,
+        color: {
+            pattern: GRAPH_COLOR[type],
+        },
         data: {
             x,
             xs,
@@ -137,12 +215,16 @@ const generateOption = (option) => {
                 show: false,
             },
         },
+        tooltip: {
+            grouped: false,
+        },
     };
 };
 
 const isDrawable = (table) => table[0].length > 1 && hasNumberColumn(table);
 
 const Chart = (props) => {
+    const theme = Theme.getStyle('popup');
     const {
         table = [[]],
         chart = {},
@@ -161,18 +243,13 @@ const Chart = (props) => {
 
     if (!isDrawable(table)) {
         return shortForm ? (
-            <div className={Styles.data_add_box}>
-                <a href="#" onClick={(e) => e.preventDefault()}>
-                    <span className={Styles.blind}>
-                        {CommonUtils.getLang('DataAnalytics.add_data')}
-                    </span>
-                </a>
+            <div className={theme.data_add_box}>
                 <p>{CommonUtils.getLang('DataAnalytics.unable_to_express_chart')}</p>
             </div>
         ) : (
-            <div className={Styles.graph_cont}>
+            <div className={theme.graph_cont}>
                 <div id={id} style={{ height: '100%' }}>
-                    <div className={Styles.alert}>
+                    <div className={theme.alert}>
                         {CommonUtils.getLang('DataAnalytics.unable_to_express_chart')}
                     </div>
                 </div>
@@ -217,23 +294,20 @@ const Chart = (props) => {
 
     if (!content) {
         return (
-            <div className={Styles.chart_area}>
+            <div className={theme.chart_area}>
                 <div id={id} style={{ height: '100%' }} />
             </div>
         );
     }
 
     return shortForm ? (
-        <div className={Styles.data_add_box}>
-            <a href="#" onClick={(e) => e.preventDefault()}>
-                <span className={Styles.blind}>{content}</span>
-            </a>
+        <div className={theme.data_add_box}>
             <p>{content}</p>
         </div>
     ) : (
-        <div className={Styles.graph_cont}>
+        <div className={theme.graph_cont}>
             <div id={id} style={{ height: '100%' }}>
-                <div className={Styles.alert}>{content}</div>
+                <div className={theme.alert}>{content}</div>
             </div>
         </div>
     );

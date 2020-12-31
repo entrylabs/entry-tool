@@ -1,20 +1,25 @@
 import React, { useContext, useState, useRef } from 'react';
-import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import Dropdown from '@components/widget/dropdown';
 import { CommonUtils } from '@utils/Common';
+import { getNumberColumnIndexes, getTrimedTable, getTable } from '@utils/dataAnalytics';
+import Theme from '@utils/Theme';
 
-import Styles from '@assets/entry/scss/popup.scss';
-
-const YAxis = (props) => {
-    const { disable, yAxisIndex = [], yIndex = -1 } = props;
+const YAxis = () => {
+    const theme = Theme.getStyle('popup');
+    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const [showDropdown, setShowDropdown] = useState(false);
     const axisRef = useRef();
-    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { table } = dataAnalytics;
-    const isSelected = yIndex !== -1;
-    const yAxis = yAxisIndex.map((index) => [table[0][index], index]);
+    const { selected = {} } = dataAnalytics;
+    const { table: selectedTable, chart, chartIndex = 0 } = selected;
+    const { yIndex = 0, xIndex } = chart[chartIndex];
+    const table = getTrimedTable(selectedTable);
+    const [fields = []] = table;
+    const yAxisIndex = disabled ? [] : getNumberColumnIndexes(table, [xIndex]);
+    const yAxis = yAxisIndex.map((index) => [fields[index], index]);
+    const disabled = xIndex === -1 || !yAxis.length;
 
-    const handleSelectDropDown = (value) => {
+    const handleSelectDropdown = (value) => {
         dispatch({
             type: 'SELECT_Y_AXIS',
             index: value[1],
@@ -32,30 +37,32 @@ const YAxis = (props) => {
     };
 
     return (
-        <div className={Styles.legend_cell}>
-            <strong className={Styles.cell_sjt}>
+        <div className={theme.select_group}>
+            <label htmlFor="ChartName" className={theme.tit_label}>
                 {CommonUtils.getLang('DataAnalytics.y_axis')}
-            </strong>
-            <div className={`${Styles.pop_selectbox} ${disable ? Styles.disabled : ''}`}>
+            </label>
+            <div
+                ref={axisRef}
+                className={`${theme.pop_selectbox} ${disabled ? theme.disabled : ''}`}
+                style={{ width: 153 }}
+            >
                 <div
-                    className={`${Styles.select_link} ${
-                        isSelected ? Styles.del_legend : Styles.common_legend
+                    className={`${theme.select_link} ${
+                        yIndex !== -1 ? theme.del_legend : theme.common_legend
                     } ${
                         showDropdown
-                            ? Styles.imico_pop_select_arr_up
-                            : Styles.imico_pop_select_arr_down
+                            ? theme.imico_pop_select_arr_up
+                            : theme.imico_pop_select_arr_down
                     }`}
-                    onClick={disable ? () => {} : handleClick}
-                    ref={axisRef}
+                    onClick={disabled ? () => {} : handleClick}
                 >
-                    {yIndex === -1 ? CommonUtils.getLang('DataAnalytics.y_axis') : table[0][yIndex]}
+                    {yIndex === -1 ? CommonUtils.getLang('DataAnalytics.y_axis') : fields[yIndex]}
                 </div>
             </div>
-
             {showDropdown && (
                 <Dropdown
                     items={yAxis}
-                    onSelectDropdown={handleSelectDropDown}
+                    onSelectDropdown={handleSelectDropdown}
                     onOutsideClick={handleOutsideClick}
                     positionDom={axisRef.current}
                 />

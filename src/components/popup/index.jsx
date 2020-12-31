@@ -6,6 +6,7 @@ import classname from 'classnames';
 import Navigation from './Contents/Navigation';
 import Select from './Contents/Select';
 import FileUpload from './Contents/FileUpload/index';
+import FileDragUpload from './Contents/FileDragUpload/index';
 import WriteBox from './Contents/WriteBox';
 import Draw from './Contents/Draw';
 import Projects from './Contents/Projects/index';
@@ -15,7 +16,7 @@ import Theme from '@utils/Theme';
 import root from 'window-or-global';
 import Modal from './Modal';
 
-class Sprite extends Component {
+class Popup extends Component {
     constructor(props) {
         super(props);
         this.theme = Theme.getStyle('popup');
@@ -78,11 +79,22 @@ class Sprite extends Component {
         let view = <div>empty</div>;
         switch (selected) {
             case 'select':
-                view = <Select {...this.property} multiSelect={multiSelect} showSelected={showSelected} data={data} />;
+                view = (
+                    <Select
+                        {...this.property}
+                        multiSelect={multiSelect}
+                        showSelected={showSelected}
+                        data={data}
+                    />
+                );
                 navigation = <Navigation {...navSettings} isDrawVector={isDrawVector} />;
                 break;
             case 'upload':
                 view = <FileUpload {...this.property} uploads={uploads} />;
+                navigation = <Navigation {...navSettings} searchOption={false} />;
+                break;
+            case 'dragUpload':
+                view = <FileDragUpload {...this.property} uploads={uploads} />;
                 navigation = <Navigation {...navSettings} searchOption={false} />;
                 break;
             case 'draw':
@@ -99,11 +111,12 @@ class Sprite extends Component {
                 view = <Select type={'bigicon'} imageBaseUrl={url} data={data} />;
                 break;
             }
-            case 'aiUtilize':
+            case 'aiUtilize': {
                 const aiImageurl = expsnsionIconBaseUrl || '/lib/entry-js/images/aiUtilize/';
                 navigation = null;
                 view = <Select type={'bigicon'} imageBaseUrl={aiImageurl} data={data} />;
                 break;
+            }
             case 'projects':
             case 'favorites':
                 view = <Projects type={selected} data={data} />;
@@ -150,4 +163,4 @@ const mapDispatchToProps = (dispatch) => ({
     initState: () => dispatch(initState()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sprite);
+export default connect(mapStateToProps, mapDispatchToProps)(Popup);

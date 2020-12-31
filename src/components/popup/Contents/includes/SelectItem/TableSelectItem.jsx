@@ -54,7 +54,9 @@ const TableSelectItem = ({ theme, item, upload, openModal }) => {
     const createFieldsText = (fields) => {
         const showCount = 3;
         if (fields.length > showCount) {
-            return CommonUtils.getLang('DataAnalytics.attributes_text').replace('%1', fields.slice(0, showCount).join(', ')).replace('%2', fields.length - showCount);
+            return CommonUtils.getLang('DataAnalytics.attributes_text')
+                .replace('%1', fields.slice(0, showCount).join(', '))
+                .replace('%2', fields.length - showCount);
         }
         return fields.join(', ');
     };
