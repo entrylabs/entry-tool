@@ -186,13 +186,16 @@
 
     //새로 만들기
     .new_add_box {
-        padding: 79px 0 0 315px;
+        padding-top: 79px;
+        text-align: center;
         .dsc {
+            display: inline-block;
             min-height: 64px;
             padding-left: 82px;
             background-image: url('#{$imageDir}/IcoNewTableAdd.svg');
             background-size: 64px auto;
             background-repeat: no-repeat;
+            vertical-align: top;
         }
         .dsc > strong {
             display: block;
@@ -200,6 +203,7 @@
             font-size: 20px;
             font-weight: 600;
             color: #2c313d;
+            text-align: left;
             letter-spacing: -0.46px;
             line-height: 22px;
         }
@@ -208,6 +212,7 @@
             margin-top: 12px;
             font-size: 14px;
             color: #2c313d;
+            text-align: left;
             letter-spacing: -0.32px;
             line-height: 16px;
         }

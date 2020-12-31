@@ -79,9 +79,10 @@
         .btn_save {
             position: absolute;
             overflow: hidden;
+            box-sizing: border-box;
             top: 0;
             right: 0;
-            height: 30px;
+            height: 32px;
             padding: 0 18px;
             border: 1px solid #e2e2e2;
             border-radius: 4px;
@@ -213,7 +214,7 @@
         }
         .table_info li:after {
             position: absolute;
-            right: 0;
+            left: 0;
             top: 1px;
             width: 1px;
             height: 10px;
@@ -222,6 +223,9 @@
         }
         .table_info li:first-of-type {
             padding-left: 0;
+        }
+        .table_info li:first-of-type:after {
+            display: none;
         }
         .table_box {
             margin-top: 20px;
@@ -252,10 +256,10 @@
             border-top: 1px solid #e2e2e2;
         }
         .table tbody td {
-            border-top: 1px solid #f4f4f4;
-        }
-        .table tbody td {
             height: 36px;
+            border-top: 1px solid #f4f4f4;
+            background-color: #fff;
+            font-weight: 600;
             text-align: center;
         }
         .table .thead_tit {
