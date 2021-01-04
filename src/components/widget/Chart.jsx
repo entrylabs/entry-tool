@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import _ from 'lodash';
+import _map from 'lodash/map';
 import _slice from 'lodash/slice';
+import _floor from 'lodash/floor';
 import _forEach from 'lodash/forEach';
+import _findIndex from 'lodash/findIndex';
 import bb from 'billboard.js';
 
 import Theme from '@utils/Theme';
@@ -39,35 +42,35 @@ const pieChart = (table, xIndex, categoryIndex) => [
 ];
 
 const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
-    _.map(
+    _map(
         table.slice(1).reduce((prev, row) => {
             prev[
-                `${row[categoryIndex]}-${table[0][yIndex]}`
+                `${row[categoryIndex]}____${table[0][yIndex]}`
                     .replaceAll(' ', '_')
                     .replaceAll('.', '_')
             ] =
                 prev[
-                    `${row[categoryIndex]}-${table[0][yIndex]}`
+                    `${row[categoryIndex]}____${table[0][yIndex]}`
                         .replaceAll(' ', '_')
                         .replaceAll('.', '_')
                 ] || [];
             prev[
-                `${row[categoryIndex]}-${table[0][yIndex]}`
+                `${row[categoryIndex]}____${table[0][yIndex]}`
                     .replaceAll(' ', '_')
                     .replaceAll('.', '_')
             ].push(row[yIndex]);
             prev[
-                `${row[categoryIndex]}-${table[0][xIndex]}`
+                `${row[categoryIndex]}____${table[0][xIndex]}`
                     .replaceAll(' ', '_')
                     .replaceAll('.', '_')
             ] =
                 prev[
-                    `${row[categoryIndex]}-${table[0][xIndex]}`
+                    `${row[categoryIndex]}____${table[0][xIndex]}`
                         .replaceAll(' ', '_')
                         .replaceAll('.', '_')
                 ] || [];
             prev[
-                `${row[categoryIndex]}-${table[0][xIndex]}`
+                `${row[categoryIndex]}____${table[0][xIndex]}`
                     .replaceAll(' ', '_')
                     .replaceAll('.', '_')
             ].push(row[xIndex]);
@@ -79,8 +82,10 @@ const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
 const scatterXs = (table, xIndex, yIndex, categoryIndex) =>
     table.slice(1).reduce((prev, row) => {
         prev[
-            `${row[categoryIndex]}-${table[0][yIndex]}`.replaceAll(' ', '_').replaceAll('.', '_')
-        ] = `${row[categoryIndex]}-${table[0][xIndex]}`.replaceAll(' ', '_').replaceAll('.', '_');
+            `${row[categoryIndex]}____${table[0][yIndex]}`.replaceAll(' ', '_').replaceAll('.', '_')
+        ] = `${row[categoryIndex]}____${table[0][xIndex]}`
+            .replaceAll(' ', '_')
+            .replaceAll('.', '_');
         return prev;
     }, {});
 
@@ -109,6 +114,15 @@ const deduplicationColumn = (columns) =>
         return [head, ...ext];
     });
 
+const getMouseOverStyle = (type, index) => `
+    background-color:${GRAPH_COLOR[type][index % GRAPH_COLOR[type].length]};
+    float: left;
+    width: 14px;
+    height: 14px;
+    margin: -1px 7px 0 0;
+    vertical-align: middle;
+`;
+
 const generateOption = (option) => {
     const {
         table,
@@ -118,9 +132,9 @@ const generateOption = (option) => {
         categoryIndexes,
         id,
         size,
-        tooltip,
         legend = { show: false },
         axisY,
+        theme,
     } = option;
 
     let x;
@@ -128,6 +142,7 @@ const generateOption = (option) => {
     let columns;
     let grid;
     let point;
+    let tooltip;
     let {
         axisX = {
             type: 'category',
@@ -147,12 +162,56 @@ const generateOption = (option) => {
                 [...categoryIndexes].map((index) => _.unzip(table)[index])
             );
             axisX.categories = table.slice(1).map((row) => row[xIndex]);
+
+            tooltip = {
+                contents: (data) => {
+                    const [{ name, value }] = data;
+                    const fields = _map(categoryIndexes, (index) => table[0][index]);
+                    const index = _findIndex(fields, (col) => col == name);
+                    return `
+                        <div class="${theme.chart_tooltip}">
+                            <span
+                                className="${theme.bg}"
+                                style="${getMouseOverStyle(type, index)}"
+                            >
+                                &nbsp;
+                            </span>
+                            ${name}: ${value.toLocaleString()}
+                        </div>`;
+                },
+                init: {
+                    x: 100,
+                },
+            };
             break;
         case 'pie':
-            columns = deduplicationColumn(
-                addValueToKey(pieChart(table, xIndex, categoryIndexes[0]))
-            );
+            columns = deduplicationColumn(pieChart(table, xIndex, categoryIndexes[0]));
             x = table[0][xIndex];
+            tooltip = {
+                contents: (data) => {
+                    const [{ name, ratio, value }] = data;
+                    const index = _findIndex(
+                        _map(table.slice(1), (row) => row[xIndex]),
+                        (col) => col == name
+                    );
+
+                    return `
+                        <div class="${theme.chart_tooltip}">
+                            <span
+                                className="${theme.bg}"
+                                style="${getMouseOverStyle(type, index)}"
+                            >
+                                &nbsp;
+                            </span>
+                            ${name} | ${_floor(ratio * 100)}% (${
+                        table[0][categoryIndexes[0]]
+                    }: ${value.toLocaleString()})
+                        </div>`;
+                },
+                init: {
+                    x: 100,
+                },
+            };
             break;
         case 'scatter': {
             columns = deduplicationColumn(scatterChart(table, xIndex, yIndex, categoryIndexes));
@@ -182,6 +241,33 @@ const generateOption = (option) => {
                     '<path d="M0 3.714L8 3.714M4 0L4 8" transform="translate(-576 -457) translate(576 457)"/>',
                 ],
             };
+            tooltip = {
+                contents: (data) => {
+                    const [{ name, value, x }] = data;
+                    const xAxis = table[0][xIndex];
+                    const [category, yAxis] = name.split('____');
+                    const categoryIndex = categoryIndexes[0];
+                    const index = _findIndex(
+                        table.slice(1),
+                        (row) => row[categoryIndex] == category
+                    );
+
+                    return `
+                        <div class="${theme.chart_tooltip}">
+                            <span
+                                className="${theme.bg}"
+                                style="${getMouseOverStyle(type, index)}"
+                            >
+                                &nbsp;
+                            </span>
+                            ${category}&nbsp;|&nbsp;${xAxis}: ${x.toLocaleString()}
+                            &nbsp;${yAxis}: ${value.toLocaleString()}
+                        </div>`;
+                },
+                init: {
+                    x: 100,
+                },
+            };
             break;
         }
         default:
@@ -195,7 +281,6 @@ const generateOption = (option) => {
         size,
         point,
         legend,
-        tooltip,
         bindto: `#${id}`,
         color: {
             pattern: GRAPH_COLOR[type],
@@ -217,6 +302,7 @@ const generateOption = (option) => {
         },
         tooltip: {
             grouped: false,
+            ...tooltip,
         },
     };
 };
@@ -225,16 +311,7 @@ const isDrawable = (table) => table[0].length > 1 && hasNumberColumn(table);
 
 const Chart = (props) => {
     const theme = Theme.getStyle('popup');
-    const {
-        table = [[]],
-        chart = {},
-        size,
-        tooltip = { grouped: false },
-        legend,
-        axisX,
-        axisY,
-        shortForm = false,
-    } = props;
+    const { table = [[]], chart = {}, size, legend, axisX, axisY, shortForm = false } = props;
 
     const { type = 'bar', xIndex = -1, yIndex, categoryIndexes = [] } = chart;
     const id = `c${generateHash()}`;
@@ -267,10 +344,10 @@ const Chart = (props) => {
                 categoryIndexes,
                 id,
                 size,
-                tooltip,
                 legend,
                 axisX,
                 axisY,
+                theme,
             });
             option && bb.generate(option);
         }
