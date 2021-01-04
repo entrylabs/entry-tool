@@ -3,6 +3,7 @@ import EntrySheet from 'entry_sheet';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import _map from 'lodash/map';
 import Theme from '@utils/Theme';
+import { downloadXLSX } from '@utils/dataAnalytics';
 
 const TableEditor = () => {
     const theme = Theme.getStyle('popup');
@@ -24,6 +25,12 @@ const TableEditor = () => {
         }
     };
 
+    const saveExcel = () => {
+        const { name } = selected;
+        const sheet = gridRef?.current?.getSheetData().data;
+        downloadXLSX(sheet, name);
+    };
+
     return (
         <div className={theme.sheet_box}>
             <EntrySheet
@@ -37,7 +44,10 @@ const TableEditor = () => {
                 }}
                 option={{
                     type: 'EDITOR',
-                    callBack: { onColumnEdit: handleColumnEdit },
+                    callBack: { onColumnEdit: handleColumnEdit, saveExcel },
+                    config: {
+                        maxCell: 30000,
+                    },
                 }}
             />
         </div>

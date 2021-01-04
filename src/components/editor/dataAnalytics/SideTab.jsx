@@ -1,12 +1,11 @@
 import React, { useState, useContext, useCallback, useMemo } from 'react';
 import _every from 'lodash/every';
 import _difference from 'lodash/difference';
-import XLSX from 'xlsx';
 import ContextMenu from '@components/widget/contextMenu';
 import SaveConfirm from './SaveConfirm';
 import { Confirm as ConfirmModal } from '@entrylabs/modal';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
-import { isChangeTable } from '@utils/dataAnalytics';
+import { downloadXLSX, isChangeTable } from '@utils/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 import { TABLE } from '@constants/dataAnalytics';
 import Theme from '@utils/Theme';
@@ -48,11 +47,7 @@ const SideTab = () => {
                 callback: () => {
                     const dataTable = list[clickedIndex];
                     const { name, table } = dataTable;
-                    const worksheet = XLSX.utils.aoa_to_sheet(table);
-                    const workbook = XLSX.utils.book_new();
-                    XLSX.utils.book_append_sheet(workbook, worksheet);
-
-                    XLSX.writeFile(workbook, `${name}.xlsx`);
+                    downloadXLSX(table, name);
                 },
             },
         ],

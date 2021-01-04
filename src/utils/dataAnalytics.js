@@ -1,3 +1,5 @@
+import XLSX from 'xlsx';
+
 import _some from 'lodash/some';
 import _head from 'lodash/head';
 import _uniq from 'lodash/uniq';
@@ -165,4 +167,12 @@ export const isChangeTable = (originProp, currentProp) => {
         origin.length !== current.length ||
         _some(origin, (row, index) => _differenceBy(row, current[index], _toString).length)
     );
+};
+
+export const downloadXLSX = (table, name) => {
+    const worksheet = XLSX.utils.aoa_to_sheet(table);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet);
+
+    XLSX.writeFile(workbook, `${name}.xlsx`);
 };
