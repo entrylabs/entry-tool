@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import TableToolTip from '@components/tooltip/TableToolTip';
-import { getSummary, getTrimedTable, getTable } from '@utils/dataAnalytics';
+import { getSummary, getTrimedTable } from '@utils/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 import { SUMMARY_HEADER } from '@constants/dataAnalytics';
 import _map from 'lodash/map';

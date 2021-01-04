@@ -41,11 +41,11 @@ const getAverage = (array) => array.reduce((sum, value) => sum + Number(value), 
 const getStandardDeviation = (arr, average) =>
     Math.sqrt(arr.reduce((acc, curr) => acc + Math.pow(curr - average, 2), 0) / arr.length);
 const makeSummary = (row) => {
-    const restRow = row.slice(1);
-    const count = restRow.length;
+    let restRow = row.slice(1);
     if (someString(restRow)) {
         return [row[0], '-', '-', '-', '-', '-'];
     }
+    restRow = _reduce(restRow, (prev, curr) => (curr == '' ? prev : [...prev, curr]), []);
     const max = Math.max(...restRow);
     const min = Math.min(...restRow);
     const average = getAverage(restRow);
