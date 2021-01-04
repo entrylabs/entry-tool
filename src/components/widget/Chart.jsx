@@ -262,7 +262,7 @@ const generateOption = (option) => {
                                 &nbsp;
                             </span>
                             ${
-                                table[categoryIndex][index + 1]
+                                table[index + 1][categoryIndex]
                             }&nbsp;|&nbsp;${xAxis}: ${x.toLocaleString()}
                             &nbsp;${table[0][yIndex]}: ${value.toLocaleString()}
                         </div>`;
