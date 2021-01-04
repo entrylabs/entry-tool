@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import _ from 'lodash';
 import _map from 'lodash/map';
 import _slice from 'lodash/slice';
+import _floor from 'lodash/floor';
 import _forEach from 'lodash/forEach';
 import _findIndex from 'lodash/findIndex';
 import bb from 'billboard.js';
@@ -162,7 +163,7 @@ const generateOption = (option) => {
 
             tooltip = {
                 contents: (data) => {
-                    const [{ name, x, value }] = data;
+                    const [{ name, value }] = data;
                     const fields = _map(categoryIndexes, (index) => table[0][index]);
                     const index = _findIndex(fields, (col) => col == name);
                     return `
@@ -182,10 +183,33 @@ const generateOption = (option) => {
             };
             break;
         case 'pie':
-            columns = deduplicationColumn(
-                addValueToKey(pieChart(table, xIndex, categoryIndexes[0]))
-            );
+            columns = deduplicationColumn(pieChart(table, xIndex, categoryIndexes[0]));
             x = table[0][xIndex];
+            tooltip = {
+                contents: (data) => {
+                    const [{ name, ratio, value }] = data;
+                    const index = _findIndex(
+                        _map(table.slice(1), (row) => row[xIndex]),
+                        (col) => col == name
+                    );
+
+                    return `
+                        <div class="${theme.chart_tooltip}">
+                            <span
+                                className="${theme.bg}"
+                                style="${getMouseOverStyle(type, index)}"
+                            >
+                                &nbsp;
+                            </span>
+                            ${name} | ${_floor(ratio * 100)}% (${
+                        table[0][categoryIndexes[0]]
+                    }: ${value.toLocaleString()})
+                        </div>`;
+                },
+                init: {
+                    x: 100,
+                },
+            };
             break;
         case 'scatter': {
             columns = deduplicationColumn(scatterChart(table, xIndex, yIndex, categoryIndexes));
