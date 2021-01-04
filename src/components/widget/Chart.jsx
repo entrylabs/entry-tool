@@ -42,35 +42,35 @@ const pieChart = (table, xIndex, categoryIndex) => [
 ];
 
 const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
-    _.map(
+    _map(
         table.slice(1).reduce((prev, row) => {
             prev[
-                `${row[categoryIndex]}-${table[0][yIndex]}`
+                `${row[categoryIndex]}____${table[0][yIndex]}`
                     .replaceAll(' ', '_')
                     .replaceAll('.', '_')
             ] =
                 prev[
-                    `${row[categoryIndex]}-${table[0][yIndex]}`
+                    `${row[categoryIndex]}____${table[0][yIndex]}`
                         .replaceAll(' ', '_')
                         .replaceAll('.', '_')
                 ] || [];
             prev[
-                `${row[categoryIndex]}-${table[0][yIndex]}`
+                `${row[categoryIndex]}____${table[0][yIndex]}`
                     .replaceAll(' ', '_')
                     .replaceAll('.', '_')
             ].push(row[yIndex]);
             prev[
-                `${row[categoryIndex]}-${table[0][xIndex]}`
+                `${row[categoryIndex]}____${table[0][xIndex]}`
                     .replaceAll(' ', '_')
                     .replaceAll('.', '_')
             ] =
                 prev[
-                    `${row[categoryIndex]}-${table[0][xIndex]}`
+                    `${row[categoryIndex]}____${table[0][xIndex]}`
                         .replaceAll(' ', '_')
                         .replaceAll('.', '_')
                 ] || [];
             prev[
-                `${row[categoryIndex]}-${table[0][xIndex]}`
+                `${row[categoryIndex]}____${table[0][xIndex]}`
                     .replaceAll(' ', '_')
                     .replaceAll('.', '_')
             ].push(row[xIndex]);
@@ -82,8 +82,10 @@ const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
 const scatterXs = (table, xIndex, yIndex, categoryIndex) =>
     table.slice(1).reduce((prev, row) => {
         prev[
-            `${row[categoryIndex]}-${table[0][yIndex]}`.replaceAll(' ', '_').replaceAll('.', '_')
-        ] = `${row[categoryIndex]}-${table[0][xIndex]}`.replaceAll(' ', '_').replaceAll('.', '_');
+            `${row[categoryIndex]}____${table[0][yIndex]}`.replaceAll(' ', '_').replaceAll('.', '_')
+        ] = `${row[categoryIndex]}____${table[0][xIndex]}`
+            .replaceAll(' ', '_')
+            .replaceAll('.', '_');
         return prev;
     }, {});
 
@@ -174,7 +176,7 @@ const generateOption = (option) => {
                             >
                                 &nbsp;
                             </span>
-                            ${name}: ${value}
+                            ${name}: ${value.toLocaleString()}
                         </div>`;
                 },
                 init: {
@@ -238,6 +240,33 @@ const generateOption = (option) => {
                     '<path d="M7.2.8L.8 7.2M7.2 7.2L.8.8" transform="translate(-528 -457) translate(528 457)"/>',
                     '<path d="M0 3.714L8 3.714M4 0L4 8" transform="translate(-576 -457) translate(576 457)"/>',
                 ],
+            };
+            tooltip = {
+                contents: (data) => {
+                    const [{ name, value, x }] = data;
+                    const xAxis = table[0][xIndex];
+                    const [category, yAxis] = name.split('____');
+                    const categoryIndex = categoryIndexes[0];
+                    const index = _findIndex(
+                        table.slice(1),
+                        (row) => row[categoryIndex] == category
+                    );
+
+                    return `
+                        <div class="${theme.chart_tooltip}">
+                            <span
+                                className="${theme.bg}"
+                                style="${getMouseOverStyle(type, index)}"
+                            >
+                                &nbsp;
+                            </span>
+                            ${category}&nbsp;|&nbsp;${xAxis}: ${x.toLocaleString()}
+                            &nbsp;${yAxis}: ${value.toLocaleString()}
+                        </div>`;
+                },
+                init: {
+                    x: 100,
+                },
             };
             break;
         }
