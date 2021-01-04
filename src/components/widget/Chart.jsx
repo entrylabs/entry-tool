@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import _ from 'lodash';
+import _map from 'lodash/map';
 import _slice from 'lodash/slice';
 import _forEach from 'lodash/forEach';
+import _findIndex from 'lodash/findIndex';
 import bb from 'billboard.js';
 
 import Theme from '@utils/Theme';
@@ -109,6 +111,15 @@ const deduplicationColumn = (columns) =>
         return [head, ...ext];
     });
 
+const getMouseOverStyle = (type, index) => `
+    background-color:${GRAPH_COLOR[type][index % GRAPH_COLOR[type].length]};
+    float: left;
+    width: 14px;
+    height: 14px;
+    margin: -1px 7px 0 0;
+    vertical-align: middle;
+`;
+
 const generateOption = (option) => {
     const {
         table,
@@ -118,9 +129,9 @@ const generateOption = (option) => {
         categoryIndexes,
         id,
         size,
-        tooltip,
         legend = { show: false },
         axisY,
+        theme,
     } = option;
 
     let x;
@@ -128,6 +139,7 @@ const generateOption = (option) => {
     let columns;
     let grid;
     let point;
+    let tooltip;
     let {
         axisX = {
             type: 'category',
@@ -147,6 +159,27 @@ const generateOption = (option) => {
                 [...categoryIndexes].map((index) => _.unzip(table)[index])
             );
             axisX.categories = table.slice(1).map((row) => row[xIndex]);
+
+            tooltip = {
+                contents: (data) => {
+                    const [{ name, x, value }] = data;
+                    const fields = _map(categoryIndexes, (index) => table[0][index]);
+                    const index = _findIndex(fields, (col) => col == name);
+                    return `
+                        <div class="${theme.chart_tooltip}">
+                            <span
+                                className="${theme.bg}"
+                                style="${getMouseOverStyle(type, index)}"
+                            >
+                                &nbsp;
+                            </span>
+                            ${name}: ${value}
+                        </div>`;
+                },
+                init: {
+                    x: 100,
+                },
+            };
             break;
         case 'pie':
             columns = deduplicationColumn(
@@ -195,7 +228,6 @@ const generateOption = (option) => {
         size,
         point,
         legend,
-        tooltip,
         bindto: `#${id}`,
         color: {
             pattern: GRAPH_COLOR[type],
@@ -217,6 +249,7 @@ const generateOption = (option) => {
         },
         tooltip: {
             grouped: false,
+            ...tooltip,
         },
     };
 };
@@ -225,16 +258,7 @@ const isDrawable = (table) => table[0].length > 1 && hasNumberColumn(table);
 
 const Chart = (props) => {
     const theme = Theme.getStyle('popup');
-    const {
-        table = [[]],
-        chart = {},
-        size,
-        tooltip = { grouped: false },
-        legend,
-        axisX,
-        axisY,
-        shortForm = false,
-    } = props;
+    const { table = [[]], chart = {}, size, legend, axisX, axisY, shortForm = false } = props;
 
     const { type = 'bar', xIndex = -1, yIndex, categoryIndexes = [] } = chart;
     const id = `c${generateHash()}`;
@@ -267,10 +291,10 @@ const Chart = (props) => {
                 categoryIndexes,
                 id,
                 size,
-                tooltip,
                 legend,
                 axisX,
                 axisY,
+                theme,
             });
             option && bb.generate(option);
         }
