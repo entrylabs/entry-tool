@@ -249,7 +249,8 @@ const generateOption = (option) => {
                     const categoryIndex = categoryIndexes[0];
                     const index = _findIndex(
                         table.slice(1),
-                        (row) => row[categoryIndex] == category
+                        (row) =>
+                            row[categoryIndex].replaceAll(' ', '_').replaceAll('.', '_') == category
                     );
 
                     return `
