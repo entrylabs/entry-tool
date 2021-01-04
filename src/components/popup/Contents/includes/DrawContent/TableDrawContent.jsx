@@ -2,7 +2,7 @@ import React from 'react';
 import { CommonUtils } from '@utils/Common';
 
 const copyRightLink =
-    'https://www.copyright.or.kr/education/educlass/learning/infringement-case/index.do';
+    'https://copyright.or.kr/education/educlass/learning/infringement-case/index.do';
 export default ({ theme, goDraw }) => (
     <section className={`${theme.pop_content} ${theme.table_file_add}`}>
         <div className={theme.section_cont}>
