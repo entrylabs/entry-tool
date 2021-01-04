@@ -1,3 +1,5 @@
+import XLSX from 'xlsx';
+
 import _some from 'lodash/some';
 import _head from 'lodash/head';
 import _uniq from 'lodash/uniq';
@@ -39,11 +41,11 @@ const getAverage = (array) => array.reduce((sum, value) => sum + Number(value), 
 const getStandardDeviation = (arr, average) =>
     Math.sqrt(arr.reduce((acc, curr) => acc + Math.pow(curr - average, 2), 0) / arr.length);
 const makeSummary = (row) => {
-    const restRow = row.slice(1);
-    const count = restRow.length;
+    let restRow = row.slice(1);
     if (someString(restRow)) {
         return [row[0], '-', '-', '-', '-', '-'];
     }
+    restRow = _reduce(restRow, (prev, curr) => (curr == '' ? prev : [...prev, curr]), []);
     const max = Math.max(...restRow);
     const min = Math.min(...restRow);
     const average = getAverage(restRow);
@@ -165,4 +167,12 @@ export const isChangeTable = (originProp, currentProp) => {
         origin.length !== current.length ||
         _some(origin, (row, index) => _differenceBy(row, current[index], _toString).length)
     );
+};
+
+export const downloadXLSX = (table, name) => {
+    const worksheet = XLSX.utils.aoa_to_sheet(table);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet);
+
+    XLSX.writeFile(workbook, `${name}.xlsx`);
 };
