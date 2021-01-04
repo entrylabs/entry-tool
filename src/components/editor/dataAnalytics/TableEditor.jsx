@@ -3,6 +3,7 @@ import EntrySheet from 'entry_sheet';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import _map from 'lodash/map';
 import Theme from '@utils/Theme';
+import { CommonUtils } from '@utils/Common';
 import { downloadXLSX } from '@utils/dataAnalytics';
 
 const TableEditor = () => {
@@ -47,6 +48,20 @@ const TableEditor = () => {
                     callBack: { onColumnEdit: handleColumnEdit, saveExcel },
                     config: {
                         maxCell: 30000,
+                        language: {
+                            copy: CommonUtils.getLang('DataAnalytics.copy'),
+                            cut: CommonUtils.getLang('DataAnalytics.cut'),
+                            delete: CommonUtils.getLang('DataAnalytics.delete'),
+                            paste: CommonUtils.getLang('DataAnalytics.paste'),
+                            addLeftRow: CommonUtils.getLang('DataAnalytics.add_property_left'),
+                            addRightRow: CommonUtils.getLang('DataAnalytics.add_property_right'),
+                            deleteRow: CommonUtils.getLang('DataAnalytics.delete_attribute'),
+                            addUpCol: CommonUtils.getLang('DataAnalytics.add_row_above'),
+                            addDownCol: CommonUtils.getLang('DataAnalytics.add_row_below'),
+                            deleteCol: CommonUtils.getLang('DataAnalytics.delete_row'),
+                            maxCellPopup: CommonUtils.getLang('DataAnalytics.not_editable_content'),
+                            maxCellPopupDown: CommonUtils.getLang('DataAnalytics.download_table'),
+                        },
                     },
                 }}
             />
