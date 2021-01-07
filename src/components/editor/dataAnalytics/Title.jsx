@@ -2,19 +2,15 @@ import React, { useContext, useCallback } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import Theme from '@utils/Theme';
 
-const Title = () => {
+const Title = ({ title }) => {
     const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { selected = {}, list } = dataAnalytics;
-    const { name = '' } = selected;
+    const { list } = dataAnalytics;
 
-    const handleChange = useCallback((event) => {
+    const handleBlur = (event) => {
         event.preventDefault();
-        dispatch({
-            type: 'CHANGE_TABLE_TITLE',
-            value: event.target.value,
-        });
-    }, []);
+        dispatch({ type: 'CHANGE_TABLE_TITLE', value: event.target.value });
+    };
 
     return (
         <input
@@ -22,8 +18,8 @@ const Title = () => {
             name="sheet_sjt"
             className={theme.input}
             disabled={!list.length}
-            onChange={handleChange}
-            value={name}
+            onBlur={handleBlur}
+            defaultValue={title}
         />
     );
 };

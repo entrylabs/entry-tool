@@ -22,13 +22,13 @@ const DataAnalyticsEditor = () => {
     const {
         tab,
         list,
+        gridRef,
         selected = {},
+        isChanged,
         selectedIndex,
         onCloseButtonClick,
-        isChanged,
-        gridRef,
     } = dataAnalytics;
-    const { table = [[]] } = selected;
+    const { table = [[]], name = '' } = selected;
 
     const handleButtonClick = (event) => {
         event.preventDefault();
@@ -91,7 +91,7 @@ const DataAnalyticsEditor = () => {
                 ) : (
                     <div className={theme.section_cont}>
                         <div className={theme.sheet_form_box}>
-                            <Title key={`title_${selected ? selected.id : 'null'}`} />
+                            <Title key={`table_title_${selectedIndex}`} title={name} />
                             <Tab />
                         </div>
                         <Contents />
