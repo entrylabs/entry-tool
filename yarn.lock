@@ -6173,7 +6173,7 @@ entities@^2.0.0, entities@~2.1.0:
 
 "entry_sheet@https://30350629d5aeb38b1d18ae9f751eba51964fc5f9:x-oauth-basic@oss.navercorp.com/ria/entry_sheet.git":
   version "1.0.0"
-  resolved "https://30350629d5aeb38b1d18ae9f751eba51964fc5f9:x-oauth-basic@oss.navercorp.com/ria/entry_sheet.git"
+  resolved "https://30350629d5aeb38b1d18ae9f751eba51964fc5f9:x-oauth-basic@oss.navercorp.com/ria/entry_sheet.git#f708c450b457f96a73d359e74e577c44ae4da11a"
   dependencies:
     "@emotion/core" "^10.1.1"
     "@emotion/styled" "^10.0.27"
