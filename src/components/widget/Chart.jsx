@@ -15,21 +15,6 @@ import { hasNumberColumn, categoryKeys, isZipable } from '@utils/dataAnalytics';
 import { GRAPH_COLOR } from '@constants/dataAnalytics';
 const { generateHash } = CommonUtils;
 
-const pivot = (table, xIndex, yIndex, categoryIndex) =>
-    table.slice(1).reduce((prev, row) => {
-        prev[row[xIndex]] = prev[row[xIndex]] || {};
-        prev[row[xIndex]][row[categoryIndex]] = row[yIndex];
-        return prev;
-    }, {});
-
-const makeTable = (pvTable, cateKey) =>
-    cateKey.map((key) => [key, ..._.map(pvTable, (xAxis) => xAxis[key] || 0)]);
-
-const pivotTable = (table, xIndex, yIndex, categoryIndex) => [
-    [table[0][xIndex], ..._.uniq(table.slice(1).map((row) => row[xIndex]))],
-    ...makeTable(pivot(table, xIndex, yIndex, categoryIndex), categoryKeys(table, categoryIndex)),
-];
-
 const pieChart = (table, xIndex, categoryIndex) => [
     [table[0][xIndex], table[0][categoryIndex]],
     ..._.toPairs(
@@ -44,59 +29,24 @@ const pieChart = (table, xIndex, categoryIndex) => [
 const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
     _map(
         table.slice(1).reduce((prev, row) => {
-            prev[
-                `${row[categoryIndex]}____${table[0][yIndex]}`
-                    .replaceAll(' ', '_')
-                    .replaceAll('.', '_')
-            ] =
-                prev[
-                    `${row[categoryIndex]}____${table[0][yIndex]}`
-                        .replaceAll(' ', '_')
-                        .replaceAll('.', '_')
-                ] || [];
-            prev[
-                `${row[categoryIndex]}____${table[0][yIndex]}`
-                    .replaceAll(' ', '_')
-                    .replaceAll('.', '_')
-            ].push(row[yIndex]);
-            prev[
-                `${row[categoryIndex]}____${table[0][xIndex]}`
-                    .replaceAll(' ', '_')
-                    .replaceAll('.', '_')
-            ] =
-                prev[
-                    `${row[categoryIndex]}____${table[0][xIndex]}`
-                        .replaceAll(' ', '_')
-                        .replaceAll('.', '_')
-                ] || [];
-            prev[
-                `${row[categoryIndex]}____${table[0][xIndex]}`
-                    .replaceAll(' ', '_')
-                    .replaceAll('.', '_')
-            ].push(row[xIndex]);
+            prev[row[categoryIndex]] = prev[row[categoryIndex]] || [];
+            prev[row[categoryIndex]].push(row[yIndex]);
+            prev[`${row[categoryIndex]}_x`] = prev[`${row[categoryIndex]}_x`] || [];
+            prev[`${row[categoryIndex]}_x`].push(row[xIndex]);
             return prev;
         }, {}),
         (value, index) => [index, ...value]
     );
 
-const scatterXs = (table, xIndex, yIndex, categoryIndex) =>
-    table.slice(1).reduce((prev, row) => {
-        prev[
-            `${row[categoryIndex]}____${table[0][yIndex]}`.replaceAll(' ', '_').replaceAll('.', '_')
-        ] = `${row[categoryIndex]}____${table[0][xIndex]}`
-            .replaceAll(' ', '_')
-            .replaceAll('.', '_');
-        return prev;
-    }, {});
-
-const tabString = '&emsp;';
-
-const addValueToKey = (table) => [
-    table[0],
-    ...table
-        .slice(1)
-        .map((item) => [`${item[0]}${tabString}|${tabString}${item[1]}${tabString}|`, item[1]]),
-];
+const scatterXs = (columns) => {
+    const xs = {};
+    for (let index = 0; index < columns.length; index += 2) {
+        xs[index / 2] = `${index / 2}_x`;
+        columns[index][0] = index / 2;
+        columns[index + 1][0] = `${index / 2}_x`;
+    }
+    return xs;
+};
 
 const deduplicationColumn = (columns) =>
     columns.map((column, index) => {
@@ -214,8 +164,8 @@ const generateOption = (option) => {
             };
             break;
         case 'scatter': {
-            columns = deduplicationColumn(scatterChart(table, xIndex, yIndex, categoryIndexes));
-            xs = scatterXs(table, xIndex, yIndex, categoryIndexes);
+            columns = scatterChart(table, xIndex, yIndex, categoryIndexes);
+            xs = scatterXs(columns);
             const { tick = {} } = axisX;
             axisX = {
                 tick: {
@@ -245,24 +195,19 @@ const generateOption = (option) => {
                 contents: (data) => {
                     const [{ name, value, x }] = data;
                     const xAxis = table[0][xIndex];
-                    const [category, yAxis] = name.split('____');
                     const categoryIndex = categoryIndexes[0];
-                    const index = _findIndex(
-                        table.slice(1),
-                        (row) =>
-                            row[categoryIndex].replaceAll(' ', '_').replaceAll('.', '_') == category
-                    );
+                    const scatterNames = categoryKeys(table, categoryIndex);
 
                     return `
                         <div class="${theme.chart_tooltip}">
                             <span
                                 className="${theme.bg}"
-                                style="${getMouseOverStyle(type, index)}"
+                                style="${getMouseOverStyle(type, name)}"
                             >
                                 &nbsp;
                             </span>
                             ${
-                                table[index + 1][categoryIndex]
+                                scatterNames[Number(name)]
                             }&nbsp;|&nbsp;${xAxis}: ${x.toLocaleString()}
                             &nbsp;${table[0][yIndex]}: ${value.toLocaleString()}
                         </div>`;
