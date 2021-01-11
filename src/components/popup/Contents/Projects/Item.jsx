@@ -16,12 +16,9 @@ export default ({ item, isSelected, onClick, avatarImgUrl }) => {
         } else {
             if (avatarImage) {
                 const id = String(_id);
-                avatarImgUrl = `/uploads/profile/${id.substr(0, 2)}/${id.substr(
-                    2,
-                    2
-                )}/avatar_${id}.png`;
+                avatarImgUrl = `/uploads/${id.substr(0, 2)}/${id.substr(2, 2)}/${id}.png`;
             } else {
-                avatarImgUrl = '/img/assets/avatar_img.png';
+                avatarImgUrl = '/img/DefaultCardUserThmb.svg';
             }
         }
     }
