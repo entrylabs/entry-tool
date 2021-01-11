@@ -1,66 +1,104 @@
-import React, { useContext } from 'react';
-import ReactDOM from 'react-dom';
-import Header from './Header';
+import React, { useState, useContext, useCallback } from 'react';
+import _every from 'lodash/every';
+import _difference from 'lodash/difference';
 import Summary from './summary/Summary';
 import TableEditor from './TableEditor';
 import ChartEditor from './chart/ChartEditor';
-import { DataAnalyticsContext } from './context/DataAnalyticsContext';
-import { SUMMARY, TABLE, CHART, TAB_ITEMS } from './Constants';
-import Styles from '@assets/entry/scss/popup.scss';
-
-const Portal = ({ children }) => {
-    const el = document.querySelector('body');
-    return ReactDOM.createPortal(children, el);
-};
+import SideTab from './SideTab';
+import Tab from './Tab';
+import Title from './Title';
+import SaveConfirm from './SaveConfirm';
+import EmptyContents from './EmptyContents';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
+import { SUMMARY, TABLE, CHART } from '@constants/dataAnalytics';
+import { isChangeTable } from '@utils/dataAnalytics';
+import Theme from '@utils/Theme';
+import { CommonUtils } from '@utils/Common';
 
 const DataAnalyticsEditor = () => {
-    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { tab, table, isFullScreen } = dataAnalytics;
+    const theme = Theme.getStyle('popup');
+    const [showConfirm, setShowConfirm] = useState(false);
+    const { dataAnalytics } = useContext(DataAnalyticsContext);
+    const {
+        tab,
+        list,
+        gridRef,
+        selected = {},
+        isChanged,
+        selectedIndex,
+        onCloseButtonClick,
+    } = dataAnalytics;
+    const { table = [[]], name = '' } = selected;
 
-    const handleFullScreenClick = (event) => {
+    const handleButtonClick = (event) => {
         event.preventDefault();
-        dispatch({
-            type: 'TOGGLE_FULLSCREEN',
-            isFullScreen: !isFullScreen,
-        });
+        if (!list.length) {
+            return onCloseButtonClick();
+        }
+        if (!isChanged) {
+            if (tab === TABLE) {
+                const grid = gridRef?.current?.getSheetData().data;
+                if (!isChangeTable(table, grid)) {
+                    return onCloseButtonClick();
+                }
+            } else {
+                return onCloseButtonClick();
+            }
+        }
+        setShowConfirm(true);
     };
 
-    const header = (
-        <Header
-            selected={tab}
-            tabItems={TAB_ITEMS}
-            isFullScreen={isFullScreen}
-            onFullScreenClick={handleFullScreenClick}
-        />
-    );
-    let content = null;
-    if (table) {
+    const handleConfirmClick = useCallback(() => {
+        setShowConfirm(false);
+        onCloseButtonClick();
+    }, []);
+
+    let sectionCSS = theme.chart_content;
+    let Contents = EmptyContents;
+
+    if (selectedIndex !== -1) {
         switch (tab) {
-            case SUMMARY:
-                content = <Summary />;
-                break;
             case TABLE:
-                content = <TableEditor />;
+                Contents = TableEditor;
                 break;
             case CHART:
-                content = <ChartEditor />;
+                Contents = ChartEditor;
                 break;
-            default:
+            case SUMMARY:
+                Contents = Summary;
+                sectionCSS = theme.summary_content;
                 break;
         }
     }
 
-    return isFullScreen ? (
-        <Portal>
-            <div className={`${Styles.data_detail_wrap} ${Styles.full}`}>
-                {header}
-                {content}
-            </div>
-        </Portal>
-    ) : (
-        <div className={`${Styles.data_detail_wrap}`}>
-            {header}
-            {content}
+    return (
+        <div className={theme.popup_wrap}>
+            <header className={theme.pop_header}>
+                <h1>{CommonUtils.getLang('DataAnalytics.load_data_analytics')}</h1>
+                <button
+                    onClick={handleButtonClick}
+                    className={`${theme.btn_back} ${theme.imbtn_pop_close}`}
+                >
+                    <span className={theme.blind}>뒤로가기</span>
+                </button>
+            </header>
+            <section className={`${theme.pop_content} ${sectionCSS}`}>
+                <SideTab />
+                {selectedIndex === -1 ? (
+                    <section className={theme.content}>
+                        <p className={theme.caution_dsc}>먼저 테이블을 추가해 주세요.</p>
+                    </section>
+                ) : (
+                    <div className={theme.section_cont}>
+                        <div className={theme.sheet_form_box}>
+                            <Title key={`table_title_${selectedIndex}`} title={name} />
+                            <Tab />
+                        </div>
+                        <Contents />
+                    </div>
+                )}
+            </section>
+            {showConfirm && <SaveConfirm onClick={handleConfirmClick} />}
         </div>
     );
 };

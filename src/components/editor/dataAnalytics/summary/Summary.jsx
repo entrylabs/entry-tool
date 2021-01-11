@@ -1,34 +1,33 @@
 import React, { useContext } from 'react';
-import Styles from '@assets/entry/scss/popup.scss';
 import Table from './Table';
 import ChartList from './ChartList';
-import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
-import { CommonUtils, getSummary } from '@utils/Common';
+import Theme from '@utils/Theme';
+import { CommonUtils } from '@utils/Common';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 
 const Summary = () => {
+    const theme = Theme.getStyle('popup');
     const { dataAnalytics } = useContext(DataAnalyticsContext);
-    const { table, title, charts, summary: info } = dataAnalytics;
-
-    const summary = getSummary(table);
-
+    const { selected } = dataAnalytics;
+    const { summary: info } = selected;
     return (
-        <section className={`${Styles.detail_cont}`}>
-            <div className={Styles.content_box}>
+        <div className={theme.chart_box}>
+            <h2 className={theme.blind}>정보</h2>
+            <div className={theme.inner}>
                 {info ? (
-                    <div className={Styles.depth_title_box}>
-                        <h2 className={Styles.tit}>
-                            {CommonUtils.getLang('DataAnalytics.summary')}
-                        </h2>
-                        <p className={Styles.tit_dsc}>{info}</p>
+                    <div className={theme.category_box}>
+                        <div className={theme.table_sjt}>
+                            <strong>{CommonUtils.getLang('DataAnalytics.summary')}</strong>
+                            <p className={theme.title_dsc}>{info}</p>
+                        </div>
                     </div>
-                ) : null}
-
-                <div className={Styles.cont_inner}>
-                    <Table summary={summary} title={title} table={table} />
-                    <ChartList table={table} charts={charts} />
-                </div>
+                ) : (
+                    ''
+                )}
+                <Table />
+                <ChartList />
             </div>
-        </section>
+        </div>
     );
 };
 

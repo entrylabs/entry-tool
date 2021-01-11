@@ -4,10 +4,17 @@ import Dropdown from '@components/widget/dropdown';
 import classname from 'classnames';
 import { CommonUtils } from '@utils/Common';
 
-export default ({ options = [], onSelect, setDropdown, isOpenDefault, staticName }) => {
+export default ({
+    options = [],
+    onSelect,
+    setDropdown,
+    isOpenDefault,
+    staticName,
+    defaultIndex = 0,
+}) => {
     const theme = Theme.getStyle('popup');
     const [isOpen, setOpenStatus] = useState(false);
-    const [selected, select] = useState(options && options[0]);
+    const [selected, select] = useState(options && options[defaultIndex]);
     const dropdownClass = classname(
         theme.select_link,
         { [theme.imico_pop_select_arr_down]: !isOpen },

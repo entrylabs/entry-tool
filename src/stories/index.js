@@ -33,6 +33,7 @@ import configureStore from '../store';
 import Chart from '../components/widget/Chart';
 import Table from '../components/widget/Table';
 import ModalChart from '../components/widget/modalChart';
+import BillBoard from '../components/widget/BillBoard';
 
 import DataSelect from '../components/ai_layout/DataSelect';
 import DataUpload from '../components/ai_layout/DataUpload';
@@ -371,7 +372,7 @@ storiesOf('AiLayout', module)
     .add('테이블 추가하기 - 데이터 선택 딤드', () => <DataSelect Dimmed />)
     .add('파일 올리기 - 업로드 기본', () => <DataUpload UploadState="Default" />)
     .add('파일 올리기 - 업로드 리스트', () => <DataUpload UploadState="List" />)
-    .add('파일 올리기 - 새로 만들기', () => <DataUpload UploadState="NewAdd" />)
+    .add('파일 올리기 - 새로 만들기', () => <DataUpload />)
     .add('데이터 차트 - 차트 추가 기본', () => <TableChart ChartState="Default" />)
     .add('데이터 차트 - Aside 접기', () => <TableChart />)
     .add('데이터 차트 - 2차 가로', () => <TableChart ChartState="Depth2" NoResultText="가로축을 먼저 선택해 주세요." />)
@@ -400,6 +401,22 @@ storiesOf('AiLayout', module)
                     },
                 ],
             }}
+        />
+    ))
+    .add('billboard', () => (
+        <BillBoard
+            onClose={action('close')}
+            source={{
+                data: {
+                    type: 'line',
+                    columns: [
+                        ['data1', 1,2,3,4],
+                        ['data2', 4,3,2,1]
+                    ]
+                }
+            }}
+            title={'billboard chart'}
+            description={'description'}
         />
     ))
     .add('바차트', () => (

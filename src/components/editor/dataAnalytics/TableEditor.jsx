@@ -1,75 +1,71 @@
-import React, { useContext } from 'react';
-import Table from '@components/widget/Table';
-import { DataAnalyticsContext } from './context/DataAnalyticsContext';
+import React, { useContext, useEffect } from 'react';
+import EntrySheet from 'entry_sheet';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
+import _map from 'lodash/map';
+import Theme from '@utils/Theme';
 import { CommonUtils } from '@utils/Common';
-import Styles from '@assets/entry/scss/popup.scss';
+import { downloadXLSX } from '@utils/dataAnalytics';
 
 const TableEditor = () => {
+    const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const {
-        table,
-        title,
-        onToastDataAnalytics,
-        onChangeDataAnalytics,
-        onAlertDataAnalytics,
-        isFullScreen,
-        gridRef,
-    } = dataAnalytics;
+    const { selected = {}, gridRef } = dataAnalytics;
+    const { table = [[]] } = selected;
 
-    const addColumn = (columnIndex, columnName) => {
-        dispatch({
-            type: 'ADD_COLUMN',
-            columnIndex,
-            columnName,
-        });
+    const handleColumnEdit = ({ editType, index }) => {
+        if (editType === 'ADD') {
+            dispatch({
+                type: 'ADD_COLUMN',
+                index,
+            });
+        } else if (editType === 'REMOVE') {
+            dispatch({
+                type: 'DELETE_COLUMN',
+                index,
+            });
+        }
     };
 
-    const deleteColumn = (columnIndex) => {
-        dispatch({
-            type: 'DELETE_COLUMN',
-            columnIndex,
-        });
-    };
-
-    const addRow = (rowIndex) => {
-        dispatch({
-            type: 'ADD_ROW',
-            rowIndex,
-        });
-    };
-
-    const deleteRow = (rowIndex) => {
-        dispatch({
-            type: 'DELETE_ROW',
-            rowIndex,
-        });
+    const saveExcel = () => {
+        const { name } = selected;
+        const sheet = gridRef?.current?.getSheetData().data;
+        downloadXLSX(sheet, name);
     };
 
     return (
-        <section className={`${Styles.detail_cont} ${Styles.table_state}`}>
-            <h2 className={Styles.blind}>{CommonUtils.getLang('DataAnalytics.table')}</h2>
-            <div className={Styles.content_box}>
-                <div className={Styles.title_box}>
-                    <strong>{title}</strong>
-                </div>
-
-                <div className={Styles.table_box} style={{ height: 555 }}>
-                    <Table
-                        table={table}
-                        onToastDataAnalytics={onToastDataAnalytics}
-                        onChangeDataAnalytics={onChangeDataAnalytics}
-                        onAlertDataAnalytics={onAlertDataAnalytics}
-                        isFullScreen={isFullScreen}
-                        dataAnalytics={dataAnalytics}
-                        gridRef={gridRef}
-                        addColumn={addColumn}
-                        deleteColumn={deleteColumn}
-                        addRow={addRow}
-                        deleteRow={deleteRow}
-                    />
-                </div>
-            </div>
-        </section>
+        <div className={theme.sheet_box}>
+            <EntrySheet
+                ref={gridRef}
+                sheetData={{
+                    fields: {
+                        cols: [],
+                        rows: [],
+                    },
+                    data: table,
+                }}
+                option={{
+                    type: 'EDITOR',
+                    callBack: { onColumnEdit: handleColumnEdit, saveExcel },
+                    config: {
+                        maxCell: 30000,
+                        language: {
+                            copy: CommonUtils.getLang('DataAnalytics.copy'),
+                            cut: CommonUtils.getLang('DataAnalytics.cut'),
+                            delete: CommonUtils.getLang('DataAnalytics.delete'),
+                            paste: CommonUtils.getLang('DataAnalytics.paste'),
+                            addLeftRow: CommonUtils.getLang('DataAnalytics.add_property_left'),
+                            addRightRow: CommonUtils.getLang('DataAnalytics.add_property_right'),
+                            deleteRow: CommonUtils.getLang('DataAnalytics.delete_attribute'),
+                            addUpCol: CommonUtils.getLang('DataAnalytics.add_row_above'),
+                            addDownCol: CommonUtils.getLang('DataAnalytics.add_row_below'),
+                            deleteCol: CommonUtils.getLang('DataAnalytics.delete_row'),
+                            maxCellPopup: CommonUtils.getLang('DataAnalytics.not_editable_content'),
+                            maxCellPopupDown: CommonUtils.getLang('DataAnalytics.download_table'),
+                        },
+                    },
+                }}
+            />
+        </div>
     );
 };
 

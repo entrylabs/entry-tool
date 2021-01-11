@@ -1,43 +1,41 @@
 import React from 'react';
-import classname from 'classnames';
 import { CommonUtils } from '@utils/Common';
 
-const copyRightLink = 'https://www.copyright.or.kr/education/educlass/learning/infringement-case/index.do';
-export default ({ theme, goDraw }) => {
-    const warnMessage = `${CommonUtils.getLang('Menus.file_upload_warn_desc_table')} <a 
-            target="_blank" 
-            class="${theme.copyright_link}"
-            href="${copyRightLink}">
-            [${CommonUtils.getLang('Menus.file_upload_warn_link')}]
-        </a>`;
-    return (
-        <div className={theme.draw_box}>
-            <div className={classname(theme.thmb, theme.imico_pop_table_thmb)}>
-                &nbsp;
+const copyRightLink =
+    'https://copyright.or.kr/education/educlass/learning/infringement-case/index.do';
+export default ({ theme, goDraw }) => (
+    <section className={`${theme.pop_content} ${theme.table_file_add}`}>
+        <div className={theme.section_cont}>
+            <div className={theme.file_add_box}>
+                <div className={theme.new_add_box}>
+                    <p className={theme.dsc}>
+                        <strong>{CommonUtils.getLang('Menus.file_upload_table_title')}</strong>
+                        <span>{CommonUtils.getLang('Menus.file_upload_table_sub_title')}</span>
+                    </p>
+                </div>
             </div>
-            <p className={theme.draw_dsc}>
-                {CommonUtils.getLang('Menus.draw_new_table_ques_1')}
-                <br />
-                {CommonUtils.getLang('Menus.draw_new_table_ques_2')}
-            </p>
-            <div className={theme.warn_box}>
-                <p className={theme.warn_title}>
-                    {CommonUtils.getLang('Menus.file_upload_warn_title_table')}
+            <div className={theme.caution_box}>
+                <p className={theme.dsc}>
+                    <strong>{CommonUtils.getLang('Menus.file_upload_warn_title_table')}</strong>
+                    <span>
+                        {CommonUtils.getLang('Menus.file_upload_warn_desc_table_1')}
+                        <br />
+                        {CommonUtils.getLang('Menus.file_upload_warn_desc_table_2')}
+                        <a className={theme.link} target="_blank" href={copyRightLink}>
+                            [{CommonUtils.getLang('Menus.file_upload_warn_link')}]
+                        </a>
+                    </span>
                 </p>
-                <div
-                    className={theme.warn_desc}
-                    dangerouslySetInnerHTML={{ __html: warnMessage }}
-                />
             </div>
             <div className={theme.pop_btn_box}>
-                <a
-                    href="#NULL"
+                <div
                     className={theme.active}
+                    style={{ width: 180 }}
                     onClick={CommonUtils.handleClick(goDraw)}
                 >
-                    {CommonUtils.getLang('Menus.draw_new_go')}
-                </a>
+                    {CommonUtils.getLang('Menus.file_upload_add')}
+                </div>
             </div>
         </div>
-    );
-};
+    </section>
+);

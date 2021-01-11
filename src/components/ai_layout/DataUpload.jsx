@@ -24,7 +24,7 @@ class DataUpload extends Component {
                 <Fragment>
                     <div className={Styles.popup_wrap}>
                         <header className={Styles.pop_header}>
-                            <h1>데이터 추가하기</h1>
+                            <h1>테이블 추가하기</h1>
                             <button
                                 onClick={this.close}
                                 className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}
@@ -312,7 +312,7 @@ class DataUpload extends Component {
                 <Fragment>
                     <div className={Styles.popup_wrap}>
                         <header className={Styles.pop_header}>
-                            <h1>데이터 추가하기</h1>
+                            <h1>테이블 추가하기</h1>
                             <button
                                 onClick={this.close}
                                 className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}

@@ -6,10 +6,9 @@ import App from '../App';
 import configureStore from '../store';
 import { visibleAction } from '../actions/index';
 import Theme from '@utils/Theme';
-// import httpService from '../config/axios';
 
-const withWrapper = (option) => (WrappedComponent) => {
-    return class extends EventEmitter {
+const withWrapper = (option) => (WrappedComponent) =>
+    class extends EventEmitter {
         constructor(...args) {
             super();
             this.initialize(...args);
@@ -139,5 +138,5 @@ const withWrapper = (option) => (WrappedComponent) => {
             }
         }
     };
-};
+
 export default withWrapper;

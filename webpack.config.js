@@ -111,6 +111,8 @@ const config = {
             '@hoc': path.resolve(__dirname, './src/hoc'),
             '@styles': path.resolve(__dirname, './src/styles'),
             '@utils': path.resolve(__dirname, './src/utils'),
+            '@contexts': path.resolve(__dirname, './src/contexts'),
+            '@reducers': path.resolve(__dirname, './src/reducers'),
         },
     },
     externals: {

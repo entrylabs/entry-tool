@@ -16,7 +16,9 @@
                     "@components": "./src/components",
                     "@utils": "./src/utils",
                     "@constants": "./src/constants",
-                    "@selectors": "./src/selectors"
+                    "@selectors": "./src/selectors",
+                    "@reducers": "./src/reducers",
+                    "@contexts": "./src/contexts"
                 }
             }
         ]
