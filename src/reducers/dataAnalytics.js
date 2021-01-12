@@ -46,10 +46,15 @@ export const dataAnalyticsReducer = (state, action) => {
             };
         }
         case 'COPY_TABLE': {
-            const { list } = state;
+            const { list, onSubmitDataAnalytics } = state;
             const { index } = action;
-            const copiedTable = _cloneDeep(list[index]);
+            const { table, chart, name } = _cloneDeep(list[index]);
+            const copiedTable = { table, chart, name };
             const changedList = [...list, copiedTable];
+            onSubmitDataAnalytics({
+                selected: copiedTable,
+                index: list.length,
+            });
             return {
                 ...state,
                 selected: copiedTable,
