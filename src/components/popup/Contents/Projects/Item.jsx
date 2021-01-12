@@ -5,18 +5,21 @@ import Theme from '@utils/Theme';
 
 export default ({ item, isSelected, onClick, avatarImgUrl }) => {
     const { thumb, name, likeCnt = 0, comment = 0, visit = 0, user = {} } = item;
-    const { _id, username, avatarImage } = user;
+    const { _id, username, profileImage } = user;
     if (!avatarImgUrl) {
         if (Theme.type == 'entryline') {
-            if (user.profileImage) {
-                avatarImgUrl = `/uploads/${user.profileImage}`;
+            if (profileImage) {
+                avatarImgUrl = `/uploads/${profileImage}`;
             } else {
                 avatarImgUrl = '/static/img/pf/profile/img-profile-default-medium@2x.png';
             }
         } else {
-            if (avatarImage) {
-                const id = String(_id);
-                avatarImgUrl = `/uploads/${id.substr(0, 2)}/${id.substr(2, 2)}/${id}.png`;
+            if (profileImage) {
+                const { filename, imageType } = profileImage;
+                avatarImgUrl = `/uploads/${filename.substr(0, 2)}/${filename.substr(
+                    2,
+                    2
+                )}/${filename}.${imageType}`;
             } else {
                 avatarImgUrl = '/img/DefaultCardUserThmb.svg';
             }
