@@ -35,7 +35,7 @@ const SideTab = () => {
     const contextMenu = useMemo(
         () => [
             {
-                text: CommonUtils.getLang('DataAnalytics.copy'),
+                text: CommonUtils.getLang('DataAnalytics.duplicate'),
                 callback: () => dispatch({ type: 'COPY_TABLE', index: clickedIndex }),
             },
             {
