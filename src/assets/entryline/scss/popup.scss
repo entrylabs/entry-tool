@@ -483,7 +483,7 @@ $lineImageDir: '../images';
             font-size: 27px;
             font-weight: bold;
             line-height: 27px;
-            color: #2a7def;
+            color: #000000;
             text-align: center;
             padding-top: 24px;
             z-index: 10;
@@ -503,35 +503,47 @@ $lineImageDir: '../images';
     }
     .error {
         position: relative;
-        background: url(#{$imageDir}/progress/error.svg) no-repeat;
-        width: 441px;
-        height: 429px;
-        padding-top: 17px;
-
+        width: 339px;
         .title {
+            position: absolute;
+            background: url(#{$imageDir}/progress/text_back.png) no-repeat;
+            width: 339px;
+            height: 158px;
             font-size: 27px;
             font-weight: bold;
-            line-height: 35px;
-            color: #2a7def;
+            line-height: 27px;
+            color: #000000;
             text-align: center;
-            margin-bottom: 7px;
+            padding-top: 24px;
+            z-index: 10;
+            margin: 0 auto;
+            margin-top: -20px;
+            background-size: contain;
         }
-
         .description {
             font-size: 15px;
             line-height: 20px;
             color: #000000;
             text-align: center;
+            z-index: 100;
         }
 
         .close {
             position: absolute;
             background: url(#{$imageDir}/progress/close.png);
             cursor: pointer;
-            top: 16px;
-            right: 16px;
+            top: -15px;
+            right: -30px;
             width: 21px;
             height: 21px;
+            z-index: 100;
+            background-size: contain;
+        }
+        .errorEntryBot {
+            height: 176px;
+            width: 190px;
+            background: url(#{$imageDir}/progress/error.svg) no-repeat;
+            margin: 130px auto 0;
         }
     }
 }
