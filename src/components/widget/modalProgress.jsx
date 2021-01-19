@@ -14,10 +14,7 @@ class ModalProgress extends Component {
         return (
             <div className={this.theme.progress}>
                 <div className={this.theme.title}>{title}</div>
-                <div className={this.theme.background_1} />
-                <div className={this.theme.background_2} />
-                <div className={this.theme.background_3} />
-                <div className={this.theme.character} />
+                <div className={this.theme.progressEntryBot}></div>
             </div>
         );
     }
@@ -37,11 +34,19 @@ class ModalProgress extends Component {
         const { title, description, onClose } = this.props;
         return (
             <div className={this.theme.error}>
-                <div className={this.theme.title} dangerouslySetInnerHTML={{ __html: title }} />
-                <div
-                    className={this.theme.description}
-                    dangerouslySetInnerHTML={{ __html: description }}
-                />
+                <div className={this.theme.title}>
+                    {title && <div dangerouslySetInnerHTML={{ __html: title }}></div>}
+                    {description && (
+                        <div
+                            className={this.theme.description}
+                            dangerouslySetInnerHTML={{ __html: description }}
+                        />
+                    )}
+                </div>
+
+                <div className={this.theme.errorEntryBot}></div>
+                {/* <div className={this.theme.title}>{title}</div> */}
+
                 <div className={this.theme.close} onClick={onClose} />
             </div>
         );
