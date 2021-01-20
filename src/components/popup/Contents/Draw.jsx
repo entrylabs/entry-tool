@@ -6,6 +6,7 @@ import { closePopup } from '@actions/popup';
 import { EMIT_TYPES } from '@constants';
 import Theme from '@utils/Theme';
 import DrawContent from './includes/DrawContent';
+import { setTimeout } from 'window-or-global';
 
 const Index = ({ type, goDraw }) => {
     const theme = Theme.getStyle('popup');
@@ -27,8 +28,10 @@ const Index = ({ type, goDraw }) => {
 
 const mapDispatchToProps = (dispatch) => ({
     goDraw: () => {
-        dispatch(triggerEvent(EMIT_TYPES.draw, null, false));
         dispatch(closePopup());
+        setTimeout(() => {
+            dispatch(triggerEvent(EMIT_TYPES.draw, null, false));
+        });
     },
 });
 
