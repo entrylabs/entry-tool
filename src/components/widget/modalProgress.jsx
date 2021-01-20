@@ -14,14 +14,17 @@ class ModalProgress extends Component {
         return (
             <div
                 className={this.theme.progress}
-                style={textBoxStyle.width && { width: textBoxStyle.width }}
+                style={textBoxStyle && textBoxStyle.width && { width: textBoxStyle.width }}
             >
                 <div className={this.theme.title} style={{ ...textBoxStyle }}>
                     {title}
                 </div>
                 <div
                     className={this.theme.progressEntryBot}
-                    style={textBoxStyle.height && { marginTop: textBoxStyle.height + 20 }}
+                    style={
+                        textBoxStyle &&
+                        textBoxStyle.height && { marginTop: textBoxStyle.height + 20 }
+                    }
                 ></div>
             </div>
         );
@@ -43,7 +46,7 @@ class ModalProgress extends Component {
         return (
             <div
                 className={this.theme.error}
-                style={textBoxStyle.width && { width: textBoxStyle.width }}
+                style={textBoxStyle && textBoxStyle.width && { width: textBoxStyle.width }}
             >
                 <div className={this.theme.title} style={{ ...textBoxStyle }}>
                     {title && <div dangerouslySetInnerHTML={{ __html: title }}></div>}
@@ -57,7 +60,9 @@ class ModalProgress extends Component {
 
                 <div
                     className={this.theme.errorEntryBot}
-                    style={textBoxStyle.height && { marginTop: textBoxStyle.height }}
+                    style={
+                        textBoxStyle && textBoxStyle.height && { marginTop: textBoxStyle.height }
+                    }
                 ></div>
                 {/* <div className={this.theme.title}>{title}</div> */}
 
