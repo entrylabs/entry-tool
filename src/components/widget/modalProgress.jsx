@@ -10,11 +10,19 @@ class ModalProgress extends Component {
         this.theme = Theme.getStyle('progress');
     }
     makeProgress() {
-        const { title } = this.props;
+        const { title, textBoxStyle } = this.props;
         return (
-            <div className={this.theme.progress}>
-                <div className={this.theme.title}>{title}</div>
-                <div className={this.theme.progressEntryBot}></div>
+            <div
+                className={this.theme.progress}
+                style={textBoxStyle.width && { width: textBoxStyle.width }}
+            >
+                <div className={this.theme.title} style={{ ...textBoxStyle }}>
+                    {title}
+                </div>
+                <div
+                    className={this.theme.progressEntryBot}
+                    style={textBoxStyle.height && { marginTop: textBoxStyle.height + 20 }}
+                ></div>
             </div>
         );
     }
@@ -31,10 +39,13 @@ class ModalProgress extends Component {
         );
     }
     makeError() {
-        const { title, description, onClose } = this.props;
+        const { title, description, onClose, textBoxStyle } = this.props;
         return (
-            <div className={this.theme.error}>
-                <div className={this.theme.title}>
+            <div
+                className={this.theme.error}
+                style={textBoxStyle.width && { width: textBoxStyle.width }}
+            >
+                <div className={this.theme.title} style={{ ...textBoxStyle }}>
                     {title && <div dangerouslySetInnerHTML={{ __html: title }}></div>}
                     {description && (
                         <div
@@ -44,7 +55,10 @@ class ModalProgress extends Component {
                     )}
                 </div>
 
-                <div className={this.theme.errorEntryBot}></div>
+                <div
+                    className={this.theme.errorEntryBot}
+                    style={textBoxStyle.height && { marginTop: textBoxStyle.height }}
+                ></div>
                 {/* <div className={this.theme.title}>{title}</div> */}
 
                 <div className={this.theme.close} onClick={onClose} />

@@ -75,8 +75,8 @@
         .title {
             position: absolute;
             background: url(#{$imageDir}/progress/text_back.png) no-repeat;
-            width: 215px;
-            height: 90px;
+            min-width: 215px;
+            min-height: 90px;
             font-size: 27px;
             font-weight: bold;
             line-height: 27px;
@@ -86,7 +86,7 @@
             z-index: 10;
             margin: 0 auto;
             margin-top: -20px;
-            background-size: cover;
+            background-size: 100% 100%;
         }
         .progressEntryBot {
             height: 147px;
@@ -100,12 +100,11 @@
     }
     .error {
         position: relative;
-        width: 339px;
         .title {
             position: absolute;
             background: url(#{$imageDir}/progress/text_back.png) no-repeat;
-            width: 339px;
-            height: 158px;
+            min-width: 339px;
+            min-height: 158px;
             font-size: 27px;
             font-weight: bold;
             line-height: 27px;
@@ -115,7 +114,7 @@
             z-index: 10;
             margin: 0 auto;
             margin-top: -20px;
-            background-size: contain;
+            background-size: 100% 100%;
         }
         .description {
             font-size: 15px;
