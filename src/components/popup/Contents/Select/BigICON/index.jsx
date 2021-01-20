@@ -50,7 +50,4 @@ const mapDispatchToProps = (dispatch) => ({
     applySelected: (list) => dispatch(applySelected(list)),
 });
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(Index);
+export default connect(null, mapDispatchToProps)(Index);
