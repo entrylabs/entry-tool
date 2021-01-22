@@ -100,14 +100,17 @@
     }
     .error {
         position: relative;
+        font-size: 18px;
+        line-height: 18px;
+        div {
+            margin: 2px;
+        }
         .title {
             position: absolute;
             background: url(#{$imageDir}/progress/text_back.png) no-repeat;
-            min-width: 339px;
-            min-height: 158px;
-            font-size: 27px;
+            width: 339px;
+            height: 158px;
             font-weight: bold;
-            line-height: 27px;
             color: #000000;
             text-align: center;
             padding-top: 24px;
@@ -115,10 +118,9 @@
             margin: 0 auto;
             margin-top: -20px;
             background-size: 100% 100%;
+            padding-bottom: 5px;
         }
         .description {
-            font-size: 15px;
-            line-height: 20px;
             color: #000000;
             text-align: center;
             z-index: 100;
