@@ -101,10 +101,7 @@
     .error {
         position: relative;
         font-size: 18px;
-        line-height: 18px;
-        div {
-            margin: 2px;
-        }
+        line-height: 24px;
         .title {
             position: absolute;
             background: url(#{$imageDir}/progress/text_back.png) no-repeat;
