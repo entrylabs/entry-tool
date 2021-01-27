@@ -480,12 +480,12 @@ $lineImageDir: '../images';
             background: url(#{$imageDir}/progress/text_back.png) no-repeat;
             min-width: 215px;
             min-height: 90px;
-            font-size: 27px;
+            font-size: 18px;
             font-weight: bold;
-            line-height: 27px;
+            line-height: 18px;
             color: #000000;
             text-align: center;
-            padding-top: 24px;
+            padding-top: 27px;
             z-index: 10;
             margin: 0 auto;
             margin-top: -20px;
@@ -494,11 +494,12 @@ $lineImageDir: '../images';
         .progressEntryBot {
             height: 147px;
             width: 102px;
-            margin: 70px auto 13px;
+            margin: 85px auto 13px;
             background: url(#{$imageDir}/progress/entry_loading_sprite.png);
             background-size: cover;
             background-repeat: no-repeat;
             animation: play2 0.9s steps(8) infinite alternate;
+            margin-left: 62px;
         }
     }
     .error {
