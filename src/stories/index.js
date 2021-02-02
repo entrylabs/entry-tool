@@ -380,6 +380,8 @@ storiesOf('AiLayout', module)
     .add('데이터 차트 - 2차 그래프', () => <TableChart ChartState="Depth2Graph" />)
     .add('데이터 차트 - 3차 계열', () => <TableChart ChartState="Depth3" NoResultText="계열을 선택해 주세요." />)
     .add('데이터 차트 - 3차 그래프', () => <TableChart ChartState="Depth3Graph" />)
+    .add('데이터 차트 - 히스토그램 계열', () => <TableChart ChartState="DepthHistogram" NoResultText="계열을 선택해 주세요." />)
+    .add('데이터 차트 - 히스토그램 그래프', () => <TableChart ChartState="DepthHistogramGraph" />)
     .add('데이터 차트 - 요약', () => <TableSummary />)
     .add('데이터 차트 - 요약 모두', () => <TableSummary SummaryState="Total" />)
     .add('차트', () => (
