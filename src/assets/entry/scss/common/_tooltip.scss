@@ -544,8 +544,8 @@
     position: absolute;
     left: 46px;
     top: 0;
-    width: 242px;
-    padding: 16px 16px 14px 16px;
+    width: 340px;
+    padding: 16px 0 14px 4px;
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #e2e2e2;
@@ -559,8 +559,8 @@
     }
     .graph_list li {
         float: left;
-        width: 40px;
-        margin-left: 16px;
+        width: 64px;
+        margin-left: 0;
         a {
             display: block;
             font-size: 14px;
@@ -568,10 +568,12 @@
             color: #2c313d;
             letter-spacing: -0.5px;
             text-align: center;
+            white-space: nowrap;
             line-height: 15px;
         }
         a:before {
             display: block;
+            width: 40px;
             height: 40px;
             margin: 0 auto 10px;
             background-size: 40px auto;
@@ -591,6 +593,9 @@
         }
         &.scatter a:before {
             background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
+        }
+        &.histogram a:before {
+            background-image: url('#{$imageDir}/icon_chart_sel05_on.svg');
         }
     }
     .arr {
