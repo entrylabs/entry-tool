@@ -180,6 +180,9 @@
         .chart_link.scatter {
             background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
         }
+        .chart_link.histogram {
+            background-image: url('#{$imageDir}/icon_chart_sel05_on.svg');
+        }
         .chart_link.bar.disabled {
             background-image: url('#{$imageDir}/icon_chart_sel01_off.svg');
         }
@@ -191,6 +194,9 @@
         }
         .chart_link.scatter.disabled {
             background-image: url('#{$imageDir}/icon_chart_sel04_off.svg');
+        }
+        .chart_link.histogram.disabled {
+            background-image: url('#{$imageDir}/icon_chart_sel05_off.svg');
         }
         .chart_link ~ .add_link_box {
             margin-left: 12px;
@@ -286,6 +292,37 @@
             line-height: 40px;
             cursor: pointer;
         }
+        .input_inner .sort_box {
+            position: absolute;
+            right: 0;
+            top: 4px;
+        }
+        .input_inner .sort_box a {
+            display: inline-block;
+            position: relative;
+            box-sizing: border-box;
+            width: 94px;
+            height: 32px;
+            border: 1px solid #e2e2e2;
+            border-radius: 4px 0 0 4px;
+            background-color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            color: #728896;
+            text-align: center;
+            letter-spacing: -0.33px;
+            line-height: 32px;
+            vertical-align: top;
+        }
+        .input_inner .sort_box a.active {
+            border-color: #4f80ff;
+            color: #4f80ff;
+            z-index: 10;
+        }
+        .input_inner .sort_box a + a {
+            border-radius: 0 4px 4px 0;
+            margin-left: -1px;
+        }
         .input_inner + .input_inner {
             margin-top: 12px;
         }
@@ -345,6 +382,155 @@
         }
         .select_group .check_inner input[type='checkbox']:checked + span {
             background-image: url('#{$imageDir}/ico_checked.svg');
+        }
+        .select_group .cnt_box {
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            width: 106px;
+            height: 32px;
+            padding: 0 30px;
+            margin: 4px 0 0 12px;
+            border:  1px solid #e2e2e2;
+            border-radius: 4px;
+            background-color: #fff;
+            vertical-align: top;
+        }
+        .select_group .cnt_box .btn {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            border-right: 1px solid #e2e2e2;
+            background-color: #f2f2f2;
+        }
+        .select_group .cnt_box .btn:before {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-image: url('#{$imageDir}/IconButtonMinus.svg');
+            background-size: 11px auto;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            content: '';
+        }
+        .select_group .cnt_box .btn ~ .btn {
+            left: auto;
+            right: 0;
+            border: 0;
+            border-left: 1px solid #e2e2e2;
+        }
+        .select_group .cnt_box .btn ~ .btn:before {
+            background-image: url('#{$imageDir}/IconButtonPlus.svg');
+            background-size: 10px auto;
+        }
+        .select_group .cnt_box .input {
+            display: block;
+            height: 30px;
+            padding: 0;
+            border: 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c313d;
+            text-align: center;
+            letter-spacing: -0.33px;
+        }
+        .select_group .cnt_width {
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            width: 70px;
+            height: 32px;
+            margin: 4px 0 0 12px;
+            border: 1px solid #e2e2e2;
+            border-radius: 4px;
+            background-color: #fff;
+            vertical-align: top;
+            .input {
+                display: block;
+                height: 30px;
+                padding: 0;
+                border: 0;
+                font-size: 14px;
+                font-weight: 600;
+                color: #2c313d;
+                text-align: center;
+                letter-spacing: -0.33;
+            }
+            &.disabled {
+                background-color: #f9f9f9;
+                .input, .input:read-only {
+                    color: #cbcbcb;
+                    background-color: #f9f9f9;
+                }
+            }
+        }
+        .select_group .cnt_sort {
+            display: inline-block;
+        }
+        .select_group .cnt_width {
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            width: 70px;
+            height: 32px;
+            margin: 4px 0 0 12px;
+            border: 1px solid #e2e2e2;
+            border-radius: 4px;
+            background-color: #fff;
+            vertical-align: top;
+            .input {
+                display: block;
+                height: 30px;
+                padding: 0;
+                border: 0;
+                font-size: 14px;
+                font-weight: 600;
+                color: #2c313d;
+                text-align: center;
+                letter-spacing: -0.33;
+            }
+            &.disabled {
+                background-color: #f9f9f9;
+                .input, .input:read-only {
+                    color: #cbcbcb;
+                    background-color: #f9f9f9;
+                }
+            }
+        }
+        .select_group .cnt_sort {
+            display: inline-block;
+            margin: 4px 0 0 12px;
+            vertical-align: top;
+        }
+        .select_group .cnt_sort a {
+            display: inline-block;
+            position: relative;
+            box-sizing: border-box;
+            width: 112px;
+            height: 32px;
+            border: 1px solid #e2e2e2;
+            border-radius: 4px 0 0 4px;
+            background-color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            color: #728896;
+            text-align: center;
+            letter-spacing: -0.33px;
+            line-height: 32px;
+            vertical-align: top;
+        }
+        .select_group .cnt_sort a.active {
+            border-color: #4f80ff;
+            color: #4f80ff;
+            z-index: 10;
+        }
+        .select_group .cnt_sort a + a {
+            border-radius: 0 4px 4px 0;
+            margin-left: -1px;
         }
     }
 }
