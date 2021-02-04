@@ -11,7 +11,7 @@ import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';
 
 import { CommonUtils } from '@utils/Common';
-import { hasNumberColumn, categoryKeys, isZipable } from '@utils/dataAnalytics';
+import { isNumberColumn, hasNumberColumn, categoryKeys, isZipable } from '@utils/dataAnalytics';
 import { GRAPH_COLOR } from '@constants/dataAnalytics';
 const { generateHash } = CommonUtils;
 
@@ -85,6 +85,8 @@ const generateOption = (option) => {
         legend = { show: false },
         axisY,
         theme,
+        order,
+        degree,
     } = option;
 
     let x;
@@ -107,16 +109,32 @@ const generateOption = (option) => {
 
     switch (type) {
         case 'bar':
-        case 'line':
+        case 'line': {
+            let orderedTable = [...table.slice(1)];
+            const isNumberColumnXIndex = isNumberColumn(table, xIndex);
+            if (order === 'ascending') {
+                orderedTable.sort((rowA, rowB) => {
+                    const a = isNumberColumnXIndex ? Number(rowA[xIndex]) : rowA[xIndex];
+                    const b = isNumberColumnXIndex ? Number(rowB[xIndex]) : rowB[xIndex];
+                    if (a > b) {
+                        return 1;
+                    }
+                    if (a < b) {
+                        return -1;
+                    }
+                    return 0;
+                });
+            }
+            orderedTable = [table[0], ...orderedTable];
             columns = deduplicationColumn(
-                [...categoryIndexes].map((index) => _.unzip(table)[index])
+                [...categoryIndexes].map((index) => _.unzip(orderedTable)[index])
             );
-            axisX.categories = table.slice(1).map((row) => row[xIndex]);
+            axisX.categories = orderedTable.slice(1).map((row) => row[xIndex]);
 
             tooltip = {
                 contents: (data) => {
                     const [{ name, value }] = data;
-                    const fields = _map(categoryIndexes, (index) => table[0][index]);
+                    const fields = _map(categoryIndexes, (index) => orderedTable[0][index]);
                     const index = _findIndex(fields, (col) => col == name);
                     return `
                         <div class="${theme.chart_tooltip}">
@@ -134,6 +152,7 @@ const generateOption = (option) => {
                 },
             };
             break;
+        }
         case 'pie':
             columns = deduplicationColumn(pieChart(table, xIndex, categoryIndexes[0]));
             x = table[0][xIndex];
@@ -261,7 +280,7 @@ const Chart = (props) => {
     const theme = Theme.getStyle('popup');
     const { table = [[]], chart = {}, size, legend, axisX, axisY, shortForm = false } = props;
 
-    const { type = 'bar', xIndex = -1, yIndex, categoryIndexes = [] } = chart;
+    const { type = 'bar', xIndex = -1, yIndex, categoryIndexes = [], order, degree } = chart;
     const id = `c${generateHash()}`;
 
     let content = '';
@@ -296,6 +315,8 @@ const Chart = (props) => {
                 axisX,
                 axisY,
                 theme,
+                order,
+                degree,
             });
             option && bb.generate(option);
         }

@@ -5,7 +5,9 @@ export const BAR = 'bar';
 export const LINE = 'line';
 export const PIE = 'pie';
 export const SCATTER = 'scatter';
+export const HISTOGRAM = 'histogram';
 export const NONE = 'none';
+export const CHART_CATEGORY = [BAR, LINE, PIE, SCATTER, HISTOGRAM];
 export const TAB_NAME = {
     TABLE,
     CHART,
@@ -16,6 +18,43 @@ export const TAB_ITEMS = [
     { name: 'DataAnalytics.chart', value: CHART },
     { name: 'DataAnalytics.dashboard', value: SUMMARY },
 ];
+export const LEGEND = {
+    [BAR]: {
+        xAxis: true,
+        xYxis: false,
+        category: true,
+        degree: false,
+        order: true,
+    },
+    [LINE]: {
+        xAxis: true,
+        xYxis: false,
+        category: true,
+        degree: false,
+        order: true,
+    },
+    [PIE]: {
+        xAxis: true,
+        xYxis: false,
+        category: true,
+        degree: false,
+        order: false,
+    },
+    [SCATTER]: {
+        xAxis: true,
+        xYxis: true,
+        category: true,
+        degree: false,
+        order: false,
+    },
+    [HISTOGRAM]: {
+        xAxis: false,
+        xYxis: false,
+        category: true,
+        degree: true,
+        order: false,
+    },
+};
 
 // 차트별로 색상이 다른 기획이 있었으나 사라지면서 색상이 통일됨
 // 색상 변경건이 있으면 여기서 수정하면 됨

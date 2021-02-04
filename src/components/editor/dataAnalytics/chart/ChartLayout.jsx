@@ -2,6 +2,8 @@ import React, { useContext, useCallback } from 'react';
 import XAxis from './XAxis';
 import YAxis from './YAxis';
 import Legend from './Legend';
+import Degree from './Degree/Group';
+import Order from './Order';
 import TitleInput from './TitleInput';
 import VerticalLegend from './VerticalLegend';
 import HorizontalLegend from './HorizontalLegend';
@@ -9,7 +11,7 @@ import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 import { getTrimedTable, getTable } from '@utils/dataAnalytics';
-import { SCATTER, PIE, NONE } from '@constants/dataAnalytics';
+import { SCATTER, PIE, NONE, LEGEND } from '@constants/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes } = {}) =>
@@ -34,9 +36,10 @@ const ChartLayout = () => {
     const { chart = [], chartIndex = 0, table: selectedTable } = selected;
     const table = getTrimedTable(selectedTable);
     const selectedChart = chart[chartIndex] || {};
-    const { type, xIndex, yIndex, categoryIndexes = [] } = selectedChart || {};
+    const { type, xIndex, yIndex, categoryIndexes = [], order: sort } = selectedChart || {};
     const isHorizontalLegend = type !== 'pie';
-    const key = `chart_${chartIndex}_${xIndex}_${yIndex}_${categoryIndexes.toString()}`;
+    const key = `chart_${chartIndex}_${xIndex}_${yIndex}_${categoryIndexes.toString()}_${sort}`;
+    const { xAxis, yAxis, category, degree, order } = LEGEND[type];
 
     const handleRemoveClick = useCallback((event) => {
         event.preventDefault();
@@ -58,9 +61,11 @@ const ChartLayout = () => {
                     </a>
                 </div>
                 <div className={theme.input_inner}>
-                    <XAxis />
-                    {type === 'scatter' ? <YAxis /> : ''}
-                    <Legend />
+                    {xAxis ? <XAxis /> : ''}
+                    {yAxis ? <YAxis /> : ''}
+                    {category ? <Legend /> : ''}
+                    {degree ? <Degree /> : ''}
+                    {order ? <Order /> : ''}
                 </div>
             </div>
             {isDrawable(selectedChart) ? (
