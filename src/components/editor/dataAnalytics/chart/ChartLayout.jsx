@@ -78,7 +78,9 @@ const ChartLayout = () => {
                     `}
                     style={{ backgroundColor: '#fff', height: '100%' }}
                 >
-                    {categoryIndexes.length && isHorizontalLegend ? (
+                    {categoryIndexes.length &&
+                    isHorizontalLegend &&
+                    categoryIndexes[0] !== table[0].length ? (
                         <HorizontalLegend table={table} chart={selectedChart} />
                     ) : null}
                     <div

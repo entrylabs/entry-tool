@@ -238,8 +238,11 @@ const generateOption = (option) => {
                                 &nbsp;
                             </span>
                             ${
-                                scatterNames[Number(name)]
-                            }&nbsp;|&nbsp;${xAxis}: ${x.toLocaleString()}
+                                categoryIndex !== table[0].length
+                                    ? `
+                                ${scatterNames[Number(name)]}&nbsp;|&nbsp;`
+                                    : ''
+                            }${xAxis}: ${x.toLocaleString()}
                             &nbsp;${table[0][yIndex]}: ${value.toLocaleString()}
                         </div>`;
                 },
