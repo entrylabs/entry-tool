@@ -4,6 +4,7 @@ import _map from 'lodash/map';
 import _slice from 'lodash/slice';
 import _floor from 'lodash/floor';
 import _forEach from 'lodash/forEach';
+import _toPairs from 'lodash/toPairs';
 import _findIndex from 'lodash/findIndex';
 import bb from 'billboard.js';
 
@@ -15,16 +16,19 @@ import { isNumberColumn, hasNumberColumn, categoryKeys, isZipable } from '@utils
 import { GRAPH_COLOR } from '@constants/dataAnalytics';
 const { generateHash } = CommonUtils;
 
-const pieChart = (table, xIndex, categoryIndex) => [
-    [table[0][xIndex], table[0][categoryIndex]],
-    ..._.toPairs(
-        table.slice(1).reduce((prev, row) => {
-            prev[row[xIndex]] = prev[row[xIndex]] || 0;
-            prev[row[xIndex]] += Number(row[categoryIndex]);
-            return prev;
-        }, {})
-    ),
-];
+const getPieChart = (table, xIndex, categoryIndex) => {
+    const isAddedOption = categoryIndex === table[0].length;
+    return [
+        [table[0][xIndex], isAddedOption ? '개수' : table[0][categoryIndex]],
+        ..._toPairs(
+            table.slice(1).reduce((prev, row) => {
+                prev[row[xIndex]] = prev[row[xIndex]] || 0;
+                prev[row[xIndex]] += Number(isAddedOption ? 1 : row[categoryIndex]);
+                return prev;
+            }, {})
+        ),
+    ];
+};
 
 const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
     _map(
@@ -158,8 +162,10 @@ const generateOption = (option) => {
             };
             break;
         }
-        case 'pie':
-            columns = deduplicationColumn(pieChart(table, xIndex, categoryIndexes[0]));
+        case 'pie': {
+            const isAddedOption = categoryIndexes[0] === table[0].length;
+            const pieChart = getPieChart(table, xIndex, categoryIndexes[0]);
+            columns = isAddedOption ? pieChart : deduplicationColumn(pieChart);
             x = table[0][xIndex];
             tooltip = {
                 contents: (data) => {
@@ -178,7 +184,7 @@ const generateOption = (option) => {
                                 &nbsp;
                             </span>
                             ${name} | ${_floor(ratio * 100)}% (${
-                        table[0][categoryIndexes[0]]
+                        isAddedOption ? '개수' : table[0][categoryIndexes[0]]
                     }: ${value.toLocaleString()})
                         </div>`;
                 },
@@ -187,6 +193,7 @@ const generateOption = (option) => {
                 },
             };
             break;
+        }
         case 'scatter': {
             columns = scatterChart(table, xIndex, yIndex, categoryIndexes);
             xs = scatterXs(columns);

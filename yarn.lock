@@ -12174,7 +12174,7 @@ react-cookies@^0.1.0:
     cookie "^0.3.1"
     object-assign "^4.1.1"
 
-react-custom-scroll@^4.0.1:
+react-custom-scroll@^4.2.2:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/react-custom-scroll/-/react-custom-scroll-4.2.2.tgz#b82966b16959e31c86121cd76fc735fe6704348f"
   integrity sha512-UJmiSvJPFQILupH3o0VttO0D+xA7g6p3rSI8ormCtO0vRbiJfmDTdq08llHsiegeZVQZgJu7ncuN5ZCZHEUxeg==

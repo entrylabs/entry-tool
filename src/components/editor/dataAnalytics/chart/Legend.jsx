@@ -37,11 +37,11 @@ const Legend = () => {
             : CommonUtils.getLang('DataAnalytics.legend');
 
     if (type === PIE) {
-        items.push(['개수', items.length]);
+        items.push(['개수', fields.length]);
         fields.push('개수');
     }
     if (type === SCATTER) {
-        items.push(['구분하지 않음', items.length]);
+        items.push(['구분하지 않음', fields.length]);
         fields.push('구분하지 않음');
     }
 
