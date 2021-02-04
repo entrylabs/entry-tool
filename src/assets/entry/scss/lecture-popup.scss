@@ -3078,6 +3078,9 @@
         .chart_link.scatter {
             background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
         }
+        .chart_link.histogram {
+            background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
+        }
         .chart_link.bar.disabled {
             background-image: url('#{$imageDir}/icon_chart_sel01_off.svg');
         }
@@ -3088,6 +3091,9 @@
             background-image: url('#{$imageDir}/icon_chart_sel03_off.svg');
         }
         .chart_link.scatter.disabled {
+            background-image: url('#{$imageDir}/icon_chart_sel04_off.svg');
+        }
+        .chart_link.histogram.disabled {
             background-image: url('#{$imageDir}/icon_chart_sel04_off.svg');
         }
         .chart_link ~ .add_link_box {

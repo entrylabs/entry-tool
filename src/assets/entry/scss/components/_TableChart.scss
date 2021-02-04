@@ -296,6 +296,7 @@
             position: absolute;
             right: 0;
             top: 4px;
+            cursor: pointer;
         }
         .input_inner .sort_box a {
             display: inline-block;
@@ -391,7 +392,7 @@
             height: 32px;
             padding: 0 30px;
             margin: 4px 0 0 12px;
-            border:  1px solid #e2e2e2;
+            border: 1px solid #e2e2e2;
             border-radius: 4px;
             background-color: #fff;
             vertical-align: top;
@@ -462,7 +463,8 @@
             }
             &.disabled {
                 background-color: #f9f9f9;
-                .input, .input:read-only {
+                .input,
+                .input:read-only {
                     color: #cbcbcb;
                     background-color: #f9f9f9;
                 }
@@ -470,6 +472,7 @@
         }
         .select_group .cnt_sort {
             display: inline-block;
+            cursor: pointer;
         }
         .select_group .cnt_width {
             display: inline-block;
@@ -495,7 +498,8 @@
             }
             &.disabled {
                 background-color: #f9f9f9;
-                .input, .input:read-only {
+                .input,
+                .input:read-only {
                     color: #cbcbcb;
                     background-color: #f9f9f9;
                 }

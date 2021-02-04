@@ -274,6 +274,22 @@ export const dataAnalyticsReducer = (state, action) => {
                 isChanged: false,
             };
         }
+        case 'EDIT_ORDER': {
+            const { selected } = state;
+            const { chart = [], chartIndex } = selected;
+            const { order } = action;
+
+            chart[chartIndex].order = order;
+
+            return {
+                ...state,
+                selected: {
+                    ...selected,
+                    chart,
+                },
+                isChanged: true,
+            };
+        }
         default:
             return state;
     }
