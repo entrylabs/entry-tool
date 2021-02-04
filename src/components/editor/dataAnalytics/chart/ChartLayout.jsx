@@ -10,8 +10,8 @@ import HorizontalLegend from './HorizontalLegend';
 import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
-import { getTrimedTable, getTable } from '@utils/dataAnalytics';
-import { SCATTER, PIE, NONE, LEGEND } from '@constants/dataAnalytics';
+import { getTrimedTable } from '@utils/dataAnalytics';
+import { SCATTER, PIE, NONE, LEGEND_OPTIONS } from '@constants/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes } = {}) =>
@@ -39,7 +39,7 @@ const ChartLayout = () => {
     const { type, xIndex, yIndex, categoryIndexes = [], order: sort } = selectedChart || {};
     const isHorizontalLegend = type !== 'pie';
     const key = `chart_${chartIndex}_${xIndex}_${yIndex}_${categoryIndexes.toString()}_${sort}`;
-    const { xAxis, yAxis, category, degree, order } = LEGEND[type];
+    const { xAxis, yAxis, category, degree, order } = LEGEND_OPTIONS[type];
 
     const handleRemoveClick = useCallback((event) => {
         event.preventDefault();

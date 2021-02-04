@@ -110,26 +110,31 @@ const generateOption = (option) => {
     switch (type) {
         case 'bar':
         case 'line': {
+            const isAddedOption = xIndex === table[0].length;
             let orderedTable = [...table.slice(1)];
-            const isNumberColumnXIndex = isNumberColumn(table, xIndex);
-            if (order === 'ascending') {
-                orderedTable.sort((rowA, rowB) => {
-                    const a = isNumberColumnXIndex ? Number(rowA[xIndex]) : rowA[xIndex];
-                    const b = isNumberColumnXIndex ? Number(rowB[xIndex]) : rowB[xIndex];
-                    if (a > b) {
-                        return 1;
-                    }
-                    if (a < b) {
-                        return -1;
-                    }
-                    return 0;
-                });
+            if (!isAddedOption) {
+                const isNumberColumnXIndex = isNumberColumn(table, xIndex);
+                if (order === 'ascending') {
+                    orderedTable.sort((rowA, rowB) => {
+                        const a = isNumberColumnXIndex ? Number(rowA[xIndex]) : rowA[xIndex];
+                        const b = isNumberColumnXIndex ? Number(rowB[xIndex]) : rowB[xIndex];
+                        if (a > b) {
+                            return 1;
+                        }
+                        if (a < b) {
+                            return -1;
+                        }
+                        return 0;
+                    });
+                }
             }
             orderedTable = [table[0], ...orderedTable];
             columns = deduplicationColumn(
                 [...categoryIndexes].map((index) => _.unzip(orderedTable)[index])
             );
-            axisX.categories = orderedTable.slice(1).map((row) => row[xIndex]);
+            axisX.categories = orderedTable
+                .slice(1)
+                .map((row, index) => (isAddedOption ? index + 1 : row[xIndex]));
 
             tooltip = {
                 contents: (data) => {
@@ -302,7 +307,7 @@ const Chart = (props) => {
     }
 
     useEffect(() => {
-        if (categoryIndexes.length && xIndex >= 0 && xIndex < table[0].length) {
+        if (categoryIndexes.length && xIndex >= 0 && xIndex <= table[0].length) {
             const option = generateOption({
                 table,
                 type,
