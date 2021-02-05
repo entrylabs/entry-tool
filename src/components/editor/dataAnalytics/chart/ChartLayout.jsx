@@ -11,11 +11,14 @@ import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 import { getTrimedTable } from '@utils/dataAnalytics';
-import { SCATTER, PIE, NONE, LEGEND_OPTIONS } from '@constants/dataAnalytics';
+import { SCATTER, PIE, NONE, LEGEND_OPTIONS, HISTOGRAM } from '@constants/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes } = {}) =>
-    type !== NONE && xIndex !== -1 && categoryIndexes.length && (type !== SCATTER || yIndex !== -1);
+    type !== NONE &&
+    ((type !== HISTOGRAM && xIndex !== -1) || (type === HISTOGRAM && categoryIndexes.length)) &&
+    categoryIndexes.length &&
+    (type !== SCATTER || yIndex !== -1);
 
 const getNoResultText = ({ type = NONE, xIndex, yIndex, categoryIndexes = [] } = {}) => {
     let content;
@@ -36,9 +39,12 @@ const ChartLayout = () => {
     const { chart = [], chartIndex = 0, table: selectedTable } = selected;
     const table = getTrimedTable(selectedTable);
     const selectedChart = chart[chartIndex] || {};
-    const { type, xIndex, yIndex, categoryIndexes = [], order: sort, bin } = selectedChart || {};
+    const { type, xIndex, yIndex, categoryIndexes = [], order: sort, bin, boundary } =
+        selectedChart || {};
     const isHorizontalLegend = type !== 'pie';
-    const key = `chart_${chartIndex}_${xIndex}_${yIndex}_${categoryIndexes.toString()}_${sort}_${bin}`;
+    const key =
+        `chart_${chartIndex}_${xIndex}_${yIndex}` +
+        `_${categoryIndexes.toString()}_${sort}_${bin}_${boundary}`;
     const { xAxis, yAxis, category, degree, order } = LEGEND_OPTIONS[type];
 
     const handleRemoveClick = useCallback((event) => {

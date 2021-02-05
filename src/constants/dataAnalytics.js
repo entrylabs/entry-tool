@@ -115,6 +115,7 @@ export const GRAPH_COLOR = {
         '#423496',
         '#2a7d7f',
     ],
+    [HISTOGRAM]: ['#4f80ff', '#f16670', '#ffb500'],
 };
 export const SUMMARY_HEADER = [
     ' ',

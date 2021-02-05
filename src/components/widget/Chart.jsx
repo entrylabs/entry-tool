@@ -12,8 +12,8 @@ import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';
 
 import { CommonUtils } from '@utils/Common';
-import { isNumberColumn, hasNumberColumn, categoryKeys, isZipable } from '@utils/dataAnalytics';
-import { GRAPH_COLOR } from '@constants/dataAnalytics';
+import { isNumberColumn, hasNumberColumn, categoryKeys, getBinWidth } from '@utils/dataAnalytics';
+import { GRAPH_COLOR, HISTOGRAM } from '@constants/dataAnalytics';
 const { generateHash } = CommonUtils;
 
 const getPieChart = (table, xIndex, categoryIndex) => {
@@ -41,6 +41,35 @@ const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
         }, {}),
         (value, index) => [index, ...value]
     );
+
+const getHistogramChart = (table, categoryIndexes, bin, boundary) => {
+    const { width: binWidth, min, max } = getBinWidth(table, categoryIndexes, boundary, bin);
+    const x = new Array(bin + 1).fill(0);
+
+    const xRow = ['histogram_chart_x', ..._map(x, (__, index) => (index + 1) * binWidth + min)];
+    const extRow = _map(categoryIndexes, (index) => {
+        const result = new Array(bin + 1).fill(0);
+        result[0] = table[0][index];
+        _forEach(table.slice(1), (row) => {
+            const binIndex = _floor((row[index] - min) / binWidth);
+            if (
+                (boundary === 'right' && (row[index] - min) % binWidth == 0) ||
+                row[index] - max === 0
+            ) {
+                result[binIndex]++;
+            } else {
+                result[binIndex + 1]++;
+            }
+        });
+        result.push(0);
+
+        return result;
+    });
+
+    console.log({ xRow, extRow });
+
+    return [xRow, ...extRow];
+};
 
 const scatterXs = (columns) => {
     const xs = {};
@@ -90,7 +119,8 @@ const generateOption = (option) => {
         axisY,
         theme,
         order,
-        degree,
+        bin,
+        boundary,
     } = option;
 
     let x;
@@ -99,6 +129,7 @@ const generateOption = (option) => {
     let grid;
     let point;
     let tooltip;
+    let line;
     let {
         axisX = {
             type: 'category',
@@ -252,6 +283,45 @@ const generateOption = (option) => {
             };
             break;
         }
+        case 'histogram': {
+            columns = getHistogramChart(table, categoryIndexes, bin, boundary);
+            axisX = null;
+            x = 'histogram_chart_x';
+            line = {
+                step: {
+                    type: 'step-after',
+                },
+            };
+            tooltip = {
+                contents: (data) => {
+                    const [{ name, value, x }] = data;
+                    const xAxis = table[0][xIndex];
+                    const categoryIndex = categoryIndexes[0];
+                    const scatterNames = categoryKeys(table, categoryIndex);
+
+                    return `
+                        <div class="${theme.chart_tooltip}">
+                            <span
+                                className="${theme.bg}"
+                                style="${getMouseOverStyle(type, name)}"
+                            >
+                                &nbsp;
+                            </span>
+                            ${
+                                categoryIndex !== table[0].length
+                                    ? `
+                                ${scatterNames[Number(name)]}&nbsp;|&nbsp;`
+                                    : ''
+                            }${xAxis}: ${x.toLocaleString()}
+                            &nbsp;${table[0][yIndex]}: ${value.toLocaleString()}
+                        </div>`;
+                },
+                init: {
+                    x: 100,
+                },
+            };
+            break;
+        }
         default:
             columns = [[]];
             break;
@@ -271,7 +341,7 @@ const generateOption = (option) => {
             x,
             xs,
             columns,
-            type,
+            type: type === HISTOGRAM ? 'area-step' : type,
         },
         axis: {
             x: axisX,
@@ -286,6 +356,7 @@ const generateOption = (option) => {
             grouped: false,
             ...tooltip,
         },
+        line,
     };
 };
 
@@ -295,7 +366,15 @@ const Chart = (props) => {
     const theme = Theme.getStyle('popup');
     const { table = [[]], chart = {}, size, legend, axisX, axisY, shortForm = false } = props;
 
-    const { type = 'bar', xIndex = -1, yIndex, categoryIndexes = [], order, degree } = chart;
+    const {
+        type = 'bar',
+        xIndex = -1,
+        yIndex,
+        categoryIndexes = [],
+        order,
+        bin = 5,
+        boundary = 'left',
+    } = chart;
     const id = `c${generateHash()}`;
 
     let content = '';
@@ -317,7 +396,10 @@ const Chart = (props) => {
     }
 
     useEffect(() => {
-        if (categoryIndexes.length && xIndex >= 0 && xIndex <= table[0].length) {
+        if (
+            categoryIndexes.length &&
+            ((type !== HISTOGRAM && xIndex >= 0 && xIndex <= table[0].length) || type === HISTOGRAM)
+        ) {
             const option = generateOption({
                 table,
                 type,
@@ -331,22 +413,15 @@ const Chart = (props) => {
                 axisY,
                 theme,
                 order,
-                degree,
+                bin,
+                boundary,
             });
             option && bb.generate(option);
         }
     }, []);
 
-    if (xIndex === -1) {
+    if (type !== HISTOGRAM && xIndex === -1) {
         content = CommonUtils.getLang('DataAnalytics.select_x_axis');
-    } else if (
-        isZipable(table, xIndex) &&
-        yIndex === -1 &&
-        !categoryIndexes.length &&
-        type !== 'scatter' &&
-        type !== 'pie'
-    ) {
-        content = CommonUtils.getLang('DataAnalytics.select_y_axis_or_legend');
     } else if (yIndex === -1 && type === 'scatter') {
         content = CommonUtils.getLang('DataAnalytics.select_y_axis');
     } else if (!categoryIndexes.length) {
