@@ -296,7 +296,6 @@ export const dataAnalyticsReducer = (state, action) => {
             const { value } = action;
             chart[chartIndex].bin = value;
 
-            console.log({ chart });
             return {
                 ...state,
                 selected: {
