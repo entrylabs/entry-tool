@@ -36,9 +36,9 @@ const ChartLayout = () => {
     const { chart = [], chartIndex = 0, table: selectedTable } = selected;
     const table = getTrimedTable(selectedTable);
     const selectedChart = chart[chartIndex] || {};
-    const { type, xIndex, yIndex, categoryIndexes = [], order: sort } = selectedChart || {};
+    const { type, xIndex, yIndex, categoryIndexes = [], order: sort, bin } = selectedChart || {};
     const isHorizontalLegend = type !== 'pie';
-    const key = `chart_${chartIndex}_${xIndex}_${yIndex}_${categoryIndexes.toString()}_${sort}`;
+    const key = `chart_${chartIndex}_${xIndex}_${yIndex}_${categoryIndexes.toString()}_${sort}_${bin}`;
     const { xAxis, yAxis, category, degree, order } = LEGEND_OPTIONS[type];
 
     const handleRemoveClick = useCallback((event) => {

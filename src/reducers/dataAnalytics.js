@@ -290,6 +290,22 @@ export const dataAnalyticsReducer = (state, action) => {
                 isChanged: true,
             };
         }
+        case 'CHANGE_DEGREE': {
+            const { selected } = state;
+            const { chart = [], chartIndex } = selected;
+            const { value } = action;
+            chart[chartIndex].bin = value;
+
+            console.log({ chart });
+            return {
+                ...state,
+                selected: {
+                    ...selected,
+                    chart,
+                },
+                isChanged: true,
+            };
+        }
         default:
             return state;
     }

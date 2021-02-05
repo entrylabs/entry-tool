@@ -4,7 +4,7 @@ import _reduce from 'lodash/reduce';
 import _findIndex from 'lodash/findIndex';
 import Dropdown from '@components/widget/dropdown';
 import { CommonUtils } from '@utils/Common';
-import { PIE, BAR, LINE, SCATTER } from '@constants/dataAnalytics';
+import { PIE, BAR, LINE, SCATTER, HISTOGRAM } from '@constants/dataAnalytics';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { getNumberColumnIndexesBySelectedColumns, getTrimedTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
@@ -18,7 +18,7 @@ const Legend = () => {
     const { table: selectedTable, chart, chartIndex = 0 } = selected;
     const { yIndex = 0, xIndex, categoryIndexes: selectedLegend, type } = chart[chartIndex];
     const table = getTrimedTable(selectedTable);
-    const checkBox = type === BAR || type === LINE;
+    const checkBox = type === BAR || type === LINE || type === HISTOGRAM;
     const fields = [...table[0]];
     const dropdownItems = _reduce(
         fields,
@@ -30,7 +30,9 @@ const Legend = () => {
         ? dropdownItems
         : getNumberColumnIndexesBySelectedColumns(table, dropdownItems)
     ).map((index) => [fields[index], index]);
-    const disabled = xIndex === -1 || (type === SCATTER && yIndex === -1) || !items.length;
+    const disabled =
+        (xIndex === -1 || (type === SCATTER && yIndex === -1) || !items.length) &&
+        (type !== HISTOGRAM || !items.length);
     const titleLabel =
         type === PIE
             ? CommonUtils.getLang('DataAnalytics.value')

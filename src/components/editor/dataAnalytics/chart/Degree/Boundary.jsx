@@ -31,7 +31,7 @@ const Boundary = () => {
                 </a>
                 <a
                     className={boundary === 'right' ? theme.active : ''}
-                    onclick={handleBoundaryClick('right')}
+                    onClick={handleBoundaryClick('right')}
                 >
                     오른쪽 닫힘
                 </a>
