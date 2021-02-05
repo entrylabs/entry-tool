@@ -15,7 +15,7 @@ const Range = () => {
 
     const getValue = () => {
         if (!categoryIndexes.length) {
-            return '';
+            return '-';
         }
         let min = Number(table[1][categoryIndexes]) || 0;
         let max = Number(table[1][categoryIndexes]) || 0;
