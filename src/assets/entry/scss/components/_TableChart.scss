@@ -537,4 +537,55 @@
             margin-left: -1px;
         }
     }
+    .histogram_legend {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #e2e2e2;
+        border-radius: 6px;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+        .legend_list {
+            overflow: hidden;
+            li { 
+                position: relative;
+                min-height: 14px;
+                padding-left: 20px;
+                margin-top: 10px;
+                font-size: 12px;
+                font-weight: 600;
+                color: #2c313d;
+                line-height: 14px;
+            }
+            li:first-of-type {
+                margin-top: 0;
+            }
+            .text {
+                position: relative;
+                display: inline-block;
+                padding-right: 6px;
+                vertical-align: top;
+            }
+            .text ~ .text {
+                padding: 0 0 0 7px;
+            }
+            .text ~ .text:before {
+                position: absolute;
+                left: 0;
+                top: 1px;
+                width: 1px;
+                height: 12px;
+                background-color: #d8d8d8;
+                content: '';
+            }
+            .bull {
+                position: absolute;
+                left: 0;
+                top: 1px;
+                width: 12px;
+                height: 12px;
+            }
+        }
+    }
 }
