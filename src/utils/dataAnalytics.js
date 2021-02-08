@@ -188,8 +188,8 @@ export const getBinWidth = (table, categoryIndexes, boundary, bin) => {
     if (!categoryIndexes.length) {
         return '-';
     }
-    let min = Number(table[1][categoryIndexes]) || 0;
-    let max = Number(table[1][categoryIndexes]) || 0;
+    let min = Number(table[1][categoryIndexes]) || Number.MAX_SAFE_INTEGER;
+    let max = Number(table[1][categoryIndexes]) || Number.MIN_SAFE_INTEGER;
     _forEach(categoryIndexes, (index) => {
         _forEach(table.slice(1), (row) => {
             const value = Number(row[index]);

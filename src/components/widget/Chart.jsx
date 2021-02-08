@@ -66,8 +66,6 @@ const getHistogramChart = (table, categoryIndexes, bin, boundary) => {
         return result;
     });
 
-    console.log({ xRow, extRow });
-
     return [xRow, ...extRow];
 };
 
