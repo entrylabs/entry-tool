@@ -39,12 +39,12 @@ const Legend = () => {
             : CommonUtils.getLang('DataAnalytics.legend');
 
     if (type === PIE) {
-        items.push(['개수', fields.length]);
-        fields.push('개수');
+        items.push([CommonUtils.getLang('DataAnalytics.quantity'), fields.length]);
+        fields.push(CommonUtils.getLang('DataAnalytics.quantity'));
     }
     if (type === SCATTER) {
-        items.push(['구분하지 않음', fields.length]);
-        fields.push('구분하지 않음');
+        items.push([CommonUtils.getLang('DataAnalytics.not_distinguished'), fields.length]);
+        fields.push(CommonUtils.getLang('DataAnalytics.not_distinguished'));
     }
 
     const getTitle = () => {

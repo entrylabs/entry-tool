@@ -2,6 +2,7 @@ import React, { useContext, useRef, useState } from 'react';
 import Number from '@components/widget/number';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { isMobile } from 'react-device-detect';
+import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 import _clamp from 'lodash/clamp';
 import _isNaN from 'lodash/isNaN';
@@ -96,7 +97,7 @@ const Count = () => {
     return (
         <div className={theme.select_group} style={{ marginLeft: 30 }}>
             <label htmlFor="Cnt" className={theme.tit_label}>
-                계급 수
+                {CommonUtils.getLang('DataAnalytics.number_of_bins')}
             </label>
             <div className={theme.cnt_box}>
                 <a role="button" className={theme.btn} onClick={handleBtnClick} name="decrease">

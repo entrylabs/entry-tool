@@ -27,8 +27,8 @@ const XAxis = () => {
             : CommonUtils.getLang('DataAnalytics.x_axis');
 
     if (type === BAR || type === LINE) {
-        xAxis.push(['순서', xAxis.length]);
-        fields.push('순서');
+        xAxis.push([CommonUtils.getLang('DataAnalytics.in_order'), xAxis.length]);
+        fields.push(CommonUtils.getLang('DataAnalytics.in_order'));
     }
 
     const handleSelectDropdown = (value) => {
