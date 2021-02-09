@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import _ from 'lodash';
 import _map from 'lodash/map';
-import _slice from 'lodash/slice';
 import _floor from 'lodash/floor';
+import _round from 'lodash/round';
+import _slice from 'lodash/slice';
+import _reduce from 'lodash/reduce';
 import _forEach from 'lodash/forEach';
 import _toPairs from 'lodash/toPairs';
 import _findIndex from 'lodash/findIndex';
@@ -19,7 +21,10 @@ const { generateHash } = CommonUtils;
 const getPieChart = (table, xIndex, categoryIndex) => {
     const isAddedOption = categoryIndex === table[0].length;
     return [
-        [table[0][xIndex], isAddedOption ? '개수' : table[0][categoryIndex]],
+        [
+            table[0][xIndex],
+            isAddedOption ? CommonUtils.getLang('DataAnalytics.quantity') : table[0][categoryIndex],
+        ],
         ..._toPairs(
             table.slice(1).reduce((prev, row) => {
                 prev[row[xIndex]] = prev[row[xIndex]] || 0;
@@ -46,7 +51,10 @@ const getHistogramChart = (table, categoryIndexes, bin, boundary) => {
     const { width: binWidth, min, max } = getBinWidth(table, categoryIndexes, boundary, bin);
     const x = new Array(bin + 1).fill(0);
 
-    const xRow = ['histogram_chart_x', ..._map(x, (__, index) => (index + 1) * binWidth + min)];
+    const xRow = [
+        'histogram_chart_x',
+        ..._map(x, (__, index) => _round(index * binWidth + min, 1)),
+    ];
     const extRow = _map(categoryIndexes, (index) => {
         const result = new Array(bin + 1).fill(0);
         result[0] = table[0][index];
@@ -96,13 +104,15 @@ const deduplicationColumn = (columns) =>
     });
 
 const getMouseOverStyle = (type, index) => `
-    background-color:${GRAPH_COLOR[type][index % GRAPH_COLOR[type].length]};
+    ${getColor(type, index)};
     float: left;
     width: 14px;
     height: 14px;
     margin: -1px 7px 0 0;
     vertical-align: middle;
 `;
+const getColor = (type, index) =>
+    `background-color:${GRAPH_COLOR[type][index % GRAPH_COLOR[type].length]};`;
 
 const generateOption = (option) => {
     const {
@@ -185,6 +195,7 @@ const generateOption = (option) => {
                             ${name}: ${value.toLocaleString()}
                         </div>`;
                 },
+                grouped: false,
                 init: {
                     x: 100,
                 },
@@ -213,7 +224,9 @@ const generateOption = (option) => {
                                 &nbsp;
                             </span>
                             ${name} | ${_floor(ratio * 100)}% (${
-                        isAddedOption ? '개수' : table[0][categoryIndexes[0]]
+                        isAddedOption
+                            ? CommonUtils.getLang('DataAnalytics.quantity')
+                            : table[0][categoryIndexes[0]]
                     }: ${value.toLocaleString()})
                         </div>`;
                 },
@@ -282,6 +295,7 @@ const generateOption = (option) => {
             break;
         }
         case 'histogram': {
+            const { width } = getBinWidth(table, categoryIndexes, boundary, bin);
             columns = getHistogramChart(table, categoryIndexes, bin, boundary);
             axisX = null;
             x = 'histogram_chart_x';
@@ -292,27 +306,45 @@ const generateOption = (option) => {
             };
             tooltip = {
                 contents: (data) => {
-                    const [{ name, value, x }] = data;
-                    const xAxis = table[0][xIndex];
-                    const categoryIndex = categoryIndexes[0];
-                    const scatterNames = categoryKeys(table, categoryIndex);
-
-                    return `
-                        <div class="${theme.chart_tooltip}">
-                            <span
-                                className="${theme.bg}"
-                                style="${getMouseOverStyle(type, name)}"
-                            >
-                                &nbsp;
-                            </span>
-                            ${
-                                categoryIndex !== table[0].length
-                                    ? `
-                                ${scatterNames[Number(name)]}&nbsp;|&nbsp;`
-                                    : ''
-                            }${xAxis}: ${x.toLocaleString()}
-                            &nbsp;${table[0][yIndex]}: ${value.toLocaleString()}
-                        </div>`;
+                    const values = _reduce(
+                        data,
+                        (prev, curr) => {
+                            if (curr.value) {
+                                prev.push(curr);
+                            }
+                            return prev;
+                        },
+                        []
+                    );
+                    if (!values.length) {
+                        return '';
+                    }
+                    const text = `
+                    <div class="${theme.histogram_legend}">
+                        <ul class="${theme.legend_list}">
+                            ${data
+                                .map(({ value, name, x }, index) =>
+                                    value
+                                        ? `   
+                            <li style="height:14px;">
+                                <span class="${theme.bull}" style="${getColor(type, index)}">
+                                    &nbsp;
+                                </span>
+                                <span class="${theme.text}">${name}</span>
+                                <span class="${theme.text}">${`${value}(${_round(
+                                              (value / (table.length - 1)) * 100,
+                                              1
+                                          )}%):${_round(x, 1)}<X≤${_round(
+                                              x + width,
+                                              1
+                                          )}`.escapeHTML()}</span> 
+                            </li>`
+                                        : ''
+                                )
+                                .join(' ')}
+                        </ul>
+                    </div>`;
+                    return text;
                 },
                 init: {
                     x: 100,
@@ -351,7 +383,6 @@ const generateOption = (option) => {
             },
         },
         tooltip: {
-            grouped: false,
             ...tooltip,
         },
         line,
