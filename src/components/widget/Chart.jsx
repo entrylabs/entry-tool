@@ -38,10 +38,10 @@ const getPieChart = (table, xIndex, categoryIndex) => {
 const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
     _map(
         table.slice(1).reduce((prev, row) => {
-            prev[row[categoryIndex]] = prev[row[categoryIndex]] || [];
-            prev[row[categoryIndex]].push(row[yIndex]);
+            prev[`${row[categoryIndex]}_y`] = prev[`${row[categoryIndex]}_y`] || [];
+            prev[`${row[categoryIndex]}_y`].push(`${row[yIndex]}`);
             prev[`${row[categoryIndex]}_x`] = prev[`${row[categoryIndex]}_x`] || [];
-            prev[`${row[categoryIndex]}_x`].push(row[xIndex]);
+            prev[`${row[categoryIndex]}_x`].push(`${row[xIndex]}`);
             return prev;
         }, {}),
         (value, index) => [index, ...value]
@@ -81,7 +81,7 @@ const scatterXs = (columns) => {
     const xs = {};
     for (let index = 0; index < columns.length; index += 2) {
         xs[index / 2] = `${index / 2}_x`;
-        columns[index][0] = index / 2;
+        columns[index][0] = `${index / 2}`;
         columns[index + 1][0] = `${index / 2}_x`;
     }
     return xs;
