@@ -1,7 +1,10 @@
 import React, { useState, useEffect, forwardRef } from 'react';
 import _debounce from 'lodash/debounce';
 import EntryEvent from '@entrylabs/event';
-import Theme from '@utils/Theme';
+import Theme from '../../utils/Theme';
+// import Styles from '@assets/entry/scss/customScroll.scss';
+Theme.type = 'entryline';
+const Styles = Theme.getStyle('customScroll');
 
 function getScaleNumber(num, inMin, inMax, outMin, outMax) {
     return ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
@@ -11,7 +14,6 @@ const PADDING_HEIGHT = 8;
 const MIN_HEIGHT = 40;
 
 const CustomScroll = (props, ref) => {
-    const theme = Theme.getStyle('popup');
     const { children, onScroll, style } = props;
     const [top, setTop] = useState(0);
     const [isScrolling, setScrolling] = useState(0);
@@ -85,14 +87,14 @@ const CustomScroll = (props, ref) => {
         }
     }, [customScroll]);
 
-    let indicatorClassName = theme.indicator;
+    let indicatorClassName = Styles.indicator;
     if (scrolled) {
-        indicatorClassName = `${theme.indicator} ${indicatorShow ? theme.show : theme.hide}`;
+        indicatorClassName = `${Styles.indicator} ${indicatorShow ? Styles.show : Styles.hide}`;
     }
     return (
-        <div className={theme.customScrollWrapper}>
+        <div className={Styles.customScrollWrapper}>
             <div
-                className={theme.customScroll}
+                className={Styles.customScroll}
                 style={style}
                 ref={(dom) => {
                     if (dom) {
