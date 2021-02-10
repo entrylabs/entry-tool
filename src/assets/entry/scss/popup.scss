@@ -1825,6 +1825,18 @@
                 top: 3px;
                 background: url('#{$imageDir}/ico_unchecked.svg') no-repeat;
             }
+            &.disabled {
+                cursor: auto;
+                &::after {
+                    content: ' ';
+                    width: 16px;
+                    height: 16px;
+                    position: relative;
+                    display: inline-block;
+                    top: 3px;
+                    background: url('#{$imageDir}/ico_unchecked_disabled.svg') no-repeat;
+                }
+            }
         }
         .item {
             &:hover {

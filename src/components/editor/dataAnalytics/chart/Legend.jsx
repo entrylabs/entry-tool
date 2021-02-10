@@ -109,8 +109,7 @@ const Legend = () => {
 
             {showDropdown && checkBox && (
                 <Dropdown
-                    multiple
-                    showSelectAll={true}
+                    maximumSelectionLength={3}
                     checkedIndex={selectedLegend.map((index) =>
                         _findIndex(
                             getNumberColumnIndexesBySelectedColumns(table, dropdownItems),
