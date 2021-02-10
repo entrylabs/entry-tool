@@ -334,10 +334,7 @@ const generateOption = (option) => {
                                 <span class="${theme.text}">${`${value}(${_round(
                                               (value / (table.length - 1)) * 100,
                                               1
-                                          )}%):${_round(x, 1)}<X≤${_round(
-                                              x + width,
-                                              1
-                                          )}`.escapeHTML()}</span> 
+                                          )}%):${_round(x, 1)}〈X≤${_round(x + width, 1)}`}</span> 
                             </li>`
                                         : ''
                                 )
@@ -382,9 +379,7 @@ const generateOption = (option) => {
                 show: false,
             },
         },
-        tooltip: {
-            ...tooltip,
-        },
+        tooltip,
         line,
     };
 };
