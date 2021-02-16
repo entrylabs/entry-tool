@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
+import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 
 const Order = () => {
@@ -22,13 +23,13 @@ const Order = () => {
                 className={order === 'default' ? theme.active : ''}
                 onClick={handleOrderClick('default')}
             >
-                원래대로
+                {CommonUtils.getLang('DataAnalytics.default')}
             </a>
             <a
                 className={order === 'ascending' ? theme.active : ''}
                 onClick={handleOrderClick('ascending')}
             >
-                오름차순
+                {CommonUtils.getLang('DataAnalytics.ascending')}
             </a>
         </div>
     );

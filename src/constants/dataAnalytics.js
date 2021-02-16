@@ -18,38 +18,38 @@ export const TAB_ITEMS = [
     { name: 'DataAnalytics.chart', value: CHART },
     { name: 'DataAnalytics.dashboard', value: SUMMARY },
 ];
-export const LEGEND = {
+export const LEGEND_OPTIONS = {
     [BAR]: {
         xAxis: true,
-        xYxis: false,
+        yAxis: false,
         category: true,
         degree: false,
         order: true,
     },
     [LINE]: {
         xAxis: true,
-        xYxis: false,
+        yAxis: false,
         category: true,
         degree: false,
         order: true,
     },
     [PIE]: {
         xAxis: true,
-        xYxis: false,
+        yAxis: false,
         category: true,
         degree: false,
         order: false,
     },
     [SCATTER]: {
         xAxis: true,
-        xYxis: true,
+        yAxis: true,
         category: true,
         degree: false,
         order: false,
     },
     [HISTOGRAM]: {
         xAxis: false,
-        xYxis: false,
+        yAxis: false,
         category: true,
         degree: true,
         order: false,
@@ -115,6 +115,7 @@ export const GRAPH_COLOR = {
         '#423496',
         '#2a7d7f',
     ],
+    [HISTOGRAM]: ['#4f80ff', '#f16670', '#ffb500'],
 };
 export const SUMMARY_HEADER = [
     ' ',

@@ -95,7 +95,7 @@ class Dropdown extends Component {
 
     handleItemCheckChange = (item, index, value) => {
         this.setState((prev) => {
-            const { items } = this.props;
+            const { items, maximumSelectionLength } = this.props;
             const { checkedIndex = [] } = prev;
             if (value === SELECT_ALL) {
                 const isChecked = checkedIndex.length === items.length;
@@ -106,6 +106,13 @@ class Dropdown extends Component {
             }
             const target = checkedIndex.indexOf(index);
             let isChecked = false;
+            if (
+                maximumSelectionLength &&
+                maximumSelectionLength <= checkedIndex.length &&
+                target < 0
+            ) {
+                return prev;
+            }
             if (target > -1) {
                 checkedIndex.splice(target, 1);
             } else {
@@ -118,25 +125,30 @@ class Dropdown extends Component {
     };
 
     makeDropdownItem() {
-        const { items = [], multiple, showSelectAll } = this.props;
+        const { items = [], multiple, showSelectAll, maximumSelectionLength } = this.props;
         const { checkedIndex = [] } = this.state;
-        const handleEvent = multiple ? this.handleItemCheckChange : this.handleItemClick;
+        const handleEvent =
+            multiple || maximumSelectionLength ? this.handleItemCheckChange : this.handleItemClick;
         const selectAll = [CommonUtils.getLang('Workspace.select_all'), SELECT_ALL];
         return (showSelectAll ? [selectAll, ...items] : items).map((item, index) => {
             const [text, value, style] = item;
             const indexWithoutSelectAll = showSelectAll ? index - 1 : index;
+            const disabled =
+                checkedIndex.indexOf(index) == -1 &&
+                maximumSelectionLength &&
+                maximumSelectionLength <= checkedIndex.length;
             return (
                 <div
-                    key={value}
+                    key={`entry_tool_dropdown_${value}`}
                     value={value}
                     index={indexWithoutSelectAll}
                     style={style}
-                    className={this.theme.item}
+                    className={`${this.theme.item} ${disabled ? this.theme.disabled : ''}`}
                     onClick={() => {
                         handleEvent(item, indexWithoutSelectAll, value);
                     }}
                 >
-                    {multiple && (
+                    {(multiple || maximumSelectionLength) && (
                         <CheckBox
                             className={this.theme.checkbox}
                             checked={
@@ -144,6 +156,7 @@ class Dropdown extends Component {
                                     ? checkedIndex.length === items.length
                                     : checkedIndex.includes(indexWithoutSelectAll)
                             }
+                            disabled={disabled}
                         />
                     )}
                     {text}
@@ -171,6 +184,7 @@ class Dropdown extends Component {
             autoWidth,
             animation = true,
             multiple,
+            maximumSelectionLength,
         } = this.props;
         const { isUpStyle, arrowLeft, componentPosition } = this.state;
         let animationStyle = {};
@@ -184,7 +198,7 @@ class Dropdown extends Component {
                 outsideExcludeDom={outsideExcludeDom}
                 onOutsideClick={() => {
                     let result;
-                    if (multiple) {
+                    if (multiple || maximumSelectionLength) {
                         result = this.getCheckData();
                     }
                     if (onOutsideClick) {

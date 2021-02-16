@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
+import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 
 const Boundary = () => {
@@ -19,21 +20,20 @@ const Boundary = () => {
     return (
         <div className={theme.select_group} style={{ marginLeft: 30 }}>
             <label htmlFor="CntWidth" className={theme.tit_label}>
-                계급 경계
+                {CommonUtils.getLang('DataAnalytics.bin_boundary')}
             </label>
-            {/* 계급 폭이 비활성일 때 disabled 클래스 추가 */}
             <div className={theme.cnt_sort}>
                 <a
                     className={boundary === 'left' ? theme.active : ''}
                     onClick={handleBoundaryClick('left')}
                 >
-                    왼쪽 닫힘
+                    {CommonUtils.getLang('DataAnalytics.left_closed')}
                 </a>
                 <a
                     className={boundary === 'right' ? theme.active : ''}
-                    onclick={handleBoundaryClick('right')}
+                    onClick={handleBoundaryClick('right')}
                 >
-                    오른쪽 닫힘
+                    {CommonUtils.getLang('DataAnalytics.right_closed')}
                 </a>
             </div>
         </div>

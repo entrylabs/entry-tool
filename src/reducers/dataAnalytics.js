@@ -290,6 +290,36 @@ export const dataAnalyticsReducer = (state, action) => {
                 isChanged: true,
             };
         }
+        case 'CHANGE_DEGREE': {
+            const { selected } = state;
+            const { chart = [], chartIndex } = selected;
+            const { value } = action;
+            chart[chartIndex].bin = value;
+
+            return {
+                ...state,
+                selected: {
+                    ...selected,
+                    chart,
+                },
+                isChanged: true,
+            };
+        }
+        case 'EDIT_BOUNDARY': {
+            const { selected } = state;
+            const { chart = [], chartIndex } = selected;
+            const { direction } = action;
+            chart[chartIndex].boundary = direction;
+
+            return {
+                ...state,
+                selected: {
+                    ...selected,
+                    chart,
+                },
+                isChanged: true,
+            };
+        }
         default:
             return state;
     }

@@ -10,12 +10,15 @@ import HorizontalLegend from './HorizontalLegend';
 import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
-import { getTrimedTable, getTable } from '@utils/dataAnalytics';
-import { SCATTER, PIE, NONE, LEGEND } from '@constants/dataAnalytics';
+import { getTrimedTable } from '@utils/dataAnalytics';
+import { SCATTER, PIE, NONE, LEGEND_OPTIONS, HISTOGRAM } from '@constants/dataAnalytics';
 import Theme from '@utils/Theme';
 
 const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes } = {}) =>
-    type !== NONE && xIndex !== -1 && categoryIndexes.length && (type !== SCATTER || yIndex !== -1);
+    type !== NONE &&
+    ((type !== HISTOGRAM && xIndex !== -1) || (type === HISTOGRAM && categoryIndexes.length)) &&
+    categoryIndexes.length &&
+    (type !== SCATTER || yIndex !== -1);
 
 const getNoResultText = ({ type = NONE, xIndex, yIndex, categoryIndexes = [] } = {}) => {
     let content;
@@ -36,10 +39,13 @@ const ChartLayout = () => {
     const { chart = [], chartIndex = 0, table: selectedTable } = selected;
     const table = getTrimedTable(selectedTable);
     const selectedChart = chart[chartIndex] || {};
-    const { type, xIndex, yIndex, categoryIndexes = [], order: sort } = selectedChart || {};
+    const { type, xIndex, yIndex, categoryIndexes = [], order: sort, bin, boundary } =
+        selectedChart || {};
     const isHorizontalLegend = type !== 'pie';
-    const key = `chart_${chartIndex}_${xIndex}_${yIndex}_${categoryIndexes.toString()}_${sort}`;
-    const { xAxis, yAxis, category, degree, order } = LEGEND[type];
+    const key =
+        `chart_${chartIndex}_${xIndex}_${yIndex}` +
+        `_${categoryIndexes.toString()}_${sort}_${bin}_${boundary}`;
+    const { xAxis, yAxis, category, degree, order } = LEGEND_OPTIONS[type];
 
     const handleRemoveClick = useCallback((event) => {
         event.preventDefault();
@@ -78,7 +84,9 @@ const ChartLayout = () => {
                     `}
                     style={{ backgroundColor: '#fff', height: '100%' }}
                 >
-                    {categoryIndexes.length && isHorizontalLegend ? (
+                    {categoryIndexes.length &&
+                    isHorizontalLegend &&
+                    categoryIndexes[0] !== table[0].length ? (
                         <HorizontalLegend table={table} chart={selectedChart} />
                     ) : null}
                     <div
