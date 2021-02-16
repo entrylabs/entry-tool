@@ -1,13 +1,17 @@
 import XLSX from 'xlsx';
 
+import _ceil from 'lodash/ceil';
 import _some from 'lodash/some';
 import _head from 'lodash/head';
 import _uniq from 'lodash/uniq';
 import _slice from 'lodash/slice';
+import _floor from 'lodash/floor';
+import _round from 'lodash/round';
 import _every from 'lodash/every';
 import _chain from 'lodash/chain';
 import _reduce from 'lodash/reduce';
 import _uniqBy from 'lodash/uniqBy';
+import _forEach from 'lodash/forEach';
 import _toString from 'lodash/toString';
 import _zipObject from 'lodash/zipObject';
 import _differenceBy from 'lodash/differenceBy';
@@ -66,6 +70,9 @@ export const categoryKeys = (table, index) =>
 
 export const isZipable = (table, xIndex) =>
     _uniqBy(table, (row) => row[xIndex]).length !== table.length;
+
+export const isNumberColumn = (table, index) =>
+    _every(table.slice(1), (row) => !isString(row[index]));
 
 export const hasNumberColumn = (table) =>
     _some(table[0], (__, columnIndex) =>
@@ -175,4 +182,30 @@ export const downloadXLSX = (table, name) => {
     XLSX.utils.book_append_sheet(workbook, worksheet);
 
     XLSX.writeFile(workbook, `${name}.xlsx`);
+};
+
+export const getBinWidth = (table, categoryIndexes, boundary, bin) => {
+    if (!categoryIndexes.length) {
+        return '-';
+    }
+    let min = Number(table[1][categoryIndexes]) || Number.MAX_SAFE_INTEGER;
+    let max = Number(table[1][categoryIndexes]) || Number.MIN_SAFE_INTEGER;
+    _forEach(categoryIndexes, (index) => {
+        _forEach(table.slice(1), (row) => {
+            const value = Number(row[index]);
+            if (min > value) {
+                min = value;
+            }
+            if (max < value) {
+                max = value;
+            }
+        });
+    });
+    if (boundary === 'left' && _ceil(max) === max) {
+        max += 1;
+    }
+    if (boundary === 'right' && _floor(min) === min) {
+        min -= 1;
+    }
+    return { min, max, width: _round((max - min) / bin, 1) };
 };

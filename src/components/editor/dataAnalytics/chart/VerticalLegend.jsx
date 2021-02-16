@@ -15,7 +15,7 @@ const VerticalLegend = (props) => {
     const category = _toPairs(
         table.slice(1).reduce((prev, row) => {
             prev[row[xIndex]] = prev[row[xIndex]] || 0;
-            prev[row[xIndex]] += Number(row[categoryIndex]);
+            prev[row[xIndex]] += categoryIndex === table[0].length ? 1 : Number(row[categoryIndex]);
             return prev;
         }, {})
     );

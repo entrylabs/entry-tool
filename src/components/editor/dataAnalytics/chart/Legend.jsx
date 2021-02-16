@@ -4,7 +4,7 @@ import _reduce from 'lodash/reduce';
 import _findIndex from 'lodash/findIndex';
 import Dropdown from '@components/widget/dropdown';
 import { CommonUtils } from '@utils/Common';
-import { PIE, BAR, LINE, SCATTER } from '@constants/dataAnalytics';
+import { PIE, BAR, LINE, SCATTER, HISTOGRAM } from '@constants/dataAnalytics';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { getNumberColumnIndexesBySelectedColumns, getTrimedTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
@@ -18,9 +18,10 @@ const Legend = () => {
     const { table: selectedTable, chart, chartIndex = 0 } = selected;
     const { yIndex = 0, xIndex, categoryIndexes: selectedLegend, type } = chart[chartIndex];
     const table = getTrimedTable(selectedTable);
-    const checkBox = type === BAR || type === LINE;
+    const checkBox = type === BAR || type === LINE || type === HISTOGRAM;
+    const fields = [...table[0]];
     const dropdownItems = _reduce(
-        table[0],
+        fields,
         (prev, __, index) =>
             !_some([xIndex, yIndex], (banIndex) => index === banIndex) ? [...prev, index] : prev,
         []
@@ -28,12 +29,23 @@ const Legend = () => {
     const items = (type === SCATTER
         ? dropdownItems
         : getNumberColumnIndexesBySelectedColumns(table, dropdownItems)
-    ).map((index) => [table[0][index], index]);
-    const disabled = xIndex === -1 || (type === SCATTER && yIndex === -1) || !items.length;
+    ).map((index) => [fields[index], index]);
+    const disabled =
+        (xIndex === -1 || (type === SCATTER && yIndex === -1) || !items.length) &&
+        (type !== HISTOGRAM || !items.length);
     const titleLabel =
         type === PIE
             ? CommonUtils.getLang('DataAnalytics.value')
             : CommonUtils.getLang('DataAnalytics.legend');
+
+    if (type === PIE) {
+        items.push([CommonUtils.getLang('DataAnalytics.quantity'), fields.length]);
+        fields.push(CommonUtils.getLang('DataAnalytics.quantity'));
+    }
+    if (type === SCATTER) {
+        items.push([CommonUtils.getLang('DataAnalytics.not_distinguished'), fields.length]);
+        fields.push(CommonUtils.getLang('DataAnalytics.not_distinguished'));
+    }
 
     const getTitle = () => {
         if (checkBox) {
@@ -41,11 +53,11 @@ const Legend = () => {
                 return titleLabel;
             }
             if (selectedLegend.length === 1) {
-                return table[0][selectedLegend[0]];
+                return fields[selectedLegend[0]];
             }
-            return `${table[0][selectedLegend[0]]} 외 ${selectedLegend.length - 1}건`;
+            return `${fields[selectedLegend[0]]} 외 ${selectedLegend.length - 1}건`;
         }
-        return !table[0][selectedLegend[0]] ? titleLabel : table[0][selectedLegend[0]];
+        return !fields[selectedLegend[0]] ? titleLabel : fields[selectedLegend[0]];
     };
 
     const handleSelectDropDown = (value) => {
@@ -97,8 +109,7 @@ const Legend = () => {
 
             {showDropdown && checkBox && (
                 <Dropdown
-                    multiple
-                    showSelectAll={true}
+                    maximumSelectionLength={3}
                     checkedIndex={selectedLegend.map((index) =>
                         _findIndex(
                             getNumberColumnIndexesBySelectedColumns(table, dropdownItems),

@@ -14,12 +14,15 @@ yarn add entry-tool
 ```
 
 ## 개발
+
 소스 다운로드
+
 ```bash
 git clone https://github.com/entrylabs/entry-tool
 ```
 
 entry-tool 실행
+
 ```bash
 yarn
 yarn start

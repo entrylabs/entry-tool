@@ -2,7 +2,7 @@ import React, { useContext, useState, useRef } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import Dropdown from '@components/widget/dropdown';
 import { CommonUtils } from '@utils/Common';
-import { PIE, SCATTER } from '@constants/dataAnalytics';
+import { BAR, LINE, PIE, SCATTER } from '@constants/dataAnalytics';
 import { getNumberColumnIndexes, getTrimedTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
 
@@ -15,7 +15,7 @@ const XAxis = () => {
     const { table: selectedTable, chart, chartIndex = 0 } = selected;
     const { type, xIndex = 0 } = chart[chartIndex];
     const table = getTrimedTable(selectedTable);
-    const [fields = []] = table;
+    const fields = [...table[0]];
     const xAxis =
         type === SCATTER
             ? getNumberColumnIndexes(table).map((index) => [fields[index], index])
@@ -25,6 +25,11 @@ const XAxis = () => {
         type === PIE
             ? CommonUtils.getLang('DataAnalytics.legend')
             : CommonUtils.getLang('DataAnalytics.x_axis');
+
+    if (type === BAR || type === LINE) {
+        xAxis.push([CommonUtils.getLang('DataAnalytics.in_order'), xAxis.length]);
+        fields.push(CommonUtils.getLang('DataAnalytics.in_order'));
+    }
 
     const handleSelectDropdown = (value) => {
         dispatch({

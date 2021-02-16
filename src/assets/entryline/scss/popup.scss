@@ -467,69 +467,81 @@ $lineImageDir: '../images';
         width: 327px;
         height: 327px;
 
+        @keyframes play2 {
+            0% {
+                background-position-x: 0px;
+            }
+            100% {
+                background-position-x: -816px;
+            }
+        }
         .title {
             position: absolute;
-            background-color: #fff;
-            border-radius: 15px;
-            width: 367px;
-            height: 45px;
-            font-size: 27px;
+            background: url(#{$imageDir}/progress/text_back.png) no-repeat;
+            min-width: 215px;
+            min-height: 90px;
+            font-size: 18px;
             font-weight: bold;
-            color: #9b9b9b;
+            line-height: 18px;
+            color: #000000;
             text-align: center;
+            padding-top: 27px;
             z-index: 10;
-            margin-left: -20px;
-            margin-top: 110px;
-            line-height: 43px;
+            margin: 0 auto;
+            margin-top: -20px;
+            background-size: 100% 100%;
         }
-
-        .background_1 {
-        }
-        .background_2 {
-        }
-        .background_3 {
-        }
-
-        .character {
-            display: none;
-            position: absolute;
-            width: 327px;
-            height: 327px;
-            background: url(#{$lineImageDir}/loading.gif);
-            background-size: 327px;
+        .progressEntryBot {
+            height: 147px;
+            width: 102px;
+            margin: 85px auto 13px;
+            background: url(#{$imageDir}/progress/entry_loading_sprite.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            animation: play2 0.9s steps(8) infinite alternate;
+            margin-left: 62px;
         }
     }
     .error {
         position: relative;
-        background: url(#{$imageDir}/progress/error.png) no-repeat;
-        width: 441px;
-        height: 429px;
-        padding-top: 17px;
-
+        font-size: 18px;
+        line-height: 24px;
         .title {
-            font-size: 27px;
+            position: absolute;
+            background: url(#{$imageDir}/progress/text_back.png) no-repeat;
+            width: 339px;
+            height: 158px;
             font-weight: bold;
-            line-height: 35px;
-            color: #2a7def;
-            text-align: center;
-            margin-bottom: 7px;
-        }
-
-        .description {
-            font-size: 15px;
-            line-height: 20px;
             color: #000000;
             text-align: center;
+            padding-top: 24px;
+            z-index: 10;
+            margin: 0 auto;
+            margin-top: -20px;
+            background-size: 100% 100%;
+        }
+        .description {
+            color: #000000;
+            text-align: center;
+            z-index: 100;
         }
 
         .close {
             position: absolute;
             background: url(#{$imageDir}/progress/close.png);
             cursor: pointer;
-            top: 16px;
-            right: 16px;
+            top: -15px;
+            right: -30px;
             width: 21px;
             height: 21px;
+            z-index: 100;
+            background-size: contain;
+        }
+        .errorEntryBot {
+            height: 176px;
+            width: 190px;
+            background: url(#{$imageDir}/progress/error.svg) no-repeat;
+            margin: 130px auto 0;
         }
     }
 }

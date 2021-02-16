@@ -1751,6 +1751,32 @@ class TableChart extends Component {
                                             </div>
                                         </div>
                                         <div className={Styles.graph_box}>
+                                            {/* 범례 위치는 left / top 값 혹은 transform: translate 값으로 조정 해주세요. */}
+                                            <div className={Styles.histogram_legend} style={{ left: 30, top: 100 }}>
+                                                <ul className={Styles.legend_list}>
+                                                    <li>
+                                                        <span className={Styles.bull} style={{ backgroundColor : '#4f80ff' }}>
+                                                            &nbsp;
+                                                        </span>
+                                                        <span className={Styles.text}>봄</span>
+                                                        <span className={Styles.text}>13 (28.3%): 12 &gt; X ≤ 13</span>
+                                                    </li>
+                                                    <li>
+                                                        <span className={Styles.bull} style={{ backgroundColor : 'orange' }}>
+                                                            &nbsp;
+                                                        </span>
+                                                        <span className={Styles.text}>범례 하나당</span>
+                                                        <span className={Styles.text}>li요소 하나씩 배치해주세요.</span>
+                                                    </li>
+                                                    <li>
+                                                        <span className={Styles.bull} style={{ backgroundColor : 'red' }}>
+                                                            &nbsp;
+                                                        </span>
+                                                        <span className={Styles.text}>범례 하나당</span>
+                                                        <span className={Styles.text}>가변성을 띄고 있음요 ㅋㅋ</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                             <div style={{ height: 500, backgroundColor : 'orange'}}>
                                                 여기에 그래프를 넣어주세요
                                             </div>

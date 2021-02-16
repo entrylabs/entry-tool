@@ -23,9 +23,13 @@ const Index = (props) => {
         prevArrow: <Arrow type="prev" theme={theme} />,
     };
 
-    const itemClicked = ({ _id: id }) => {
-        if (id) {
-            applySelected(CommonUtils.remove(selected, (element) => element._id === id));
+    const itemClicked = ({ _id,  id }) => {
+        const selectedId = _id || id;
+        if (selectedId) {
+            applySelected(CommonUtils.remove(selected, (element) => {
+                const itemId = element._id || element.id;
+                return itemId === selectedId;
+            }));
         }
     };
 
