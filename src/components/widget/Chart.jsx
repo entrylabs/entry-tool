@@ -331,10 +331,13 @@ const generateOption = (option) => {
                                     &nbsp;
                                 </span>
                                 <span class="${theme.text}">${name}</span>
-                                <span class="${theme.text}">${`${value}(${_round(
+                                <span class="${theme.text}">${`${value} (${_round(
                                               (value / (table.length - 1)) * 100,
                                               1
-                                          )}%):${_round(x, 1)}〈X≤${_round(x + width, 1)}`}</span> 
+                                          )}%): ${_round(x, 1)} 〈 X ≤ ${_round(
+                                              x + width,
+                                              1
+                                          )}`}</span> 
                             </li>`
                                         : ''
                                 )
