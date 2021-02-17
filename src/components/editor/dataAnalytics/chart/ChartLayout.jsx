@@ -67,11 +67,11 @@ const ChartLayout = () => {
                     </a>
                 </div>
                 <div className={theme.input_inner}>
-                    {xAxis ? <XAxis /> : ''}
-                    {yAxis ? <YAxis /> : ''}
-                    {category ? <Legend /> : ''}
-                    {degree ? <Degree /> : ''}
-                    {order ? <Order /> : ''}
+                    {xAxis ? <XAxis key={`${key}_xaxis`} /> : ''}
+                    {yAxis ? <YAxis key={`${key}_yaxis`} /> : ''}
+                    {category ? <Legend key={`${key}_category`} /> : ''}
+                    {degree ? <Degree key={`${key}_degree`} /> : ''}
+                    {order ? <Order key={`${key}_order`} /> : ''}
                 </div>
             </div>
             {isDrawable(selectedChart) ? (
