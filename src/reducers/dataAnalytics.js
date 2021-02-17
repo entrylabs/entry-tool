@@ -276,7 +276,7 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'EDIT_ORDER': {
             const { selected } = state;
-            const { chart = [], chartIndex } = selected;
+            const { chart = [], chartIndex = 0 } = selected;
             const { order } = action;
 
             chart[chartIndex].order = order;
@@ -292,7 +292,7 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'CHANGE_DEGREE': {
             const { selected } = state;
-            const { chart = [], chartIndex } = selected;
+            const { chart = [], chartIndex = 0 } = selected;
             const { value } = action;
             chart[chartIndex].bin = value;
 
@@ -307,7 +307,7 @@ export const dataAnalyticsReducer = (state, action) => {
         }
         case 'EDIT_BOUNDARY': {
             const { selected } = state;
-            const { chart = [], chartIndex } = selected;
+            const { chart = [], chartIndex = 0 } = selected;
             const { direction } = action;
             chart[chartIndex].boundary = direction;
 
