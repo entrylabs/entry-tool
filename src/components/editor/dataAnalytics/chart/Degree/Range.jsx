@@ -27,7 +27,7 @@ const Range = () => {
                     className={theme.input}
                     id="Cnt"
                     name="Cnt"
-                    defaultValue={width}
+                    defaultValue={_round(width, 1)}
                     readOnly
                 />
             </div>
