@@ -48,23 +48,21 @@ const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
     );
 
 const getHistogramChart = (table, categoryIndexes, bin, boundary) => {
-    const { width: binWidth, min, max } = getBinWidth(table, categoryIndexes, boundary, bin);
+    const { width, min, max } = getBinWidth(table, categoryIndexes, boundary, bin);
     const x = new Array(bin + 1).fill(0);
+    const binWidth = _round(width, 1);
 
-    const xRow = [
-        'histogram_chart_x',
-        ..._map(x, (__, index) => _round(index * binWidth + min, 1)),
-    ];
+    const xRow = ['histogram_chart_x', ..._map(x, (__, index) => _round(index * width + min, 1))];
     const extRow = _map(categoryIndexes, (index) => {
         const result = new Array(bin + 1).fill(0);
         result[0] = table[0][index];
         _forEach(table.slice(1), (row) => {
-            const binIndex = _floor((row[index] - min) / binWidth);
+            const binIndex = _floor((row[index] - min) / width);
             if (
                 (boundary === 'right' && (row[index] - min) % binWidth == 0) ||
                 row[index] - max === 0
             ) {
-                result[binIndex]++;
+                result[binIndex || 1]++;
             } else {
                 result[binIndex + 1]++;
             }
@@ -293,7 +291,13 @@ const generateOption = (option) => {
         case 'histogram': {
             const { width } = getBinWidth(table, categoryIndexes, boundary, bin);
             columns = getHistogramChart(table, categoryIndexes, bin, boundary);
-            axisX = null;
+            axisX = {
+                tick: {
+                    fit: true,
+                    multiline: false,
+                    culling: false,
+                },
+            };
             x = 'histogram_chart_x';
             line = {
                 step: {
@@ -343,9 +347,6 @@ const generateOption = (option) => {
                         </ul>
                     </div>`;
                     return text;
-                },
-                init: {
-                    x: 100,
                 },
             };
             break;

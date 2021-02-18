@@ -209,5 +209,5 @@ export const getBinWidth = (table, categoryIndexes, boundary, bin) => {
     }
     min = _floor(min);
     max = _ceil(max);
-    return { min, max, width: _round((max - min) / bin, 1) };
+    return { min, max, width: (max - min) / bin };
 };
