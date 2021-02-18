@@ -350,9 +350,6 @@ const generateOption = (option) => {
                     </div>`;
                     return text;
                 },
-                init: {
-                    x: 100,
-                },
             };
             break;
         }
