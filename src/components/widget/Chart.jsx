@@ -207,11 +207,7 @@ const generateOption = (option) => {
             x = table[0][xIndex];
             tooltip = {
                 contents: (data) => {
-                    const [{ name, ratio, value }] = data;
-                    const index = _findIndex(
-                        _map(table.slice(1), (row) => row[xIndex]),
-                        (col) => col == name
-                    );
+                    const [{ name, ratio, value, index }] = data;
 
                     return `
                         <div class="${theme.chart_tooltip}">
@@ -338,7 +334,9 @@ const generateOption = (option) => {
                                 <span class="${theme.text}">${`${value} (${_round(
                                               (value / (table.length - 1)) * 100,
                                               1
-                                          )}%): ${_round(x, 1)} 〈 X ≤ ${_round(
+                                          )}%): ${_round(x, 1)} ${
+                                              boundary === 'left' ? '≤' : '〈'
+                                          } X ${boundary === 'left' ? '〈' : '≤'} ${_round(
                                               x + width,
                                               1
                                           )}`}</span> 
