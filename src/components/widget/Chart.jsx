@@ -15,7 +15,7 @@ import '@assets/entry/scss/widget/insight.css';
 
 import { CommonUtils } from '@utils/Common';
 import { isNumberColumn, hasNumberColumn, categoryKeys, getBinWidth } from '@utils/dataAnalytics';
-import { GRAPH_COLOR, HISTOGRAM } from '@constants/dataAnalytics';
+import { GRAPH_COLOR, HISTOGRAM, SCATTER_POINT_PATTERN } from '@constants/dataAnalytics';
 const { generateHash } = CommonUtils;
 
 const getPieChart = (table, xIndex, categoryIndex) => {
@@ -102,15 +102,14 @@ const deduplicationColumn = (columns) =>
     });
 
 const getMouseOverStyle = (type, index) => `
-    ${getColor(type, index)};
+    background-color: ${getColor(type, index)};
     float: left;
     width: 14px;
     height: 14px;
     margin: -1px 7px 0 0;
     vertical-align: middle;
 `;
-const getColor = (type, index) =>
-    `background-color:${GRAPH_COLOR[type][index % GRAPH_COLOR[type].length]};`;
+const getColor = (type, index) => `${GRAPH_COLOR[type][index % GRAPH_COLOR[type].length]}`;
 
 const generateOption = (option) => {
     const {
@@ -249,14 +248,7 @@ const generateOption = (option) => {
                 },
             };
             point = {
-                pattern: [
-                    '<g transform="translate(-336 -457) translate(336 457)"><circle cx="4" cy="4" r="3"/></g>',
-                    '<path d="M1 1H7V7H1z" transform="translate(-384 -457) translate(384 457)"/>',
-                    '<path d="M5.937 2.766h-3.6v3.6h3.6v-3.6z" transform="translate(-432 -457) translate(432 456) translate(0 .2) rotate(45 4.137 4.566)"/>',
-                    '<path d="M4 2.236L1.618 7h4.764L4 2.236z" transform="translate(-480 -457) translate(480 457)"/>',
-                    '<path d="M7.2.8L.8 7.2M7.2 7.2L.8.8" transform="translate(-528 -457) translate(528 457)"/>',
-                    '<path d="M0 3.714L8 3.714M4 0L4 8" transform="translate(-576 -457) translate(576 457)"/>',
-                ],
+                pattern: SCATTER_POINT_PATTERN,
             };
             tooltip = {
                 contents: (data) => {
@@ -269,9 +261,18 @@ const generateOption = (option) => {
                         <div class="${theme.chart_tooltip}">
                             <span
                                 className="${theme.bg}"
-                                style="${getMouseOverStyle(type, name)}"
+                                style="float: left;
+                                    width: 14px;
+                                    height: 14px;
+                                    margin: -1px 7px 0 0;
+                                    vertical-align: middle;"
                             >
-                                &nbsp;
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    style="fill: ${getColor(type, name)};
+                                    stroke: ${getColor(type, name)};"
+                                    width="16" height="16" viewBox="0 0 10 10">
+                                    ${SCATTER_POINT_PATTERN[Number(name)]}
+                                </svg>
                             </span>
                             ${
                                 categoryIndex !== table[0].length
@@ -327,7 +328,8 @@ const generateOption = (option) => {
                                     value
                                         ? `   
                             <li style="height:14px;">
-                                <span class="${theme.bull}" style="${getColor(type, index)}">
+                                <span class="${theme.bull}" 
+                                    style="background-color: ${getColor(type, index)}">
                                     &nbsp;
                                 </span>
                                 <span class="${theme.text}">${name}</span>
