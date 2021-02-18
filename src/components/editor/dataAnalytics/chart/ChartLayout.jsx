@@ -86,6 +86,7 @@ const ChartLayout = () => {
                 >
                     {categoryIndexes.length &&
                     isHorizontalLegend &&
+                    type !== SCATTER &&
                     categoryIndexes[0] !== table[0].length ? (
                         <HorizontalLegend table={table} chart={selectedChart} />
                     ) : null}
