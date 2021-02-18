@@ -50,9 +50,9 @@ const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
 const getHistogramChart = (table, categoryIndexes, bin, boundary) => {
     const { width, min, max } = getBinWidth(table, categoryIndexes, boundary, bin);
     const x = new Array(bin + 1).fill(0);
-    const binWidth = _round(width, 1);
+    const binWidth = _round(width, 2);
 
-    const xRow = ['histogram_chart_x', ..._map(x, (__, index) => _round(index * width + min, 1))];
+    const xRow = ['histogram_chart_x', ..._map(x, (__, index) => _round(index * width + min, 2))];
     const extRow = _map(categoryIndexes, (index) => {
         const result = new Array(bin + 1).fill(0);
         result[0] = table[0][index];
@@ -333,12 +333,12 @@ const generateOption = (option) => {
                                 <span class="${theme.text}">${name}</span>
                                 <span class="${theme.text}">${`${value} (${_round(
                                               (value / (table.length - 1)) * 100,
-                                              1
-                                          )}%): ${_round(x, 1)} ${
+                                              2
+                                          )}%): ${_round(x, 2)} ${
                                               boundary === 'left' ? '≤' : '〈'
                                           } X ${boundary === 'left' ? '〈' : '≤'} ${_round(
                                               x + width,
-                                              1
+                                              2
                                           )}`}</span> 
                             </li>`
                                         : ''
