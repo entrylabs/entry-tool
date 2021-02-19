@@ -8,7 +8,7 @@ const Boundary = () => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
     const { chart = [], chartIndex } = selected;
-    const { boundary = 'left' } = chart[chartIndex] || {};
+    const { boundary = 'right' } = chart[chartIndex] || {};
 
     const handleBoundaryClick = (direction) => (event) => {
         event.preventDefault();

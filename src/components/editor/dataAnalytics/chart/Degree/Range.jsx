@@ -13,8 +13,8 @@ const Range = () => {
     const { dataAnalytics } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
     const { table, chart = [], chartIndex = 0 } = selected;
-    const { categoryIndexes = [], bin = 5, boundary = 'left' } = chart[chartIndex];
-    const { width } = getBinWidth(table, categoryIndexes, boundary, bin);
+    const { categoryIndexes = [], bin = 5, boundary = 'right' } = chart[chartIndex];
+    const { width = 0 } = getBinWidth(table, categoryIndexes, boundary, bin);
 
     return (
         <div className={theme.select_group} style={{ marginLeft: 30 }}>
