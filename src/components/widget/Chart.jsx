@@ -14,7 +14,7 @@ import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';
 
 import { CommonUtils } from '@utils/Common';
-import { isNumberColumn, hasNumberColumn, categoryKeys, getBinWidth } from '@utils/dataAnalytics';
+import { isNumberColumn, categoryKeys, getBinWidth, isDrawable } from '@utils/dataAnalytics';
 import { GRAPH_COLOR, HISTOGRAM } from '@constants/dataAnalytics';
 const { generateHash } = CommonUtils;
 
@@ -385,8 +385,6 @@ const generateOption = (option) => {
     };
 };
 
-const isDrawable = (table) => table[0].length > 1 && hasNumberColumn(table);
-
 const Chart = (props) => {
     const theme = Theme.getStyle('popup');
     const { table = [[]], chart = {}, size, legend, axisX, axisY, shortForm = false } = props;
@@ -404,7 +402,7 @@ const Chart = (props) => {
 
     let content = '';
 
-    if (!isDrawable(table)) {
+    if (!isDrawable({ type, xIndex, yIndex, categoryIndexes })) {
         return shortForm ? (
             <div className={theme.data_add_box}>
                 <p>{CommonUtils.getLang('DataAnalytics.unable_to_express_chart')}</p>

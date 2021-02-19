@@ -16,6 +16,8 @@ import _toString from 'lodash/toString';
 import _zipObject from 'lodash/zipObject';
 import _differenceBy from 'lodash/differenceBy';
 
+import { NONE, SCATTER, HISTOGRAM } from '@constants/DataAnalytics';
+
 import flow from 'lodash/fp/flow';
 import map from 'lodash/fp/map';
 import unzip from 'lodash/fp/unzip';
@@ -205,3 +207,9 @@ export const getBinWidth = (table, categoryIndexes, boundary, bin) => {
     max = _ceil(max);
     return { min, max, width: (max - min) / bin };
 };
+
+export const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes } = {}) =>
+    type !== NONE &&
+    ((type !== HISTOGRAM && xIndex !== -1) || (type === HISTOGRAM && categoryIndexes.length)) &&
+    categoryIndexes.length &&
+    (type !== SCATTER || yIndex !== -1);
