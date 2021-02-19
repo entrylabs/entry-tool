@@ -125,7 +125,6 @@ export const SUMMARY_HEADER = [
     'DataAnalytics.median',
     'DataAnalytics.minimum',
 ];
-
 export const SCATTER_POINT_PATTERN = [
     '<g transform="translate(-336 -457) translate(336 457)"><circle cx="4" cy="4" r="3"/></g>',
     '<path d="M1 1H7V7H1z" transform="translate(-384 -457)' +

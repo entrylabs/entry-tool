@@ -271,7 +271,11 @@ const generateOption = (option) => {
                                     style="fill: ${getColor(type, name)};
                                     stroke: ${getColor(type, name)};"
                                     width="16" height="16" viewBox="0 0 10 10">
-                                    ${SCATTER_POINT_PATTERN[Number(name)]}
+                                    ${
+                                        SCATTER_POINT_PATTERN[
+                                            Number(name) % SCATTER_POINT_PATTERN.length
+                                        ]
+                                    }
                                 </svg>
                             </span>
                             ${
