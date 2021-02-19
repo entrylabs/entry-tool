@@ -14,26 +14,15 @@ import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';
 
 import { CommonUtils } from '@utils/Common';
-import { isNumberColumn, hasNumberColumn, categoryKeys, getBinWidth } from '@utils/dataAnalytics';
+import {
+    isNumberColumn,
+    hasNumberColumn,
+    categoryKeys,
+    getBinWidth,
+    getPieChart,
+} from '@utils/dataAnalytics';
 import { GRAPH_COLOR, HISTOGRAM, SCATTER_POINT_PATTERN } from '@constants/dataAnalytics';
 const { generateHash } = CommonUtils;
-
-const getPieChart = (table, xIndex, categoryIndex) => {
-    const isAddedOption = categoryIndex === table[0].length;
-    return [
-        [
-            table[0][xIndex],
-            isAddedOption ? CommonUtils.getLang('DataAnalytics.quantity') : table[0][categoryIndex],
-        ],
-        ..._toPairs(
-            table.slice(1).reduce((prev, row) => {
-                prev[row[xIndex]] = prev[row[xIndex]] || 0;
-                prev[row[xIndex]] += Number(isAddedOption ? 1 : row[categoryIndex]);
-                return prev;
-            }, {})
-        ),
-    ];
-};
 
 const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
     _map(
@@ -202,21 +191,21 @@ const generateOption = (option) => {
         case 'pie': {
             const isAddedOption = categoryIndexes[0] === table[0].length;
             const pieChart = getPieChart(table, xIndex, categoryIndexes[0]);
-            columns = isAddedOption ? pieChart : deduplicationColumn(pieChart);
+            columns = [pieChart[0], ...pieChart.slice(1).map((value, index) => [index, value[1]])];
             x = table[0][xIndex];
             tooltip = {
                 contents: (data) => {
-                    const [{ name, ratio, value, index }] = data;
+                    const [{ name, ratio, value }] = data;
 
                     return `
                         <div class="${theme.chart_tooltip}">
                             <span
                                 className="${theme.bg}"
-                                style="${getMouseOverStyle(type, index)}"
+                                style="${getMouseOverStyle(type, name)}"
                             >
                                 &nbsp;
                             </span>
-                            ${name} | ${_floor(ratio * 100)}% (${
+                            ${pieChart[Number(name) + 1][0]} | ${_floor(ratio * 100)}% (${
                         isAddedOption
                             ? CommonUtils.getLang('DataAnalytics.quantity')
                             : table[0][categoryIndexes[0]]
