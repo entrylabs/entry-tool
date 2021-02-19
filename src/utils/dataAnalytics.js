@@ -201,12 +201,6 @@ export const getBinWidth = (table, categoryIndexes, boundary, bin) => {
             }
         });
     });
-    if (boundary === 'left' && _ceil(max) === max) {
-        max += 1;
-    }
-    if (boundary === 'right' && _floor(min) === min) {
-        min -= 1;
-    }
     min = _floor(min);
     max = _ceil(max);
     return { min, max, width: (max - min) / bin };

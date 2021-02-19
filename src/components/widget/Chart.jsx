@@ -323,11 +323,11 @@ const generateOption = (option) => {
                     <div class="${theme.histogram_legend}">
                         <ul class="${theme.legend_list}">
                             ${data
-                                .map(({ value, name, x }, index) =>
+                                .map(({ value, name, x, index }, idx) =>
                                     value
                                         ? `   
                             <li style="height:14px;">
-                                <span class="${theme.bull}" style="${getColor(type, index)}">
+                                <span class="${theme.bull}" style="${getColor(type, idx)}">
                                     &nbsp;
                                 </span>
                                 <span class="${theme.text}">${name}</span>
@@ -335,11 +335,10 @@ const generateOption = (option) => {
                                               (value / (table.length - 1)) * 100,
                                               2
                                           )}%): ${_round(x, 2)} ${
-                                              boundary === 'left' ? '≤' : '〈'
-                                          } X ${boundary === 'left' ? '〈' : '≤'} ${_round(
-                                              x + width,
-                                              2
-                                          )}`}</span> 
+                                              boundary === 'left' || index === 0 ? '≤' : '〈'
+                                          } X ${
+                                              boundary === 'right' || index === bin - 1 ? '≤' : '〈'
+                                          } ${_round(x + width, 2)}`}</span> 
                             </li>`
                                         : ''
                                 )
@@ -399,7 +398,7 @@ const Chart = (props) => {
         categoryIndexes = [],
         order,
         bin = 5,
-        boundary = 'left',
+        boundary = 'right',
     } = chart;
     const id = `c${generateHash()}`;
 
