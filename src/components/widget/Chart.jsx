@@ -14,8 +14,14 @@ import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';
 
 import { CommonUtils } from '@utils/Common';
-import { isNumberColumn, categoryKeys, getBinWidth, isDrawable } from '@utils/dataAnalytics';
-import { GRAPH_COLOR, HISTOGRAM } from '@constants/dataAnalytics';
+import {
+    isNumberColumn,
+    categoryKeys,
+    getBinWidth,
+    isDrawable,
+    getPieChart,
+} from '@utils/dataAnalytics';
+import { GRAPH_COLOR, HISTOGRAM, SCATTER_POINT_PATTERN } from '@constants/dataAnalytics';
 const { generateHash } = CommonUtils;
 
 const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
