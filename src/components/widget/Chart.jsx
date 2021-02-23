@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import _ from 'lodash';
 import _map from 'lodash/map';
 import _floor from 'lodash/floor';
 import _round from 'lodash/round';
 import _slice from 'lodash/slice';
+import _unzip from 'lodash/unzip';
 import _reduce from 'lodash/reduce';
 import _forEach from 'lodash/forEach';
 import _toPairs from 'lodash/toPairs';
@@ -52,7 +52,7 @@ const getHistogramChart = (table, categoryIndexes, bin, boundary) => {
     const x = new Array(bin + 1).fill(0);
     const binWidth = _round(width, 2);
 
-    const xRow = ['histogram_chart_x', ..._map(x, (__, index) => _round(index * width + min, 2))];
+    const xRow = ['histogram_chart_x', ..._map(x, (__, index) => index * width + min)];
     const extRow = _map(categoryIndexes, (index) => {
         const result = new Array(bin + 1).fill(0);
         result[0] = table[0][index];
@@ -171,7 +171,7 @@ const generateOption = (option) => {
             }
             orderedTable = [table[0], ...orderedTable];
             columns = deduplicationColumn(
-                [...categoryIndexes].map((index) => _.unzip(orderedTable)[index])
+                [...categoryIndexes].map((index) => _unzip(orderedTable)[index])
             );
             axisX.categories = orderedTable
                 .slice(1)
@@ -293,9 +293,10 @@ const generateOption = (option) => {
             columns = getHistogramChart(table, categoryIndexes, bin, boundary);
             axisX = {
                 tick: {
-                    fit: true,
                     multiline: false,
                     culling: false,
+                    count: bin + 1,
+                    format: (x) => _round(x, 2),
                 },
             };
             x = 'histogram_chart_x';
