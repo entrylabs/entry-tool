@@ -18,23 +18,6 @@ import { isNumberColumn, categoryKeys, getBinWidth, isDrawable } from '@utils/da
 import { GRAPH_COLOR, HISTOGRAM } from '@constants/dataAnalytics';
 const { generateHash } = CommonUtils;
 
-const getPieChart = (table, xIndex, categoryIndex) => {
-    const isAddedOption = categoryIndex === table[0].length;
-    return [
-        [
-            table[0][xIndex],
-            isAddedOption ? CommonUtils.getLang('DataAnalytics.quantity') : table[0][categoryIndex],
-        ],
-        ..._toPairs(
-            table.slice(1).reduce((prev, row) => {
-                prev[row[xIndex]] = prev[row[xIndex]] || 0;
-                prev[row[xIndex]] += Number(isAddedOption ? 1 : row[categoryIndex]);
-                return prev;
-            }, {})
-        ),
-    ];
-};
-
 const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
     _map(
         table.slice(1).reduce((prev, row) => {
@@ -102,15 +85,14 @@ const deduplicationColumn = (columns) =>
     });
 
 const getMouseOverStyle = (type, index) => `
-    ${getColor(type, index)};
+    background-color: ${getColor(type, index)};
     float: left;
     width: 14px;
     height: 14px;
     margin: -1px 7px 0 0;
     vertical-align: middle;
 `;
-const getColor = (type, index) =>
-    `background-color:${GRAPH_COLOR[type][index % GRAPH_COLOR[type].length]};`;
+const getColor = (type, index) => `${GRAPH_COLOR[type][index % GRAPH_COLOR[type].length]}`;
 
 const generateOption = (option) => {
     const {
@@ -203,21 +185,21 @@ const generateOption = (option) => {
         case 'pie': {
             const isAddedOption = categoryIndexes[0] === table[0].length;
             const pieChart = getPieChart(table, xIndex, categoryIndexes[0]);
-            columns = isAddedOption ? pieChart : deduplicationColumn(pieChart);
+            columns = [pieChart[0], ...pieChart.slice(1).map((value, index) => [index, value[1]])];
             x = table[0][xIndex];
             tooltip = {
                 contents: (data) => {
-                    const [{ name, ratio, value, index }] = data;
+                    const [{ name, ratio, value }] = data;
 
                     return `
                         <div class="${theme.chart_tooltip}">
                             <span
                                 className="${theme.bg}"
-                                style="${getMouseOverStyle(type, index)}"
+                                style="${getMouseOverStyle(type, name)}"
                             >
                                 &nbsp;
                             </span>
-                            ${name} | ${_floor(ratio * 100)}% (${
+                            ${pieChart[Number(name) + 1][0]} | ${_floor(ratio * 100)}% (${
                         isAddedOption
                             ? CommonUtils.getLang('DataAnalytics.quantity')
                             : table[0][categoryIndexes[0]]
@@ -249,14 +231,7 @@ const generateOption = (option) => {
                 },
             };
             point = {
-                pattern: [
-                    '<g transform="translate(-336 -457) translate(336 457)"><circle cx="4" cy="4" r="3"/></g>',
-                    '<path d="M1 1H7V7H1z" transform="translate(-384 -457) translate(384 457)"/>',
-                    '<path d="M5.937 2.766h-3.6v3.6h3.6v-3.6z" transform="translate(-432 -457) translate(432 456) translate(0 .2) rotate(45 4.137 4.566)"/>',
-                    '<path d="M4 2.236L1.618 7h4.764L4 2.236z" transform="translate(-480 -457) translate(480 457)"/>',
-                    '<path d="M7.2.8L.8 7.2M7.2 7.2L.8.8" transform="translate(-528 -457) translate(528 457)"/>',
-                    '<path d="M0 3.714L8 3.714M4 0L4 8" transform="translate(-576 -457) translate(576 457)"/>',
-                ],
+                pattern: SCATTER_POINT_PATTERN,
             };
             tooltip = {
                 contents: (data) => {
@@ -269,9 +244,22 @@ const generateOption = (option) => {
                         <div class="${theme.chart_tooltip}">
                             <span
                                 className="${theme.bg}"
-                                style="${getMouseOverStyle(type, name)}"
+                                style="float: left;
+                                    width: 14px;
+                                    height: 14px;
+                                    margin: -1px 7px 0 0;
+                                    vertical-align: middle;"
                             >
-                                &nbsp;
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    style="fill: ${getColor(type, name)};
+                                    stroke: ${getColor(type, name)};"
+                                    width="16" height="16" viewBox="0 0 10 10">
+                                    ${
+                                        SCATTER_POINT_PATTERN[
+                                            Number(name) % SCATTER_POINT_PATTERN.length
+                                        ]
+                                    }
+                                </svg>
                             </span>
                             ${
                                 categoryIndex !== table[0].length

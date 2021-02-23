@@ -1,9 +1,11 @@
 import React from 'react';
 import _toPairs from 'lodash/toPairs';
 import _sumBy from 'lodash/sumBy';
-import { GRAPH_COLOR, PIE } from '@constants/dataAnalytics';
+import _round from 'lodash/round';
+import { GRAPH_COLOR } from '@constants/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
+import { getPieChart } from '@utils/dataAnalytics';
 
 const VerticalLegend = (props) => {
     const theme = Theme.getStyle('popup');
@@ -11,16 +13,12 @@ const VerticalLegend = (props) => {
     const chart = chartProp || (charts.length ? charts[chartIndex] : {});
     const { type, xIndex = -1, categoryIndexes } = chart;
     const categoryIndex = categoryIndexes[0];
+    const category = getPieChart(table, xIndex, categoryIndex).slice(1);
 
-    const category = _toPairs(
-        table.slice(1).reduce((prev, row) => {
-            prev[row[xIndex]] = prev[row[xIndex]] || 0;
-            prev[row[xIndex]] += categoryIndex === table[0].length ? 1 : Number(row[categoryIndex]);
-            return prev;
-        }, {})
+    const sum = _round(
+        _sumBy(category, (item) => item[1]),
+        2
     );
-
-    const sum = _sumBy(category, (item) => item[1]);
 
     return (
         <div className={theme.pie_legend}>

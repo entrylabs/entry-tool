@@ -12,6 +12,7 @@ import _chain from 'lodash/chain';
 import _reduce from 'lodash/reduce';
 import _uniqBy from 'lodash/uniqBy';
 import _forEach from 'lodash/forEach';
+import _toPairs from 'lodash/toPairs';
 import _toString from 'lodash/toString';
 import _zipObject from 'lodash/zipObject';
 import _differenceBy from 'lodash/differenceBy';
@@ -22,7 +23,8 @@ import flow from 'lodash/fp/flow';
 import map from 'lodash/fp/map';
 import unzip from 'lodash/fp/unzip';
 
-// export const isString = (str) => isNaN(str) || Number(str).toString() != str;
+import { CommonUtils } from '@utils/Common';
+
 export const isString = (str) => isNaN(str);
 export const someString = (array) => _some(array, isString);
 export const getHeader = (matrix, editable = true) =>
@@ -208,8 +210,35 @@ export const getBinWidth = (table, categoryIndexes, boundary, bin) => {
     return { min, max, width: (max - min) / bin };
 };
 
+
+export const getPieChart = (table, xIndex, categoryIndex) => {
+    const isAddedOption = categoryIndex === table[0].length;
+    return [
+        [
+            table[0][xIndex],
+            isAddedOption ? CommonUtils.getLang('DataAnalytics.quantity') : table[0][categoryIndex],
+        ],
+        ..._toPairs(
+            table.slice(1).reduce((prev, row) => {
+                prev[row[xIndex]] = prev[row[xIndex]] || 0;
+                prev[row[xIndex]] += Number(isAddedOption ? 1 : row[categoryIndex]);
+                return prev;
+            }, {})
+        ).sort((a, b) => {
+            if (a[1] > b[1]) {
+                return -1;
+            }
+            if (a[1] < b[1]) {
+                return +1;
+            }
+            return 0;
+        }),
+    ];
+};
+
 export const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes } = {}) =>
     type !== NONE &&
     ((type !== HISTOGRAM && xIndex !== -1) || (type === HISTOGRAM && categoryIndexes.length)) &&
     categoryIndexes.length &&
     (type !== SCATTER || yIndex !== -1);
+
