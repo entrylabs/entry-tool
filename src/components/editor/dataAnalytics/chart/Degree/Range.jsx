@@ -13,7 +13,7 @@ const Range = () => {
     const { dataAnalytics } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
     const { table, chart = [], chartIndex = 0 } = selected;
-    const { categoryIndexes = [], bin = 5, boundary = 'left' } = chart[chartIndex];
+    const { categoryIndexes = [], bin = 5, boundary = 'right' } = chart[chartIndex];
     const { width = 0 } = getBinWidth(table, categoryIndexes, boundary, bin);
 
     return (

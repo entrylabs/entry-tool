@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import _ from 'lodash';
 import _map from 'lodash/map';
 import _floor from 'lodash/floor';
 import _round from 'lodash/round';
 import _slice from 'lodash/slice';
+import _unzip from 'lodash/unzip';
 import _reduce from 'lodash/reduce';
 import _forEach from 'lodash/forEach';
 import _toPairs from 'lodash/toPairs';
@@ -14,14 +14,8 @@ import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';
 
 import { CommonUtils } from '@utils/Common';
-import {
-    isNumberColumn,
-    hasNumberColumn,
-    categoryKeys,
-    getBinWidth,
-    getPieChart,
-} from '@utils/dataAnalytics';
-import { GRAPH_COLOR, HISTOGRAM, SCATTER_POINT_PATTERN } from '@constants/dataAnalytics';
+import { isNumberColumn, categoryKeys, getBinWidth, isDrawable } from '@utils/dataAnalytics';
+import { GRAPH_COLOR, HISTOGRAM } from '@constants/dataAnalytics';
 const { generateHash } = CommonUtils;
 
 const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
@@ -41,7 +35,7 @@ const getHistogramChart = (table, categoryIndexes, bin, boundary) => {
     const x = new Array(bin + 1).fill(0);
     const binWidth = _round(width, 2);
 
-    const xRow = ['histogram_chart_x', ..._map(x, (__, index) => _round(index * width + min, 2))];
+    const xRow = ['histogram_chart_x', ..._map(x, (__, index) => index * width + min)];
     const extRow = _map(categoryIndexes, (index) => {
         const result = new Array(bin + 1).fill(0);
         result[0] = table[0][index];
@@ -159,7 +153,7 @@ const generateOption = (option) => {
             }
             orderedTable = [table[0], ...orderedTable];
             columns = deduplicationColumn(
-                [...categoryIndexes].map((index) => _.unzip(orderedTable)[index])
+                [...categoryIndexes].map((index) => _unzip(orderedTable)[index])
             );
             axisX.categories = orderedTable
                 .slice(1)
@@ -287,9 +281,10 @@ const generateOption = (option) => {
             columns = getHistogramChart(table, categoryIndexes, bin, boundary);
             axisX = {
                 tick: {
-                    fit: true,
                     multiline: false,
                     culling: false,
+                    count: bin + 1,
+                    format: (x) => _round(x, 2),
                 },
             };
             x = 'histogram_chart_x';
@@ -317,12 +312,11 @@ const generateOption = (option) => {
                     <div class="${theme.histogram_legend}">
                         <ul class="${theme.legend_list}">
                             ${data
-                                .map(({ value, name, x }, index) =>
+                                .map(({ value, name, x, index }, idx) =>
                                     value
                                         ? `   
                             <li style="height:14px;">
-                                <span class="${theme.bull}" 
-                                    style="background-color: ${getColor(type, index)}">
+                                <span class="${theme.bull}" style="${getColor(type, idx)}">
                                     &nbsp;
                                 </span>
                                 <span class="${theme.text}">${name}</span>
@@ -330,11 +324,10 @@ const generateOption = (option) => {
                                               (value / (table.length - 1)) * 100,
                                               2
                                           )}%): ${_round(x, 2)} ${
-                                              boundary === 'left' ? '≤' : '〈'
-                                          } X ${boundary === 'left' ? '〈' : '≤'} ${_round(
-                                              x + width,
-                                              2
-                                          )}`}</span> 
+                                              boundary === 'left' || index === 0 ? '≤' : '〈'
+                                          } X ${
+                                              boundary === 'right' || index === bin - 1 ? '≤' : '〈'
+                                          } ${_round(x + width, 2)}`}</span> 
                             </li>`
                                         : ''
                                 )
@@ -381,8 +374,6 @@ const generateOption = (option) => {
     };
 };
 
-const isDrawable = (table) => table[0].length > 1 && hasNumberColumn(table);
-
 const Chart = (props) => {
     const theme = Theme.getStyle('popup');
     const { table = [[]], chart = {}, size, legend, axisX, axisY, shortForm = false } = props;
@@ -394,13 +385,13 @@ const Chart = (props) => {
         categoryIndexes = [],
         order,
         bin = 5,
-        boundary = 'left',
+        boundary = 'right',
     } = chart;
     const id = `c${generateHash()}`;
 
     let content = '';
 
-    if (!isDrawable(table)) {
+    if (!isDrawable({ type, xIndex, yIndex, categoryIndexes })) {
         return shortForm ? (
             <div className={theme.data_add_box}>
                 <p>{CommonUtils.getLang('DataAnalytics.unable_to_express_chart')}</p>

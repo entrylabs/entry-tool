@@ -10,15 +10,9 @@ import HorizontalLegend from './HorizontalLegend';
 import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
-import { getTrimedTable } from '@utils/dataAnalytics';
-import { SCATTER, PIE, NONE, LEGEND_OPTIONS, HISTOGRAM } from '@constants/dataAnalytics';
+import { getTrimedTable, isDrawable } from '@utils/dataAnalytics';
+import { SCATTER, PIE, NONE, LEGEND_OPTIONS } from '@constants/dataAnalytics';
 import Theme from '@utils/Theme';
-
-const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes } = {}) =>
-    type !== NONE &&
-    ((type !== HISTOGRAM && xIndex !== -1) || (type === HISTOGRAM && categoryIndexes.length)) &&
-    categoryIndexes.length &&
-    (type !== SCATTER || yIndex !== -1);
 
 const getNoResultText = ({ type = NONE, xIndex, yIndex, categoryIndexes = [] } = {}) => {
     let content;

@@ -17,6 +17,8 @@ import _toString from 'lodash/toString';
 import _zipObject from 'lodash/zipObject';
 import _differenceBy from 'lodash/differenceBy';
 
+import { NONE, SCATTER, HISTOGRAM } from '@constants/DataAnalytics';
+
 import flow from 'lodash/fp/flow';
 import map from 'lodash/fp/map';
 import unzip from 'lodash/fp/unzip';
@@ -203,16 +205,11 @@ export const getBinWidth = (table, categoryIndexes, boundary, bin) => {
             }
         });
     });
-    if (boundary === 'left' && _ceil(max) === max) {
-        max += 1;
-    }
-    if (boundary === 'right' && _floor(min) === min) {
-        min -= 1;
-    }
     min = _floor(min);
     max = _ceil(max);
     return { min, max, width: (max - min) / bin };
 };
+
 
 export const getPieChart = (table, xIndex, categoryIndex) => {
     const isAddedOption = categoryIndex === table[0].length;
@@ -238,3 +235,10 @@ export const getPieChart = (table, xIndex, categoryIndex) => {
         }),
     ];
 };
+
+export const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes } = {}) =>
+    type !== NONE &&
+    ((type !== HISTOGRAM && xIndex !== -1) || (type === HISTOGRAM && categoryIndexes.length)) &&
+    categoryIndexes.length &&
+    (type !== SCATTER || yIndex !== -1);
+
