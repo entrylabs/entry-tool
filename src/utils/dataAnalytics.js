@@ -17,13 +17,12 @@ import _toString from 'lodash/toString';
 import _zipObject from 'lodash/zipObject';
 import _differenceBy from 'lodash/differenceBy';
 
-import { NONE, SCATTER, HISTOGRAM } from '@constants/DataAnalytics';
-
 import flow from 'lodash/fp/flow';
 import map from 'lodash/fp/map';
 import unzip from 'lodash/fp/unzip';
 
 import { CommonUtils } from '@utils/Common';
+import { NONE, SCATTER, HISTOGRAM } from '@constants/dataAnalytics';
 
 export const isString = (str) => isNaN(str);
 export const someString = (array) => _some(array, isString);
@@ -210,7 +209,6 @@ export const getBinWidth = (table, categoryIndexes, boundary, bin) => {
     return { min, max, width: (max - min) / bin };
 };
 
-
 export const getPieChart = (table, xIndex, categoryIndex) => {
     const isAddedOption = categoryIndex === table[0].length;
     return [
@@ -241,4 +239,3 @@ export const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes } = {}
     ((type !== HISTOGRAM && xIndex !== -1) || (type === HISTOGRAM && categoryIndexes.length)) &&
     categoryIndexes.length &&
     (type !== SCATTER || yIndex !== -1);
-
