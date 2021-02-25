@@ -107,27 +107,25 @@ const Legend = () => {
                 </div>
             </div>
 
-            {showDropdown && checkBox && (
-                <Dropdown
-                    maximumSelectionLength={3}
-                    checkedIndex={selectedLegend.map((index) =>
-                        _findIndex(
-                            getNumberColumnIndexesBySelectedColumns(table, dropdownItems),
-                            (categoryIndex) => categoryIndex === index
-                        )
-                    )}
-                    items={items}
-                    onOutsideClick={handleCheckOutsideClick}
-                    positionDom={axisRef.current}
-                />
-            )}
-
-            {showDropdown && !checkBox && (
+            {showDropdown && (
                 <Dropdown
                     items={items}
                     onSelectDropdown={handleSelectDropDown}
-                    onOutsideClick={handleOutsideClick}
+                    onOutsideClick={checkBox ? handleCheckOutsideClick : handleOutsideClick}
                     positionDom={axisRef.current}
+                    checkedIndex={
+                        checkBox
+                            ? selectedLegend.map((index) =>
+                                  _findIndex(
+                                      getNumberColumnIndexesBySelectedColumns(table, dropdownItems),
+                                      (categoryIndex) => categoryIndex === index
+                                  )
+                              )
+                            : ''
+                    }
+                    multiple={checkBox && type !== HISTOGRAM}
+                    showSelectAll={checkBox && type !== HISTOGRAM}
+                    maximumSelectionLength={checkBox && type === HISTOGRAM ? 3 : ''}
                 />
             )}
         </div>
