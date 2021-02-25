@@ -39,7 +39,6 @@ const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
 const getHistogramChart = (table, categoryIndexes, bin, boundary) => {
     const { width, min, max } = getBinWidth(table, categoryIndexes, boundary, bin);
     const x = new Array(bin + 1).fill(0);
-    const binWidth = _round(width, 2);
 
     const xRow = ['histogram_chart_x', ..._map(x, (__, index) => index * width + min)];
     const extRow = _map(categoryIndexes, (index) => {
@@ -48,7 +47,7 @@ const getHistogramChart = (table, categoryIndexes, bin, boundary) => {
         _forEach(table.slice(1), (row) => {
             const binIndex = _floor((row[index] - min) / width);
             if (
-                (boundary === 'right' && (row[index] - min) % binWidth == 0) ||
+                (boundary === 'right' && (row[index] - min) % width == 0) ||
                 row[index] - max === 0
             ) {
                 result[binIndex || 1]++;
