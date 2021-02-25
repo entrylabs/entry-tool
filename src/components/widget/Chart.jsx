@@ -45,12 +45,21 @@ const getHistogramChart = (table, categoryIndexes, bin, boundary) => {
         const result = new Array(bin + 1).fill(0);
         result[0] = table[0][index];
         _forEach(table.slice(1), (row) => {
-            const binIndex = _floor((row[index] - min) / width);
-            if (
-                (boundary === 'right' && (row[index] - min) % width == 0) ||
-                row[index] - max === 0
+            const binIndex = _floor((Number(row[index]) - min) / width);
+            if (Number(row[index]) - max === 0) {
+                result[bin]++;
+            } else if (Number(row[index]) - min === 0) {
+                result[1]++;
+            } else if (
+                boundary === 'right' &&
+                _round(min + width * binIndex, 4) == _round(Number(row[index]), 4)
             ) {
-                result[binIndex || 1]++;
+                result[binIndex]++;
+            } else if (
+                boundary === 'left' &&
+                _round(min + width * (binIndex + 1), 4) == _round(Number(row[index]), 4)
+            ) {
+                result[binIndex + 2]++;
             } else {
                 result[binIndex + 1]++;
             }
