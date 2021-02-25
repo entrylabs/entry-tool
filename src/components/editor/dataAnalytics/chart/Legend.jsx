@@ -31,7 +31,7 @@ const Legend = () => {
         : getNumberColumnIndexesBySelectedColumns(table, dropdownItems)
     ).map((index) => [fields[index], index]);
     const disabled =
-        (xIndex === -1 || (type === SCATTER && yIndex === -1) || !items.length) &&
+        (xIndex === -1 || (type === SCATTER && yIndex === -1) || (type !== PIE && !items.length)) &&
         (type !== HISTOGRAM || !items.length);
     const titleLabel =
         type === PIE
