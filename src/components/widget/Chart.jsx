@@ -321,7 +321,8 @@ const generateOption = (option) => {
                                     value
                                         ? `   
                             <li style="height:14px;">
-                                <span class="${theme.bull}" style="${getColor(type, idx)}">
+                                <span class="${theme.bull}" 
+                                    style="background-color: ${getColor(type, idx)};">
                                     &nbsp;
                                 </span>
                                 <span class="${theme.text}">${name}</span>
