@@ -1,13 +1,18 @@
 import XLSX from 'xlsx';
 
+import _ceil from 'lodash/ceil';
 import _some from 'lodash/some';
 import _head from 'lodash/head';
 import _uniq from 'lodash/uniq';
 import _slice from 'lodash/slice';
+import _floor from 'lodash/floor';
+import _round from 'lodash/round';
 import _every from 'lodash/every';
 import _chain from 'lodash/chain';
 import _reduce from 'lodash/reduce';
 import _uniqBy from 'lodash/uniqBy';
+import _forEach from 'lodash/forEach';
+import _toPairs from 'lodash/toPairs';
 import _toString from 'lodash/toString';
 import _zipObject from 'lodash/zipObject';
 import _differenceBy from 'lodash/differenceBy';
@@ -16,7 +21,9 @@ import flow from 'lodash/fp/flow';
 import map from 'lodash/fp/map';
 import unzip from 'lodash/fp/unzip';
 
-// export const isString = (str) => isNaN(str) || Number(str).toString() != str;
+import { CommonUtils } from '@utils/Common';
+import { NONE, SCATTER, HISTOGRAM } from '@constants/dataAnalytics';
+
 export const isString = (str) => isNaN(str);
 export const someString = (array) => _some(array, isString);
 export const getHeader = (matrix, editable = true) =>
@@ -66,6 +73,9 @@ export const categoryKeys = (table, index) =>
 
 export const isZipable = (table, xIndex) =>
     _uniqBy(table, (row) => row[xIndex]).length !== table.length;
+
+export const isNumberColumn = (table, index) =>
+    _every(table.slice(1), (row) => !isString(row[index]));
 
 export const hasNumberColumn = (table) =>
     _some(table[0], (__, columnIndex) =>
@@ -176,3 +186,56 @@ export const downloadXLSX = (table, name) => {
 
     XLSX.writeFile(workbook, `${name}.xlsx`);
 };
+
+export const getBinWidth = (table, categoryIndexes, boundary, bin) => {
+    if (!categoryIndexes.length) {
+        return '-';
+    }
+    let min = Number(table[1][categoryIndexes]) || Number.MAX_SAFE_INTEGER;
+    let max = Number(table[1][categoryIndexes]) || Number.MIN_SAFE_INTEGER;
+    _forEach(categoryIndexes, (index) => {
+        _forEach(table.slice(1), (row) => {
+            const value = Number(row[index]);
+            if (min > value) {
+                min = value;
+            }
+            if (max < value) {
+                max = value;
+            }
+        });
+    });
+    min = _floor(min);
+    max = _ceil(max);
+    return { min, max, width: (max - min) / bin };
+};
+
+export const getPieChart = (table, xIndex, categoryIndex) => {
+    const isAddedOption = categoryIndex === table[0].length;
+    return [
+        [
+            table[0][xIndex],
+            isAddedOption ? CommonUtils.getLang('DataAnalytics.quantity') : table[0][categoryIndex],
+        ],
+        ..._toPairs(
+            table.slice(1).reduce((prev, row) => {
+                prev[row[xIndex]] = prev[row[xIndex]] || 0;
+                prev[row[xIndex]] += Number(isAddedOption ? 1 : row[categoryIndex]);
+                return prev;
+            }, {})
+        ).sort((a, b) => {
+            if (a[1] > b[1]) {
+                return -1;
+            }
+            if (a[1] < b[1]) {
+                return +1;
+            }
+            return 0;
+        }),
+    ];
+};
+
+export const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes } = {}) =>
+    type !== NONE &&
+    ((type !== HISTOGRAM && xIndex !== -1) || (type === HISTOGRAM && categoryIndexes.length)) &&
+    categoryIndexes.length &&
+    (type !== SCATTER || yIndex !== -1);

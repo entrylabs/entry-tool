@@ -274,6 +274,52 @@ export const dataAnalyticsReducer = (state, action) => {
                 isChanged: false,
             };
         }
+        case 'EDIT_ORDER': {
+            const { selected } = state;
+            const { chart = [], chartIndex = 0 } = selected;
+            const { order } = action;
+
+            chart[chartIndex].order = order;
+
+            return {
+                ...state,
+                selected: {
+                    ...selected,
+                    chart,
+                },
+                isChanged: true,
+            };
+        }
+        case 'CHANGE_DEGREE': {
+            const { selected } = state;
+            const { chart = [], chartIndex = 0 } = selected;
+            const { value } = action;
+            chart[chartIndex].bin = value;
+
+            return {
+                ...state,
+                selected: {
+                    ...selected,
+                    chart,
+                },
+                isChanged: true,
+            };
+        }
+        case 'EDIT_BOUNDARY': {
+            const { selected } = state;
+            const { chart = [], chartIndex = 0 } = selected;
+            const { direction } = action;
+            chart[chartIndex].boundary = direction;
+
+            return {
+                ...state,
+                selected: {
+                    ...selected,
+                    chart,
+                },
+                isChanged: true,
+            };
+        }
         default:
             return state;
     }

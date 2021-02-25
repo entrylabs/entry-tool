@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
-import _ from 'lodash';
 import _map from 'lodash/map';
-import _slice from 'lodash/slice';
 import _floor from 'lodash/floor';
+import _round from 'lodash/round';
+import _slice from 'lodash/slice';
+import _unzip from 'lodash/unzip';
+import _reduce from 'lodash/reduce';
 import _forEach from 'lodash/forEach';
+import _toPairs from 'lodash/toPairs';
 import _findIndex from 'lodash/findIndex';
 import bb from 'billboard.js';
 
@@ -11,38 +14,60 @@ import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';
 
 import { CommonUtils } from '@utils/Common';
-import { hasNumberColumn, categoryKeys, isZipable } from '@utils/dataAnalytics';
-import { GRAPH_COLOR } from '@constants/dataAnalytics';
+import {
+    isNumberColumn,
+    categoryKeys,
+    getBinWidth,
+    isDrawable,
+    getPieChart,
+} from '@utils/dataAnalytics';
+import { GRAPH_COLOR, HISTOGRAM, SCATTER_POINT_PATTERN } from '@constants/dataAnalytics';
 const { generateHash } = CommonUtils;
-
-const pieChart = (table, xIndex, categoryIndex) => [
-    [table[0][xIndex], table[0][categoryIndex]],
-    ..._.toPairs(
-        table.slice(1).reduce((prev, row) => {
-            prev[row[xIndex]] = prev[row[xIndex]] || 0;
-            prev[row[xIndex]] += Number(row[categoryIndex]);
-            return prev;
-        }, {})
-    ),
-];
 
 const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
     _map(
         table.slice(1).reduce((prev, row) => {
-            prev[row[categoryIndex]] = prev[row[categoryIndex]] || [];
-            prev[row[categoryIndex]].push(row[yIndex]);
+            prev[`${row[categoryIndex]}_y`] = prev[`${row[categoryIndex]}_y`] || [];
+            prev[`${row[categoryIndex]}_y`].push(`${row[yIndex]}`);
             prev[`${row[categoryIndex]}_x`] = prev[`${row[categoryIndex]}_x`] || [];
-            prev[`${row[categoryIndex]}_x`].push(row[xIndex]);
+            prev[`${row[categoryIndex]}_x`].push(`${row[xIndex]}`);
             return prev;
         }, {}),
         (value, index) => [index, ...value]
     );
 
+const getHistogramChart = (table, categoryIndexes, bin, boundary) => {
+    const { width, min, max } = getBinWidth(table, categoryIndexes, boundary, bin);
+    const x = new Array(bin + 1).fill(0);
+
+    const xRow = ['histogram_chart_x', ..._map(x, (__, index) => index * width + min)];
+    const extRow = _map(categoryIndexes, (index) => {
+        const result = new Array(bin + 1).fill(0);
+        result[0] = table[0][index];
+        _forEach(table.slice(1), (row) => {
+            const binIndex = _floor((row[index] - min) / width);
+            if (
+                (boundary === 'right' && (row[index] - min) % width == 0) ||
+                row[index] - max === 0
+            ) {
+                result[binIndex || 1]++;
+            } else {
+                result[binIndex + 1]++;
+            }
+        });
+        result.push(0);
+
+        return result;
+    });
+
+    return [xRow, ...extRow];
+};
+
 const scatterXs = (columns) => {
     const xs = {};
     for (let index = 0; index < columns.length; index += 2) {
         xs[index / 2] = `${index / 2}_x`;
-        columns[index][0] = index / 2;
+        columns[index][0] = `${index / 2}`;
         columns[index + 1][0] = `${index / 2}_x`;
     }
     return xs;
@@ -65,13 +90,14 @@ const deduplicationColumn = (columns) =>
     });
 
 const getMouseOverStyle = (type, index) => `
-    background-color:${GRAPH_COLOR[type][index % GRAPH_COLOR[type].length]};
+    background-color: ${getColor(type, index)};
     float: left;
     width: 14px;
     height: 14px;
     margin: -1px 7px 0 0;
     vertical-align: middle;
 `;
+const getColor = (type, index) => `${GRAPH_COLOR[type][index % GRAPH_COLOR[type].length]}`;
 
 const generateOption = (option) => {
     const {
@@ -85,6 +111,9 @@ const generateOption = (option) => {
         legend = { show: false },
         axisY,
         theme,
+        order,
+        bin,
+        boundary,
     } = option;
 
     let x;
@@ -93,6 +122,7 @@ const generateOption = (option) => {
     let grid;
     let point;
     let tooltip;
+    let line;
     let {
         axisX = {
             type: 'category',
@@ -107,16 +137,37 @@ const generateOption = (option) => {
 
     switch (type) {
         case 'bar':
-        case 'line':
+        case 'line': {
+            const isAddedOption = xIndex === table[0].length;
+            let orderedTable = [...table.slice(1)];
+            if (!isAddedOption) {
+                const isNumberColumnXIndex = isNumberColumn(table, xIndex);
+                if (order === 'ascending') {
+                    orderedTable.sort((rowA, rowB) => {
+                        const a = isNumberColumnXIndex ? Number(rowA[xIndex]) : rowA[xIndex];
+                        const b = isNumberColumnXIndex ? Number(rowB[xIndex]) : rowB[xIndex];
+                        if (a > b) {
+                            return 1;
+                        }
+                        if (a < b) {
+                            return -1;
+                        }
+                        return 0;
+                    });
+                }
+            }
+            orderedTable = [table[0], ...orderedTable];
             columns = deduplicationColumn(
-                [...categoryIndexes].map((index) => _.unzip(table)[index])
+                [...categoryIndexes].map((index) => _unzip(orderedTable)[index])
             );
-            axisX.categories = table.slice(1).map((row) => row[xIndex]);
+            axisX.categories = orderedTable
+                .slice(1)
+                .map((row, index) => (isAddedOption ? index + 1 : row[xIndex]));
 
             tooltip = {
                 contents: (data) => {
                     const [{ name, value }] = data;
-                    const fields = _map(categoryIndexes, (index) => table[0][index]);
+                    const fields = _map(categoryIndexes, (index) => orderedTable[0][index]);
                     const index = _findIndex(fields, (col) => col == name);
                     return `
                         <div class="${theme.chart_tooltip}">
@@ -129,32 +180,34 @@ const generateOption = (option) => {
                             ${name}: ${value.toLocaleString()}
                         </div>`;
                 },
+                grouped: false,
                 init: {
                     x: 100,
                 },
             };
             break;
-        case 'pie':
-            columns = deduplicationColumn(pieChart(table, xIndex, categoryIndexes[0]));
+        }
+        case 'pie': {
+            const isAddedOption = categoryIndexes[0] === table[0].length;
+            const pieChart = getPieChart(table, xIndex, categoryIndexes[0]);
+            columns = [pieChart[0], ...pieChart.slice(1).map((value, index) => [index, value[1]])];
             x = table[0][xIndex];
             tooltip = {
                 contents: (data) => {
                     const [{ name, ratio, value }] = data;
-                    const index = _findIndex(
-                        _map(table.slice(1), (row) => row[xIndex]),
-                        (col) => col == name
-                    );
 
                     return `
                         <div class="${theme.chart_tooltip}">
                             <span
                                 className="${theme.bg}"
-                                style="${getMouseOverStyle(type, index)}"
+                                style="${getMouseOverStyle(type, name)}"
                             >
                                 &nbsp;
                             </span>
-                            ${name} | ${_floor(ratio * 100)}% (${
-                        table[0][categoryIndexes[0]]
+                            ${pieChart[Number(name) + 1][0]} | ${_floor(ratio * 100)}% (${
+                        isAddedOption
+                            ? CommonUtils.getLang('DataAnalytics.quantity')
+                            : table[0][categoryIndexes[0]]
                     }: ${value.toLocaleString()})
                         </div>`;
                 },
@@ -163,6 +216,7 @@ const generateOption = (option) => {
                 },
             };
             break;
+        }
         case 'scatter': {
             columns = scatterChart(table, xIndex, yIndex, categoryIndexes);
             xs = scatterXs(columns);
@@ -182,14 +236,7 @@ const generateOption = (option) => {
                 },
             };
             point = {
-                pattern: [
-                    '<g transform="translate(-336 -457) translate(336 457)"><circle cx="4" cy="4" r="3"/></g>',
-                    '<path d="M1 1H7V7H1z" transform="translate(-384 -457) translate(384 457)"/>',
-                    '<path d="M5.937 2.766h-3.6v3.6h3.6v-3.6z" transform="translate(-432 -457) translate(432 456) translate(0 .2) rotate(45 4.137 4.566)"/>',
-                    '<path d="M4 2.236L1.618 7h4.764L4 2.236z" transform="translate(-480 -457) translate(480 457)"/>',
-                    '<path d="M7.2.8L.8 7.2M7.2 7.2L.8.8" transform="translate(-528 -457) translate(528 457)"/>',
-                    '<path d="M0 3.714L8 3.714M4 0L4 8" transform="translate(-576 -457) translate(576 457)"/>',
-                ],
+                pattern: SCATTER_POINT_PATTERN,
             };
             tooltip = {
                 contents: (data) => {
@@ -202,18 +249,98 @@ const generateOption = (option) => {
                         <div class="${theme.chart_tooltip}">
                             <span
                                 className="${theme.bg}"
-                                style="${getMouseOverStyle(type, name)}"
+                                style="float: left;
+                                    width: 14px;
+                                    height: 14px;
+                                    margin: -1px 7px 0 0;
+                                    vertical-align: middle;"
                             >
-                                &nbsp;
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    style="fill: ${getColor(type, name)};
+                                    stroke: ${getColor(type, name)};"
+                                    width="16" height="16" viewBox="0 0 10 10">
+                                    ${
+                                        SCATTER_POINT_PATTERN[
+                                            Number(name) % SCATTER_POINT_PATTERN.length
+                                        ]
+                                    }
+                                </svg>
                             </span>
                             ${
-                                scatterNames[Number(name)]
-                            }&nbsp;|&nbsp;${xAxis}: ${x.toLocaleString()}
+                                categoryIndex !== table[0].length
+                                    ? `
+                                ${scatterNames[Number(name)]}&nbsp;|&nbsp;`
+                                    : ''
+                            }${xAxis}: ${x.toLocaleString()}
                             &nbsp;${table[0][yIndex]}: ${value.toLocaleString()}
                         </div>`;
                 },
                 init: {
                     x: 100,
+                },
+            };
+            break;
+        }
+        case 'histogram': {
+            const { width } = getBinWidth(table, categoryIndexes, boundary, bin);
+            columns = getHistogramChart(table, categoryIndexes, bin, boundary);
+            axisX = {
+                tick: {
+                    multiline: false,
+                    culling: false,
+                    count: bin + 1,
+                    format: (x) => _round(x, 2),
+                },
+            };
+            x = 'histogram_chart_x';
+            line = {
+                step: {
+                    type: 'step-after',
+                },
+            };
+            tooltip = {
+                contents: (data) => {
+                    const values = _reduce(
+                        data,
+                        (prev, curr) => {
+                            if (curr.value) {
+                                prev.push(curr);
+                            }
+                            return prev;
+                        },
+                        []
+                    );
+                    if (!values.length) {
+                        return '';
+                    }
+                    const text = `
+                    <div class="${theme.histogram_legend}">
+                        <ul class="${theme.legend_list}">
+                            ${data
+                                .map(({ value, name, x, index }, idx) =>
+                                    value
+                                        ? `   
+                            <li style="height:14px;">
+                                <span class="${theme.bull}" 
+                                    style="background-color: ${getColor(type, idx)};">
+                                    &nbsp;
+                                </span>
+                                <span class="${theme.text}">${name}</span>
+                                <span class="${theme.text}">${`${value} (${_round(
+                                              (value / (table.length - 1)) * 100,
+                                              2
+                                          )}%): ${_round(x, 2)} ${
+                                              boundary === 'left' || index === 0 ? '≤' : '〈'
+                                          } X ${
+                                              boundary === 'right' || index === bin - 1 ? '≤' : '〈'
+                                          } ${_round(x + width, 2)}`}</span> 
+                            </li>`
+                                        : ''
+                                )
+                                .join(' ')}
+                        </ul>
+                    </div>`;
+                    return text;
                 },
             };
             break;
@@ -237,7 +364,7 @@ const generateOption = (option) => {
             x,
             xs,
             columns,
-            type,
+            type: type === HISTOGRAM ? 'area-step' : type,
         },
         axis: {
             x: axisX,
@@ -248,25 +375,29 @@ const generateOption = (option) => {
                 show: false,
             },
         },
-        tooltip: {
-            grouped: false,
-            ...tooltip,
-        },
+        tooltip,
+        line,
     };
 };
-
-const isDrawable = (table) => table[0].length > 1 && hasNumberColumn(table);
 
 const Chart = (props) => {
     const theme = Theme.getStyle('popup');
     const { table = [[]], chart = {}, size, legend, axisX, axisY, shortForm = false } = props;
 
-    const { type = 'bar', xIndex = -1, yIndex, categoryIndexes = [] } = chart;
+    const {
+        type = 'bar',
+        xIndex = -1,
+        yIndex,
+        categoryIndexes = [],
+        order,
+        bin = 5,
+        boundary = 'right',
+    } = chart;
     const id = `c${generateHash()}`;
 
     let content = '';
 
-    if (!isDrawable(table)) {
+    if (!isDrawable({ type, xIndex, yIndex, categoryIndexes })) {
         return shortForm ? (
             <div className={theme.data_add_box}>
                 <p>{CommonUtils.getLang('DataAnalytics.unable_to_express_chart')}</p>
@@ -283,7 +414,10 @@ const Chart = (props) => {
     }
 
     useEffect(() => {
-        if (categoryIndexes.length && xIndex >= 0 && xIndex < table[0].length) {
+        if (
+            categoryIndexes.length &&
+            ((type !== HISTOGRAM && xIndex >= 0 && xIndex <= table[0].length) || type === HISTOGRAM)
+        ) {
             const option = generateOption({
                 table,
                 type,
@@ -296,21 +430,16 @@ const Chart = (props) => {
                 axisX,
                 axisY,
                 theme,
+                order,
+                bin,
+                boundary,
             });
             option && bb.generate(option);
         }
     }, []);
 
-    if (xIndex === -1) {
+    if (type !== HISTOGRAM && xIndex === -1) {
         content = CommonUtils.getLang('DataAnalytics.select_x_axis');
-    } else if (
-        isZipable(table, xIndex) &&
-        yIndex === -1 &&
-        !categoryIndexes.length &&
-        type !== 'scatter' &&
-        type !== 'pie'
-    ) {
-        content = CommonUtils.getLang('DataAnalytics.select_y_axis_or_legend');
     } else if (yIndex === -1 && type === 'scatter') {
         content = CommonUtils.getLang('DataAnalytics.select_y_axis');
     } else if (!categoryIndexes.length) {

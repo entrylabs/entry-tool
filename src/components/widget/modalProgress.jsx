@@ -10,14 +10,22 @@ class ModalProgress extends Component {
         this.theme = Theme.getStyle('progress');
     }
     makeProgress() {
-        const { title } = this.props;
+        const { title, textBoxStyle } = this.props;
         return (
-            <div className={this.theme.progress}>
-                <div className={this.theme.title}>{title}</div>
-                <div className={this.theme.background_1} />
-                <div className={this.theme.background_2} />
-                <div className={this.theme.background_3} />
-                <div className={this.theme.character} />
+            <div
+                className={this.theme.progress}
+                style={textBoxStyle && textBoxStyle.width && { width: textBoxStyle.width }}
+            >
+                <div className={this.theme.title} style={{ ...textBoxStyle }}>
+                    {title}
+                </div>
+                <div
+                    className={this.theme.progressEntryBot}
+                    style={
+                        textBoxStyle &&
+                        textBoxStyle.height && { marginTop: textBoxStyle.height + 20 }
+                    }
+                ></div>
             </div>
         );
     }
@@ -34,14 +42,30 @@ class ModalProgress extends Component {
         );
     }
     makeError() {
-        const { title, description, onClose } = this.props;
+        const { title, description, onClose, textBoxStyle } = this.props;
         return (
-            <div className={this.theme.error}>
-                <div className={this.theme.title} dangerouslySetInnerHTML={{ __html: title }} />
+            <div
+                className={this.theme.error}
+                style={textBoxStyle && textBoxStyle.width && { width: textBoxStyle.width }}
+            >
+                <div className={this.theme.title} style={{ ...textBoxStyle }}>
+                    {title && <div dangerouslySetInnerHTML={{ __html: title }}></div>}
+                    {description && (
+                        <div
+                            className={this.theme.description}
+                            dangerouslySetInnerHTML={{ __html: description }}
+                        />
+                    )}
+                </div>
+
                 <div
-                    className={this.theme.description}
-                    dangerouslySetInnerHTML={{ __html: description }}
-                />
+                    className={this.theme.errorEntryBot}
+                    style={
+                        textBoxStyle && textBoxStyle.height && { marginTop: textBoxStyle.height }
+                    }
+                ></div>
+                {/* <div className={this.theme.title}>{title}</div> */}
+
                 <div className={this.theme.close} onClick={onClose} />
             </div>
         );

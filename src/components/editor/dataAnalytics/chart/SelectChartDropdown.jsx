@@ -1,4 +1,5 @@
 import React from 'react';
+import { CHART_CATEGORY } from '@constants/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 
@@ -13,38 +14,16 @@ const SelectChartDropdown = (props) => {
     return (
         <div className={theme.vertical_tooltip} style={{ left: '56px', display: 'block' }}>
             <ul className={theme.graph_list}>
-                <li className={theme.bar} onClick={onClick('bar')}>
-                    <a onClick={handleAClick} role="button">
-                        {CommonUtils.getLang('DataAnalytics.bar')}
-                        <span className={theme.blind}>
-                            {CommonUtils.getLang('DataAnalytics.graph')}
-                        </span>
-                    </a>
-                </li>
-                <li className={theme.line} onClick={onClick('line')}>
-                    <a onClick={handleAClick} role="button">
-                        {CommonUtils.getLang('DataAnalytics.line')}
-                        <span className={theme.blind}>
-                            {CommonUtils.getLang('DataAnalytics.graph')}
-                        </span>
-                    </a>
-                </li>
-                <li className={theme.pie} onClick={onClick('pie')}>
-                    <a onClick={handleAClick} role="button">
-                        {CommonUtils.getLang('DataAnalytics.pie')}
-                        <span className={theme.blind}>
-                            {CommonUtils.getLang('DataAnalytics.graph')}
-                        </span>
-                    </a>
-                </li>
-                <li className={theme.scatter} onClick={onClick('scatter')}>
-                    <a onClick={handleAClick} role="button">
-                        {CommonUtils.getLang('DataAnalytics.scatter')}
-                        <span className={theme.blind}>
-                            {CommonUtils.getLang('DataAnalytics.graph')}
-                        </span>
-                    </a>
-                </li>
+                {CHART_CATEGORY.map((item, index) => (
+                    <li key={`chart_list_${index}`} className={theme[item]} onClick={onClick(item)}>
+                        <a onClick={handleAClick} role="button">
+                            {CommonUtils.getLang(`DataAnalytics.${item}`)}
+                            <span className={theme.blind}>
+                                {CommonUtils.getLang('DataAnalytics.graph')}
+                            </span>
+                        </a>
+                    </li>
+                ))}
             </ul>
             <span className={`${theme.arr}`}>
                 <i />

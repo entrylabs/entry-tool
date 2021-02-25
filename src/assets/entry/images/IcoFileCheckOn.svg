@@ -1,18 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25">
-    <g fill="none" fill-rule="evenodd">
-        <g fill-rule="nonzero">
-            <g>
-                <g>
-                    <g>
-                        <g>
-                            <g transform="translate(-154 -174) translate(16 168) translate(132) translate(0 .5) translate(6 6)">
-                                <rect width="23" height="23" x=".5" y=".5" fill="#4F80FF" stroke="#4F80FF" rx="4"/>
-                                <path fill="#FFF" d="M15.396 15.987c.422.356.474.987.117 1.409-.356.422-.987.474-1.409.117l-6.5-5.5c-.447-.378-.475-1.056-.061-1.47l3.5-3.5c.39-.39 1.024-.39 1.414 0 .39.39.39 1.024 0 1.414L9.726 11.19l5.67 4.798z" transform="rotate(-90 11.5 12.25)"/>
-                            </g>
-                        </g>
-                    </g>
-                </g>
-            </g>
-        </g>
-    </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25"><g fill="none" fill-rule="evenodd"><g fill-rule="nonzero"><g><g><g><g><g transform="translate(-154 -174) translate(16 168) translate(132) translate(0 .5) translate(6 6)"><rect width="23" height="23" x=".5" y=".5" fill="#4F80FF" stroke="#4F80FF" rx="4"/><path fill="#FFF" d="M15.396 15.987c.422.356.474.987.117 1.409-.356.422-.987.474-1.409.117l-6.5-5.5c-.447-.378-.475-1.056-.061-1.47l3.5-3.5c.39-.39 1.024-.39 1.414 0 .39.39.39 1.024 0 1.414L9.726 11.19l5.67 4.798z" transform="rotate(-90 11.5 12.25)"/></g></g></g></g></g></g></g></svg>

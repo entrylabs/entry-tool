@@ -3,9 +3,16 @@ import React from 'react';
 import Theme from '@utils/Theme';
 
 const CheckBox = (props) => {
-    const { checked } = props;
+    const { checked, disabled = false } = props;
     const theme = Theme.getStyle('popup');
-    return <input type="checkbox" className={`${theme.checkbox}`} checked={checked} readOnly />;
+    return (
+        <input
+            type="checkbox"
+            className={`${theme.checkbox} ${disabled ? theme.disabled : ''}`}
+            checked={checked}
+            readOnly
+        />
+    );
 };
 
 export default CheckBox;
