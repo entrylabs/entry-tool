@@ -53,8 +53,10 @@ const FileDragUpload = (props) => {
                 setExcluded(uploads);
             }
         }
-        isUploading && setUploadState(false);
-    }, [uploads]);
+        if (result.length > 0 && isUploading && uploadedItems.length === result.length) {
+            setUploadState(false);
+        }
+    }, [uploads, uploadedItems]);
 
     return (
         <section className={`${theme.pop_content} ${theme.table_file_add}`}>

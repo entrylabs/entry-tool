@@ -86,7 +86,9 @@ const DataAnalyticsEditor = () => {
                 <SideTab />
                 {selectedIndex === -1 ? (
                     <section className={theme.content}>
-                        <p className={theme.caution_dsc}>먼저 테이블을 추가해 주세요.</p>
+                        <p className={theme.caution_dsc}>
+                            {CommonUtils.getLang('DataAnalytics.select_table')}
+                        </p>
                     </section>
                 ) : (
                     <div className={theme.section_cont}>

@@ -50,8 +50,10 @@ const Index = (props) => {
                 setExcluded(uploads);
             }
         }
-        isUploading && setUploadState(false);
-    }, [uploads]);
+        if (result.length > 0 && isUploading && uploadedItems.length === result.length) {
+            setUploadState(false);
+        }
+    }, [uploads, uploadedItems]);
 
     return (
         <>

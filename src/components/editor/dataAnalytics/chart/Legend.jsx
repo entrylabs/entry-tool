@@ -31,7 +31,7 @@ const Legend = () => {
         : getNumberColumnIndexesBySelectedColumns(table, dropdownItems)
     ).map((index) => [fields[index], index]);
     const disabled =
-        (xIndex === -1 || (type === SCATTER && yIndex === -1) || !items.length) &&
+        (xIndex === -1 || (type === SCATTER && yIndex === -1) || (type !== PIE && !items.length)) &&
         (type !== HISTOGRAM || !items.length);
     const titleLabel =
         type === PIE
@@ -107,27 +107,25 @@ const Legend = () => {
                 </div>
             </div>
 
-            {showDropdown && checkBox && (
-                <Dropdown
-                    maximumSelectionLength={3}
-                    checkedIndex={selectedLegend.map((index) =>
-                        _findIndex(
-                            getNumberColumnIndexesBySelectedColumns(table, dropdownItems),
-                            (categoryIndex) => categoryIndex === index
-                        )
-                    )}
-                    items={items}
-                    onOutsideClick={handleCheckOutsideClick}
-                    positionDom={axisRef.current}
-                />
-            )}
-
-            {showDropdown && !checkBox && (
+            {showDropdown && (
                 <Dropdown
                     items={items}
                     onSelectDropdown={handleSelectDropDown}
-                    onOutsideClick={handleOutsideClick}
+                    onOutsideClick={checkBox ? handleCheckOutsideClick : handleOutsideClick}
                     positionDom={axisRef.current}
+                    checkedIndex={
+                        checkBox
+                            ? selectedLegend.map((index) =>
+                                  _findIndex(
+                                      getNumberColumnIndexesBySelectedColumns(table, dropdownItems),
+                                      (categoryIndex) => categoryIndex === index
+                                  )
+                              )
+                            : ''
+                    }
+                    multiple={checkBox && type !== HISTOGRAM}
+                    showSelectAll={checkBox && type !== HISTOGRAM}
+                    maximumSelectionLength={checkBox && type === HISTOGRAM ? 3 : ''}
                 />
             )}
         </div>
