@@ -14,7 +14,7 @@ export default ({ item, isSelected, onClick, avatarImgUrl }) => {
                 avatarImgUrl = '/static/img/pf/profile/img-profile-default-medium@2x.png';
             }
         } else {
-            if (profileImage) {
+            if (profileImage && profileImage.filename) {
                 const { filename, imageType } = profileImage;
                 avatarImgUrl = `/uploads/${filename.substr(0, 2)}/${filename.substr(
                     2,
