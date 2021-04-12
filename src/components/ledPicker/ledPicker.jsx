@@ -35,23 +35,14 @@ class LedPicker extends Component {
             isTransparent: false,
             dropdownCell: { x: -1, y: -1 },
         };
-        this.defaultLedStatus = [
+        const { defaultStatus, maxBrightness, withLevel } = this.props;
+        this.defaultLedStatus = defaultStatus || [
             [0, 0, 0, 0, 0],
             [0, 1, 0, 1, 0],
             [0, 0, 0, 0, 0],
             [1, 0, 0, 0, 1],
             [0, 1, 1, 1, 0],
         ];
-
-        if (this.props.withLevel) {
-            this.defaultLedStatus = [
-                [0, 0, 0, 0, 0],
-                [0, 9, 0, 9, 0],
-                [0, 0, 0, 0, 0],
-                [9, 0, 0, 0, 9],
-                [0, 9, 9, 9, 0],
-            ];
-        }
 
         Object.assign(state, this.getDefaultLedPickerStyle());
         if (this.props.ledStatus) {
@@ -179,8 +170,9 @@ class LedPicker extends Component {
         };
     }
     _handleLedStatusChange = ({ x, y, isReset, value }) => {
-        const { onChangeLedPicker } = this.props;
+        const { onChangeLedPicker, withLevel, maxBrightness } = this.props;
         const status = this.state.ledStatus;
+        const targetBrightness = maxBrightness || 1;
         if (isReset) {
             for (let i = 0; i < status.length; i++) {
                 const row = status[i];
@@ -188,16 +180,16 @@ class LedPicker extends Component {
                 status[i] = new Array(rowLength).fill(0);
             }
         } else {
-            if (this.props.withLevel) {
+            if (withLevel) {
                 status[x][y] += 1;
                 if (status[x][y] > 9) {
                     status[x][y] = 0;
                 }
             } else {
-                if (status[x][y] == 1) {
+                if (status[x][y] == targetBrightness) {
                     status[x][y] = 0;
                 } else {
-                    status[x][y] = 1;
+                    status[x][y] = targetBrightness;
                 }
             }
         }
@@ -220,6 +212,7 @@ class LedPicker extends Component {
             outsideExcludeDom,
             eventTypes = ['mouseup', 'touchend'],
             animation = true,
+            withLevel,
         } = this.props;
         const { color, arrowLeft, isUpStyle, ledPickerStyle, ledStatus, dropdownCell } = this.state;
         let animationStyle = {};
@@ -248,7 +241,7 @@ class LedPicker extends Component {
                         isUpStyle ? this.theme.up : ''
                     }`}
                 >
-                    {this.props.withLevel ? (
+                    {withLevel ? (
                         <div className={this.theme.led_picker_inner}>
                             {ledStatus.map((leds, x) =>
                                 leds.map((led, y) => {
