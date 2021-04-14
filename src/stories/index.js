@@ -11,6 +11,7 @@ import Number from '../components/widget/number';
 import Dropdown from '../components/widget/dropdown';
 import DropdownExtra from '../components/widget/dropdownExtra';
 import ModalProgress from '../components/widget/modalProgress';
+import MusicScale from '../components/widget/musicScale';
 import Angle from '../components/widget/angle';
 import Backpack from '../components/widget/Backpack';
 import Sortable from '../components/widget/sortable';
@@ -102,6 +103,13 @@ wigetStories
                 ]}
             />
         </div>
+    ))
+    .add('음악 - 음', () => (
+        <MusicScale
+            onButtonPressed={action('onButtonPressed')}
+            onBackButtonPressed={action('onBackButtonPressed')}
+            onOutsideClick={action('onOutsideClick')}
+        />
     ))
     .add('숫자', () => (
         <Number
@@ -375,12 +383,20 @@ storiesOf('AiLayout', module)
     .add('파일 올리기 - 새로 만들기', () => <DataUpload />)
     .add('데이터 차트 - 차트 추가 기본', () => <TableChart ChartState="Default" />)
     .add('데이터 차트 - Aside 접기', () => <TableChart />)
-    .add('데이터 차트 - 2차 가로', () => <TableChart ChartState="Depth2" NoResultText="가로축을 먼저 선택해 주세요." />)
-    .add('데이터 차트 - 2차 계열', () => <TableChart ChartState="Depth2" NoResultText="계열을 선택해 주세요." />)
+    .add('데이터 차트 - 2차 가로', () => (
+        <TableChart ChartState="Depth2" NoResultText="가로축을 먼저 선택해 주세요." />
+    ))
+    .add('데이터 차트 - 2차 계열', () => (
+        <TableChart ChartState="Depth2" NoResultText="계열을 선택해 주세요." />
+    ))
     .add('데이터 차트 - 2차 그래프', () => <TableChart ChartState="Depth2Graph" />)
-    .add('데이터 차트 - 3차 계열', () => <TableChart ChartState="Depth3" NoResultText="계열을 선택해 주세요." />)
+    .add('데이터 차트 - 3차 계열', () => (
+        <TableChart ChartState="Depth3" NoResultText="계열을 선택해 주세요." />
+    ))
     .add('데이터 차트 - 3차 그래프', () => <TableChart ChartState="Depth3Graph" />)
-    .add('데이터 차트 - 히스토그램 계열', () => <TableChart ChartState="DepthHistogram" NoResultText="계열을 선택해 주세요." />)
+    .add('데이터 차트 - 히스토그램 계열', () => (
+        <TableChart ChartState="DepthHistogram" NoResultText="계열을 선택해 주세요." />
+    ))
     .add('데이터 차트 - 히스토그램 그래프', () => <TableChart ChartState="DepthHistogramGraph" />)
     .add('데이터 차트 - 요약', () => <TableSummary />)
     .add('데이터 차트 - 요약 모두', () => <TableSummary SummaryState="Total" />)
@@ -412,10 +428,10 @@ storiesOf('AiLayout', module)
                 data: {
                     type: 'line',
                     columns: [
-                        ['data1', 1,2,3,4],
-                        ['data2', 4,3,2,1]
-                    ]
-                }
+                        ['data1', 1, 2, 3, 4],
+                        ['data2', 4, 3, 2, 1],
+                    ],
+                },
             }}
             title={'billboard chart'}
             description={'description'}

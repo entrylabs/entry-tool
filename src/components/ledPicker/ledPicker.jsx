@@ -31,10 +31,7 @@ class LedPicker extends Component {
     constructor(props) {
         super(props);
         this.theme = Theme.getStyle('popup');
-        const state = {
-            isTransparent: false,
-            dropdownCell: { x: -1, y: -1 },
-        };
+        const state = {};
         const { defaultStatus, maxBrightness, withLevel } = this.props;
         this.defaultLedStatus = defaultStatus || [
             [0, 0, 0, 0, 0],
@@ -214,7 +211,7 @@ class LedPicker extends Component {
             animation = true,
             withLevel,
         } = this.props;
-        const { color, arrowLeft, isUpStyle, ledPickerStyle, ledStatus, dropdownCell } = this.state;
+        const { color, arrowLeft, isUpStyle, ledPickerStyle, ledStatus } = this.state;
         let animationStyle = {};
         if (!animation) {
             animationStyle = {

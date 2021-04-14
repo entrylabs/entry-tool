@@ -535,6 +535,65 @@
         }
     }
 }
+
+// 음계 표현용, 마이크로비트에서 필요
+.tooltip_box.music_scale {
+    width: 370px;
+    height: 170px;
+    background-color: #d6e9f4;
+    z-index: 2;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+    .tooltip_inner {
+        height: 150px;
+        width: 350px;
+        display: flex;
+        margin: 10px;
+        border-radius: 6px;
+        position: relative;
+    }
+    .normal_scale {
+        flex: 1;
+        background: white;
+        border: black solid 1px;
+        border-radius: 6px;
+    }
+    .half_scale {
+        position: absolute;
+        background-color: black;
+        border: black solid 1px;
+        flex: 1;
+        width: 25px;
+        height: 90px;
+        top: 0;
+        border-radius: 6px;
+    }
+
+    .half_1 {
+        left: 37.5px;
+    }
+    .half_2 {
+        left: 87.5px;
+    }
+    .half_3 {
+        left: 187.5px;
+    }
+    .half_4 {
+        left: 237.5px;
+    }
+    .half_5 {
+        left: 287.5px;
+    }
+
+    .free > i {
+        background-color: #d6e9f4;
+    }
+
+    .selected {
+        border-color: red;
+        border-width: 3pt;
+    }
+}
+
 // 타임박스 - 패드만 있는 경우
 .tooltip_box.pad_only {
     width: 216px;
