@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+      - uses: webfactory/ssh-agent@v0.5.2
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Use Node.js 10.x
         uses: actions/setup-node@v1
         env:
@@ -19,10 +22,6 @@ jobs:
           TOOL_NODE_FLAGS: '--max-old-space-size=4096'
         with:
           node-version: '10.x'
-      - name: actions/checkout@v2
-      - uses: webfactory/ssh-agent@v0.5.2
-        with:
-          ssh-private-key: ${{ secrets.GITHUB_TOKEN }}
       - uses: bahmutov/npm-install@v1
       - name: entry build
         env:
