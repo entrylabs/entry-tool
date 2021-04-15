@@ -123,6 +123,7 @@ const generateOption = (option) => {
         order,
         bin,
         boundary,
+        shortForm,
     } = option;
 
     let x;
@@ -294,11 +295,15 @@ const generateOption = (option) => {
             const { width } = getBinWidth(table, categoryIndexes, boundary, bin);
             columns = getHistogramChart(table, categoryIndexes, bin, boundary);
             axisX = {
+                type: undefined,
                 tick: {
+                    ...axisX.tick,
                     multiline: false,
                     culling: false,
                     count: bin + 1,
                     format: (x) => _round(x, 2),
+                    fit: undefined,
+                    autorotate: undefined,
                 },
             };
             x = 'histogram_chart_x';
@@ -384,7 +389,7 @@ const generateOption = (option) => {
                 show: false,
             },
         },
-        tooltip,
+        tooltip: shortForm ? { show: false } : tooltip,
         line,
     };
 };
@@ -440,8 +445,9 @@ const Chart = (props) => {
                 axisY,
                 theme,
                 order,
-                bin,
+                bin: Number(bin),
                 boundary,
+                shortForm,
             });
             option && bb.generate(option);
         }

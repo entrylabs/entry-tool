@@ -186,8 +186,8 @@
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
     user-select: none;
-    height: calc(100% - 34px);
 
     &.loading {
         background-color: rgba(214, 233, 244, 0.95);
