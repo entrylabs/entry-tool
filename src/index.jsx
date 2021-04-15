@@ -3,7 +3,7 @@ import ModalProgress from './components/widget/modalProgress';
 import ColorPicker from './components/picker/color';
 import Backpack from './components/widget/Backpack';
 import Number from './components/widget/number';
-import MusicScale from './components/widget/musicscale';
+import MusicScale from './components/widget/musicScale';
 
 export const Component = {
     Dropdown,
