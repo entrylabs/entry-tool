@@ -19,7 +19,7 @@ jobs:
           TOOL_NODE_FLAGS: '--max-old-space-size=4096'
         with:
           node-version: '10.x'
-      - actions/checkout@v2
+      - name: actions/checkout@v2
       - uses: webfactory/ssh-agent@v0.5.2
         with:
           ssh-private-key: ${{ secrets.GITHUB_TOKEN }}
