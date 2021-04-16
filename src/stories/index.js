@@ -109,6 +109,8 @@ wigetStories
             onButtonPressed={action('onButtonPressed')}
             onBackButtonPressed={action('onBackButtonPressed')}
             onOutsideClick={action('onOutsideClick')}
+            octave={1}
+            scale={'C'}
         />
     ))
     .add('숫자', () => (
