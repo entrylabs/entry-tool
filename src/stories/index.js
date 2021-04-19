@@ -110,7 +110,7 @@ wigetStories
             onBackButtonPressed={action('onBackButtonPressed')}
             onOutsideClick={action('onOutsideClick')}
             octave={1}
-            scale={'C'}
+            scale={'C#'}
         />
     ))
     .add('숫자', () => (

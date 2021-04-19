@@ -538,89 +538,157 @@
 
 // 음계 표현용, 마이크로비트에서 필요
 .tooltip_box.music_scale {
-    width: 440px;
-    height: 170px;
+    width: 507px;
+    height: 258px;
     background-color: #d6e9f4;
+    border: 1px #bfd8e6 solid;
     z-index: 2;
     flex-direction: row;
     display: flex;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
-    .scale_common:active {
-        box-shadow: 0 5px rgba(0, 0, 0, 0.25);
-        transform: translateY(4px);
-    }
-    .scale_common {
-        color: #d6e9f4;
-        text-shadow: 2px 2px 2px gray;
-        position: relative;
-        width: inherit;
-        p {
-            text-align: center;
-            height: 20px;
-            line-height: 20px;
-        }
-    }
-    .normal_scale:before {
-        content: '';
-        display: inline-block;
-        height: calc(100% - 25px);
-    }
-    .half_scale:before {
-        content: '';
-        display: inline-block;
-        height: calc(100% - 45px);
-    }
+    font-family: NanumGothicOTF;
 
     .tooltip_inner {
-        height: 150px;
-        width: 350px;
+        height: 226px;
+        width: 100%;
         display: flex;
-        margin: 10px;
+        margin: 16px;
         border-radius: 6px;
         position: relative;
         overflow: visible;
     }
+
+    .normal_scale:before {
+        content: '';
+        display: inline-block;
+        height: calc(100% - 45px);
+    }
+    .half_scale:before {
+        content: '';
+        display: inline-block;
+        height: calc(100% - 60px);
+    }
+
     .normal_scale {
         flex: 1;
         background: white;
-        border: black solid 1px;
+        border: #d6e9f4 solid 1px;
         border-radius: 6px;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+        margin: 0 1px;
+        color: #606c73;
     }
+
+    .normal_scale:active {
+        background-color: #eceff0;
+    }
+
     .half_scale {
         position: absolute;
-        background-color: black;
-        border: black solid 1px;
+        background-color: #606c73;
         flex: 1;
-        width: 25px;
-        height: 90px;
+        width: 50px;
+        height: 120px;
         top: 0;
-        border-radius: 6px;
+        border-radius: 0 0 6px 6px;
+        color: white;
     }
+    .half_scale > p > span {
+        color: #b9d3e2;
+    }
+
+    .half_scale:active {
+        background-color: #40484d;
+    }
+    .scale_common > p {
+        width: 100%;
+        height: 19px;
+        font-size: 18px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: center;
+        text-align: center;
+    }
+
     .octave_wrapper {
-        width: 60px;
-        margin: 10px 0;
-        margin-right: 10px;
+        width: 55px;
+        margin: 30px 0px;
         display: flex;
         flex-direction: column;
-        color: black;
-        & > p {
+        color: #606c73;
+        font-family: NanumGothicOTF;
+        margin-left: 10px;
+        text-align: center;
+        font-weight: bold;
+        > p {
             width: 100%;
             text-align: center;
+            width: 44px;
+            height: 18px;
+            margin: 40px 0 12px 16px;
+            font-size: 16px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: -0.64px;
+            text-align: right;
+            word-break: keep-all;
+        }
+        .octave_button_wrapper {
+            display: flex;
+            margin: 0 auto;
+            flex-direction: column;
+            margin-top: 12px;
+        }
+        .octave_ind {
+            margin: 0 auto;
+            > p {
+                width: 40px;
+                height: 40px;
+                border: solid 1px #d4d4d4;
+                background-color: white;
+                font-size: 14px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 40px;
+                letter-spacing: -0.56px;
+                text-align: center;
+                color: #2c313d;
+            }
         }
         .octave_button {
-            width: 40px;
-            height: 40px;
-            border-radius: 20px;
-            background-color: white;
+            margin: 0 auto;
             display: flex;
-            margin: 10px auto;
-            p {
+            width: 40px;
+            height: 39px;
+            border-radius: 4px 4px 0 0;
+            border: solid 1px #d4d4d4;
+            background-color: #f4f4f4;
+            font-weight: normal;
+            > p {
                 font-size: 15pt;
                 width: 100%;
                 height: 100%;
                 line-height: 40px;
                 text-align: center;
             }
+            > span {
+                width: 12px;
+                height: 2px;
+                border-radius: 1.5px;
+                background-color: #606c73;
+                margin-top: 18px;
+                margin-left: 14px;
+            }
+        }
+        .octave_button.bottom {
+            border-radius: 0 0 4px 4px;
+            border: solid 1px #d4d4d4;
+            font-size: 20pt;
         }
         .octave_button:active {
             box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
@@ -629,28 +697,33 @@
     }
 
     .half_1 {
-        left: 37.5px;
+        left: 34px;
     }
     .half_2 {
-        left: 87.5px;
+        left: 94px;
     }
     .half_3 {
-        left: 187.5px;
+        left: 214px;
     }
     .half_4 {
-        left: 237.5px;
+        left: 274px;
     }
     .half_5 {
-        left: 287.5px;
+        left: 334px;
     }
 
     .free > i {
         background-color: #d6e9f4;
+        border: 1px #bfd8e6 solid;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
     }
 
-    .selected {
-        border-color: red;
-        border-width: 3pt;
+    .scale_common.selected {
+        background-color: #ffc233;
+        color: white;
+        p > span {
+            color: white;
+        }
     }
 }
 

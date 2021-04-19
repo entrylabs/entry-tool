@@ -13,11 +13,11 @@ import _clamp from 'lodash/clamp';
 const normalScale = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
 const halfScale = ['C#', 'D#', 'F#', 'G#', 'A#'];
 const replacement = {
-    'C#': 'Db',
-    'D#': 'Eb',
-    'F#': 'Gb',
-    'G#': 'Ab',
-    'A#': 'Bb',
+    'C#': 'D♭',
+    'D#': 'E♭',
+    'F#': 'G♭',
+    'G#': 'A♭',
+    'A#': 'B♭',
 };
 const octave = [1, 2, 3, 4, 5];
 
@@ -100,9 +100,9 @@ class MusicScale extends Component {
                     }}
                 >
                     <p>
-                        {replacement[value]}
-                        <br />
                         {value}
+                        <br />
+                        <span>{replacement[value]}</span>
                     </p>
                 </div>
             );
@@ -152,31 +152,45 @@ class MusicScale extends Component {
                     <div className={this.theme.tooltip_inner}>
                         {this.makeScaleButtons(scale)}
                         {this.makeHalfScaleButtons(scale)}
-                    </div>
-                    <div className={this.theme.octave_wrapper}>
-                        <p>옥타브</p>
-                        <div
-                            className={this.theme.octave_button}
-                            onClick={() => {
-                                if (this.state.octave < 5) {
-                                    this.handleButtonClick('octave', Number(this.state.octave) + 1);
-                                }
-                            }}
-                        >
-                            <p>+</p>
+                        <div className={this.theme.octave_wrapper}>
+                            <div className={this.theme.ocatave_wrapper}>
+                                <p>옥타브</p>
+                                <div className={this.theme.octave_button_wrapper}>
+                                    <div
+                                        className={this.theme.octave_button}
+                                        onClick={() => {
+                                            if (this.state.octave < 5) {
+                                                this.handleButtonClick(
+                                                    'octave',
+                                                    Number(this.state.octave) + 1
+                                                );
+                                            }
+                                        }}
+                                    >
+                                        <p>+</p>
+                                    </div>
+                                    <div className={this.theme.octave_ind}>
+                                        <p>{this.state.octave}</p>
+                                    </div>
+                                    <div
+                                        className={`${this.theme.octave_button} ${this.theme.bottom}`}
+                                        onClick={() => {
+                                            if (this.state.octave > 1) {
+                                                this.handleButtonClick(
+                                                    'octave',
+                                                    Number(this.state.octave) - 1
+                                                );
+                                            }
+                                        }}
+                                    >
+                                        <span />
+                                        {/* <p>ㅡ</p> */}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <p>{this.state.octave}</p>
-                        <div
-                            className={this.theme.octave_button}
-                            onClick={() => {
-                                if (this.state.octave > 1) {
-                                    this.handleButtonClick('octave', Number(this.state.octave) - 1);
-                                }
-                            }}
-                        >
-                            <p>-</p>
-                        </div>
                     </div>
+
                     <span
                         className={`${this.theme.arr} ${this.theme.free}`}
                         style={{ left: `${arrowLeft}px` }}
