@@ -3,14 +3,23 @@ import { pure } from 'recompose';
 import { CommonUtils } from '@utils/Common';
 import OutsideClick from '../common/outsideClick';
 import { debounce, camelCase } from 'lodash';
-import root, { alert, console } from 'window-or-global';
+import root from 'window-or-global';
 import Theme from '@utils/Theme';
+import _clamp from 'lodash/clamp';
 
 /* eslint-disable jsx-a11y/anchor-is-valid*/
 /* eslint-disable array-element-newline */
 /* eslint-disable array-bracket-newline */
 const normalScale = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
 const halfScale = ['C#', 'D#', 'F#', 'G#', 'A#'];
+const replacement = {
+    'C#': 'D♭',
+    'D#': 'E♭',
+    'F#': 'G♭',
+    'G#': 'A♭',
+    'A#': 'B♭',
+};
+const octave = [1, 2, 3, 4, 5];
 
 class MusicScale extends Component {
     getPositionOptions() {
@@ -31,7 +40,7 @@ class MusicScale extends Component {
         this.makeScaleButtons = this.makeScaleButtons.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.makeHalfScaleButtons = this.makeHalfScaleButtons.bind(this);
-        this.state = { selected: this.props.value };
+        this.state = { scale: this.props.scale, octave: _clamp(this.props.octave, 1, 5) };
     }
 
     componentDidMount() {
@@ -63,15 +72,17 @@ class MusicScale extends Component {
         return normalScale.map((value) => {
             const isSelected = selected && value == selected;
             return (
-                <a
+                <div
                     className={`${this.theme.normal_scale} ${
                         isSelected ? this.theme.selected : ''
-                    }`}
+                    } ${this.theme.scale_common}`}
                     key={value}
                     onClick={() => {
-                        this.handleButtonClick('buttonPressed', value);
+                        this.handleButtonClick('scale', value);
                     }}
-                ></a>
+                >
+                    <p>{value}</p>
+                </div>
             );
         });
     }
@@ -79,15 +90,21 @@ class MusicScale extends Component {
         return halfScale.map((value, i) => {
             const isSelected = selected && value == selected;
             return (
-                <a
+                <div
                     className={`${this.theme.half_scale} ${this.theme[`half_${i + 1}`]} ${
                         isSelected ? this.theme.selected : ''
-                    }`}
+                    } ${this.theme.scale_common}`}
                     key={value}
                     onClick={() => {
-                        this.handleButtonClick('buttonPressed', value);
+                        this.handleButtonClick('scale', value);
                     }}
-                ></a>
+                >
+                    <p>
+                        {value}
+                        <br />
+                        <span>{replacement[value]}</span>
+                    </p>
+                </div>
             );
         });
     }
@@ -95,8 +112,13 @@ class MusicScale extends Component {
     handleButtonClick(type, value) {
         const { eventEmitter: emitter } = this.props;
         if (emitter) {
-            emitter.emit('click', type, value);
-            this.setState({ ...this.state, selected: value });
+            if (type == 'scale') {
+                this.setState({ ...this.state, scale: value });
+                emitter.emit('click', 'changedValue', `${value}${this.state.octave}`);
+            } else if (type == 'octave' && value > 0 && value < 6) {
+                this.setState({ ...this.state, octave: value });
+                emitter.emit('click', 'changedValue', `${this.state.scale}${value}`);
+            }
         } else {
             const event = camelCase(`on-${type}`);
             if (typeof this.props[event] === 'function') {
@@ -107,7 +129,7 @@ class MusicScale extends Component {
 
     render() {
         const { onOutsideClick, eventTypes = ['mouseup', 'touchend', 'wheel'] } = this.props;
-        const { arrowLeft, isUpStyle, componentPosition, selected } = this.state;
+        const { arrowLeft, isUpStyle, componentPosition, scale, octave } = this.state;
 
         return (
             <OutsideClick
@@ -128,9 +150,47 @@ class MusicScale extends Component {
                     }`}
                 >
                     <div className={this.theme.tooltip_inner}>
-                        {this.makeScaleButtons(selected)}
-                        {this.makeHalfScaleButtons(selected)}
+                        {this.makeScaleButtons(scale)}
+                        {this.makeHalfScaleButtons(scale)}
+                        <div className={this.theme.octave_wrapper}>
+                            <div className={this.theme.ocatave_wrapper}>
+                                <p>옥타브</p>
+                                <div className={this.theme.octave_button_wrapper}>
+                                    <div
+                                        className={this.theme.octave_button}
+                                        onClick={() => {
+                                            if (this.state.octave < 5) {
+                                                this.handleButtonClick(
+                                                    'octave',
+                                                    Number(this.state.octave) + 1
+                                                );
+                                            }
+                                        }}
+                                    >
+                                        <p>+</p>
+                                    </div>
+                                    <div className={this.theme.octave_ind}>
+                                        <p>{this.state.octave}</p>
+                                    </div>
+                                    <div
+                                        className={`${this.theme.octave_button} ${this.theme.bottom}`}
+                                        onClick={() => {
+                                            if (this.state.octave > 1) {
+                                                this.handleButtonClick(
+                                                    'octave',
+                                                    Number(this.state.octave) - 1
+                                                );
+                                            }
+                                        }}
+                                    >
+                                        <span />
+                                        {/* <p>ㅡ</p> */}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <span
                         className={`${this.theme.arr} ${this.theme.free}`}
                         style={{ left: `${arrowLeft}px` }}
