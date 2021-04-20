@@ -558,6 +558,19 @@
         overflow: visible;
     }
 
+    .scale_common > p {
+        width: 100%;
+        height: 19px;
+        font-size: 18px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: center;
+        color: white;
+    }
+
     .normal_scale:before {
         content: '';
         display: inline-block;
@@ -577,8 +590,10 @@
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
         margin: 0 1px;
         color: #606c73;
+        > p {
+            color: #606c73;
+        }
     }
-
     .normal_scale:active {
         background-color: #eceff0;
     }
@@ -593,24 +608,13 @@
         border-radius: 0 0 6px 6px;
         color: white;
     }
+
     .half_scale > p > span {
         color: #b9d3e2;
     }
 
     .half_scale:active {
         background-color: #40484d;
-    }
-    .scale_common > p {
-        width: 100%;
-        height: 19px;
-        font-size: 18px;
-        font-weight: bold;
-        font-stretch: normal;
-        font-style: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: center;
-        text-align: center;
     }
 
     .octave_wrapper {
@@ -720,7 +724,9 @@
 
     .scale_common.selected {
         background-color: #ffc233;
-        color: white;
+        p {
+            color: white;
+        }
         p > span {
             color: white;
         }
