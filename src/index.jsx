@@ -3,6 +3,7 @@ import ModalProgress from './components/widget/modalProgress';
 import ColorPicker from './components/picker/color';
 import Backpack from './components/widget/Backpack';
 import Number from './components/widget/number';
+import MusicScale from './components/widget/musicScale';
 
 export const Component = {
     Dropdown,
@@ -10,6 +11,7 @@ export const Component = {
     ColorPicker,
     Backpack,
     Number,
+    MusicScale,
 };
 
 export { default as ColorPicker } from './components/picker/colorContainer';
@@ -29,3 +31,4 @@ export { default as Number } from './components/widget/numberContainer';
 export { default as ContextMenu } from './components/widget/contextMenuContainer';
 export { default as Backpack } from './components/widget/BackpackContainer';
 export { default as Popup } from './components/popup/popupContainer';
+export { default as MusicScale } from './components/widget/musicScaleContainer';
