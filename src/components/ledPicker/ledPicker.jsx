@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { pure } from 'recompose';
-import { CommonUtils } from '@utils/Common';
 import OutsideClick from '../common/outsideClick';
 import { debounce } from 'lodash';
 import root from 'window-or-global';
 import produce from 'immer';
 import Theme from '@utils/Theme';
+import Dropdown from '@components/widget/dropdown';
 
 class LedPicker extends Component {
     get PICKER_WIDTH() {
@@ -31,21 +31,22 @@ class LedPicker extends Component {
     constructor(props) {
         super(props);
         this.theme = Theme.getStyle('popup');
-        const state = {
-            isTransparent: false,
-        };
-        this.defaultLedStatus = [
+        const state = {};
+        const { defaultStatus, maxBrightness, withLevel } = this.props;
+        this.defaultLedStatus = defaultStatus || [
             [0, 0, 0, 0, 0],
             [0, 1, 0, 1, 0],
             [0, 0, 0, 0, 0],
             [1, 0, 0, 0, 1],
             [0, 1, 1, 1, 0],
         ];
-        if (this.props.ledStatus) {
-            var clonedArray = JSON.parse(JSON.stringify(this.props.ledStatus));
-        }
+
         Object.assign(state, this.getDefaultLedPickerStyle());
-        Object.assign(state, { ledStatus: clonedArray || this.defaultLedStatus });
+        if (this.props.ledStatus) {
+            const clonedArray = JSON.parse(JSON.stringify(this.props.ledStatus));
+            Object.assign(state, { ledStatus: clonedArray || this.defaultLedStatus });
+        }
+
         this.state = state;
     }
 
@@ -165,10 +166,10 @@ class LedPicker extends Component {
             },
         };
     }
-    _handleLedStatusChange = ({ x, y, isReset }) => {
-        const { onChangeLedPicker } = this.props;
-
+    _handleLedStatusChange = ({ x, y, isReset, value }) => {
+        const { onChangeLedPicker, withLevel, maxBrightness } = this.props;
         const status = this.state.ledStatus;
+        const targetBrightness = maxBrightness || 1;
         if (isReset) {
             for (let i = 0; i < status.length; i++) {
                 const row = status[i];
@@ -176,10 +177,17 @@ class LedPicker extends Component {
                 status[i] = new Array(rowLength).fill(0);
             }
         } else {
-            if (status[x][y] == 1) {
-                status[x][y] = 0;
+            if (withLevel) {
+                status[x][y] += 1;
+                if (status[x][y] > 9) {
+                    status[x][y] = 0;
+                }
             } else {
-                status[x][y] = 1;
+                if (status[x][y] == targetBrightness) {
+                    status[x][y] = 0;
+                } else {
+                    status[x][y] = targetBrightness;
+                }
             }
         }
 
@@ -201,6 +209,7 @@ class LedPicker extends Component {
             outsideExcludeDom,
             eventTypes = ['mouseup', 'touchend'],
             animation = true,
+            withLevel,
         } = this.props;
         const { color, arrowLeft, isUpStyle, ledPickerStyle, ledStatus } = this.state;
         let animationStyle = {};
@@ -214,7 +223,7 @@ class LedPicker extends Component {
                 outsideExcludeDom={outsideExcludeDom}
                 onOutsideClick={() => {
                     if (onOutsideClick) {
-                        onOutsideClick(this.state.ledStatus);
+                        onOutsideClick(ledStatus);
                     }
                 }}
                 eventTypes={eventTypes}
@@ -229,20 +238,61 @@ class LedPicker extends Component {
                         isUpStyle ? this.theme.up : ''
                     }`}
                 >
-                    <div className={this.theme.led_picker_inner}>
-                        {ledStatus.map((leds, x) =>
-                            leds.map((led, y) => (
-                                <div
-                                    className={`${this.theme.led_item} ${led > 0 &&
-                                        this.theme.led_item_selected}`}
-                                    key={`led${x}${y}`}
-                                    onClick={() =>
-                                        this._handleLedStatusChange({ x, y, isReset: false })
-                                    }
-                                />
-                            ))
-                        )}
-                    </div>
+                    {withLevel ? (
+                        <div className={this.theme.led_picker_inner}>
+                            {ledStatus.map((leds, x) =>
+                                leds.map((led, y) => {
+                                    const brightness = ledStatus[x][y];
+                                    const targetStyle = this.theme[
+                                        `led_item_selected_${brightness}`
+                                    ];
+                                    const key = `led${x}${y}`;
+
+                                    return (
+                                        <div
+                                            className={`${this.theme.led_item} ${brightness > 0 &&
+                                                this.theme.led_item_selected} ${targetStyle}`}
+                                            key={key}
+                                            onClick={() => {
+                                                this._handleLedStatusChange({
+                                                    x,
+                                                    y,
+                                                    isReset: false,
+                                                });
+                                            }}
+                                        >
+                                            <div className={`${this.theme.led_item_indicator}`}>
+                                                {brightness}
+                                            </div>
+                                        </div>
+                                    );
+                                })
+                            )}
+                        </div>
+                    ) : (
+                        <div className={this.theme.led_picker_inner}>
+                            {ledStatus.map((leds, x) =>
+                                leds.map((led, y) => {
+                                    const brightness = ledStatus[x][y];
+                                    return (
+                                        <div
+                                            className={`${this.theme.led_item} ${brightness > 0 &&
+                                                this.theme.led_item_selected}`}
+                                            key={`led${x}${y}`}
+                                            onClick={() =>
+                                                this._handleLedStatusChange({
+                                                    x,
+                                                    y,
+                                                    isReset: false,
+                                                })
+                                            }
+                                        />
+                                    );
+                                })
+                            )}
+                        </div>
+                    )}
+
                     <div
                         className={this.theme.led_clear}
                         onClick={() => this._handleLedStatusChange({ isReset: true })}
