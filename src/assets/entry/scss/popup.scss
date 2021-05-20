@@ -1229,20 +1229,21 @@
             flex: 1 1;
             margin-top: 12px;
             overflow: hidden;
-            overflow-y: auto;
+            // overflow-y: auto;
         }
         .section_cont .scroll_box * {
             box-sizing: content-box;
         }
         .section_cont .list {
-            overflow: hidden;
-            margin: -18px 0 0 -18px;
+            //overflow: hidden;
+            margin: 0 0;
             padding-bottom: 34px;
+            height: calc(100% - 34px);
         }
         .section_cont .list li {
             float: left;
             width: 304px;
-            margin: 18px 0 0 18px;
+            margin: 18px 0 0 0;
         }
         .section_cont .list .link {
             position: relative;

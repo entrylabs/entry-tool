@@ -114,6 +114,7 @@
         "window-or-global": "^1.0.1"
     },
     "dependencies": {
+        "@egjs/react-infinitegrid": "^3.2.3",
         "@entrylabs/event": "^1.0.3",
         "@entrylabs/modal": "^1.2.5",
         "@entrylabs/postcss-url": "^8.0.1",
