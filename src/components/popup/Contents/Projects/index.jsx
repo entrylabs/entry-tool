@@ -8,9 +8,10 @@ import Theme from '@utils/Theme';
 import classname from 'classnames';
 import EmptyContents from './EmptyContents';
 import Item from './Item';
+import { GridLayout } from '@egjs/react-infinitegrid';
 
-const Index = ({ type, data = [], avatarImage, closePopup, submit, fetch }) => {
-    const totalCount = data.length;
+const Index = ({ type, data = [], avatarImage, raw, closePopup, submit, fetch, fetchMore }) => {
+    const totalCount = raw.total || data.length;
     const theme = Theme.getStyle('popup');
     const [selected, select] = useState(null);
 
@@ -21,6 +22,23 @@ const Index = ({ type, data = [], avatarImage, closePopup, submit, fetch }) => {
     if (totalCount === 0) {
         return <EmptyContents />;
     }
+
+    const onAppend = (p) => {
+        const { startLoading, currentTarget } = p;
+        if (currentTarget.isLoading()) {
+            return;
+        }
+        startLoading();
+        fetchMore({ type, data, searchAfter: raw.searchAfter, searchParam: raw.searchParam });
+        // const list = this.state.list;
+        // const items = this.loadItems(parseFloat(groupKey) + 1, 5);
+
+        // this.setState({ list: list.concat(items) });
+    };
+    const onLayoutComplete = ({ isLayout, endLoading, target, orgScrollPos }) => {
+        !isLayout && endLoading();
+    };
+
     return (
         <>
             <section className={classname(theme.pop_content, theme.art_content)}>
@@ -30,7 +48,22 @@ const Index = ({ type, data = [], avatarImage, closePopup, submit, fetch }) => {
                         {CommonUtils.getLang('Menus.all')} ({totalCount})
                     </strong>
                     <div className={theme.scroll_box}>
-                        <ul className={theme.list}>
+                        <GridLayout
+                            tag="ul"
+                            className={theme.list}
+                            useFirstRender={false}
+                            options={{
+                                isConstantSize: true,
+                                transitionDuration: 0.2,
+                                isOverflowScroll: true,
+                            }}
+                            layoutOptions={{
+                                margin: 18,
+                                align: 'center',
+                            }}
+                            onAppend={onAppend}
+                            onLayoutComplete={onLayoutComplete}
+                        >
                             {data
                                 .filter(({ user }) => user)
                                 .map((item, index) => (
@@ -44,7 +77,8 @@ const Index = ({ type, data = [], avatarImage, closePopup, submit, fetch }) => {
                                         }}
                                     />
                                 ))}
-                        </ul>
+                        </GridLayout>
+                        asd
                     </div>
                 </div>
             </section>
@@ -65,6 +99,7 @@ const Index = ({ type, data = [], avatarImage, closePopup, submit, fetch }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+    fetchMore: (param) => dispatch(triggerEvent(Types.fetchMore, param, false)),
     fetch: (type) => dispatch(triggerEvent(Types.fetch, { type }, false)),
     submit: (data) => {
         dispatch(triggerEvent(Types.submit, data, false));
@@ -73,7 +108,4 @@ const mapDispatchToProps = (dispatch) => ({
     closePopup: () => dispatch(closePopup()),
 });
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(Index);
+export default connect(null, mapDispatchToProps)(Index);
