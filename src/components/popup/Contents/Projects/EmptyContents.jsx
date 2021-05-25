@@ -7,7 +7,27 @@ import { EMIT_TYPES as Types } from '@constants';
 import { triggerEvent } from '@actions/index';
 import { closePopup } from '@actions/popup';
 
-const Index = ({ makeProject }) => {
+const getResultMent = (type) => {
+    switch (type) {
+        case 'projects':
+            return (
+                <div>
+                    {CommonUtils.getLang('Menus.no_project_1')}
+                    <br />
+                    {CommonUtils.getLang('Menus.no_project_2')}
+                </div>
+            );
+            break;
+        case 'favorites':
+            return <div>{CommonUtils.getLang('Menus.no_marked_project')}</div>;
+            break;
+        default:
+            return <div>not supported type</div>;
+            break;
+    }
+};
+
+const Index = ({ makeProject, type }) => {
     const theme = Theme.getStyle('popup');
     return (
         <section className={classname(theme.pop_content, theme.art_content)}>
@@ -16,19 +36,17 @@ const Index = ({ makeProject }) => {
                 <h2 className={theme.blind}>{CommonUtils.getLang('Menus.my_project')}</h2>
                 <div className={theme.result_box}>
                     <div className={classname(theme.thmb, theme.imico_pop_mywrite_thmb)} />
-                    <p className={theme.result_dsc}>
-                        {CommonUtils.getLang('Menus.no_project_1')}
-                        <br />
-                        {CommonUtils.getLang('Menus.no_project_2')}
-                    </p>
-                    <div className={theme.pop_btn_box}>
-                        <div
-                            className={theme.active}
-                            onClick={CommonUtils.handleClick(makeProject)}
-                        >
-                            {CommonUtils.getLang('Menus.make_project')}
+                    <p className={theme.result_dsc}>{getResultMent(type)}</p>
+                    {type !== 'favorites' && (
+                        <div className={theme.pop_btn_box}>
+                            <div
+                                className={theme.active}
+                                onClick={CommonUtils.handleClick(makeProject)}
+                            >
+                                {CommonUtils.getLang('Menus.make_project')}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         </section>
@@ -42,7 +60,4 @@ const mapDispatchToProps = (dispatch) => ({
     },
 });
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(Index);
+export default connect(null, mapDispatchToProps)(Index);

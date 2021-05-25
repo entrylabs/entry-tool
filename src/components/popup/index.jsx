@@ -118,6 +118,8 @@ class Popup extends Component {
                 break;
             }
             case 'projects':
+                view = <Projects type={selected} data={data} />;
+                break;
             case 'favorites':
                 view = <Projects type={selected} data={data} />;
                 break;

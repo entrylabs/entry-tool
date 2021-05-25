@@ -19,7 +19,7 @@ const Index = ({ type, data = [], avatarImage, closePopup, submit, fetch }) => {
     }, [type]);
 
     if (totalCount === 0) {
-        return <EmptyContents />;
+        return <EmptyContents type={type} />;
     }
     return (
         <>
@@ -73,7 +73,4 @@ const mapDispatchToProps = (dispatch) => ({
     closePopup: () => dispatch(closePopup()),
 });
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(Index);
+export default connect(null, mapDispatchToProps)(Index);
