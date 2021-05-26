@@ -20,7 +20,7 @@ const Index = ({ type, data = [], avatarImage, raw, closePopup, submit, fetch, f
     }, [type]);
 
     if (totalCount === 0) {
-        return <EmptyContents />;
+        return <EmptyContents type={type} />;
     }
 
     const onAppend = (p) => {
