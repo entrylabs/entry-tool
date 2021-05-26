@@ -8,6 +8,7 @@ export const EMIT_TYPES = {
     load: 'load',
     search: 'search',
     fetch: 'fetch',
+    fetchMore: 'fetchMore',
     close: 'close',
     write: 'write',
     draw: 'draw',
