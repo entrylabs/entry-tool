@@ -170,6 +170,14 @@ const generateOption = (option) => {
             columns = deduplicationColumn(
                 [...categoryIndexes].map((index) => _unzip(orderedTable)[index])
             );
+            axisX.tick = {
+                fit: true,
+                multiline: false,
+                autorotate: orderedTable.length <= 16,
+                rotate: orderedTable.length <= 16 ? 15 : null,
+                culling: orderedTable.length > 16,
+            };
+            axisX.clipPath = false;
             axisX.categories = orderedTable
                 .slice(1)
                 .map((row, index) => (isAddedOption ? index + 1 : row[xIndex]));
