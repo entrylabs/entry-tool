@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import Item from './Item';
 import Foot from '../foot';
 import { CommonUtils } from '@utils/Common';
@@ -15,6 +15,16 @@ const Index = (props) => {
         applySelected(data.filter((item) => item.active));
     }, []);
 
+    const alertMsgKey = useMemo(() => {
+        if (imageBaseUrl.includes('aiUtilize')) {
+            return 'template.aiUtilize_block_descriptions';
+        } else if (imageBaseUrl.includes('entry-js')) {
+            return 'template.expansion_block_descriptions';
+        } else {
+            return 'template.hardware_lite_descriptions';
+        }
+    }, [imageBaseUrl]);
+
     return (
         <>
             <section className={classname(theme.extend_content, theme.pop_content)}>
@@ -23,13 +33,7 @@ const Index = (props) => {
                     <div className={theme.cont_box}>
                         <div className={theme.desc}>
                             <div className={theme.imico_exclamation_mark} />
-                            <div className={theme.content}>
-                                {CommonUtils.getLang(
-                                    imageBaseUrl.includes('aiUtilize')
-                                        ? 'template.aiUtilize_block_descriptions'
-                                        : 'template.expansion_block_descriptions'
-                                )}
-                            </div>
+                            <div className={theme.content}>{CommonUtils.getLang(alertMsgKey)}</div>
                         </div>
                         <div className={theme.extend_block}>
                             <ul className={theme.list}>

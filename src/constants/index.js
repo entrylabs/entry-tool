@@ -383,6 +383,10 @@ export const DEFAULT_OPTIONS = {
             title: 'Workspace.load_ai_utilize_block',
             mainType: 'aiUtilize',
         },
+        hardwareLite: {
+            title: 'Workspace.load_hardware_lite_block',
+            mainType: 'hardwareLite',
+        },
         projects: {
             title: 'Menus.my_project',
             mainType: 'projects',

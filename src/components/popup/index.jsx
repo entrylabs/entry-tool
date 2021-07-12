@@ -121,6 +121,11 @@ class Popup extends Component {
             case 'favorites':
                 view = <Projects type={selected} data={data} raw={dataObj} />;
                 break;
+            case 'hardwareLite': {
+                navigation = null;
+                view = <Select type={'bigicon'} imageBaseUrl={''} data={data} />;
+                break;
+            }
             default:
                 break;
         }

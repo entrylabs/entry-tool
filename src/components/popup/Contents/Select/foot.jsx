@@ -33,6 +33,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     submit: (data) => {
+        console.log(Types.submit);
         dispatch(triggerEvent(Types.submit, data, false));
         dispatch(closePopup());
     },

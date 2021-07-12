@@ -10,8 +10,8 @@ import Theme from '@utils/Theme';
 
 const Index = ({ index, imageBaseUrl, item, selected, applySelected, select, deselect }) => {
     const theme = Theme.getStyle('popup');
-    const { imageName, titleKey, sponserText } = item;
-    const desc = CommonUtils.getLang(item.descriptionKey);
+    const { imageName, titleKey, sponserText, title } = item;
+    const desc = item.descriptionKey ? CommonUtils.getLang(item.descriptionKey) : item.description;
     const onItemClicked = (e) => {
         e.preventDefault();
         const isBlockDeselect = typeof item.active !== 'undefined';
@@ -36,6 +36,7 @@ const Index = ({ index, imageBaseUrl, item, selected, applySelected, select, des
                         backgroundImage: `url("${imageBaseUrl}${imageName}")`,
                         backgroundRepeat: 'no-repeat',
                         position: 'relative',
+                        backgroundSize: 'contain',
                     }}
                 >
                     {sponserText && (
@@ -45,7 +46,9 @@ const Index = ({ index, imageBaseUrl, item, selected, applySelected, select, des
                     )}
                 </div>
                 <div className={theme.inner_box}>
-                    <strong className={theme.sjt}>{CommonUtils.getLang(titleKey)}</strong>
+                    <strong className={theme.sjt}>
+                        {titleKey ? CommonUtils.getLang(titleKey) : title}
+                    </strong>
                     <div className={theme.dsc} dangerouslySetInnerHTML={{ __html: desc }} />
                 </div>
             </div>
