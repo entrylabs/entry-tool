@@ -199,13 +199,13 @@
             }
         }
         .character {
-            height: 84px;
-            width: 72px;
-            margin: 0 auto 13px;
-            background: url(#{$imageDir}/progress/loading_animation.png);
+            height: 147px;
+            width: 102px;
+            margin: 85px auto 13px;
+            background: url(#{$imageDir}/progress/entry_loading_sprite.png);
             background-size: cover;
             background-repeat: no-repeat;
-            animation: play 0.9s steps(8) infinite alternate;
+            animation: play2 0.9s steps(8) infinite;
         }
         .description {
             font-family: NanumGothic;
