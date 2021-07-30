@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import _map from 'lodash/map';
 import _floor from 'lodash/floor';
 import _round from 'lodash/round';
@@ -124,6 +124,7 @@ const generateOption = (option) => {
         bin,
         boundary,
         shortForm,
+        bindto,
     } = option;
 
     let x;
@@ -378,7 +379,7 @@ const generateOption = (option) => {
         size,
         point,
         legend,
-        bindto: `#${id}`,
+        bindto: bindto,
         color: {
             pattern: GRAPH_COLOR[type],
         },
@@ -405,7 +406,7 @@ const generateOption = (option) => {
 const Chart = (props) => {
     const theme = Theme.getStyle('popup');
     const { table = [[]], chart = {}, size, legend, axisX, axisY, shortForm = false } = props;
-
+    const chartRef = useRef(null);
     const {
         type = 'bar',
         xIndex = -1,
@@ -456,6 +457,7 @@ const Chart = (props) => {
                 bin: Number(bin),
                 boundary,
                 shortForm,
+                bindto: chartRef.current,
             });
             option && bb.generate(option);
         }
@@ -472,7 +474,7 @@ const Chart = (props) => {
     if (!content) {
         return (
             <div className={theme.chart_area}>
-                <div id={id} style={{ height: '100%' }} />
+                <div id={id} style={{ height: '100%' }} ref={chartRef}/>
             </div>
         );
     }
@@ -483,7 +485,7 @@ const Chart = (props) => {
         </div>
     ) : (
         <div className={theme.graph_cont}>
-            <div id={id} style={{ height: '100%' }}>
+            <div id={id} style={{ height: '100%' }} ref={chartRef}>
                 <div className={theme.alert}>{content}</div>
             </div>
         </div>
