@@ -28,10 +28,11 @@ class Sample extends Component {
                             <h1>오브젝트 추가하기</h1>
                             <button
                                 onClick={this.close}
-                                className={`${Styles.btn_back} ${Styles.imbtn_pop_back}`}
+                                className={`${Styles.btn_back} ${Styles.imbtn_pop_close}`}
                             >
                                 <span className={Styles.blind}>뒤로가기</span>
                             </button>
+                            <a href="/" className={Styles.btn} role="button">불러오기</a>
                         </header>
 
                         <div className={Styles.section_navi}>
