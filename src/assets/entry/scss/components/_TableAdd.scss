@@ -1,113 +1,69 @@
 @charset "UTF-8";
 
-// 데이터 시트 파일 올리기.
-.popup_wrap .pop_content.table_file_add {
-    background-color: #fff;
-    .section_cont {
-        background-color: #fff;
-    }
-    .file_add_box {
-        background-color: #ecf8ff;
-        height: 222px;
-    }
-    .caution {
-        overflow: hidden;
-        height: 16px;
-        margin: 16px 18px 0;
-        font-size: 14px;
-        padding-left: 22px;
-        color: #000;
-        letter-spacing: -0.32px;
-        line-height: 16px;
-    }
-    .file_add {
+.table_file_add_content {
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    .file_add,
+    .new_add_box {
         position: relative;
         padding: 46px 45px;
-        margin: 16px 18px 0;
         background-color: #f9fdff;
         border: 2px dashed #d6e9f4;
-    }
-    .file_add .dsc {
-        position: relative;
-        height: 64px;
-        padding-left: 82px;
-        background-image: url('#{$imageDir}/IcoFileUploadBig.svg');
-        background-size: 64px auto;
-        background-repeat: no-repeat;
-    }
-    .file_add .dsc > strong {
-        display: block;
-        padding-top: 11px;
-        font-size: 20px;
-        font-weight: 600;
-        color: #2c313d;
-        letter-spacing: -0.46px;
-        line-height: 22px;
-    }
-    .file_add .dsc > span {
-        display: block;
-        margin-top: 12px;
-        font-size: 14px;
-        color: #2c313d;
-        letter-spacing: -0.32px;
-        line-height: 16px;
-    }
-    .file_add .add_label {
-        position: absolute;
-        overflow: hidden;
-        right: 45px;
-        top: 50%;
-        box-sizing: border-box;
-        width: 180px;
-        height: 48px;
         border-radius: 6px;
-        border: 1px solid #4f80ff;
-        background-color: #fff;
-        font-size: 14px;
-        font-weight: 600;
-        color: #4f80ff;
-        text-align: center;
-        transform: translateY(-50%);
-        cursor: pointer;
-        line-height: 48px;
+        .dsc {
+            position: relative;
+            height: 64px;
+            padding-left: 82px;
+            background-image: url('#{$imageDir}/IcoFileUploadBig.svg');
+            background-size: 64px auto;
+            background-repeat: no-repeat;
+        }
+        .dsc > strong {
+            display: block;
+            padding-top: 11px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c313d;
+            letter-spacing: -0.46px;
+            line-height: 22px;
+        }
+        .dsc > span {
+            display: block;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #2c313d;
+            letter-spacing: -0.32px;
+            line-height: 16px;
+        }
+        .add_label {
+            position: absolute;
+            overflow: hidden;
+            right: 45px;
+            top: 50%;
+            box-sizing: border-box;
+            width: 180px;
+            height: 48px;
+            border-radius: 6px;
+            border: 1px solid #4f80ff;
+            background-color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4f80ff;
+            text-align: center;
+            transform: translateY(-50%);
+            cursor: pointer;
+            line-height: 48px;
+        }
     }
-    .caution_box {
-        padding: 17px 18px 19px;
-        background-color: #f7fcff;
+    .new_add_box .dsc {
+        background-image: url('#{$imageDir}/IcoNewTableAdd.svg');
+        background-size: 64px auto;
     }
-    .caution_box .dsc {
-        min-height: 72px;
-        padding-left: 83px;
-        background-image: url('#{$imageDir}/IcoCatutionImg.svg');
-        background-size: 75px auto;
-        background-repeat: no-repeat;
-        font-size: 14px;
-        color: #2c313d;
-        line-height: 17px;
-    }
-    .caution_box .dsc > strong {
-        display: block;
-        padding-top: 6px;
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: -0.32px;
-    }
-    .caution_box .dsc > span {
-        display: block;
-        margin-top: 12px;
-    }
-    .caution_box .dsc .link {
-        font-weight: 600;
-        color: #4f80ff;
-    }
-    .pop_btn_box {
-        padding: 12px 0;
-    }
-    // 파일 리스트
-    .section_cont .file_list_box {
+    .file_list_box {
         position: relative;
-        height: 144px;
-        margin: 16px 0 0 16px;
+        height: 156px;
         overflow-x: auto;
         .list_file_add {
             position: absolute;
@@ -140,12 +96,12 @@
         }
         .list_inner {
             overflow: hidden;
-            padding-right: 16px;
             margin-left: 132px;
         }
         .obj_list {
             position: relative;
             overflow: hidden;
+            margin: 0;
         }
         .obj_list li {
             position: relative;
@@ -167,6 +123,10 @@
             background: url(#{$imageDir}/ico_pop_data_thmb.png) no-repeat;
             background-size: 64px auto;
         }
+        .obj_list .on .sjt {
+            background-color: #4f80ff;
+            color: #fff;
+        }
         .obj_list li .check {
             overflow: hidden;
             position: absolute;
@@ -184,37 +144,4 @@
         }
     }
 
-    //새로 만들기
-    .new_add_box {
-        padding-top: 79px;
-        text-align: center;
-        .dsc {
-            display: inline-block;
-            min-height: 64px;
-            padding-left: 82px;
-            background-image: url('#{$imageDir}/IcoNewTableAdd.svg');
-            background-size: 64px auto;
-            background-repeat: no-repeat;
-            vertical-align: top;
-        }
-        .dsc > strong {
-            display: block;
-            padding-top: 6px;
-            font-size: 20px;
-            font-weight: 600;
-            color: #2c313d;
-            text-align: left;
-            letter-spacing: -0.46px;
-            line-height: 22px;
-        }
-        .dsc > span {
-            display: block;
-            margin-top: 12px;
-            font-size: 14px;
-            color: #2c313d;
-            text-align: left;
-            letter-spacing: -0.32px;
-            line-height: 16px;
-        }
-    }
 }

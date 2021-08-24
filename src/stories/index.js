@@ -393,7 +393,6 @@ wigetStories
     });
 
 storiesOf('AiLayout', module)
-    .addDecorator((story) => <Provider story={story()} />)
     .add('테이블 추가하기 - 데이터 선택', () => <DataSelect />)
     .add('테이블 추가하기 - 데이터 선택 딤드', () => <DataSelect Dimmed />)
     .add('파일 올리기 - 업로드 기본', () => <DataUpload UploadState="Default" />)
