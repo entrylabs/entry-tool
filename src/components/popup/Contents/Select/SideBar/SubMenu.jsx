@@ -3,7 +3,7 @@ import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 import classname from 'classnames';
 
-export default ({ menus = {}, onClick }) => {
+export default ({ menus = {}, onClick, isDrawVector, isVectorOnly, toggleVector }) => {
     const theme = Theme.getStyle('popup');
     const list = Object.keys(menus);
     const [selected, select] = useState(list[0]);
@@ -24,7 +24,7 @@ export default ({ menus = {}, onClick }) => {
     }
 
     return (
-        <div className={theme.sub_menu}>
+        <div className={theme.sub_tab}>
             <div className={theme.menu_inner}>
                 {list.map((key) => {
                     const { name } = menus[key];
@@ -35,6 +35,19 @@ export default ({ menus = {}, onClick }) => {
                         </a>
                     );
                 })}
+            </div>
+            <div className={theme.checkbox}>
+                {isDrawVector && (
+                    <input
+                        className={theme.blind}
+                        type="checkbox"
+                        id="vector"
+                        name="vector"
+                        checked={isVectorOnly}
+                        onClick={toggleVector}
+                    />
+                )}
+                <label htmlFor="vector">{CommonUtils.getLang('Buttons.show_only_vector')}</label>
             </div>
         </div>
     );

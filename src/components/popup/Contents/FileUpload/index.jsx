@@ -1,22 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Theme from '@utils/Theme';
 import { CommonUtils } from '@utils/Common';
 import classname from 'classnames';
 import Item from './Item';
-import Warn from './Warn';
 import UploadInput from './UploadInput';
 import { EMIT_TYPES as Types } from '@constants';
-import { closePopup, applyUploaded } from '@actions/popup';
+import { applyUploaded, closePopup } from '@actions/popup';
 import { connect } from 'react-redux';
 import { triggerEvent } from '@actions/index';
+import Styles from '@assets/entry/scss/popup.scss';
+
+const copyrightLinkUrl =
+    'https://copyright.or.kr/education/educlass/learning/infringement-case/index.do';
 
 const Index = (props) => {
-    const { type, opt = {}, uploads = [], baseUrl } = props;
-    const { submit, select, deselect, closePopup, applyUploaded, uploadedItems } = props;
+    const { type, opt = {}, uploads = [], baseUrl, HeaderButtonPortal } = props;
+    const { submit, select, deselect, applyUploaded, uploadedItems } = props;
     const [excluded, setExcluded] = useState([]);
     const [isUploading, setUploadState] = useState(false);
     const theme = Theme.getStyle('popup');
-    const { warnExt, title, desc } = getWarnMsg(opt.uploadAllowed, theme.copyright_link);
+    const warnMessages = getWarnMsg(opt.uploadAllowed);
     const getExcludedIndex = (item) => excluded.findIndex(({ _id }) => _id === item._id);
     const onItemClick = (item) => {
         if (!opt.multiSelect) {
@@ -56,49 +59,58 @@ const Index = (props) => {
     }, [uploads, uploadedItems]);
 
     return (
-        <>
-            <section className={classname(theme.pop_content, theme.file_add_list_content)}>
-                <h2 className={theme.blind}>Upload File {excluded.length}</h2>
-                {isUploading && (
-                    <div className={theme.fileupload_loding}>
-                        <span className={theme.loding_text}>
-                            {CommonUtils.getLang('Menus.file_upload_loading')}
-                        </span>
-                    </div>
-                )}
-                <div className={theme.section_cont}>
-                    <p className={classname(theme.caution, theme.imico_pop_caution)}>{warnExt}</p>
-                    <div className={classname(theme.list_area, theme[`${type}_type`])}>
-                        <UploadInput
-                            uploadNotAllowedExt={opt.uploadNotAllowedExt}
-                            uploadAllowed={opt.uploadAllowed}
-                            setUploadState={(state) => setUploadState(state)}
+        <div className={classname([theme.section_content, theme.file_add_list_content])}>
+            <h2 className={theme.blind}>{CommonUtils.getLang('Menus.file_upload')}</h2>
+            {/*{isUploading && (*/}
+            {/*    <div className={theme.fileupload_loding}>*/}
+            {/*        <span className={theme.loding_text}>*/}
+            {/*            {CommonUtils.getLang('Menus.file_upload_loading')}*/}
+            {/*        </span>*/}
+            {/*    </div>*/}
+            {/*)}*/}
+            <div className={classname(theme.list_area, theme[`${type}_type`])}>
+                <UploadInput
+                    uploadNotAllowedExt={opt.uploadNotAllowedExt}
+                    uploadAllowed={opt.uploadAllowed}
+                    setUploadState={(state) => setUploadState(state)}
+                />
+                <ul className={theme.obj_list}>
+                    {uploadedItems.map((item) => (
+                        <Item
+                            key={item._id || item.id}
+                            item={item}
+                            type={type}
+                            baseUrl={baseUrl}
+                            onClick={onItemClick}
+                            excluded={opt.multiSelect !== getExcludedIndex(item) >= 0}
                         />
-                        <ul className={theme.obj_list}>
-                            {uploadedItems.map((item) => (
-                                <Item
-                                    key={item._id || item.id}
-                                    item={item}
-                                    type={type}
-                                    baseUrl={baseUrl}
-                                    onClick={onItemClick}
-                                    excluded={opt.multiSelect !== getExcludedIndex(item) >= 0}
-                                />
-                            ))}
-                        </ul>
-                    </div>
-                    <Warn title={title} desc={desc} type={type} />
-                </div>
-            </section>
-            <div className={theme.pop_btn_box}>
-                <a onClick={CommonUtils.handleClick(closePopup)}>
-                    {CommonUtils.getLang('Buttons.cancel')}
-                </a>
-                <a className={theme.active} onClick={CommonUtils.handleClick(onSubmit)}>
-                    {CommonUtils.getLang('Buttons.add')}
-                </a>
+                    ))}
+                </ul>
             </div>
-        </>
+            <div className={Styles.caution_box}>
+                {warnMessages.map(({ title, desc }) => (
+                    <p className={theme.caution}>
+                        {desc ? (
+                            <>
+                                <strong>{title}</strong>
+                                <br />
+                                <span className={theme.sub_dsc}>{desc}</span>
+                                <a target="_blank" href={copyrightLinkUrl}>
+                                    [{CommonUtils.getLang('Menus.file_upload_warn_link')}]
+                                </a>
+                            </>
+                        ) : (
+                            title
+                        )}
+                    </p>
+                ))}
+            </div>
+            <HeaderButtonPortal>
+                <a className={theme.btn} role="button" onClick={CommonUtils.handleClick(onSubmit)}>
+                    {CommonUtils.getLang('Buttons.add2')}
+                </a>
+            </HeaderButtonPortal>
+        </div>
     );
 };
 
@@ -119,30 +131,39 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);
 
-const getWarnMsg = (allowed, copyrightClass) => {
-    const result = { warnExt: '', title: '', desc: '' };
+const getWarnMsg = (allowed) => {
     if (allowed.sound) {
-        result.warnExt = CommonUtils.getLang('Menus.sound_upload_warn_1');
-        result.title = CommonUtils.getLang('Menus.file_upload_warn_title_sound');
-        result.desc = CommonUtils.getLang('Menus.file_upload_warn_desc_sound');
+        return [
+            { title: CommonUtils.getLang('Menus.sound_upload_warn_1') },
+            {
+                title: CommonUtils.getLang('Menus.file_upload_warn_title_sound'),
+                desc: CommonUtils.getLang('Menus.file_upload_warn_desc_sound'),
+            },
+        ];
     } else if (allowed.table) {
-        result.warnExt = CommonUtils.getLang('Menus.table_upload_warn_1');
-        result.title = CommonUtils.getLang('Menus.file_upload_warn_title_table');
-        result.desc = CommonUtils.getLang('Menus.file_upload_warn_desc_table');
+        return [
+            { title: CommonUtils.getLang('Menus.table_upload_warn_1') },
+            {
+                title: CommonUtils.getLang('Menus.file_upload_warn_title_table'),
+                desc: CommonUtils.getLang('Menus.file_upload_warn_desc_table'),
+            },
+        ];
     } else if (allowed.object && allowed.image) {
-        result.warnExt = CommonUtils.getLang('Menus.sprite_upload_warn');
-        result.title = CommonUtils.getLang('Menus.file_upload_warn_title_image');
-        result.desc = CommonUtils.getLang('Menus.file_upload_warn_desc_image');
+        return [
+            { title: CommonUtils.getLang('Menus.sprite_upload_warn') },
+            {
+                title: CommonUtils.getLang('Menus.file_upload_warn_title_image'),
+                desc: CommonUtils.getLang('Menus.file_upload_warn_desc_image'),
+            },
+        ];
     } else if (!allowed.object && allowed.image) {
-        result.warnExt = CommonUtils.getLang('Menus.picture_upload_warn_1');
-        result.title = CommonUtils.getLang('Menus.file_upload_warn_title_image');
-        result.desc = CommonUtils.getLang('Menus.file_upload_warn_desc_image');
+        return [
+            { title: CommonUtils.getLang('Menus.picture_upload_warn_1') },
+            {
+                title: CommonUtils.getLang('Menus.file_upload_warn_title_image'),
+                desc: CommonUtils.getLang('Menus.file_upload_warn_desc_image'),
+            },
+        ];
     }
-    result.desc = `${result.desc} <a 
-            target="_blank" 
-            class="${copyrightClass}"
-            href="https://copyright.or.kr/education/educlass/learning/infringement-case/index.do">
-            [${CommonUtils.getLang('Menus.file_upload_warn_link')}]
-        </a>`;
-    return result;
+    return [];
 };

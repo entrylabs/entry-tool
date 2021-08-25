@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Item from './Item';
 import SideBar from './SideBar';
 import SubMenu from './SubMenu';
 import Selected from './Selected';
-import Foot from '../foot';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 import { EMIT_TYPES as Types } from '@constants';
@@ -11,6 +10,7 @@ import { triggerEvent } from '@actions/index';
 import { connect } from 'react-redux';
 import PopupList from '../../includes/PopupList';
 import _isEmpty from 'lodash/isEmpty';
+import { closePopup, toggleVector } from '@actions/popup';
 
 const Index = (props) => {
     const {
@@ -22,7 +22,11 @@ const Index = (props) => {
         isVectorOnly = false,
         fetch,
         baseUrl,
-        cancelButton = true,
+        isDrawVector,
+        toggleVector,
+        HeaderButtonPortal,
+        selected,
+        submit,
     } = props;
     const [selectedSidebar, selectSidebar] = useState(Object.keys(sidebar)[0]);
     const [selectedSubMenu, selectSubMenu] = useState(null);
@@ -50,8 +54,7 @@ const Index = (props) => {
 
     return (
         <>
-            <div className={theme.pop_content}>
-                <h2 className={theme.blind}>Popup</h2>
+            <div className={theme.section_content}>
                 {!isEmpty && (
                     <SideBar
                         type={type}
@@ -59,26 +62,46 @@ const Index = (props) => {
                         onClick={(item) => selectSidebar(item)}
                     />
                 )}
-                <div className={theme.section_cont}>
-                    <SubMenu menus={subMenu} onClick={(item) => selectSubMenu(item)} />
+                <div className={theme.content_box}>
+                    <SubMenu
+                        menus={subMenu}
+                        onClick={(item) => selectSubMenu(item)}
+                        isDrawVector={isDrawVector}
+                        isVectorOnly={isVectorOnly}
+                        toggleVector={toggleVector}
+                    />
                     <PopupList type={type} theme={theme}>
                         {drawItems()}
                     </PopupList>
-                    {showSelected && <Selected type={type} baseUrl={baseUrl} />}
                 </div>
+                {showSelected && <Selected type={type} baseUrl={baseUrl} />}
             </div>
-            <Foot hasCancelButton={cancelButton} />
+            <HeaderButtonPortal>
+                <a
+                    className={theme.btn}
+                    role="button"
+                    onClick={CommonUtils.handleClick(() => submit({ selected }))}
+                >
+                    {CommonUtils.getLang('Buttons.load')}
+                </a>
+            </HeaderButtonPortal>
         </>
     );
 };
 
 const mapStateToProps = (state) => ({
     isVectorOnly: state.popupReducer.isVectorOnly,
+    selected: state.popupReducer.selected,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     fetch: (type, sidebar, subMenu) =>
         dispatch(triggerEvent(Types.fetch, { type, sidebar, subMenu }, false)),
+    toggleVector: () => dispatch(toggleVector()),
+    submit: (data) => {
+        dispatch(triggerEvent(Types.submit, data, false));
+        dispatch(closePopup());
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);
