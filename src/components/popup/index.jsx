@@ -152,7 +152,14 @@ class Popup extends Component {
             }
             case 'projects':
             case 'favorites':
-                view = <Projects type={selected} data={data} raw={dataObj} />;
+                view = (
+                    <Projects
+                        type={selected}
+                        data={data}
+                        raw={dataObj}
+                        HeaderButtonPortal={HeaderButtonPortal}
+                    />
+                );
                 break;
             default:
                 break;

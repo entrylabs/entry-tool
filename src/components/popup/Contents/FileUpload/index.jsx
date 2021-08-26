@@ -61,13 +61,13 @@ const Index = (props) => {
     return (
         <div className={classname([theme.section_content, theme.file_add_list_content])}>
             <h2 className={theme.blind}>{CommonUtils.getLang('Menus.file_upload')}</h2>
-            {/*{isUploading && (*/}
-            {/*    <div className={theme.fileupload_loding}>*/}
-            {/*        <span className={theme.loding_text}>*/}
-            {/*            {CommonUtils.getLang('Menus.file_upload_loading')}*/}
-            {/*        </span>*/}
-            {/*    </div>*/}
-            {/*)}*/}
+            {isUploading && (
+                <div className={theme.fileupload_loding}>
+                    <span className={theme.loding_text}>
+                        {CommonUtils.getLang('Menus.file_upload_loading')}
+                    </span>
+                </div>
+            )}
             <div className={classname(theme.list_area, theme[`${type}_type`])}>
                 <UploadInput
                     uploadNotAllowedExt={opt.uploadNotAllowedExt}
