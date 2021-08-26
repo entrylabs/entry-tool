@@ -84,7 +84,7 @@ class Popup extends Component {
             return <div />;
         };
 
-        let navigation = <Navigation {...navSettings} isDrawVector={isDrawVector} />;
+        let navigation = <Navigation {...navSettings} />;
         let view = <div>empty</div>;
         switch (selected) {
             case 'select':

@@ -4,6 +4,7 @@ import SoundSelectedListItem from './SoundSelectedListItem';
 
 const ListSelectedItem = {
     sprite: SpriteSelectedListItem,
+    picture: SpriteSelectedListItem,
     sound: SoundSelectedListItem,
 };
 
