@@ -43,6 +43,7 @@ const Index = (props) => {
                     multiSelect={multiSelect}
                     type={type}
                     baseUrl={baseUrl}
+                    playable={type === 'sound'}
                 />
             ));
 
@@ -82,7 +83,7 @@ const Index = (props) => {
                     role="button"
                     onClick={CommonUtils.handleClick(() => submit({ selected }))}
                 >
-                    {CommonUtils.getLang('Buttons.load')}
+                    {CommonUtils.getLang(type === 'sprite' ? 'Buttons.load' : 'Buttons.add2')}
                 </a>
             </HeaderButtonPortal>
         </>

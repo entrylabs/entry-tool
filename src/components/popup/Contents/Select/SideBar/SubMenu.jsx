@@ -36,8 +36,8 @@ export default ({ menus = {}, onClick, isDrawVector, isVectorOnly, toggleVector 
                     );
                 })}
             </div>
-            <div className={theme.checkbox}>
-                {isDrawVector && (
+            {isDrawVector && (
+                <div className={theme.checkbox}>
                     <input
                         className={theme.blind}
                         type="checkbox"
@@ -46,9 +46,12 @@ export default ({ menus = {}, onClick, isDrawVector, isVectorOnly, toggleVector 
                         checked={isVectorOnly}
                         onClick={toggleVector}
                     />
-                )}
-                <label htmlFor="vector">{CommonUtils.getLang('Buttons.show_only_vector')}</label>
-            </div>
+
+                    <label htmlFor="vector">
+                        {CommonUtils.getLang('Buttons.show_only_vector')}
+                    </label>
+                </div>
+            )}
         </div>
     );
 };

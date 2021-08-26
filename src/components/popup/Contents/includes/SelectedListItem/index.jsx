@@ -1,8 +1,10 @@
 import React from 'react';
-import SpriteSelectedItem from './SpriteSelectedListItem';
+import SpriteSelectedListItem from './SpriteSelectedListItem';
+import SoundSelectedListItem from './SoundSelectedListItem';
 
 const ListSelectedItem = {
-    sprite: SpriteSelectedItem,
+    sprite: SpriteSelectedListItem,
+    sound: SoundSelectedListItem,
 };
 
 export default (props) => {

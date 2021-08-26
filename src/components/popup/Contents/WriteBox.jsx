@@ -271,7 +271,6 @@ class WriteBox extends Component {
                                 >
                                     {this.state.font.name}
                                 </div>
-                                {this.state.dropDown}
                             </div>
                             <div
                                 className={this.theme.font_style_box}
@@ -317,6 +316,7 @@ class WriteBox extends Component {
                         />
                     </div>
                     {this.state.colorPicker}
+                    {this.state.dropDown}
                 </div>
                 <HeaderButtonPortal>
                     <a className={this.theme.btn} role="button" onClick={this.onSubmitBtnClicked}>

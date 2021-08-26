@@ -127,13 +127,27 @@ class Popup extends Component {
             case 'expansion': {
                 const url = expsnsionIconBaseUrl || '/lib/entry-js/images/hardware/';
                 navigation = null;
-                view = <Select type={'bigicon'} imageBaseUrl={url} data={data} />;
+                view = (
+                    <Select
+                        type={'bigicon'}
+                        imageBaseUrl={url}
+                        data={data}
+                        HeaderButtonPortal={HeaderButtonPortal}
+                    />
+                );
                 break;
             }
             case 'aiUtilize': {
                 const aiImageurl = expsnsionIconBaseUrl || '/lib/entry-js/images/aiUtilize/';
                 navigation = null;
-                view = <Select type={'bigicon'} imageBaseUrl={aiImageurl} data={data} />;
+                view = (
+                    <Select
+                        type={'bigicon'}
+                        imageBaseUrl={aiImageurl}
+                        data={data}
+                        HeaderButtonPortal={HeaderButtonPortal}
+                    />
+                );
                 break;
             }
             case 'projects':
