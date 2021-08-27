@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import PopupList from '../../includes/PopupList';
 import _isEmpty from 'lodash/isEmpty';
 import { closePopup, toggleVector } from '@actions/popup';
+import classname from 'classnames';
 
 const Index = (props) => {
     const {
@@ -55,7 +56,12 @@ const Index = (props) => {
 
     return (
         <>
-            <div className={theme.section_content}>
+            <div
+                className={classname(
+                    theme.section_content,
+                    CommonUtils.toggleClass(type === 'table', theme.data_select_content)
+                )}
+            >
                 {!isEmpty && (
                     <SideBar
                         type={type}

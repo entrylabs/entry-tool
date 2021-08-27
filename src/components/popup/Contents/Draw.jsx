@@ -7,12 +7,21 @@ import { EMIT_TYPES } from '@constants';
 import Theme from '@utils/Theme';
 import DrawContent from './includes/DrawContent';
 import { setTimeout } from 'window-or-global';
+import { CommonUtils } from '@utils/Common';
 
 const Index = ({ type, goDraw, HeaderButtonPortal }) => {
     const theme = Theme.getStyle('popup');
     return (
-        <div className={classname(theme.section_content, theme.drawing_content)}>
-            {/* TODO: type === 'table' 인 경우 처리 */}
+        <div
+            className={classname(
+                theme.section_content,
+                CommonUtils.toggleClass(
+                    type === 'table',
+                    theme.table_file_add_content,
+                    theme.drawing_content
+                )
+            )}
+        >
             <DrawContent
                 type={type}
                 goDraw={goDraw}

@@ -111,7 +111,13 @@ class Popup extends Component {
                 navigation = <Navigation {...navSettings} searchOption={false} />;
                 break;
             case 'dragUpload':
-                view = <FileDragUpload {...this.property} uploads={uploads} />;
+                view = (
+                    <FileDragUpload
+                        {...this.property}
+                        uploads={uploads}
+                        HeaderButtonPortal={HeaderButtonPortal}
+                    />
+                );
                 navigation = <Navigation {...navSettings} searchOption={false} />;
                 break;
             case 'draw':
