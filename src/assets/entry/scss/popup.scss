@@ -633,7 +633,7 @@
         display: inline-block;
         width: 92px;
         height: 12px;
-        background-image: 
+        background-image:
             radial-gradient( circle 6px at 6px 6px, #4f80ff 100%, transparent 0 ),
             radial-gradient( circle 6px at 6px 6px, #32d27d 100%, transparent 0 ),
             radial-gradient( circle 6px at 6px 6px, #4f80ff 100%, transparent 0 ),
@@ -2055,10 +2055,10 @@
     -o-object-fit: contain;
     object-fit: contain;
     position: absolute;
-    top: 40%;
-    left: 50%;
-    background-color: none;
+    top: calc(50% - 78px);
+    left: calc(50% - 78px);
     background: url('#{$imageDir}/loading.gif') no-repeat;
+    z-index: 10;
 
     .loding_text {
         width: 156px;
