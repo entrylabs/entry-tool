@@ -5,8 +5,9 @@ import { triggerEvent } from '@actions/index';
 import { EMIT_TYPES as Types } from '@constants';
 import { playSound, stopSound } from '@actions/sound';
 
-const SoundSelectItem = ({ theme, item, play, stop, playable, isPlaying, setPlaying }) => {
+const SoundSelectItem = ({ theme, item, play, stop, playable, playInfo, setPlaying }) => {
     const { name } = CommonUtils.getImageSummary(item);
+    const { instance: prevInstance, playing } = playInfo;
     const handleClick = useCallback(
         (e) => {
             if (!playable) {
@@ -16,13 +17,20 @@ const SoundSelectItem = ({ theme, item, play, stop, playable, isPlaying, setPlay
             e.stopPropagation();
 
             const { id } = item;
-            if (isPlaying) {
-                stop({ id, setPlaying: (status) => setPlaying({ id, status }) });
+            if (!playing) {
+                play({
+                    id,
+                    callback: ({ instance, status }) => setPlaying({ id, instance, status }),
+                });
             } else {
-                play({ id, setPlaying: (status) => setPlaying({ id, status }) });
+                stop({
+                    id,
+                    instance: prevInstance,
+                    callback: ({ status }) => setPlaying({ id, status }),
+                });
             }
         },
-        [isPlaying]
+        [playing]
     );
 
     return (
@@ -30,14 +38,14 @@ const SoundSelectItem = ({ theme, item, play, stop, playable, isPlaying, setPlay
             <div className={theme.thmb}>
                 <div
                     className={CommonUtils.toggleClass(
-                        playable && isPlaying,
+                        playable && playing,
                         theme.type_sound,
                         theme.type_play
                     )}
                     onClick={handleClick}
                     style={{ zIndex: 11 }}
                 >
-                    {playable && isPlaying ? (
+                    {playable && playing ? (
                         <div className={theme.bar}>
                             <span />
                             <span />
@@ -55,15 +63,16 @@ const SoundSelectItem = ({ theme, item, play, stop, playable, isPlaying, setPlay
 };
 
 const mapStateToProps = (state, props) => ({
-    isPlaying: state.soundReducer.playIdMap[props.item.id],
+    playInfo: state.soundReducer.playIdMap[props.item.id] || {},
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    play: ({ id, setPlaying }) => dispatch(triggerEvent(Types.play, { id, setPlaying }, false)),
-    stop: ({ id, setPlaying }) => dispatch(triggerEvent(Types.stop, { id, setPlaying }, false)),
-    setPlaying: ({ id, status }) => {
+    play: ({ id, callback }) => dispatch(triggerEvent(Types.play, { id, callback }, false)),
+    stop: ({ id, instance, callback }) =>
+        dispatch(triggerEvent(Types.stop, { id, instance, callback }, false)),
+    setPlaying: ({ id, instance, status }) => {
         if (status) {
-            dispatch(playSound(id));
+            dispatch(playSound(id, instance));
         } else {
             dispatch(stopSound(id));
         }

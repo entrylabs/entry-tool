@@ -11,7 +11,10 @@ export default function soundReducer(state = INITIAL_STATE, action) {
                 ...state,
                 playIdMap: {
                     ...state.playIdMap,
-                    [action.data]: true,
+                    [action.data.id]: {
+                        instance: action.data.instance,
+                        playing: true,
+                    },
                 },
             };
         case STOP_SOUND:
@@ -19,7 +22,10 @@ export default function soundReducer(state = INITIAL_STATE, action) {
                 ...state,
                 playIdMap: {
                     ...state.playIdMap,
-                    [action.data]: false,
+                    [action.data.id]: {
+                        instance: action.data.instance,
+                        playing: false,
+                    },
                 },
             };
         case STOP_ALL_SOUNDS:
