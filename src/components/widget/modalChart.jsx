@@ -123,7 +123,7 @@ const ModalChart = (props) => {
                                         key={`c${generateHash()}`}
                                         table={data}
                                         chart={chart}
-                                        size={{ width: isHorizontalLegend ? '' : 448 }}
+                                        size={{ width: isHorizontalLegend ? 660 : 448 }}
                                     />
                                 )}
                             </div>

@@ -154,7 +154,7 @@ class MusicScale extends Component {
                         {this.makeHalfScaleButtons(scale)}
                         <div className={this.theme.octave_wrapper}>
                             <div className={this.theme.ocatave_wrapper}>
-                                <p>옥타브</p>
+                                <p>{Lang?.Msgs?.microbit2_octave || '옥타브'}</p>
                                 <div className={this.theme.octave_button_wrapper}>
                                     <div
                                         className={this.theme.octave_button}
