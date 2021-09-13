@@ -7,21 +7,27 @@ import { EMIT_TYPES } from '@constants';
 import Theme from '@utils/Theme';
 import DrawContent from './includes/DrawContent';
 import { setTimeout } from 'window-or-global';
+import { CommonUtils } from '@utils/Common';
 
-const Index = ({ type, goDraw }) => {
+const Index = ({ type, goDraw, HeaderButtonPortal }) => {
     const theme = Theme.getStyle('popup');
     return (
         <div
-            className={classname(theme.pop_content, {
-                [theme.table_file_add]: type === 'table',
-            })}
+            className={classname(
+                theme.section_content,
+                CommonUtils.toggleClass(
+                    type === 'table',
+                    theme.table_file_add_content,
+                    theme.drawing_content
+                )
+            )}
         >
-            <div className={theme.section_cont}>
-                <h2 className={theme.blind}>DRAW</h2>
-                <div className={`${theme.cont_box} ${theme.draw}`}>
-                    <DrawContent type={type} goDraw={goDraw} theme={theme} />
-                </div>
-            </div>
+            <DrawContent
+                type={type}
+                goDraw={goDraw}
+                theme={theme}
+                HeaderButtonPortal={HeaderButtonPortal}
+            />
         </div>
     );
 };

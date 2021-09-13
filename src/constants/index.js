@@ -16,6 +16,8 @@ export const EMIT_TYPES = {
     select: 'select',
     itemon: 'itemon',
     itemoff: 'itemoff',
+    play: 'play',
+    stop: 'stop',
     submitUploads: 'uploads',
     uploadFail: 'uploadFail',
     uploads: 'dummyUploads',

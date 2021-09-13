@@ -9,6 +9,7 @@ import { EMIT_TYPES } from '@constants';
 import _cloneDeep from 'lodash/cloneDeep';
 import _includes from 'lodash/includes';
 import Theme from '@utils/Theme';
+import classnames from 'classnames';
 
 /* eslint-disable array-element-newline */
 const FIELDS = {
@@ -72,7 +73,7 @@ class Input extends Component {
     }
 
     render() {
-        const filed = FIELDS[this.props.writeType];
+        const field = FIELDS[this.props.writeType];
         return (
             <div className={this.theme.input_box}>
                 <div
@@ -87,7 +88,7 @@ class Input extends Component {
                     >
                         {CommonUtils.getLang('Workspace.textbox_input')}
                     </label>
-                    <filed.inputType
+                    <field.inputType
                         type="text"
                         id="inpt"
                         name="inpt"
@@ -96,7 +97,7 @@ class Input extends Component {
                     />
                 </div>
                 <ul className={this.theme.list}>
-                    {filed.descriptions.map((description, index) => (
+                    {field.descriptions.map((description, index) => (
                         <li key={index}>{CommonUtils.getLang(description)}</li>
                     ))}
                 </ul>
@@ -133,7 +134,7 @@ class WriteBox extends Component {
                 backgroundColor === '#ffffff' || backgroundColor === 'transparent',
                 this.theme.clear
             );
-            const className = `${CommonUtils.toggleClass(!isColor, this.theme.style_link)} ${
+            const className = `${this.theme.style_link} ${
                 this.theme[`imbtn_pop_font_${key.toLowerCase()}`]
             } ${CommonUtils.toggleClass(isOn, this.theme.on)} ${clear}`;
             return (
@@ -144,7 +145,7 @@ class WriteBox extends Component {
                     title={CommonUtils.getLang(effect.text)}
                 >
                     <span className="blind">글자 {effect.text}</span>
-                    {isColor && <em style={{ backgroundColor }}></em>}
+                    {isColor && <em style={{ backgroundColor }} />}
                 </div>
             );
         });
@@ -251,96 +252,77 @@ class WriteBox extends Component {
     }
 
     render() {
+        const { HeaderButtonPortal } = this.props;
+
         return (
             <React.Fragment>
-                <section className={this.theme.pop_content}>
-                    <div className={this.theme.section_cont}>
-                        {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
-                        <h2 className={this.theme.blind}>글상자</h2>
-                        <div className={this.theme.cont_box}>
-                            <div className={this.theme.write_box}>
-                                <div className={this.theme.write_set}>
-                                    <div className={this.theme.pop_selectbox}>
-                                        <div
-                                            className={`${
-                                                this.theme.select_link
-                                            } ${CommonUtils.toggleClass(
-                                                this.state.dropDown,
-                                                this.theme.imico_pop_select_arr_up,
-                                                this.theme.imico_pop_select_arr_down
-                                            )}`}
-                                            onClick={this.onFontBoxClicked}
-                                            title={CommonUtils.getLang('Workspace.font_family')}
-                                        >
-                                            {this.state.font.name}
-                                        </div>
-                                    </div>
-
-                                    <div
-                                        className={this.theme.font_style_box}
-                                        onClick={this.onEffectBtnClicked}
-                                    >
-                                        {this.drawEffects()}
-                                    </div>
-                                    <div className={this.theme.write_type_box}>
-                                        {/* 링크가 클릭되면 on 클래스 토글 */}
-                                        <a
-                                            className={CommonUtils.toggleClass(
-                                                this.state.writeType === 'one',
-                                                this.theme.on
-                                            )}
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                handle(e, () =>
-                                                    this.setState({ writeType: 'one' })
-                                                );
-                                            }}
-                                        >
-                                            {CommonUtils.getLang('Buttons.single_line')}
-                                        </a>
-                                        <a
-                                            className={CommonUtils.toggleClass(
-                                                this.state.writeType === 'multi',
-                                                this.theme.on
-                                            )}
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                handle(e, () =>
-                                                    this.setState({ writeType: 'multi' })
-                                                );
-                                            }}
-                                        >
-                                            {CommonUtils.getLang('Buttons.multi_line')}
-                                        </a>
-                                    </div>
+                <div className={classnames(this.theme.section_content, this.theme.writing_content)}>
+                    <div className={this.theme.write_box}>
+                        <div className={this.theme.write_set}>
+                            <div className={this.theme.pop_selectbox}>
+                                <div
+                                    className={`${this.theme.select_link} ${CommonUtils.toggleClass(
+                                        this.state.dropDown,
+                                        this.theme.imico_pop_select_arr_up,
+                                        this.theme.imico_pop_select_arr_down
+                                    )}`}
+                                    onClick={this.onFontBoxClicked}
+                                    title={CommonUtils.getLang('Workspace.font_family')}
+                                >
+                                    {this.state.font.name}
                                 </div>
-                                <Input
-                                    writeType={this.state.writeType}
-                                    font={this.state.font}
-                                    effects={this.state.effects}
-                                    onChange={(text) => {
-                                        this.setState({ text });
+                            </div>
+                            <div
+                                className={this.theme.font_style_box}
+                                onClick={this.onEffectBtnClicked}
+                            >
+                                {this.drawEffects()}
+                            </div>
+                            <div className={this.theme.write_type_box}>
+                                {/* 링크가 클릭되면 on 클래스 토글 */}
+                                <a
+                                    className={CommonUtils.toggleClass(
+                                        this.state.writeType === 'one',
+                                        this.theme.on
+                                    )}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handle(e, () => this.setState({ writeType: 'one' }));
                                     }}
-                                />
+                                >
+                                    {CommonUtils.getLang('Buttons.single_line')}
+                                </a>
+                                <a
+                                    className={CommonUtils.toggleClass(
+                                        this.state.writeType === 'multi',
+                                        this.theme.on
+                                    )}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handle(e, () => this.setState({ writeType: 'multi' }));
+                                    }}
+                                >
+                                    {CommonUtils.getLang('Buttons.multi_line')}
+                                </a>
                             </div>
                         </div>
+                        <Input
+                            writeType={this.state.writeType}
+                            font={this.state.font}
+                            effects={this.state.effects}
+                            onChange={(text) => {
+                                this.setState({ text });
+                            }}
+                        />
                     </div>
                     {this.state.colorPicker}
                     {this.state.dropDown}
-                </section>
-                <div className={this.theme.pop_btn_box}>
-                    <a
-                        onClick={(e) => {
-                            e.preventDefault();
-                            this.props.closePopup();
-                        }}
-                    >
-                        {CommonUtils.getLang('Buttons.cancel')}
-                    </a>
-                    <a className={this.theme.active} onClick={this.onSubmitBtnClicked}>
-                        {CommonUtils.getLang('Buttons.apply')}
-                    </a>
                 </div>
+                <HeaderButtonPortal>
+                    <a className={this.theme.btn} role="button" onClick={this.onSubmitBtnClicked}>
+                        {CommonUtils.getLang('Buttons.add2')}
+                    </a>
+                </HeaderButtonPortal>
             </React.Fragment>
         );
     }

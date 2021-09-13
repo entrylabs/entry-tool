@@ -1,6 +1,4 @@
-import React, { useState, useContext, useCallback } from 'react';
-import _every from 'lodash/every';
-import _difference from 'lodash/difference';
+import React, { useState, useContext, useCallback, useEffect } from 'react';
 import Summary from './summary/Summary';
 import TableEditor from './TableEditor';
 import ChartEditor from './chart/ChartEditor';
@@ -11,14 +9,16 @@ import SaveConfirm from './SaveConfirm';
 import EmptyContents from './EmptyContents';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { SUMMARY, TABLE, CHART } from '@constants/dataAnalytics';
-import { isChangeTable } from '@utils/dataAnalytics';
+import { getTrimedTable, isChangeTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
 import { CommonUtils } from '@utils/Common';
+import classname from 'classnames';
 
 const DataAnalyticsEditor = () => {
     const theme = Theme.getStyle('popup');
     const [showConfirm, setShowConfirm] = useState(false);
-    const { dataAnalytics } = useContext(DataAnalyticsContext);
+    const [applyClicked, setApplyClicked] = useState(false);
+    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const {
         tab,
         list,
@@ -30,7 +30,16 @@ const DataAnalyticsEditor = () => {
     } = dataAnalytics;
     const { table = [[]], name = '' } = selected;
 
-    const handleButtonClick = (event) => {
+    const apply = () => {
+        let table;
+        if (tab === TABLE) {
+            table = getTrimedTable(gridRef?.current?.getSheetData().data);
+        }
+        dispatch({ type: 'SAVE', table });
+        setApplyClicked(true);
+    };
+
+    const handleButtonClick = (showConfirm) => (event) => {
         event.preventDefault();
         if (!list.length) {
             return onCloseButtonClick();
@@ -45,7 +54,11 @@ const DataAnalyticsEditor = () => {
                 return onCloseButtonClick();
             }
         }
-        setShowConfirm(true);
+        if (showConfirm) {
+            setShowConfirm(true);
+        } else {
+            apply();
+        }
     };
 
     const handleConfirmClick = useCallback(() => {
@@ -53,7 +66,13 @@ const DataAnalyticsEditor = () => {
         onCloseButtonClick();
     }, []);
 
-    let sectionCSS = theme.chart_content;
+    useEffect(() => {
+        if (applyClicked && !isChanged) {
+            onCloseButtonClick();
+        }
+    }, [applyClicked, isChanged]);
+
+    let containerClass = theme.chart_container;
     let Contents = EmptyContents;
 
     if (selectedIndex !== -1) {
@@ -66,7 +85,7 @@ const DataAnalyticsEditor = () => {
                 break;
             case SUMMARY:
                 Contents = Summary;
-                sectionCSS = theme.summary_content;
+                containerClass = theme.summary_container;
                 break;
         }
     }
@@ -76,30 +95,35 @@ const DataAnalyticsEditor = () => {
             <header className={theme.pop_header}>
                 <h1>{CommonUtils.getLang('DataAnalytics.load_data_analytics')}</h1>
                 <button
-                    onClick={handleButtonClick}
+                    onClick={handleButtonClick(true)}
                     className={`${theme.btn_back} ${theme.imbtn_pop_close}`}
                 >
-                    <span className={theme.blind}>뒤로가기</span>
+                    <span className={theme.blind}>{CommonUtils.getLang('Buttons.back')}</span>
                 </button>
+                <a className={theme.btn} role="button" onClick={handleButtonClick(false)}>
+                    {CommonUtils.getLang('Buttons.apply')}
+                </a>
             </header>
-            <section className={`${theme.pop_content} ${sectionCSS}`}>
+            <div className={classname(theme.section_container, containerClass)}>
                 <SideTab />
-                {selectedIndex === -1 ? (
-                    <section className={theme.content}>
-                        <p className={theme.caution_dsc}>
-                            {CommonUtils.getLang('DataAnalytics.select_table')}
-                        </p>
-                    </section>
-                ) : (
-                    <div className={theme.section_cont}>
-                        <div className={theme.sheet_form_box}>
-                            <Title key={`table_title_${selectedIndex}`} title={name} />
-                            <Tab />
+                <div className={theme.container_inner}>
+                    {selectedIndex === -1 ? (
+                        <section className={theme.content}>
+                            <p className={theme.caution_dsc}>
+                                {CommonUtils.getLang('DataAnalytics.select_table')}
+                            </p>
+                        </section>
+                    ) : (
+                        <div className={theme.section_content}>
+                            <div className={theme.sheet_form_box}>
+                                <Title key={`table_title_${selectedIndex}`} title={name} />
+                                <Tab />
+                            </div>
+                            <Contents />
                         </div>
-                        <Contents />
-                    </div>
-                )}
-            </section>
+                    )}
+                </div>
+            </div>
             {showConfirm && <SaveConfirm onClick={handleConfirmClick} />}
         </div>
     );

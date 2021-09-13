@@ -10,7 +10,16 @@ import EmptyContents from './EmptyContents';
 import Item from './Item';
 import { GridLayout } from '@egjs/react-infinitegrid';
 
-const Index = ({ type, data = [], avatarImage, raw, closePopup, submit, fetch, fetchMore }) => {
+const Index = ({
+    type,
+    data = [],
+    avatarImage,
+    raw,
+    submit,
+    fetch,
+    fetchMore,
+    HeaderButtonPortal,
+}) => {
     const totalCount = raw.total || data.length;
     const theme = Theme.getStyle('popup');
     const [selected, select] = useState(null);
@@ -35,65 +44,57 @@ const Index = ({ type, data = [], avatarImage, raw, closePopup, submit, fetch, f
 
         // this.setState({ list: list.concat(items) });
     };
-    const onLayoutComplete = ({ isLayout, endLoading, target, orgScrollPos }) => {
+    const onLayoutComplete = ({ isLayout, endLoading }) => {
         !isLayout && endLoading();
     };
 
     return (
         <>
-            <section className={classname(theme.pop_content, theme.art_content)}>
-                <div className={theme.section_cont}>
-                    <h2 className={theme.blind}>{CommonUtils.getLang('Menus.my_project')}</h2>
-                    <strong className={theme.list_sjt}>
-                        {CommonUtils.getLang('Menus.all')} ({totalCount})
-                    </strong>
-                    <div className={theme.scroll_box}>
-                        <GridLayout
-                            tag="ul"
-                            className={theme.list}
-                            useFirstRender={false}
-                            options={{
-                                isConstantSize: true,
-                                transitionDuration: 0.2,
-                                isOverflowScroll: true,
-                            }}
-                            layoutOptions={{
-                                margin: 18,
-                                align: 'center',
-                            }}
-                            onAppend={onAppend}
-                            onLayoutComplete={onLayoutComplete}
-                        >
-                            {data
-                                .filter(({ user }) => user)
-                                .map((item, index) => (
-                                    <Item
-                                        key={index}
-                                        item={item}
-                                        avatarImgUrl={avatarImage}
-                                        isSelected={selected === index}
-                                        onClick={() => {
-                                            select(selected !== index ? index : null);
-                                        }}
-                                    />
-                                ))}
-                        </GridLayout>
-                        asd
-                    </div>
-                </div>
-            </section>
-            <div className={theme.pop_btn_box}>
-                <div onClick={CommonUtils.handleClick(closePopup)}>
-                    {CommonUtils.getLang('Buttons.cancel')}
-                </div>
-
-                <div
-                    className={theme.active}
+            <div className={classname(theme.section_content, theme.art_content)}>
+                <h2 className={theme.blind}>{CommonUtils.getLang('Menus.my_project')}</h2>
+                <strong className={theme.list_sjt}>
+                    {CommonUtils.getLang('Menus.all')} ({totalCount})
+                </strong>
+                <GridLayout
+                    tag="ul"
+                    className={theme.list}
+                    useFirstRender={false}
+                    options={{
+                        isConstantSize: true,
+                        transitionDuration: 0.2,
+                        isOverflowScroll: true,
+                    }}
+                    layoutOptions={{
+                        margin: 18,
+                        align: 'left',
+                    }}
+                    onAppend={onAppend}
+                    onLayoutComplete={onLayoutComplete}
+                >
+                    {data
+                        .filter(({ user }) => user)
+                        .map((item, index) => (
+                            <Item
+                                key={index}
+                                item={item}
+                                avatarImgUrl={avatarImage}
+                                isSelected={selected === index}
+                                onClick={() => {
+                                    select(selected !== index ? index : null);
+                                }}
+                            />
+                        ))}
+                </GridLayout>
+            </div>
+            <HeaderButtonPortal>
+                <a
+                    className={theme.btn}
+                    role="button"
                     onClick={CommonUtils.handleClick(() => submit(data[selected]))}
                 >
-                    {CommonUtils.getLang('Menus.Load')}
-                </div>
-            </div>
+                    {CommonUtils.getLang('Buttons.load')}
+                </a>
+            </HeaderButtonPortal>
         </>
     );
 };
