@@ -61,7 +61,7 @@ const Index = (props) => {
     return (
         <div className={classname([theme.section_content, theme.file_add_list_content])}>
             <h2 className={theme.blind}>{CommonUtils.getLang('Menus.file_upload')}</h2>
-            <div className={classname(theme.list_area, theme[`${type}_type`])}>
+            <div className={classname(theme.list_area, theme[`${type}_list_area`])}>
                 <UploadInput
                     uploadNotAllowedExt={opt.uploadNotAllowedExt}
                     uploadAllowed={opt.uploadAllowed}
