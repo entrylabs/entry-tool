@@ -6,6 +6,9 @@ import {
     onToastDataAnalytics,
     onChangeDataAnalytics,
     onAlertDataAnalytics,
+    onCloseButtonClick,
+    onAddTableButtonClick,
+    onRemoveTable,
 } from '@actions/editor';
 import withWrapper from '@hoc/withWrapper';
 
@@ -20,6 +23,9 @@ const mapDispatchToProps = (dispatch) => ({
     onToastDataAnalytics: (data) => dispatch(onToastDataAnalytics(data)),
     onChangeDataAnalytics: (data) => dispatch(onChangeDataAnalytics(data)),
     onAlertDataAnalytics: (data) => dispatch(onAlertDataAnalytics(data)),
+    onCloseButtonClick: () => dispatch(onCloseButtonClick()),
+    onAddTableButtonClick: () => dispatch(onAddTableButtonClick()),
+    onRemoveTable: (data) => dispatch(onRemoveTable(data)),
 });
 
 export default withWrapper({ type: 'editor' })(

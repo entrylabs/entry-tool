@@ -54,7 +54,8 @@
         overflow: hidden;
         height: 15px;
         padding: 17px 0 14px 7px;
-        font-weight: 600;
+        font-size: 14px;
+        font-weight: bold;
         color: #2c313d;
         letter-spacing: 0;
         line-height: 15px;
@@ -135,10 +136,58 @@
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
     border: solid 1px #d6e9f4;
     background-color: #c6deeb;
+    cursor: pointer;
 }
+
 .led_item_selected {
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 1);
     border-color: #d6e9f4;
+}
+
+.led_item_selected_1 {
+    background-color: rgba(255, 255, 255, 0.11);
+    border-color: #d6e9f4;
+}
+.led_item_selected_2 {
+    background-color: rgba(255, 255, 255, 0.22);
+    border-color: #d6e9f4;
+}
+.led_item_selected_3 {
+    background-color: rgba(255, 255, 255, 0.33);
+    border-color: #d6e9f4;
+}
+.led_item_selected_4 {
+    background-color: rgba(255, 255, 255, 0.44);
+    border-color: #d6e9f4;
+}
+.led_item_selected_5 {
+    background-color: rgba(255, 255, 255, 0.55);
+    border-color: #d6e9f4;
+}
+.led_item_selected_6 {
+    background-color: rgba(255, 255, 255, 0.66);
+    border-color: #d6e9f4;
+}
+.led_item_selected_7 {
+    background-color: rgba(255, 255, 255, 0.77);
+    border-color: #d6e9f4;
+}
+.led_item_selected_8 {
+    background-color: rgba(255, 255, 255, 0.88);
+    border-color: #d6e9f4;
+}
+.led_item_selected_9 {
+    background-color: rgba(255, 255, 255, 1);
+    border-color: #d6e9f4;
+}
+.led_item_indicator {
+    width: 100%;
+    height: 100%;
+    line-height: 30px;
+    font-size: 10pt;
+    color: rgba($color: #aaaaaa, $alpha: 1);
+    text-align: center;
+    opacity: 0.6;
 }
 
 //컬러 피커
@@ -388,7 +437,13 @@
                     height: 100%;
                     transform-origin: right 50%;
                     transform: rotate(180deg);
-                    background-image: repeating-linear-gradient(45deg, rgb(255, 181, 0), rgb(255, 195, 50) 1px, rgb(255, 181, 0) 4px, rgb(255, 181, 0) 1px);
+                    background-image: repeating-linear-gradient(
+                        45deg,
+                        rgb(255, 181, 0),
+                        rgb(255, 195, 50) 1px,
+                        rgb(255, 181, 0) 4px,
+                        rgb(255, 181, 0) 1px
+                    );
                     border-bottom-left-radius: 90px;
                     border-top-left-radius: 90px;
                 }
@@ -481,6 +536,204 @@
         }
     }
 }
+
+// 음계 표현용, 마이크로비트에서 필요
+.tooltip_box.music_scale {
+    width: 507px;
+    height: 258px;
+    background-color: #d6e9f4;
+    border: 1px #bfd8e6 solid;
+    z-index: 2;
+    flex-direction: row;
+    display: flex;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+    font-family: NanumGothicOTF;
+
+    .tooltip_inner {
+        height: 226px;
+        width: 100%;
+        display: flex;
+        margin: 16px;
+        border-radius: 6px;
+        position: relative;
+        overflow: visible;
+    }
+
+    .scale_common > p {
+        width: 100%;
+        height: 19px;
+        font-size: 18px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: center;
+        color: white;
+    }
+
+    .normal_scale:before {
+        content: '';
+        display: inline-block;
+        height: calc(100% - 45px);
+    }
+    .half_scale:before {
+        content: '';
+        display: inline-block;
+        height: calc(100% - 60px);
+    }
+
+    .normal_scale {
+        flex: 1;
+        background: white;
+        border: #d6e9f4 solid 1px;
+        border-radius: 6px;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+        margin: 0 1px;
+        color: #606c73;
+        > p {
+            color: #606c73;
+        }
+    }
+    .normal_scale:active {
+        background-color: #eceff0;
+    }
+
+    .half_scale {
+        position: absolute;
+        background-color: #606c73;
+        flex: 1;
+        width: 50px;
+        height: 120px;
+        top: 0;
+        border-radius: 0 0 6px 6px;
+        color: white;
+    }
+
+    .half_scale > p > span {
+        color: #b9d3e2;
+    }
+
+    .half_scale:active {
+        background-color: #40484d;
+    }
+
+    .octave_wrapper {
+        width: 55px;
+        margin: 30px 0px;
+        display: flex;
+        flex-direction: column;
+        color: #606c73;
+        font-family: NanumGothicOTF;
+        margin-left: 10px;
+        text-align: center;
+        font-weight: bold;
+        > p {
+            width: 100%;
+            text-align: center;
+            width: 44px;
+            height: 18px;
+            margin: 40px 0 12px 16px;
+            font-size: 16px;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: -0.64px;
+            text-align: right;
+            word-break: keep-all;
+        }
+        .octave_button_wrapper {
+            display: flex;
+            margin: 0 auto;
+            flex-direction: column;
+            margin-top: 12px;
+        }
+        .octave_ind {
+            margin: 0 auto;
+            > p {
+                width: 40px;
+                height: 40px;
+                border: solid 1px #d4d4d4;
+                background-color: white;
+                font-size: 14px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 40px;
+                letter-spacing: -0.56px;
+                text-align: center;
+                color: #2c313d;
+            }
+        }
+        .octave_button {
+            margin: 0 auto;
+            display: flex;
+            width: 40px;
+            height: 39px;
+            border-radius: 4px 4px 0 0;
+            border: solid 1px #d4d4d4;
+            background-color: #f4f4f4;
+            font-weight: normal;
+            > p {
+                font-size: 15pt;
+                width: 100%;
+                height: 100%;
+                line-height: 40px;
+                text-align: center;
+            }
+            > span {
+                width: 12px;
+                height: 2px;
+                border-radius: 1.5px;
+                background-color: #606c73;
+                margin-top: 18px;
+                margin-left: 14px;
+            }
+        }
+        .octave_button.bottom {
+            border-radius: 0 0 4px 4px;
+            border: solid 1px #d4d4d4;
+            font-size: 20pt;
+        }
+        .octave_button:active {
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+            transform: translateY(2px);
+        }
+    }
+
+    .half_1 {
+        left: 34px;
+    }
+    .half_2 {
+        left: 94px;
+    }
+    .half_3 {
+        left: 214px;
+    }
+    .half_4 {
+        left: 274px;
+    }
+    .half_5 {
+        left: 334px;
+    }
+
+    .free > i {
+        background-color: #d6e9f4;
+        border: 1px #bfd8e6 solid;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+    }
+
+    .scale_common.selected {
+        background-color: #ffc233;
+        p {
+            color: white;
+        }
+        p > span {
+            color: white;
+        }
+    }
+}
+
 // 타임박스 - 패드만 있는 경우
 .tooltip_box.pad_only {
     width: 216px;
@@ -544,12 +797,12 @@
     position: absolute;
     left: 46px;
     top: 0;
-    width: 242px;
-    padding: 16px 16px 14px 16px;
+    width: 340px;
+    padding: 16px 0 14px 4px;
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #e2e2e2;
-    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 6px 0 rgba(124, 124, 124, 0.06);
     font-size: 14px;
     color: #2c313d;
     line-height: 15px;
@@ -559,8 +812,8 @@
     }
     .graph_list li {
         float: left;
-        width: 40px;
-        margin-left: 16px;
+        width: 64px;
+        margin-left: 0;
         a {
             display: block;
             font-size: 14px;
@@ -568,10 +821,12 @@
             color: #2c313d;
             letter-spacing: -0.5px;
             text-align: center;
+            white-space: nowrap;
             line-height: 15px;
         }
         a:before {
             display: block;
+            width: 40px;
             height: 40px;
             margin: 0 auto 10px;
             background-size: 40px auto;
@@ -592,6 +847,9 @@
         &.scatter a:before {
             background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
         }
+        &.histogram a:before {
+            background-image: url('#{$imageDir}/icon_chart_sel05_on.svg');
+        }
     }
     .arr {
         position: absolute;
@@ -608,8 +866,36 @@
             height: 14px;
             background-color: #fff;
             border: 1px solid #e2e2e2;
-            box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.25);
+            box-shadow: 0 1px 6px 0 rgba(124, 124, 124, 0.06);
             transform: translate(50%, 50%) rotate(45deg);
         }
-    }   
+    }
+}
+
+// 꼭지점 없는 툴팁
+.cell_layer {
+    position: absolute;
+    box-sizing: border-box;
+    padding: 0 8px;
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.25);
+    z-index: 100;
+    ul {
+        overflow: hidden;
+        li {
+            border-top: 1px solid #f2f2f2;
+        }
+        li:first-of-type {
+            border-top: 0;
+        }
+        .link {
+            display: block;
+            padding: 16px 8px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c313d;
+            line-height: 16px;
+        }
+    }
 }

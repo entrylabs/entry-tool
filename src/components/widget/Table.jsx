@@ -5,14 +5,13 @@ import Grid from '@toast-ui/react-grid';
 import { Prompt } from '@entrylabs/modal';
 
 import Theme from '@utils/Theme';
-import { CommonUtils, getHeader, getData } from '@utils/Common';
+import { CommonUtils } from '@utils/Common';
+import { getHeader, getData } from '@utils/dataAnalytics';
 import ContextMenu from '../widget/contextMenu';
 import OutsideClick from '../common/outsideClick';
 
 import 'tui-grid/dist/tui-grid.css';
 import '@entrylabs/modal/dist/entry/entry-modal.css';
-
-import Styles from '@assets/entry/scss/popup.scss';
 
 const LEFT_CLICK = 1;
 const RIGHT_CLICK = 3;
@@ -317,8 +316,8 @@ const Table = (props) => {
 
         addColumn
             ? addColumn(colIndex, columnName)
-            : setTable((table) => {
-                  return table.map((row, index) => {
+            : setTable((table) =>
+                  table.map((row, index) => {
                       row.splice(
                           colIndex,
                           0,
@@ -331,8 +330,8 @@ const Table = (props) => {
                                 )
                       );
                       return row;
-                  });
-              });
+                  })
+              );
     };
 
     const handleEditingFinish = useCallback(
@@ -356,7 +355,7 @@ const Table = (props) => {
     const theme = Theme.getStyle('table');
 
     return (
-        <div className={`${theme.Table} ${Styles.tui_grid}`} onContextMenu={handleContextMenu}>
+        <div className={`${theme.Table} ${theme.tui_grid}`} onContextMenu={handleContextMenu}>
             <OutsideClick
                 onOutsideClick={() => {
                     const { current = {} } = gridRef;

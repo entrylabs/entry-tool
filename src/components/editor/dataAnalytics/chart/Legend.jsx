@@ -1,35 +1,63 @@
 import React, { useContext, useState, useRef } from 'react';
-import _ from 'lodash';
-import { DataAnalyticsContext } from '../context/DataAnalyticsContext';
-import { CommonUtils, getNumberColumnIndexesBySelectedColumns } from '@utils/Common';
+import _some from 'lodash/some';
+import _reduce from 'lodash/reduce';
+import _findIndex from 'lodash/findIndex';
 import Dropdown from '@components/widget/dropdown';
+import { CommonUtils } from '@utils/Common';
+import { PIE, BAR, LINE, SCATTER, HISTOGRAM } from '@constants/dataAnalytics';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
+import { getNumberColumnIndexesBySelectedColumns, getTrimedTable } from '@utils/dataAnalytics';
+import Theme from '@utils/Theme';
 
-import Styles from '@assets/entry/scss/popup.scss';
-
-const Legend = (props) => {
-    const { checkBox, disabled, selectedLegend, dropdownItems = [] } = props;
-    const [showDropdown, setShowDropdown] = useState(false);
+const Legend = () => {
+    const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
+    const [showDropdown, setShowDropdown] = useState(false);
     const axisRef = useRef();
-    const { table } = dataAnalytics;
-    const items = (checkBox
-        ? getNumberColumnIndexesBySelectedColumns(table, dropdownItems)
-        : dropdownItems
-    ).map((index) => [table[0][index], index]);
+    const { selected = {} } = dataAnalytics;
+    const { table: selectedTable, chart, chartIndex = 0 } = selected;
+    const { yIndex = 0, xIndex, categoryIndexes: selectedLegend, type } = chart[chartIndex];
+    const table = getTrimedTable(selectedTable);
+    const checkBox = type === BAR || type === LINE || type === HISTOGRAM;
+    const fields = [...table[0]];
+    const dropdownItems = _reduce(
+        fields,
+        (prev, __, index) =>
+            !_some([xIndex, yIndex], (banIndex) => index === banIndex) ? [...prev, index] : prev,
+        []
+    );
+    const items = (type === SCATTER
+        ? dropdownItems
+        : getNumberColumnIndexesBySelectedColumns(table, dropdownItems)
+    ).map((index) => [fields[index], index]);
+    const disabled =
+        (xIndex === -1 || (type === SCATTER && yIndex === -1) || (type !== PIE && !items.length)) &&
+        (type !== HISTOGRAM || !items.length);
+    const titleLabel =
+        type === PIE
+            ? CommonUtils.getLang('DataAnalytics.value')
+            : CommonUtils.getLang('DataAnalytics.legend');
+
+    if (type === PIE) {
+        items.push([CommonUtils.getLang('DataAnalytics.quantity'), fields.length]);
+        fields.push(CommonUtils.getLang('DataAnalytics.quantity'));
+    }
+    if (type === SCATTER) {
+        items.push([CommonUtils.getLang('DataAnalytics.not_distinguished'), fields.length]);
+        fields.push(CommonUtils.getLang('DataAnalytics.not_distinguished'));
+    }
 
     const getTitle = () => {
         if (checkBox) {
             if (!selectedLegend.length) {
-                return CommonUtils.getLang('DataAnalytics.legend');
+                return titleLabel;
             }
             if (selectedLegend.length === 1) {
-                return table[0][selectedLegend[0]];
+                return fields[selectedLegend[0]];
             }
-            return `${table[0][selectedLegend[0]]} 외 ${selectedLegend.length - 1}건`;
+            return `${fields[selectedLegend[0]]} 외 ${selectedLegend.length - 1}건`;
         }
-        return !table[0][selectedLegend[0]]
-            ? CommonUtils.getLang('DataAnalytics.legend')
-            : table[0][selectedLegend[0]];
+        return !fields[selectedLegend[0]] ? titleLabel : fields[selectedLegend[0]];
     };
 
     const handleSelectDropDown = (value) => {
@@ -58,50 +86,46 @@ const Legend = (props) => {
     };
 
     return (
-        <div className={Styles.legend_cell}>
-            <strong className={Styles.cell_sjt}>
-                {CommonUtils.getLang('DataAnalytics.legend')}
-            </strong>
+        <div className={theme.select_group}>
+            <label htmlFor="ChartName" className={theme.tit_label}>
+                {titleLabel}
+            </label>
             <div
-                className={
-                    disabled ? `${Styles.pop_selectbox} ${Styles.disabled}` : Styles.pop_selectbox
-                }
+                ref={axisRef}
+                className={`${theme.pop_selectbox} ${disabled ? theme.disabled : ''}`}
+                style={{ width: 153 }}
             >
                 <div
-                    className={`${Styles.select_link} ${
+                    className={`${theme.select_link} ${
                         showDropdown
-                            ? Styles.imico_pop_select_arr_up
-                            : Styles.imico_pop_select_arr_down
+                            ? theme.imico_pop_select_arr_up
+                            : theme.imico_pop_select_arr_down
                     }`}
                     onClick={disabled ? () => {} : handleClick}
-                    ref={axisRef}
                 >
                     {getTitle()}
                 </div>
             </div>
 
-            {showDropdown && checkBox && (
-                <Dropdown
-                    multiple
-                    showSelectAll={true}
-                    checkedIndex={selectedLegend.map((index) =>
-                        _.findIndex(
-                            getNumberColumnIndexesBySelectedColumns(table, dropdownItems),
-                            (categoryIndex) => categoryIndex === index
-                        )
-                    )}
-                    items={items}
-                    onOutsideClick={handleCheckOutsideClick}
-                    positionDom={axisRef.current}
-                />
-            )}
-
-            {showDropdown && !checkBox && (
+            {showDropdown && (
                 <Dropdown
                     items={items}
                     onSelectDropdown={handleSelectDropDown}
-                    onOutsideClick={handleOutsideClick}
+                    onOutsideClick={checkBox ? handleCheckOutsideClick : handleOutsideClick}
                     positionDom={axisRef.current}
+                    checkedIndex={
+                        checkBox
+                            ? selectedLegend.map((index) =>
+                                  _findIndex(
+                                      getNumberColumnIndexesBySelectedColumns(table, dropdownItems),
+                                      (categoryIndex) => categoryIndex === index
+                                  )
+                              )
+                            : ''
+                    }
+                    multiple={checkBox && type !== HISTOGRAM}
+                    showSelectAll={checkBox && type !== HISTOGRAM}
+                    maximumSelectionLength={checkBox && type === HISTOGRAM ? 3 : ''}
                 />
             )}
         </div>

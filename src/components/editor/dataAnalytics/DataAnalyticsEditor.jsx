@@ -1,66 +1,130 @@
-import React, { useContext } from 'react';
-import ReactDOM from 'react-dom';
-import Header from './Header';
+import React, { useState, useContext, useCallback, useEffect } from 'react';
 import Summary from './summary/Summary';
 import TableEditor from './TableEditor';
 import ChartEditor from './chart/ChartEditor';
-import { DataAnalyticsContext } from './context/DataAnalyticsContext';
-import { SUMMARY, TABLE, CHART, TAB_ITEMS } from './Constants';
-import Styles from '@assets/entry/scss/popup.scss';
-
-const Portal = ({ children }) => {
-    const el = document.querySelector('body');
-    return ReactDOM.createPortal(children, el);
-};
+import SideTab from './SideTab';
+import Tab from './Tab';
+import Title from './Title';
+import SaveConfirm from './SaveConfirm';
+import EmptyContents from './EmptyContents';
+import { DataAnalyticsContext } from '@contexts/dataAnalytics';
+import { SUMMARY, TABLE, CHART } from '@constants/dataAnalytics';
+import { getTrimedTable, isChangeTable } from '@utils/dataAnalytics';
+import Theme from '@utils/Theme';
+import { CommonUtils } from '@utils/Common';
+import classname from 'classnames';
 
 const DataAnalyticsEditor = () => {
+    const theme = Theme.getStyle('popup');
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [applyClicked, setApplyClicked] = useState(false);
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { tab, table, isFullScreen } = dataAnalytics;
+    const {
+        tab,
+        list,
+        gridRef,
+        selected = {},
+        isChanged,
+        selectedIndex,
+        onCloseButtonClick,
+    } = dataAnalytics;
+    const { table = [[]], name = '' } = selected;
 
-    const handleFullScreenClick = (event) => {
-        event.preventDefault();
-        dispatch({
-            type: 'TOGGLE_FULLSCREEN',
-            isFullScreen: !isFullScreen,
-        });
+    const apply = () => {
+        let table;
+        if (tab === TABLE) {
+            table = getTrimedTable(gridRef?.current?.getSheetData().data);
+        }
+        dispatch({ type: 'SAVE', table });
+        setApplyClicked(true);
     };
 
-    const header = (
-        <Header
-            selected={tab}
-            tabItems={TAB_ITEMS}
-            isFullScreen={isFullScreen}
-            onFullScreenClick={handleFullScreenClick}
-        />
-    );
-    let content = null;
-    if (table) {
+    const handleButtonClick = (showConfirm) => (event) => {
+        event.preventDefault();
+        if (!list.length) {
+            return onCloseButtonClick();
+        }
+        if (!isChanged) {
+            if (tab === TABLE) {
+                const grid = gridRef?.current?.getSheetData().data;
+                if (!isChangeTable(table, grid)) {
+                    return onCloseButtonClick();
+                }
+            } else {
+                return onCloseButtonClick();
+            }
+        }
+        if (showConfirm) {
+            setShowConfirm(true);
+        } else {
+            apply();
+        }
+    };
+
+    const handleConfirmClick = useCallback(() => {
+        setShowConfirm(false);
+        onCloseButtonClick();
+    }, []);
+
+    useEffect(() => {
+        if (applyClicked && !isChanged) {
+            onCloseButtonClick();
+        }
+    }, [applyClicked, isChanged]);
+
+    let containerClass = theme.chart_container;
+    let Contents = EmptyContents;
+
+    if (selectedIndex !== -1) {
         switch (tab) {
-            case SUMMARY:
-                content = <Summary />;
-                break;
             case TABLE:
-                content = <TableEditor />;
+                Contents = TableEditor;
                 break;
             case CHART:
-                content = <ChartEditor />;
+                Contents = ChartEditor;
                 break;
-            default:
+            case SUMMARY:
+                Contents = Summary;
+                containerClass = theme.summary_container;
                 break;
         }
     }
 
-    return isFullScreen ? (
-        <Portal>
-            <div className={`${Styles.data_detail_wrap} ${Styles.full}`}>
-                {header}
-                {content}
+    return (
+        <div className={theme.popup_wrap}>
+            <header className={theme.pop_header}>
+                <h1>{CommonUtils.getLang('DataAnalytics.load_data_analytics')}</h1>
+                <button
+                    onClick={handleButtonClick(true)}
+                    className={`${theme.btn_back} ${theme.imbtn_pop_close}`}
+                >
+                    <span className={theme.blind}>{CommonUtils.getLang('Buttons.back')}</span>
+                </button>
+                <a className={theme.btn} role="button" onClick={handleButtonClick(false)}>
+                    {CommonUtils.getLang('Buttons.apply')}
+                </a>
+            </header>
+            <div className={classname(theme.section_container, containerClass)}>
+                <SideTab />
+                <div className={theme.container_inner}>
+                    {selectedIndex === -1 ? (
+                        <section className={theme.content}>
+                            <p className={theme.caution_dsc}>
+                                {CommonUtils.getLang('DataAnalytics.select_table')}
+                            </p>
+                        </section>
+                    ) : (
+                        <div className={theme.section_content}>
+                            <div className={theme.sheet_form_box}>
+                                <Title key={`table_title_${selectedIndex}`} title={name} />
+                                <Tab />
+                            </div>
+                            <Contents />
+                        </div>
+                    )}
+                </div>
             </div>
-        </Portal>
-    ) : (
-        <div className={`${Styles.data_detail_wrap}`}>
-            {header}
-            {content}
+            {showConfirm && <SaveConfirm onClick={handleConfirmClick} />}
         </div>
     );
 };

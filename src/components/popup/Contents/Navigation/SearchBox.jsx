@@ -17,6 +17,7 @@ const Index = ({ projectNavOptions, searchOption = {}, triggerSearch }) => {
         sort: DropdownOption.sort[0],
         period: DropdownOption.period[0],
     });
+    const [isActive, setActive] = useState(false);
 
     const search = (e) => {
         e.preventDefault();
@@ -46,13 +47,15 @@ const Index = ({ projectNavOptions, searchOption = {}, triggerSearch }) => {
                         );
                     })}
                 {searchOption.query && (
-                    <div className={theme.srch_box}>
+                    <div className={classname([theme.srch_box, { [theme.active]: isActive }])}>
                         <input
                             type="text"
                             id="srch"
                             name="searchQuery"
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
+                            onFocus={() => setActive(true)}
+                            onBlur={() => setActive(false)}
                         />
                         <button
                             type="button"

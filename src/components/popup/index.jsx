@@ -6,6 +6,7 @@ import classname from 'classnames';
 import Navigation from './Contents/Navigation';
 import Select from './Contents/Select';
 import FileUpload from './Contents/FileUpload/index';
+import FileDragUpload from './Contents/FileDragUpload/index';
 import WriteBox from './Contents/WriteBox';
 import Draw from './Contents/Draw';
 import Projects from './Contents/Projects/index';
@@ -14,11 +15,14 @@ import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 import root from 'window-or-global';
 import Modal from './Modal';
+import * as ReactDOM from 'react-dom';
 
-class Sprite extends Component {
+class Popup extends Component {
     constructor(props) {
         super(props);
         this.theme = Theme.getStyle('popup');
+        this.headerButtonRef = React.createRef();
+
         const { navigations = {}, type, initState } = this.property;
         this.state = {
             navigation: Object.keys(navigations)[0] || type,
@@ -73,40 +77,95 @@ class Sprite extends Component {
         const isOld = dataObj && dataObj.data;
         const uploads = isOld ? dataObj.uploads : uploaded;
         const data = isOld ? dataObj.data : dataObj;
+        const HeaderButtonPortal = ({ children }) => {
+            if (this.headerButtonRef.current) {
+                return ReactDOM.createPortal(children, this.headerButtonRef.current);
+            }
+            return <div />;
+        };
 
-        let navigation = <Navigation {...navSettings} isDrawVector={isDrawVector} />;
+        let navigation = <Navigation {...navSettings} />;
         let view = <div>empty</div>;
         switch (selected) {
             case 'select':
-                view = <Select {...this.property} multiSelect={multiSelect} showSelected={showSelected} data={data} />;
+                view = (
+                    <Select
+                        {...this.property}
+                        isDrawVector={isDrawVector}
+                        multiSelect={multiSelect}
+                        showSelected={showSelected}
+                        data={data}
+                        HeaderButtonPortal={HeaderButtonPortal}
+                    />
+                );
                 navigation = <Navigation {...navSettings} isDrawVector={isDrawVector} />;
                 break;
             case 'upload':
-                view = <FileUpload {...this.property} uploads={uploads} />;
+                view = (
+                    <FileUpload
+                        {...this.property}
+                        uploads={uploads}
+                        HeaderButtonPortal={HeaderButtonPortal}
+                    />
+                );
+                navigation = <Navigation {...navSettings} searchOption={false} />;
+                break;
+            case 'dragUpload':
+                view = (
+                    <FileDragUpload
+                        {...this.property}
+                        uploads={uploads}
+                        HeaderButtonPortal={HeaderButtonPortal}
+                    />
+                );
                 navigation = <Navigation {...navSettings} searchOption={false} />;
                 break;
             case 'draw':
-                view = <Draw type={type} />;
+                view = <Draw type={type} HeaderButtonPortal={HeaderButtonPortal} />;
                 navigation = <Navigation {...navSettings} searchOption={false} />;
                 break;
             case 'write':
-                view = <WriteBox fontOption={writeBoxOption} />;
+                view = (
+                    <WriteBox fontOption={writeBoxOption} HeaderButtonPortal={HeaderButtonPortal} />
+                );
                 navigation = <Navigation {...navSettings} searchOption={false} />;
                 break;
             case 'expansion': {
                 const url = expsnsionIconBaseUrl || '/lib/entry-js/images/hardware/';
                 navigation = null;
-                view = <Select type={'bigicon'} imageBaseUrl={url} data={data} />;
+                view = (
+                    <Select
+                        type={'bigicon'}
+                        imageBaseUrl={url}
+                        data={data}
+                        HeaderButtonPortal={HeaderButtonPortal}
+                    />
+                );
                 break;
             }
-            case 'aiUtilize':
+            case 'aiUtilize': {
                 const aiImageurl = expsnsionIconBaseUrl || '/lib/entry-js/images/aiUtilize/';
                 navigation = null;
-                view = <Select type={'bigicon'} imageBaseUrl={aiImageurl} data={data} />;
+                view = (
+                    <Select
+                        type={'bigicon'}
+                        imageBaseUrl={aiImageurl}
+                        data={data}
+                        HeaderButtonPortal={HeaderButtonPortal}
+                    />
+                );
                 break;
+            }
             case 'projects':
             case 'favorites':
-                view = <Projects type={selected} data={data} />;
+                view = (
+                    <Projects
+                        type={selected}
+                        data={data}
+                        raw={dataObj}
+                        HeaderButtonPortal={HeaderButtonPortal}
+                    />
+                );
                 break;
             default:
                 break;
@@ -127,14 +186,17 @@ class Sprite extends Component {
                     <h1>{CommonUtils.getLang(this.property.title)}</h1>
                     <button
                         onClick={this.close}
-                        className={classname(this.theme.btn_back, this.theme.imbtn_pop_back)}
+                        className={classname(this.theme.btn_back, this.theme.imbtn_pop_close)}
                     >
                         <span className={this.theme.blind}>
                             {CommonUtils.getLang('Menus.history_back')}
                         </span>
                     </button>
+                    <div ref={this.headerButtonRef} />
                 </header>
-                {this.setContent()}
+                <div className={this.theme.section_container}>
+                    <div className={this.theme.container_inner}>{this.setContent()}</div>
+                </div>
                 <Modal />
             </div>
         );
@@ -150,4 +212,4 @@ const mapDispatchToProps = (dispatch) => ({
     initState: () => dispatch(initState()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sprite);
+export default connect(mapStateToProps, mapDispatchToProps)(Popup);

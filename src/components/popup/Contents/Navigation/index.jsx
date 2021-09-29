@@ -3,13 +3,10 @@ import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 import SearchBox from './SearchBox';
 import classname from 'classnames';
-import { connect } from 'react-redux';
-import { toggleVector } from '@actions/popup';
 
 const preventDefault = (e) => e.preventDefault();
 const Index = (props) => {
-    const { onClicked, navigations = {}, searchOption, projectNavOptions, isDrawVector } = props;
-    const { selected, isVectorOnly, toggleVector } = props;
+    const { onClicked, navigations = {}, searchOption, projectNavOptions, selected } = props;
     const theme = Theme.getStyle('popup');
     return (
         <div className={theme.section_navi}>
@@ -24,7 +21,7 @@ const Index = (props) => {
                                 onClicked && onClicked(item);
                             }}
                         >
-                            <a href="#NULL" onClick={preventDefault}>
+                            <a onClick={preventDefault}>
                                 {CommonUtils.getLang(navigations[item].name)}
                             </a>
                         </li>
@@ -34,24 +31,8 @@ const Index = (props) => {
             {searchOption && (
                 <SearchBox searchOption={searchOption} projectNavOptions={projectNavOptions} />
             )}
-            {isDrawVector && (
-                <div
-                    className={classname(theme.vector, { [theme.on]: isVectorOnly })}
-                    onClick={toggleVector}
-                >
-                    <span>{CommonUtils.getLang('Buttons.show_only_vector')}</span>
-                </div>
-            )}
         </div>
     );
 };
 
-const mapStateToProps = (state) => ({
-    isVectorOnly: state.popupReducer.isVectorOnly,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-    toggleVector: () => dispatch(toggleVector()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Index);
+export default Index;

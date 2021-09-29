@@ -1,51 +1,31 @@
 import React from 'react';
+import { CHART_CATEGORY } from '@constants/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
-import Styles from '@assets/entry/scss/popup.scss';
+import Theme from '@utils/Theme';
 
 const SelectChartDropdown = (props) => {
-    const { position = { left: '-3px', top: '55px' }, onClick = () => {} } = props;
+    const theme = Theme.getStyle('popup');
+    const { onClick = () => {} } = props;
 
     const handleAClick = (event) => {
         event.preventDefault();
     };
 
     return (
-        <div className={Styles.vertical_tooltip} style={{ left: '56px', display: 'block' }}>
-            <ul className={Styles.graph_list}>
-                <li className={Styles.bar} onClick={onClick('bar')}>
-                    <a href="#" onClick={handleAClick} role="button">
-                        {CommonUtils.getLang('DataAnalytics.bar')}
-                        <span className={Styles.blind}>
-                            {CommonUtils.getLang('DataAnalytics.graph')}
-                        </span>
-                    </a>
-                </li>
-                <li className={Styles.line} onClick={onClick('line')}>
-                    <a href="#" onClick={handleAClick} role="button">
-                        {CommonUtils.getLang('DataAnalytics.line')}
-                        <span className={Styles.blind}>
-                            {CommonUtils.getLang('DataAnalytics.graph')}
-                        </span>
-                    </a>
-                </li>
-                <li className={Styles.pie} onClick={onClick('pie')}>
-                    <a href="#" onClick={handleAClick} role="button">
-                        {CommonUtils.getLang('DataAnalytics.pie')}
-                        <span className={Styles.blind}>
-                            {CommonUtils.getLang('DataAnalytics.graph')}
-                        </span>
-                    </a>
-                </li>
-                <li className={Styles.scatter} onClick={onClick('scatter')}>
-                    <a href="#" onClick={handleAClick} role="button">
-                        {CommonUtils.getLang('DataAnalytics.scatter')}
-                        <span className={Styles.blind}>
-                            {CommonUtils.getLang('DataAnalytics.graph')}
-                        </span>
-                    </a>
-                </li>
+        <div className={theme.vertical_tooltip} style={{ left: '56px', display: 'block' }}>
+            <ul className={theme.graph_list}>
+                {CHART_CATEGORY.map((item, index) => (
+                    <li key={`chart_list_${index}`} className={theme[item]} onClick={onClick(item)}>
+                        <a onClick={handleAClick} role="button">
+                            {CommonUtils.getLang(`DataAnalytics.${item}`)}
+                            <span className={theme.blind}>
+                                {CommonUtils.getLang('DataAnalytics.graph')}
+                            </span>
+                        </a>
+                    </li>
+                ))}
             </ul>
-            <span className={`${Styles.arr}`}>
+            <span className={`${theme.arr}`}>
                 <i />
             </span>
         </div>

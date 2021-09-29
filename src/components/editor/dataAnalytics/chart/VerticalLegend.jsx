@@ -1,51 +1,45 @@
 import React from 'react';
-import _ from 'lodash';
-import { GRAPH_COLOR } from '../Constants';
+import _toPairs from 'lodash/toPairs';
+import _sumBy from 'lodash/sumBy';
+import _round from 'lodash/round';
+import { GRAPH_COLOR } from '@constants/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
-
-import Styles from '@assets/entry/scss/popup.scss';
-
-const { generateHash } = CommonUtils;
+import Theme from '@utils/Theme';
+import { getPieChart } from '@utils/dataAnalytics';
 
 const VerticalLegend = (props) => {
+    const theme = Theme.getStyle('popup');
     const { table = [[]], charts = [], chartIndex, chart: chartProp } = props;
     const chart = chartProp || (charts.length ? charts[chartIndex] : {});
-    const { xIndex = -1, categoryIndexes } = chart;
+    const { type, xIndex = -1, categoryIndexes } = chart;
     const categoryIndex = categoryIndexes[0];
+    const category = getPieChart(table, xIndex, categoryIndex).slice(1);
 
-    const category = _.toPairs(
-        table.slice(1).reduce((prev, row) => {
-            prev[row[xIndex]] = prev[row[xIndex]] || 0;
-            prev[row[xIndex]] += Number(row[categoryIndex]);
-            return prev;
-        }, {})
+    const sum = _round(
+        _sumBy(category, (item) => item[1]),
+        2
     );
 
-    const sum = _.sumBy(category, (item) => item[1]);
-
     return (
-        <div className={Styles.pie_legend}>
-            <strong className={Styles.legend_sjt}>
+        <div className={theme.pie_legend}>
+            <strong className={theme.legend_sjt}>
                 <em>{CommonUtils.getLang('DataAnalytics.total')}</em>
                 {sum}
             </strong>
-            <div className={Styles.scroll_box}>
-                <ul className={Styles.list}>
+            <div className={theme.scroll_box}>
+                <ul className={theme.list}>
                     {category.map((item, index) => (
-                        <li key={`legend_${generateHash()}`}>
+                        <li key={`legend_${index}`}>
                             <span
-                                className={Styles.bg}
+                                className={theme.bg}
                                 style={{
-                                    backgroundColor: GRAPH_COLOR[index % GRAPH_COLOR.length],
+                                    backgroundColor:
+                                        GRAPH_COLOR[type][index % GRAPH_COLOR[type].length],
                                 }}
                             >
                                 &nbsp;
                             </span>
-                            <span className={Styles.cnt}>{item[0]}</span>
-                            <span className={Styles.cnt}>{item[1]}</span>
-                            <span className={Styles.cnt}>
-                                {((item[1] / sum) * 100).toFixed(1)}%
-                            </span>
+                            <span className={theme.cnt}>{item[0]}</span>
                         </li>
                     ))}
                 </ul>

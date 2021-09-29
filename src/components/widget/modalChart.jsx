@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { pure } from 'recompose';
 import Theme from '@utils/Theme';
 import Option from '../popup/Contents/Navigation/SearchOption';
@@ -11,10 +11,11 @@ const { generateHash } = CommonUtils;
 
 const ModalChart = (props) => {
     const theme = Theme.getStyle('popup');
-    const { source = {}, onClose, togglePause, stop } = props;
+
+    const { source = {}, onClose, togglePause, stop, isIframe, chartIndex = 0 } = props;
     const [isPaused, setPause] = useState(false);
     const [dropdown, setDropdown] = useState('');
-    const [selected, select] = useState(0);
+    const [selected, select] = useState(chartIndex || 0);
     const toggleDropDown = (dropdown) => setDropdown(dropdown);
     const { fields = [], origin = [], chart: charts = [] } = source;
     const chartList = charts.map(({ title }, index) => [title, index]);
@@ -44,7 +45,7 @@ const ModalChart = (props) => {
     const isHorizontalLegend = chart.type !== 'pie';
     return (
         <div className={theme.dimmed}>
-            <div className={theme.center}>
+            <div className={isIframe ? theme.center_chart : theme.center}>
                 <div className={theme.modal}>
                     <div className={theme.head}>
                         <div className={theme.text}>
@@ -59,12 +60,16 @@ const ModalChart = (props) => {
                         />
                     </div>
                     <div className={theme.body}>
-                        <div className={theme.content} style={{ minHeight: '440px' }}>
+                        <div
+                            className={theme.content}
+                            style={{ minHeight: '440px', position: 'relative' }}
+                        >
                             <Option
                                 onSelect={selectChart}
                                 options={chartList}
                                 setDropdown={toggleDropDown}
                                 isOpenDefault={!!dropdown}
+                                defaultIndex={selected}
                             />
                             <div className={theme.summary}>
                                 <span className={`${theme.text} ${theme.bold}`}>
@@ -118,7 +123,7 @@ const ModalChart = (props) => {
                                         key={`c${generateHash()}`}
                                         table={data}
                                         chart={chart}
-                                        size={{ width: isHorizontalLegend ? '' : 448 }}
+                                        size={{ width: isHorizontalLegend ? 660 : 448 }}
                                     />
                                 )}
                             </div>

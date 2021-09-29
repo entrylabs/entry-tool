@@ -8,6 +8,7 @@ export const EMIT_TYPES = {
     load: 'load',
     search: 'search',
     fetch: 'fetch',
+    fetchMore: 'fetchMore',
     close: 'close',
     write: 'write',
     draw: 'draw',
@@ -15,6 +16,8 @@ export const EMIT_TYPES = {
     select: 'select',
     itemon: 'itemon',
     itemoff: 'itemoff',
+    play: 'play',
+    stop: 'stop',
     submitUploads: 'uploads',
     uploadFail: 'uploadFail',
     uploads: 'dummyUploads',
@@ -404,7 +407,7 @@ export const DEFAULT_OPTIONS = {
                 select: {
                     name: 'Workspace.select_table',
                 },
-                upload: {
+                dragUpload: {
                     name: 'Workspace.upload',
                 },
                 draw: {
@@ -423,6 +426,7 @@ export const DEFAULT_OPTIONS = {
                 },
             },
             sidebar: {},
+            cancelButton: false,
         },
     },
 };
