@@ -916,12 +916,12 @@
     }
     .extend_block .list {
         overflow: hidden;
-        margin: -32px 0 0 -44px;
+        margin: -20px 0 0 -18px;
     }
     .extend_block .list li {
         float: left;
         overflow: hidden;
-        margin: 32px 0 0 44px;
+        margin: 20px 0 0 18px;
         background-color: #fff;
         border-radius: 6px;
     }
@@ -985,8 +985,8 @@
         height: 132px;
     }
     .extend_block .list .inner_box .sjt {
-        font-size: 22px;
-        font-weight: normal;
+        font-size: 18px;
+        font-weight: bold;
         letter-spacing: -0.8px;
     }
     .extend_block .list .inner_box .dsc {
