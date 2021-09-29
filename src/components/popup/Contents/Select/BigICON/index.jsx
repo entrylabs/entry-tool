@@ -1,53 +1,61 @@
 import React, { useEffect } from 'react';
 import Item from './Item';
-import Foot from '../foot';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 import classname from 'classnames';
-import { applySelected } from '@actions/popup';
+import { applySelected, closePopup } from '@actions/popup';
 import { connect } from 'react-redux';
+import { triggerEvent } from '@actions/index';
+import { EMIT_TYPES as Types } from '@constants';
 
 const Index = (props) => {
     const theme = Theme.getStyle('popup');
-    const { data = [], imageBaseUrl, applySelected } = props;
+    const { data = [], imageBaseUrl, applySelected, submit, selected, HeaderButtonPortal } = props;
 
     useEffect(() => {
         applySelected(data.filter((item) => item.active));
     }, []);
 
     return (
-        <>
-            <section className={classname(theme.extend_content, theme.pop_content)}>
-                <div className={theme.section_cont}>
-                    <h2 className={theme.blind}>BIG ICON LIST</h2>
-                    <div className={theme.cont_box}>
-                        <div className={theme.desc}>
-                            <div className={theme.imico_exclamation_mark} />
-                            <div className={theme.content}>
-                                {CommonUtils.getLang(
-                                    imageBaseUrl.includes('aiUtilize')
-                                        ? 'template.aiUtilize_block_descriptions'
-                                        : 'template.expansion_block_descriptions'
-                                )}
-                            </div>
-                        </div>
-                        <div className={theme.extend_block}>
-                            <ul className={theme.list}>
-                                {data.map((item) => (
-                                    <Item key={item.name} item={item} imageBaseUrl={imageBaseUrl} />
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <Foot />
-        </>
+        <div className={classname(theme.section_content, theme.extend_content)}>
+            <h2 className={theme.blind}>BIG ICON LIST</h2>
+            <p className={theme.caution_dsc}>
+                {CommonUtils.getLang(
+                    imageBaseUrl.includes('aiUtilize')
+                        ? 'template.aiUtilize_block_descriptions'
+                        : 'template.expansion_block_descriptions'
+                )}
+            </p>
+            <div className={theme.extend_block}>
+                <ul className={theme.list}>
+                    {data.map((item) => (
+                        <Item key={item.name} item={item} imageBaseUrl={imageBaseUrl} />
+                    ))}
+                </ul>
+            </div>
+            <HeaderButtonPortal>
+                <a
+                    className={theme.btn}
+                    role="button"
+                    onClick={CommonUtils.handleClick(() => submit({ selected }))}
+                >
+                    {CommonUtils.getLang('Buttons.load')}
+                </a>
+            </HeaderButtonPortal>
+        </div>
     );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    applySelected: (list) => dispatch(applySelected(list)),
+const mapStateToProps = (state) => ({
+    selected: state.popupReducer.selected,
 });
 
-export default connect(null, mapDispatchToProps)(Index);
+const mapDispatchToProps = (dispatch) => ({
+    applySelected: (list) => dispatch(applySelected(list)),
+    submit: (data) => {
+        dispatch(triggerEvent(Types.submit, data, false));
+        dispatch(closePopup());
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Index);
