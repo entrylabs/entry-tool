@@ -8,7 +8,7 @@ import Theme from '@utils/Theme';
 /* eslint-disable new-cap */
 const SortableItem = SortableElement(({ value }) => {
     const { item } = value;
-    const theme = Theme.getStyle("popup");
+    const theme = Theme.getStyle('popup');
     if (typeof item === 'string') {
         return <div className={theme.sortableItem} dangerouslySetInnerHTML={{ __html: item }} />;
     } else if (item instanceof HTMLElement) {
@@ -58,7 +58,7 @@ const SortableList = SortableContainer(({ items, disabled }) => {
 class Sortable extends Component {
     constructor(props) {
         super(props);
-        this.theme = Theme.getStyle("popup");
+        this.theme = Theme.getStyle('popup');
     }
 
     onSortEnd = ({ oldIndex, newIndex }) => {
@@ -73,6 +73,7 @@ class Sortable extends Component {
         const { className = '' } = target;
         const { sortableTarget } = this.props;
         const list = className.split(' ');
+
         if (!_intersection(sortableTarget, list).length) {
             return true;
         }

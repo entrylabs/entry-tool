@@ -8,6 +8,7 @@ import Styles from '@assets/entry/scss/draggable.scss';
 import AutoScroll from '@utils/AutoScroll';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
+import _intersection from 'lodash/intersection';
 const { getPosition } = CommonUtils;
 
 class DraggableList extends Component {
@@ -34,7 +35,10 @@ class DraggableList extends Component {
     }
 
     unsetItemEvent() {
-        this.targetEvent.off('draggable');
+        this.targetEvent.off('touchmove.draggable', this.itemEventMove, { passive: false });
+        this.targetEvent.off('touchend.draggable', this.itemEventEnd, true);
+        this.targetEvent.off('mousemove.draggable', this.itemEventMove, true);
+        this.targetEvent.off('mouseup.draggable', this.itemEventEnd, true);
     }
 
     componentDidMount() {
@@ -205,6 +209,7 @@ class DraggableList extends Component {
 
     itemEventMove = (e) => {
         const { isDragging } = this.state;
+
         if (isDragging && e.cancelable) {
             e.preventDefault();
         }
@@ -323,6 +328,7 @@ class DraggableList extends Component {
         this.checkRectList = undefined;
         this.lastNewIndex = -1;
         this.dragItemInfo = undefined;
+
         this.unsetItemEvent();
     };
 
@@ -351,12 +357,17 @@ class DraggableList extends Component {
                         <div key={key}>
                             <DraggableItem
                                 handleItemEventStart={(e, target) => {
-                                    this.dragItemInfo = getPosition(e.nativeEvent);
-                                    this.dragItemInfo.target = target;
-                                    this.dragItemInfo.item = value;
-                                    this.dragItemInfo.index = index;
-                                    this.dragItemInfo.image = image;
-                                    this.setItemEvent();
+                                    const { className = '' } = e.target;
+                                    const { sortableTarget } = this.props;
+                                    const list = className.split(' ');
+                                    if (_intersection(sortableTarget, list).length) {
+                                        this.dragItemInfo = getPosition(e.nativeEvent);
+                                        this.dragItemInfo.target = target;
+                                        this.dragItemInfo.item = value;
+                                        this.dragItemInfo.index = index;
+                                        this.dragItemInfo.image = image;
+                                        this.setItemEvent();
+                                    }
                                 }}
                                 index={index}
                                 value={{
