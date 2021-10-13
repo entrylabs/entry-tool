@@ -386,7 +386,7 @@ export const DEFAULT_OPTIONS = {
             mainType: 'aiUtilize',
         },
         projects: {
-            title: 'Menus.my_project',
+            title: 'Menus.open_project',
             mainType: 'projects',
             opt: {
                 search: { category: true, date: true, order: true, query: true },
