@@ -89,7 +89,7 @@ const Index = (props) => {
             </div>
             <div className={Styles.caution_box}>
                 {warnMessages.map(({ title, desc }) => (
-                    <p className={theme.caution}>
+                    <p key={title} className={theme.caution}>
                         {desc ? (
                             <>
                                 <strong>{title}</strong>
