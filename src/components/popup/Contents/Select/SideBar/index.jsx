@@ -89,7 +89,7 @@ const Index = (props) => {
                     role="button"
                     onClick={CommonUtils.handleClick(() => submit({ selected }))}
                 >
-                    {CommonUtils.getLang(type === 'sprite' ? 'Buttons.load' : 'Buttons.add2')}
+                    {CommonUtils.getLang('Buttons.add2')}
                 </a>
             </HeaderButtonPortal>
         </>

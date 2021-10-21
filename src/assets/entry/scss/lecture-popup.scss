@@ -399,7 +399,7 @@
     padding: 20px 24px;
     margin-top: 24px;
     border-radius: 6px;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.6);
     .caution {
         position: relative;
         padding-left: 24px;
@@ -525,7 +525,7 @@
 .obj_select_cont {
     flex-shrink: 0;
     width: 124px;
-    max-height: 499px;
+    height: 514px;
     margin: 42px 0 0 62px;
     padding: 21px 0 0 18px;
     background-color: #c4dfef;
@@ -538,7 +538,7 @@
         line-height: 14px;
     }
     .select_list {
-        max-height: 440px;
+        max-height: 474px;
         overflow-y: auto;
         padding-top: 18px;
     }
@@ -916,12 +916,12 @@
     }
     .extend_block .list {
         overflow: hidden;
-        margin: -32px 0 0 -44px;
+        margin: -20px 0 0 -18px;
     }
     .extend_block .list li {
         float: left;
         overflow: hidden;
-        margin: 32px 0 0 44px;
+        margin: 20px 0 0 18px;
         background-color: #fff;
         border-radius: 6px;
     }
@@ -985,8 +985,8 @@
         height: 132px;
     }
     .extend_block .list .inner_box .sjt {
-        font-size: 22px;
-        font-weight: normal;
+        font-size: 18px;
+        font-weight: bold;
         letter-spacing: -0.8px;
     }
     .extend_block .list .inner_box .dsc {

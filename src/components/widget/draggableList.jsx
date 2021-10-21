@@ -360,7 +360,10 @@ class DraggableList extends Component {
                                     const { className = '' } = e.target;
                                     const { sortableTarget } = this.props;
                                     const list = className.split(' ');
-                                    if (_intersection(sortableTarget, list).length) {
+                                    if (
+                                        !sortableTarget ||
+                                        _intersection(sortableTarget, list).length
+                                    ) {
                                         this.dragItemInfo = getPosition(e.nativeEvent);
                                         this.dragItemInfo.target = target;
                                         this.dragItemInfo.item = value;
