@@ -1104,11 +1104,13 @@
     }
     .list {
         height: 100%;
+        padding-top: 10px;
+        margin-top: 10px;
     }
     .list li {
         float: left;
         width: 304px;
-        margin: 18px 0 0 18px;
+        margin: 0;
     }
     .list .link {
         position: relative;
