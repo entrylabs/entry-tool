@@ -1092,25 +1092,42 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@egjs/component@^2.2.2":
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/@egjs/component/-/component-2.2.2.tgz#b8208ea4ca05f6562a51d58f1e6f9979aad8a9d9"
-  integrity sha512-2m6nu6/Mbs6VnoT4IHFGUBX6V82Zp01zDmlWpIJ3fMatHpe7BB1qUYFgMmSWGY0uOvOl4plvflwbCRUAGMfwWQ==
-
-"@egjs/imready@^1.1.2":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@egjs/imready/-/imready-1.1.3.tgz#6c7890e4357df11f22208fef95972bedc00f980d"
-  integrity sha512-9jbF0RZZdgzZqpfOb3IlpgStlkid2Wb6hMw06ln5kmGwUbkgbYCW/hWDeoRX2bVWCf9SAoAZK7dcMnK0U8+FHw==
+"@egjs/children-differ@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@egjs/children-differ/-/children-differ-1.0.1.tgz#5465fa80671d5ca3564ebe912f48b05b3e8a14fd"
+  integrity sha512-DRvyqMf+CPCOzAopQKHtW+X8iN6Hy6SFol+/7zCUiE5y4P/OB8JP8FtU4NxtZwtafvSL4faD5KoQYPj3JHzPFQ==
   dependencies:
-    "@egjs/component" "^2.2.2"
+    "@egjs/list-differ" "^1.0.0"
 
-"@egjs/infinitegrid@~3.8.3":
-  version "3.8.3"
-  resolved "https://registry.yarnpkg.com/@egjs/infinitegrid/-/infinitegrid-3.8.3.tgz#f521fd633e098408b35012fdbad10532db9e8356"
-  integrity sha512-wLbOmARU+4NIEcW8vj5D6Ym4kSBC5bQJgyVHWuodNgr3umNS4hyVkXq2O3slgoATyn1j21nKkMLc5wn3ZhDFAA==
+"@egjs/component@^3.0.0", "@egjs/component@^3.0.1":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@egjs/component/-/component-3.0.2.tgz#c56794fcf1b2cb2768d09b021444779e54d0de1b"
+  integrity sha512-Mze3mwEE19+dERrimg0JVLtpOHG4AC+LOuKqvF4qGZjn0k23ZbNI7b/gy1LFR63LigC2b8k70aDjy8xoT+WNPA==
+
+"@egjs/grid@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@egjs/grid/-/grid-1.6.0.tgz#0d7edca6962da854b8803d2f93cefe29c563129f"
+  integrity sha512-ErAVeDlMehCQJiaJdLlHgVzzI51azcGfJcJNgnRZxc3YwR8UPGW5Fek0N8ocw2LOfCG1n8iuEpQ1yCnU4ola8A==
   dependencies:
-    "@egjs/component" "^2.2.2"
-    "@egjs/imready" "^1.1.2"
+    "@egjs/children-differ" "^1.0.1"
+    "@egjs/component" "^3.0.0"
+    "@egjs/imready" "^1.1.4"
+
+"@egjs/imready@^1.1.4":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@egjs/imready/-/imready-1.2.0.tgz#49497dd2e2ea4b1a5721e1276859502639dcbaea"
+  integrity sha512-pkJbae95mHKc1Go1OPY6hKDsMIcZt4yvFLI+Icqm0YXFTVhcbtnvtTmrSYDeB6v3C0trVj7Jf55S0mQYpGCCKw==
+  dependencies:
+    "@egjs/component" "^3.0.1"
+
+"@egjs/infinitegrid@~4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@egjs/infinitegrid/-/infinitegrid-4.1.1.tgz#53ca1aa8870f7621756b3cc9c77ded24591f011c"
+  integrity sha512-ss1cDSHk1gVv/Wupu2fnZL5nllrImgj01fYx9V9tJ/i37LjN43R7s6rFeUX6jj3OaiaWJM8IU6iJsJSr27QmTQ==
+  dependencies:
+    "@egjs/children-differ" "^1.0.1"
+    "@egjs/component" "^3.0.0"
+    "@egjs/grid" "^1.6.0"
     "@egjs/list-differ" "^1.0.0"
 
 "@egjs/list-differ@^1.0.0":
@@ -1118,13 +1135,12 @@
   resolved "https://registry.yarnpkg.com/@egjs/list-differ/-/list-differ-1.0.0.tgz#2277aff52e3e4bd9318d5c30ffc3ba3b6216f05e"
   integrity sha512-HsbMKc0ZAQH+EUeCmI/2PvTYSybmkaWwakU8QGDYYgMVIg9BQ5sM0A0Nnombjxo2+JzXHxmH+jw//yGX+y6GYw==
 
-"@egjs/react-infinitegrid@^3.2.3":
-  version "3.2.4"
-  resolved "https://registry.yarnpkg.com/@egjs/react-infinitegrid/-/react-infinitegrid-3.2.4.tgz#ec42512ccb7df95fdafa96bd954b7c58349652bd"
-  integrity sha512-TUsm3XZOBDWGad0M7WMDvn+8CGepMWCwe3ennoHbqMJ3mzB/Y9Zt2QnCfmLYTuRWwrTbFtweOVl3JkucfqR7kQ==
+"@egjs/react-infinitegrid@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@egjs/react-infinitegrid/-/react-infinitegrid-4.1.1.tgz#b8e417e75acc8b2444a333fc084d3d707b2d3ad8"
+  integrity sha512-TDXt8I7xuJ2sc9v+vf1k4khftGTwcX1x+s5dyGoCt1Q7+jJr2wZ/bVipg12aOLQNCnE4EmBZNgeB3jSEA4pk5Q==
   dependencies:
-    "@egjs/infinitegrid" "~3.8.3"
-    "@egjs/list-differ" "^1.0.0"
+    "@egjs/infinitegrid" "~4.1.1"
 
 "@emotion/cache@^10.0.27":
   version "10.0.29"
@@ -10166,7 +10182,7 @@ lodash.uniq@4.5.0, lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.0.1, lodash@^4.17.0, lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.7.0, lodash@~4.17.10:
+"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.0.1, lodash@^4.17.0, lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.7.0, lodash@~4.17.10:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
