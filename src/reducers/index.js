@@ -4,6 +4,7 @@ import commonReducer from './common';
 import popupReducer from './popup';
 import pickerReducer from './picker';
 import widgetReducer from './widget';
+import soundReducer from './sound';
 
 export default combineReducers({
     commonReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
     pickerReducer,
     widgetReducer,
     form: formReducer,
+    soundReducer,
 });

@@ -10,7 +10,7 @@ import SelectItem from '../../includes/SelectItem';
 
 const Index = (props) => {
     const { index, selected, applySelected, select, deselect } = props;
-    const { baseUrl, type, item, multiSelect = true } = props;
+    const { baseUrl, type, item, multiSelect = true, playable } = props;
     const theme = Theme.getStyle('popup');
 
     const onItemClicked = (e) => {
@@ -34,7 +34,13 @@ const Index = (props) => {
     return (
         <li onClick={onItemClicked} className={classname({ [theme.on]: index >= 0 })}>
             <div className={theme.link}>
-                <SelectItem type={type} theme={theme} item={item} baseUrl={baseUrl} />
+                <SelectItem
+                    type={type}
+                    theme={theme}
+                    item={item}
+                    baseUrl={baseUrl}
+                    playable={playable}
+                />
             </div>
         </li>
     );

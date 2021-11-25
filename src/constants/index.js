@@ -8,6 +8,7 @@ export const EMIT_TYPES = {
     load: 'load',
     search: 'search',
     fetch: 'fetch',
+    fetchMore: 'fetchMore',
     close: 'close',
     write: 'write',
     draw: 'draw',
@@ -15,6 +16,8 @@ export const EMIT_TYPES = {
     select: 'select',
     itemon: 'itemon',
     itemoff: 'itemoff',
+    play: 'play',
+    stop: 'stop',
     submitUploads: 'uploads',
     uploadFail: 'uploadFail',
     uploads: 'dummyUploads',
@@ -383,7 +386,7 @@ export const DEFAULT_OPTIONS = {
             mainType: 'aiUtilize',
         },
         projects: {
-            title: 'Menus.my_project',
+            title: 'Menus.open_project',
             mainType: 'projects',
             opt: {
                 search: { category: true, date: true, order: true, query: true },

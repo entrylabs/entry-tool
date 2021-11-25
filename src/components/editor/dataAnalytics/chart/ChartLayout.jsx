@@ -30,14 +30,14 @@ const ChartLayout = () => {
     const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
-    const { chart = [], chartIndex = 0, table: selectedTable } = selected;
+    const { id, chart = [], chartIndex = 0, table: selectedTable } = selected;
     const table = getTrimedTable(selectedTable);
     const selectedChart = chart[chartIndex] || {};
     const { type, xIndex, yIndex, categoryIndexes = [], order: sort, bin, boundary } =
         selectedChart || {};
     const isHorizontalLegend = type !== 'pie';
     const key =
-        `chart_${chartIndex}_${xIndex}_${yIndex}` +
+        `chart_${id}_${chartIndex}_${xIndex}_${yIndex}` +
         `_${categoryIndexes.toString()}_${sort}_${bin}_${boundary}`;
     const { xAxis, yAxis, category, degree, order } = LEGEND_OPTIONS[type];
 

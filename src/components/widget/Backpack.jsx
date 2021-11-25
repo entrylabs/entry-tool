@@ -46,17 +46,16 @@ class Backpack extends Component {
             this.eventTarget.on('touchend.bpInTool', this.handlePointEnd);
             this.eventTarget.on('mousemove.bpInTool', this.handlePointMove);
             this.eventTarget.on('mouseup.bpInTool', this.handlePointEnd);
-            this.eventWindow.on(
-                'resize.bpInTool',
-                _.throttle(() => {
-                    this.getBackpackRect.cache = new _.memoize.Cache();
-                }, 500)
-            );
+            this.eventWindow.on('resize.bpInTool', this.handleResize);
         }
     }
 
     componentWillUnmount() {
-        this.eventTarget.off('bpInTool');
+        this.eventTarget.off('touchmove.bpInTool', this.handlePointMove);
+        this.eventTarget.off('touchend.bpInTool', this.handlePointEnd);
+        this.eventTarget.off('mousemove.bpInTool', this.handlePointMove);
+        this.eventTarget.off('mouseup.bpInTool', this.handlePointEnd);
+        this.eventWindow.off('resize.bpInTool', this.handleResize);
     }
 
     getBackpackRect = _.memoize(() => {
@@ -121,6 +120,10 @@ class Backpack extends Component {
             onRemoveItem(id);
         }
     };
+
+    handleResize = _.throttle(() => {
+        this.getBackpackRect.cache = new _.memoize.Cache();
+    }, 500);
 
     handleDragInfo = (isDragging, data) => {
         const { onDragActionChange, onDragData } = this.props;

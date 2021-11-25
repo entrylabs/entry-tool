@@ -10,7 +10,7 @@ class ModalProgress extends Component {
         this.theme = Theme.getStyle('progress');
     }
     makeProgress() {
-        const { title, textBoxStyle } = this.props;
+        const { title, textBoxStyle, theme } = this.props;
         return (
             <div
                 className={this.theme.progress}
@@ -19,13 +19,15 @@ class ModalProgress extends Component {
                 <div className={this.theme.title} style={{ ...textBoxStyle }}>
                     {title}
                 </div>
-                <div
-                    className={this.theme.progressEntryBot}
-                    style={
-                        textBoxStyle &&
-                        textBoxStyle.height && { marginTop: textBoxStyle.height + 20 }
-                    }
-                ></div>
+                {theme !== 'entryline' && (
+                    <div
+                        className={this.theme.progressEntryBot}
+                        style={
+                            textBoxStyle &&
+                            textBoxStyle.height && { marginTop: textBoxStyle.height + 20 }
+                        }
+                    ></div>
+                )}
             </div>
         );
     }
@@ -42,7 +44,7 @@ class ModalProgress extends Component {
         );
     }
     makeError() {
-        const { title, description, onClose, textBoxStyle } = this.props;
+        const { title, description, onClose, textBoxStyle, theme } = this.props;
         return (
             <div
                 className={this.theme.error}
@@ -57,13 +59,16 @@ class ModalProgress extends Component {
                         />
                     )}
                 </div>
+                {theme !== 'entryline' && (
+                    <div
+                        className={this.theme.errorEntryBot}
+                        style={
+                            textBoxStyle &&
+                            textBoxStyle.height && { marginTop: textBoxStyle.height }
+                        }
+                    ></div>
+                )}
 
-                <div
-                    className={this.theme.errorEntryBot}
-                    style={
-                        textBoxStyle && textBoxStyle.height && { marginTop: textBoxStyle.height }
-                    }
-                ></div>
                 {/* <div className={this.theme.title}>{title}</div> */}
 
                 <div className={this.theme.close} onClick={onClose} />

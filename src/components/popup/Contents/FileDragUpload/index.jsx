@@ -9,9 +9,10 @@ import { EMIT_TYPES as Types } from '@constants';
 import { closePopup, applyUploaded } from '@actions/popup';
 import { connect } from 'react-redux';
 import { triggerEvent } from '@actions/index';
+import classname from 'classnames';
 
 const FileDragUpload = (props) => {
-    const { type, opt = {}, uploads = [], baseUrl } = props;
+    const { type, opt = {}, uploads = [], baseUrl, HeaderButtonPortal } = props;
     const { submit, select, deselect, applyUploaded, uploadedItems = [] } = props;
     const [excluded, setExcluded] = useState([]);
     const [isUploading, setUploadState] = useState(false);
@@ -59,62 +60,50 @@ const FileDragUpload = (props) => {
     }, [uploads, uploadedItems]);
 
     return (
-        <section className={`${theme.pop_content} ${theme.table_file_add}`}>
-            <h2 className={theme.blind}>file upload</h2>
-            <div className={theme.section_cont}>
-                <div className={theme.file_add_box}>
-                    <p className={`${theme.caution} ${theme.imico_pop_caution}`}>{warnExt}</p>
-                    {uploadedItems.length ? (
-                        <div className={theme.file_list_box}>
-                            <div className={theme.list_file_add}>
-                                <UploadInput
-                                    uploadNotAllowedExt={opt.uploadNotAllowedExt}
-                                    uploadAllowed={opt.uploadAllowed}
-                                    setUploadState={(state) => setUploadState(state)}
-                                />
-                            </div>
-                            <div
-                                className={theme.list_inner}
-                                style={{ width: uploadedItems.length * 132 + 10 }}
-                            >
-                                <ul className={theme.obj_list}>
-                                    {uploadedItems.map((item) => (
-                                        <Item
-                                            key={item._id || item.id}
-                                            item={item}
-                                            type={type}
-                                            baseUrl={baseUrl}
-                                            onClick={onItemClick}
-                                            excluded={
-                                                opt.multiSelect !== getExcludedIndex(item) >= 0
-                                            }
-                                        />
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-                    ) : (
-                        <DragArea
-                            title={dragTitle}
-                            description={dragDesc}
+        <div className={classname(theme.section_content, theme.table_file_add_content)}>
+            {uploadedItems.length ? (
+                <div className={theme.file_list_box}>
+                    <div className={theme.list_file_add}>
+                        <UploadInput
                             uploadNotAllowedExt={opt.uploadNotAllowedExt}
                             uploadAllowed={opt.uploadAllowed}
                             setUploadState={(state) => setUploadState(state)}
                         />
-                    )}
-                </div>
-                <Warn title={title} desc1={desc1} desc2={desc2} />
-                <div className={theme.pop_btn_box}>
+                    </div>
                     <div
-                        className={theme.active}
-                        style={{ width: 180 }}
-                        onClick={CommonUtils.handleClick(onSubmit)}
+                        className={theme.list_inner}
+                        style={{ width: uploadedItems.length * 132 + 10 }}
                     >
-                        {CommonUtils.getLang('Buttons.add')}
+                        <ul className={theme.obj_list}>
+                            {uploadedItems.map((item) => (
+                                <Item
+                                    key={item._id || item.id}
+                                    item={item}
+                                    type={type}
+                                    baseUrl={baseUrl}
+                                    onClick={onItemClick}
+                                    excluded={opt.multiSelect !== getExcludedIndex(item) >= 0}
+                                />
+                            ))}
+                        </ul>
                     </div>
                 </div>
-            </div>
-        </section>
+            ) : (
+                <DragArea
+                    title={dragTitle}
+                    description={dragDesc}
+                    uploadNotAllowedExt={opt.uploadNotAllowedExt}
+                    uploadAllowed={opt.uploadAllowed}
+                    setUploadState={(state) => setUploadState(state)}
+                />
+            )}
+            <Warn warnExt={warnExt} title={title} desc1={desc1} desc2={desc2} />
+            <HeaderButtonPortal>
+                <a className={theme.btn} role="button" onClick={CommonUtils.handleClick(onSubmit)}>
+                    {CommonUtils.getLang('Buttons.add2')}
+                </a>
+            </HeaderButtonPortal>
+        </div>
     );
 };
 

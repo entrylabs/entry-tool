@@ -11,6 +11,7 @@ import Number from '../components/widget/number';
 import Dropdown from '../components/widget/dropdown';
 import DropdownExtra from '../components/widget/dropdownExtra';
 import ModalProgress from '../components/widget/modalProgress';
+import MusicScale from '../components/widget/musicScale';
 import Angle from '../components/widget/angle';
 import Backpack from '../components/widget/Backpack';
 import Sortable from '../components/widget/sortable';
@@ -50,7 +51,23 @@ export default function Provider({ story }) {
 Theme.type = 'entry';
 storiesOf('Popup', module)
     .addDecorator((story) => <Provider story={story()} />)
-    .add('전체', () => <Sample />)
+    .add('오브젝트 선택 팝업', () => <Sample SampleState='ObjectSelect' />)
+    .add('파일 올리기 팝업', () => <Sample SampleState='FileUpload' />)
+    .add('그리기 팝업', () => <Sample SampleState='Drawing' />)
+    .add('짧은 글상자 팝업', () => <Sample SampleState='ShortWrite' />)
+    .add('여러줄 글상자 팝업', () => <Sample SampleState='MultiWrite' />)
+    .add('확장블럭 팝업', () => <Sample SampleState='ExpandBlock' />)
+    .add('소리선택 팝업', () => <Sample SampleState='SoundSelect' />)
+    .add('소리 올리기', () => <Sample SampleState='SoundUpload' />)
+    .add('회원가입1', () => <Sample SampleState='SignUp1' />)
+    .add('회원가입2', () => <Sample SampleState='SignUp2' />)
+    .add('회원가입3', () => <Sample SampleState='SignUp3' />)
+    .add('회원가입4', () => <Sample SampleState='SignUp4' />)
+    .add('회원가입5', () => <Sample SampleState='SignUp5' />)
+    .add('로그인', () => <Sample SampleState='Login' />)
+    .add('툴팁', () => <Sample SampleState='Tooltip' />)
+    .add('나의 작품 - 리스트', () => <Sample SampleState='MyProduct' />)
+    .add('나의 작품 - 작품 없음', () => <Sample />)
     .add('툴팁', () => <Tooltips />)
     .add('확장블록', () => <Popup type="expansion" data={EXPANSION_SAMPLE} />)
     .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE} uploads={SOUND_SAMPLE} />)
@@ -102,6 +119,15 @@ wigetStories
                 ]}
             />
         </div>
+    ))
+    .add('음악 - 음', () => (
+        <MusicScale
+            onButtonPressed={action('onButtonPressed')}
+            onBackButtonPressed={action('onBackButtonPressed')}
+            onOutsideClick={action('onOutsideClick')}
+            octave={1}
+            scale={'C#'}
+        />
     ))
     .add('숫자', () => (
         <Number
@@ -367,7 +393,6 @@ wigetStories
     });
 
 storiesOf('AiLayout', module)
-    .addDecorator((story) => <Provider story={story()} />)
     .add('테이블 추가하기 - 데이터 선택', () => <DataSelect />)
     .add('테이블 추가하기 - 데이터 선택 딤드', () => <DataSelect Dimmed />)
     .add('파일 올리기 - 업로드 기본', () => <DataUpload UploadState="Default" />)
@@ -375,12 +400,20 @@ storiesOf('AiLayout', module)
     .add('파일 올리기 - 새로 만들기', () => <DataUpload />)
     .add('데이터 차트 - 차트 추가 기본', () => <TableChart ChartState="Default" />)
     .add('데이터 차트 - Aside 접기', () => <TableChart />)
-    .add('데이터 차트 - 2차 가로', () => <TableChart ChartState="Depth2" NoResultText="가로축을 먼저 선택해 주세요." />)
-    .add('데이터 차트 - 2차 계열', () => <TableChart ChartState="Depth2" NoResultText="계열을 선택해 주세요." />)
+    .add('데이터 차트 - 2차 가로', () => (
+        <TableChart ChartState="Depth2" NoResultText="가로축을 먼저 선택해 주세요." />
+    ))
+    .add('데이터 차트 - 2차 계열', () => (
+        <TableChart ChartState="Depth2" NoResultText="계열을 선택해 주세요." />
+    ))
     .add('데이터 차트 - 2차 그래프', () => <TableChart ChartState="Depth2Graph" />)
-    .add('데이터 차트 - 3차 계열', () => <TableChart ChartState="Depth3" NoResultText="계열을 선택해 주세요." />)
+    .add('데이터 차트 - 3차 계열', () => (
+        <TableChart ChartState="Depth3" NoResultText="계열을 선택해 주세요." />
+    ))
     .add('데이터 차트 - 3차 그래프', () => <TableChart ChartState="Depth3Graph" />)
-    .add('데이터 차트 - 히스토그램 계열', () => <TableChart ChartState="DepthHistogram" NoResultText="계열을 선택해 주세요." />)
+    .add('데이터 차트 - 히스토그램 계열', () => (
+        <TableChart ChartState="DepthHistogram" NoResultText="계열을 선택해 주세요." />
+    ))
     .add('데이터 차트 - 히스토그램 그래프', () => <TableChart ChartState="DepthHistogramGraph" />)
     .add('데이터 차트 - 요약', () => <TableSummary />)
     .add('데이터 차트 - 요약 모두', () => <TableSummary SummaryState="Total" />)
@@ -412,10 +445,10 @@ storiesOf('AiLayout', module)
                 data: {
                     type: 'line',
                     columns: [
-                        ['data1', 1,2,3,4],
-                        ['data2', 4,3,2,1]
-                    ]
-                }
+                        ['data1', 1, 2, 3, 4],
+                        ['data2', 4, 3, 2, 1],
+                    ],
+                },
             }}
             title={'billboard chart'}
             description={'description'}
