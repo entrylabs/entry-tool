@@ -180,6 +180,7 @@ class Popup extends Component {
     }
 
     render() {
+        const { navigation } = this.state;
         return (
             <div className={this.theme.popup_wrap}>
                 <header className={this.theme.pop_header}>
@@ -195,7 +196,9 @@ class Popup extends Component {
                     <div ref={this.headerButtonRef} />
                 </header>
                 <div className={this.theme.section_container}>
-                    <div className={this.theme.container_inner}>{this.setContent()}</div>
+                    <div className={`${this.theme.container_inner} ${navigation}`}>
+                        {this.setContent()}
+                    </div>
                 </div>
                 <Modal />
             </div>
