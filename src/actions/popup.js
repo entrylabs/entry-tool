@@ -36,7 +36,7 @@ export function applyUploaded(list) {
             uploads: list,
         });
     };
-};
+}
 
 export function applySelected(list) {
     return (dispatch) => {

@@ -28,10 +28,6 @@ const Index = ({
         fetch(type);
     }, [type]);
 
-    if (totalCount === 0) {
-        return <EmptyContents type={type} />;
-    }
-
     const onRequestAppend = useCallback(() => {
         if (!raw.searchAfter || !raw.searchAfter[0] || raw.total === data.length) {
             return;
@@ -39,6 +35,9 @@ const Index = ({
         fetchMore({ type, data, searchAfter: raw.searchAfter, searchParam: raw.searchParam });
     }, [raw, data, fetchMore]);
 
+    if (totalCount === 0) {
+        return <EmptyContents type={type} />;
+    }
     return (
         <>
             <div className={classname(theme.section_content, theme.art_content)}>
