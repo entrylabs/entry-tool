@@ -1012,6 +1012,11 @@
     .extend_block .list .on .inner_box {
         color: #fff;
     }
+    .extend_block .list .link_box {
+        font-size: 13px;
+        position: absolute;
+        bottom: 15px;
+    }
 }
 
 //소리 추가하기

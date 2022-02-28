@@ -8,10 +8,20 @@ import { makeFindSelectedByName } from '@selectors';
 import classname from 'classnames';
 import Theme from '@utils/Theme';
 
-const Index = ({ index, imageBaseUrl, item, selected, applySelected, select, deselect }) => {
+const Index = ({
+    index,
+    imageBaseUrl,
+    item,
+    selected,
+    applySelected,
+    select,
+    deselect,
+    useLangKey = true,
+}) => {
     const theme = Theme.getStyle('popup');
-    const { imageName, titleKey, sponserText } = item;
-    const desc = CommonUtils.getLang(item.descriptionKey);
+    const { imageName, sponserText, linkBox } = item;
+    const desc = useLangKey ? CommonUtils.getLang(item.descriptionKey) : item.description;
+    const title = useLangKey ? CommonUtils.getLang(item.titleKey) : item.title.ko;
     const onItemClicked = (e) => {
         e.preventDefault();
         const isBlockDeselect = typeof item.active !== 'undefined';
@@ -35,6 +45,7 @@ const Index = ({ index, imageBaseUrl, item, selected, applySelected, select, des
                     style={{
                         backgroundImage: `url("${imageBaseUrl}${imageName}")`,
                         backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'contain',
                         position: 'relative',
                     }}
                 >
@@ -45,8 +56,13 @@ const Index = ({ index, imageBaseUrl, item, selected, applySelected, select, des
                     )}
                 </div>
                 <div className={theme.inner_box}>
-                    <strong className={theme.sjt}>{CommonUtils.getLang(titleKey)}</strong>
+                    <strong className={theme.sjt}>{title}</strong>
                     <div className={theme.dsc} dangerouslySetInnerHTML={{ __html: desc }} />
+                    {linkBox && (
+                        <div className={theme.link_box}>
+                            <a href={linkBox.url}>{linkBox.desc}</a>
+                        </div>
+                    )}
                 </div>
             </div>
         </li>
