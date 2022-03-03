@@ -21,7 +21,7 @@ const Index = ({
     const theme = Theme.getStyle('popup');
     const { imageName, sponserText, linkBox } = item;
     const desc = useLangKey ? CommonUtils.getLang(item.descriptionKey) : item.description;
-    const title = useLangKey ? CommonUtils.getLang(item.titleKey) : item.title.ko;
+    const title = useLangKey ? CommonUtils.getLang(item.titleKey) : item.title?.ko;
     const onItemClicked = (e) => {
         e.preventDefault();
         const isBlockDeselect = typeof item.active !== 'undefined';
