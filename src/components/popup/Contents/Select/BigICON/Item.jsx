@@ -60,7 +60,14 @@ const Index = ({
                     <div className={theme.dsc} dangerouslySetInnerHTML={{ __html: desc }} />
                     {linkBox && (
                         <div className={theme.link_box}>
-                            <a href={linkBox.url}>{linkBox.desc}</a>
+                            <a
+                                href={linkBox.url}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                }}
+                            >
+                                {linkBox.desc}
+                            </a>
                         </div>
                     )}
                 </div>
