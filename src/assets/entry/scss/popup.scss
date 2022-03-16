@@ -474,6 +474,7 @@
         border-radius: 6px;
         z-index: 10;
         content: '';
+        pointer-events: none;
     }
     .thmb {
         display: block;
@@ -941,6 +942,7 @@
         border: 1px solid #d6e9f4;
         border-radius: 6px;
         content: '';
+        pointer-events: none;
     }
     .extend_block .list .thmb {
         height: 168px;
@@ -1011,6 +1013,11 @@
     }
     .extend_block .list .on .inner_box {
         color: #fff;
+    }
+    .extend_block .list .link_box {
+        font-size: 13px;
+        position: absolute;
+        bottom: 15px;
     }
 }
 

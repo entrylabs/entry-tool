@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import Item from './Item';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
@@ -16,20 +16,33 @@ const Index = (props) => {
         applySelected(data.filter((item) => item.active));
     }, []);
 
+    const useLangKey = useMemo(() => {
+        if(data[0]?.descriptionKey && data[0]?.titleKey){
+            return true;
+        }
+        return false;
+    })
+
+    const alertMsgKey = useMemo(() => {
+        if (imageBaseUrl.includes('aiUtilize')) {
+            return 'template.aiUtilize_block_descriptions';
+        } else if (imageBaseUrl.includes('hw_lite')) {
+            return 'template.hardware_lite_descriptions';
+        } else if (imageBaseUrl.includes('entry-js')) {
+            return 'template.expansion_block_descriptions';
+        } else {
+            console.error('Error, incorrect imageBaseUrl : ', imageBaseUrl);
+        }
+    }, [imageBaseUrl]);
+
     return (
         <div className={classname(theme.section_content, theme.extend_content)}>
             <h2 className={theme.blind}>BIG ICON LIST</h2>
-            <p className={theme.caution_dsc}>
-                {CommonUtils.getLang(
-                    imageBaseUrl.includes('aiUtilize')
-                        ? 'template.aiUtilize_block_descriptions'
-                        : 'template.expansion_block_descriptions'
-                )}
-            </p>
+            <p className={theme.caution_dsc}>{CommonUtils.getLang(alertMsgKey)}</p>
             <div className={theme.extend_block}>
                 <ul className={theme.list}>
                     {data.map((item) => (
-                        <Item key={item.name} item={item} imageBaseUrl={imageBaseUrl} />
+                        <Item key={item.name} item={item} imageBaseUrl={imageBaseUrl} useLangKey={useLangKey}/>
                     ))}
                 </ul>
             </div>

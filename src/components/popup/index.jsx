@@ -156,6 +156,19 @@ class Popup extends Component {
                 );
                 break;
             }
+            case 'hardwareLite': {
+                const hwLiteImageurl = expsnsionIconBaseUrl || '/lib/entry-js/images/hw_lite/';
+                navigation = null;
+                view = (
+                    <Select
+                        type={'bigicon'}
+                        imageBaseUrl={hwLiteImageurl}
+                        data={data}
+                        HeaderButtonPortal={HeaderButtonPortal}
+                    />
+                );
+                break;
+            }
             case 'projects':
             case 'favorites':
                 view = (
