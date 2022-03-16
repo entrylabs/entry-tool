@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { triggerEvent } from '@actions/index';
 import SearchOption from './SearchOption';
 
-const Index = ({ projectNavOptions, searchOption = {}, triggerSearch }) => {
+const Index = ({ projectNavOptions, searchOption = {}, triggerSearch, type }) => {
     const DropdownOption = createDropDownOption(projectNavOptions);
     const theme = Theme.getStyle('popup');
     const [query, setQuery] = useState('');
@@ -24,6 +24,7 @@ const Index = ({ projectNavOptions, searchOption = {}, triggerSearch }) => {
         triggerSearch({
             ...selected,
             searchQuery: query,
+            type,
         });
     };
 

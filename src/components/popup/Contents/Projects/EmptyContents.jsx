@@ -11,16 +11,22 @@ const getResultMent = (type) => {
     switch (type) {
         case 'projects':
             return (
-                <div>
+                <>
                     {CommonUtils.getLang('Menus.no_project_1')}
                     <br />
                     {CommonUtils.getLang('Menus.no_project_2')}
-                </div>
+                </>
             );
         case 'favorites':
-            return <div>{CommonUtils.getLang('Menus.no_marked_project')}</div>;
+            return (
+                <>
+                    {CommonUtils.getLang('Menus.no_marked_project1')}
+                    <br />
+                    {CommonUtils.getLang('Menus.no_marked_project2')}
+                </>
+            );
         default:
-            return <div>not supported type</div>;
+            return <>not supported type</>;
     }
 };
 

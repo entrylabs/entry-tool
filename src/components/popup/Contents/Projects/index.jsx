@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { triggerEvent } from '@actions';
 import { closePopup } from '@actions/popup';
@@ -8,7 +8,7 @@ import Theme from '@utils/Theme';
 import classname from 'classnames';
 import EmptyContents from './EmptyContents';
 import Item from './Item';
-import { GridLayout } from '@egjs/react-infinitegrid';
+import { MasonryInfiniteGrid } from '@egjs/react-infinitegrid';
 
 const Index = ({
     type,
@@ -28,26 +28,16 @@ const Index = ({
         fetch(type);
     }, [type]);
 
+    const onRequestAppend = useCallback(() => {
+        if (!raw.searchAfter || !raw.searchAfter[0] || raw.total === data.length) {
+            return;
+        }
+        fetchMore({ type, data, searchAfter: raw.searchAfter, searchParam: raw.searchParam });
+    }, [raw, data, fetchMore]);
+
     if (totalCount === 0) {
         return <EmptyContents type={type} />;
     }
-
-    const onAppend = (p) => {
-        const { startLoading, currentTarget } = p;
-        if (currentTarget.isLoading()) {
-            return;
-        }
-        startLoading();
-        fetchMore({ type, data, searchAfter: raw.searchAfter, searchParam: raw.searchParam });
-        // const list = this.state.list;
-        // const items = this.loadItems(parseFloat(groupKey) + 1, 5);
-
-        // this.setState({ list: list.concat(items) });
-    };
-    const onLayoutComplete = ({ isLayout, endLoading }) => {
-        !isLayout && endLoading();
-    };
-
     return (
         <>
             <div className={classname(theme.section_content, theme.art_content)}>
@@ -55,21 +45,15 @@ const Index = ({
                 <strong className={theme.list_sjt}>
                     {CommonUtils.getLang('Menus.all')} ({totalCount})
                 </strong>
-                <GridLayout
-                    tag="ul"
+                <MasonryInfiniteGrid
+                    tag="div"
+                    containerTag="ul"
+                    container={true}
+                    isConstantSize={true}
+                    isEqualSize={true}
                     className={theme.list}
-                    useFirstRender={false}
-                    options={{
-                        isConstantSize: true,
-                        transitionDuration: 0.2,
-                        isOverflowScroll: true,
-                    }}
-                    layoutOptions={{
-                        margin: 18,
-                        align: 'left',
-                    }}
-                    onAppend={onAppend}
-                    onLayoutComplete={onLayoutComplete}
+                    gap={15}
+                    onRequestAppend={onRequestAppend}
                 >
                     {data
                         .filter(({ user }) => user)
@@ -84,7 +68,7 @@ const Index = ({
                                 }}
                             />
                         ))}
-                </GridLayout>
+                </MasonryInfiniteGrid>
             </div>
             <HeaderButtonPortal>
                 <a

@@ -43,7 +43,7 @@ export default ({ menus = {}, onClick, isDrawVector, isVectorOnly, toggleVector 
                         type="checkbox"
                         id="vector"
                         name="vector"
-                        checked={isVectorOnly}
+                        defaultChecked={isVectorOnly}
                         onClick={toggleVector}
                     />
 

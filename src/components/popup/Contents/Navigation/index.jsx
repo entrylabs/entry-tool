@@ -29,7 +29,11 @@ const Index = (props) => {
                 })}
             </ul>
             {searchOption && (
-                <SearchBox searchOption={searchOption} projectNavOptions={projectNavOptions} />
+                <SearchBox
+                    searchOption={searchOption}
+                    projectNavOptions={projectNavOptions}
+                    type={selected}
+                />
             )}
         </div>
     );
