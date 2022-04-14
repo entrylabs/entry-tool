@@ -4,7 +4,6 @@ import { TABLE } from '@constants/dataAnalytics';
 import { Confirm as ConfirmModal } from '@entrylabs/modal';
 import { CommonUtils } from '@utils/Common';
 import { getTrimedTable } from '@utils/dataAnalytics';
-import '@entrylabs/modal/dist/entry/entry-modal.css';
 
 const SaveConfirm = ({ onClick }) => {
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
