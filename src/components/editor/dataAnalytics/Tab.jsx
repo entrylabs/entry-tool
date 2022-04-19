@@ -5,7 +5,6 @@ import SaveConfirm from './SaveConfirm';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 import { TAB_ITEMS, TABLE } from '@constants/dataAnalytics';
-import '@entrylabs/modal/dist/entry/entry-modal.css';
 import Theme from '@utils/Theme';
 
 const Tab = () => {
