@@ -83,12 +83,13 @@ export default connect(null, mapDispatchToProps)(Index);
 //TODO: Theme.type == 'entryline' 이면 @web/config.category 사용.
 const defaultOptions = {
     category: [
-        [CommonUtils.getLang('EntryStatic.art_category_all'), 'art_category_all'],
-        [CommonUtils.getLang('EntryStatic.art_category_game'), 'art_category_game'],
-        [CommonUtils.getLang('EntryStatic.art_category_animation'), 'art_category_animation'],
-        [CommonUtils.getLang('EntryStatic.art_category_media'), 'art_category_media'],
-        [CommonUtils.getLang('EntryStatic.art_category_physical'), 'art_category_physical'],
-        [CommonUtils.getLang('EntryStatic.art_category_etc'), 'art_category_etc'],
+        [CommonUtils.getLang('EntryStatic.art_category_all'), 'all'],
+        [CommonUtils.getLang('EntryStatic.art_category_game'), 'game'],
+        [CommonUtils.getLang('EntryStatic.art_category_living'), 'living'],
+        [CommonUtils.getLang('EntryStatic.art_category_storytelling'), 'storytelling'],
+        [CommonUtils.getLang('EntryStatic.art_category_arts'), 'arts'],
+        [CommonUtils.getLang('EntryStatic.art_category_knowledge'), 'knowledge'],
+        [CommonUtils.getLang('EntryStatic.art_category_etc'), 'etc'],
     ],
     sort: [
         [CommonUtils.getLang('EntryStatic.art_sort_updated'), 'updated'],
@@ -98,10 +99,10 @@ const defaultOptions = {
     ],
     period: [
         [CommonUtils.getLang('EntryStatic.art_period_all'), null],
-        [CommonUtils.getLang('EntryStatic.art_period_day'), '1'],
-        [CommonUtils.getLang('EntryStatic.art_period_week'), '7'],
-        [CommonUtils.getLang('EntryStatic.art_period_month'), '30'],
-        [CommonUtils.getLang('EntryStatic.art_period_three_month'), '90'],
+        [CommonUtils.getLang('EntryStatic.art_period_today'), 'today'],
+        [CommonUtils.getLang('EntryStatic.art_period_week'), 'week'],
+        [CommonUtils.getLang('EntryStatic.art_period_month'), 'month'],
+        [CommonUtils.getLang('EntryStatic.art_period_quarter'), 'quarter'],
     ],
 };
 
@@ -110,7 +111,7 @@ const createDropDownOption = (projectNavOptions = {}) => {
     const result = defaultOptions;
     if (categoryOptions) {
         result.category = categoryOptions.map((item) => [
-            CommonUtils.getLang(`EntryStatic.${item}`),
+            CommonUtils.getLang(`EntryStatic.art_category_${item}`),
             item,
         ]);
     }
@@ -122,7 +123,7 @@ const createDropDownOption = (projectNavOptions = {}) => {
     }
     if (periodOptions) {
         result.period = periodOptions.map((item) => [
-            CommonUtils.getLang(`EntryStatic.${item}`),
+            CommonUtils.getLang(`EntryStatic.art_period_${item}`),
             item,
         ]);
     }
