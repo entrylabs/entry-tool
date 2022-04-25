@@ -1018,6 +1018,15 @@
         font-size: 13px;
         position: absolute;
         bottom: 15px;
+
+        a {
+            color: #6d8797;
+            font-weight: 500;
+            text-decoration: underline;
+        }
+    }
+    .extend_block .list .on .link_box a{
+        color: #fff;
     }
 }
 

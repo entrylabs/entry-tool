@@ -143,7 +143,9 @@ class Dropdown extends Component {
                     value={value}
                     index={indexWithoutSelectAll}
                     style={style}
-                    className={`${this.theme.item} ${disabled ? this.theme.disabled : ''}`}
+                    className={`${this.theme.item} ${
+                        disabled || style?.disabled ? this.theme.disabled : ''
+                    }`}
                     onClick={() => {
                         handleEvent(item, indexWithoutSelectAll, value);
                     }}
