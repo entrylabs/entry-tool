@@ -11,7 +11,6 @@ import ContextMenu from '../widget/contextMenu';
 import OutsideClick from '../common/outsideClick';
 
 import 'tui-grid/dist/tui-grid.css';
-import '@entrylabs/modal/dist/entry/entry-modal.css';
 
 const LEFT_CLICK = 1;
 const RIGHT_CLICK = 3;

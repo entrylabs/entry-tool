@@ -21,7 +21,7 @@
     }
 
     @keyframes indicatorShow {
-        form {
+        from {
             opacity: 0;
         }
 
@@ -31,7 +31,7 @@
     }
 
     @keyframes indicatorHide {
-        form {
+        from {
             opacity: 1;
         }
 
