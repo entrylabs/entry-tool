@@ -62,6 +62,7 @@ const Index = ({
                         <div className={theme.link_box}>
                             <a
                                 href={linkBox.url}
+                                target="_blank"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                 }}
