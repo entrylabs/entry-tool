@@ -28,12 +28,24 @@ const Index = ({
         fetch(type);
     }, [type]);
 
-    const onRequestAppend = useCallback(() => {
-        if (!raw.searchAfter || !raw.searchAfter[0] || raw.total === data.length) {
-            return;
-        }
-        fetchMore({ type, data, searchAfter: raw.searchAfter, searchParam: raw.searchParam });
-    }, [raw, data, fetchMore]);
+    const onRequestAppend = useCallback(
+        (event) => {
+            if (!raw.searchAfter || !raw.searchAfter[0] || raw.total === data.length) {
+                return;
+            }
+            event.wait();
+            fetchMore({
+                type,
+                data,
+                searchAfter: raw.searchAfter,
+                searchParam: raw.searchParam,
+                callback: () => {
+                    event.ready();
+                },
+            });
+        },
+        [raw, data, fetchMore]
+    );
 
     if (totalCount === 0) {
         return <EmptyContents type={type} />;
