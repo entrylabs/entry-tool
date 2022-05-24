@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 import classname from 'classnames';
@@ -19,20 +19,31 @@ const Index = ({ projectNavOptions, searchOption = {}, triggerSearch, type }) =>
     });
     const [isActive, setActive] = useState(false);
 
-    const search = (e) => {
-        e.preventDefault();
+    const search = useCallback(() => {
         triggerSearch({
             ...selected,
             searchQuery: query,
             type,
         });
-    };
+    }, [query, selected, triggerSearch, type]);
+
+    const handleSearch = useCallback(
+        (e) => {
+            e.preventDefault();
+            search();
+        },
+        [search]
+    );
+
+    useEffect(() => {
+        search();
+    }, [selected, type]);
 
     const toggleDropDown = (dropdown) => setDropdown(dropdown);
     const selectOption = (type) => (option) => select({ ...selected, [type]: option });
     return (
         <div className={theme.art_sel_area}>
-            <form onSubmit={search}>
+            <form onSubmit={handleSearch}>
                 {Object.keys(SearchOptionMap)
                     .filter((key) => searchOption[key])
                     .map((key) => {
@@ -61,7 +72,7 @@ const Index = ({ projectNavOptions, searchOption = {}, triggerSearch, type }) =>
                         <button
                             type="button"
                             className={classname(theme.btn_srch, theme.imbtn_pop_srch)}
-                            onClick={search}
+                            onClick={handleSearch}
                         >
                             <span className={theme.blind}>
                                 {CommonUtils.getLang('Menus.search_lang')}
