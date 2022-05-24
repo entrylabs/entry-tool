@@ -6,14 +6,14 @@ import classname from 'classnames';
 import moment from 'moment';
 
 const DetailModal = ({ theme, info = {} }) => {
-    const { provider, rows = 0, name, fields, updatedAt = '', description } = info;
-    const updated = moment(new Date(updatedAt)).format('YYYY-MM-DD');
+    const { provider, rows = 0, name, fields, updated = '', description } = info;
+    const updatedAt = moment(new Date(updated)).format('YYYY-MM-DD');
     return (
         <div className={theme.contents}>
             <strong className={theme.more_sjt}>{name}</strong>
             <ul className={theme.more_info}>
                 <li>{`${CommonUtils.getLang('Menus.data_table_provider')} : ` + `${provider}`}</li>
-                <li>{`${CommonUtils.getLang('Menus.data_table_modifidate')} : ${updated}`}</li>
+                <li>{`${CommonUtils.getLang('Menus.data_table_modifidate')} : ${updatedAt}`}</li>
             </ul>
             <ul className={theme.more_sub_info}>
                 <li>
@@ -70,11 +70,11 @@ const TableSelectItem = ({ theme, item, upload, openModal }) => {
             <div className={theme.info}>
                 <p className={theme.fields}>{createFieldsText(fields)}</p>
             </div>
-            {item.exampleurl && (
+            {item.url && (
                 <div className={theme.info}>
                     <a
                         className={theme.text_url_link}
-                        href={item.exampleurl}
+                        href={item.url}
                         rel="noopener noreferrer"
                         target="_blank"
                         onClick={(e) => {
