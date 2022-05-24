@@ -65,6 +65,7 @@ const Index = ({
                     isEqualSize={true}
                     className={theme.list}
                     gap={15}
+                    align={'start'}
                     onRequestAppend={onRequestAppend}
                 >
                     {data
