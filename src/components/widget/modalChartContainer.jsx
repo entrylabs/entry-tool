@@ -6,12 +6,7 @@ import ModalChart from './modalChart';
 
 class ModalChartContainer extends Component {
     render() {
-        return (
-            <ModalChart
-                {...this.props}
-                onClose={() => this.props.setVisible(false)}
-            />
-        );
+        return <ModalChart {...this.props} onClose={() => this.props.setVisible(false)} />;
     }
 }
 
@@ -21,9 +16,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default withWrapper({
     type: 'widget',
-})(
-    connect(
-        undefined,
-        mapDispatchToProps
-    )(ModalChartContainer)
-);
+})(connect(undefined, mapDispatchToProps)(ModalChartContainer));

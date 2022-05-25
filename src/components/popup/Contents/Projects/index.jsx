@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { triggerEvent } from '@actions';
 import { closePopup } from '@actions/popup';
@@ -10,30 +10,28 @@ import EmptyContents from './EmptyContents';
 import Item from './Item';
 import { MasonryInfiniteGrid } from '@egjs/react-infinitegrid';
 
-const Index = ({
-    type,
-    data = [],
-    avatarImage,
-    raw,
-    submit,
-    fetch,
-    fetchMore,
-    HeaderButtonPortal,
-}) => {
+const Index = ({ type, data = [], avatarImage, raw, submit, fetchMore, HeaderButtonPortal }) => {
     const totalCount = raw.total || data.length;
     const theme = Theme.getStyle('popup');
     const [selected, select] = useState(null);
-
-    useEffect(() => {
-        fetch(type);
-    }, [type]);
-
-    const onRequestAppend = useCallback(() => {
-        if (!raw.searchAfter || !raw.searchAfter[0] || raw.total === data.length) {
-            return;
-        }
-        fetchMore({ type, data, searchAfter: raw.searchAfter, searchParam: raw.searchParam });
-    }, [raw, data, fetchMore]);
+    const onRequestAppend = useCallback(
+        (event) => {
+            if (!raw.searchAfter || !raw.searchAfter[0] || raw.total === data.length) {
+                return;
+            }
+            event.wait();
+            fetchMore({
+                type,
+                data,
+                searchAfter: raw.searchAfter,
+                searchParam: raw.searchParam,
+                callback: () => {
+                    event.ready();
+                },
+            });
+        },
+        [raw, data, fetchMore]
+    );
 
     if (totalCount === 0) {
         return <EmptyContents type={type} />;
@@ -53,6 +51,7 @@ const Index = ({
                     isEqualSize={true}
                     className={theme.list}
                     gap={15}
+                    align={'start'}
                     onRequestAppend={onRequestAppend}
                 >
                     {data
