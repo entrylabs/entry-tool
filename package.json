@@ -116,7 +116,7 @@
     "dependencies": {
         "@egjs/react-infinitegrid": "^4.1.1",
         "@entrylabs/event": "^1.0.3",
-        "@entrylabs/modal": "^1.2.5",
+        "@entrylabs/modal": "^1.2.9",
         "@entrylabs/postcss-url": "^8.0.1",
         "@toast-ui/react-grid": "^4.10.1",
         "axios": "^0.18.0",
