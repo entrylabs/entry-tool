@@ -19,14 +19,18 @@ const Index = ({ type, data = [], avatarImage, raw, submit, fetchMore, HeaderBut
             if (!raw.searchAfter || !raw.searchAfter[0] || raw.total === data.length) {
                 return;
             }
-            event.wait();
+            if (event && event.wait) {
+                event.wait();
+            }
             fetchMore({
                 type,
                 data,
                 searchAfter: raw.searchAfter,
                 searchParam: raw.searchParam,
                 callback: () => {
-                    event.ready();
+                    if (event && event.ready) {
+                        event.ready();
+                    }
                 },
             });
         },
