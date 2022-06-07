@@ -393,7 +393,10 @@ export const DEFAULT_OPTIONS = {
             title: 'Menus.open_project',
             mainType: 'projects',
             opt: {
-                search: { category: true, date: true, order: true, query: true },
+                searchByType: {
+                    projects: { category: true, date: true, order: true, query: true },
+                    favorites: { category: true, date: true, query: true },
+                },
             },
             navigations: {
                 projects: {
