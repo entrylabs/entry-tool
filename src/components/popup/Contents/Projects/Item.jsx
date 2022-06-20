@@ -7,22 +7,14 @@ export default ({ item, isSelected, onClick, avatarImgUrl }) => {
     const { thumb, name, likeCnt = 0, comment = 0, visit = 0, user = {} } = item;
     const { _id, username, profileImage } = user;
     if (!avatarImgUrl) {
-        if (Theme.type == 'entryline') {
-            if (profileImage) {
-                avatarImgUrl = `/uploads/${profileImage}`;
-            } else {
-                avatarImgUrl = '/static/img/pf/profile/img-profile-default-medium@2x.png';
-            }
+        if (profileImage && profileImage.filename) {
+            const { filename, imageType } = profileImage;
+            avatarImgUrl = `/uploads/${filename.substr(0, 2)}/${filename.substr(
+                2,
+                2
+            )}/${filename}.${imageType}`;
         } else {
-            if (profileImage && profileImage.filename) {
-                const { filename, imageType } = profileImage;
-                avatarImgUrl = `/uploads/${filename.substr(0, 2)}/${filename.substr(
-                    2,
-                    2
-                )}/${filename}.${imageType}`;
-            } else {
-                avatarImgUrl = '/img/DefaultCardUserThmb.svg';
-            }
+            avatarImgUrl = '/img/DefaultCardUserThmb.svg';
         }
     }
     const theme = Theme.getStyle('popup');
