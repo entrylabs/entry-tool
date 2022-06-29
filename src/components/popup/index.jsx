@@ -65,11 +65,11 @@ class Popup extends Component {
     setContent() {
         const { opt = {}, writeBoxOption, data: dataObj, uploads: uploaded, type } = this.property;
         const { imageBaseUrl: expsnsionIconBaseUrl } = this.property;
-        const { isDrawVector, multiSelect, showSelected, search: searchOption } = opt;
+        const { isDrawVector, multiSelect, showSelected, search, searchByType } = opt;
         const { navigation: selected } = this.state;
         const navSettings = {
             ...this.property,
-            searchOption,
+            searchOption: searchByType ? searchByType[this.state?.navigation] : search,
             selected,
             onClicked: (item) => this.setState({ navigation: item }),
         };
