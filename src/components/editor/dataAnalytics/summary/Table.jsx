@@ -25,8 +25,9 @@ const Table = () => {
                 </p>
             </div>
             <ul className={theme.table_info}>
-                <li>{`${CommonUtils.getLang('DataAnalytics.row')} ${table.length -
-                    1}${CommonUtils.getLang('DataAnalytics.attribute_count')}`}</li>
+                <li>{`${CommonUtils.getLang('DataAnalytics.row')} ${
+                    table.length
+                }${CommonUtils.getLang('DataAnalytics.attribute_count')}`}</li>
                 <li>{`${CommonUtils.getLang('DataAnalytics.attribute')} ${
                     summary.length
                 }${CommonUtils.getLang('DataAnalytics.attribute_count')}`}</li>
