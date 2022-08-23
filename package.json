@@ -126,7 +126,7 @@
         "clipboard": "^2.0.11",
         "entry_sheet": "https://8a14b1ce074335d7a7d9099b4a0807cc40fc9434:x-oauth-basic@oss.navercorp.com/ria/entry_sheet.git",
         "jest": "^26.0.1",
-        "moment": "^2.24.0",
+        "moment": "^2.29.4",
         "react-cookies": "^0.1.0",
         "react-device-detect": "^1.15.0",
         "react-outside-click-handler": "^1.2.2",
