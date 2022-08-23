@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import withWrapper from '@hoc/withWrapper';
 import { connect } from 'react-redux';
-import Popup from './index';
+import List from './index';
 import { visibleAction } from '@actions/index';
 
-class PopupContainer extends Component {
+class ListTool extends Component {
     render() {
-        return <Popup {...this.props} />;
+        return <List {...this.props} />;
     }
 }
 
@@ -19,5 +19,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default withWrapper({
-    type: 'popup',
-})(connect(mapStateToProps, mapDispatchToProps)(PopupContainer));
+    type: 'listTool',
+})(connect(mapStateToProps, mapDispatchToProps)(ListTool));
