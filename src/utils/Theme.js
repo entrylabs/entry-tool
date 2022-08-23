@@ -1,4 +1,5 @@
 import EntryPopupStyle from '@assets/entry/scss/popup.scss';
+import EntryListStyle from '@assets/entry/scss/list.scss';
 import EntryLecturePopupStyle from '@assets/entry/scss/lecture-popup.scss';
 import EntryBackpackStyle from '@assets/entry/scss/widget/Backpack.scss';
 import EntryDropper from '@assets/entry/scss/widget/Dropper.scss';
@@ -17,6 +18,7 @@ class Theme {
         this.styles = {
             entry: {
                 popup: EntryPopupStyle,
+                list: EntryListStyle,
                 backpack: EntryBackpackStyle,
                 progress: EntryProgress,
                 draggable: EntryDraggable,
@@ -26,6 +28,7 @@ class Theme {
             },
             lecture: {
                 popup: EntryLecturePopupStyle,
+                list: EntryListStyle,
                 backpack: EntryBackpackStyle,
                 progress: EntryProgress,
                 draggable: EntryDraggable,
@@ -35,6 +38,7 @@ class Theme {
             },
             entryline: {
                 popup: EntryLinePopupStyle,
+                list: EntryListStyle,
                 backpack: EntryLineBackpackStyle,
                 progress: EntryLinePopupStyle,
                 draggable: EntryLineDraggable,
