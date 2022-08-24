@@ -111,18 +111,22 @@ const Import = (props) => {
                 <a role="button" className={theme.btn_close} onClick={close} />
             </div>
             <div className={theme.body}>
-                <div className={theme.content_wrap}>
-                    <div className={theme.left_content}>
+                <div className={theme.content}>
+                    <div className={theme.text_wrap}>
                         <span>{CommonUtils.getLang('Menus.list_import_notice_1')}</span>
                         <span>{CommonUtils.getLang('Menus.list_import_notice_2')}</span>
-                        <textarea
-                            className={theme.export_content}
-                            onChange={handleChangeText}
-                            value={textData}
-                            placeholder={CommonUtils.getLang('Menus.list_import_placeholder')}
-                        />
                     </div>
-                    <div className={theme.right_content} />
+                    <div className={theme.content_wrap}>
+                        <div className={theme.left_content}>
+                            <textarea
+                                className={theme.export_content}
+                                onChange={handleChangeText}
+                                value={textData}
+                                placeholder={CommonUtils.getLang('Menus.list_import_placeholder')}
+                            />
+                        </div>
+                        <div className={theme.right_content} />
+                    </div>
                 </div>
                 <div className={theme.btn_wrap}>
                     <a role="button" onClick={handleExcelDownload}>
