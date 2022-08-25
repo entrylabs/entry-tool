@@ -32,7 +32,7 @@ const Table = () => {
                     summary.length
                 }${CommonUtils.getLang('DataAnalytics.attribute_count')}`}</li>
                 <li>{`${CommonUtils.getLang('DataAnalytics.cell')} ${summary.length *
-                    (table.length - 1)}${CommonUtils.getLang('DataAnalytics.cell_count')}`}</li>
+                    table.length}${CommonUtils.getLang('DataAnalytics.cell_count')}`}</li>
             </ul>
             <div className={theme.table_box}>
                 <table className={theme.table}>
