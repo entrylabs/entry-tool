@@ -15,6 +15,7 @@ const Index = ({ uploadNotAllowedExt, uploadAllowed, uploadFail, upload, setUplo
         const $upload = e.currentTarget;
         const uploadFiles = $upload.files;
         if (!isValidFiles(uploadFiles, uploadFail)) {
+            $upload.value = '';
             return false;
         }
         setUploadState(true);
@@ -26,10 +27,10 @@ const Index = ({ uploadNotAllowedExt, uploadAllowed, uploadFail, upload, setUplo
         });
         if (result) {
             upload(result);
-            $upload.value = '';
         } else {
             setUploadState(false);
         }
+        $upload.value = '';
     };
 
     return (
