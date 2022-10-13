@@ -4,6 +4,7 @@ import EntrySheet from 'entry_sheet';
 import Option from '../popup/Contents/Navigation/SearchOption';
 import { CommonUtils } from '@utils/Common';
 import _find from 'lodash/find';
+import _findIndex from 'lodash/findIndex';
 import cn from 'classnames';
 
 const ModalTable = (props) => {
@@ -12,12 +13,12 @@ const ModalTable = (props) => {
     const { table, onClose, togglePause, stop, isIframe, tables } = props;
     const [isPaused, setPause] = useState(false);
     const [dropdown, setDropdown] = useState('');
-    const [selected, select] = useState(table.id || 0);
+    const [selected, select] = useState(_findIndex(tables, { id: table.id }) || 0);
     const toggleDropDown = (dropdown) => setDropdown(dropdown);
-    const tableList = tables.map(({ name, id }) => [name, id]);
+    const tableList = tables.map(({ name }, index) => [name, index]);
     const selectTable = (option) => {
-        const [, id] = option;
-        select(id);
+        const [, index] = option;
+        select(index);
     };
     const getTable = (targetId) => _find(tables, ({ id }) => id === targetId);
 
@@ -35,8 +36,6 @@ const ModalTable = (props) => {
 
         onClose();
     }, []);
-
-    console.log({ tableList, selected });
 
     return (
         <div className={theme.dimmed}>
@@ -72,14 +71,21 @@ const ModalTable = (props) => {
                             />
                             <div className={`${theme.chart_area}`}>
                                 {table && (
-                                    <div className={theme.sheet_box} style={{ height: '480px' }}>
+                                    <div
+                                        className={theme.sheet_box}
+                                        style={{
+                                            width: '710px',
+                                            height: '480px',
+                                            marginRight: '-24px',
+                                        }}
+                                    >
                                         <EntrySheet
                                             sheetData={{
                                                 fields: {
                                                     cols: [],
                                                     rows: [],
                                                 },
-                                                data: getTable(selected).table,
+                                                data: tables[selected].table,
                                             }}
                                             option={{
                                                 type: 'VIEWER',
