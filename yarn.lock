@@ -6517,6 +6517,11 @@ domhandler@^5.0.1, domhandler@^5.0.2, domhandler@^5.0.3:
   dependencies:
     domelementtype "^2.3.0"
 
+dompurify@^2.3.9:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-2.4.0.tgz#c9c88390f024c2823332615c9e20a453cf3825dd"
+  integrity sha512-Be9tbQMZds4a3C6xTmz68NlMfeONA//4dOavl/1rNw50E+/QO0KVpbcU0PcaW0nsQxurXls9ZocqFxk8R2mWEA==
+
 domutils@^1.5.1:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/domutils/-/domutils-1.7.0.tgz#56ea341e834e06e6748af7a1cb25da67ea9f8c2a"
@@ -15222,10 +15227,11 @@ tui-date-picker@^4.1.0:
     tui-time-picker "^2.1.3"
 
 tui-grid@^4.21.1:
-  version "4.21.1"
-  resolved "https://registry.yarnpkg.com/tui-grid/-/tui-grid-4.21.1.tgz#0dac678626802abba0e0ce97784f4285465320a1"
-  integrity sha512-q6SEvXNm7BcoA3hRByARimu5NA+i+2u+gdiMWdDGKyxE+oLcQ70BdYyvRPTvyKBxN1H4ljxzR/MzrwYAi6tT+Q==
+  version "4.21.6"
+  resolved "https://registry.yarnpkg.com/tui-grid/-/tui-grid-4.21.6.tgz#5ac97b89720763d1af87da453fac86392a476b08"
+  integrity sha512-KGFuwtggocMKtjozCNHeeALMRTNi3tc8Ty1AO6MyJZ6GrvoYcuxEIqIRJACLkDesn+CKCZQ0GMxr6pvlDLAS+g==
   dependencies:
+    dompurify "^2.3.9"
     tui-date-picker "^4.1.0"
     tui-pagination "^3.4.0"
     xlsx "^0.17.1"
