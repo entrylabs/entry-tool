@@ -73,6 +73,10 @@ const ModalTable = (props) => {
                                 {table && (
                                     <div
                                         className={theme.sheet_box}
+                                        onKeyDown={(e) => {
+                                            e.stopPropagation();
+                                            e.preventDefault();
+                                        }}
                                         style={{
                                             width: '710px',
                                             height: '480px',
