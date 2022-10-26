@@ -1,9 +1,8 @@
 import React from 'react';
 
-export default ({ theme, children }) => {
-    return (
-        <div id="popupList" className={theme.data_selbox}>
-            <ul className={theme.list}>{children}</ul>
-        </div>
-    );
-};
+export default ({ theme, children, dropdown }) => (
+    <div id="popupList" className={theme.data_selbox}>
+        {dropdown}
+        <ul className={theme.list}>{children}</ul>
+    </div>
+);

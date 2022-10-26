@@ -8,7 +8,7 @@ import Theme from '@utils/Theme';
 import { EMIT_TYPES as Types } from '@constants';
 import { triggerEvent } from '@actions/index';
 import { connect } from 'react-redux';
-import PopupList from '../../includes/PopupList';
+import PopupList from '../../includes/PopupList/index';
 import _isEmpty from 'lodash/isEmpty';
 import { closePopup, toggleVector } from '@actions/popup';
 import classname from 'classnames';
@@ -31,6 +31,7 @@ const Index = (props) => {
     } = props;
     const [selectedSidebar, selectSidebar] = useState(Object.keys(sidebar)[0]);
     const [selectedSubMenu, selectSubMenu] = useState(null);
+    const dropdownState = useState('');
     const theme = Theme.getStyle('popup');
     const isEmpty = _isEmpty(sidebar);
     const subMenu = (sidebar[selectedSidebar] && sidebar[selectedSidebar].sub) || {};
@@ -45,6 +46,7 @@ const Index = (props) => {
                     type={type}
                     baseUrl={baseUrl}
                     playable={type === 'sound'}
+                    dropdownState={dropdownState}
                 />
             ));
 
@@ -77,7 +79,7 @@ const Index = (props) => {
                         isVectorOnly={isVectorOnly}
                         toggleVector={toggleVector}
                     />
-                    <PopupList type={type} theme={theme}>
+                    <PopupList type={type} theme={theme} dropdown={dropdownState[0]}>
                         {drawItems()}
                     </PopupList>
                 </div>

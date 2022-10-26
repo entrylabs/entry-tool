@@ -1602,10 +1602,16 @@
             color: #fff;
         }
     }
+    .data_selbox .list .dropdown {
+        position: absolute;
+        left: 12px;
+        bottom: 16px;
+        z-index: 20;
+    }
     .data_selbox .list .text_link {
         position: absolute;
         right: 12px;
-        bottom: 12px;
+        bottom: 16px;
         font-size: 12px;
         font-weight: 600;
         color: #2c313d;
@@ -1773,6 +1779,12 @@
         letter-spacing: -0.3px;
         line-height: 38px;
         cursor: pointer;
+        .text {
+            width: 78px;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+        }
     }
     .select_link:after {
         @include PositionRT(absolute, 16px, 50%);

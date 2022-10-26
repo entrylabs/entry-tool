@@ -4,7 +4,7 @@ import { initState } from '@actions/popup';
 import { visibleAction } from '@actions/index';
 import classname from 'classnames';
 import Navigation from './Contents/Navigation';
-import Select from './Contents/Select';
+import Select from './Contents/Select/index';
 import FileUpload from './Contents/FileUpload/index';
 import FileDragUpload from './Contents/FileDragUpload/index';
 import WriteBox from './Contents/WriteBox';

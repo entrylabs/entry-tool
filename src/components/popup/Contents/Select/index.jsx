@@ -1,5 +1,5 @@
 import React from 'react';
-import SideBar from './SideBar';
+import SideBar from './SideBar/index';
 import BigICON from './BigICON';
 
 export default (props) => {
