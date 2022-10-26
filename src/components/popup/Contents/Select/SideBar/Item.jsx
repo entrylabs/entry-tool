@@ -6,10 +6,10 @@ import { triggerEvent } from '@actions';
 import { makeFindSelectedById } from '@selectors';
 import Theme from '@utils/Theme';
 import classname from 'classnames';
-import SelectItem from '../../includes/SelectItem';
+import SelectItem from '../../includes/SelectItem/index';
 
 const Index = (props) => {
-    const { index, selected, applySelected, select, deselect } = props;
+    const { index, selected, applySelected, select, deselect, dropdownState } = props;
     const { baseUrl, type, item, multiSelect = true, playable } = props;
     const theme = Theme.getStyle('popup');
 
@@ -40,6 +40,7 @@ const Index = (props) => {
                     item={item}
                     baseUrl={baseUrl}
                     playable={playable}
+                    dropdownState={dropdownState}
                 />
             </div>
         </li>
