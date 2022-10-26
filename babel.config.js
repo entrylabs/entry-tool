@@ -42,7 +42,7 @@ module.exports = function(api) {
                     },
                 },
             ],
-            '@babel/react',
+            ['@babel/react', { runtime: 'automatic' }],
         ],
     };
 };

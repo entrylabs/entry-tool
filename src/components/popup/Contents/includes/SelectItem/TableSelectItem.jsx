@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { openModal } from '@actions/popup';
 import { connect } from 'react-redux';
 import { CommonUtils } from '@utils/Common';
+import Option from '@components/popup/Contents/Navigation/SearchOption';
 import classname from 'classnames';
 import moment from 'moment';
+import _map from 'lodash/map';
 
 const DetailModal = ({ theme, info = {} }) => {
     const { provider, rows = 0, name, fields, updated = '', description } = info;
@@ -35,8 +37,21 @@ const DetailModal = ({ theme, info = {} }) => {
     );
 };
 
-const TableSelectItem = ({ theme, item, upload, openModal }) => {
+const TableSelectItem = ({ theme, item, upload, openModal, dropdownState }) => {
+    const [option, setOption] = useState(0);
+    const handleSelect = (option) => {
+        const [, index] = option;
+        if (index) {
+            item.selected = item.otherTypes[index - 1].projectTable;
+        } else {
+            item.selected = item.projectTable;
+        }
+        setOption(index);
+    };
+    const [dropdown, setDropdown] = dropdownState;
+    const toggleDropDown = (dropdown) => setDropdown(dropdown);
     const { summary, rows = 0, name, fields = [] } = item;
+    const items = _map([{ name: '기본' }, ...item.otherTypes], ({ name }, index) => [name, index]);
     if (upload) {
         return (
             <>
@@ -83,6 +98,20 @@ const TableSelectItem = ({ theme, item, upload, openModal }) => {
                     >
                         {item.linkText || CommonUtils.getLang('Menus.sample_project')}
                     </a>
+                </div>
+            )}
+            {item.hasOtherTypes && (
+                <div className={theme.dropdown}>
+                    <Option
+                        onSelect={handleSelect}
+                        options={items}
+                        setDropdown={toggleDropDown}
+                        isOpenDefault={!!dropdown}
+                        defaultIndex={option}
+                        height={'30px'}
+                        width={'116px'}
+                        lineHeight={'28px'}
+                    />
                 </div>
             )}
             <a href="/" className={theme.text_link} onClick={handleClick}>
