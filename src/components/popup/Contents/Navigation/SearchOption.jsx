@@ -11,6 +11,9 @@ export default ({
     isOpenDefault,
     staticName,
     defaultIndex = 0,
+    height,
+    width,
+    lineHeight,
 }) => {
     const theme = Theme.getStyle('popup');
     const [isOpen, setOpenStatus] = useState(false);
@@ -27,6 +30,7 @@ export default ({
     };
     const openDropDown = async (e) => {
         e.preventDefault();
+        e.stopPropagation();
         setOpenStatus(true);
         if (isOpenDefault) {
             setDropdown(null);
@@ -51,7 +55,7 @@ export default ({
     return (
         <>
             <div className={theme.pop_selectbox} onClick={openDropDown}>
-                <div className={dropdownClass}>
+                <div className={dropdownClass} style={{ height, width, lineHeight }}>
                     <div className={theme.text}>{text}</div>
                 </div>
             </div>
