@@ -21,6 +21,7 @@ export { default as Chart } from './components/widget/Chart';
 export { default as ModalChart } from './components/widget/modalChartContainer';
 export { default as ModalTable } from './components/widget/modalTableContainer';
 export { default as BillBoard } from './components/widget/BillBoardChartContainer';
+export { default as Tree } from './components/widget/TreeNodeContainer';
 export { default as ModalProgress } from './components/widget/modalProgressContainer';
 export { default as Dropper } from './components/widget/DropperContainer';
 export { default as Sortable } from './components/widget/sortableContainer';
