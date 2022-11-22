@@ -35,6 +35,7 @@ import Chart from '../components/widget/Chart';
 import Table from '../components/widget/Table';
 import ModalChart from '../components/widget/modalChart';
 import BillBoard from '../components/widget/BillBoard';
+import Tree from '../components/widget/Tree';
 
 import DataSelect from '../components/ai_layout/DataSelect';
 import DataUpload from '../components/ai_layout/DataUpload';
@@ -493,6 +494,113 @@ storiesOf('AiLayout', module)
                 yIndex: 2,
                 categoryIndexes: [0],
             }}
+        />
+    ))
+    .add('tree', () => (
+        <Tree
+            onClose={action('close')}
+            source={{
+                fields: [
+                    '품종',
+                    '서식지',
+                    '부리 길이',
+                    '부리 깊이',
+                    '물갈퀴 길이',
+                    '몸무게',
+                    '성별',
+                ],
+                valueMap: { 1: 'Adelie', 2: 'Chinstrap', 3: 'Gentoo' },
+                graphData: {
+                    kind: 'classifier',
+                    gainFunction: 'gini',
+                    splitFunction: 'mean',
+                    minNumSamples: 5,
+                    maxDepth: 8,
+                    gainThreshold: 0.01,
+                    splitValue: 42.349999999999994,
+                    splitColumn: 1,
+                    gain: 0.30649417647665156,
+                    left: {
+                        kind: 'classifier',
+                        gainFunction: 'gini',
+                        splitFunction: 'mean',
+                        minNumSamples: 5,
+                        maxDepth: 8,
+                        gainThreshold: 0.01,
+                        splitValue: 15.1,
+                        splitColumn: 2,
+                        gain: 0.03537496173860637,
+                        left: {
+                            kind: 'classifier',
+                            gainFunction: 'gini',
+                            splitFunction: 'mean',
+                            minNumSamples: 5,
+                            maxDepth: 8,
+                            gainThreshold: 0.01,
+                            distribution: [[0, 0, 1]],
+                        },
+                        right: {
+                            kind: 'classifier',
+                            gainFunction: 'gini',
+                            splitFunction: 'mean',
+                            minNumSamples: 5,
+                            maxDepth: 8,
+                            gainThreshold: 0.01,
+                            distribution: [[0.9907407407407424, 0.009259259259259259]],
+                        }
+                    },
+                    right: {
+                        kind: 'classifier',
+                        gainFunction: 'gini',
+                        splitFunction: 'mean',
+                        minNumSamples: 5,
+                        maxDepth: 8,
+                        gainThreshold: 0.01,
+                        splitValue: 2.5,
+                        splitColumn: 0,
+                        gain: 0.41289419144936496,
+                        left: {
+                            kind: 'classifier',
+                            gainFunction: 'gini',
+                            splitFunction: 'mean',
+                            minNumSamples: 5,
+                            maxDepth: 8,
+                            gainThreshold: 0.01,
+                            splitValue: 17.450000000000003,
+                            splitColumn: 2,
+                            gain: 0.16233702578178827,
+                            left: {
+                                kind: 'classifier',
+                                gainFunction: 'gini',
+                                splitFunction: 'mean',
+                                minNumSamples: 5,
+                                maxDepth: 8,
+                                gainThreshold: 0.01,
+                                distribution: [[0, 0, 1.0000000000000018]],
+                            },
+                            right: {
+                                kind: 'classifier',
+                                gainFunction: 'gini',
+                                splitFunction: 'mean',
+                                minNumSamples: 5,
+                                maxDepth: 8,
+                                gainThreshold: 0.01,
+                                distribution: [[1.0000000000000002]],
+                            },
+                        },
+                        right: {
+                            kind: 'classifier',
+                            gainFunction: 'gini',
+                            splitFunction: 'mean',
+                            minNumSamples: 5,
+                            maxDepth: 8,
+                            gainThreshold: 0.01,
+                            distribution: [[0.017857142857142856, 0.9821428571428582]],
+                        },
+                    },
+                },
+            }}
+            title={'binary tree'}
         />
     ))
     .add('테이블', () => (
