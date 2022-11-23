@@ -6736,7 +6736,7 @@ entities@^4.2.0, entities@^4.3.0:
 
 "entry_sheet@https://8a14b1ce074335d7a7d9099b4a0807cc40fc9434:x-oauth-basic@oss.navercorp.com/ria/entry_sheet.git":
   version "1.0.0"
-  resolved "https://8a14b1ce074335d7a7d9099b4a0807cc40fc9434:x-oauth-basic@oss.navercorp.com/ria/entry_sheet.git#54371a920ce327670bd4b38e8051d3f317666b19"
+  resolved "https://8a14b1ce074335d7a7d9099b4a0807cc40fc9434:x-oauth-basic@oss.navercorp.com/ria/entry_sheet.git#774268207c48a2f7dc8a92501a93ca9479da471e"
   dependencies:
     "@emotion/core" "^10.1.1"
     "@emotion/styled" "^10.0.27"
