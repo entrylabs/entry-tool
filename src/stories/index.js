@@ -52,22 +52,22 @@ export default function Provider({ story }) {
 Theme.type = 'entry';
 storiesOf('Popup', module)
     .addDecorator((story) => <Provider story={story()} />)
-    .add('오브젝트 선택 팝업', () => <Sample SampleState='ObjectSelect' />)
-    .add('파일 올리기 팝업', () => <Sample SampleState='FileUpload' />)
-    .add('그리기 팝업', () => <Sample SampleState='Drawing' />)
-    .add('짧은 글상자 팝업', () => <Sample SampleState='ShortWrite' />)
-    .add('여러줄 글상자 팝업', () => <Sample SampleState='MultiWrite' />)
-    .add('확장블럭 팝업', () => <Sample SampleState='ExpandBlock' />)
-    .add('소리선택 팝업', () => <Sample SampleState='SoundSelect' />)
-    .add('소리 올리기', () => <Sample SampleState='SoundUpload' />)
-    .add('회원가입1', () => <Sample SampleState='SignUp1' />)
-    .add('회원가입2', () => <Sample SampleState='SignUp2' />)
-    .add('회원가입3', () => <Sample SampleState='SignUp3' />)
-    .add('회원가입4', () => <Sample SampleState='SignUp4' />)
-    .add('회원가입5', () => <Sample SampleState='SignUp5' />)
-    .add('로그인', () => <Sample SampleState='Login' />)
-    .add('툴팁', () => <Sample SampleState='Tooltip' />)
-    .add('나의 작품 - 리스트', () => <Sample SampleState='MyProduct' />)
+    .add('오브젝트 선택 팝업', () => <Sample SampleState="ObjectSelect" />)
+    .add('파일 올리기 팝업', () => <Sample SampleState="FileUpload" />)
+    .add('그리기 팝업', () => <Sample SampleState="Drawing" />)
+    .add('짧은 글상자 팝업', () => <Sample SampleState="ShortWrite" />)
+    .add('여러줄 글상자 팝업', () => <Sample SampleState="MultiWrite" />)
+    .add('확장블럭 팝업', () => <Sample SampleState="ExpandBlock" />)
+    .add('소리선택 팝업', () => <Sample SampleState="SoundSelect" />)
+    .add('소리 올리기', () => <Sample SampleState="SoundUpload" />)
+    .add('회원가입1', () => <Sample SampleState="SignUp1" />)
+    .add('회원가입2', () => <Sample SampleState="SignUp2" />)
+    .add('회원가입3', () => <Sample SampleState="SignUp3" />)
+    .add('회원가입4', () => <Sample SampleState="SignUp4" />)
+    .add('회원가입5', () => <Sample SampleState="SignUp5" />)
+    .add('로그인', () => <Sample SampleState="Login" />)
+    .add('툴팁', () => <Sample SampleState="Tooltip" />)
+    .add('나의 작품 - 리스트', () => <Sample SampleState="MyProduct" />)
     .add('나의 작품 - 작품 없음', () => <Sample />)
     .add('툴팁', () => <Tooltips />)
     .add('확장블록', () => <Popup type="expansion" data={EXPANSION_SAMPLE} />)
@@ -416,8 +416,10 @@ storiesOf('AiLayout', module)
         <TableChart ChartState="DepthHistogram" NoResultText="계열을 선택해 주세요." />
     ))
     .add('데이터 차트 - 히스토그램 그래프', () => <TableChart ChartState="DepthHistogramGraph" />)
+    .add('데이터 차트 - 테이블 없음', () => <TableChart ChartState="NoTable" />)
     .add('데이터 차트 - 요약', () => <TableSummary />)
     .add('데이터 차트 - 요약 모두', () => <TableSummary SummaryState="Total" />)
+    .add('데이터 차트 - test', () => <DataAnalytics />)
     .add('차트', () => (
         <Chart table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} type="line" />
     ))
@@ -547,7 +549,7 @@ storiesOf('AiLayout', module)
                             maxDepth: 8,
                             gainThreshold: 0.01,
                             distribution: [[0.9907407407407424, 0.009259259259259259]],
-                        }
+                        },
                     },
                     right: {
                         kind: 'classifier',

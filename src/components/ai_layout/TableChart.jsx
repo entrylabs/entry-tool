@@ -2061,6 +2061,45 @@ class TableChart extends Component {
                     </div>
                 </Fragment>
             )
+        } else if (ChartState == 'NoTable') {
+            return (
+                <Fragment>
+                    <div className={Styles.popup_wrap}>
+                        <header className={Styles.pop_header}>
+                            <h1>테이블 불러오기</h1>
+                            <button
+                                onClick={this.close}
+                                className={`${Styles.btn_back} ${Styles.imbtn_pop_close}`}
+                            >
+                                <span className={Styles.blind}>닫기</span>
+                            </button>
+                            <a href="/" className={Styles.btn} role="button">적용하기</a>
+                        </header>
+                        <div className={`${Styles.section_container} ${Styles.chart_container}`}>
+                            {/* [D] 메뉴 카테고리 선택에 따라 텍스트 변경  */}
+                            {/* 창 조절하기 버튼을 누르면 fold 클래스 추가 */}
+                            <section className={`${Styles.aside}`}>
+                                <h2 className={Styles.blind}>테이블 추가하기</h2>
+                                <div className={Styles.add_btn_box}>
+                                    <a href="/" role="button">테이블 추가하기</a>
+                                </div>
+                                <ul className={Styles.list}>
+                                </ul>
+                                <a href="/" role="button" className={Styles.split_bar}>
+                                    <span className={Styles.blind}>창 조절하기</span>
+                                </a>
+                            </section>
+                            <div className={Styles.container_inner}>
+                                <section className={Styles.content}>
+                                    <p className={Styles.caution_dsc}>
+                                        먼저 테이블을 추가해 주세요
+                                    </p>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </Fragment>
+            )
         } else {
             return (
                 <Fragment>
