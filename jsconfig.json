@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "ES6",
+        "target": "ES2022",
         "baseUrl": "./",
         "paths": {
             "@hoc/*": ["src/hoc/*"],
@@ -10,7 +10,9 @@
             "@components/*": ["src/components/*"],
             "@utils/*": ["src/utils/*"],
             "@reducers/*": ["src/reducers/*"],
-            "@contexts/*": ["src/contexts/*"]
+            "@contexts/*": ["src/contexts/*"],
+            "@selectors/*": ["src/selectors/*"],
+            "@constants/*": ["src/constants/*"]
         }
     },
     "exclude": ["node_modules", "**/node_modules/*", "dist", "component"]

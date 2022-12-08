@@ -154,6 +154,9 @@
         .chart_link.scatter {
             background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
         }
+        .chart_link.scatterGrid {
+            background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
+        }
         .chart_link.histogram {
             background-image: url('#{$imageDir}/icon_chart_sel05_on.svg');
         }
@@ -167,6 +170,9 @@
             background-image: url('#{$imageDir}/icon_chart_sel03_off.svg');
         }
         .chart_link.scatter.disabled {
+            background-image: url('#{$imageDir}/icon_chart_sel04_off.svg');
+        }
+        .chart_link.scatterGrid.disabled {
             background-image: url('#{$imageDir}/icon_chart_sel04_off.svg');
         }
         .chart_link.histogram.disabled {
@@ -708,6 +714,9 @@
         .chart_link.scatter {
             background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
         }
+        .chart_link.scatterGrid {
+            background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
+        }
         .chart_link.histogram {
             background-image: url('#{$imageDir}/icon_chart_sel05_on.svg');
         }
@@ -721,6 +730,9 @@
             background-image: url('#{$imageDir}/icon_chart_sel03_off.svg');
         }
         .chart_link.scatter.disabled {
+            background-image: url('#{$imageDir}/icon_chart_sel04_off.svg');
+        }
+        .chart_link.scatterGrid.disabled {
             background-image: url('#{$imageDir}/icon_chart_sel04_off.svg');
         }
         .chart_link.histogram.disabled {

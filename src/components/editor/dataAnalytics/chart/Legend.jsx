@@ -4,21 +4,20 @@ import _reduce from 'lodash/reduce';
 import _findIndex from 'lodash/findIndex';
 import Dropdown from '@components/widget/dropdown';
 import { CommonUtils } from '@utils/Common';
-import { PIE, BAR, LINE, SCATTER, HISTOGRAM } from '@constants/dataAnalytics';
+import { PIE, SCATTER, HISTOGRAM, SCATTERGRID } from '@constants/dataAnalytics';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { getNumberColumnIndexesBySelectedColumns, getTrimedTable } from '@utils/dataAnalytics';
 import Theme from '@utils/Theme';
 
-const Legend = () => {
-    const theme = Theme.getStyle('popup');
-    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const [showDropdown, setShowDropdown] = useState(false);
+const Legend = ({ maximumSelectionLength, showSelectAll, checkBox }) => {
     const axisRef = useRef();
+    const theme = Theme.getStyle('popup');
+    const [showDropdown, setShowDropdown] = useState(false);
+    const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
     const { table: selectedTable, chart, chartIndex = 0 } = selected;
-    const { yIndex = 0, xIndex, categoryIndexes: selectedLegend, type } = chart[chartIndex];
+    const { yIndex = 0, xIndex, categoryIndexes: selectedLegend = [], type } = chart[chartIndex];
     const table = getTrimedTable(selectedTable);
-    const checkBox = type === BAR || type === LINE || type === HISTOGRAM;
     const fields = [...table[0]];
     const dropdownItems = _reduce(
         fields,
@@ -31,14 +30,20 @@ const Legend = () => {
         : getNumberColumnIndexesBySelectedColumns(table, dropdownItems)
     ).map((index) => [fields[index], index]);
     const disabled =
-        (xIndex === -1 || (type === SCATTER && yIndex === -1) || (type !== PIE && !items.length)) &&
-        (type !== HISTOGRAM || !items.length);
-    const titleLabel =
-        type === PIE
-            ? CommonUtils.getLang('DataAnalytics.value')
-            : CommonUtils.getLang('DataAnalytics.legend');
+        !((type === HISTOGRAM || type === SCATTERGRID || type === PIE) && items.length) &&
+        (xIndex === -1 || (type === SCATTER && yIndex === -1));
+    const checkedIndex = checkBox
+        ? selectedLegend.map((index) =>
+              _findIndex(
+                  getNumberColumnIndexesBySelectedColumns(table, dropdownItems),
+                  (categoryIndex) => categoryIndex === index
+              )
+          )
+        : '';
 
+    let titleLabel = CommonUtils.getLang('DataAnalytics.legend');
     if (type === PIE) {
+        titleLabel = CommonUtils.getLang('DataAnalytics.value');
         items.push([CommonUtils.getLang('DataAnalytics.quantity'), fields.length]);
         fields.push(CommonUtils.getLang('DataAnalytics.quantity'));
     }
@@ -47,20 +52,12 @@ const Legend = () => {
         fields.push(CommonUtils.getLang('DataAnalytics.not_distinguished'));
     }
 
-    const getTitle = () => {
-        if (checkBox) {
-            if (!selectedLegend.length) {
-                return titleLabel;
-            }
-            if (selectedLegend.length === 1) {
-                return fields[selectedLegend[0]];
-            }
-            return `${fields[selectedLegend[0]]} 외 ${selectedLegend.length - 1}건`;
-        }
-        return !fields[selectedLegend[0]] ? titleLabel : fields[selectedLegend[0]];
-    };
+    const getTitle = () =>
+        checkBox && selectedLegend.length > 1
+            ? `${fields[selectedLegend[0]]} 외 ${selectedLegend.length - 1}건`
+            : fields[selectedLegend[0]] || titleLabel;
 
-    const handleSelectDropDown = (value) => {
+    const handleSelectDropdown = (value) => {
         setShowDropdown(false);
         dispatch({
             type: 'SELECT_LEGEND_AXIS',
@@ -68,16 +65,14 @@ const Legend = () => {
         });
     };
 
-    const handleOutsideClick = () => {
+    const handleOutsideClick = (checkItems) => {
         setShowDropdown(false);
-    };
-
-    const handleCheckOutsideClick = (checkItems) => {
-        setShowDropdown(false);
-        dispatch({
-            type: 'SELECT_LEGEND_AXIS',
-            indexes: checkItems.items.map((item) => item[1]),
-        });
+        if (checkBox) {
+            dispatch({
+                type: 'SELECT_LEGEND_AXIS',
+                indexes: checkItems.items.map((item) => item[1]),
+            });
+        }
     };
 
     const handleClick = (event) => {
@@ -110,22 +105,13 @@ const Legend = () => {
             {showDropdown && (
                 <Dropdown
                     items={items}
-                    onSelectDropdown={handleSelectDropDown}
-                    onOutsideClick={checkBox ? handleCheckOutsideClick : handleOutsideClick}
+                    onSelectDropdown={handleSelectDropdown}
+                    onOutsideClick={handleOutsideClick}
                     positionDom={axisRef.current}
-                    checkedIndex={
-                        checkBox
-                            ? selectedLegend.map((index) =>
-                                  _findIndex(
-                                      getNumberColumnIndexesBySelectedColumns(table, dropdownItems),
-                                      (categoryIndex) => categoryIndex === index
-                                  )
-                              )
-                            : ''
-                    }
-                    multiple={checkBox && type !== HISTOGRAM}
-                    showSelectAll={checkBox && type !== HISTOGRAM}
-                    maximumSelectionLength={checkBox && type === HISTOGRAM ? 3 : ''}
+                    multiple={showSelectAll}
+                    showSelectAll={showSelectAll}
+                    maximumSelectionLength={maximumSelectionLength}
+                    checkedIndex={checkedIndex}
                 />
             )}
         </div>

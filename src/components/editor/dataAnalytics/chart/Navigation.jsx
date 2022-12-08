@@ -22,6 +22,8 @@ const Navigation = () => {
                 return CommonUtils.getLang('DataAnalytics.pie');
             case 'scatter':
                 return CommonUtils.getLang('DataAnalytics.scatter');
+            case 'scatterGrid':
+                return CommonUtils.getLang('DataAnalytics.scatterGrid');
             case 'plus':
                 return CommonUtils.getLang('DataAnalytics.plus');
             default:

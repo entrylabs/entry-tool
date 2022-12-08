@@ -797,7 +797,7 @@
     position: absolute;
     left: 46px;
     top: 0;
-    width: 340px;
+    width: 393px;
     padding: 16px 0 14px 4px;
     box-sizing: border-box;
     background-color: #fff;
@@ -845,6 +845,9 @@
             background-image: url('#{$imageDir}/icon_chart_sel03_on.svg');
         }
         &.scatter a:before {
+            background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
+        }
+        &.scatterGrid a:before {
             background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
         }
         &.histogram a:before {

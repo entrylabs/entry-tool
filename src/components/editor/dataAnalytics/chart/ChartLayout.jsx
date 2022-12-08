@@ -10,21 +10,16 @@ import HorizontalLegend from './HorizontalLegend';
 import Chart from '@components/widget/Chart';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
-import { getTrimedTable, isDrawable } from '@utils/dataAnalytics';
-import { SCATTER, PIE, NONE, LEGEND_OPTIONS } from '@constants/dataAnalytics';
+import { getTrimedTable, isDrawable, getNoResultText } from '@utils/dataAnalytics';
+import {
+    SCATTER,
+    PIE,
+    NONE,
+    LEGEND_OPTIONS,
+    SCATTERGRID,
+    HISTOGRAM,
+} from '@constants/dataAnalytics';
 import Theme from '@utils/Theme';
-
-const getNoResultText = ({ type = NONE, xIndex, yIndex, categoryIndexes = [] } = {}) => {
-    let content;
-    if (xIndex === -1) {
-        content = CommonUtils.getLang('DataAnalytics.select_x_axis');
-    } else if (yIndex === -1 && type === SCATTER) {
-        content = CommonUtils.getLang('DataAnalytics.select_y_axis');
-    } else if (!categoryIndexes.length) {
-        content = CommonUtils.getLang('DataAnalytics.select_legend');
-    }
-    return content;
-};
 
 const ChartLayout = () => {
     const theme = Theme.getStyle('popup');
@@ -39,12 +34,23 @@ const ChartLayout = () => {
     const key =
         `chart_${id}_${chartIndex}_${xIndex}_${yIndex}` +
         `_${categoryIndexes.toString()}_${sort}_${bin}_${boundary}`;
-    const { xAxis, yAxis, category, degree, order } = LEGEND_OPTIONS[type];
+    const {
+        xAxis,
+        yAxis,
+        order,
+        degree,
+        category,
+        checkBox,
+        showSelectAll,
+        maximumSelectionLength,
+    } = LEGEND_OPTIONS[type];
 
     const handleRemoveClick = useCallback((event) => {
         event.preventDefault();
         dispatch({ type: 'REMOVE_CHART' });
     }, []);
+
+    console.log({ id: isDrawable(selectedChart), selectedChart });
 
     return (
         <>
@@ -63,7 +69,16 @@ const ChartLayout = () => {
                 <div className={theme.input_inner}>
                     {xAxis ? <XAxis key={`${key}_xaxis`} /> : ''}
                     {yAxis ? <YAxis key={`${key}_yaxis`} /> : ''}
-                    {category ? <Legend key={`${key}_category`} /> : ''}
+                    {category ? (
+                        <Legend
+                            key={`${key}_category`}
+                            checkBox={checkBox}
+                            showSelectAll={showSelectAll}
+                            maximumSelectionLength={maximumSelectionLength}
+                        />
+                    ) : (
+                        ''
+                    )}
                     {degree ? <Degree key={`${key}_degree`} /> : ''}
                     {order ? <Order key={`${key}_order`} /> : ''}
                 </div>
@@ -81,6 +96,7 @@ const ChartLayout = () => {
                     {categoryIndexes.length &&
                     isHorizontalLegend &&
                     type !== SCATTER &&
+                    type !== SCATTERGRID &&
                     categoryIndexes[0] !== table[0].length ? (
                         <HorizontalLegend table={table} chart={selectedChart} />
                     ) : null}

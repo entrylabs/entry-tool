@@ -22,7 +22,7 @@ import map from 'lodash/fp/map';
 import unzip from 'lodash/fp/unzip';
 
 import { CommonUtils } from '@utils/Common';
-import { NONE, SCATTER, HISTOGRAM } from '@constants/dataAnalytics';
+import { NONE, SCATTER, HISTOGRAM, SCATTERGRID } from '@constants/dataAnalytics';
 
 export const isString = (str) => isNaN(str);
 export const someString = (array) => _some(array, isString);
@@ -236,6 +236,113 @@ export const getPieChart = (table, xIndex, categoryIndex) => {
 
 export const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes } = {}) =>
     type !== NONE &&
-    ((type !== HISTOGRAM && xIndex !== -1) || (type === HISTOGRAM && categoryIndexes.length)) &&
+    (!(type === HISTOGRAM || xIndex === -1) ||
+        ((type === HISTOGRAM || type === SCATTERGRID) && categoryIndexes.length)) &&
     categoryIndexes.length &&
-    (type !== SCATTER || yIndex !== -1);
+    !(type === SCATTER && yIndex === -1);
+
+export const getNoResultText = ({ type = NONE, xIndex, yIndex, categoryIndexes = [] } = {}) => {
+    let content;
+    if (type !== HISTOGRAM && type !== SCATTERGRID && xIndex === -1) {
+        content = CommonUtils.getLang('DataAnalytics.select_x_axis');
+    } else if (yIndex === -1 && type === SCATTER) {
+        content = CommonUtils.getLang('DataAnalytics.select_y_axis');
+    } else if (!categoryIndexes.length) {
+        content = CommonUtils.getLang('DataAnalytics.select_legend');
+    }
+    return content;
+};
+
+export const pcorr = (x, y) => {
+    let sumX = 0;
+    let sumY = 0;
+    let sumXY = 0;
+    let sumX2 = 0;
+    let sumY2 = 0;
+    const minLength = Math.min(x.length, y.length);
+    const reduce = (xi, idx) => {
+        const yi = y[idx];
+        sumX += xi;
+        sumY += yi;
+        sumXY += xi * yi;
+        sumX2 += xi * xi;
+        sumY2 += yi * yi;
+    };
+    x.forEach(reduce);
+    return (
+        (minLength * sumXY - sumX * sumY) /
+        Math.sqrt((minLength * sumX2 - sumX * sumX) * (minLength * sumY2 - sumY * sumY))
+    );
+};
+
+export const pearsonCorrelation = (prefs, p1 = 0, p2 = 1) => {
+    const si = [];
+
+    for (const key in prefs[p1]) {
+        if (prefs[p2][key]) {
+            si.push(key);
+        }
+    }
+
+    const n = si.length;
+
+    if (n == 0) {
+        return 0;
+    }
+
+    let sum1 = 0;
+    for (let i = 0; i < si.length; i++) {
+        sum1 += prefs[p1][si[i]];
+    }
+
+    let sum2 = 0;
+    for (let i = 0; i < si.length; i++) {
+        sum2 += prefs[p2][si[i]];
+    }
+
+    let sum1Sq = 0;
+    for (let i = 0; i < si.length; i++) {
+        sum1Sq += Math.pow(prefs[p1][si[i]], 2);
+    }
+
+    let sum2Sq = 0;
+    for (let i = 0; i < si.length; i++) {
+        sum2Sq += Math.pow(prefs[p2][si[i]], 2);
+    }
+
+    let pSum = 0;
+    for (let i = 0; i < si.length; i++) {
+        pSum += prefs[p1][si[i]] * prefs[p2][si[i]];
+    }
+
+    const num = pSum - (sum1 * sum2) / n;
+    const den = Math.sqrt((sum1Sq - Math.pow(sum1, 2) / n) * (sum2Sq - Math.pow(sum2, 2) / n));
+
+    if (den == 0) {
+        return 0;
+    }
+
+    return num / den;
+};
+/**
+ * calculates pearson correlation
+ * @param {number[]} d1
+ * @param {number[]} d2
+ */
+export function corr(d1, d2) {
+    const { min, pow, sqrt } = Math;
+    const add = (a, b) => a + b;
+    const n = min(d1.length, d2.length);
+    if (n === 0) {
+        return 0;
+    }
+    [d1, d2] = [d1.slice(0, n), d2.slice(0, n)];
+    const [sum1, sum2] = [d1, d2].map((l) => l.reduce(add));
+    const [pow1, pow2] = [d1, d2].map((l) => l.reduce((a, b) => a + pow(b, 2), 0));
+    const mulSum = d1.map((n, i) => n * d2[i]).reduce(add);
+    const dense = sqrt((pow1 - pow(sum1, 2) / n) * (pow2 - pow(sum2, 2) / n));
+    if (dense === 0) {
+        return 0;
+    }
+    return (mulSum - (sum1 * sum2) / n) / dense;
+}

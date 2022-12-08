@@ -20,8 +20,14 @@ import {
     getBinWidth,
     isDrawable,
     getPieChart,
+    getNoResultText,
 } from '@utils/dataAnalytics';
-import { GRAPH_COLOR, HISTOGRAM, SCATTER_POINT_PATTERN } from '@constants/dataAnalytics';
+import {
+    GRAPH_COLOR,
+    HISTOGRAM,
+    SCATTERGRID,
+    SCATTER_POINT_PATTERN,
+} from '@constants/dataAnalytics';
 const { generateHash } = CommonUtils;
 
 const scatterChart = (table, xIndex, yIndex, categoryIndex) =>
@@ -379,7 +385,7 @@ const generateOption = (option) => {
         size,
         point,
         legend,
-        bindto: bindto,
+        bindto,
         color: {
             pattern: GRAPH_COLOR[type],
         },
@@ -418,7 +424,7 @@ const Chart = (props) => {
     } = chart;
     const id = `c${generateHash()}`;
 
-    let content = '';
+    const content = getNoResultText(chart);
 
     if (!isDrawable({ type, xIndex, yIndex, categoryIndexes })) {
         return shortForm ? (
@@ -463,18 +469,10 @@ const Chart = (props) => {
         }
     }, []);
 
-    if (type !== HISTOGRAM && xIndex === -1) {
-        content = CommonUtils.getLang('DataAnalytics.select_x_axis');
-    } else if (yIndex === -1 && type === 'scatter') {
-        content = CommonUtils.getLang('DataAnalytics.select_y_axis');
-    } else if (!categoryIndexes.length) {
-        content = CommonUtils.getLang('DataAnalytics.select_legend');
-    }
-
     if (!content) {
         return (
             <div className={theme.chart_area}>
-                <div id={id} style={{ height: '100%' }} ref={chartRef}/>
+                <div id={id} style={{ height: '100%' }} ref={chartRef} />
             </div>
         );
     }

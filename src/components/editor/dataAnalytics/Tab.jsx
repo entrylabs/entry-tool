@@ -39,6 +39,7 @@ const Tab = () => {
 
     return (
         <div className={theme.btn_box}>
+            <button style={{ padding: '10px', backgroundColor: 'skyblue' }}>hihi</button>
             <div className={theme.tab}>
                 {TAB_ITEMS.map(({ value, name }) => (
                     <a
