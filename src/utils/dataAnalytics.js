@@ -252,78 +252,6 @@ export const getNoResultText = ({ type = NONE, xIndex, yIndex, categoryIndexes =
     }
     return content;
 };
-
-export const pcorr = (x, y) => {
-    let sumX = 0;
-    let sumY = 0;
-    let sumXY = 0;
-    let sumX2 = 0;
-    let sumY2 = 0;
-    const minLength = Math.min(x.length, y.length);
-    const reduce = (xi, idx) => {
-        const yi = y[idx];
-        sumX += xi;
-        sumY += yi;
-        sumXY += xi * yi;
-        sumX2 += xi * xi;
-        sumY2 += yi * yi;
-    };
-    x.forEach(reduce);
-    return (
-        (minLength * sumXY - sumX * sumY) /
-        Math.sqrt((minLength * sumX2 - sumX * sumX) * (minLength * sumY2 - sumY * sumY))
-    );
-};
-
-export const pearsonCorrelation = (prefs, p1 = 0, p2 = 1) => {
-    const si = [];
-
-    for (const key in prefs[p1]) {
-        if (prefs[p2][key]) {
-            si.push(key);
-        }
-    }
-
-    const n = si.length;
-
-    if (n == 0) {
-        return 0;
-    }
-
-    let sum1 = 0;
-    for (let i = 0; i < si.length; i++) {
-        sum1 += prefs[p1][si[i]];
-    }
-
-    let sum2 = 0;
-    for (let i = 0; i < si.length; i++) {
-        sum2 += prefs[p2][si[i]];
-    }
-
-    let sum1Sq = 0;
-    for (let i = 0; i < si.length; i++) {
-        sum1Sq += Math.pow(prefs[p1][si[i]], 2);
-    }
-
-    let sum2Sq = 0;
-    for (let i = 0; i < si.length; i++) {
-        sum2Sq += Math.pow(prefs[p2][si[i]], 2);
-    }
-
-    let pSum = 0;
-    for (let i = 0; i < si.length; i++) {
-        pSum += prefs[p1][si[i]] * prefs[p2][si[i]];
-    }
-
-    const num = pSum - (sum1 * sum2) / n;
-    const den = Math.sqrt((sum1Sq - Math.pow(sum1, 2) / n) * (sum2Sq - Math.pow(sum2, 2) / n));
-
-    if (den == 0) {
-        return 0;
-    }
-
-    return num / den;
-};
 /**
  * calculates pearson correlation
  * @param {number[]} d1
@@ -331,7 +259,7 @@ export const pearsonCorrelation = (prefs, p1 = 0, p2 = 1) => {
  */
 export function corr(d1, d2) {
     const { min, pow, sqrt } = Math;
-    const add = (a, b) => a + b;
+    const add = (a, b) => Number(a) + Number(b);
     const n = min(d1.length, d2.length);
     if (n === 0) {
         return 0;
@@ -344,5 +272,6 @@ export function corr(d1, d2) {
     if (dense === 0) {
         return 0;
     }
+    console.log({ mulSum, sum1, sum2, n, dense });
     return (mulSum - (sum1 * sum2) / n) / dense;
 }
