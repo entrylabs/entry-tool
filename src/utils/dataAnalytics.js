@@ -24,7 +24,7 @@ import unzip from 'lodash/fp/unzip';
 import { CommonUtils } from '@utils/Common';
 import { NONE, SCATTER, HISTOGRAM, SCATTERGRID } from '@constants/dataAnalytics';
 
-export const isString = (str) => isNaN(str);
+export const isString = (str) => isNaN(str) || str === '';
 export const someString = (array) => _some(array, isString);
 export const getHeader = (matrix, editable = true) =>
     _chain(matrix)
@@ -53,18 +53,18 @@ const makeSummary = (row) => {
         return [row[0], '-', '-', '-', '-', '-'];
     }
     restRow = _reduce(restRow, (prev, curr) => (curr == '' ? prev : [...prev, curr]), []);
-    const max = Math.max(...restRow);
-    const min = Math.min(...restRow);
-    const average = getAverage(restRow);
+    const max = restRow.length ? Math.max(...restRow) : '-';
+    const min = restRow.length ? Math.min(...restRow) : '-';
+    const average = getAverage(restRow) || '-';
 
     return [
         row[0],
         average,
-        getStandardDeviation(restRow, average),
+        getStandardDeviation(restRow, average) || '-',
         max,
-        restRow.sort((a, b) => a - b)[Math.floor((restRow.length - 1) / 2)],
+        restRow.sort((a, b) => a - b)[Math.floor((restRow.length - 1) / 2)] || '-',
         min,
-    ].map((value) => (isString(value) ? value : toFixed(value)));
+    ].map((value) => (isString(value) ? value || '-' : toFixed(value)));
 };
 export const getSummary = flow(unzip, map(makeSummary));
 

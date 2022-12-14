@@ -417,11 +417,21 @@ storiesOf('AiLayout', module)
         <TableChart ChartState="DepthHistogram" NoResultText="계열을 선택해 주세요." />
     ))
     .add('데이터 차트 - 히스토그램 그래프', () => <TableChart ChartState="DepthHistogramGraph" />)
-    .add('데이터 차트 - 산점도 행렬 2x2 그래프', () => <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType2 />)
-    .add('데이터 차트 - 산점도 행렬 3x3 그래프', () => <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType3 />)
-    .add('데이터 차트 - 산점도 행렬 4x4 그래프', () => <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType4 />)
-    .add('데이터 차트 - 산점도 행렬 5x5 그래프', () => <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType5 />)
-    .add('데이터 차트 - 산점도 행렬 6x6 그래프', () => <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType6 />)
+    .add('데이터 차트 - 산점도 행렬 2x2 그래프', () => (
+        <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType2 />
+    ))
+    .add('데이터 차트 - 산점도 행렬 3x3 그래프', () => (
+        <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType3 />
+    ))
+    .add('데이터 차트 - 산점도 행렬 4x4 그래프', () => (
+        <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType4 />
+    ))
+    .add('데이터 차트 - 산점도 행렬 5x5 그래프', () => (
+        <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType5 />
+    ))
+    .add('데이터 차트 - 산점도 행렬 6x6 그래프', () => (
+        <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType6 />
+    ))
     .add('데이터 차트 - 테이블 없음', () => <TableChart ChartState="NoTable" />)
     .add('데이터 차트 - 요약', () => <TableSummary />)
     .add('데이터 차트 - 요약 모두 - Aside 접기', () => <TableSummary SummaryState="Total" />)
@@ -626,5 +636,15 @@ storiesOf('AiLayout', module)
     ))
     .add('DataAnalytics', () => (
         <DataAnalytics
+            list={[
+                {
+                    id: '4sbt',
+                    name: '보스턴 주택 가격 데이터',
+                    summary:
+                        '특정 시기 미국 보스턴 교외 지역의 주택 가격에 영향을 주었던 여러 지표와 당시 주택의 중간 가격(중앙값)을 정리한 예시 데이터입니다.',
+                    chart: [],
+                    table: [['']],
+                },
+            ]}
         />
     ));
