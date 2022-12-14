@@ -320,6 +320,10 @@ export const dataAnalyticsReducer = (state, action) => {
                 isChanged: true,
             };
         }
+        case 'CHANGE_VIEW_MODE': {
+            const { zoomIn } = action;
+            return { ...state, zoomIn: !!zoomIn };
+        }
         default:
             return state;
     }

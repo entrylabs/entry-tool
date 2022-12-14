@@ -11,7 +11,7 @@ const Tab = () => {
     const theme = Theme.getStyle('popup');
     const [showConfirm, setShowConfirm] = useState(false);
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { tab, selected, gridRef, isChanged } = dataAnalytics;
+    const { tab, selected, gridRef, isChanged, zoomIn } = dataAnalytics;
 
     const handleClick = useCallback(
         (value) => (event) => {
@@ -37,9 +37,21 @@ const Tab = () => {
         setShowConfirm(false);
     }, []);
 
+    const handleZoomClick = useCallback(() => {
+        dispatch({
+            type: 'CHANGE_VIEW_MODE',
+            zoomIn: !zoomIn,
+        });
+    }, [zoomIn]);
+
     return (
         <div className={theme.btn_box}>
-            <button style={{ padding: '10px', backgroundColor: 'skyblue' }}>hihi</button>
+            <button
+                className={`${theme.btn_zoom_in} ${zoomIn ? `${theme.active}` : ''}`}
+                onClick={handleZoomClick}
+            >
+                <span className={theme.blind}>{zoomIn ? '작게 보기' : '크게 보기'} </span>
+            </button>
             <div className={theme.tab}>
                 {TAB_ITEMS.map(({ value, name }) => (
                     <a

@@ -22,6 +22,7 @@ const DataAnalyticsEditor = () => {
     const {
         tab,
         list,
+        zoomIn = false,
         gridRef,
         selected = {},
         isChanged,
@@ -104,7 +105,11 @@ const DataAnalyticsEditor = () => {
                     {CommonUtils.getLang('Buttons.apply')}
                 </a>
             </header>
-            <div className={classname(theme.section_container, containerClass)}>
+            <div
+                className={classname(theme.section_container, containerClass, {
+                    [theme.zoom_in]: zoomIn,
+                })}
+            >
                 <SideTab />
                 <div className={theme.container_inner}>
                     {selectedIndex === -1 ? (

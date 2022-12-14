@@ -2,7 +2,7 @@ import React from 'react';
 import _cloneDeep from 'lodash/cloneDeep';
 import DataAnalyticsEditor from './DataAnalyticsEditor';
 import DataAnalyticsContextProvider from '@contexts/dataAnalytics';
-import { TABLE } from '@constants/dataAnalytics';
+import { TABLE, ZOOMOUT } from '@constants/dataAnalytics';
 
 const DataAnalytics = (props) => {
     const {
@@ -25,6 +25,7 @@ const DataAnalytics = (props) => {
         list,
         selectedIndex: index,
         selected: _cloneDeep(list[index]) || {},
+        zoomIn: false,
         fold: false,
         onToastDataAnalytics,
         onSubmitDataAnalytics,

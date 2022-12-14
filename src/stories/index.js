@@ -70,7 +70,7 @@ storiesOf('Popup', module)
     .add('툴팁', () => <Sample SampleState="Tooltip" />)
     .add('나의 작품 - 리스트', () => <Sample SampleState="MyProduct" />)
     .add('나의 작품 - 작품 없음', () => <Sample />)
-    .add('툴팁', () => <Tooltips />)
+    .add('툴팁1', () => <Tooltips />)
     .add('확장블록', () => <Popup type="expansion" data={EXPANSION_SAMPLE} />)
     .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE} uploads={SOUND_SAMPLE} />)
     .add('데이터 테이블', () => (
