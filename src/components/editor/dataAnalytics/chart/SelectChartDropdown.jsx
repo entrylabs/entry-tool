@@ -12,7 +12,7 @@ const SelectChartDropdown = (props) => {
     };
 
     return (
-        <div className={theme.vertical_tooltip} style={{ left: '56px', display: 'block' }}>
+        <div className={theme.tooltip_graph_box} style={{ display: 'block' }}>
             <ul className={theme.graph_list}>
                 {CHART_CATEGORY.map((item, index) => (
                     <li key={`chart_list_${index}`} className={theme[item]} onClick={onClick(item)}>

@@ -402,7 +402,7 @@ storiesOf('AiLayout', module)
     .add('파일 올리기 - 새로 만들기', () => <DataUpload />)
     .add('데이터 차트 - 차트 추가 기본', () => <TableChart ChartState="Default" />)
     .add('데이터 차트 - Aside 접기', () => <TableChart />)
-    .add('데이터 차트 - 2차 가로', () => (
+    .add('데이터 차트 - 2차 가로 - 크게보기', () => (
         <TableChart ChartState="Depth2" NoResultText="가로축을 먼저 선택해 주세요." />
     ))
     .add('데이터 차트 - 2차 계열', () => (
@@ -417,9 +417,15 @@ storiesOf('AiLayout', module)
         <TableChart ChartState="DepthHistogram" NoResultText="계열을 선택해 주세요." />
     ))
     .add('데이터 차트 - 히스토그램 그래프', () => <TableChart ChartState="DepthHistogramGraph" />)
+    .add('데이터 차트 - 산점도 행렬 2x2 그래프', () => <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType2 />)
+    .add('데이터 차트 - 산점도 행렬 3x3 그래프', () => <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType3 />)
+    .add('데이터 차트 - 산점도 행렬 4x4 그래프', () => <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType4 />)
+    .add('데이터 차트 - 산점도 행렬 5x5 그래프', () => <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType5 />)
+    .add('데이터 차트 - 산점도 행렬 6x6 그래프', () => <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType6 />)
     .add('데이터 차트 - 테이블 없음', () => <TableChart ChartState="NoTable" />)
     .add('데이터 차트 - 요약', () => <TableSummary />)
-    .add('데이터 차트 - 요약 모두', () => <TableSummary SummaryState="Total" />)
+    .add('데이터 차트 - 요약 모두 - Aside 접기', () => <TableSummary SummaryState="Total" />)
+    .add('데이터 차트 - 요약 모두 - 크게보기', () => <TableSummary SummaryState="Total" ZoonIn />)
     .add('데이터 차트 - test', () => <DataAnalytics />)
     .add('차트', () => (
         <Chart table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} type="line" />
