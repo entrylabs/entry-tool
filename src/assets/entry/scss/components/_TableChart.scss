@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-$axis-size: 20px;
+$axis-size: 22px;
 
 .section_container {
     &.zoom_in {
@@ -239,10 +239,8 @@ $axis-size: 20px;
             -webkit-box-flex: 1;
             flex: 1 1 auto;
             overflow: auto;
-            min-height: 370px;
             padding: 30px;
             background-color: #fff;
-            box-sizing: border-box;
             .chart_area {
                 svg {
                     margin: auto;
@@ -254,8 +252,10 @@ $axis-size: 20px;
             padding-right: 230px;
         }
         .graph_box.scatter_matrix {
-            padding-bottom: 30px + $axis-size;
-            padding-left: 30px + $axis-size;
+            min-height: 370px;
+            padding-bottom: 30px + ($axis-size * 2);
+            padding-left: 30px + ($axis-size * 2);
+            box-sizing: border-box;
             .graph {
                 float: left;
                 position: relative;
@@ -273,36 +273,69 @@ $axis-size: 20px;
             }
             .graph_title,
             .axis_x,
-            .axis_y {
+            .axis_list_x,
+            .axis_y,
+            .axis_list_y {
                 color: #555;
                 letter-spacing: -0.5px;
             }
             .axis_x,
-            .axis_y {
+            .axis_list_x,
+            .axis_y,
+            .axis_list_y {
                 position: absolute;
+            }
+            .axis_x,
+            .axis_y {
                 overflow: hidden;
-                height: 20px;
+                height: $axis-size;
                 font-size: 12px;
                 white-space: nowrap;
                 text-overflow: ellipsis;
             }
-            .axis_x {
-                bottom: -($axis-size + 10px);
+            .axis_x,
+            .axis_list_x {
                 left: 50%;
-                max-width: 100%;
                 transform: translateX(-50%);
+            }
+            .axis_x {
+                bottom: -(($axis-size * 2) + 10px);
+                max-width: 100%;
             }
             .axis_y {
                 display: block;
                 bottom: 0;
-                left: -($axis-size + 10px);
-                max-width: 30%;
+                left: -(($axis-size * 2) + 10px);
+                max-width: 40%;
                 transform-origin: 0 0;
                 transform: rotate(-90deg);
             }
+            .axis_list_x,
+            .axis_list_y {
+                display: flex;
+                justify-content: space-between;
+                align-items: self-end;
+                font-size: 10px;
+            }
+            .axis_list_x {
+                bottom: -$axis-size;
+                width: 100%;
+                height: $axis-size;
+            }
+            .axis_list_y {
+                flex-direction: column;
+                -webkit-box-direction: normal;
+                -webkit-box-orient: vertical;
+                top: 0;
+                left: -($axis-size + 10px);
+                width: $axis-size;
+                height: 100%;
+            }
             &.type_2 {
                 .graph {
+                    min-width: 134px;
                     width: 50%;
+                    min-height: 134px;
                     height: 50%;
                 }
                 .graph_title {
@@ -315,7 +348,9 @@ $axis-size: 20px;
             }
             &.type_3 {
                 .graph {
+                    min-width: 120px;
                     width: 33.3333%;
+                    min-height: 120px;
                     height: 33.3333%;
                 }
                 .graph_title {
@@ -324,7 +359,9 @@ $axis-size: 20px;
             }
             &.type_4 {
                 .graph {
+                    min-width: 105px;
                     width: 25%;
+                    min-height: 105px;
                     height: 25%;
                 }
                 .graph_title {
@@ -333,7 +370,9 @@ $axis-size: 20px;
             }
             &.type_5 {
                 .graph {
+                    min-width: 82px;
                     width: 20%;
+                    min-height: 82px;
                     height: 20%;
                 }
                 .graph_title {
@@ -342,7 +381,9 @@ $axis-size: 20px;
             }
             &.type_6 {
                 .graph {
+                    min-width: 70px;
                     width: 16.6666%;
+                    min-height: 70px;
                     height: 16.6666%;
                 }
                 .graph_title {
