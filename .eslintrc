@@ -1,18 +1,19 @@
 {
-    "plugins": ["prettier"],
-    "extends": ["plugin:prettier/recommended"],
+    "plugins": ["react", "prettier", "react-hooks"],
+    "extends": ["plugin:prettier/recommended", "plugin:react/recommended"],
     "env": {
         "es6": true,
         "browser": true,
         "jquery": true
     },
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "parserOptions": {
-        "ecmaVersion": 2017,
+        "ecmaVersion": 11,
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true
-        }
+        },
+        "requireConfigFile": false
     },
     "rules": {
         "prefer-const": "warn",
@@ -72,7 +73,9 @@
         "camelcase": ["warn", { "properties": "never" }],
         "new-cap": ["warn", { "capIsNewExceptionPattern": "^Entry." }],
         "curly": "warn",
-        "keyword-spacing": "warn"
+        "keyword-spacing": "warn",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
     },
     "globals": {
         "$": true,
