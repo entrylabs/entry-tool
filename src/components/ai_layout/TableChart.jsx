@@ -2641,26 +2641,52 @@ class TableChart extends Component {
                                                             <div className={Styles.graph} style={{ backgroundColor : 'red'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
-                                                                <span className={Styles.axis_y}>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'orange'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >-0.23</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>-0.23</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'yellow'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
-                                                                <span className={Styles.axis_x}>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
-                                                                <span className={Styles.axis_y}>y축 레이블</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>y축 레이블</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>8000</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'green'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
-                                                                <span className={Styles.axis_x}>x축 레이블</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>x축 레이블</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>8000</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                         </>
                                                     }
@@ -2669,53 +2695,91 @@ class TableChart extends Component {
                                                             <div className={Styles.graph} style={{ backgroundColor : 'red'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
-                                                                <span className={Styles.axis_y}>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'orange'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >-0.23</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>-0.23</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'yellow'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'green'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
-                                                                <span className={Styles.axis_y}>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>8000</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'blue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'darkblue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'purple'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
-                                                                <span className={Styles.axis_x}>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
-                                                                <span className={Styles.axis_y}>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'red'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
-                                                                <span className={Styles.axis_x}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>8000</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'orange'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >-0.23</strong>
-                                                                <span className={Styles.axis_x}>부리 깊이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>-0.23</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>부리 깊이</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                         </>
                                                     }
@@ -2724,90 +2788,139 @@ class TableChart extends Component {
                                                             <div className={Styles.graph} style={{ backgroundColor : 'red'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
-                                                                <span className={Styles.axis_y}>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'orange'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >-0.23</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>-0.23</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'yellow'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'green'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'blue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
-                                                                <span className={Styles.axis_y}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>8000</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'darkblue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'purple'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'red'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'orange'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >-0.23</strong>
-                                                                <span className={Styles.axis_y}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>-0.23</strong>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'yellow'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'green'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'blue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'darkblue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
-                                                                <span className={Styles.axis_x}>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
-                                                                <span className={Styles.axis_y}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>8000</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'purple'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
-                                                                <span className={Styles.axis_x}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>8000</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'red'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
-                                                                <span className={Styles.axis_x}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'orange'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >-0.23</strong>
-                                                                <span className={Styles.axis_x}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>-0.23</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                         </>
                                                     }
@@ -2816,137 +2929,201 @@ class TableChart extends Component {
                                                             <div className={Styles.graph} style={{ backgroundColor : 'red'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
-                                                                <span className={Styles.axis_y}>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'orange'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >-0.23</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>-0.23</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'yellow'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'green'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'blue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'darkblue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
-                                                                <span className={Styles.axis_y}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>8000</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'purple'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'red'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'orange'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >-0.23</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>-0.23</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'yellow'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'green'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
-                                                                <span className={Styles.axis_y}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'blue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'darkblue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'purple'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'red'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'orange'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >-0.23</strong>
-                                                                <span className={Styles.axis_y}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>-0.23</strong>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'yellow'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'green'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'blue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'darkblue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'purple'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
-                                                                <span className={Styles.axis_x}>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
-                                                                <span className={Styles.axis_y}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'red'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
-                                                                <span className={Styles.axis_x}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>8000</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'orange'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >-0.23</strong>
-                                                                <span className={Styles.axis_x}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>-0.23</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'yellow'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
-                                                                <span className={Styles.axis_x}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'green'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
-                                                                <span className={Styles.axis_x}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                         </>
                                                     }
@@ -2955,194 +3132,272 @@ class TableChart extends Component {
                                                             <div className={Styles.graph} style={{ backgroundColor : 'red'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
-                                                                <span className={Styles.axis_y}>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'orange'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >-0.23</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>-0.23</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'yellow'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'green'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'blue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'darkblue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'purple'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
-                                                                <span className={Styles.axis_y}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>8000</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'red'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'orange'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >-0.23</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>-0.23</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'yellow'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'green'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'blue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'darkblue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
-                                                                <span className={Styles.axis_y}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'purple'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'red'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'orange'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >-0.23</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>-0.23</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'yellow'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'green'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'blue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
-                                                                <span className={Styles.axis_y}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'darkblue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'purple'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'red'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'orange'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >-0.23</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>-0.23</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'yellow'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'green'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
-                                                                <span className={Styles.axis_y}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'blue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'darkblue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'purple'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'red'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'orange'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >-0.23</strong>
+                                                                ><span className={Styles.blind}>속성 이름</span>-0.23</strong>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'yellow'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
-                                                                <span className={Styles.axis_x}>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
-                                                                <span className={Styles.axis_y}>부리 길이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
+                                                                <span className={Styles.axis_y}><span className={Styles.blind}>y축 속성 이름</span>부리 길이</span>
+                                                                <dl className={Styles.axis_list_y}>
+                                                                    <dt className={Styles.blind}>y축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'green'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
-                                                                <span className={Styles.axis_x}>부리 깊이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>부리 깊이</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'blue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
-                                                                <span className={Styles.axis_x}>부리 깊이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>부리 깊이</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>8000</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'darkblue'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
-                                                                <span className={Styles.axis_x}>부리 깊이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>부리 깊이</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'purple'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 깊이</strong>
-                                                                <span className={Styles.axis_x}>부리 깊이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 깊이</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>부리 깊이</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                             <div className={Styles.graph} style={{ backgroundColor : 'red'}}>
                                                                 여기에 그래프를 넣어주세요
                                                                 <strong className={Styles.graph_title}
-                                                                >부리 길이</strong>
-                                                                <span className={Styles.axis_x}>부리 깊이</span>
+                                                                ><span className={Styles.blind}>속성 이름</span>부리 길이</strong>
+                                                                <span className={Styles.axis_x}><span className={Styles.blind}>x축 속성 이름</span>부리 깊이</span>
+                                                                <dl className={Styles.axis_list_x}>
+                                                                    <dt className={Styles.blind}>x축</dt>
+                                                                    <dd>12.3K</dd>
+                                                                    <dd>9999</dd>
+                                                                    <dd>12</dd>
+                                                                    <dd>0</dd>
+                                                                </dl>
                                                             </div>
                                                         </>
                                                     }
