@@ -47,6 +47,7 @@ export const LEGEND_OPTIONS = {
         category: true,
         maximumSelectionLength: 6,
         checkBox: true,
+        coefficient: true,
     },
     [HISTOGRAM]: {
         category: true,

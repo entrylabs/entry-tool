@@ -16,6 +16,7 @@
         "requireConfigFile": false
     },
     "rules": {
+        "no-unused-vars": "warn",
         "prefer-const": "warn",
         "no-var": "warn",
         "eqeqeq": 0,
@@ -75,7 +76,8 @@
         "curly": "warn",
         "keyword-spacing": "warn",
         "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn"
+        "react-hooks/exhaustive-deps": "warn",
+        "react/prop-types": "off"
     },
     "globals": {
         "$": true,

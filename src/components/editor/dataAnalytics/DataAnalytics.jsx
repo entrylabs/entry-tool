@@ -2,7 +2,7 @@ import React from 'react';
 import _cloneDeep from 'lodash/cloneDeep';
 import DataAnalyticsEditor from './DataAnalyticsEditor';
 import DataAnalyticsContextProvider from '@contexts/dataAnalytics';
-import { TABLE, ZOOMOUT } from '@constants/dataAnalytics';
+import { TABLE } from '@constants/dataAnalytics';
 
 const DataAnalytics = (props) => {
     const {

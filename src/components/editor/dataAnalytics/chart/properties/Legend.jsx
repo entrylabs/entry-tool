@@ -25,9 +25,10 @@ const Legend = ({ maximumSelectionLength, showSelectAll, checkBox }) => {
             !_some([xIndex, yIndex], (banIndex) => index === banIndex) ? [...prev, index] : prev,
         []
     );
-    const items = (type === SCATTER
-        ? dropdownItems
-        : getNumberColumnIndexesBySelectedColumns(table, dropdownItems)
+    const items = (
+        type === SCATTER
+            ? dropdownItems
+            : getNumberColumnIndexesBySelectedColumns(table, dropdownItems)
     ).map((index) => [fields[index], index]);
     const disabled =
         !((type === HISTOGRAM || type === SCATTERGRID || type === PIE) && items.length) &&

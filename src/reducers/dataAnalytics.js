@@ -290,6 +290,22 @@ export const dataAnalyticsReducer = (state, action) => {
                 isChanged: true,
             };
         }
+        case 'EDIT_COEFFICIENT': {
+            const { selected } = state;
+            const { chart = [], chartIndex = 0 } = selected;
+            const { coefficient } = action;
+
+            chart[chartIndex].coefficient = coefficient;
+
+            return {
+                ...state,
+                selected: {
+                    ...selected,
+                    chart,
+                },
+                isChanged: true,
+            };
+        }
         case 'CHANGE_DEGREE': {
             const { selected } = state;
             const { chart = [], chartIndex = 0 } = selected;

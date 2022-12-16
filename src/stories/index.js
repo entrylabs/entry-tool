@@ -643,7 +643,8 @@ storiesOf('AiLayout', module)
                     summary:
                         '특정 시기 미국 보스턴 교외 지역의 주택 가격에 영향을 주었던 여러 지표와 당시 주택의 중간 가격(중앙값)을 정리한 예시 데이터입니다.',
                     chart: [],
-                    table: [['']],
+                    table: [TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin],
+                    tab: 'chart',
                 },
             ]}
         />

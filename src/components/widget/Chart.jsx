@@ -8,7 +8,7 @@ import _reduce from 'lodash/reduce';
 import _forEach from 'lodash/forEach';
 import _toPairs from 'lodash/toPairs';
 import _findIndex from 'lodash/findIndex';
-import bb from 'billboard.js';
+import bb, { bar, line, scatter, pie, histogram } from 'billboard.js';
 
 import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';
@@ -139,7 +139,7 @@ const generateOption = (option) => {
     let grid;
     let point;
     let tooltip;
-    let line;
+    let histogramLine;
     let {
         axisX = {
             type: 'category',
@@ -210,6 +210,8 @@ const generateOption = (option) => {
                     x: 100,
                 },
             };
+            line();
+            bar();
             break;
         }
         case 'pie': {
@@ -240,6 +242,7 @@ const generateOption = (option) => {
                     x: 100,
                 },
             };
+            pie();
             break;
         }
         case 'scatter': {
@@ -304,6 +307,7 @@ const generateOption = (option) => {
                     x: 100,
                 },
             };
+            scatter();
             break;
         }
         case 'histogram': {
@@ -322,7 +326,7 @@ const generateOption = (option) => {
                 },
             };
             x = 'histogram_chart_x';
-            line = {
+            histogramLine = {
                 step: {
                     type: 'step-after',
                 },
@@ -372,6 +376,7 @@ const generateOption = (option) => {
                     return text;
                 },
             };
+            histogram();
             break;
         }
         default:
@@ -405,7 +410,7 @@ const generateOption = (option) => {
             },
         },
         tooltip: shortForm ? { show: false } : tooltip,
-        line,
+        line: histogramLine,
     };
 };
 
@@ -425,22 +430,6 @@ const Chart = (props) => {
     const id = `c${generateHash()}`;
 
     const content = getNoResultText(chart);
-
-    if (!isDrawable({ type, xIndex, yIndex, categoryIndexes })) {
-        return shortForm ? (
-            <div className={theme.data_add_box}>
-                <p>{CommonUtils.getLang('DataAnalytics.unable_to_express_chart')}</p>
-            </div>
-        ) : (
-            <div className={theme.graph_cont}>
-                <div id={id} style={{ height: '100%' }}>
-                    <div className={theme.alert}>
-                        {CommonUtils.getLang('DataAnalytics.unable_to_express_chart')}
-                    </div>
-                </div>
-            </div>
-        );
-    }
 
     useEffect(() => {
         if (
@@ -468,6 +457,22 @@ const Chart = (props) => {
             option && bb.generate(option);
         }
     }, []);
+
+    if (!isDrawable({ type, xIndex, yIndex, categoryIndexes })) {
+        return shortForm ? (
+            <div className={theme.data_add_box}>
+                <p>{CommonUtils.getLang('DataAnalytics.unable_to_express_chart')}</p>
+            </div>
+        ) : (
+            <div className={theme.graph_cont}>
+                <div id={id} style={{ height: '100%' }}>
+                    <div className={theme.alert}>
+                        {CommonUtils.getLang('DataAnalytics.unable_to_express_chart')}
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     if (!content) {
         return (

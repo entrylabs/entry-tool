@@ -4,6 +4,7 @@ import Scrollbars from '../common/scrollbars';
 import root from 'window-or-global';
 import { pure } from 'recompose';
 import Theme from '@utils/Theme';
+import cx from 'classnames';
 
 class ContextMenu extends Component {
     get SCROLL_ITEM_THRESHOLD() {
@@ -88,7 +89,11 @@ class ContextMenu extends Component {
                 <div
                     ref={(dom) => (this.contextDom = dom)}
                     style={{ left, top, transition: 'none' }}
-                    className={`${this.theme.tooltip_box} ${this.theme.dropdown} ${this.theme.auto_width}`}
+                    className={cx(
+                        this.theme.tooltip_box,
+                        this.theme.dropdown,
+                        this.theme.auto_width
+                    )}
                 >
                     <div className={this.theme.tooltip_inner}>
                         {items.length <= this.SCROLL_ITEM_THRESHOLD && this.makeDropdownItem()}
