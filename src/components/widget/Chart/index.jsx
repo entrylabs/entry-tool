@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';
@@ -7,9 +7,17 @@ import { CommonUtils } from '@utils/Common';
 import { isDrawable, getNoResultText } from '@utils/dataAnalytics';
 import { BAR, HISTOGRAM, LINE, PIE, SCATTER, SCATTERGRID } from '@constants/dataAnalytics';
 
+import Line from './Line';
+import Bar from './Bar';
+import Pie from './Pie';
+import Scatter from './Scatter';
+import ScatterGrid from './ScatterGrid';
+import Histogram from './Histogram';
+
 const Chart = (props) => {
     const theme = Theme.getStyle('popup');
     const { table = [[]], chart = {}, size } = props;
+    const { type, xIndex, yIndex, categoryIndexes, id = `c${CommonUtils.generateHash()}` } = chart;
 
     const noResultContent = getNoResultText(chart);
 
@@ -58,3 +66,5 @@ const Chart = (props) => {
 };
 
 export default Chart;
+
+export { Line, Bar, Pie, Scatter, ScatterGrid, Histogram };
