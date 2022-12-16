@@ -1733,10 +1733,10 @@
   resolved "https://registry.yarnpkg.com/@mdx-js/util/-/util-1.6.22.tgz#219dfd89ae5b97a8801f015323ffa4b62f45718b"
   integrity sha512-H1rQc1ZOHANWBvPcW+JpGwr+juXSxM8Q8YCkm3GhZd8REu1fHR3z99CErO1p9pkcfcxZnMdIZdIsXkOHY0NilA==
 
-"@next/eslint-plugin-next@13.0.6":
-  version "13.0.6"
-  resolved "https://registry.yarnpkg.com/@next/eslint-plugin-next/-/eslint-plugin-next-13.0.6.tgz#4d73774ede50183c5ae5bab01ec4a7dd2d11fed5"
-  integrity sha512-JUANdYNCddhmQBjQQPxEJYL7GMCqYtbfrdmtX7c013srig7waNCG69Aoql7CgAgjdy8jn1ovHVdcF/NB46XN3Q==
+"@next/eslint-plugin-next@13.0.7":
+  version "13.0.7"
+  resolved "https://registry.yarnpkg.com/@next/eslint-plugin-next/-/eslint-plugin-next-13.0.7.tgz#a41f628ea48043f13d9d060871e649dc4dddd4d1"
+  integrity sha512-Q/Z0V3D3UpKhhzFU6/s17wD4rqJ+ZDGded8UpqNyzX1nUdD+/PnsZexPhSIZ2Yf/c8QESeirmJVRb3eAfCQkRQ==
   dependencies:
     glob "7.1.7"
 
@@ -6990,7 +6990,7 @@ entities@^4.2.0, entities@^4.3.0, entities@^4.4.0:
 
 "entry_sheet@https://8a14b1ce074335d7a7d9099b4a0807cc40fc9434:x-oauth-basic@oss.navercorp.com/ria/entry_sheet.git":
   version "1.0.0"
-  resolved "https://8a14b1ce074335d7a7d9099b4a0807cc40fc9434:x-oauth-basic@oss.navercorp.com/ria/entry_sheet.git#16420c53fa65e7af9610a9526a8dbb47c8489eea"
+  resolved "https://8a14b1ce074335d7a7d9099b4a0807cc40fc9434:x-oauth-basic@oss.navercorp.com/ria/entry_sheet.git#74a00415221df674502750869ff482b9c31da71a"
   dependencies:
     "@emotion/core" "^10.1.1"
     "@emotion/styled" "^10.0.27"
@@ -7311,11 +7311,11 @@ escope@^3.6.0:
     estraverse "^4.1.1"
 
 eslint-config-next@^13.0.6:
-  version "13.0.6"
-  resolved "https://registry.yarnpkg.com/eslint-config-next/-/eslint-config-next-13.0.6.tgz#bbbcfd6e50eacca54552f962e43c9e2c4fb52ef6"
-  integrity sha512-Tfn/0lirhkEuoGxKMtDQNtQuC7P3eHcyUyhIJY/OHtjU9ExHFtcge/Fe8Ou/Jd7DIC71vN3CT72oszVwia71cg==
+  version "13.0.7"
+  resolved "https://registry.yarnpkg.com/eslint-config-next/-/eslint-config-next-13.0.7.tgz#576a70e8dc92ecad9beb4e911fa0cfefaea83338"
+  integrity sha512-X7DB7iDJ9iHi5DAZbnFdWm4M0dwarj5h5y6Vpm9INCYzFgAwSWslq3v0qjYEjtUO5IQ8n1WK6IU5FkOQ2HBhOA==
   dependencies:
-    "@next/eslint-plugin-next" "13.0.6"
+    "@next/eslint-plugin-next" "13.0.7"
     "@rushstack/eslint-patch" "^1.1.3"
     "@typescript-eslint/parser" "^5.42.0"
     eslint-import-resolver-node "^0.3.6"
