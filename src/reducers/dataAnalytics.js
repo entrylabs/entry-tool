@@ -133,6 +133,7 @@ export const dataAnalyticsReducer = (state, action) => {
                 xIndex: -1,
                 yIndex: -1,
                 categoryIndexes: [],
+                id: `c${CommonUtils.generateHash()}`,
             });
             return {
                 ...state,

@@ -14,6 +14,7 @@ import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 import { getTrimedTable, isDrawable, getNoResultText } from '@utils/dataAnalytics';
 import { SCATTER, LEGEND_OPTIONS, SCATTERGRID } from '@constants/dataAnalytics';
+import cx from 'classnames';
 import Theme from '@utils/Theme';
 
 const ChartLayout = () => {
@@ -47,6 +48,12 @@ const ChartLayout = () => {
         showSelectAll,
         maximumSelectionLength,
     } = LEGEND_OPTIONS[type];
+
+    const isDrawableHorizontalLegend =categoryIndexes.length &&
+                    isHorizontalLegend &&
+                    type !== SCATTER &&
+                    type !== SCATTERGRID &&
+                    categoryIndexes[0] !== table[0].length
 
     const handleRemoveClick = useCallback(
         (event) => {
@@ -129,19 +136,17 @@ const ChartLayout = () => {
             </div>
             {isDrawable(selectedChart) ? (
                 <div
-                    className={`${theme.graph_box} ${
-                        !(categoryIndexes.length && isHorizontalLegend)
-                            ? theme.vertical
-                            : theme.horizontal
-                    } ${theme[type]}
-                    `}
+                    className={cx(theme.graph_box, {
+                            [theme.vertical]: !(categoryIndexes.length && isHorizontalLegend),
+                            [theme.horizontal]: (categoryIndexes.length && isHorizontalLegend),
+                            [theme.scatter_matrix]: type === SCATTERGRID,
+                            [theme[`type_${categoryIndexes.length}`]]: type === SCATTERGRID && categoryIndexes.length >= 2 && categoryIndexes.length <= 6
+                        },
+                        theme[type])
+                    }
                     style={{ backgroundColor: '#fff', height: '100%' }}
                 >
-                    {categoryIndexes.length &&
-                    isHorizontalLegend &&
-                    type !== SCATTER &&
-                    type !== SCATTERGRID &&
-                    categoryIndexes[0] !== table[0].length ? (
+                    {isDrawableHorizontalLegend ? (
                         <HorizontalLegend table={table} chart={selectedChart} />
                     ) : null}
                     <div
@@ -153,7 +158,6 @@ const ChartLayout = () => {
                     >
                         <Chart
                             key={key}
-                            legend={{ show: false }}
                             table={table}
                             chart={chart[chartIndex]}
                             size={{

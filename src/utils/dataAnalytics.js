@@ -6,7 +6,6 @@ import _head from 'lodash/head';
 import _uniq from 'lodash/uniq';
 import _slice from 'lodash/slice';
 import _floor from 'lodash/floor';
-import _round from 'lodash/round';
 import _every from 'lodash/every';
 import _chain from 'lodash/chain';
 import _reduce from 'lodash/reduce';
@@ -22,7 +21,7 @@ import map from 'lodash/fp/map';
 import unzip from 'lodash/fp/unzip';
 
 import { CommonUtils } from '@utils/Common';
-import { NONE, SCATTER, HISTOGRAM, SCATTERGRID } from '@constants/dataAnalytics';
+import { NONE, SCATTER, HISTOGRAM, SCATTERGRID, GRAPH_COLOR } from '@constants/dataAnalytics';
 
 export const isString = (str) => isNaN(str) || str === '';
 export const someString = (array) => _some(array, isString);
@@ -275,3 +274,50 @@ export function corr(d1, d2) {
     console.log({ mulSum, sum1, sum2, n, dense });
     return (mulSum - (sum1 * sum2) / n) / dense;
 }
+
+export const deduplicationColumn = (columns) =>
+    columns.map((column, index) => {
+        const [head, ...ext] = column;
+        const prev = _slice(columns, 0, index);
+        let count = 0;
+        _forEach(prev, ([prevHead]) => {
+            if (prevHead == head) {
+                count++;
+            }
+        });
+        if (count) {
+            return [`${head} (${count})`, ...ext];
+        }
+        return [head, ...ext];
+    });
+
+export const getColor = (type, index) => `${GRAPH_COLOR[type][index % GRAPH_COLOR[type].length]}`;
+export const getMouseOverStyle = (type, index) => `
+        background-color: ${getColor(type, index)};
+        float: left;
+        width: 14px;
+        height: 14px;
+        margin: -1px 7px 0 0;
+        vertical-align: middle;
+`;
+
+export const getOrderedTable = ({ table, xIndex, isAddedOption, order }) => {
+    const orderedTable = [...table.slice(1)];
+    if (!isAddedOption) {
+        const isNumberColumnXIndex = isNumberColumn(table, xIndex);
+        if (order === 'ascending') {
+            orderedTable.sort((rowA, rowB) => {
+                const a = isNumberColumnXIndex ? Number(rowA[xIndex]) : rowA[xIndex];
+                const b = isNumberColumnXIndex ? Number(rowB[xIndex]) : rowB[xIndex];
+                if (a > b) {
+                    return 1;
+                }
+                if (a < b) {
+                    return -1;
+                }
+                return 0;
+            });
+        }
+    }
+    return [table[0], ...orderedTable];
+};
