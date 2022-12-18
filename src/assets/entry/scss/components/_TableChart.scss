@@ -783,8 +783,8 @@ $axis-size: 22px;
     }
     .graph_title {
         position: absolute;
-        top: 50%;
-        left: 50%;
+        top: calc(50% - 13px);
+        left: calc(50% + 15px);
         transform: translate(-50%, -50%);
     }
     .graph_title,
@@ -835,9 +835,9 @@ $axis-size: 22px;
     }
     .axis_list_x {
         bottom: -$axis-size;
-        width: 90%;
+        width: calc(100% - 22px);
         height: $axis-size;
-        padding-left: 10%
+        margin-left: 11px;
     }
     .axis_list_y {
         flex-direction: column;
@@ -846,7 +846,7 @@ $axis-size: 22px;
         top: 0;
         left: -($axis-size + 10px);
         width: $axis-size;
-        height: 93%;
+        height: calc(100% - 27px);
     }
     &.type_2 {
         .graph {

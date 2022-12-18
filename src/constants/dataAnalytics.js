@@ -5,10 +5,15 @@ export const BAR = 'bar';
 export const LINE = 'line';
 export const PIE = 'pie';
 export const SCATTER = 'scatter';
+export const BAR_SUB = 'bar_sub';
+export const LINE_SUB = 'line_sub';
+export const PIE_SUB = 'pie_sub';
+export const SCATTER_SUB = 'scatter_sub';
 export const SCATTERGRID = 'scatter_matrix';
 export const HISTOGRAM = 'histogram';
 export const NONE = 'none';
 export const CHART_CATEGORY = [BAR, LINE, PIE, SCATTER, SCATTERGRID, HISTOGRAM];
+export const CHART_CATEGORY_SUB = [BAR_SUB, LINE_SUB, PIE_SUB, SCATTER_SUB, '', ''];
 export const TAB_NAME = {
     TABLE,
     CHART,

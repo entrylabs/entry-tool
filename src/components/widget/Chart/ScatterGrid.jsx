@@ -61,7 +61,7 @@ const ScatterGrid = ({ table, chart, size: { width } = {}, zoomIn }) => {
                 },
                 theme.scatter_matrix
             )}
-            style={{ width: width * 1.2, margin: '0 auto', overflow: 'initial' }}
+            style={{ width, margin: '0 auto', overflow: 'initial', padding: '30px 0' }}
         >
             {categoryIndexes.map((yAxis, xIndex) =>
                 categoryIndexes.map((xAxis, yIndex) => (
@@ -95,18 +95,22 @@ const ScatterGrid = ({ table, chart, size: { width } = {}, zoomIn }) => {
                                 <dl className={theme.axis_list_x}>
                                     <dt className={theme.blind}>x축</dt>
                                     <dd>{mins[xAxis]}</dd>
-                                    <dd>
-                                        {(
-                                            mins[xAxis] +
-                                            (maxs[xAxis] - mins[xAxis]) * (1 / 3)
-                                        ).toFixed(fixedLengths[xAxis] + 1)}
-                                    </dd>
-                                    <dd>
-                                        {(
-                                            mins[xAxis] +
-                                            (maxs[xAxis] - mins[xAxis]) * (2 / 3)
-                                        ).toFixed(fixedLengths[xAxis] + 1)}
-                                    </dd>
+                                    {categoryIndexes.length < 5 ? (
+                                        <>
+                                            <dd>
+                                                {(
+                                                    mins[xAxis] +
+                                                    (maxs[xAxis] - mins[xAxis]) * (1 / 3)
+                                                ).toFixed(fixedLengths[xAxis] + 1)}
+                                            </dd>
+                                            <dd>
+                                                {(
+                                                    mins[xAxis] +
+                                                    (maxs[xAxis] - mins[xAxis]) * (2 / 3)
+                                                ).toFixed(fixedLengths[xAxis] + 1)}
+                                            </dd>
+                                        </>
+                                    ) : null}
                                     <dd>{maxs[xAxis]}</dd>
                                 </dl>
                             </>
@@ -120,18 +124,22 @@ const ScatterGrid = ({ table, chart, size: { width } = {}, zoomIn }) => {
                                 <dl className={theme.axis_list_y}>
                                     <dt className={theme.blind}>y축</dt>
                                     <dd>{maxs[yAxis]}</dd>
-                                    <dd>
-                                        {(
-                                            mins[yAxis] +
-                                            (maxs[yAxis] - mins[yAxis]) * (1 / 3)
-                                        ).toFixed(fixedLengths[yAxis] + 1)}
-                                    </dd>
-                                    <dd>
-                                        {(
-                                            mins[yAxis] +
-                                            (maxs[yAxis] - mins[yAxis]) * (2 / 3)
-                                        ).toFixed(fixedLengths[yAxis] + 1)}
-                                    </dd>
+                                    {categoryIndexes.length < 5 ? (
+                                        <>
+                                            <dd>
+                                                {(
+                                                    mins[yAxis] +
+                                                    (maxs[yAxis] - mins[yAxis]) * (1 / 3)
+                                                ).toFixed(fixedLengths[yAxis] + 1)}
+                                            </dd>
+                                            <dd>
+                                                {(
+                                                    mins[yAxis] +
+                                                    (maxs[yAxis] - mins[yAxis]) * (2 / 3)
+                                                ).toFixed(fixedLengths[yAxis] + 1)}
+                                            </dd>
+                                        </>
+                                    ) : null}
                                     <dd>{mins[yAxis]}</dd>
                                 </dl>
                             </>
