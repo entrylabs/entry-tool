@@ -4,8 +4,6 @@ const ScatterGrid = ({ table, chart, size }) => {
     const theme = Theme.getStyle('popup');
     const { categoryIndexes, id } = chart;
 
-    console.log('hihi', chart, table, size, categoryIndexes);
-
     if (categoryIndexes.length < 2) {
         return null;
     }
@@ -19,7 +17,7 @@ const ScatterGrid = ({ table, chart, size }) => {
                         <strong className={theme.graph_title}>
                             <span className={theme.blind}>속성 이름</span>부리 길이
                         </strong>
-                        {yIndex === 0 ? (
+                        {xIndex === categoryIndexes.length - 1 ? (
                             <>
                                 <span className={theme.axis_x}>
                                     <span className={theme.blind}>x축 속성 이름</span>
@@ -34,7 +32,7 @@ const ScatterGrid = ({ table, chart, size }) => {
                                 </dl>
                             </>
                         ) : null}
-                        {xIndex === categoryIndexes.length - 1 ? (
+                        {yIndex === 0 ? (
                             <>
                                 <span className={theme.axis_y}>
                                     <span className={theme.blind}>y축 속성 이름</span>
@@ -42,6 +40,7 @@ const ScatterGrid = ({ table, chart, size }) => {
                                 </span>
                                 <dl className={theme.axis_list_y}>
                                     <dt className={theme.blind}>y축</dt>
+                                    <dd>8000</dd>
                                     <dd>8000</dd>
                                     <dd>12</dd>
                                     <dd>0</dd>
