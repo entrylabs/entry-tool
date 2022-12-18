@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { triggerEvent } from '@actions/index';
 import Theme from '@utils/Theme';

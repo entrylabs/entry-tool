@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import OutsideClick from '../common/outsideClick';
 import Scrollbars from '../common/scrollbars';
 import root from 'window-or-global';

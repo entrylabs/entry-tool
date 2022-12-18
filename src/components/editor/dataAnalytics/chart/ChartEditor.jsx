@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import Navigation from './Navigation';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import ChartLayout from './ChartLayout';

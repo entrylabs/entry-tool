@@ -1,4 +1,3 @@
-import React from 'react';
 import { CHART_CATEGORY } from '@constants/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';

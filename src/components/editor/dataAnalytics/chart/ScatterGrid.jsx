@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { SCATTERGRID } from '@constants/dataAnalytics';
 import { corr } from '@utils/dataAnalytics';
 import bb from 'billboard.js';

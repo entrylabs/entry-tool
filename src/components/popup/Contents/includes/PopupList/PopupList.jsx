@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default ({ theme, children }) => {
     return (
         <div id="popupList" className={theme.list_area}>

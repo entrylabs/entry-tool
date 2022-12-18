@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import _ceil from 'lodash/ceil';
 import _floor from 'lodash/floor';

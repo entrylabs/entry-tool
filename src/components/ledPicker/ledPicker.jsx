@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { pure } from 'recompose';
 import OutsideClick from '../common/outsideClick';
 import { debounce } from 'lodash';

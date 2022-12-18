@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import OutsideClick from '@components/common/outsideClick';
 import SelectChartDropdown from './SelectChartDropdown';

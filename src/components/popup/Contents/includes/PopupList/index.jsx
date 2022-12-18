@@ -1,4 +1,3 @@
-import React from 'react';
 import DefaultPopupList from './PopupList';
 import TablePopupList from './TablePopupList';
 import SoundPopupList from './SoundPopupList';

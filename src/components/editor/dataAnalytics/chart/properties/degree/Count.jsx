@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import Number from '@components/widget/number';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { isMobile } from 'react-device-detect';

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';

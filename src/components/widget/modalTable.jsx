@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import Theme from '@utils/Theme';
 import EntrySheet from 'entry_sheet';
 import Option from '../popup/Contents/Navigation/SearchOption';

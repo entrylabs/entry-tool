@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Theme from '@utils/Theme';
 
 const CheckBox = (props) => {

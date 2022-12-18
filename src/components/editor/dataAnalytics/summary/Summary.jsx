@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import Table from './Table';
 import ChartList from './ChartList';
 import Theme from '@utils/Theme';

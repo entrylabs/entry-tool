@@ -1,4 +1,3 @@
-import React from 'react';
 import _cloneDeep from 'lodash/cloneDeep';
 import DataAnalyticsEditor from './DataAnalyticsEditor';
 import DataAnalyticsContextProvider from '@contexts/dataAnalytics';

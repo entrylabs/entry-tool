@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { pure } from 'recompose';
 import bb from 'billboard.js';
 import Theme from '@utils/Theme';

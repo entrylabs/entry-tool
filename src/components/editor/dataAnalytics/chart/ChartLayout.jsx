@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback, useMemo } from 'react';
+import { useState, useEffect, useContext, useCallback, useMemo } from 'react';
 import root from 'window-or-global';
 import XAxis from './properties/XAxis';
 import YAxis from './properties/YAxis';

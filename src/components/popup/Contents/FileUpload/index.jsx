@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Theme from '@utils/Theme';
 import { CommonUtils } from '@utils/Common';
 import classname from 'classnames';

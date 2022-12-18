@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from 'react';
+import { useContext, useState, useRef } from 'react';
 import _some from 'lodash/some';
 import _reduce from 'lodash/reduce';
 import _findIndex from 'lodash/findIndex';

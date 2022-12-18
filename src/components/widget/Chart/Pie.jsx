@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import bb, { pie } from 'billboard.js';
 import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';

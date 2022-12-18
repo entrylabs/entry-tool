@@ -1,4 +1,4 @@
-import React, { useState, useContext, useCallback, useMemo } from 'react';
+import { useState, useContext, useCallback, useMemo } from 'react';
 import _every from 'lodash/every';
 import _difference from 'lodash/difference';
 import ContextMenu from '@components/widget/contextMenu';

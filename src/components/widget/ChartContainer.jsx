@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import Chart from './Chart/index';
 import withWrapper from '@hoc/withWrapper';
 

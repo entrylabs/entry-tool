@@ -1,4 +1,3 @@
-import React from 'react';
 import DefaultSelectItem from './SelectItem';
 import TableSelectItem from './TableSelectItem';
 import SoundSelectItem from './SoundSelectItem';

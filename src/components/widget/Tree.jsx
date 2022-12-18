@@ -1,4 +1,3 @@
-import React from 'react';
 import Theme from '@utils/Theme';
 import _floor from 'lodash/floor';
 
