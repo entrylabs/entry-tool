@@ -4,6 +4,13 @@ import Theme from '@utils/Theme';
 const ScatterGrid = ({ table, chart, size }) => {
     const theme = Theme.getStyle('popup');
     const { categoryIndexes, id } = chart;
+
+    console.log('hihi', chart, table, size);
+
+    if (categoryIndexes.length < 2) {
+        return null;
+    }
+
     return (
         <>
             {categoryIndexes.map((yAxis, xIndex) => {

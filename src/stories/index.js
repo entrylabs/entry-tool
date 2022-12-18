@@ -31,7 +31,7 @@ import {
 } from '../constants/sample';
 
 import configureStore from '../store';
-import Chart from '../components/widget/Chart';
+import Chart from '../components/widget/Chart/index';
 import Table from '../components/widget/Table';
 import ModalChart from '../components/widget/modalChart';
 import BillBoard from '../components/widget/BillBoard';

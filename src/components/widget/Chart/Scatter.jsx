@@ -33,6 +33,7 @@ const Scatter = ({ chart, table, size }) => {
             size,
             point: {
                 pattern: SCATTER_POINT_PATTERN,
+                opacity: 1,
             },
             color: {
                 pattern: GRAPH_COLOR[type],

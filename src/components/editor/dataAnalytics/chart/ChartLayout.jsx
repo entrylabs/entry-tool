@@ -9,7 +9,7 @@ import Coefficient from './properties/Coefficient';
 import TitleInput from './TitleInput';
 import VerticalLegend from './VerticalLegend';
 import HorizontalLegend from './HorizontalLegend';
-import Chart from '@components/widget/Chart';
+import Chart from '@components/widget/Chart/index';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 import { getTrimedTable, isDrawable, getNoResultText } from '@utils/dataAnalytics';
@@ -49,11 +49,12 @@ const ChartLayout = () => {
         maximumSelectionLength,
     } = LEGEND_OPTIONS[type];
 
-    const isDrawableHorizontalLegend =categoryIndexes.length &&
-                    isHorizontalLegend &&
-                    type !== SCATTER &&
-                    type !== SCATTERGRID &&
-                    categoryIndexes[0] !== table[0].length
+    const isDrawableHorizontalLegend =
+        categoryIndexes.length &&
+        isHorizontalLegend &&
+        type !== SCATTER &&
+        type !== SCATTERGRID &&
+        categoryIndexes[0] !== table[0].length;
 
     const handleRemoveClick = useCallback(
         (event) => {
@@ -136,14 +137,19 @@ const ChartLayout = () => {
             </div>
             {isDrawable(selectedChart) ? (
                 <div
-                    className={cx(theme.graph_box, {
+                    className={cx(
+                        theme.graph_box,
+                        {
                             [theme.vertical]: !(categoryIndexes.length && isHorizontalLegend),
-                            [theme.horizontal]: (categoryIndexes.length && isHorizontalLegend),
+                            [theme.horizontal]: categoryIndexes.length && isHorizontalLegend,
                             [theme.scatter_matrix]: type === SCATTERGRID,
-                            [theme[`type_${categoryIndexes.length}`]]: type === SCATTERGRID && categoryIndexes.length >= 2 && categoryIndexes.length <= 6
+                            [theme[`type_${categoryIndexes.length}`]]:
+                                type === SCATTERGRID &&
+                                categoryIndexes.length >= 2 &&
+                                categoryIndexes.length <= 6,
                         },
-                        theme[type])
-                    }
+                        theme[type]
+                    )}
                     style={{ backgroundColor: '#fff', height: '100%' }}
                 >
                     {isDrawableHorizontalLegend ? (

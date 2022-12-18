@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Chart from './Chart';
+import Chart from './Chart/index';
 import withWrapper from '@hoc/withWrapper';
 
 class ChartContainer extends Component {

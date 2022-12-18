@@ -18,6 +18,7 @@ const Chart = (props) => {
     const theme = Theme.getStyle('popup');
     const { table = [[]], chart = {}, size } = props;
     const { type, id = `c${CommonUtils.generateHash()}` } = chart;
+    const noResultContent = getNoResultText(chart);
 
     const BillboardChart = useMemo(() => {
         switch (type) {
@@ -54,7 +55,7 @@ const Chart = (props) => {
         return (
             <div className={theme.graph_cont}>
                 <div id={id} style={{ height: '100%' }}>
-                    <div className={theme.alert}>{getNoResultText(chart)}</div>
+                    <div className={theme.alert}>{noResultContent}</div>
                 </div>
             </div>
         );
