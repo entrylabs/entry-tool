@@ -519,7 +519,7 @@ storiesOf('AiLayout', module)
         <ScatterGrid
             table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]}
             chart={{
-                type: 'scatterGrid',
+                type: 'scatter_matrix',
                 categoryIndexes: [2, 3, 4],
             }}
         />

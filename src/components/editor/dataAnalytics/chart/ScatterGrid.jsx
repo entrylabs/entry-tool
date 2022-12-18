@@ -16,7 +16,7 @@ const BillboardChart = ({
     columns,
     type,
     xs,
-    id = 'scatterGrid',
+    id = 'scatter_matrix',
     xLabel,
     yLabel,
     width,

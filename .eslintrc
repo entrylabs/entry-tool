@@ -1,6 +1,6 @@
 {
     "plugins": ["react", "prettier", "react-hooks"],
-    "extends": ["plugin:prettier/recommended", "plugin:react/recommended"],
+    "extends": ["plugin:prettier/recommended", "eslint:recommended", "plugin:react/recommended"],
     "env": {
         "es6": true,
         "browser": true,

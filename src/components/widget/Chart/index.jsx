@@ -17,9 +17,7 @@ import Histogram from './Histogram';
 const Chart = (props) => {
     const theme = Theme.getStyle('popup');
     const { table = [[]], chart = {}, size } = props;
-    const { type, xIndex, yIndex, categoryIndexes, id = `c${CommonUtils.generateHash()}` } = chart;
-
-    const noResultContent = getNoResultText(chart);
+    const { type, id = `c${CommonUtils.generateHash()}` } = chart;
 
     const BillboardChart = useMemo(() => {
         switch (type) {
@@ -40,7 +38,7 @@ const Chart = (props) => {
         }
     }, [type]);
 
-    if (!isDrawable({ type, xIndex, yIndex, categoryIndexes })) {
+    if (!isDrawable(chart)) {
         return (
             <div className={theme.graph_cont}>
                 <div id={id} style={{ height: '100%' }}>
@@ -56,7 +54,7 @@ const Chart = (props) => {
         return (
             <div className={theme.graph_cont}>
                 <div id={id} style={{ height: '100%' }}>
-                    <div className={theme.alert}>{noResultContent}</div>
+                    <div className={theme.alert}>{getNoResultText(chart)}</div>
                 </div>
             </div>
         );
