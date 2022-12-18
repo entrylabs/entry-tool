@@ -319,8 +319,9 @@ $axis-size: 22px;
             }
             .axis_list_x {
                 bottom: -$axis-size;
-                width: 100%;
+                width: 86%;
                 height: $axis-size;
+                // margin-left: 12px;
             }
             .axis_list_y {
                 flex-direction: column;
@@ -329,7 +330,8 @@ $axis-size: 22px;
                 top: 0;
                 left: -($axis-size + 10px);
                 width: $axis-size;
-                height: 100%;
+                height: 85%;
+                margin-top: 7.5%;
             }
             &.type_2 {
                 .graph {

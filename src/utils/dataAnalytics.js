@@ -271,8 +271,7 @@ export function corr(d1, d2) {
     if (dense === 0) {
         return 0;
     }
-    console.log({ mulSum, sum1, sum2, n, dense });
-    return (mulSum - (sum1 * sum2) / n) / dense;
+    return ((mulSum - (sum1 * sum2) / n) / dense).toFixed(2);
 }
 
 export const deduplicationColumn = (columns) =>

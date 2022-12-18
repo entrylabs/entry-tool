@@ -27,6 +27,7 @@ import {
     TABLE_INFO_SAMPLE,
     TABLE_SAMPLE2,
     TABLE_SAMPLE3,
+    TABLE_SAMPLE4,
 } from '../constants/sample';
 
 import configureStore from '../store';
@@ -505,11 +506,11 @@ storiesOf('AiLayout', module)
     ))
     .add('분산차트', () => (
         <Chart
-            table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]}
+            table={[TABLE_SAMPLE4.fields, ...TABLE_SAMPLE4.origin]}
             chart={{
                 type: 'scatter',
-                xIndex: 1,
-                yIndex: 2,
+                xIndex: 2,
+                yIndex: 3,
                 categoryIndexes: [0],
             }}
         />

@@ -61,6 +61,7 @@ const Chart = (props) => {
         );
     }
 
+    console.log({ chart });
     return <BillboardChart table={table} chart={chart} size={size} />;
 };
 

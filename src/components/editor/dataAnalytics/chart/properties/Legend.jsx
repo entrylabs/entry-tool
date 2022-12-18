@@ -68,6 +68,7 @@ const Legend = ({ maximumSelectionLength, showSelectAll, checkBox }) => {
 
     const handleOutsideClick = (checkItems) => {
         setShowDropdown(false);
+        console.log('hihi');
         if (checkBox) {
             dispatch({
                 type: 'SELECT_LEGEND_AXIS',

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useCallback, useMemo } from 'react';
+import { useContext, useCallback, useMemo } from 'react';
 import root from 'window-or-global';
 import XAxis from './properties/XAxis';
 import YAxis from './properties/YAxis';
@@ -186,22 +186,3 @@ const ChartLayout = () => {
 };
 
 export default ChartLayout;
-
-const useChartSize = () => {
-    const [windowSize, setWindowSize] = useState({
-        width: undefined,
-        height: undefined,
-    });
-    useEffect(() => {
-        const handleResize = () => {
-            setWindowSize({
-                width: window.innerWidth,
-                height: window.innerHeight,
-            });
-        };
-        window.addEventListener('resize', handleResize);
-        handleResize();
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-    return windowSize;
-};

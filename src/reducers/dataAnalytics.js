@@ -185,6 +185,7 @@ export const dataAnalyticsReducer = (state, action) => {
         case 'SELECT_LEGEND_AXIS': {
             const { selected } = state;
             const { chart, chartIndex = 0 } = selected;
+            console.log({chart, chartIndex, action});
             selected.chart[chartIndex] = {
                 ...chart[chartIndex],
                 categoryIndexes: action.indexes,
