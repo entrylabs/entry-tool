@@ -11,7 +11,7 @@ const Table = () => {
     const theme = Theme.getStyle('popup');
     const { dataAnalytics } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
-    const { table: selectedTable, fieldInfos = [], fields } = selected;
+    const { table: selectedTable, fieldInfos = [] } = selected;
     const table = getTrimedTable(selectedTable);
     const summary = getSummary(table) || [];
 
@@ -31,8 +31,9 @@ const Table = () => {
                 <li>{`${CommonUtils.getLang('DataAnalytics.attribute')} ${
                     summary.length
                 }${CommonUtils.getLang('DataAnalytics.attribute_count')}`}</li>
-                <li>{`${CommonUtils.getLang('DataAnalytics.cell')} ${summary.length *
-                    table.length}${CommonUtils.getLang('DataAnalytics.cell_count')}`}</li>
+                <li>{`${CommonUtils.getLang('DataAnalytics.cell')} ${
+                    summary.length * table.length
+                }${CommonUtils.getLang('DataAnalytics.cell_count')}`}</li>
             </ul>
             <div className={theme.table_box}>
                 <table className={theme.table}>
@@ -88,8 +89,8 @@ const Table = () => {
                         <ul className={theme.dsc_list}>
                             {fieldInfos.map((fieldInfo, index) =>
                                 fieldInfo ? (
-                                    <li>
-                                        {fields[index]}: {fieldInfo}
+                                    <li key={`field_info_${index}`}>
+                                        {table[0][index]}: {fieldInfo}
                                     </li>
                                 ) : null
                             )}

@@ -11,7 +11,7 @@ const ChartList = () => {
     const { selected } = dataAnalytics;
     const { chart: charts = [] } = selected;
 
-    const handleClickChart = (tab, index) => () => {
+    const handleChartClick = (tab, index) => () => {
         dispatch({
             type: 'SET_TAB',
             tab,
@@ -33,11 +33,11 @@ const ChartList = () => {
                 <div className={theme.chart_list}>
                     <ul className={theme.chart_list}>
                         {charts.map((chart, index) => (
-                            <li key={`summary_chart_${index}`}>
-                                <button
-                                    className={cx(theme.chart_link, theme[chart.type])}
-                                    onClick={handleClickChart(CHART, index)}
-                                >
+                            <li
+                                key={`summary_chart_${index}`}
+                                onClick={handleChartClick(CHART, index)}
+                            >
+                                <button className={cx(theme.chart_link, theme[chart.type])}>
                                     <strong className={theme.title}>{chart.title}</strong>
                                 </button>
                             </li>
