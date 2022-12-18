@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { pure } from 'recompose';
 import Theme from '@utils/Theme';
 import Option from '../popup/Contents/Navigation/SearchOption';
-import Chart from '@components/widget/Chart';
+import Chart from '@components/widget/Chart/index';
 import VerticalLegend from '../editor/dataAnalytics/chart/VerticalLegend';
 import HorizontalLegend from '../editor/dataAnalytics/chart/HorizontalLegend';
 import { CommonUtils } from '@utils/Common';
@@ -99,10 +99,9 @@ const ModalChart = (props) => {
                                             ? table[0][chart.categoryIndexes[0]]
                                             : `${
                                                   table[0][chart.categoryIndexes[0]]
-                                              } ${CommonUtils.getLang('DataAnalytics.and')} ${chart
-                                                  .categoryIndexes.length - 1}${CommonUtils.getLang(
-                                                  'DataAnalytics.other'
-                                              )}`}
+                                              } ${CommonUtils.getLang('DataAnalytics.and')} ${
+                                                  chart.categoryIndexes.length - 1
+                                              }${CommonUtils.getLang('DataAnalytics.other')}`}
                                     </span>
                                 ) : null}
                             </div>

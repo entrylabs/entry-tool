@@ -1,4 +1,3 @@
-import React from 'react';
 import classname from 'classnames';
 import Theme from '@utils/Theme';
 import { CommonUtils } from '@utils/Common';

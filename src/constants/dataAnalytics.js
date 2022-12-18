@@ -5,9 +5,10 @@ export const BAR = 'bar';
 export const LINE = 'line';
 export const PIE = 'pie';
 export const SCATTER = 'scatter';
+export const SCATTERGRID = 'scatter_matrix';
 export const HISTOGRAM = 'histogram';
 export const NONE = 'none';
-export const CHART_CATEGORY = [BAR, LINE, PIE, SCATTER, HISTOGRAM];
+export const CHART_CATEGORY = [BAR, LINE, PIE, SCATTER, SCATTERGRID, HISTOGRAM];
 export const TAB_NAME = {
     TABLE,
     CHART,
@@ -21,38 +22,38 @@ export const TAB_ITEMS = [
 export const LEGEND_OPTIONS = {
     [BAR]: {
         xAxis: true,
-        yAxis: false,
         category: true,
-        degree: false,
         order: true,
+        showSelectAll: true,
+        checkBox: true,
     },
     [LINE]: {
         xAxis: true,
-        yAxis: false,
         category: true,
-        degree: false,
         order: true,
+        showSelectAll: true,
+        checkBox: true,
     },
     [PIE]: {
         xAxis: true,
-        yAxis: false,
         category: true,
-        degree: false,
-        order: false,
     },
     [SCATTER]: {
         xAxis: true,
         yAxis: true,
         category: true,
-        degree: false,
-        order: false,
+    },
+    [SCATTERGRID]: {
+        category: true,
+        maximumSelectionLength: 6,
+        checkBox: true,
+        coefficient: true,
     },
     [HISTOGRAM]: {
-        xAxis: false,
-        yAxis: false,
         category: true,
         degree: true,
-        order: false,
+        maximumSelectionLength: 3,
+        checkBox: true,
     },
 };
 

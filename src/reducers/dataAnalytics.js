@@ -133,6 +133,7 @@ export const dataAnalyticsReducer = (state, action) => {
                 xIndex: -1,
                 yIndex: -1,
                 categoryIndexes: [],
+                id: `c${CommonUtils.generateHash()}`,
             });
             return {
                 ...state,
@@ -290,6 +291,22 @@ export const dataAnalyticsReducer = (state, action) => {
                 isChanged: true,
             };
         }
+        case 'EDIT_COEFFICIENT': {
+            const { selected } = state;
+            const { chart = [], chartIndex = 0 } = selected;
+            const { coefficient } = action;
+
+            chart[chartIndex].coefficient = coefficient;
+
+            return {
+                ...state,
+                selected: {
+                    ...selected,
+                    chart,
+                },
+                isChanged: true,
+            };
+        }
         case 'CHANGE_DEGREE': {
             const { selected } = state;
             const { chart = [], chartIndex = 0 } = selected;
@@ -319,6 +336,10 @@ export const dataAnalyticsReducer = (state, action) => {
                 },
                 isChanged: true,
             };
+        }
+        case 'CHANGE_VIEW_MODE': {
+            const { zoomIn } = action;
+            return { ...state, zoomIn: !!zoomIn };
         }
         default:
             return state;

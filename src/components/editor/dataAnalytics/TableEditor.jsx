@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState, useCallback } from 'react';
 import EntrySheet from 'entry_sheet';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { Alert as AlertModal } from '@entrylabs/modal';
@@ -14,19 +14,22 @@ const TableEditor = () => {
     const { selected = {}, gridRef } = dataAnalytics;
     const { table = [[]] } = selected;
 
-    const handleColumnEdit = ({ editType, index }) => {
-        if (editType === 'ADD') {
-            dispatch({
-                type: 'ADD_COLUMN',
-                index,
-            });
-        } else if (editType === 'REMOVE') {
-            dispatch({
-                type: 'DELETE_COLUMN',
-                index,
-            });
-        }
-    };
+    const handleColumnEdit = useCallback(
+        ({ editType, index }) => {
+            if (editType === 'ADD') {
+                dispatch({
+                    type: 'ADD_COLUMN',
+                    index,
+                });
+            } else if (editType === 'REMOVE') {
+                dispatch({
+                    type: 'DELETE_COLUMN',
+                    index,
+                });
+            }
+        },
+        [dispatch]
+    );
 
     const saveExcel = () => {
         const { name } = selected;

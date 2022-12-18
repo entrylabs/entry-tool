@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Theme from '@utils/Theme';
 import Dropdown from '@components/widget/dropdown';
 import classname from 'classnames';

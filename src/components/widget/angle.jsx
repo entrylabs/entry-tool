@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { CommonUtils } from '@utils/Common';
 import { debounce } from 'lodash';
 import { pure } from 'recompose';

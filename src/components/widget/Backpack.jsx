@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { createRef, Component } from 'react';
 import _ from 'lodash';
 import { pure } from 'recompose';
 import Draggable from './draggable';
@@ -16,10 +16,10 @@ class Backpack extends Component {
 
     constructor(props) {
         super(props);
-        this.backpack = React.createRef();
+        this.backpack = createRef();
         this.eventTarget = new EntryEvent(document);
         this.eventWindow = new EntryEvent(window);
-        this.input = React.createRef();
+        this.input = createRef();
         this.refsList = [];
         this.theme = Theme.getStyle('backpack');
     }

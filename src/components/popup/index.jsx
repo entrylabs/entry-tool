@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { createRef, Component } from 'react';
 import { connect } from 'react-redux';
 import { initState } from '@actions/popup';
 import { visibleAction } from '@actions/index';
@@ -21,7 +21,7 @@ class Popup extends Component {
     constructor(props) {
         super(props);
         this.theme = Theme.getStyle('popup');
-        this.headerButtonRef = React.createRef();
+        this.headerButtonRef = createRef();
 
         const { navigations = {}, type, initState } = this.property;
         this.state = {

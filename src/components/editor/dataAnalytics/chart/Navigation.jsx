@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import OutsideClick from '@components/common/outsideClick';
 import SelectChartDropdown from './SelectChartDropdown';
@@ -22,6 +22,8 @@ const Navigation = () => {
                 return CommonUtils.getLang('DataAnalytics.pie');
             case 'scatter':
                 return CommonUtils.getLang('DataAnalytics.scatter');
+            case 'scatter_matrix':
+                return CommonUtils.getLang('DataAnalytics.scatterGrid');
             case 'plus':
                 return CommonUtils.getLang('DataAnalytics.plus');
             default:
@@ -46,7 +48,7 @@ const Navigation = () => {
         setShowDropdown(true);
     };
 
-    const handleClick = (value) => (event) => {
+    const handleClick = (value) => () => {
         dispatch({
             type: 'ADD_CHART',
             chartType: value,

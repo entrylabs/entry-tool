@@ -1,53 +1,110 @@
-import React, { useContext, useCallback } from 'react';
-import XAxis from './XAxis';
-import YAxis from './YAxis';
-import Legend from './Legend';
-import Degree from './Degree/Group';
-import Order from './Order';
+import { useContext, useCallback, useMemo } from 'react';
+import root from 'window-or-global';
+import XAxis from './properties/XAxis';
+import YAxis from './properties/YAxis';
+import Legend from './properties/Legend';
+import Degree from './properties/degree/Group';
+import Order from './properties/Order';
+import Coefficient from './properties/Coefficient';
 import TitleInput from './TitleInput';
 import VerticalLegend from './VerticalLegend';
 import HorizontalLegend from './HorizontalLegend';
-import Chart from '@components/widget/Chart';
+import Chart from '@components/widget/Chart/index';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
-import { getTrimedTable, isDrawable } from '@utils/dataAnalytics';
-import { SCATTER, PIE, NONE, LEGEND_OPTIONS } from '@constants/dataAnalytics';
+import { getTrimedTable, isDrawable, getNoResultText } from '@utils/dataAnalytics';
+import { SCATTER, LEGEND_OPTIONS, SCATTERGRID } from '@constants/dataAnalytics';
+import cx from 'classnames';
 import Theme from '@utils/Theme';
-
-const getNoResultText = ({ type = NONE, xIndex, yIndex, categoryIndexes = [] } = {}) => {
-    let content;
-    if (xIndex === -1) {
-        content = CommonUtils.getLang('DataAnalytics.select_x_axis');
-    } else if (yIndex === -1 && type === SCATTER) {
-        content = CommonUtils.getLang('DataAnalytics.select_y_axis');
-    } else if (!categoryIndexes.length) {
-        content = CommonUtils.getLang('DataAnalytics.select_legend');
-    }
-    return content;
-};
 
 const ChartLayout = () => {
     const theme = Theme.getStyle('popup');
     const { dataAnalytics, dispatch } = useContext(DataAnalyticsContext);
-    const { selected = {} } = dataAnalytics;
+    const { selected = {}, zoomIn } = dataAnalytics;
     const { id, chart = [], chartIndex = 0, table: selectedTable } = selected;
     const table = getTrimedTable(selectedTable);
     const selectedChart = chart[chartIndex] || {};
-    const { type, xIndex, yIndex, categoryIndexes = [], order: sort, bin, boundary } =
-        selectedChart || {};
+    const {
+        type,
+        xIndex,
+        yIndex,
+        categoryIndexes = [],
+        order: sort,
+        bin,
+        boundary,
+    } = selectedChart || {};
     const isHorizontalLegend = type !== 'pie';
     const key =
         `chart_${id}_${chartIndex}_${xIndex}_${yIndex}` +
         `_${categoryIndexes.toString()}_${sort}_${bin}_${boundary}`;
-    const { xAxis, yAxis, category, degree, order } = LEGEND_OPTIONS[type];
+    const {
+        xAxis,
+        yAxis,
+        order,
+        degree,
+        category,
+        checkBox,
+        coefficient,
+        showSelectAll,
+        maximumSelectionLength,
+    } = LEGEND_OPTIONS[type];
 
-    const handleRemoveClick = useCallback((event) => {
-        event.preventDefault();
-        dispatch({ type: 'REMOVE_CHART' });
+    const isDrawableHorizontalLegend =
+        categoryIndexes.length &&
+        isHorizontalLegend &&
+        type !== SCATTER &&
+        type !== SCATTERGRID &&
+        categoryIndexes[0] !== table[0].length;
+
+    const handleRemoveClick = useCallback(
+        (event) => {
+            event.preventDefault();
+            dispatch({ type: 'REMOVE_CHART' });
+        },
+        [dispatch]
+    );
+
+    const getScatterGridSize = useCallback((size) => {
+        switch (size) {
+            case 2:
+                return 368;
+            case 3:
+                return 480;
+            case 4:
+            case 5:
+                return 560;
+            case 6:
+                return 600;
+            default:
+                return 0;
+        }
     }, []);
 
+    const size = useMemo(() => {
+        let width = root.innerWidth;
+        let height = root.innerHeight;
+        if (zoomIn) {
+            if (type === SCATTERGRID) {
+                width = Math.max(width * 0.8, 600);
+                height = width;
+            } else {
+                width = Math.max(width * 0.8, 600);
+                height = (width * 3) / 4;
+            }
+        } else {
+            if (type === SCATTERGRID) {
+                width = getScatterGridSize(categoryIndexes.length);
+                height = width;
+            } else {
+                height = Math.max(height * 0.5, 360);
+                width = (height * 4) / 3;
+            }
+        }
+        return { width, height };
+    }, [categoryIndexes.length, getScatterGridSize, type, zoomIn]);
+
     return (
-        <>
+        <div className={theme.chart_wrap}>
             <div className={theme.form_box}>
                 <div className={theme.input_inner}>
                     <label htmlFor="ChartName" className={theme.tit_label}>
@@ -63,45 +120,46 @@ const ChartLayout = () => {
                 <div className={theme.input_inner}>
                     {xAxis ? <XAxis key={`${key}_xaxis`} /> : ''}
                     {yAxis ? <YAxis key={`${key}_yaxis`} /> : ''}
-                    {category ? <Legend key={`${key}_category`} /> : ''}
+                    {category ? (
+                        <Legend
+                            key={`${key}_category`}
+                            checkBox={checkBox}
+                            showSelectAll={showSelectAll}
+                            maximumSelectionLength={maximumSelectionLength}
+                        />
+                    ) : (
+                        ''
+                    )}
                     {degree ? <Degree key={`${key}_degree`} /> : ''}
                     {order ? <Order key={`${key}_order`} /> : ''}
+                    {coefficient ? <Coefficient key={`${key}_order`} /> : ''}
                 </div>
             </div>
             {isDrawable(selectedChart) ? (
                 <div
-                    className={`${theme.graph_box} ${
-                        !(categoryIndexes.length && isHorizontalLegend)
-                            ? theme.vertical
-                            : theme.horizontal
-                    } ${theme[type]}
-                    `}
+                    className={cx(
+                        theme.graph_box,
+                        {
+                            [theme.vertical]: !(categoryIndexes.length && isHorizontalLegend),
+                            [theme.horizontal]: categoryIndexes.length && isHorizontalLegend,
+                        },
+                        theme[type]
+                    )}
                     style={{ backgroundColor: '#fff', height: '100%' }}
                 >
-                    {categoryIndexes.length &&
-                    isHorizontalLegend &&
-                    type !== SCATTER &&
-                    categoryIndexes[0] !== table[0].length ? (
+                    {isDrawableHorizontalLegend ? (
                         <HorizontalLegend table={table} chart={selectedChart} />
                     ) : null}
-                    <div
-                        style={{
-                            width: type === PIE ? 500 : '',
-                            height: type === PIE ? 500 : 378,
-                            margin: 'auto',
+                    <Chart
+                        key={key}
+                        table={table}
+                        chart={chart[chartIndex]}
+                        size={{
+                            width: size.width,
+                            height: size.height,
                         }}
-                    >
-                        <Chart
-                            key={key}
-                            legend={{ show: false }}
-                            table={table}
-                            chart={chart[chartIndex]}
-                            size={{
-                                width: type === PIE ? 500 : '',
-                                height: type === PIE ? 500 : 378,
-                            }}
-                        />
-                    </div>
+                        zoomIn
+                    />
                     {categoryIndexes.length && !isHorizontalLegend ? (
                         <VerticalLegend table={table} chart={selectedChart} />
                     ) : null}
@@ -111,7 +169,7 @@ const ChartLayout = () => {
                     <p className={theme.dsc}>{getNoResultText(selectedChart)}</p>
                 </div>
             )}
-        </>
+        </div>
     );
 };
 

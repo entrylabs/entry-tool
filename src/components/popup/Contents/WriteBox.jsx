@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
 import { CommonUtils } from '@utils/Common';
 import { triggerEvent } from '@actions';
@@ -255,7 +255,7 @@ class WriteBox extends Component {
         const { HeaderButtonPortal } = this.props;
 
         return (
-            <React.Fragment>
+            <Fragment>
                 <div className={classnames(this.theme.section_content, this.theme.writing_content)}>
                     <div className={this.theme.write_box}>
                         <div className={this.theme.write_set}>
@@ -323,7 +323,7 @@ class WriteBox extends Component {
                         {CommonUtils.getLang('Buttons.add2')}
                     </a>
                 </HeaderButtonPortal>
-            </React.Fragment>
+            </Fragment>
         );
     }
 }

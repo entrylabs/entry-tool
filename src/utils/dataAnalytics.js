@@ -6,7 +6,6 @@ import _head from 'lodash/head';
 import _uniq from 'lodash/uniq';
 import _slice from 'lodash/slice';
 import _floor from 'lodash/floor';
-import _round from 'lodash/round';
 import _every from 'lodash/every';
 import _chain from 'lodash/chain';
 import _reduce from 'lodash/reduce';
@@ -22,9 +21,9 @@ import map from 'lodash/fp/map';
 import unzip from 'lodash/fp/unzip';
 
 import { CommonUtils } from '@utils/Common';
-import { NONE, SCATTER, HISTOGRAM } from '@constants/dataAnalytics';
+import { NONE, SCATTER, HISTOGRAM, SCATTERGRID, GRAPH_COLOR } from '@constants/dataAnalytics';
 
-export const isString = (str) => isNaN(str);
+export const isString = (str) => isNaN(str) || str === '';
 export const someString = (array) => _some(array, isString);
 export const getHeader = (matrix, editable = true) =>
     _chain(matrix)
@@ -53,18 +52,18 @@ const makeSummary = (row) => {
         return [row[0], '-', '-', '-', '-', '-'];
     }
     restRow = _reduce(restRow, (prev, curr) => (curr == '' ? prev : [...prev, curr]), []);
-    const max = Math.max(...restRow);
-    const min = Math.min(...restRow);
-    const average = getAverage(restRow);
+    const max = restRow.length ? Math.max(...restRow) : '-';
+    const min = restRow.length ? Math.min(...restRow) : '-';
+    const average = getAverage(restRow) || '-';
 
     return [
         row[0],
         average,
-        getStandardDeviation(restRow, average),
+        getStandardDeviation(restRow, average) || '-',
         max,
-        restRow.sort((a, b) => a - b)[Math.floor((restRow.length - 1) / 2)],
+        restRow.sort((a, b) => a - b)[Math.floor((restRow.length - 1) / 2)] || '-',
         min,
-    ].map((value) => (isString(value) ? value : toFixed(value)));
+    ].map((value) => (isString(value) ? value || '-' : toFixed(value)));
 };
 export const getSummary = flow(unzip, map(makeSummary));
 
@@ -236,6 +235,88 @@ export const getPieChart = (table, xIndex, categoryIndex) => {
 
 export const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes } = {}) =>
     type !== NONE &&
-    ((type !== HISTOGRAM && xIndex !== -1) || (type === HISTOGRAM && categoryIndexes.length)) &&
+    (!(type === HISTOGRAM || xIndex === -1) ||
+        ((type === HISTOGRAM || type === SCATTERGRID) && categoryIndexes.length)) &&
     categoryIndexes.length &&
-    (type !== SCATTER || yIndex !== -1);
+    !(type === SCATTER && yIndex === -1);
+
+export const getNoResultText = ({ type = NONE, xIndex, yIndex, categoryIndexes = [] } = {}) => {
+    let content;
+    if (type !== HISTOGRAM && type !== SCATTERGRID && xIndex === -1) {
+        content = CommonUtils.getLang('DataAnalytics.select_x_axis');
+    } else if (yIndex === -1 && type === SCATTER) {
+        content = CommonUtils.getLang('DataAnalytics.select_y_axis');
+    } else if (!categoryIndexes.length) {
+        content = CommonUtils.getLang('DataAnalytics.select_legend');
+    }
+    return content;
+};
+/**
+ * calculates pearson correlation
+ * @param {number[]} d1
+ * @param {number[]} d2
+ */
+export function corr(d1, d2) {
+    const { min, pow, sqrt } = Math;
+    const add = (a, b) => Number(a) + Number(b);
+    const n = min(d1.length, d2.length);
+    if (n === 0) {
+        return 0;
+    }
+    [d1, d2] = [d1.slice(0, n), d2.slice(0, n)];
+    const [sum1, sum2] = [d1, d2].map((l) => l.reduce(add));
+    const [pow1, pow2] = [d1, d2].map((l) => l.reduce((a, b) => a + pow(b, 2), 0));
+    const mulSum = d1.map((n, i) => n * d2[i]).reduce(add);
+    const dense = sqrt((pow1 - pow(sum1, 2) / n) * (pow2 - pow(sum2, 2) / n));
+    if (dense === 0) {
+        return 0;
+    }
+    return ((mulSum - (sum1 * sum2) / n) / dense).toFixed(2);
+}
+
+export const deduplicationColumn = (columns) =>
+    columns.map((column, index) => {
+        const [head, ...ext] = column;
+        const prev = _slice(columns, 0, index);
+        let count = 0;
+        _forEach(prev, ([prevHead]) => {
+            if (prevHead == head) {
+                count++;
+            }
+        });
+        if (count) {
+            return [`${head} (${count})`, ...ext];
+        }
+        return [head, ...ext];
+    });
+
+export const getColor = (type, index) => `${GRAPH_COLOR[type][index % GRAPH_COLOR[type].length]}`;
+export const getMouseOverStyle = (type, index) => `
+        background-color: ${getColor(type, index)};
+        float: left;
+        width: 14px;
+        height: 14px;
+        margin: -1px 7px 0 0;
+        vertical-align: middle;
+`;
+
+export const getOrderedTable = ({ table, xIndex, isAddedOption, order }) => {
+    const orderedTable = [...table.slice(1)];
+    if (!isAddedOption) {
+        const isNumberColumnXIndex = isNumberColumn(table, xIndex);
+        if (order === 'ascending') {
+            orderedTable.sort((rowA, rowB) => {
+                const a = isNumberColumnXIndex ? Number(rowA[xIndex]) : rowA[xIndex];
+                const b = isNumberColumnXIndex ? Number(rowB[xIndex]) : rowB[xIndex];
+                if (a > b) {
+                    return 1;
+                }
+                if (a < b) {
+                    return -1;
+                }
+                return 0;
+            });
+        }
+    }
+    return [table[0], ...orderedTable];
+};

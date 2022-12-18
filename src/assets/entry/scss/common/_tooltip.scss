@@ -791,22 +791,20 @@
         content: '';
     }
 }
-// 가로형 툴팁 박스
 
-.vertical_tooltip {
-    position: absolute;
-    left: 46px;
-    top: 0;
-    width: 340px;
+// 그래프
+.tooltip_graph_box {
+    @include PositionLT(absolute, 0, 54px);
+    width: 393px;
     padding: 16px 0 14px 4px;
     box-sizing: border-box;
     background-color: #fff;
+    border-radius: 6px;
     border: 1px solid #e2e2e2;
     box-shadow: 0 1px 6px 0 rgba(124, 124, 124, 0.06);
     font-size: 14px;
     color: #2c313d;
     line-height: 15px;
-    border-radius: 6px;
     .graph_list {
         overflow: hidden;
     }
@@ -816,13 +814,18 @@
         margin-left: 0;
         a {
             display: block;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
             color: #2c313d;
             letter-spacing: -0.5px;
             text-align: center;
             white-space: nowrap;
             line-height: 15px;
+            span {
+                display: block;
+                font-size: 10px;
+                color: #555;
+            }
         }
         a:before {
             display: block;
@@ -847,28 +850,32 @@
         &.scatter a:before {
             background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
         }
+        &.scatterGrid a:before {
+            background-image: url('#{$imageDir}/icon_chart_sel04_on.svg');
+        }
         &.histogram a:before {
             background-image: url('#{$imageDir}/icon_chart_sel05_on.svg');
         }
+        &.scatter_matrix a:before {
+            background-image: url('#{$imageDir}/icon_chart_sel06_on.svg');
+        }
     }
     .arr {
-        position: absolute;
-        top: 4px;
-        right: 100%;
+        @include PositionLB(absolute, 12px, 100%);
         overflow: hidden;
-        width: 20px;
-        height: 30px;
-        i {
-            position: absolute;
-            left: 6px;
-            top: 0;
-            width: 14px;
-            height: 14px;
-            background-color: #fff;
-            border: 1px solid #e2e2e2;
-            box-shadow: 0 1px 6px 0 rgba(124, 124, 124, 0.06);
-            transform: translate(50%, 50%) rotate(45deg);
-        }
+        width: 16px;
+        height: 14px;
+    }
+    .arr i {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: 14px;
+        height: 14px;
+        background-color: #fff;
+        border: 1px solid #e2e2e2;
+        box-shadow: 0 1px 6px 0 rgba(124, 124, 124, 0.06);
+        transform: translate(-50%, 50%) rotate(45deg);
     }
 }
 

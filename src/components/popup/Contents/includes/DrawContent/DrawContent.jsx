@@ -1,4 +1,3 @@
-import React from 'react';
 import { CommonUtils } from '@utils/Common';
 import Styles from '@assets/entry/scss/popup.scss';
 

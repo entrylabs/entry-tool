@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { openModal } from '@actions/popup';
 import { connect } from 'react-redux';
 import { CommonUtils } from '@utils/Common';

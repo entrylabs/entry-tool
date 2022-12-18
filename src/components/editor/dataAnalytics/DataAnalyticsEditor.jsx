@@ -1,4 +1,4 @@
-import React, { useState, useContext, useCallback, useEffect } from 'react';
+import { useState, useContext, useCallback, useEffect } from 'react';
 import Summary from './summary/Summary';
 import TableEditor from './TableEditor';
 import ChartEditor from './chart/ChartEditor';
@@ -22,6 +22,7 @@ const DataAnalyticsEditor = () => {
     const {
         tab,
         list,
+        zoomIn = false,
         gridRef,
         selected = {},
         isChanged,
@@ -104,14 +105,34 @@ const DataAnalyticsEditor = () => {
                     {CommonUtils.getLang('Buttons.apply')}
                 </a>
             </header>
-            <div className={classname(theme.section_container, containerClass)}>
+            <div
+                className={classname(theme.section_container, containerClass, {
+                    [theme.zoom_in]: zoomIn,
+                })}
+            >
                 <SideTab />
                 <div className={theme.container_inner}>
                     {selectedIndex === -1 ? (
-                        <section className={theme.content}>
-                            <p className={theme.caution_dsc}>
-                                {CommonUtils.getLang('DataAnalytics.select_table')}
-                            </p>
+                        <section className={`${theme.content} ${theme.table_no_result_content}`}>
+                            <div className={theme.inner}>
+                                <p className={theme.dsc_title}>
+                                    {CommonUtils.getLang('DataAnalytics.select_table')}
+                                </p>
+                                <dl className={theme.dsc_list}>
+                                    <dt>
+                                        {CommonUtils.getLang('DataAnalytics.select_table_title')}
+                                    </dt>
+                                    <dd>
+                                        {CommonUtils.getLang('DataAnalytics.select_table_des1')}
+                                    </dd>
+                                    <dd>
+                                        {CommonUtils.getLang('DataAnalytics.select_table_des2')}
+                                    </dd>
+                                    <dd>
+                                        {CommonUtils.getLang('DataAnalytics.select_table_des3')}
+                                    </dd>
+                                </dl>
+                            </div>
                         </section>
                     ) : (
                         <div className={theme.section_content}>

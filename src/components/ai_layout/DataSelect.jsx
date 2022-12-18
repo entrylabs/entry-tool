@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { visibleAction } from '../../actions/index';
 import Styles from '../../assets/entry/scss/popup.scss';

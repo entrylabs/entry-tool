@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 import classname from 'classnames';
