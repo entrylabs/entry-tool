@@ -33,7 +33,7 @@ const Scatter = ({ chart, table, size }) => {
             grid: { x: { show: true }, y: { show: true } },
             size,
             point: {
-                pattern: SCATTER_POINT_PATTERN,
+                // pattern: SCATTER_POINT_PATTERN,
                 opacity: 1,
             },
             color: {
@@ -103,7 +103,18 @@ const Scatter = ({ chart, table, size }) => {
             legend: { show: false },
             bindto: chartRef.current,
         });
-    }, []);
+    }, [
+        categoryIndexes,
+        chart,
+        id,
+        size,
+        table,
+        theme.bg,
+        theme.chart_tooltip,
+        type,
+        xIndex,
+        yIndex,
+    ]);
 
     return (
         <div className={theme.chart_area}>

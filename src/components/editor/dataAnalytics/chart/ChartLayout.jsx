@@ -85,8 +85,8 @@ const ChartLayout = () => {
         let height = root.innerHeight;
         if (zoomIn) {
             if (type === SCATTERGRID) {
-                width = 600;
-                height = 600;
+                width = Math.max(width * 0.8, 600);
+                height = width;
             } else {
                 width = Math.max(width * 0.8, 600);
                 height = (width * 3) / 4;
@@ -142,11 +142,6 @@ const ChartLayout = () => {
                         {
                             [theme.vertical]: !(categoryIndexes.length && isHorizontalLegend),
                             [theme.horizontal]: categoryIndexes.length && isHorizontalLegend,
-                            [theme.scatter_matrix]: type === SCATTERGRID,
-                            [theme[`type_${categoryIndexes.length}`]]:
-                                type === SCATTERGRID &&
-                                categoryIndexes.length >= 2 &&
-                                categoryIndexes.length <= 6,
                         },
                         theme[type]
                     )}
@@ -155,23 +150,16 @@ const ChartLayout = () => {
                     {isDrawableHorizontalLegend ? (
                         <HorizontalLegend table={table} chart={selectedChart} />
                     ) : null}
-                    <div
-                        style={{
+                    <Chart
+                        key={key}
+                        table={table}
+                        chart={chart[chartIndex]}
+                        size={{
                             width: size.width,
                             height: size.height,
-                            margin: 'auto',
                         }}
-                    >
-                        <Chart
-                            key={key}
-                            table={table}
-                            chart={chart[chartIndex]}
-                            size={{
-                                width: size.width,
-                                height: size.height,
-                            }}
-                        />
-                    </div>
+                        zoomIn
+                    />
                     {categoryIndexes.length && !isHorizontalLegend ? (
                         <VerticalLegend table={table} chart={selectedChart} />
                     ) : null}

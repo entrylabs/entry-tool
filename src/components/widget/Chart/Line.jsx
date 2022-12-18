@@ -78,7 +78,18 @@ const Line = ({ chart, table, size }) => {
             legend: { show: false },
             bindto: chartRef.current,
         });
-    }, []);
+    }, [
+        categoryIndexes,
+        chart,
+        id,
+        order,
+        size,
+        table,
+        theme.bg,
+        theme.chart_tooltip,
+        type,
+        xIndex,
+    ]);
 
     return (
         <div className={theme.chart_area}>

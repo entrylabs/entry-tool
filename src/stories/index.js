@@ -43,7 +43,6 @@ import DataAnalytics from '../components/editor/dataAnalytics/DataAnalytics';
 import TableChart from '../components/ai_layout/TableChart';
 import TableSummary from '../components/ai_layout/TableSummary';
 import Theme from '@utils/Theme';
-import ScatterGrid from '@components/editor/dataAnalytics/chart/ScatterGrid';
 
 const store = configureStore();
 httpService.setupInterceptors('http://localhost:4000');
@@ -516,11 +515,11 @@ storiesOf('AiLayout', module)
         />
     ))
     .add('산점도행렬', () => (
-        <ScatterGrid
-            table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]}
+        <Chart
+            table={[TABLE_SAMPLE4.fields, ...TABLE_SAMPLE4.origin]}
             chart={{
                 type: 'scatter_matrix',
-                categoryIndexes: [2, 3, 4],
+                categoryIndexes: [2, 3, 4, 5],
             }}
         />
     ))
@@ -643,7 +642,7 @@ storiesOf('AiLayout', module)
                     summary:
                         '특정 시기 미국 보스턴 교외 지역의 주택 가격에 영향을 주었던 여러 지표와 당시 주택의 중간 가격(중앙값)을 정리한 예시 데이터입니다.',
                     chart: [],
-                    table: [TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin],
+                    table: [TABLE_SAMPLE4.fields, ...TABLE_SAMPLE4.origin],
                     tab: 'chart',
                 },
             ]}

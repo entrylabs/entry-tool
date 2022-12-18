@@ -101,7 +101,20 @@ const Histogram = ({ chart, table, size }) => {
             line: { step: { type: 'step-after' } },
             bindto: chartRef.current,
         });
-    }, []);
+    }, [
+        bin,
+        boundary,
+        categoryIndexes,
+        chart,
+        id,
+        size,
+        table,
+        theme.bull,
+        theme.histogram_legend,
+        theme.legend_list,
+        theme.text,
+        type,
+    ]);
 
     return (
         <div className={theme.chart_area}>

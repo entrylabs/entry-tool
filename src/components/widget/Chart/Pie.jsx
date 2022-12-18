@@ -76,7 +76,7 @@ const Pie = ({ table, chart, size }) => {
             legend: { show: false },
             bindto: chartRef.current,
         });
-    }, []);
+    }, [categoryIndexes, chart, id, size, table, theme.bg, theme.chart_tooltip, type, xIndex]);
 
     return (
         <div className={theme.chart_area}>
