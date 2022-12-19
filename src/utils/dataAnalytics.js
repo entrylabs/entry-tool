@@ -320,3 +320,10 @@ export const getOrderedTable = ({ table, xIndex, isAddedOption, order }) => {
     }
     return [table[0], ...orderedTable];
 };
+
+export const isDrawableHorizontalLegend = ({ categoryIndexes, isHorizontalLegend, type, table }) =>
+    categoryIndexes.length &&
+    isHorizontalLegend &&
+    type !== SCATTER &&
+    type !== SCATTERGRID &&
+    categoryIndexes[0] !== table[0].length;

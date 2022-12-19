@@ -6,6 +6,7 @@ import Chart from '@components/widget/Chart/index';
 import VerticalLegend from '../editor/dataAnalytics/chart/VerticalLegend';
 import HorizontalLegend from '../editor/dataAnalytics/chart/HorizontalLegend';
 import { CommonUtils } from '@utils/Common';
+import { isDrawableHorizontalLegend } from '@utils/dataAnalytics';
 import cn from 'classnames';
 const { generateHash } = CommonUtils;
 
@@ -42,6 +43,7 @@ const ModalChart = (props) => {
     };
 
     const data = table;
+    const { type, categoryIndexes } = chart;
     const isHorizontalLegend = chart.type !== 'pie';
     return (
         <div className={theme.dimmed}>
@@ -105,10 +107,12 @@ const ModalChart = (props) => {
                                     </span>
                                 ) : null}
                             </div>
-                            {chart.categoryIndexes &&
-                            chart.categoryIndexes.length &&
-                            isHorizontalLegend &&
-                            chart.type !== 'scatter' ? (
+                            {isDrawableHorizontalLegend({
+                                categoryIndexes,
+                                isHorizontalLegend,
+                                type,
+                                table,
+                            }) ? (
                                 <HorizontalLegend table={data} chart={chart} />
                             ) : null}
 

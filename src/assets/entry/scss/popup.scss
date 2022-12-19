@@ -1026,7 +1026,7 @@
             text-decoration: underline;
         }
     }
-    .extend_block .list .on .link_box a{
+    .extend_block .list .on .link_box a {
         color: #fff;
     }
 }
@@ -1782,9 +1782,9 @@
         cursor: pointer;
         .text {
             width: 78px;
-            overflow:hidden;
-            text-overflow:ellipsis;
-            white-space:nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
     }
     .select_link:after {
@@ -2241,7 +2241,7 @@
     }
     .modal {
         background: #fff;
-        width: 680px;
+        width: 752px;
         min-height: 472px;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
@@ -2286,7 +2286,7 @@
             align-items: center;
 
             .content {
-                width: 660px;
+                width: 732px;
                 line-height: 18px;
                 font-size: 16px;
                 overflow: hidden;

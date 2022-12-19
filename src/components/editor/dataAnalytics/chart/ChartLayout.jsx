@@ -12,8 +12,13 @@ import HorizontalLegend from './HorizontalLegend';
 import Chart from '@components/widget/Chart/index';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
-import { getTrimedTable, isDrawable, getNoResultText } from '@utils/dataAnalytics';
-import { SCATTER, LEGEND_OPTIONS, SCATTERGRID } from '@constants/dataAnalytics';
+import {
+    getTrimedTable,
+    isDrawable,
+    getNoResultText,
+    isDrawableHorizontalLegend,
+} from '@utils/dataAnalytics';
+import { LEGEND_OPTIONS, SCATTERGRID } from '@constants/dataAnalytics';
 import cx from 'classnames';
 import Theme from '@utils/Theme';
 
@@ -48,13 +53,6 @@ const ChartLayout = () => {
         showSelectAll,
         maximumSelectionLength,
     } = LEGEND_OPTIONS[type];
-
-    const isDrawableHorizontalLegend =
-        categoryIndexes.length &&
-        isHorizontalLegend &&
-        type !== SCATTER &&
-        type !== SCATTERGRID &&
-        categoryIndexes[0] !== table[0].length;
 
     const handleRemoveClick = useCallback(
         (event) => {
@@ -147,7 +145,12 @@ const ChartLayout = () => {
                     )}
                     style={{ backgroundColor: '#fff', height: '100%' }}
                 >
-                    {isDrawableHorizontalLegend ? (
+                    {isDrawableHorizontalLegend({
+                        categoryIndexes,
+                        isHorizontalLegend,
+                        type,
+                        table,
+                    }) ? (
                         <HorizontalLegend table={table} chart={selectedChart} />
                     ) : null}
                     <Chart

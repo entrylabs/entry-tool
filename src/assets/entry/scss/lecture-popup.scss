@@ -128,7 +128,7 @@
         li.table_list {
             width: 120px;
         }
-        a, 
+        a,
         div {
             position: relative;
             display: block;
@@ -142,7 +142,7 @@
             outline: 0;
             cursor: pointer;
         }
-        a:after, 
+        a:after,
         div:after {
             position: absolute;
             left: 0;
@@ -240,7 +240,7 @@
         &.on span {
             color: #fff;
         }
-        &.on:before { 
+        &.on:before {
             background-image: url('#{$imageDir}/btn_pop_get_vectors_on.svg');
         }
     }
@@ -350,7 +350,6 @@
             border-radius: 2px;
             content: '';
         }
-
     }
     .menu_inner a.on,
     .menu_inner div.on {
@@ -487,7 +486,6 @@
         background: url('#{$imageDir}/imico_pop_vector.png') no-repeat;
         background-size: 22px auto;
         content: '';
-
     }
     .thmb:before {
         display: inline-block;
@@ -610,10 +608,9 @@
         background-image: url(#{$imageDir}/btn_pop_obj_list_del.png);
         background-size: 24px auto;
     }
-
 }
 
-//파일 올리기 리스트 
+//파일 올리기 리스트
 .file_add_list_content {
     display: flex;
     flex-direction: column;
@@ -633,13 +630,12 @@
         display: inline-block;
         width: 92px;
         height: 12px;
-        background-image: 
-            radial-gradient( circle 6px at 6px 6px, #4f80ff 100%, transparent 0 ),
-            radial-gradient( circle 6px at 6px 6px, #32d27d 100%, transparent 0 ),
-            radial-gradient( circle 6px at 6px 6px, #4f80ff 100%, transparent 0 ),
-            radial-gradient( circle 6px at 6px 6px, #32d27d 100%, transparent 0 ),
-            radial-gradient( circle 6px at 6px 6px, #4f80ff 100%, transparent 0 );
-        background-position:  0 0, 20px 0, 40px 0, 60px 0, 80px 0;
+        background-image: radial-gradient(circle 6px at 6px 6px, #4f80ff 100%, transparent 0),
+            radial-gradient(circle 6px at 6px 6px, #32d27d 100%, transparent 0),
+            radial-gradient(circle 6px at 6px 6px, #4f80ff 100%, transparent 0),
+            radial-gradient(circle 6px at 6px 6px, #32d27d 100%, transparent 0),
+            radial-gradient(circle 6px at 6px 6px, #4f80ff 100%, transparent 0);
+        background-position: 0 0, 20px 0, 40px 0, 60px 0, 80px 0;
         vertical-align: top;
     }
     .loading_bar > p {
@@ -895,7 +891,7 @@
         margin-top: 24px;
         padding-left: 22px;
         font-size: 14px;
-        color:  #000;
+        color: #000;
         letter-spacing: -0.32px;
         line-height: 16px;
     }
@@ -1100,7 +1096,8 @@
     .list {
         overflow: hidden;
         margin: -6px 0 0 -18px;
-    }.list li {
+    }
+    .list li {
         float: left;
         width: 304px;
         margin: 18px 0 0 18px;
@@ -1512,7 +1509,7 @@
         background-color: #4f80ff;
         color: #fff;
     }
-    .data_selbox .list strong { 
+    .data_selbox .list strong {
         display: block;
         overflow: hidden;
         padding: 10px 12px;
@@ -2205,7 +2202,7 @@
     }
     .modal {
         background: #fff;
-        width: 680px;
+        width: 752px;
         min-height: 472px;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
@@ -2250,7 +2247,7 @@
             align-items: center;
 
             .content {
-                width: 660px;
+                width: 732px;
                 line-height: 18px;
                 font-size: 16px;
                 overflow: hidden;
@@ -2464,6 +2461,5 @@
 @keyframes bar1 {
     50% {
         height: 24px;
-        
     }
 }
