@@ -31,7 +31,7 @@ import {
 } from '../constants/sample';
 
 import configureStore from '../store';
-import Chart from '../components/widget/Chart/index';
+import Chart, { ScatterGrid } from '../components/widget/Chart/index';
 import Table from '../components/widget/Table';
 import ModalChart from '../components/widget/modalChart';
 import BillBoard from '../components/widget/BillBoard';
@@ -515,11 +515,21 @@ storiesOf('AiLayout', module)
         />
     ))
     .add('산점도행렬', () => (
+        <ScatterGrid
+            table={[TABLE_SAMPLE4.fields, ...TABLE_SAMPLE4.origin]}
+            chart={{
+                type: 'scatter_matrix',
+                categoryIndexes: [2, 3, 4, 5],
+            }}
+        />
+    ))
+    .add('Plotly', () => (
         <Chart
             table={[TABLE_SAMPLE4.fields, ...TABLE_SAMPLE4.origin]}
             chart={{
                 type: 'scatter_matrix',
                 categoryIndexes: [2, 3, 4, 5],
+                size: { width: 600, height: 600 },
             }}
         />
     ))

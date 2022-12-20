@@ -12,6 +12,7 @@ import Bar from './Bar';
 import Pie from './Pie';
 import Scatter from './Scatter';
 import ScatterGrid from './ScatterGrid';
+import Plotly from './Plotly';
 import Histogram from './Histogram';
 
 const Chart = (props) => {
@@ -31,7 +32,7 @@ const Chart = (props) => {
             case SCATTER:
                 return Scatter;
             case SCATTERGRID:
-                return ScatterGrid;
+                return Plotly;
             case HISTOGRAM:
                 return Histogram;
             default:
