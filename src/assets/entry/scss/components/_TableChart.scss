@@ -32,6 +32,10 @@ $axis-size: 22px;
         flex: 1 1 auto;
         -ms-flex: 1 1 auto;
         overflow: auto;
+
+        .big_line_height {
+            line-height: 43px;
+        }
     }
 }
 .section_container.chart_container {
@@ -244,6 +248,12 @@ $axis-size: 22px;
             .chart_area {
                 svg {
                     margin: auto;
+
+                    :global(.infolayer) {
+                        text {
+                            font-weight: 600 !important;
+                        }
+                    }
                 }
             }
         }
@@ -1093,7 +1103,7 @@ $axis-size: 22px;
     flex: 1;
     position: relative;
     overflow: hidden;
-    margin-left: -27px;
+    margin-left: -23px;
     .inner {
         position: relative;
         -webkit-box-flex: 1;

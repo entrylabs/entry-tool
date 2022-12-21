@@ -78,9 +78,9 @@ const ModalTable = (props) => {
                                             e.preventDefault();
                                         }}
                                         style={{
-                                            width: '710px',
-                                            height: '480px',
-                                            marginRight: '-24px',
+                                            width: '778px',
+                                            height: '389px',
+                                            marginRight: '-23px',
                                         }}
                                     >
                                         <EntrySheet
