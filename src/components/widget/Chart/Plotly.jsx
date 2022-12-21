@@ -1,6 +1,6 @@
 import Plotly from 'react-plotly.js';
 import Theme from '@utils/Theme';
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 const getColumn = (table, index, wrapper = (x) => x) => table.map((field) => wrapper(field[index]));
 
@@ -16,7 +16,7 @@ const PlotlyChart = ({ table, chart, size: { width = 600, height = 600 } = {} })
         },
     }));
 
-    const axis = useCallback(() => {
+    const axis = useMemo(() => {
         return {
             color: '#2c313d',
             zerolinecolor: '#2c313d',
@@ -47,22 +47,22 @@ const PlotlyChart = ({ table, chart, size: { width = 600, height = 600 } = {} })
                     },
                     hovermode: false,
                     plot_bgcolor: 'rgba(240,240,240, 0.25)',
-                    xaxis: axis(),
-                    yaxis: axis(),
-                    xaxis2: axis(),
-                    xaxis3: axis(),
-                    xaxis4: axis(),
-                    xaxis5: axis(),
-                    xaxis6: axis(),
-                    xaxis7: axis(),
-                    xaxis8: axis(),
-                    yaxis2: axis(),
-                    yaxis3: axis(),
-                    yaxis4: axis(),
-                    yaxis5: axis(),
-                    yaxis6: axis(),
-                    yaxis7: axis(),
-                    yaxis8: axis(),
+                    xaxis: axis,
+                    yaxis: axis,
+                    xaxis2: axis,
+                    xaxis3: axis,
+                    xaxis4: axis,
+                    xaxis5: axis,
+                    xaxis6: axis,
+                    xaxis7: axis,
+                    xaxis8: axis,
+                    yaxis2: axis,
+                    yaxis3: axis,
+                    yaxis4: axis,
+                    yaxis5: axis,
+                    yaxis6: axis,
+                    yaxis7: axis,
+                    yaxis8: axis,
                 }}
                 config={{ displayModeBar: false }}
             />
