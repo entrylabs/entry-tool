@@ -458,7 +458,7 @@ class TableChart extends Component {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div className={Styles.select_group} style={{ marginLeft : 45 }}>
+                                                        <div className={Styles.select_group}>
                                                             <label htmlFor="ChartName" className={Styles.tit_label}>계열</label>
                                                             <div className={Styles.pop_selectbox} style={{ width: 208 }}>
                                                                 {/* [D] on 클래스가 들어오면  imico_pop_select_arr_up 으로 바꿔주세요 */}
@@ -791,7 +791,7 @@ class TableChart extends Component {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div className={Styles.select_group} style={{ marginLeft : 45 }}>
+                                                        <div className={Styles.select_group}>
                                                             <label htmlFor="ChartName" className={Styles.tit_label}>계열</label>
                                                             <div className={Styles.pop_selectbox} style={{ width: 208 }}>
                                                                 {/* [D] on 클래스가 들어오면  imico_pop_select_arr_up 으로 바꿔주세요 */}
@@ -1891,7 +1891,7 @@ class TableChart extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className={Styles.select_group} style={{ marginLeft : 30 }}>
+                                                    <div className={Styles.select_group}>
                                                         <label htmlFor="Cnt" className={Styles.tit_label}>계급 수</label>
                                                         <div className={Styles.cnt_box}>
                                                             <a href="/" role="button" className={Styles.btn}>
@@ -1903,7 +1903,7 @@ class TableChart extends Component {
                                                             <input type="text" className={Styles.input} id="Cnt" name="Cnt" />
                                                         </div>
                                                     </div>
-                                                    <div className={Styles.select_group} style={{ marginLeft : 30 }}>
+                                                    <div className={Styles.select_group}>
                                                         <label htmlFor="CntWidth" className={Styles.tit_label}>계급 폭</label>
                                                         {/* 계급 폭이 비활성일 때 disabled 클래스 추가 */}
                                                         <div className={`${Styles.cnt_width} ${Styles.disabled}`}>
@@ -1911,7 +1911,7 @@ class TableChart extends Component {
                                                             <input type="text" className={Styles.input} id="Cnt" name="Cnt" value="1.0" readOnly />
                                                         </div>
                                                     </div>
-                                                    <div className={Styles.select_group} style={{ marginLeft : 30 }}>
+                                                    <div className={Styles.select_group}>
                                                         <label htmlFor="CntWidth" className={Styles.tit_label}>계급 경계</label>
                                                         {/* 계급 폭이 비활성일 때 disabled 클래스 추가 */}
                                                         <div className={Styles.cnt_sort}>
@@ -2176,7 +2176,7 @@ class TableChart extends Component {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div className={Styles.select_group} style={{ marginLeft : 30 }}>
+                                                        <div className={Styles.select_group}>
                                                             <label htmlFor="Cnt" className={Styles.tit_label}>계급 수</label>
                                                             <div className={Styles.cnt_box}>
                                                                 <a href="/" role="button" className={Styles.btn}>
@@ -2188,7 +2188,7 @@ class TableChart extends Component {
                                                                 <input type="text" className={Styles.input} id="Cnt" name="Cnt" />
                                                             </div>
                                                         </div>
-                                                        <div className={Styles.select_group} style={{ marginLeft : 30 }}>
+                                                        <div className={Styles.select_group}>
                                                             <label htmlFor="CntWidth" className={Styles.tit_label}>계급 폭</label>
                                                             {/* 계급 폭이 비활성일 때 disabled 클래스 추가 */}
                                                             <div className={`${Styles.cnt_width} ${Styles.disabled}`}>
@@ -2196,7 +2196,7 @@ class TableChart extends Component {
                                                                 <input type="text" className={Styles.input} id="Cnt" name="Cnt" value="1.0" readOnly />
                                                             </div>
                                                         </div>
-                                                        <div className={Styles.select_group} style={{ marginLeft : 30 }}>
+                                                        <div className={Styles.select_group}>
                                                             <label htmlFor="CntWidth" className={Styles.tit_label}>계급 경계</label>
                                                             {/* 계급 폭이 비활성일 때 disabled 클래스 추가 */}
                                                             <div className={Styles.cnt_sort}>
