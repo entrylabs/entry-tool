@@ -1,6 +1,5 @@
 import Plotly from 'react-plotly.js';
 import Theme from '@utils/Theme';
-import { useMemo } from 'react';
 
 const getColumn = (table, index, wrapper = (x) => x) => table.map((field) => wrapper(field[index]));
 
@@ -16,12 +15,18 @@ const PlotlyChart = ({ table, chart, size: { width = 600, height = 600 } = {} })
         },
     }));
 
-    const axis = useMemo(() => {
-        return {
-            color: '#2c313d',
-            zerolinecolor: '#2c313d',
-        };
-    }, []);
+    const axis = {
+        color: '#2c313d',
+        zerolinecolor: '#2c313d',
+        title: {
+            font: {
+                family: '나눔고딕, NanumGothic',
+            },
+        },
+        tickfont: {
+            family: '나눔고딕, NanumGothic',
+        },
+    };
 
     return (
         <div className={theme.chart_area} style={{ width, margin: '0 auto' }}>
