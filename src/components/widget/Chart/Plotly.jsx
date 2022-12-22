@@ -1,5 +1,7 @@
+import React from 'react';
 import Plotly from 'react-plotly.js';
 import Theme from '@utils/Theme';
+import _isEqual from 'lodash/isEqual';
 
 const getColumn = (table, index, wrapper = (x) => x) => table.map((field) => wrapper(field[index]));
 
@@ -17,7 +19,11 @@ const PlotlyChart = ({ table, chart, size: { width = 600, height = 600 } = {} })
 
     const axis = {
         color: '#2c313d',
-        zerolinecolor: '#2c313d',
+        showline: true,
+        zeroline: false,
+        mirror: 'allticks',
+        ticks: 'outside',
+        tickcolor: '#2c313d',
         title: {
             font: {
                 family: '나눔고딕, NanumGothic',
@@ -45,9 +51,9 @@ const PlotlyChart = ({ table, chart, size: { width = 600, height = 600 } = {} })
                     height,
                     margin: {
                         l: 70,
-                        r: 0,
+                        r: 10,
                         b: 70,
-                        t: 0,
+                        t: 10,
                         pad: 2,
                     },
                     hovermode: false,

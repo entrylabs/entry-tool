@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { pure } from 'recompose';
 import Theme from '@utils/Theme';
 import Option from '../popup/Contents/Navigation/SearchOption';
@@ -41,6 +41,8 @@ const ModalChart = (props) => {
 
         onClose();
     };
+
+    const chartKey = useMemo(() => `c${generateHash()}`, [data, chart, isHorizontalLegend]);
 
     const data = table;
     const { type, categoryIndexes } = chart;
@@ -115,7 +117,6 @@ const ModalChart = (props) => {
                             }) ? (
                                 <HorizontalLegend table={data} chart={chart} />
                             ) : null}
-
                             <div
                                 className={`${theme.chart_area} ${
                                     isHorizontalLegend ? '' : theme.vertical
@@ -123,7 +124,7 @@ const ModalChart = (props) => {
                             >
                                 {chart && (
                                     <Chart
-                                        key={`c${generateHash()}`}
+                                        key={chartKey}
                                         table={data}
                                         chart={chart}
                                         size={{ width: isHorizontalLegend ? 660 : 448 }}
