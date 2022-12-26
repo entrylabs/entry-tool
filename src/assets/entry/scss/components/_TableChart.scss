@@ -263,6 +263,12 @@ $axis-size: 22px;
         border-bottom: 1px solid #e2e2e2;
         .input_inner {
             position: relative;
+
+            &.margin60 {
+                & > div {
+                    margin-right: 60px;
+                }
+            }
         }
         .input_inner:after {
             display: block;
@@ -836,6 +842,7 @@ $axis-size: 22px;
     line-height: 12px;
     letter-spacing: normal;
     color: #2c313d;
+    font-family: 나눔고딕, NanumGothic;
 }
 .chart_group {
     position: relative;

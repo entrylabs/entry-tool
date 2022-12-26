@@ -100,6 +100,9 @@ const Histogram = ({ chart, table, size }) => {
             legend: { show: false },
             line: { step: { type: 'step-after' } },
             bindto: chartRef.current,
+            point: {
+                r: 0,
+            },
         });
     }, [
         bin,

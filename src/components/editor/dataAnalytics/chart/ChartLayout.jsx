@@ -115,7 +115,7 @@ const ChartLayout = () => {
                         {CommonUtils.getLang('DataAnalytics.remove_chart')}
                     </a>
                 </div>
-                <div className={theme.input_inner}>
+                <div className={`${theme.input_inner} ${theme.margin60}`}>
                     {xAxis ? <XAxis key={`${key}_xaxis`} /> : ''}
                     {yAxis ? <YAxis key={`${key}_yaxis`} /> : ''}
                     {category ? (

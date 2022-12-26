@@ -17,7 +17,7 @@ const Range = () => {
     const { width = 0 } = getBinWidth(table, categoryIndexes, boundary, bin);
 
     return (
-        <div className={theme.select_group} style={{ marginLeft: 30, marginRight: 30 }}>
+        <div className={theme.select_group}>
             <label htmlFor="CntWidth" className={theme.tit_label}>
                 {CommonUtils.getLang('DataAnalytics.bin_width')}
             </label>

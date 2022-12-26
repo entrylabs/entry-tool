@@ -45,9 +45,7 @@ const ModalChart = (props) => {
 
     const data = table;
     const { type, categoryIndexes } = chart;
-    const isHorizontalLegend = useMemo(() => {
-        return chart.type !== PIE;
-    }, [chart]);
+    const isHorizontalLegend = useMemo(() => chart.type !== PIE, [chart]);
 
     const chartKey = useMemo(() => `c${generateHash()}`, [data, chart, isHorizontalLegend]);
     const chartSize = useMemo(() => {
@@ -55,7 +53,8 @@ const ModalChart = (props) => {
         let height = 328;
 
         if (chart.type === SCATTERGRID) {
-            width = 328;
+            width = 372;
+            height = 372;
         } else if (chart.type === LINE || chart.type === BAR || chart.type === HISTOGRAM) {
             width = 700;
             height = 275;
@@ -71,6 +70,7 @@ const ModalChart = (props) => {
             height,
         };
     }, [chart]);
+    const isShowSummary = useMemo(() => chart.type !== SCATTERGRID, [chart]);
 
     return (
         <div className={theme.dimmed}>
@@ -100,40 +100,42 @@ const ModalChart = (props) => {
                                 isOpenDefault={!!dropdown}
                                 defaultIndex={selected}
                             />
-                            <div className={theme.summary}>
-                                <span className={`${theme.text} ${theme.bold}`}>
-                                    {isHorizontalLegend
-                                        ? CommonUtils.getLang('DataAnalytics.x_axis')
-                                        : CommonUtils.getLang('DataAnalytics.column_name')}
-                                </span>
-                                <span className={`${theme.text} ${theme.cnt}`}>
-                                    {table[0][chart.xIndex]}
-                                </span>
-                                {isHorizontalLegend && chart.yIndex !== -1 ? (
-                                    <>
-                                        <span className={`${theme.text} ${theme.bold}`}>
-                                            {CommonUtils.getLang('DataAnalytics.y_axis')}
-                                        </span>
-                                        <span className={`${theme.text} ${theme.cnt}`}>
-                                            {table[0][chart.yIndex]}
-                                        </span>
-                                    </>
-                                ) : null}
-                                <span className={`${theme.text} ${theme.bold}`}>
-                                    {CommonUtils.getLang('DataAnalytics.legend')}
-                                </span>
-                                {chart.categoryIndexes ? (
-                                    <span className={`${theme.text} ${theme.cnt}`}>
-                                        {chart.categoryIndexes.length <= 1
-                                            ? table[0][chart.categoryIndexes[0]]
-                                            : `${
-                                                  table[0][chart.categoryIndexes[0]]
-                                              } ${CommonUtils.getLang('DataAnalytics.and')} ${
-                                                  chart.categoryIndexes.length - 1
-                                              }${CommonUtils.getLang('DataAnalytics.other')}`}
+                            {isShowSummary && (
+                                <div className={theme.summary}>
+                                    <span className={`${theme.text} ${theme.bold}`}>
+                                        {isHorizontalLegend
+                                            ? CommonUtils.getLang('DataAnalytics.x_axis')
+                                            : CommonUtils.getLang('DataAnalytics.column_name')}
                                     </span>
-                                ) : null}
-                            </div>
+                                    <span className={`${theme.text} ${theme.cnt}`}>
+                                        {table[0][chart.xIndex]}
+                                    </span>
+                                    {isHorizontalLegend && chart.yIndex !== -1 ? (
+                                        <>
+                                            <span className={`${theme.text} ${theme.bold}`}>
+                                                {CommonUtils.getLang('DataAnalytics.y_axis')}
+                                            </span>
+                                            <span className={`${theme.text} ${theme.cnt}`}>
+                                                {table[0][chart.yIndex]}
+                                            </span>
+                                        </>
+                                    ) : null}
+                                    <span className={`${theme.text} ${theme.bold}`}>
+                                        {CommonUtils.getLang('DataAnalytics.legend')}
+                                    </span>
+                                    {chart.categoryIndexes ? (
+                                        <span className={`${theme.text} ${theme.cnt}`}>
+                                            {chart.categoryIndexes.length <= 1
+                                                ? table[0][chart.categoryIndexes[0]]
+                                                : `${
+                                                      table[0][chart.categoryIndexes[0]]
+                                                  } ${CommonUtils.getLang('DataAnalytics.and')} ${
+                                                      chart.categoryIndexes.length - 1
+                                                  }${CommonUtils.getLang('DataAnalytics.other')}`}
+                                        </span>
+                                    ) : null}
+                                </div>
+                            )}
                             {isDrawableHorizontalLegend({
                                 categoryIndexes,
                                 isHorizontalLegend,
