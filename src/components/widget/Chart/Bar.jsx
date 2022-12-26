@@ -18,6 +18,8 @@ const Bar = ({ chart, table, size }) => {
     const chartRef = useRef(null);
     const { id, xIndex = -1, order, categoryIndexes = [], type } = chart;
 
+    console.log('size', size);
+
     useEffect(() => {
         if (!isDrawable(chart)) {
             return;

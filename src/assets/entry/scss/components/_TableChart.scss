@@ -244,6 +244,12 @@ $axis-size: 22px;
             .chart_area {
                 svg {
                     margin: auto;
+
+                    :global(.infolayer) {
+                        text {
+                            font-weight: 600 !important;
+                        }
+                    }
                 }
             }
         }
@@ -251,148 +257,6 @@ $axis-size: 22px;
             padding-top: 30px;
             padding-right: 230px;
         }
-        // .graph_box.scatter_matrix {
-        // .scatter_matrix {
-        //     min-height: 370px;
-        //     padding-bottom: 30px + ($axis-size * 2);
-        //     padding-left: 30px + ($axis-size * 2);
-        //     box-sizing: border-box;
-        //     .graph {
-        //         float: left;
-        //         position: relative;
-        //     }
-        //     &:after {
-        //         display: block;
-        //         clear: both;
-        //         content: '';
-        //     }
-        //     .graph_title {
-        //         position: absolute;
-        //         top: 50%;
-        //         left: 50%;
-        //         transform: translate(-50%, -50%);
-        //     }
-        //     .graph_title,
-        //     .axis_x,
-        //     .axis_list_x,
-        //     .axis_y,
-        //     .axis_list_y {
-        //         color: #555;
-        //         letter-spacing: -0.5px;
-        //     }
-        //     .axis_x,
-        //     .axis_list_x,
-        //     .axis_y,
-        //     .axis_list_y {
-        //         position: absolute;
-        //     }
-        //     .axis_x,
-        //     .axis_y {
-        //         overflow: hidden;
-        //         height: $axis-size;
-        //         font-size: 12px;
-        //         white-space: nowrap;
-        //         text-overflow: ellipsis;
-        //     }
-        //     .axis_x,
-        //     .axis_list_x {
-        //         left: 50%;
-        //         transform: translateX(-50%);
-        //     }
-        //     .axis_x {
-        //         bottom: -(($axis-size * 2) + 10px);
-        //         max-width: 100%;
-        //     }
-        //     .axis_y {
-        //         display: block;
-        //         bottom: 0;
-        //         left: -(($axis-size * 2) + 10px);
-        //         max-width: 40%;
-        //         transform-origin: 0 0;
-        //         transform: rotate(-90deg);
-        //     }
-        //     .axis_list_x,
-        //     .axis_list_y {
-        //         display: flex;
-        //         justify-content: space-between;
-        //         align-items: self-end;
-        //         font-size: 10px;
-        //     }
-        //     .axis_list_x {
-        //         bottom: -$axis-size;
-        //         width: 95%;
-        //         height: $axis-size;
-        //         margin-left: 12px;
-        //     }
-        //     .axis_list_y {
-        //         flex-direction: column;
-        //         -webkit-box-direction: normal;
-        //         -webkit-box-orient: vertical;
-        //         top: 0;
-        //         left: -($axis-size + 10px);
-        //         width: $axis-size;
-        //         height: 100%;
-        //     }
-        //     &.type_2 {
-        //         .graph {
-        //             min-width: 134px;
-        //             width: 50%;
-        //             min-height: 134px;
-        //             height: 50%;
-        //         }
-        //         .graph_title {
-        //             font-size: 18px;
-        //         }
-        //         .axis_x,
-        //         .axis_y {
-        //             font-size: 12px;
-        //         }
-        //     }
-        //     &.type_3 {
-        //         .graph {
-        //             min-width: 120px;
-        //             width: 33.3333%;
-        //             min-height: 120px;
-        //             height: 33.3333%;
-        //         }
-        //         .graph_title {
-        //             font-size: 18px;
-        //         }
-        //     }
-        //     &.type_4 {
-        //         .graph {
-        //             min-width: 105px;
-        //             width: 25%;
-        //             min-height: 105px;
-        //             height: 25%;
-        //         }
-        //         .graph_title {
-        //             font-size: 16px;
-        //         }
-        //     }
-        //     &.type_5 {
-        //         .graph {
-        //             min-width: 82px;
-        //             width: 20%;
-        //             min-height: 82px;
-        //             height: 20%;
-        //         }
-        //         .graph_title {
-        //             font-size: 14px;
-        //         }
-        //     }
-        //     &.type_6 {
-        //         .graph {
-        //             min-width: 70px;
-        //             width: 16.6666%;
-        //             min-height: 70px;
-        //             height: 16.6666%;
-        //         }
-        //         .graph_title {
-        //             font-size: 12px;
-        //         }
-        //     }
-        // }
     }
     .form_box {
         padding: 18px 16px;
@@ -413,7 +277,7 @@ $axis-size: 22px;
             color: #2c313d;
             letter-spacing: -0.33px;
             vertical-align: top;
-            line-height: 40px;
+            line-height: 43px;
         }
         .input_box {
             overflow: hidden;
@@ -487,10 +351,7 @@ $axis-size: 22px;
         }
         .select_group {
             float: left;
-            margin-left: 22px;
-        }
-        .select_group:first-of-type {
-            margin-left: 0;
+            margin-right: 30px;
         }
         .select_group:first-of-type .tit_label {
             width: 70px;
@@ -504,7 +365,7 @@ $axis-size: 22px;
         .select_group .pop_selectbox {
             display: inline-block;
             vertical-align: top;
-            margin-left: 12px;
+            margin-left: 19px;
         }
         .select_group .pop_selectbox .select_link {
             width: auto;
@@ -549,7 +410,7 @@ $axis-size: 22px;
             width: 106px;
             height: 32px;
             padding: 0 30px;
-            margin: 4px 0 0 12px;
+            margin: 4px 0 0 19px;
             border: 1px solid #e2e2e2;
             border-radius: 4px;
             background-color: #fff;
@@ -603,7 +464,7 @@ $axis-size: 22px;
             overflow: hidden;
             width: 70px;
             height: 32px;
-            margin: 4px 0 0 12px;
+            margin: 4px 0 0 19px;
             border: 1px solid #e2e2e2;
             border-radius: 4px;
             background-color: #fff;
@@ -638,7 +499,7 @@ $axis-size: 22px;
             overflow: hidden;
             width: 70px;
             height: 32px;
-            margin: 4px 0 0 12px;
+            margin: 4px 0 0 19px;
             border: 1px solid #e2e2e2;
             border-radius: 4px;
             background-color: #fff;
@@ -665,7 +526,7 @@ $axis-size: 22px;
         }
         .select_group .cnt_sort {
             display: inline-block;
-            margin: 4px 0 0 12px;
+            margin: 4px 0 0 19px;
             vertical-align: top;
         }
         .select_group .cnt_sort a {
@@ -1093,7 +954,7 @@ $axis-size: 22px;
     flex: 1;
     position: relative;
     overflow: hidden;
-    margin-left: -27px;
+    margin-left: -23px;
     .inner {
         position: relative;
         -webkit-box-flex: 1;
@@ -1270,13 +1131,13 @@ $axis-size: 22px;
             }
         }
         .input_box .input_inner + .input_inner {
-            margin-left: 12px;
+            margin-left: 19px;
         }
         .input_box .chart_del {
             float: left;
             width: 100px;
             height: 38px;
-            margin-left: 12px;
+            margin-left: 19px;
             background-color: #fff;
             border: 1px solid #e2e2e2;
             border-radius: 4px;

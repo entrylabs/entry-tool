@@ -263,7 +263,7 @@
         }
         .table_sjt > strong {
             float: left;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
             color: #2c313d;
             letter-spacing: -0.57px;
@@ -289,8 +289,9 @@
             letter-spacing: -0.5px;
         }
         .table_sjt .title_dsc {
-            font-size: 16px;
+            font-size: 14px;
             color: #2c313d;
+            line-height: 22px;
         }
         .table_sjt .tooltip_box {
             width: 464px;
@@ -438,7 +439,7 @@
             border-top: 0;
         }
         .chart_list {
-            margin-left: -8px
+            margin-left: -8px;
         }
         .chart_list:after {
             display: block;

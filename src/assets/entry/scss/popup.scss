@@ -2355,6 +2355,9 @@
 
                 .chart_area {
                     margin-top: 21px;
+                    .sheet_box > div {
+                        padding-bottom: 0px;
+                    }
                 }
                 .pop_selectbox {
                     position: relative;
