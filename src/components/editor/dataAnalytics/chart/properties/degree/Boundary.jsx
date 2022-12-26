@@ -18,7 +18,7 @@ const Boundary = () => {
     };
 
     return (
-        <div className={theme.select_group} style={{ marginLeft: 30 }}>
+        <div className={theme.select_group}>
             <label htmlFor="CntWidth" className={theme.tit_label}>
                 {CommonUtils.getLang('DataAnalytics.bin_boundary')}
             </label>
