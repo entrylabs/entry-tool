@@ -257,6 +257,22 @@ export const dataAnalyticsReducer = (state, action) => {
                 isChanged: true,
             };
         }
+        case 'ADD_ROW': {
+            const { selected } = state;
+            return {
+                ...state,
+                selected,
+                isChanged: true,
+            };
+        }
+        case 'DELETE_ROW': {
+            const { selected } = state;
+            return {
+                ...state,
+                selected,
+                isChanged: true,
+            };
+        }
         case 'SAVE': {
             const { list, selectedIndex, selected, onSubmitDataAnalytics } = state;
             const { table } = action;
