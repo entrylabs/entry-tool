@@ -5,7 +5,7 @@ import _isEqual from 'lodash/isEqual';
 
 const getColumn = (table, index, wrapper = (x) => x) => table.map((field) => wrapper(field[index]));
 
-const PlotlyChart = ({ table, chart, size: { width = 600, height = 600 } = {} }) => {
+const PlotlyChart = ({ table, chart, size: { width = 600, height = 328 } = {} }) => {
     const theme = Theme.getStyle('popup');
     const { categoryIndexes } = chart;
 

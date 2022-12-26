@@ -8,6 +8,7 @@ import HorizontalLegend from '../editor/dataAnalytics/chart/HorizontalLegend';
 import { CommonUtils } from '@utils/Common';
 import { isDrawableHorizontalLegend } from '@utils/dataAnalytics';
 import cn from 'classnames';
+import { BAR, HISTOGRAM, LINE, PIE, SCATTER, SCATTERGRID } from '@constants/dataAnalytics';
 const { generateHash } = CommonUtils;
 
 const ModalChart = (props) => {
@@ -42,11 +43,35 @@ const ModalChart = (props) => {
         onClose();
     };
 
-    const chartKey = useMemo(() => `c${generateHash()}`, [data, chart, isHorizontalLegend]);
-
     const data = table;
     const { type, categoryIndexes } = chart;
-    const isHorizontalLegend = chart.type !== 'pie';
+    const isHorizontalLegend = useMemo(() => {
+        return chart.type !== PIE;
+    }, [chart]);
+
+    const chartKey = useMemo(() => `c${generateHash()}`, [data, chart, isHorizontalLegend]);
+    const chartSize = useMemo(() => {
+        let width = 0;
+        let height = 328;
+
+        if (chart.type === SCATTERGRID) {
+            width = 328;
+        } else if (chart.type === LINE || chart.type === BAR || chart.type === HISTOGRAM) {
+            width = 700;
+            height = 275;
+        } else if (chart.type === PIE) {
+            width = 448;
+            height = 310;
+        } else {
+            width = 700;
+        }
+
+        return {
+            width,
+            height,
+        };
+    }, [chart]);
+
     return (
         <div className={theme.dimmed}>
             <div className={isIframe ? theme.center_chart : theme.center}>
@@ -127,7 +152,7 @@ const ModalChart = (props) => {
                                         key={chartKey}
                                         table={data}
                                         chart={chart}
-                                        size={{ width: isHorizontalLegend ? 660 : 448 }}
+                                        size={chartSize}
                                     />
                                 )}
                             </div>
