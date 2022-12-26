@@ -795,8 +795,8 @@
 // 그래프
 .tooltip_graph_box {
     @include PositionLT(absolute, 0, 54px);
-    width: 393px;
-    padding: 16px 0 14px 4px;
+    width: 424px;
+    padding: 16px 0 14px 0;
     box-sizing: border-box;
     background-color: #fff;
     border-radius: 6px;
@@ -806,12 +806,15 @@
     color: #2c313d;
     line-height: 15px;
     .graph_list {
+        padding-left: 1px;
+        padding-right: 1px;
         overflow: hidden;
     }
     .graph_list li {
         float: left;
         width: 64px;
-        margin-left: 0;
+        margin-left: 3px;
+        margin-right: 3px;
         a {
             display: block;
             font-size: 12px;
@@ -834,9 +837,6 @@
             margin: 0 auto 10px;
             background-size: 40px auto;
             content: '';
-        }
-        &:first-child {
-            margin-left: 0;
         }
         &.bar a:before {
             background-image: url('#{$imageDir}/icon_chart_sel01_on.svg');

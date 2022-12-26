@@ -130,7 +130,7 @@ const ChartLayout = () => {
                     )}
                     {degree ? <Degree key={`${key}_degree`} /> : ''}
                     {order ? <Order key={`${key}_order`} /> : ''}
-                    {coefficient ? <Coefficient key={`${key}_order`} /> : ''}
+                    {/* {coefficient ? <Coefficient key={`${key}_order`} /> : ''} */}
                 </div>
             </div>
             {isDrawable(selectedChart) ? (
@@ -161,7 +161,7 @@ const ChartLayout = () => {
                             width: size.width,
                             height: size.height,
                         }}
-                        zoomIn
+                        zoomIn={zoomIn}
                     />
                     {categoryIndexes.length && !isHorizontalLegend ? (
                         <VerticalLegend table={table} chart={selectedChart} />
