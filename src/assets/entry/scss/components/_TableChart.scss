@@ -263,12 +263,6 @@ $axis-size: 22px;
         border-bottom: 1px solid #e2e2e2;
         .input_inner {
             position: relative;
-
-            &.margin60 {
-                & > div {
-                    margin-right: 60px;
-                }
-            }
         }
         .input_inner:after {
             display: block;
@@ -835,6 +829,7 @@ $axis-size: 22px;
     box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.25);
     border: solid 1px #e2e2e2;
     background-color: #ffffff;
+    font-family: "나눔고딕", NanumGothic;
     font-size: 12px;
     font-weight: bold;
     font-stretch: normal;
@@ -842,7 +837,6 @@ $axis-size: 22px;
     line-height: 12px;
     letter-spacing: normal;
     color: #2c313d;
-    font-family: 나눔고딕, NanumGothic;
 }
 .chart_group {
     position: relative;
