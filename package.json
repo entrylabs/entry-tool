@@ -126,7 +126,7 @@
         "@entrylabs/modal": "1.2.5",
         "@entrylabs/postcss-url": "^8.0.1",
         "@toast-ui/react-grid": "^4.10.1",
-        "axios": "^0.18.0",
+        "axios": "^0.21.2",
         "billboard.js": "^3.6.3",
         "chroma-js": "^1.4.0",
         "classnames": "^2.2.6",
