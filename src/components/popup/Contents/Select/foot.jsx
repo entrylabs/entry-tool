@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { triggerEvent } from '@actions/index';
 import { closePopup } from '@actions/popup';

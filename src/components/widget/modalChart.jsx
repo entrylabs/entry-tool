@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import { pure } from 'recompose';
 import Theme from '@utils/Theme';
 import Option from '../popup/Contents/Navigation/SearchOption';
-import Chart from '@components/widget/Chart';
+import Chart from '@components/widget/Chart/index';
 import VerticalLegend from '../editor/dataAnalytics/chart/VerticalLegend';
 import HorizontalLegend from '../editor/dataAnalytics/chart/HorizontalLegend';
 import { CommonUtils } from '@utils/Common';
+import { isDrawableHorizontalLegend } from '@utils/dataAnalytics';
 import cn from 'classnames';
+import { BAR, HISTOGRAM, LINE, PIE, SCATTER, SCATTERGRID } from '@constants/dataAnalytics';
 const { generateHash } = CommonUtils;
 
 const ModalChart = (props) => {
@@ -42,7 +44,34 @@ const ModalChart = (props) => {
     };
 
     const data = table;
-    const isHorizontalLegend = chart.type !== 'pie';
+    const { type, categoryIndexes } = chart;
+    const isHorizontalLegend = useMemo(() => chart.type !== PIE, [chart]);
+
+    const chartKey = useMemo(() => `c${generateHash()}`, [data, chart, isHorizontalLegend]);
+    const chartSize = useMemo(() => {
+        let width = 0;
+        let height = 328;
+
+        if (chart.type === SCATTERGRID) {
+            width = 372;
+            height = 372;
+        } else if (chart.type === LINE || chart.type === BAR || chart.type === HISTOGRAM) {
+            width = 700;
+            height = 275;
+        } else if (chart.type === PIE) {
+            width = 448;
+            height = 310;
+        } else {
+            width = 700;
+        }
+
+        return {
+            width,
+            height,
+        };
+    }, [chart]);
+    const isShowSummary = useMemo(() => chart.type !== SCATTERGRID, [chart]);
+
     return (
         <div className={theme.dimmed}>
             <div className={isIframe ? theme.center_chart : theme.center}>
@@ -71,48 +100,50 @@ const ModalChart = (props) => {
                                 isOpenDefault={!!dropdown}
                                 defaultIndex={selected}
                             />
-                            <div className={theme.summary}>
-                                <span className={`${theme.text} ${theme.bold}`}>
-                                    {isHorizontalLegend
-                                        ? CommonUtils.getLang('DataAnalytics.x_axis')
-                                        : CommonUtils.getLang('DataAnalytics.column_name')}
-                                </span>
-                                <span className={`${theme.text} ${theme.cnt}`}>
-                                    {table[0][chart.xIndex]}
-                                </span>
-                                {isHorizontalLegend && chart.yIndex !== -1 ? (
-                                    <>
-                                        <span className={`${theme.text} ${theme.bold}`}>
-                                            {CommonUtils.getLang('DataAnalytics.y_axis')}
-                                        </span>
-                                        <span className={`${theme.text} ${theme.cnt}`}>
-                                            {table[0][chart.yIndex]}
-                                        </span>
-                                    </>
-                                ) : null}
-                                <span className={`${theme.text} ${theme.bold}`}>
-                                    {CommonUtils.getLang('DataAnalytics.legend')}
-                                </span>
-                                {chart.categoryIndexes ? (
-                                    <span className={`${theme.text} ${theme.cnt}`}>
-                                        {chart.categoryIndexes.length <= 1
-                                            ? table[0][chart.categoryIndexes[0]]
-                                            : `${
-                                                  table[0][chart.categoryIndexes[0]]
-                                              } ${CommonUtils.getLang('DataAnalytics.and')} ${chart
-                                                  .categoryIndexes.length - 1}${CommonUtils.getLang(
-                                                  'DataAnalytics.other'
-                                              )}`}
+                            {isShowSummary && (
+                                <div className={theme.summary}>
+                                    <span className={`${theme.text} ${theme.bold}`}>
+                                        {isHorizontalLegend
+                                            ? CommonUtils.getLang('DataAnalytics.x_axis')
+                                            : CommonUtils.getLang('DataAnalytics.column_name')}
                                     </span>
-                                ) : null}
-                            </div>
-                            {chart.categoryIndexes &&
-                            chart.categoryIndexes.length &&
-                            isHorizontalLegend &&
-                            chart.type !== 'scatter' ? (
+                                    <span className={`${theme.text} ${theme.cnt}`}>
+                                        {table[0][chart.xIndex]}
+                                    </span>
+                                    {isHorizontalLegend && chart.yIndex !== -1 ? (
+                                        <>
+                                            <span className={`${theme.text} ${theme.bold}`}>
+                                                {CommonUtils.getLang('DataAnalytics.y_axis')}
+                                            </span>
+                                            <span className={`${theme.text} ${theme.cnt}`}>
+                                                {table[0][chart.yIndex]}
+                                            </span>
+                                        </>
+                                    ) : null}
+                                    <span className={`${theme.text} ${theme.bold}`}>
+                                        {CommonUtils.getLang('DataAnalytics.legend')}
+                                    </span>
+                                    {chart.categoryIndexes ? (
+                                        <span className={`${theme.text} ${theme.cnt}`}>
+                                            {chart.categoryIndexes.length <= 1
+                                                ? table[0][chart.categoryIndexes[0]]
+                                                : `${
+                                                      table[0][chart.categoryIndexes[0]]
+                                                  } ${CommonUtils.getLang('DataAnalytics.and')} ${
+                                                      chart.categoryIndexes.length - 1
+                                                  }${CommonUtils.getLang('DataAnalytics.other')}`}
+                                        </span>
+                                    ) : null}
+                                </div>
+                            )}
+                            {isDrawableHorizontalLegend({
+                                categoryIndexes,
+                                isHorizontalLegend,
+                                type,
+                                table,
+                            }) ? (
                                 <HorizontalLegend table={data} chart={chart} />
                             ) : null}
-
                             <div
                                 className={`${theme.chart_area} ${
                                     isHorizontalLegend ? '' : theme.vertical
@@ -120,10 +151,10 @@ const ModalChart = (props) => {
                             >
                                 {chart && (
                                     <Chart
-                                        key={`c${generateHash()}`}
+                                        key={chartKey}
                                         table={data}
                                         chart={chart}
-                                        size={{ width: isHorizontalLegend ? 660 : 448 }}
+                                        size={chartSize}
                                     />
                                 )}
                             </div>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import _intersection from 'lodash/intersection';
 import { pure } from 'recompose';
 import DraggableList from './draggableList';

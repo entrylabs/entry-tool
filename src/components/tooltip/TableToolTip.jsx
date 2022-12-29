@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import OutsideClick from '../common/outsideClick';
 import { CommonUtils } from '@utils/Common';
 

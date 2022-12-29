@@ -1,4 +1,3 @@
-import React from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
 import Tooltips from '../components/tooltip';
@@ -28,10 +27,11 @@ import {
     TABLE_INFO_SAMPLE,
     TABLE_SAMPLE2,
     TABLE_SAMPLE3,
+    TABLE_SAMPLE4,
 } from '../constants/sample';
 
 import configureStore from '../store';
-import Chart from '../components/widget/Chart';
+import Chart, { ScatterGrid } from '../components/widget/Chart/index';
 import Table from '../components/widget/Table';
 import ModalChart from '../components/widget/modalChart';
 import BillBoard from '../components/widget/BillBoard';
@@ -52,24 +52,24 @@ export default function Provider({ story }) {
 Theme.type = 'entry';
 storiesOf('Popup', module)
     .addDecorator((story) => <Provider story={story()} />)
-    .add('오브젝트 선택 팝업', () => <Sample SampleState='ObjectSelect' />)
-    .add('파일 올리기 팝업', () => <Sample SampleState='FileUpload' />)
-    .add('그리기 팝업', () => <Sample SampleState='Drawing' />)
-    .add('짧은 글상자 팝업', () => <Sample SampleState='ShortWrite' />)
-    .add('여러줄 글상자 팝업', () => <Sample SampleState='MultiWrite' />)
-    .add('확장블럭 팝업', () => <Sample SampleState='ExpandBlock' />)
-    .add('소리선택 팝업', () => <Sample SampleState='SoundSelect' />)
-    .add('소리 올리기', () => <Sample SampleState='SoundUpload' />)
-    .add('회원가입1', () => <Sample SampleState='SignUp1' />)
-    .add('회원가입2', () => <Sample SampleState='SignUp2' />)
-    .add('회원가입3', () => <Sample SampleState='SignUp3' />)
-    .add('회원가입4', () => <Sample SampleState='SignUp4' />)
-    .add('회원가입5', () => <Sample SampleState='SignUp5' />)
-    .add('로그인', () => <Sample SampleState='Login' />)
-    .add('툴팁', () => <Sample SampleState='Tooltip' />)
-    .add('나의 작품 - 리스트', () => <Sample SampleState='MyProduct' />)
+    .add('오브젝트 선택 팝업', () => <Sample SampleState="ObjectSelect" />)
+    .add('파일 올리기 팝업', () => <Sample SampleState="FileUpload" />)
+    .add('그리기 팝업', () => <Sample SampleState="Drawing" />)
+    .add('짧은 글상자 팝업', () => <Sample SampleState="ShortWrite" />)
+    .add('여러줄 글상자 팝업', () => <Sample SampleState="MultiWrite" />)
+    .add('확장블럭 팝업', () => <Sample SampleState="ExpandBlock" />)
+    .add('소리선택 팝업', () => <Sample SampleState="SoundSelect" />)
+    .add('소리 올리기', () => <Sample SampleState="SoundUpload" />)
+    .add('회원가입1', () => <Sample SampleState="SignUp1" />)
+    .add('회원가입2', () => <Sample SampleState="SignUp2" />)
+    .add('회원가입3', () => <Sample SampleState="SignUp3" />)
+    .add('회원가입4', () => <Sample SampleState="SignUp4" />)
+    .add('회원가입5', () => <Sample SampleState="SignUp5" />)
+    .add('로그인', () => <Sample SampleState="Login" />)
+    .add('툴팁', () => <Sample SampleState="Tooltip" />)
+    .add('나의 작품 - 리스트', () => <Sample SampleState="MyProduct" />)
     .add('나의 작품 - 작품 없음', () => <Sample />)
-    .add('툴팁', () => <Tooltips />)
+    .add('툴팁1', () => <Tooltips />)
     .add('확장블록', () => <Popup type="expansion" data={EXPANSION_SAMPLE} />)
     .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE} uploads={SOUND_SAMPLE} />)
     .add('데이터 테이블', () => (
@@ -401,7 +401,7 @@ storiesOf('AiLayout', module)
     .add('파일 올리기 - 새로 만들기', () => <DataUpload />)
     .add('데이터 차트 - 차트 추가 기본', () => <TableChart ChartState="Default" />)
     .add('데이터 차트 - Aside 접기', () => <TableChart />)
-    .add('데이터 차트 - 2차 가로', () => (
+    .add('데이터 차트 - 2차 가로 - 크게보기', () => (
         <TableChart ChartState="Depth2" NoResultText="가로축을 먼저 선택해 주세요." />
     ))
     .add('데이터 차트 - 2차 계열', () => (
@@ -416,8 +416,26 @@ storiesOf('AiLayout', module)
         <TableChart ChartState="DepthHistogram" NoResultText="계열을 선택해 주세요." />
     ))
     .add('데이터 차트 - 히스토그램 그래프', () => <TableChart ChartState="DepthHistogramGraph" />)
+    .add('데이터 차트 - 산점도 행렬 2x2 그래프', () => (
+        <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType2 />
+    ))
+    .add('데이터 차트 - 산점도 행렬 3x3 그래프', () => (
+        <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType3 />
+    ))
+    .add('데이터 차트 - 산점도 행렬 4x4 그래프', () => (
+        <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType4 />
+    ))
+    .add('데이터 차트 - 산점도 행렬 5x5 그래프', () => (
+        <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType5 />
+    ))
+    .add('데이터 차트 - 산점도 행렬 6x6 그래프', () => (
+        <TableChart ChartState="ScatterMatrixGraph" ScatterMatrixGraphType6 />
+    ))
+    .add('데이터 차트 - 테이블 없음', () => <TableChart ChartState="NoTable" />)
     .add('데이터 차트 - 요약', () => <TableSummary />)
-    .add('데이터 차트 - 요약 모두', () => <TableSummary SummaryState="Total" />)
+    .add('데이터 차트 - 요약 모두 - Aside 접기', () => <TableSummary SummaryState="Total" />)
+    .add('데이터 차트 - 요약 모두 - 크게보기', () => <TableSummary SummaryState="Total" ZoonIn />)
+    .add('데이터 차트 - test', () => <DataAnalytics />)
     .add('차트', () => (
         <Chart table={[TABLE_SAMPLE2.fields, ...TABLE_SAMPLE2.origin]} type="line" />
     ))
@@ -487,12 +505,31 @@ storiesOf('AiLayout', module)
     ))
     .add('분산차트', () => (
         <Chart
-            table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]}
+            table={[TABLE_SAMPLE4.fields, ...TABLE_SAMPLE4.origin]}
             chart={{
                 type: 'scatter',
-                xIndex: 1,
-                yIndex: 2,
+                xIndex: 2,
+                yIndex: 3,
                 categoryIndexes: [0],
+            }}
+        />
+    ))
+    .add('산점도행렬', () => (
+        <ScatterGrid
+            table={[TABLE_SAMPLE4.fields, ...TABLE_SAMPLE4.origin]}
+            chart={{
+                type: 'scatter_matrix',
+                categoryIndexes: [2, 3, 4, 5],
+            }}
+        />
+    ))
+    .add('Plotly', () => (
+        <Chart
+            table={[TABLE_SAMPLE4.fields, ...TABLE_SAMPLE4.origin]}
+            chart={{
+                type: 'scatter_matrix',
+                categoryIndexes: [2, 3, 4, 5],
+                size: { width: 600, height: 600 },
             }}
         />
     ))
@@ -547,7 +584,7 @@ storiesOf('AiLayout', module)
                             maxDepth: 8,
                             gainThreshold: 0.01,
                             distribution: [[0.9907407407407424, 0.009259259259259259]],
-                        }
+                        },
                     },
                     right: {
                         kind: 'classifier',
@@ -606,4 +643,18 @@ storiesOf('AiLayout', module)
     .add('테이블', () => (
         <Table table={[TABLE_SAMPLE3.fields, ...TABLE_SAMPLE3.origin]} editor={'text'} />
     ))
-    .add('DataAnalytics', () => <DataAnalytics table={[[]]} />);
+    .add('DataAnalytics', () => (
+        <DataAnalytics
+            list={[
+                {
+                    id: '4sbt',
+                    name: '보스턴 주택 가격 데이터',
+                    summary:
+                        '특정 시기 미국 보스턴 교외 지역의 주택 가격에 영향을 주었던 여러 지표와 당시 주택의 중간 가격(중앙값)을 정리한 예시 데이터입니다.',
+                    chart: [],
+                    table: [TABLE_SAMPLE4.fields, ...TABLE_SAMPLE4.origin],
+                    tab: 'chart',
+                },
+            ]}
+        />
+    ));

@@ -1,4 +1,3 @@
-import React from 'react';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
 import SearchBox from './SearchBox';

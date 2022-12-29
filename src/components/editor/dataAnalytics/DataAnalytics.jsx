@@ -1,4 +1,3 @@
-import React from 'react';
 import _cloneDeep from 'lodash/cloneDeep';
 import DataAnalyticsEditor from './DataAnalyticsEditor';
 import DataAnalyticsContextProvider from '@contexts/dataAnalytics';
@@ -25,6 +24,7 @@ const DataAnalytics = (props) => {
         list,
         selectedIndex: index,
         selected: _cloneDeep(list[index]) || {},
+        zoomIn: false,
         fold: false,
         onToastDataAnalytics,
         onSubmitDataAnalytics,

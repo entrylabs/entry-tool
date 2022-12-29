@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import { visibleAction } from '../../actions/index';
 import Styles from '../../assets/entry/scss/gnb.scss';

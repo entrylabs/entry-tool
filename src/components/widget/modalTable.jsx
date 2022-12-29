@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import Theme from '@utils/Theme';
 import EntrySheet from 'entry_sheet';
 import Option from '../popup/Contents/Navigation/SearchOption';
@@ -78,9 +78,9 @@ const ModalTable = (props) => {
                                             e.preventDefault();
                                         }}
                                         style={{
-                                            width: '710px',
-                                            height: '480px',
-                                            marginRight: '-24px',
+                                            width: '778px',
+                                            height: '389px',
+                                            marginRight: '-23px',
                                         }}
                                     >
                                         <EntrySheet

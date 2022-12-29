@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { isValidElement, Component } from 'react';
 import _intersection from 'lodash/intersection';
 import _isPlainObject from 'lodash/isPlainObject';
 import { pure } from 'recompose';
@@ -22,7 +22,7 @@ const SortableItem = SortableElement(({ value }) => {
                 }}
             />
         );
-    } else if (React.isValidElement(item)) {
+    } else if (isValidElement(item)) {
         return <div className={theme.sortableItem}>{item}</div>;
     } else {
         return <div className={theme.sortableItem} />;
@@ -35,7 +35,7 @@ const SortableList = SortableContainer(({ items, disabled }) => {
             {items.map((value, index) => {
                 let key = `item-${index}`;
                 let item = value;
-                if (!React.isValidElement(value) && _isPlainObject(value)) {
+                if (!isValidElement(value) && _isPlainObject(value)) {
                     key = value.key || key;
                     item = value.item;
                 }

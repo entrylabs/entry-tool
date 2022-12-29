@@ -1,4 +1,4 @@
-import React, { useContext, useCallback } from 'react';
+import { useContext, useCallback } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import Theme from '@utils/Theme';
 

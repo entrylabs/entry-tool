@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default ({ theme, children, dropdown }) => (
     <div id="popupList" className={theme.data_selbox}>
         {dropdown}

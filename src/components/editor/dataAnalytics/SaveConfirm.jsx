@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { TABLE } from '@constants/dataAnalytics';
 import { Confirm as ConfirmModal } from '@entrylabs/modal';

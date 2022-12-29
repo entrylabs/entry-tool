@@ -1,9 +1,9 @@
-import React from 'react';
+import { createRef, isValidElement } from 'react';
 import Styles from '@assets/entry/scss/draggable.scss';
 
 /* eslint-disable new-cap */
 const DraggableItem = (props, ref) => {
-    const itemRef = React.createRef();
+    const itemRef = createRef();
     const {
         value,
         itemWrapperClassName,
@@ -38,8 +38,8 @@ const DraggableItem = (props, ref) => {
             {(itemShadowClassName || itemShadowStyle) && (
                 <div className={itemShadowClassName} style={itemShadowStyle} />
             )}
-            {React.isValidElement(item) && <div {...attr}>{item}</div>}
-            {!React.isValidElement(item) && <div {...attr} />}
+            {isValidElement(item) && <div {...attr}>{item}</div>}
+            {!isValidElement(item) && <div {...attr} />}
         </div>
     );
 };

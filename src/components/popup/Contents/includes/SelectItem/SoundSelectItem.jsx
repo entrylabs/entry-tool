@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { CommonUtils } from '@utils/Common';
 import { connect } from 'react-redux';
 import { triggerEvent } from '@actions/index';

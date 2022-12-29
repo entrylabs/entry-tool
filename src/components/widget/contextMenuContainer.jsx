@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import withWrapper from '@hoc/withWrapper';
 import { connect } from 'react-redux';
 import ContextMenu from './contextMenu';

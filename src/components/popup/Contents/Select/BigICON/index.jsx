@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import Item from './Item';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';

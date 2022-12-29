@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import produce from 'immer';
 import { CommonUtils } from '@utils/Common';
 const { getByteLength } = CommonUtils;

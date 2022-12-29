@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import Number from '@components/widget/number';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { isMobile } from 'react-device-detect';
@@ -95,7 +95,7 @@ const Count = () => {
     };
 
     return (
-        <div className={theme.select_group} style={{ marginLeft: 30 }}>
+        <div className={theme.select_group}>
             <label htmlFor="Cnt" className={theme.tit_label}>
                 {CommonUtils.getLang('DataAnalytics.number_of_bins')}
             </label>

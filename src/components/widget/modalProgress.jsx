@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { pure } from 'recompose';
 import Theme from '@utils/Theme';
 import { CommonUtils } from '@utils/Common';
