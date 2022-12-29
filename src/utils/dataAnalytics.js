@@ -186,8 +186,8 @@ export const downloadXLSX = (table, name) => {
     XLSX.writeFile(workbook, `${name}.xlsx`);
 };
 
-export const getBinWidth = (table, categoryIndexes, boundary, bin) => {
-    if (!categoryIndexes.length) {
+export const getBinWidth = (table, categoryIndexes = [], boundary, bin) => {
+    if (categoryIndexes.length < 2) {
         return '-';
     }
     let min = Number(table[1][categoryIndexes]) || Number.MAX_SAFE_INTEGER;
@@ -233,11 +233,11 @@ export const getPieChart = (table, xIndex, categoryIndex) => {
     ];
 };
 
-export const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes } = {}) =>
+export const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes = [] } = {}) =>
     type !== NONE &&
     (!(type === HISTOGRAM || xIndex === -1) ||
-        ((type === HISTOGRAM || type === SCATTERGRID) && categoryIndexes.length)) &&
-    categoryIndexes.length &&
+        ((type === HISTOGRAM || type === SCATTERGRID) && categoryIndexes.length > 1)) &&
+    categoryIndexes.length > 1 &&
     !(type === SCATTER && yIndex === -1);
 
 export const getNoResultText = ({ type = NONE, xIndex, yIndex, categoryIndexes = [] } = {}) => {
@@ -246,7 +246,7 @@ export const getNoResultText = ({ type = NONE, xIndex, yIndex, categoryIndexes =
         content = CommonUtils.getLang('DataAnalytics.select_x_axis');
     } else if (yIndex === -1 && type === SCATTER) {
         content = CommonUtils.getLang('DataAnalytics.select_y_axis');
-    } else if (!categoryIndexes.length) {
+    } else if (categoryIndexes.length < 2) {
         content = CommonUtils.getLang('DataAnalytics.select_legend');
     }
     return content;
@@ -322,7 +322,7 @@ export const getOrderedTable = ({ table, xIndex, isAddedOption, order }) => {
 };
 
 export const isDrawableHorizontalLegend = ({ categoryIndexes, isHorizontalLegend, type, table }) =>
-    categoryIndexes.length &&
+    categoryIndexes.length > 1 &&
     isHorizontalLegend &&
     type !== SCATTER &&
     type !== SCATTERGRID &&
