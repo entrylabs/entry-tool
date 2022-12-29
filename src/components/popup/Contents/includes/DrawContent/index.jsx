@@ -1,4 +1,3 @@
-import React from 'react';
 import DefaultDrawContent from './DrawContent';
 import TableDrawContent from './TableDrawContent';
 

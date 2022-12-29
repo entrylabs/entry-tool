@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { applySelected } from '@actions/popup';
 import { CommonUtils } from '@utils/Common';

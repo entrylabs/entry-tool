@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import TableToolTip from '@components/tooltip/TableToolTip';
 import { getSummary, getTrimedTable } from '@utils/dataAnalytics';
@@ -11,14 +11,14 @@ const Table = () => {
     const theme = Theme.getStyle('popup');
     const { dataAnalytics } = useContext(DataAnalyticsContext);
     const { selected = {} } = dataAnalytics;
-    const { table: selectedTable } = selected;
+    const { table: selectedTable, fieldInfos = [] } = selected;
     const table = getTrimedTable(selectedTable);
     const summary = getSummary(table) || [];
 
     return (
         <div className={theme.category_box}>
             <div className={theme.table_sjt}>
-                <strong>{CommonUtils.getLang('DataAnalytics.table')}</strong>
+                <strong>{CommonUtils.getLang('DataAnalytics.statistic')}</strong>
                 <TableToolTip />
                 <p className={theme.title_dsc}>
                     {CommonUtils.getLang('DataAnalytics.summary_table_description')}
@@ -31,8 +31,9 @@ const Table = () => {
                 <li>{`${CommonUtils.getLang('DataAnalytics.attribute')} ${
                     summary.length
                 }${CommonUtils.getLang('DataAnalytics.attribute_count')}`}</li>
-                <li>{`${CommonUtils.getLang('DataAnalytics.cell')} ${summary.length *
-                    table.length}${CommonUtils.getLang('DataAnalytics.cell_count')}`}</li>
+                <li>{`${CommonUtils.getLang('DataAnalytics.cell')} ${
+                    summary.length * table.length
+                }${CommonUtils.getLang('DataAnalytics.cell_count')}`}</li>
             </ul>
             <div className={theme.table_box}>
                 <table className={theme.table}>
@@ -81,6 +82,22 @@ const Table = () => {
                     </tbody>
                 </table>
             </div>
+            {fieldInfos.length ? (
+                <div className={theme.category_box}>
+                    <div className={theme.table_sjt}>
+                        <strong>{CommonUtils.getLang('DataAnalytics.field_info')}</strong>
+                        <ul className={theme.dsc_list}>
+                            {fieldInfos.map((fieldInfo, index) =>
+                                fieldInfo ? (
+                                    <li key={`field_info_${index}`}>
+                                        {table[0][index]}: {fieldInfo}
+                                    </li>
+                                ) : null
+                            )}
+                        </ul>
+                    </div>
+                </div>
+            ) : null}
         </div>
     );
 };

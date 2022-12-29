@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { createRef, isValidElement, Component } from 'react';
 import _ from 'lodash';
 import EntryEvent from '@entrylabs/event';
 import produce from 'immer';
@@ -14,7 +14,7 @@ const { getPosition } = CommonUtils;
 class DraggableList extends Component {
     constructor(props) {
         super(props);
-        this.draggableListRef = React.createRef();
+        this.draggableListRef = createRef();
         this.theme = Theme.getStyle('draggable');
     }
 
@@ -348,7 +348,7 @@ class DraggableList extends Component {
                     let key = `item-${index}`;
                     let item = value;
                     let image = value;
-                    if (!React.isValidElement(value) && _.isPlainObject(value)) {
+                    if (!isValidElement(value) && _.isPlainObject(value)) {
                         key = value.key || key;
                         item = value.item;
                         image = value.image;
@@ -406,7 +406,7 @@ class DraggableList extends Component {
             if (!this.dragViewElement) {
                 const { image } = this.dragItemInfo || {};
                 let imagePath = image;
-                if (React.isValidElement(image)) {
+                if (isValidElement(image)) {
                     imagePath = image.props['data-image'];
                 }
                 this.dragViewElement = document.createElement('div');

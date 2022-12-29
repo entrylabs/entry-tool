@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { pure } from 'recompose';
 import { COLOR_PICKER_MODE } from '../../constants';
 import Theme from '@utils/Theme';

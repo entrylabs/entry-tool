@@ -1,4 +1,3 @@
-import React from 'react';
 import { categoryKeys } from '@utils/dataAnalytics';
 import { GRAPH_COLOR } from '@constants/dataAnalytics';
 import Theme from '@utils/Theme';

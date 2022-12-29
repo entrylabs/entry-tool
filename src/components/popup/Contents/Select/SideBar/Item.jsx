@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { applySelected } from '@actions/popup';
 import { EMIT_TYPES as Types } from '@constants';

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
@@ -18,7 +18,7 @@ const Boundary = () => {
     };
 
     return (
-        <div className={theme.select_group} style={{ marginLeft: 30 }}>
+        <div className={theme.select_group}>
             <label htmlFor="CntWidth" className={theme.tit_label}>
                 {CommonUtils.getLang('DataAnalytics.bin_boundary')}
             </label>

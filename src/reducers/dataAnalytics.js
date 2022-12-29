@@ -133,6 +133,7 @@ export const dataAnalyticsReducer = (state, action) => {
                 xIndex: -1,
                 yIndex: -1,
                 categoryIndexes: [],
+                id: `c${CommonUtils.generateHash()}`,
             });
             return {
                 ...state,
@@ -256,6 +257,22 @@ export const dataAnalyticsReducer = (state, action) => {
                 isChanged: true,
             };
         }
+        case 'ADD_ROW': {
+            const { selected } = state;
+            return {
+                ...state,
+                selected,
+                isChanged: true,
+            };
+        }
+        case 'DELETE_ROW': {
+            const { selected } = state;
+            return {
+                ...state,
+                selected,
+                isChanged: true,
+            };
+        }
         case 'SAVE': {
             const { list, selectedIndex, selected, onSubmitDataAnalytics } = state;
             const { table } = action;
@@ -280,6 +297,22 @@ export const dataAnalyticsReducer = (state, action) => {
             const { order } = action;
 
             chart[chartIndex].order = order;
+
+            return {
+                ...state,
+                selected: {
+                    ...selected,
+                    chart,
+                },
+                isChanged: true,
+            };
+        }
+        case 'EDIT_COEFFICIENT': {
+            const { selected } = state;
+            const { chart = [], chartIndex = 0 } = selected;
+            const { coefficient } = action;
+
+            chart[chartIndex].coefficient = coefficient;
 
             return {
                 ...state,
@@ -319,6 +352,10 @@ export const dataAnalyticsReducer = (state, action) => {
                 },
                 isChanged: true,
             };
+        }
+        case 'CHANGE_VIEW_MODE': {
+            const { zoomIn } = action;
+            return { ...state, zoomIn: !!zoomIn };
         }
         default:
             return state;

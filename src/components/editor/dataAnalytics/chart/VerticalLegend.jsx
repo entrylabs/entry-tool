@@ -1,4 +1,3 @@
-import React from 'react';
 import _toPairs from 'lodash/toPairs';
 import _sumBy from 'lodash/sumBy';
 import _round from 'lodash/round';

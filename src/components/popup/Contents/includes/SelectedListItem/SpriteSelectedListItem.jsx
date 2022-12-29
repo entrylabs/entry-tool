@@ -1,4 +1,3 @@
-import React from 'react';
 import { CommonUtils } from '@utils/Common';
 
 export default ({ theme, item, baseUrl, onDelete }) => {

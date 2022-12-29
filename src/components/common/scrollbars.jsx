@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import '../../assets/entry/scss/scroll.scss';
 // let CustomScroll = null;
 // if (typeof window !== 'undefined') {

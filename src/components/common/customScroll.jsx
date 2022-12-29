@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef } from 'react';
+import { useState, useEffect, forwardRef } from 'react';
 import _debounce from 'lodash/debounce';
 import EntryEvent from '@entrylabs/event';
 import Theme from '../../utils/Theme';

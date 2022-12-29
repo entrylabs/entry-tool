@@ -17,7 +17,7 @@ export const Component = {
 export { default as ColorPicker } from './components/picker/colorContainer';
 export { default as LedPicker } from './components/ledPicker/ledPickerContainer';
 export { default as DataAnalytics } from './components/editor/dataAnalytics/DataAnalyticsContainer';
-export { default as Chart } from './components/widget/Chart';
+export { default as Chart } from './components/widget/Chart/index';
 export { default as ModalChart } from './components/widget/modalChartContainer';
 export { default as ModalTable } from './components/widget/modalTableContainer';
 export { default as BillBoard } from './components/widget/BillBoardChartContainer';

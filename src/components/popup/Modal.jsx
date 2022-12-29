@@ -1,4 +1,3 @@
-import React from 'react';
 import Theme from '@utils/Theme';
 import { closeModal } from '@actions/popup';
 import { connect } from 'react-redux';
