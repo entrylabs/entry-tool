@@ -187,7 +187,7 @@ export const downloadXLSX = (table, name) => {
 };
 
 export const getBinWidth = (table, categoryIndexes = [], boundary, bin) => {
-    if (categoryIndexes.length < 2) {
+    if (!categoryIndexes.length) {
         return '-';
     }
     let min = Number(table[1][categoryIndexes]) || Number.MAX_SAFE_INTEGER;
@@ -236,8 +236,9 @@ export const getPieChart = (table, xIndex, categoryIndex) => {
 export const isDrawable = ({ type = NONE, xIndex, yIndex, categoryIndexes = [] } = {}) =>
     type !== NONE &&
     (!(type === HISTOGRAM || xIndex === -1) ||
-        ((type === HISTOGRAM || type === SCATTERGRID) && categoryIndexes.length > 1)) &&
-    categoryIndexes.length > 1 &&
+        (type === HISTOGRAM && categoryIndexes.length) ||
+        (type === SCATTERGRID && categoryIndexes.length > 1)) &&
+    categoryIndexes.length &&
     !(type === SCATTER && yIndex === -1);
 
 export const getNoResultText = ({ type = NONE, xIndex, yIndex, categoryIndexes = [] } = {}) => {
@@ -246,7 +247,9 @@ export const getNoResultText = ({ type = NONE, xIndex, yIndex, categoryIndexes =
         content = CommonUtils.getLang('DataAnalytics.select_x_axis');
     } else if (yIndex === -1 && type === SCATTER) {
         content = CommonUtils.getLang('DataAnalytics.select_y_axis');
-    } else if (categoryIndexes.length < 2) {
+    } else if (type === SCATTERGRID && categoryIndexes.length < 2) {
+        content = CommonUtils.getLang('DataAnalytics.select_legend2');
+    } else if (!categoryIndexes.length) {
         content = CommonUtils.getLang('DataAnalytics.select_legend');
     }
     return content;
@@ -322,7 +325,7 @@ export const getOrderedTable = ({ table, xIndex, isAddedOption, order }) => {
 };
 
 export const isDrawableHorizontalLegend = ({ categoryIndexes, isHorizontalLegend, type, table }) =>
-    categoryIndexes.length > 1 &&
+    categoryIndexes.length &&
     isHorizontalLegend &&
     type !== SCATTER &&
     type !== SCATTERGRID &&
