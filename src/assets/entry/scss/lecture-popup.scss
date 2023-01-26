@@ -2408,8 +2408,21 @@
                         margin-left: 36px;
                         :global(.chart_handle_wrapper) {
                             display: block;
-                            background-color: white;
-                            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+                            height: 32px;
+                            padding: 10px 12px 10px;
+                            border-radius: 6px;
+                            -webkit-box-shadow: 0 1px 6px 0 rgb(0 0 0 / 25%);
+                            box-shadow: 0 1px 6px 0 rgb(0 0 0 / 25%);
+                            border: solid 1px #e2e2e2;
+                            background-color: #fff;
+                            font-family: "\B098\B214\ACE0\B515",NanumGothic;
+                            font-size: 12px;
+                            font-weight: bold;
+                            font-stretch: normal;
+                            font-style: normal;
+                            line-height: 12px;
+                            letter-spacing: normal;
+                            color: #2c313d;
                         }
                     }
                 }
