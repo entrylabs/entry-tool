@@ -1,9 +1,27 @@
 import { useEffect, useState, useRef } from 'react';
 import { pure } from 'recompose';
-import bb from 'billboard.js';
+import bb, { bar, line, scatter, pie, area, bubble, step } from 'billboard.js';
 import Theme from '@utils/Theme';
 import { CommonUtils } from '@utils/Common';
 import cn from 'classnames';
+
+const getBillBoardType = (type) => {
+    if (type === 'line') {
+        return line();
+    } else if (type === 'bar') {
+        return bar();
+    } else if (type === 'scatter') {
+        return scatter();
+    } else if (type === 'pie') {
+        return pie();
+    } else if (type === 'area') {
+        return area();
+    } else if (type === 'bubble') {
+        return bubble();
+    } else if (type === 'step') {
+        return step();
+    }
+};
 
 const BillBoard = (props) => {
     const theme = Theme.getStyle('popup');
@@ -31,11 +49,22 @@ const BillBoard = (props) => {
         }
         drawChart();
     }, [data, options, targets]);
+    const newTableData = {
+        ...data,
+    };
+    if (data.type) {
+        newTableData.type = getBillBoardType(data.type)
+    }
+    if (data.types) {
+        Object.keys(data.types).forEach((key) => {
+            newTableData.types[key] = getBillBoardType(data.types[key]);
+        });
+    }
 
     const drawChart = () => {
         try {
             const chart = bb.generate({
-                data,
+                data: newTableData,
                 ...options,
                 bindto: chartRef.current,
             });
