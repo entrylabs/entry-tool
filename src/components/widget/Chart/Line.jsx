@@ -13,11 +13,11 @@ import _map from 'lodash/map';
 import _unzip from 'lodash/unzip';
 import _findIndex from 'lodash/findIndex';
 
-const setChartXCount = (chartObj, categories) => () => {
+const setChartXCount = (chartObj, categories, chartRef) => () => {
     const categoryWordLength = categories?.[0].toString().length * 5;
     const padding = 100;
-    const windowWidth = window.innerWidth;
-    let count = Math.min(categories.length, 100);
+    const windowWidth = chartRef?.current?.offsetWidth || 0;
+    let count = Math.min(categories.length, 30);
     if (windowWidth < categoryWordLength * 10 + padding) {
         count = Math.min(count, 8);
     }
@@ -98,7 +98,7 @@ const Line = ({ chart, table, size }) => {
             legend: { show: false },
             bindto: chartRef.current,
         });
-        const handleResize = setChartXCount(chartObj, categories);
+        const handleResize = setChartXCount(chartObj, categories, chartRef);
         window.addEventListener('resize', handleResize);
         handleResize();
         return () => window.removeEventListener('resize', handleResize);
