@@ -17,7 +17,7 @@ const setChartXCount = (chartObj, categories) => () => {
     const categoryWordLength = categories?.[0].toString().length * 5;
     const padding = 100;
     const windowWidth = window.innerWidth;
-    let count = categories.length;
+    let count = Math.min(categories.length, 100);
     if (windowWidth < categoryWordLength * 10 + padding) {
         count = Math.min(count, 8);
     }
