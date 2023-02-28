@@ -72,7 +72,7 @@ const Bar = ({ chart, table, size }) => {
                         multiline: false,
                         autorotate: orderedTable.length <= 16,
                         rotate: orderedTable.length <= 16 ? 15 : null,
-                        // culling: orderedTable.length > 16,
+                        culling: orderedTable.length > 16,
                     },
                 },
             },
@@ -100,9 +100,9 @@ const Bar = ({ chart, table, size }) => {
             legend: { show: false },
             bindto: chartRef.current,
         });
-        const handleResize = setChartXCount(chartObj, categories, chartRef);
-        window.addEventListener('resize', handleResize);
-        handleResize();
+        // const handleResize = setChartXCount(chartObj, categories, chartRef);
+        // window.addEventListener('resize', handleResize);
+        // handleResize();
         return () => window.removeEventListener('resize', handleResize);
     }, [
         categoryIndexes,
