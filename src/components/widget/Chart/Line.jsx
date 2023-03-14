@@ -18,6 +18,9 @@ const setChartXCount = (chartObj, categories, chartRef) => () => {
     const padding = 100;
     const windowWidth = chartRef?.current?.offsetWidth || 0;
     let count = Math.min(categories.length, 16);
+    if (windowWidth < categoryWordLength * 16 + padding) {
+        count = Math.min(count, 10);
+    }
     if (windowWidth < categoryWordLength * 10 + padding) {
         count = Math.min(count, 8);
     }
