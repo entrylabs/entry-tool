@@ -17,7 +17,7 @@ const setChartXCount = (chartObj, categories, chartRef) => () => {
     const categoryWordLength = categories?.[0].toString().length * 5;
     const padding = 100;
     const windowWidth = chartRef?.current?.offsetWidth || 0;
-    let count = Math.min(categories.length, 20);
+    let count = Math.min(categories.length, 16);
     if (windowWidth < categoryWordLength * 10 + padding) {
         count = Math.min(count, 8);
     }
@@ -28,7 +28,6 @@ const setChartXCount = (chartObj, categories, chartRef) => () => {
         count = Math.min(count, 3);
     }
     if (!chartObj.tickCount || chartObj.tickCount !== count) {
-        chartObj.config('axis_x_tick_culling', count > 16);
         chartObj.config('axis_x_tick_count', count, true);
     }
     chartObj.tickCount = count;
@@ -71,7 +70,7 @@ const Line = ({ chart, table, size }) => {
                         multiline: false,
                         autorotate: categories.length <= 16,
                         rotate: categories.length <= 16 ? 15 : null,
-                        culling: categories.length > 16,
+                        culling: false,
                     },
                 },
             },
@@ -99,9 +98,9 @@ const Line = ({ chart, table, size }) => {
             legend: { show: false },
             bindto: chartRef.current,
         });
-        // const handleResize = setChartXCount(chartObj, categories, chartRef);
-        // window.addEventListener('resize', handleResize);
-        // handleResize();
+        const handleResize = setChartXCount(chartObj, categories, chartRef);
+        window.addEventListener('resize', handleResize);
+        handleResize();
         return () => window.removeEventListener('resize', handleResize);
     }, [
         categoryIndexes,
