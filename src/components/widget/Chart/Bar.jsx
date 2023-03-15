@@ -102,7 +102,7 @@ const Bar = ({ chart, table, size }) => {
             legend: { show: false },
             bindto: chartRef.current,
         });
-        const handleResize = setChartXCount(chartObj, categories, size);
+        const handleResize = setChartXCount(chartObj, categories, size?.width);
         window.addEventListener('resize', handleResize);
         handleResize();
         return () => window.removeEventListener('resize', handleResize);
