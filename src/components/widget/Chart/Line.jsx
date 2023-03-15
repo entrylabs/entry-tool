@@ -33,6 +33,7 @@ const setChartXCount = (chartObj, categories, chartRef) => () => {
     if (!chartObj.tickCount || chartObj.tickCount !== count) {
         chartObj.config('axis_x_tick_count', count, true);
     }
+    console.log(windowWidth, categoryWordLength * 16 + padding, categoryWordLength * 10 + padding, count);
     chartObj.tickCount = count;
 };
 
