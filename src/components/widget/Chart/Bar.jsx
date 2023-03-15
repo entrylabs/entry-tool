@@ -13,10 +13,9 @@ import _map from 'lodash/map';
 import _unzip from 'lodash/unzip';
 import _findIndex from 'lodash/findIndex';
 
-const setChartXCount = (chartObj, categories, chartRef) => () => {
+const setChartXCount = (chartObj, categories, windowWidth) => () => {
     const categoryWordLength = categories?.[0].toString().length * 5;
     const padding = 100;
-    const windowWidth = chartRef?.current?.offsetWidth || 0;
     let count = Math.min(categories.length, 16);
     if (windowWidth < categoryWordLength * 16 + padding) {
         count = Math.min(count, 10);
@@ -33,7 +32,6 @@ const setChartXCount = (chartObj, categories, chartRef) => () => {
     if (!chartObj.tickCount || chartObj.tickCount !== count) {
         chartObj.config('axis_x_tick_count', count, true);
     }
-    console.log(windowWidth, categoryWordLength * 16 + padding, categoryWordLength * 10 + padding, count);
     chartObj.tickCount = count;
 };
 
@@ -41,6 +39,7 @@ const Bar = ({ chart, table, size }) => {
     const theme = Theme.getStyle('popup');
     const chartRef = useRef(null);
     const { id, xIndex = -1, order, categoryIndexes = [], type } = chart;
+  
     useEffect(() => {
         if (!isDrawable(chart)) {
             return;
@@ -103,7 +102,7 @@ const Bar = ({ chart, table, size }) => {
             legend: { show: false },
             bindto: chartRef.current,
         });
-        const handleResize = setChartXCount(chartObj, categories, chartRef);
+        const handleResize = setChartXCount(chartObj, categories, size);
         window.addEventListener('resize', handleResize);
         handleResize();
         return () => window.removeEventListener('resize', handleResize);
