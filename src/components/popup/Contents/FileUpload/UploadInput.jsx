@@ -88,8 +88,10 @@ const checkFileType = ({ file, uploadNotAllowedExt, failEvent, uploadAllowed: al
     const splittedNames = file.name.split('.');
     const ext = splittedNames[splittedNames.length - 1];
     const notSupported = { messageParent: 'Workspace', message: 'upload_not_supported_file_msg' };
-    if (file.size > 1024 * 1024 * 5) {
-        failEvent({ messageParent: 'Menus', message: 'file_upload_max_size' });
+    const fileSize = isImage ? 5 : 10;
+    const msgKey = isImage ? 'file_upload_max_size_image' : 'file_upload_max_size';
+    if (file.size > 1024 * 1024 * fileSize) {
+        failEvent({ messageParent: 'Menus', message: msgKey });
         return false;
     }
     if (_includes(uploadNotAllowedExt, ext)) {
