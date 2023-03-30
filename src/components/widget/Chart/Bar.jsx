@@ -16,6 +16,10 @@ import _findIndex from 'lodash/findIndex';
 const setChartXCount = (chartObj, categories, windowWidth) => () => {
     const categoryWordLength = categories?.[0].toString().length * 5;
     const padding = 100;
+    if (windowWidth > categoryWordLength * categories.length + padding) {
+        chartObj.tickCount = categories.length;
+        return;
+    }
     let count = Math.min(categories.length, 16);
     if (windowWidth < categoryWordLength * 16 + padding) {
         count = Math.min(count, 10);
