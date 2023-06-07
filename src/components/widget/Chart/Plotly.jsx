@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Plotly from 'react-plotly.js';
 import Theme from '@utils/Theme';
 import _isEqual from 'lodash/isEqual';
+import { corr } from '@utils/dataAnalytics';
 
 const getColumn = (table, index, wrapper = (x) => x) => table.map((field) => wrapper(field[index]));
+const getColumns = (table, indexes, wrapper = (x) => x) =>
+    indexes.map((index) => table.map((field) => wrapper(field[index])));
 
+    
 const PlotlyChart = ({ table, chart, size: { width = 600, height = 328 } = {} }) => {
+    const [overLaps, setOverlaps] = useState([]);
     const theme = Theme.getStyle('popup');
     const { categoryIndexes } = chart;
-
     const dimensions = categoryIndexes.map((cIndex) => ({
         label: table[0][cIndex],
         values: getColumn(table.slice(1), cIndex),
@@ -33,7 +37,7 @@ const PlotlyChart = ({ table, chart, size: { width = 600, height = 328 } = {} })
             family: '나눔고딕, NanumGothic',
         },
     };
-
+    
     return (
         <div className={theme.chart_area} style={{ width, margin: '0 auto' }}>
             <Plotly
@@ -46,6 +50,56 @@ const PlotlyChart = ({ table, chart, size: { width = 600, height = 328 } = {} })
                         mode: 'markers',
                     },
                 ]}
+                onInitialized={(figure, graphDiv) => {
+                    const indexLength = categoryIndexes.length;
+                    const gridLayer = graphDiv.getElementsByClassName('nsewdrag');
+                    const layers = Array.prototype.map.call(gridLayer,(layer, i) => {
+                        const y = i%indexLength;
+                        const x = Math.floor(i/indexLength);
+                        const left = layer.attributes.x.textContent + 'px';
+                        const top = layer.attributes.y.textContent + 'px';
+                        const width = layer.width.baseVal.value;
+                        const height = layer.height.baseVal.value;
+                        if (x === y) {
+                            return (
+                                <div style={{ top, width, height, left, position:'absolute', backgroundColor: 'white' }}>
+                                    <div style={{
+                                        position: 'absolute',
+                                        top: '50%',
+                                        width: '100%',
+                                        textAlign: 'center',
+                                        transform: 'translateY(-50%)'}}
+                                    >
+                                            {dimensions[x].label}
+                                    </div>
+                                </div>
+                            );
+                        } else if (x > y) {
+                            const colX = categoryIndexes[x];
+                            const colY = categoryIndexes[y];
+                            const corrValue =  corr(
+                                ...getColumns(table, [colY, colX]).map((column) =>
+                                    column.slice(1)
+                                )
+                            );
+                            return (
+                                <div style={{ top, width, height, left, position:'absolute', backgroundColor: 'white' }}>
+                                    <div style={{
+                                        position: 'absolute',
+                                        top: '50%',
+                                        width: '100%',
+                                        textAlign: 'center',
+                                        transform: 'translateY(-50%)'}}
+                                    >
+                                            {corrValue}
+                                    </div>
+                                </div>
+                            );
+                        }
+                    }).filter((x) => x);
+                    setOverlaps(layers);
+                    
+                }}
                 layout={{
                     width,
                     height,
@@ -77,6 +131,9 @@ const PlotlyChart = ({ table, chart, size: { width = 600, height = 328 } = {} })
                 }}
                 config={{ displayModeBar: false }}
             />
+            <div style={{position: 'relative', float: 'left'}}>
+                {overLaps}
+            </div>
         </div>
     );
 };
