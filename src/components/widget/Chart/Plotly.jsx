@@ -10,7 +10,7 @@ const getColumns = (table, indexes, wrapper = (x) => x) =>
 const PlotlyChart = ({ table, chart, size: { width = 600, height = 328 } = {} }) => {
     const [overLaps, setOverlaps] = useState([]);
     const theme = Theme.getStyle('popup');
-    const { categoryIndexes, coefficient = true } = chart;
+    const { categoryIndexes, coefficient } = chart;
     const dimensions = categoryIndexes.map((cIndex) => ({
         label: table[0][cIndex],
         values: getColumn(table.slice(1), cIndex),
@@ -49,9 +49,6 @@ const PlotlyChart = ({ table, chart, size: { width = 600, height = 328 } = {} })
                     },
                 ]}
                 onInitialized={(figure, graphDiv) => {
-                    if (!coefficient) {
-                        return;
-                    }
                     const indexLength = categoryIndexes.length;
                     const gridLayer = graphDiv.getElementsByClassName('nsewdrag');
                     const layers = Array.prototype.map
@@ -155,7 +152,7 @@ const PlotlyChart = ({ table, chart, size: { width = 600, height = 328 } = {} })
                 }}
                 config={{ displayModeBar: false }}
             />
-            <div style={{ position: 'relative', float: 'left' }}>{overLaps}</div>
+            {coefficient && <div style={{ position: 'relative', float: 'left' }}>{overLaps}</div>}
         </div>
     );
 };
