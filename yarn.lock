@@ -7412,9 +7412,9 @@ entities@^4.2.0, entities@^4.3.0, entities@^4.4.0:
   resolved "https://registry.yarnpkg.com/entities/-/entities-4.4.0.tgz#97bdaba170339446495e653cfd2db78962900174"
   integrity sha512-oYp7156SP8LkeGD0GF85ad1X9Ai79WtRsZ2gxJqtBuzH+98YUV6jkHEKlZkMbcrjJjIVJNIDP/3WL9wQkoPbWA==
 
-"entry_sheet@https://8a14b1ce074335d7a7d9099b4a0807cc40fc9434:x-oauth-basic@oss.navercorp.com/ria/entry_sheet.git#v0.0.0.26":
+"entry_sheet@https://8a14b1ce074335d7a7d9099b4a0807cc40fc9434:x-oauth-basic@oss.navercorp.com/ria/entry_sheet.git#v0.0.0.27":
   version "1.0.0"
-  resolved "https://8a14b1ce074335d7a7d9099b4a0807cc40fc9434:x-oauth-basic@oss.navercorp.com/ria/entry_sheet.git#237ef30da0a3f2031ededde9f754c991704facc0"
+  resolved "https://8a14b1ce074335d7a7d9099b4a0807cc40fc9434:x-oauth-basic@oss.navercorp.com/ria/entry_sheet.git#4695e73e4fedddeec7a2f86523c74fe9083c6675"
   dependencies:
     "@emotion/core" "^10.1.1"
     "@emotion/styled" "^10.0.27"
