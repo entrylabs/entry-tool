@@ -4,6 +4,7 @@ import ColorPicker from './components/picker/color';
 import Backpack from './components/widget/Backpack';
 import Number from './components/widget/number';
 import MusicScale from './components/widget/musicScale';
+import ContextMenu from './components/widget/contextMenu';
 
 export const Component = {
     Dropdown,
@@ -12,6 +13,7 @@ export const Component = {
     Backpack,
     Number,
     MusicScale,
+    ContextMenu,
 };
 
 export { default as ColorPicker } from './components/picker/colorContainer';
