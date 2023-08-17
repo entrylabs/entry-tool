@@ -74,10 +74,7 @@ const CardCategoryView = (props) => {
         () =>
             categoryTypes.reduce((acc, category) => {
                 console.log('data', data);
-                acc[category] = data.filter((item) => {
-                    console.log('item', item);
-                    return item.category === category;
-                });
+                acc[category] = data.filter((item) => item.category === category);
                 return acc;
             }, {}),
         [data]
