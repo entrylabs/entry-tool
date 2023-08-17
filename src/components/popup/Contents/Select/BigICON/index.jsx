@@ -17,11 +17,11 @@ const Index = (props) => {
     }, []);
 
     const useLangKey = useMemo(() => {
-        if(data[0]?.descriptionKey && data[0]?.titleKey){
+        if (data[0]?.descriptionKey && data[0]?.titleKey) {
             return true;
         }
         return false;
-    })
+    });
 
     const alertMsgKey = useMemo(() => {
         if (imageBaseUrl.includes('aiUtilize')) {
@@ -42,7 +42,12 @@ const Index = (props) => {
             <div className={theme.extend_block}>
                 <ul className={theme.list}>
                     {data.map((item) => (
-                        <Item key={item.name} item={item} imageBaseUrl={imageBaseUrl} useLangKey={useLangKey}/>
+                        <Item
+                            key={item.name}
+                            item={item}
+                            imageBaseUrl={imageBaseUrl}
+                            useLangKey={useLangKey}
+                        />
                     ))}
                 </ul>
             </div>

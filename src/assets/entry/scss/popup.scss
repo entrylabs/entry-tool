@@ -109,6 +109,17 @@
     overflow: hidden;
 }
 
+.card_content {
+    display: flex;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    overflow: hidden;
+
+    &.extend_content {
+        margin: 0 16px 18px;
+    }
+}
+
 .section_navi {
     position: relative;
     padding: 16px 16px 24px;
@@ -1028,6 +1039,192 @@
     }
     .extend_block .list .on .link_box a {
         color: #fff;
+    }
+
+    .extend_block {
+        padding-top: 40px;
+
+        .categoryList {
+            overflow: hidden;
+            .categoryListWrapper {
+                display: block;
+
+                .categoryWrapper {
+                    margin-top: 36px;
+                    margin-bottom: 20px;
+                    .line {
+                        border-top: 1px solid #d6e9f4;
+                        width: 100vw;
+                        left: 0;
+                        position: absolute;
+                    }
+
+                    span {
+                        vertical-align: top;
+                        margin-top: 36px;
+                    }
+
+                    span.icon {
+                        display: inline-block;
+                        width: 34px;
+                        height: 34px;
+                        margin-right: 8px;
+                    }
+
+                    span.video {
+                        background: url(#{$imageDir}/ico_video.svg) no-repeat;
+                    }
+
+                    span.audio {
+                        background: url(#{$imageDir}/ico_audio.svg) no-repeat;
+                    }
+
+                    span.text {
+                        display: inline-block;
+                        line-height: 34px;
+                        font-size: 16px;
+                        font-weight: bold;
+                        letter-spacing: -0.37px;
+                        color: #2c313d;
+                    }
+                }
+
+                .cardWrapper {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, 264px);
+                    gap: 18px 20px;
+
+                    .card {
+                        overflow: hidden;
+                        width: 264px;
+                        height: 300px;
+                        background-color: #fff;
+                        border-radius: 6px;
+
+                        &.hasSponsor {
+                            height: 336px;
+
+                            .link {
+                                height: 336px;
+                            }
+                        }
+
+                        &.on {
+                            background-color: #4f80ff;
+
+                            .link:after {
+                                border: 2px solid #4f80ff;
+                            }
+
+                            .link_box a {
+                                color: #fff;
+                            }
+
+                            .inner_box {
+                                color: #fff;
+                            }
+                        }
+
+                        .link_box {
+                            font-size: 13px;
+                            position: absolute;
+                            bottom: 15px;
+
+                            a {
+                                color: #6d8797;
+                                font-weight: 500;
+                                text-decoration: underline;
+                            }
+                        }
+
+                        .link {
+                            display: block;
+                            overflow: hidden;
+                            position: relative;
+                            border-radius: 6px;
+                            cursor: pointer;
+
+                            &:after {
+                                @include PositionLRTB(absolute, 0, 0, 0, 0);
+                                border: 1px solid #d6e9f4;
+                                border-radius: 6px;
+                                content: '';
+                                pointer-events: none;
+                            }
+                        }
+
+                        .thmb {
+                            height: 168px;
+                            text-align: center;
+                            background-color: #d6e9f4;
+                            background-position: 50% 50%;
+                            background-size: 264px auto;
+                            &:before {
+                                display: inline-block;
+                                width: 1px;
+                                height: 100%;
+                                vertical-align: middle;
+                                content: '';
+                            }
+
+                            img {
+                                max-width: 96px;
+                                max-height: 100%;
+                                margin-left: -1px;
+                                vertical-align: middle;
+                            }
+                        }
+                        .sponsor_text {
+                            position: absolute;
+                            left: 18px;
+                            bottom: 18px;
+                            height: 12px;
+                            border-radius: 6px;
+                        }
+
+                        .sponsor_text_span {
+                            font-size: 12px;
+                            font-weight: bold;
+                            line-height: 12px;
+                            letter-spacing: -0.3px;
+                            color: #aaaaaa;
+                            vertical-align: top;
+
+                            img {
+                                vertical-align: top;
+                                margin-top: 1px;
+                                height: 10px;
+                            }
+                        }
+
+                        .inner_box {
+                            padding: 20px 16px 0;
+                            color: #000;
+                            height: 132px;
+
+                            .sjt {
+                                font-size: 18px;
+                                font-weight: bold;
+                                letter-spacing: -0.8px;
+                            }
+
+                            .dsc {
+                                display: block;
+                                display: -webkit-box;
+                                overflow: hidden;
+                                -webkit-box-orient: vertical;
+                                -webkit-line-clamp: 3;
+                                max-height: 66px;
+                                margin-top: 10px;
+                                font-size: 14px;
+                                letter-spacing: -0.5px;
+                                line-height: 22px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -2457,7 +2654,7 @@
                             box-shadow: 0 1px 6px 0 rgb(0 0 0 / 25%);
                             border: solid 1px #e2e2e2;
                             background-color: #fff;
-                            font-family: "\B098\B214\ACE0\B515",NanumGothic;
+                            font-family: '\B098\B214\ACE0\B515', NanumGothic;
                             font-size: 12px;
                             font-weight: bold;
                             font-stretch: normal;
