@@ -73,7 +73,6 @@ const CardCategoryView = (props) => {
     const datas = useMemo(
         () =>
             categoryTypes.reduce((acc, category) => {
-                console.log('data', data);
                 acc[category] = data.filter((item) => item.category === category);
                 return acc;
             }, {}),

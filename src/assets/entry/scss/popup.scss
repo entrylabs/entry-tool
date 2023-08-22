@@ -87,7 +87,8 @@
 
 .container_inner {
     flex: 1 1 0;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 
     &:global(.projects),
     &:global(.favorites) {
@@ -117,6 +118,10 @@
 
     &.extend_content {
         margin: 0 16px 18px;
+
+        .extend_block {
+            overflow: visible;
+        }
     }
 }
 
@@ -1045,7 +1050,7 @@
         padding-top: 40px;
 
         .categoryList {
-            overflow: hidden;
+
             .categoryListWrapper {
                 display: block;
 
@@ -1053,11 +1058,12 @@
                     position: relative;
                     margin-top: 36px;
                     margin-bottom: 20px;
+
                     .line {
+                        position: absolute;
                         border-top: 1px solid #d6e9f4;
                         width: 100vw;
-                        left: 0;
-                        position: absolute;
+                        left: -16px;
                     }
 
                     span {
@@ -1123,6 +1129,12 @@
 
                             .inner_box {
                                 color: #fff;
+                            }
+
+                            &.hasSponsor {
+                                .sponsor_text_span {
+                                    color: #fff;
+                                }
                             }
                         }
 
