@@ -8,7 +8,7 @@ import classname from 'classnames';
 import Theme from '@utils/Theme';
 
 const SponsorText = (props) => {
-    const { sponsorText, sponsorImage } = props;
+    const { isOn, sponsorText, sponsorImage, sponsorOnImage } = props;
 
     if (!sponsorImage) {
         return sponsorText;
@@ -17,7 +17,7 @@ const SponsorText = (props) => {
     return (
         <span>
             {textParts[0]}
-            <img src={sponsorImage} alt="Logo" />
+            <img src={isOn ? sponsorOnImage : sponsorImage} alt="Logo" />
             {textParts[1]}
         </span>
     );
@@ -34,7 +34,7 @@ const Index = ({
     useLangKey = true,
 }) => {
     const theme = Theme.getStyle('popup');
-    const { imageName, sponsorText, sponsorImage, linkBox } = item;
+    const { imageName, sponsorText, sponsorImage, sponsorOnImage, linkBox } = item;
     const desc = useLangKey ? CommonUtils.getLang(item.descriptionKey) : item.description;
     const title = useLangKey ? CommonUtils.getLang(item.titleKey) : item.title?.ko;
     const onItemClicked = (e) => {
@@ -77,8 +77,10 @@ const Index = ({
                         <div className={theme.sponsor_text}>
                             <span className={theme.sponsor_text_span}>
                                 <SponsorText
+                                    isOn={index >= 0}
                                     sponsorText={sponsorText}
                                     sponsorImage={`${imageBaseUrl}${sponsorImage}`}
+                                    sponsorOnImage={`${imageBaseUrl}${sponsorOnImage}`}
                                 />
                             </span>
                         </div>
