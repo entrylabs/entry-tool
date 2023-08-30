@@ -149,6 +149,7 @@ class Popup extends Component {
                 view = (
                     <Select
                         type={'bigicon'}
+                        popupType={selected}
                         imageBaseUrl={aiImageurl}
                         data={data}
                         HeaderButtonPortal={HeaderButtonPortal}

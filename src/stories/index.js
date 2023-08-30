@@ -23,6 +23,7 @@ import {
     PROJECTS_SAMPLE,
     SPRITE_SAMPLE,
     EXPANSION_SAMPLE,
+    AI_UTILIZE_SAMPLE,
     SOUND_SAMPLE,
     TABLE_INFO_SAMPLE,
     TABLE_SAMPLE2,
@@ -70,7 +71,20 @@ storiesOf('Popup', module)
     .add('나의 작품 - 리스트', () => <Sample SampleState="MyProduct" />)
     .add('나의 작품 - 작품 없음', () => <Sample />)
     .add('툴팁1', () => <Tooltips />)
-    .add('확장블록', () => <Popup type="expansion" data={EXPANSION_SAMPLE} />)
+    .add('확장블록', () => (
+        <Popup
+            type="expansion"
+            data={EXPANSION_SAMPLE}
+            imageBaseUrl={'https://entry2-dev.playentry.org/lib/entry-js/images/hardware/'} 
+        />
+    ))
+    .add('ai활용블록', () => (
+        <Popup
+            type="aiUtilize"
+            data={AI_UTILIZE_SAMPLE}
+            imageBaseUrl={'https://entry2-dev.playentry.org/lib/entry-js/images/aiUtilize/'} 
+        />
+    ))
     .add('소리', () => <Popup type="sound" data={SOUND_SAMPLE} uploads={SOUND_SAMPLE} />)
     .add('데이터 테이블', () => (
         <Popup type="table" data={TABLE_INFO_SAMPLE} uploads={[TABLE_SAMPLE2]} />
