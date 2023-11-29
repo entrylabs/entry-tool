@@ -2295,7 +2295,7 @@
     }
 }
 
-.fileupload_loding {
+.fileupload_loading {
     width: 156px;
     height: 156px;
     -o-object-fit: contain;
@@ -2306,7 +2306,7 @@
     background: url('#{$imageDir}/loading.gif') no-repeat;
     z-index: 10;
 
-    .loding_text {
+    .loading_text {
         width: 156px;
         height: 156px;
         font-size: 16px;

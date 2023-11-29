@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import Theme from '@utils/Theme';
 import { CommonUtils } from '@utils/Common';
 import classname from 'classnames';
@@ -18,6 +18,7 @@ const Index = (props) => {
     const { submit, select, deselect, applyUploaded, uploadedItems } = props;
     const [excluded, setExcluded] = useState([]);
     const [isUploading, setUploadState] = useState(false);
+    const toggleUploadRef = useRef(false);
     const theme = Theme.getStyle('popup');
     const warnMessages = getWarnMsg(opt.uploadAllowed);
     const getExcludedIndex = (item) => excluded.findIndex(({ _id }) => _id === item._id);
@@ -45,18 +46,31 @@ const Index = (props) => {
         submit(selected);
     };
 
-    useEffect(() => {
-        const result = [...uploadedItems, ...uploads].filter(CommonUtils.distinct);
-        if (result.length !== uploadedItems.length) {
-            applyUploaded(result);
-            if (!opt.multiSelect) {
-                setExcluded(uploads);
+    const setNewUploaded = useCallback(
+        (uploads) => {
+            const result = [...uploadedItems, ...uploads].filter(CommonUtils.distinct);
+            if (result.length !== uploadedItems.length) {
+                applyUploaded(result);
+                if (!opt.multiSelect) {
+                    setExcluded(uploads);
+                }
             }
+        },
+        [uploadedItems, applyUploaded, opt.multiSelect]
+    );
+
+    useEffect(() => {
+        if (!isUploading) {
+            return;
         }
-        if (result.length > 0 && isUploading && uploadedItems.length === result.length) {
+        if (uploads.length > 0) {
+            setNewUploaded(uploads);
+        }
+        if (toggleUploadRef?.current) {
             setUploadState(false);
         }
-    }, [uploads, uploadedItems]);
+        toggleUploadRef.current = !toggleUploadRef.current;
+    }, [uploads, isUploading, setNewUploaded]);
 
     return (
         <div className={classname([theme.section_content, theme.file_add_list_content])}>
@@ -80,8 +94,8 @@ const Index = (props) => {
                     ))}
                 </ul>
                 {isUploading && (
-                    <div className={theme.fileupload_loding}>
-                        <span className={theme.loding_text}>
+                    <div className={theme.fileupload_loading}>
+                        <span className={theme.loading_text}>
                             {CommonUtils.getLang('Menus.file_upload_loading')}
                         </span>
                     </div>
@@ -95,7 +109,7 @@ const Index = (props) => {
                                 <strong>{title}</strong>
                                 <br />
                                 <span className={theme.sub_dsc}>{desc}</span>
-                                <a target="_blank" href={copyrightLinkUrl}>
+                                <a target="_blank" href={copyrightLinkUrl} rel="noreferrer">
                                     [{CommonUtils.getLang('Menus.file_upload_warn_link')}]
                                 </a>
                             </>
