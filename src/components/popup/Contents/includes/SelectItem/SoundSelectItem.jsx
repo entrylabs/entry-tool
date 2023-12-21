@@ -19,14 +19,14 @@ const SoundSelectItem = ({ theme, item, play, stop, playable, playInfo, setPlayi
             const { id } = item;
             if (!playing) {
                 play({
-                    id,
                     callback: ({ instance, status }) => setPlaying({ id, instance, status }),
+                    ...item,
                 });
             } else {
                 stop({
-                    id,
                     instance: prevInstance,
                     callback: ({ status }) => setPlaying({ id, status }),
+                    ...item,
                 });
             }
         },
@@ -67,9 +67,10 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    play: ({ id, callback }) => dispatch(triggerEvent(Types.play, { id, callback }, false)),
-    stop: ({ id, instance, callback }) =>
-        dispatch(triggerEvent(Types.stop, { id, instance, callback }, false)),
+    play: ({ id, callback, filename, path }) =>
+        dispatch(triggerEvent(Types.play, { id, callback, filename, path }, false)),
+    stop: ({ id, instance, callback, filename, path }) =>
+        dispatch(triggerEvent(Types.stop, { id, instance, callback, filename, path }, false)),
     setPlaying: ({ id, instance, status }) => {
         if (status) {
             dispatch(playSound(id, instance));
