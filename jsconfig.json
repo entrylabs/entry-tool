@@ -12,7 +12,8 @@
             "@reducers/*": ["src/reducers/*"],
             "@contexts/*": ["src/contexts/*"],
             "@selectors/*": ["src/selectors/*"],
-            "@constants/*": ["src/constants/*"]
+            "@constants/*": ["src/constants/*"],
+            "@sheet/*": ["extern/sheet/*"]
         }
     },
     "exclude": ["node_modules", "**/node_modules/*", "dist", "component"]

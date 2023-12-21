@@ -1,5 +1,5 @@
 import { useContext, useState, useCallback } from 'react';
-import EntrySheet from 'entry_sheet';
+import EntrySheet from '@sheet/entrysheet.bundle.js';
 import { DataAnalyticsContext } from '@contexts/dataAnalytics';
 import { Alert as AlertModal } from '@entrylabs/modal';
 import _map from 'lodash/map';

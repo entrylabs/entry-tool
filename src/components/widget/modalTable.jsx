@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import Theme from '@utils/Theme';
-import EntrySheet from 'entry_sheet';
+import EntrySheet from '@sheet/entrysheet.bundle.js';
 import Option from '../popup/Contents/Navigation/SearchOption';
 import { CommonUtils } from '@utils/Common';
 import _find from 'lodash/find';
