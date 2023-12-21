@@ -81,6 +81,7 @@ const plugins = [
                         '@utils': './src/utils',
                         '@constants': './src/constants',
                         '@selectors': './src/selectors',
+                        '@sheet': './extern/sheet',
                     },
                 },
             ],

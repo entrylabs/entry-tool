@@ -1,4 +1,4 @@
-module.exports = function(api) {
+module.exports = function (api) {
     api.cache(true);
     return {
         plugins: [
@@ -29,6 +29,7 @@ module.exports = function(api) {
                         '@selectors': './src/selectors',
                         '@contexts': './src/contexts',
                         '@reducers': './src/reducers',
+                        '@sheet': './extern/sheet',
                     },
                 },
             ],
