@@ -68,7 +68,8 @@ const Export = (props) => {
                 <a role="button" className={theme.btn_close} onClick={close} />
             </div>
             <div className={theme.body}>
-                <span>{CommonUtils.getLang('Menus.list_export_notice')}</span>
+                <span>{CommonUtils.getLang('Menus.list_export_notice1')}</span>
+                <span>{CommonUtils.getLang('Menus.list_export_notice2')}</span>
                 <textarea className={theme.export_content} disabled value={textData} />
                 <div className={theme.btn_wrap}>
                     <a role="button" onClick={handleExcelDownload}>
