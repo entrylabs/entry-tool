@@ -57,6 +57,10 @@ const Export = (props) => {
         emitter.emit('download', textData.split('\n'));
     }, [textData]);
 
+    const handleConvertTable = useCallback(() => {
+        emitter.emit('convertTable', _trimEnd(textData).split('\n'));
+    }, [textData]);
+
     const handleCopy = useCallback(() => {
         emitter.emit('copy');
     }, []);
@@ -72,11 +76,14 @@ const Export = (props) => {
                 <span>{CommonUtils.getLang('Menus.list_export_notice2')}</span>
                 <textarea className={theme.export_content} disabled value={textData} />
                 <div className={theme.btn_wrap}>
+                    <a ref={clipRef} role="button">
+                        {CommonUtils.getLang('Buttons.duplication')}
+                    </a>
                     <a role="button" onClick={handleExcelDownload}>
                         {CommonUtils.getLang('Buttons.export_to_excel')}
                     </a>
-                    <a ref={clipRef} role="button">
-                        {CommonUtils.getLang('Buttons.duplication')}
+                    <a role="button" onClick={handleConvertTable}>
+                        {CommonUtils.getLang('Buttons.convert_table')}
                     </a>
                 </div>
             </div>
