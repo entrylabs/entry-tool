@@ -13,12 +13,14 @@
     justify-content: center;
     z-index: 9999;
     overflow: auto;
+    font-family: NanumGothic;
 
     .export_wrap {
         width: 556px;
         height: 385px;
 
         .header {
+            box-sizing: border-box;
             position: relative;
             height: 56px;
             background-color: #4f80ff;
@@ -45,6 +47,7 @@
         }
 
         .body {
+            box-sizing: border-box;
             height: 360px;
             background-color: #fff;
             border-radius: 0 0 10px 10px;
@@ -71,6 +74,7 @@
                 border-radius: 4px;
                 resize: none;
                 padding: 10px 16px;
+                box-sizing: border-box;
             }
 
             .btn_wrap {
@@ -107,6 +111,7 @@
             background-color: #4f80ff;
             border-radius: 10px 10px 0 0;
             padding: 18px 24px;
+            box-sizing: border-box;
 
             span {
                 font-size: 20px;
@@ -132,6 +137,7 @@
             background-color: #fff;
             border-radius: 0 0 10px 10px;
             padding: 24px;
+            box-sizing: border-box;
 
             .content {
                 .text_wrap {
