@@ -27,7 +27,8 @@
                     "@constants": "./src/constants",
                     "@selectors": "./src/selectors",
                     "@reducers": "./src/reducers",
-                    "@contexts": "./src/contexts"
+                    "@contexts": "./src/contexts",
+                    "@sheet": "./extern/sheet"
                 }
             }
         ]
