@@ -13,12 +13,14 @@
     justify-content: center;
     z-index: 9999;
     overflow: auto;
+    font-family: NanumGothic;
 
     .export_wrap {
         width: 556px;
         height: 385px;
 
         .header {
+            box-sizing: border-box;
             position: relative;
             height: 56px;
             background-color: #4f80ff;
@@ -45,13 +47,15 @@
         }
 
         .body {
-            height: 339px;
+            box-sizing: border-box;
+            height: 360px;
             background-color: #fff;
             border-radius: 0 0 10px 10px;
             padding: 24px;
 
             span {
-                margin-left: 15px;
+                display: block;
+                margin-bottom: 5px;
                 font-size: 16px;
                 font-weight: 600;
                 letter-spacing: -0.57px;
@@ -70,6 +74,7 @@
                 border-radius: 4px;
                 resize: none;
                 padding: 10px 16px;
+                box-sizing: border-box;
             }
 
             .btn_wrap {
@@ -85,7 +90,8 @@
                     font-weight: 600;
                     letter-spacing: -0.32px;
                     text-align: center;
-                    color: #4f80ff;
+                    color: #ffffff;
+                    background-color: #4f80ff;
 
                     + a {
                         margin-left: 9px;
@@ -105,6 +111,7 @@
             background-color: #4f80ff;
             border-radius: 10px 10px 0 0;
             padding: 18px 24px;
+            box-sizing: border-box;
 
             span {
                 font-size: 20px;
@@ -130,29 +137,19 @@
             background-color: #fff;
             border-radius: 0 0 10px 10px;
             padding: 24px;
+            box-sizing: border-box;
 
             .content {
                 .text_wrap {
                     margin-bottom: 24px;
                     span {
-                        &::before {
-                            content: ' ';
-                            position: absolute;
-                            width: 4px;
-                            height: 4px;
-                            display: inline-block;
-                            background-color: #2c313d;
-                            top: 7px;
-                            left: 2px;
-                        }
                         position: relative;
                         display: block;
                         font-size: 16px;
                         font-weight: 600;
                         letter-spacing: -0.57px;
                         color: #2c313d;
-                        padding-left: 15px;
-                        margin-bottom: 15px;
+                        margin-bottom: 5px;
                     }
                 }
 
