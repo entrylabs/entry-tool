@@ -59,7 +59,7 @@
         "case-sensitive-paths-webpack-plugin": "2.1.1",
         "chalk": "1.1.3",
         "cross-env": "^6.0.3",
-        "css-loader": "0.28.7",
+        "css-loader": "6.11.0",
         "dotenv": "4.0.0",
         "dotenv-expand": "4.2.0",
         "enzyme": "^3.4.2",
@@ -77,11 +77,11 @@
         "extract-text-webpack-plugin": "3.0.2",
         "file-loader": "1.1.5",
         "fs-extra": "3.0.1",
-        "html-webpack-plugin": "2.29.0",
+        "html-webpack-plugin": "5.6.0",
         "immer": "^2.0.0",
         "isomorphic-style-loader": "^4.0.0",
         "lodash": "^4.17.19",
-        "mini-css-extract-plugin": "^0.9.0",
+        "mini-css-extract-plugin": "^2.9.0",
         "node-sass": "npm:sass",
         "object-assign": "4.1.1",
         "postcss-flexbugs-fixes": "3.2.0",
@@ -111,11 +111,9 @@
         "styled-components": "^3.4.2",
         "sw-precache-webpack-plugin": "0.11.4",
         "url-loader": "0.6.2",
-        "webpack": "^4.41.5",
-        "webpack-cli": "^4.9.2",
-        "webpack-dev-server": "^3.1.11",
-        "webpack-fix-style-only-entries": "^0.4.0",
-        "webpack-manifest-plugin": "1.3.2",
+        "webpack": "^5.91.0",
+        "webpack-cli": "^5.1.4",
+        "webpack-dev-server": "^5.0.4",
         "whatwg-fetch": "2.0.3",
         "window-or-global": "^1.0.1"
     },
@@ -141,5 +139,12 @@
         "redux-form": "^7.4.2",
         "reselect": "^4.0.0",
         "xlsx": "^0.16.9"
-    }
+    },
+    "files": [
+        "dist/",
+        "lib/",
+        "package.json",
+        "LICENSE",
+        "README.md"
+    ]
 }
