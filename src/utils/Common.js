@@ -201,13 +201,14 @@ export const CommonUtils = {
     },
 
     getImageSummary(item) {
-        let { imageType, filename, fileurl } = item;
+        let { imageType, filename, fileurl, thumbUrl } = item;
         const { label = {}, name: itemName, pictures = [], hasSvg } = item;
         let thumb;
         const lang = this.getLangType();
         if (pictures.length > 0) {
             filename = pictures[0].filename;
             fileurl = pictures[0].fileurl;
+            thumbUrl = pictures[0].thumbUrl;
         }
         if (pictures.length > 0) {
             imageType = pictures[0].imageType;
@@ -215,8 +216,8 @@ export const CommonUtils = {
         if (hasSvg) {
             imageType = 'svg';
         }
-        if (fileurl) {
-            thumb = fileurl.thumb || fileurl.resized || fileurl.origin || fileurl;
+        if (thumbUrl || fileurl) {
+            thumb = thumbUrl || fileurl.thumb || fileurl.resized || fileurl.origin || fileurl;
         }
         const defaultName = label && label.en ? label.en : itemName;
         const name = label && label[lang] ? label[lang] : defaultName;

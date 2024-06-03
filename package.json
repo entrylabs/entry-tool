@@ -1,6 +1,6 @@
 {
-    "name": "entry-tool",
-    "version": "v1.1.11",
+    "name": "@entrylabs/tool",
+    "version": "2.0.0",
     "license": "MIT",
     "repository": {
         "type": "git",

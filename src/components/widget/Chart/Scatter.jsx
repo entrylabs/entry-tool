@@ -7,7 +7,6 @@ import { isDrawable, categoryKeys, getColor } from '@utils/dataAnalytics';
 import _map from 'lodash/map';
 
 const Scatter = ({ chart, table, size }) => {
-    // console.log({ chart });
     const theme = Theme.getStyle('popup');
     const chartRef = useRef(null);
     const { id, xIndex = -1, yIndex, categoryIndexes = [], type } = chart;
