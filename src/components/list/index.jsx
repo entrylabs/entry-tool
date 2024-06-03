@@ -148,8 +148,6 @@ const Import = (props) => {
 
 const List = (props) => {
     const { type, data, visibleAction, eventEmitter } = props;
-
-    console.log('props', props);
     const [theme, setTheme] = useState(Theme.getStyle('list'));
 
     return (
