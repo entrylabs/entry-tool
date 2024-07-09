@@ -118,6 +118,7 @@
         "window-or-global": "^1.0.1"
     },
     "dependencies": {
+        "@babel/runtime": "^7.24.6",
         "@egjs/react-infinitegrid": "^4.1.1",
         "@entrylabs/event": "^1.0.3",
         "@entrylabs/modal": "1.2.5",
