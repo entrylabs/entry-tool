@@ -43,7 +43,7 @@ const CardCategoryView = (props) => {
         selected,
         popupType,
         HeaderButtonPortal,
-        alertMsg,
+        popupAlertMessage,
     } = props;
 
     useEffect(() => {
@@ -83,7 +83,7 @@ const CardCategoryView = (props) => {
     return (
         <div className={classname(theme.card_content, theme.extend_content)}>
             <h2 className={theme.blind}>CARD CATEGORY LIST</h2>
-            <p className={theme.caution_dsc}>{alertMsg || CommonUtils.getLang(alertMsgKey)}</p>
+            <p className={theme.caution_dsc}>{popupAlertMessage || CommonUtils.getLang(alertMsgKey)}</p>
             <div className={theme.extend_block}>
                 <div className={theme.categoryList}>
                     {categoryTypes.map((category) => {
