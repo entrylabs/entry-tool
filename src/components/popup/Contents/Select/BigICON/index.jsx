@@ -10,7 +10,7 @@ import { EMIT_TYPES as Types } from '@constants';
 
 const Index = (props) => {
     const theme = Theme.getStyle('popup');
-    const { data = [], imageBaseUrl, applySelected, submit, selected, HeaderButtonPortal } = props;
+    const { data = [], imageBaseUrl, applySelected, submit, selected, HeaderButtonPortal, popupAlertMessage } = props;
 
     useEffect(() => {
         applySelected(data.filter((item) => item.active));
@@ -38,7 +38,7 @@ const Index = (props) => {
     return (
         <div className={classname(theme.section_content, theme.extend_content)}>
             <h2 className={theme.blind}>BIG ICON LIST</h2>
-            <p className={theme.caution_dsc}>{CommonUtils.getLang(alertMsgKey)}</p>
+            <p className={theme.caution_dsc}>{popupAlertMessage || CommonUtils.getLang(alertMsgKey)}</p>
             <div className={theme.extend_block}>
                 <ul className={theme.list}>
                     {data.map((item) => (

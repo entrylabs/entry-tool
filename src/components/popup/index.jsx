@@ -63,7 +63,7 @@ class Popup extends Component {
     }
 
     setContent() {
-        const { opt = {}, writeBoxOption, data: dataObj, uploads: uploaded, type } = this.property;
+        const { opt = {}, writeBoxOption, data: dataObj, uploads: uploaded, type, popupAlertMessage } = this.property;
         const { imageBaseUrl: expsnsionIconBaseUrl } = this.property;
         const { isDrawVector, multiSelect, showSelected, search, searchByType } = opt;
         const { navigation: selected } = this.state;
@@ -139,6 +139,7 @@ class Popup extends Component {
                         imageBaseUrl={url}
                         data={data}
                         HeaderButtonPortal={HeaderButtonPortal}
+                        popupAlertMessage={popupAlertMessage}
                     />
                 );
                 break;
@@ -153,6 +154,7 @@ class Popup extends Component {
                         imageBaseUrl={aiImageurl}
                         data={data}
                         HeaderButtonPortal={HeaderButtonPortal}
+                        popupAlertMessage={popupAlertMessage}
                     />
                 );
                 break;
@@ -166,6 +168,7 @@ class Popup extends Component {
                         imageBaseUrl={hwLiteImageurl}
                         data={data}
                         HeaderButtonPortal={HeaderButtonPortal}
+                        popupAlertMessage={popupAlertMessage}
                     />
                 );
                 break;
