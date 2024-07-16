@@ -43,7 +43,7 @@ const Bar = ({ chart, table, size }) => {
     const theme = Theme.getStyle('popup');
     const chartRef = useRef(null);
     const { id, xIndex = -1, order, categoryIndexes = [], type } = chart;
-  
+
     useEffect(() => {
         if (!isDrawable(chart)) {
             return;
@@ -66,7 +66,7 @@ const Bar = ({ chart, table, size }) => {
             },
             data: {
                 columns,
-                type: bar(),
+                type: 'bar',
             },
             axis: {
                 x: {

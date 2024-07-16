@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Plotly from 'react-plotly.js';
 import Theme from '@utils/Theme';
 import { corr } from '@utils/dataAnalytics';

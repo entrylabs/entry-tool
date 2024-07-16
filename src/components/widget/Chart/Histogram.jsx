@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import bb, { areaStep } from 'billboard.js';
+import bb from 'billboard.js';
 import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';
 import { GRAPH_COLOR } from '@constants/dataAnalytics';
@@ -30,7 +30,7 @@ const Histogram = ({ chart, table, size }) => {
             data: {
                 x: 'histogram_chart_x',
                 columns: getHistogramChart(table, categoryIndexes, bin, boundary),
-                type: areaStep(),
+                type: 'area-step',
             },
             axis: {
                 x: {

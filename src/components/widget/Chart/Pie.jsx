@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import bb, { pie } from 'billboard.js';
+import bb from 'billboard.js';
 import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';
 import { GRAPH_COLOR } from '@constants/dataAnalytics';
@@ -32,7 +32,7 @@ const Pie = ({ table, chart, size }) => {
                     pieChart[0],
                     ...pieChart.slice(1).map((value, index) => [index, value[1]]),
                 ],
-                type: pie(),
+                type: 'pie',
             },
             axis: {
                 x: {

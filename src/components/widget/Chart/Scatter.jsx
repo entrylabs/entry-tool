@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import bb, { scatter } from 'billboard.js';
+import bb from 'billboard.js';
 import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';
 import { GRAPH_COLOR, SCATTER_POINT_PATTERN } from '@constants/dataAnalytics';
@@ -41,7 +41,7 @@ const Scatter = ({ chart, table, size }) => {
             data: {
                 xs: scatterXs(columns),
                 columns,
-                type: scatter(),
+                type: 'scatter',
             },
             axis: {
                 x: {
