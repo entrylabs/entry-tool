@@ -2,7 +2,7 @@
 set -e # 에러 발생 시 스크립트 중단
 
 export NODE_ENV=production
-git clone -b build "${GH_REPO}" build
+git clone -b build "https://github.com/$GITHUB_REPOSITORY" build
 rm -rf build/**/* || exit 0
 pnpm dist
 cp -r dist build/
