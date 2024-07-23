@@ -24,11 +24,6 @@ jobs:
               with:
                   version: 9
                   run_install: true
-            - name: entry build
-              env:
-                  NODE_OPTIONS: '--max-old-space-size=4096'
-                  TOOL_NODE_FLAGS: '--max-old-space-size=4096'
-              run: pnpm prod
             - name: Define branch name
               id: target_branch
               shell: bash
