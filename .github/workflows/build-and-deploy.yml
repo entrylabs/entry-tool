@@ -6,6 +6,7 @@ on:
             - develop-hw
             - develop2
             - develop
+            - master
 
 jobs:
     build-and-deploy:
