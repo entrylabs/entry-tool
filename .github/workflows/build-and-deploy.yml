@@ -29,6 +29,12 @@ jobs:
               id: target_branch
               shell: bash
               run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF##*/})"
+            - uses: haya14busa/action-cond@v1
+              id: deploy_branch
+              with:
+                  cond: ${{ steps.target_branch.outputs.branch == 'master' }}
+                  if_true: 'build'
+                  if_false: dist/${{ steps.target_branch.outputs.branch }}
             - name: Execute build.sh
               run: |
                   sh ./scripts/build.sh
@@ -41,4 +47,4 @@ jobs:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   force: true
                   directory: ./build
-                  branch: dist/${{ steps.target_branch.outputs.branch }}
+                  branch: ${{ steps.deploy_branch.outputs.value }}
