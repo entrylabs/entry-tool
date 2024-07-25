@@ -10,10 +10,12 @@ cd build
 git config user.name "Entry Dev"
 git config user.email "entrydev@nts-corp.com"
 
-git checkout -b "$deployName"
-# git push --delete "https://${GH_TOKEN}@${GH_REF}" "$deployName"
+if [ "$branchName" = "master" ]
+then
+    git checkout -b build
+else
+    git checkout -b "$deployName"
+fi
+
 git add .
 git commit -m "Entry Tool deploy $deployName"
-# git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" "$deployName"
-
-#curl -d '{"tag_name": "v$DATEFMT","target_commitish": "build","name": "v$DATEFMT","body": "Description of the release","draft": false,"prerelease": false}' -X POST "https://developer.github.com/v3/repos/kimokim/entryjs/releases"
