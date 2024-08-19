@@ -107,7 +107,6 @@
         "rimraf": "^2.6.2",
         "safe-umd-webpack-plugin": "^4.0.0",
         "sass-loader": "^7.1.0",
-        "style-loader": "0.19.0",
         "styled-components": "^3.4.2",
         "sw-precache-webpack-plugin": "0.11.4",
         "url-loader": "0.6.2",
@@ -139,6 +138,7 @@
         "react-slick": "^0.23.2",
         "redux-form": "^7.4.2",
         "reselect": "^4.0.0",
+        "style-loader": "^4.0.0",
         "xlsx": "^0.16.9"
     },
     "files": [
