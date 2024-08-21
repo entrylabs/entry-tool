@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Item from './Item';
 import { CommonUtils } from '@utils/Common';
 import Theme from '@utils/Theme';
@@ -25,6 +25,7 @@ const Index = (props) => {
         HeaderButtonPortal,
         popupAlertMessage,
     } = props;
+    const [itemSelected, setItemSelected] = useState(true);
 
     useEffect(() => {
         applySelected(data.filter((item) => item.active));
@@ -49,6 +50,8 @@ const Index = (props) => {
         }
     }, [imageBaseUrl]);
 
+    const isHwLite = popupType === 'hw_lite';
+
     return (
         <div className={classname(theme.section_content, theme.extend_content)}>
             <h2 className={theme.blind}>BIG ICON LIST</h2>
@@ -63,19 +66,25 @@ const Index = (props) => {
                             item={item}
                             imageBaseUrl={imageBaseUrl}
                             useLangKey={useLangKey}
+                            allowDuplicate={isHwLite ? false : true} // 수정
                         />
                     ))}
                 </ul>
             </div>
             <HeaderButtonPortal>
                 <a
-                    className={theme.btn}
+                    className={`${theme.btn} ${
+                        isHwLite && selected.length <= 1 ? theme.disabled : ''
+                    }`}
                     role="button"
-                    onClick={CommonUtils.handleClick(() => submit({ selected }))}
+                    onClick={CommonUtils.handleClick(() => {
+                        if (itemSelected) {
+                            submit({ selected });
+                            setItemSelected(false);
+                        }
+                    })}
                 >
-                    {CommonUtils.getLang(
-                        popupType === 'hw_lite' ? 'Buttons.select' : 'Buttons.load'
-                    )}
+                    {CommonUtils.getLang(isHwLite ? 'Buttons.select' : 'Buttons.load')}
                 </a>
             </HeaderButtonPortal>
         </div>
