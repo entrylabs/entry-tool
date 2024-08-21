@@ -8,9 +8,23 @@ import { connect } from 'react-redux';
 import { triggerEvent } from '@actions/index';
 import { EMIT_TYPES as Types } from '@constants';
 
+const ALERT_MSG_KEY = {
+    aiUtilize: 'template.aiUtilize_block_descriptions',
+    hw_lite: 'template.hardware_lite_descriptions',
+    'entry-js': 'template.expansion_block_descriptions',
+};
+
 const Index = (props) => {
     const theme = Theme.getStyle('popup');
-    const { data = [], imageBaseUrl, applySelected, submit, selected, HeaderButtonPortal, popupAlertMessage } = props;
+    const {
+        data = [],
+        imageBaseUrl,
+        applySelected,
+        submit,
+        selected,
+        HeaderButtonPortal,
+        popupAlertMessage,
+    } = props;
 
     useEffect(() => {
         applySelected(data.filter((item) => item.active));
@@ -23,13 +37,13 @@ const Index = (props) => {
         return false;
     });
 
-    const alertMsgKey = useMemo(() => {
+    const popupType = useMemo(() => {
         if (imageBaseUrl.includes('aiUtilize')) {
-            return 'template.aiUtilize_block_descriptions';
+            return 'aiUtilize';
         } else if (imageBaseUrl.includes('hw_lite')) {
-            return 'template.hardware_lite_descriptions';
+            return 'hw_lite';
         } else if (imageBaseUrl.includes('entry-js')) {
-            return 'template.expansion_block_descriptions';
+            return 'entry-js';
         } else {
             console.error('Error, incorrect imageBaseUrl : ', imageBaseUrl);
         }
@@ -38,7 +52,9 @@ const Index = (props) => {
     return (
         <div className={classname(theme.section_content, theme.extend_content)}>
             <h2 className={theme.blind}>BIG ICON LIST</h2>
-            <p className={theme.caution_dsc}>{popupAlertMessage || CommonUtils.getLang(alertMsgKey)}</p>
+            <p className={theme.caution_dsc}>
+                {popupAlertMessage || CommonUtils.getLang(ALERT_MSG_KEY[popupType])}
+            </p>
             <div className={theme.extend_block}>
                 <ul className={theme.list}>
                     {data.map((item) => (
@@ -57,7 +73,9 @@ const Index = (props) => {
                     role="button"
                     onClick={CommonUtils.handleClick(() => submit({ selected }))}
                 >
-                    {CommonUtils.getLang('Buttons.load')}
+                    {CommonUtils.getLang(
+                        popupType === 'hw_lite' ? 'Buttons.select' : 'Buttons.load'
+                    )}
                 </a>
             </HeaderButtonPortal>
         </div>
