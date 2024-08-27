@@ -16,6 +16,7 @@ const Index = ({
     select,
     deselect,
     useLangKey = true,
+    allowDuplicate = true,
 }) => {
     const theme = Theme.getStyle('popup');
     const { imageName, sponserText, linkBox } = item;
@@ -31,6 +32,9 @@ const Index = ({
                 selected.splice(index, 1);
             }
         } else {
+            if (!allowDuplicate && selected.length >= 0) {
+                selected = [];
+            }
             selected.push(item, () => select(item));
         }
         applySelected(selected);
