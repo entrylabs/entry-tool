@@ -71,6 +71,9 @@ importers:
       reselect:
         specifier: ^4.0.0
         version: 4.1.8
+      style-loader:
+        specifier: ^4.0.0
+        version: 4.0.0(webpack@5.91.0(webpack-cli@5.1.4))
       xlsx:
         specifier: ^0.16.9
         version: 0.16.9
@@ -303,9 +306,6 @@ importers:
       sass-loader:
         specifier: ^7.1.0
         version: 7.3.1(webpack@5.91.0(webpack-cli@5.1.4))
-      style-loader:
-        specifier: 0.19.0
-        version: 0.19.0
       styled-components:
         specifier: ^3.4.2
         version: 3.4.10(react@17.0.2)
@@ -7988,13 +7988,15 @@ packages:
   strongly-connected-components@1.0.1:
     resolution: {integrity: sha512-i0TFx4wPcO0FwX+4RkLJi1MxmcTv90jNZgxMu9XRnMXMeFUY1VJlIoXpZunPUvUUqbCT1pg5PEkFqqpcaElNaA==}
 
-  style-loader@0.19.0:
-    resolution: {integrity: sha512-9mx9sC9nX1dgP96MZOODpGC6l1RzQBITI2D5WJhu+wnbrSYVKLGuy14XJSLVQih/0GFrPpjelt+s//VcZQ2Evw==}
-    engines: {node: '>= 0.12.0'}
-
   style-loader@0.20.3:
     resolution: {integrity: sha512-2I7AVP73MvK33U7B9TKlYZAqdROyMXDYSMvHLX43qy3GCOaJNiV6i0v/sv9idWIaQ42Yn2dNv79Q5mKXbKhAZg==}
     engines: {node: '>= 0.12.0'}
+
+  style-loader@4.0.0:
+    resolution: {integrity: sha512-1V4WqhhZZgjVAVJyt7TdDPZoPBPNHbekX4fWnCJL1yQukhCeZhJySUL+gL9y6sNdN95uEOS83Y55SqHcP7MzLA==}
+    engines: {node: '>= 18.12.0'}
+    peerDependencies:
+      webpack: ^5.27.0
 
   styled-components@3.4.10:
     resolution: {integrity: sha512-TA8ip8LoILgmSAFd3r326pKtXytUUGu5YWuqZcOQVwVVwB6XqUMn4MHW2IuYJ/HAD81jLrdQed8YWfLSG1LX4Q==}
@@ -18885,15 +18887,14 @@ snapshots:
 
   strongly-connected-components@1.0.1: {}
 
-  style-loader@0.19.0:
-    dependencies:
-      loader-utils: 1.4.2
-      schema-utils: 0.3.0
-
   style-loader@0.20.3:
     dependencies:
       loader-utils: 1.4.2
       schema-utils: 0.4.7
+
+  style-loader@4.0.0(webpack@5.91.0(webpack-cli@5.1.4)):
+    dependencies:
+      webpack: 5.91.0(webpack-cli@5.1.4)
 
   styled-components@3.4.10(react@17.0.2):
     dependencies:
