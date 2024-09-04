@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import bb, { bar } from 'billboard.js';
+import bb from 'billboard.js';
 import Theme from '@utils/Theme';
 import '@assets/entry/scss/widget/insight.css';
 import { GRAPH_COLOR } from '@constants/dataAnalytics';

@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { corr } from '@utils/dataAnalytics';
-import bb, { scatter } from 'billboard.js';
+import bb from 'billboard.js';
 import '@assets/entry/scss/widget/insight.css';
 import Theme from '@utils/Theme';
 import _unzip from 'lodash/unzip';
@@ -17,7 +17,7 @@ const ScatterChart = ({ columns, id = 'scatter_matrix', size, zoomIn, opacity })
             columns[1][0] += 'x';
         }
         bb.generate({
-            data: { columns, type: scatter(), xs: { [columns[0][0]]: columns[1][0] } },
+            data: { columns, type: 'scatter', xs: { [columns[0][0]]: columns[1][0] } },
             bindto: chartRef.current,
             axis: {
                 x: { tick: { text: { show: false }, count: 4, padding: 0 } },
