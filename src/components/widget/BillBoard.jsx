@@ -53,11 +53,13 @@ const BillBoard = (props) => {
         ...data,
     };
     if (data.type) {
-        newTableData.type = getBillBoardType(data.type)
+        newTableData.type = data.type;
+        // newTableData.type = getBillBoardType(data.type);
     }
     if (data.types) {
         Object.keys(data.types).forEach((key) => {
-            newTableData.types[key] = getBillBoardType(data.types[key]);
+            newTableData.types[key] = data.types[key];
+            // newTableData.types[key] = getBillBoardType(data.types[key]);
         });
     }
 
@@ -81,9 +83,7 @@ const BillBoard = (props) => {
             <div className={isIframe ? theme.center_chart : theme.center}>
                 <div className={theme.modal}>
                     <div className={theme.head}>
-                        <div className={theme.text}>
-                            {title}
-                        </div>
+                        <div className={theme.text}>{title}</div>
                         <div
                             className={theme.close}
                             id="chart_btn"
@@ -93,8 +93,14 @@ const BillBoard = (props) => {
                         />
                     </div>
                     <div className={theme.body}>
-                        <div className={cn(theme.content, theme.billboard)} style={{ minHeight: '300px' }}>
-                            <div className={theme.description} dangerouslySetInnerHTML={ {__html: description} } />
+                        <div
+                            className={cn(theme.content, theme.billboard)}
+                            style={{ minHeight: '300px' }}
+                        >
+                            <div
+                                className={theme.description}
+                                dangerouslySetInnerHTML={{ __html: description }}
+                            />
                             <div className={theme.graph_box} ref={chartRef} />
                         </div>
                     </div>
@@ -130,6 +136,6 @@ const BillBoard = (props) => {
             </div>
         </div>
     );
-}
+};
 
 export default pure(BillBoard);
