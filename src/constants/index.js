@@ -417,6 +417,9 @@ export const DEFAULT_OPTIONS = {
                 dragUpload: {
                     name: 'Workspace.upload',
                 },
+                loadWeb: {
+                    name: 'Workspace.load_web',
+                },
                 draw: {
                     name: 'Workspace.draw_new_table',
                 },

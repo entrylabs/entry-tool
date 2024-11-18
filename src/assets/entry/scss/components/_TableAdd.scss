@@ -6,6 +6,7 @@
     -webkit-box-direction: normal;
     flex-direction: column;
     .file_add,
+    .load_web,
     .new_add_box {
         position: relative;
         padding: 46px 45px;
@@ -56,6 +57,10 @@
             cursor: pointer;
             line-height: 48px;
         }
+    }
+    .load_web .dsc {
+        background-image: url('#{$imageDir}/IcoTableLoadWeb.svg');
+        background-size: 64px auto;
     }
     .new_add_box .dsc {
         background-image: url('#{$imageDir}/IcoNewTableAdd.svg');
@@ -143,5 +148,66 @@
             }
         }
     }
+    .load_web {
+        .add_label {
+            top: 80px;
+        }
 
+        .sheet_group {
+            display: flex;
+            gap: 16px;
+            margin-top: 40px;
+
+            .sheet_doc_wrapper {
+                flex: 2;
+            }
+
+            .sheet_name_wrapper {
+                flex: 1;
+            }
+
+            .input_wrapper {
+                margin-top: 8px;
+            }
+
+            .label {
+                em {
+                    color: #4f80ff;
+                }
+            }
+
+            label {
+                color: #929292;
+            }
+
+            input[type='text'] {
+                width: 100%;
+                height: 40px;
+                box-sizing: border-box;
+                padding: 0 16px;
+                border: 0;
+                border: 1px solid #e2e2e2;
+                border-radius: 4px;
+                line-height: 38px;
+                outline: 0;
+                letter-spacing: -0.3px;
+                background: #ffffff;
+            }
+
+            input[type='text']:focus,
+            input[type='text']:active {
+                border-color: #4f80ff;
+            }
+
+            input::placeholder {
+                font-size: 14px;
+                font-weight: bold;
+                color: #979797;
+                line-height: 40px;
+                letter-spacing: -0.3px;
+                font-family: NanumGothicOTF, '나눔고딕', NanumGothic, '맑은 고딕', Malgun Gothic,
+                    'Apple SD Gothic Neo', '돋움', dotum, Helvetica, arial, sans-serif;
+            }
+        }
+    }
 }
