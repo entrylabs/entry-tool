@@ -1,19 +1,53 @@
+import { useState } from 'react';
 import { connect } from 'react-redux';
 import classname from 'classnames';
 import { triggerEvent } from '@actions';
 import { closePopup } from '@actions/popup';
 import { EMIT_TYPES } from '@constants';
 import Theme from '@utils/Theme';
-import DrawContent from '../includes/DrawContent';
 import { setTimeout } from 'window-or-global';
 import { CommonUtils } from '@utils/Common';
-import Styles from '@assets/entry/scss/popup.scss';
 
 const copyRightLink =
     'https://copyright.or.kr/education/educlass/learning/infringement-case/index.do';
 
-const Index = ({ type, goDraw, HeaderButtonPortal }) => {
+const SheetIdValidMsg = [
+    'Menus.file_load_web_error_sheet_id_1',
+    'Menus.file_load_web_error_sheet_id_2',
+];
+
+const Index = ({ type, loadWeb, HeaderButtonPortal }) => {
     const theme = Theme.getStyle('popup');
+    const [sheetId, setSheetId] = useState('');
+    const [sheetName, setSheetName] = useState('');
+    const [sheetIdValid, setSheetIdValid] = useState(null);
+
+    const onChangeSheetId = (e) => {
+        setSheetIdValid(null);
+        setSheetId(e.target.value);
+    };
+
+    const onChangeSheetName = (e) => {
+        setSheetName(e.target.value);
+    };
+
+    const getLoadGoogleSheet = async () => {
+        if (!sheetId) {
+            setSheetIdValid(SheetIdValidMsg[0]);
+            return;
+        }
+
+        setSheetIdValid(null);
+
+        // test : 1iBFMcYDjcyvccd3yynWDijmPSqo2HyYmeNVclXtdSck
+        const response = await fetch(
+            // eslint-disable-next-line max-len
+            `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=${sheetName}`
+        );
+        const csv = await response.text();
+        loadWeb(csv);
+    };
+
     return (
         <div
             className={classname(
@@ -31,16 +65,9 @@ const Index = ({ type, goDraw, HeaderButtonPortal }) => {
                         <strong>{CommonUtils.getLang('Menus.file_load_web_table_title')}</strong>
                         <span>{CommonUtils.getLang('Menus.file_load_web_table_sub_title')}</span>
                     </p>
-                    <label htmlFor="table_add" className={theme.add_label}>
+                    <div className={theme.add_label} onClick={getLoadGoogleSheet}>
                         {CommonUtils.getLang('Workspace.load_web')}
-                        <input
-                            type="file"
-                            id="table_add"
-                            name="table_add"
-                            className={theme.blind}
-                            onClick={CommonUtils.handleClick(goDraw)}
-                        />
-                    </label>
+                    </div>
                     <div className={theme.sheet_group}>
                         <div className={theme.sheet_doc_wrapper}>
                             <label htmlFor="sheetId" className={theme.label}>
@@ -55,15 +82,18 @@ const Index = ({ type, goDraw, HeaderButtonPortal }) => {
                                     className={theme.input}
                                     id="sheetId"
                                     name="sheetId"
+                                    value={sheetId}
+                                    onChange={onChangeSheetId}
                                     placeholder={CommonUtils.getLang(
                                         'Menus.file_input_sheet_id_placeholder'
                                     )}
                                 />
                             </div>
+                            {sheetIdValid && <div>{CommonUtils.getLang(sheetIdValid)}</div>}
                         </div>
                         <div className={theme.sheet_name_wrapper}>
                             <label htmlFor="sheetName" className={theme.label}>
-                                시트 이름
+                                {CommonUtils.getLang('Menus.file_input_sheet_name')}
                             </label>
                             <div className={`${theme.input_wrapper}`}>
                                 <input
@@ -71,6 +101,8 @@ const Index = ({ type, goDraw, HeaderButtonPortal }) => {
                                     className={theme.input}
                                     id="sheetName"
                                     name="sheetName"
+                                    value={sheetName}
+                                    onChange={onChangeSheetName}
                                     placeholder={CommonUtils.getLang(
                                         'Menus.file_input_sheet_name_placeholder'
                                     )}
@@ -89,17 +121,13 @@ const Index = ({ type, goDraw, HeaderButtonPortal }) => {
                         <span className={theme.sub_dsc}>
                             {CommonUtils.getLang('Menus.file_load_web_warn_desc_2_1')}{' '}
                         </span>
-                        <a target="_blank" href={copyRightLink}>
+                        <a target="_blank" href={copyRightLink} rel="noreferrer">
                             [{CommonUtils.getLang('Menus.file_upload_warn_link')}]
                         </a>
                     </p>
                 </div>
                 <HeaderButtonPortal>
-                    <a
-                        className={theme.btn}
-                        role="button"
-                        onClick={CommonUtils.handleClick(goDraw)}
-                    >
+                    <a className={theme.btn} role="button" onClick={getLoadGoogleSheet}>
                         {CommonUtils.getLang('Buttons.add2')}
                     </a>
                 </HeaderButtonPortal>
@@ -109,10 +137,10 @@ const Index = ({ type, goDraw, HeaderButtonPortal }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    goDraw: () => {
+    loadWeb: (csv) => {
         dispatch(closePopup());
         setTimeout(() => {
-            dispatch(triggerEvent(EMIT_TYPES.draw, null, false));
+            dispatch(triggerEvent(EMIT_TYPES.loadWeb, csv, false));
         });
     },
 });

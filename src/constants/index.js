@@ -11,6 +11,7 @@ export const EMIT_TYPES = {
     fetchMore: 'fetchMore',
     close: 'close',
     write: 'write',
+    loadWeb: 'loadWeb',
     draw: 'draw',
     makeProject: 'makeproject',
     select: 'select',
