@@ -192,6 +192,10 @@
                 outline: 0;
                 letter-spacing: -0.3px;
                 background: #ffffff;
+
+                &.error_input {
+                    border-color: #ff0000;
+                }
             }
 
             input[type='text']:focus,
@@ -207,6 +211,12 @@
                 letter-spacing: -0.3px;
                 font-family: NanumGothicOTF, '나눔고딕', NanumGothic, '맑은 고딕', Malgun Gothic,
                     'Apple SD Gothic Neo', '돋움', dotum, Helvetica, arial, sans-serif;
+            }
+
+            .sheet_valid_error_msg {
+                margin-top: 8px;
+                color: #ff0000;
+                font-size: 14px;
             }
         }
     }

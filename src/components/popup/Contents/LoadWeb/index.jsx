@@ -44,6 +44,10 @@ const Index = ({ type, loadWeb, HeaderButtonPortal }) => {
             // eslint-disable-next-line max-len
             `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=${sheetName}`
         );
+        if (response.status !== 200) {
+            setSheetIdValid(SheetIdValidMsg[1]);
+            return;
+        }
         const csv = await response.text();
         loadWeb(csv);
     };
@@ -79,7 +83,9 @@ const Index = ({ type, loadWeb, HeaderButtonPortal }) => {
                             <div className={`${theme.input_wrapper}`}>
                                 <input
                                     type="text"
-                                    className={theme.input}
+                                    className={`${theme.input}${
+                                        sheetIdValid && ` ${theme.error_input}`
+                                    }`}
                                     id="sheetId"
                                     name="sheetId"
                                     value={sheetId}
@@ -89,7 +95,11 @@ const Index = ({ type, loadWeb, HeaderButtonPortal }) => {
                                     )}
                                 />
                             </div>
-                            {sheetIdValid && <div>{CommonUtils.getLang(sheetIdValid)}</div>}
+                            {sheetIdValid && (
+                                <div className={theme.sheet_valid_error_msg}>
+                                    {CommonUtils.getLang(sheetIdValid)}
+                                </div>
+                            )}
                         </div>
                         <div className={theme.sheet_name_wrapper}>
                             <label htmlFor="sheetName" className={theme.label}>
