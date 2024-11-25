@@ -39,7 +39,6 @@ const Index = ({ type, loadWeb, HeaderButtonPortal }) => {
 
         setSheetIdValid(null);
 
-        // test : 1iBFMcYDjcyvccd3yynWDijmPSqo2HyYmeNVclXtdSck
         const response = await fetch(
             // eslint-disable-next-line max-len
             `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=${sheetName}`
