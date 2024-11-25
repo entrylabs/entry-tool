@@ -243,15 +243,15 @@ class LedPicker extends Component {
                             {ledStatus.map((leds, x) =>
                                 leds.map((led, y) => {
                                     const brightness = ledStatus[x][y];
-                                    const targetStyle = this.theme[
-                                        `led_item_selected_${brightness}`
-                                    ];
+                                    const targetStyle =
+                                        this.theme[`led_item_selected_${brightness}`];
                                     const key = `led${x}${y}`;
 
                                     return (
                                         <div
-                                            className={`${this.theme.led_item} ${brightness > 0 &&
-                                                this.theme.led_item_selected} ${targetStyle}`}
+                                            className={`${this.theme.led_item} ${
+                                                brightness > 0 && this.theme.led_item_selected
+                                            } ${targetStyle}`}
                                             key={key}
                                             onClick={() => {
                                                 this._handleLedStatusChange({
@@ -276,8 +276,9 @@ class LedPicker extends Component {
                                     const brightness = ledStatus[x][y];
                                     return (
                                         <div
-                                            className={`${this.theme.led_item} ${brightness > 0 &&
-                                                this.theme.led_item_selected}`}
+                                            className={`${this.theme.led_item} ${
+                                                brightness > 0 && this.theme.led_item_selected
+                                            }`}
                                             key={`led${x}${y}`}
                                             onClick={() =>
                                                 this._handleLedStatusChange({
