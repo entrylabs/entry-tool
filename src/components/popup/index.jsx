@@ -8,6 +8,7 @@ import Select from './Contents/Select/index';
 import FileUpload from './Contents/FileUpload/index';
 import FileDragUpload from './Contents/FileDragUpload/index';
 import WriteBox from './Contents/WriteBox';
+import LoadWeb from './Contents/LoadWeb/index';
 import Draw from './Contents/Draw';
 import Projects from './Contents/Projects/index';
 import { DEFAULT_OPTIONS } from '../../constants';
@@ -63,7 +64,14 @@ class Popup extends Component {
     }
 
     setContent() {
-        const { opt = {}, writeBoxOption, data: dataObj, uploads: uploaded, type, popupAlertMessage } = this.property;
+        const {
+            opt = {},
+            writeBoxOption,
+            data: dataObj,
+            uploads: uploaded,
+            type,
+            popupAlertMessage,
+        } = this.property;
         const { imageBaseUrl: expsnsionIconBaseUrl } = this.property;
         const { isDrawVector, multiSelect, showSelected, search, searchByType } = opt;
         const { navigation: selected } = this.state;
@@ -118,6 +126,10 @@ class Popup extends Component {
                         HeaderButtonPortal={HeaderButtonPortal}
                     />
                 );
+                navigation = <Navigation {...navSettings} searchOption={false} />;
+                break;
+            case 'loadWeb':
+                view = <LoadWeb type={type} HeaderButtonPortal={HeaderButtonPortal} />;
                 navigation = <Navigation {...navSettings} searchOption={false} />;
                 break;
             case 'draw':

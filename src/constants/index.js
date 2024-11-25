@@ -11,6 +11,7 @@ export const EMIT_TYPES = {
     fetchMore: 'fetchMore',
     close: 'close',
     write: 'write',
+    loadWeb: 'loadWeb',
     draw: 'draw',
     makeProject: 'makeproject',
     select: 'select',
@@ -416,6 +417,9 @@ export const DEFAULT_OPTIONS = {
                 },
                 dragUpload: {
                     name: 'Workspace.upload',
+                },
+                loadWeb: {
+                    name: 'Workspace.load_web',
                 },
                 draw: {
                     name: 'Workspace.draw_new_table',

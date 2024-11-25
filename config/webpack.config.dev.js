@@ -224,8 +224,6 @@ module.exports = {
             inject: true,
             template: paths.appHtml,
         }),
-        // Add module names to factory functions so they appear in browser profiler.
-        new webpack.NamedModulesPlugin(),
         // Makes some environment variables available to the JS code, for example:
         // if (process.env.NODE_ENV === 'development') { ... }. See `./env.js`.
         new webpack.DefinePlugin(env.stringified),
@@ -244,8 +242,10 @@ module.exports = {
         // by default due to how Webpack interprets its code. This is a practical
         // solution that requires the user to opt into importing specific locales.
         // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
-        // You can remove this if you don't use Moment.js:
-        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+        new webpack.IgnorePlugin({
+            resourceRegExp: /^\.\/locale$/,
+            contextRegExp: /moment$/,
+        }),
     ],
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.
