@@ -178,9 +178,9 @@ class LedPicker extends Component {
             }
         } else {
             if (withLevel) {
-                status[x][y] += 1;
-                if (status[x][y] > 9) {
-                    status[x][y] = 0;
+                status[x][y] -= 1;
+                if (status[x][y] < 0) {
+                    status[x][y] = 9;
                 }
             } else {
                 if (status[x][y] == targetBrightness) {
