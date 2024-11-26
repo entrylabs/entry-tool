@@ -5,7 +5,9 @@ import { debounce } from 'lodash';
 import root from 'window-or-global';
 import produce from 'immer';
 import Theme from '@utils/Theme';
-import Dropdown from '@components/widget/dropdown';
+
+let timer = null;
+let islongPress = false;
 
 class LedPicker extends Component {
     get PICKER_WIDTH() {
@@ -166,7 +168,7 @@ class LedPicker extends Component {
             },
         };
     }
-    _handleLedStatusChange = ({ x, y, isReset, value }) => {
+    _handleLedStatusChange = ({ x, y, isReset, resetOne }) => {
         const { onChangeLedPicker, withLevel, maxBrightness } = this.props;
         const status = this.state.ledStatus;
         const targetBrightness = maxBrightness || 1;
@@ -178,9 +180,13 @@ class LedPicker extends Component {
             }
         } else {
             if (withLevel) {
-                status[x][y] += 1;
-                if (status[x][y] > 9) {
+                if (resetOne) {
                     status[x][y] = 0;
+                } else {
+                    status[x][y] -= 1;
+                    if (status[x][y] < 0) {
+                        status[x][y] = 9;
+                    }
                 }
             } else {
                 if (status[x][y] == targetBrightness) {
@@ -199,6 +205,25 @@ class LedPicker extends Component {
                 }
             })
         );
+    };
+
+    _handleMouseDown = (x, y) => (e) => {
+        timer = setTimeout(() => {
+            this._handleLedStatusChange({ x, y, isReset: false, resetOne: true });
+            islongPress = true;
+        }, 500);
+    };
+
+    _handleMouseUp = (x, y) => (e) => {
+        if (timer) {
+            clearTimeout(timer);
+            timer = null;
+        }
+        if (islongPress) {
+            islongPress = false;
+        } else {
+            this._handleLedStatusChange({ x, y, isReset: false });
+        }
     };
 
     render() {
@@ -243,23 +268,18 @@ class LedPicker extends Component {
                             {ledStatus.map((leds, x) =>
                                 leds.map((led, y) => {
                                     const brightness = ledStatus[x][y];
-                                    const targetStyle = this.theme[
-                                        `led_item_selected_${brightness}`
-                                    ];
+                                    const targetStyle =
+                                        this.theme[`led_item_selected_${brightness}`];
                                     const key = `led${x}${y}`;
 
                                     return (
                                         <div
-                                            className={`${this.theme.led_item} ${brightness > 0 &&
-                                                this.theme.led_item_selected} ${targetStyle}`}
+                                            className={`${this.theme.led_item} ${
+                                                brightness > 0 && this.theme.led_item_selected
+                                            } ${targetStyle}`}
                                             key={key}
-                                            onClick={() => {
-                                                this._handleLedStatusChange({
-                                                    x,
-                                                    y,
-                                                    isReset: false,
-                                                });
-                                            }}
+                                            onMouseDown={this._handleMouseDown(x, y)}
+                                            onMouseUp={this._handleMouseUp(x, y)}
                                         >
                                             <div className={`${this.theme.led_item_indicator}`}>
                                                 {brightness}
@@ -276,8 +296,9 @@ class LedPicker extends Component {
                                     const brightness = ledStatus[x][y];
                                     return (
                                         <div
-                                            className={`${this.theme.led_item} ${brightness > 0 &&
-                                                this.theme.led_item_selected}`}
+                                            className={`${this.theme.led_item} ${
+                                                brightness > 0 && this.theme.led_item_selected
+                                            }`}
                                             key={`led${x}${y}`}
                                             onClick={() =>
                                                 this._handleLedStatusChange({

@@ -20,11 +20,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default withWrapper({
     type: 'microBitLedPicker',
-})(
-    connect(
-        undefined,
-        mapDispatchToProps
-    )(LedPickerContainer)
-);
+})(connect(undefined, mapDispatchToProps)(LedPickerContainer));
 // mapStateToProps,
 // mapDispatchToProps
