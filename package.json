@@ -25,7 +25,7 @@
         "build": "npm run build:prod&&npm run build:esm",
         "start": "node scripts/start.js",
         "dist": "npm run build",
-        "dev": "cross-env NODE_ENV=watch webpack --mode development",
+        "dev": "cross-env NODE_ENV=watch webpack --mode development --watch",
         "test": "echo \"Error: no test specified\" && exit 0",
         "storybook": "start-storybook -p 9009",
         "build-storybook": "build-storybook"
