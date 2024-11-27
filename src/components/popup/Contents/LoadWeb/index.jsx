@@ -39,16 +39,20 @@ const Index = ({ type, loadWeb, HeaderButtonPortal }) => {
 
         setSheetIdValid(null);
 
-        const response = await fetch(
-            // eslint-disable-next-line max-len
-            `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=${sheetName}`
-        );
-        if (response.status !== 200) {
+        try {
+            const response = await fetch(
+                // eslint-disable-next-line max-len
+                `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=${sheetName}`
+            );
+            if (response.status !== 200) {
+                setSheetIdValid(SheetIdValidMsg[1]);
+                return;
+            }
+            const csv = await response.text();
+            loadWeb(csv);
+        } catch (e) {
             setSheetIdValid(SheetIdValidMsg[1]);
-            return;
         }
-        const csv = await response.text();
-        loadWeb(csv);
     };
 
     return (
