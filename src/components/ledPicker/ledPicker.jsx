@@ -31,7 +31,7 @@ class LedPicker extends Component {
     }
 
     get CONTAINER_WIDTH() {
-        return 24 + this.state.ledStatus.length * 39;
+        return 26 + this.state.ledStatus.length * 40;
     }
 
     get CONTAINER_HEIGHT() {
