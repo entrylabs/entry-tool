@@ -30,6 +30,14 @@ class LedPicker extends Component {
         return 9;
     }
 
+    get CONTAINER_WIDTH() {
+        return 26 + this.state.ledStatus.length * 40;
+    }
+
+    get CONTAINER_HEIGHT() {
+        return 101 + this.state.ledStatus[0].length * 39;
+    }
+
     constructor(props) {
         super(props);
         this.theme = Theme.getStyle('popup');
@@ -257,7 +265,11 @@ class LedPicker extends Component {
                     ref={(dom) => {
                         this.ledPicker = dom;
                     }}
-                    style={ledPickerStyle}
+                    style={{
+                        ...ledPickerStyle,
+                        width: this.CONTAINER_WIDTH,
+                        height: this.CONTAINER_HEIGHT,
+                    }}
                     onClick={onClick}
                     className={`${this.theme.tooltip_box} ${this.theme.led_picker} ${
                         isUpStyle ? this.theme.up : ''
