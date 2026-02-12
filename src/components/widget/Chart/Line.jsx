@@ -14,7 +14,7 @@ import _unzip from 'lodash/unzip';
 import _findIndex from 'lodash/findIndex';
 
 const setChartXCount = (chartObj, categories, windowWidth) => () => {
-    const categoryWordLength = categories?.[0].toString().length * 5;
+    const categoryWordLength = categories?.[0]?.toString().length * 5;
     const padding = 100;
     if (windowWidth > categoryWordLength * categories.length + padding) {
         chartObj.tickCount = categories.length;
