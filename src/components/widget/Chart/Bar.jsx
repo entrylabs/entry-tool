@@ -30,7 +30,7 @@ const setChartXCount = (chartObj, categories, windowWidth) => () => {
     if (windowWidth < categoryWordLength * 8 + padding) {
         count = Math.min(count, 5);
     }
-    if (windowWidth < categoryWordLength * 5 + padding) { ㅐ
+    if (windowWidth < categoryWordLength * 5 + padding) {
         count = Math.min(count, 3);
     }
     if (!chartObj.tickCount || chartObj.tickCount !== count) {
