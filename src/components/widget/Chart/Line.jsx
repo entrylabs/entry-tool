@@ -53,7 +53,7 @@ const Line = ({ chart, table, size }) => {
             .slice(1)
             .map((row, index) => (isAddedOption ? index + 1 : row[xIndex]));
         const columns = deduplicationColumn(
-            [...categoryIndexes].map((index) => _unzip(orderedTable)[index])
+            [...categoryIndexes].map((index) => _unzip(orderedTable)[index]).filter(Array.isArray)
         );
 
         const chartObj = bb.generate({
