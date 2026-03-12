@@ -30,7 +30,7 @@ const setChartXCount = (chartObj, categories, windowWidth) => () => {
     if (windowWidth < categoryWordLength * 8 + padding) {
         count = Math.min(count, 5);
     }
-    if (windowWidth < categoryWordLength * 5 + padding) {
+    if (windowWidth < categoryWordLength * 5 + padding) { ㅐ
         count = Math.min(count, 3);
     }
     if (!chartObj.tickCount || chartObj.tickCount !== count) {
@@ -55,7 +55,7 @@ const Bar = ({ chart, table, size }) => {
             .slice(1)
             .map((row, index) => (isAddedOption ? index + 1 : row[xIndex]));
         const columns = deduplicationColumn(
-            [...categoryIndexes].map((index) => _unzip(orderedTable)[index])
+            [...categoryIndexes].map((index) => _unzip(orderedTable)[index]).filter(Array.isArray)
         );
 
         const chartObj = bb.generate({
