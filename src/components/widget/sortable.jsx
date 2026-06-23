@@ -68,6 +68,29 @@ class Sortable extends Component {
         }
     };
 
+    setSortableRoot = (el) => {
+        this.sortableRoot = el;
+        if (el && this.resolveSortContainer) {
+            const resolveSortContainer = this.resolveSortContainer;
+            this.resolveSortContainer = undefined;
+            resolveSortContainer(this.getSortContainer());
+        }
+    };
+
+    getSortContainer = () => {
+        const container =
+            (this.sortableRoot && this.sortableRoot.closest('.rcs-inner-container')) ||
+            this.sortableRoot;
+
+        if (container) {
+            return container;
+        }
+
+        return new Promise((resolve) => {
+            this.resolveSortContainer = resolve;
+        });
+    };
+
     shouldCancelStart = (e) => {
         const { target } = e;
         const { className = '' } = target;
@@ -95,7 +118,7 @@ class Sortable extends Component {
         }
         return (
             <Scrollbars heightRelativeToParent={height}>
-                <div className={`${this.theme.sortable} ${className}`}>
+                <div ref={this.setSortableRoot} className={`${this.theme.sortable} ${className}`}>
                     <SortableList
                         axis={axis}
                         lockAxis={lockAxis}
@@ -104,6 +127,7 @@ class Sortable extends Component {
                         disabled={disabled}
                         distance={1}
                         shouldCancelStart={shouldCancelStart}
+                        getContainer={this.getSortContainer}
                     />
                 </div>
             </Scrollbars>
