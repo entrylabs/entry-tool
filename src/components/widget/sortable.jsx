@@ -68,6 +68,25 @@ class Sortable extends Component {
         }
     };
 
+    getClosestSortContainer = (el) => {
+        let current = el;
+
+        while (current && current.nodeType === 1) {
+            const matches =
+                current.matches ||
+                current.msMatchesSelector ||
+                current.webkitMatchesSelector ||
+                current.mozMatchesSelector ||
+                current.oMatchesSelector;
+
+            if (matches && matches.call(current, '.rcs-inner-container')) {
+                return current;
+            }
+
+            current = current.parentElement;
+        }
+    };
+
     setSortableRoot = (el) => {
         this.sortableRoot = el;
         if (el && this.resolveSortContainer) {
@@ -78,9 +97,7 @@ class Sortable extends Component {
     };
 
     getSortContainer = () => {
-        const container =
-            (this.sortableRoot && this.sortableRoot.closest('.rcs-inner-container')) ||
-            this.sortableRoot;
+        const container = this.getClosestSortContainer(this.sortableRoot) || this.sortableRoot;
 
         if (container) {
             return container;
