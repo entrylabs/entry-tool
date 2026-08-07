@@ -14,7 +14,7 @@ import _unzip from 'lodash/unzip';
 import _findIndex from 'lodash/findIndex';
 
 const setChartXCount = (chartObj, categories, windowWidth) => () => {
-    const categoryWordLength = categories?.[0].toString().length * 5;
+    const categoryWordLength = categories?.[0]?.toString().length * 5;
     const padding = 100;
     if (windowWidth > categoryWordLength * categories.length + padding) {
         chartObj.tickCount = categories.length;
@@ -55,7 +55,7 @@ const Bar = ({ chart, table, size }) => {
             .slice(1)
             .map((row, index) => (isAddedOption ? index + 1 : row[xIndex]));
         const columns = deduplicationColumn(
-            [...categoryIndexes].map((index) => _unzip(orderedTable)[index])
+            [...categoryIndexes].map((index) => _unzip(orderedTable)[index]).filter(Array.isArray)
         );
 
         const chartObj = bb.generate({
