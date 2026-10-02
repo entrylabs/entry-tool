@@ -14,18 +14,19 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - name: Use Node.js 20.x
+            # pnpm 11 은 Node >= 22.13 을 요구한다.
+            - name: Use Node.js 24.x
               uses: actions/setup-node@v4
               env:
                   NODE_OPTIONS: '--max-old-space-size=4096'
                   TOOL_NODE_FLAGS: '--max-old-space-size=4096'
               with:
-                  node-version: 20
+                  node-version: 24
                   registry-url: 'https://registry.npmjs.org'
-            - uses: pnpm/action-setup@v3
+            # pnpm 버전은 package.json 의 packageManager 를 따른다.
+            - uses: pnpm/action-setup@v4
               name: Install pnpm
               with:
-                  version: 9
                   run_install: true
             - name: Define branch name
               id: target_branch

@@ -1,0 +1,11 @@
+# pnpm 10 부터 package.json 의 pnpm 필드를 읽지 않으므로 pnpm 설정은 이 파일에 둔다.
+packages:
+  - '.'
+
+# 빌드에 필요 없는 install 스크립트는 실행하지 않는다.
+allowBuilds:
+  core-js: false
+  es5-ext: false
+  fsevents: false
+  styled-components: false
+  uglifyjs-webpack-plugin: false

@@ -1,6 +1,7 @@
 {
     "name": "@entrylabs/tool",
     "version": "2.0.9",
+    "packageManager": "pnpm@11.26.0",
     "license": "MIT",
     "repository": {
         "type": "git",
@@ -82,7 +83,7 @@
         "isomorphic-style-loader": "^4.0.0",
         "lodash": "^4.17.19",
         "mini-css-extract-plugin": "^2.9.0",
-        "node-sass": "npm:sass",
+        "node-sass": "npm:sass@^1.77.4",
         "object-assign": "4.1.1",
         "postcss-flexbugs-fixes": "3.2.0",
         "postcss-loader": "^3.0.0",
