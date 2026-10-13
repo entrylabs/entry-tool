@@ -23,11 +23,11 @@ object-assign
  * billboard.js, JavaScript chart library
  * https://naver.github.io/billboard.js/
  *
- * @version 3.12.2
+ * @version 3.18.0
  *
  * All-in-one packaged file for ease use of 'billboard.js' with dependant d3.js modules & polyfills.
- * - @types/d3-selection ^3.0.0
- * - @types/d3-transition ^3.0.0
+ * - @types/d3-selection ^3.0.11
+ * - @types/d3-transition ^3.0.9
  * - d3-axis ^3.0.0
  * - d3-brush ^3.0.0
  * - d3-drag ^3.0.0
@@ -52,7 +52,7 @@ object-assign
 
 /*!
  * ENTRY TOOL by @entrylabs
- * @version 2.0.4 | Thu Jul 25 2024
+ * @version 2.0.9 | Tue Oct 13 2026
  * @license MIT
  */
 
@@ -113,7 +113,7 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
-/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
+/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */
 
 /*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
@@ -180,6 +180,15 @@ PERFORMANCE OF THIS SOFTWARE.
  */
 
 /** @license React v16.13.1
+   * react-is.production.min.js
+   *
+   * Copyright (c) Facebook, Inc. and its affiliates.
+   *
+   * This source code is licensed under the MIT license found in the
+   * LICENSE file in the root directory of this source tree.
+   */
+
+/** @license React v16.13.1
  * react-is.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -190,6 +199,15 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /** @license React v17.0.2
  * react-dom.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v17.0.2
+ * react-is.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
