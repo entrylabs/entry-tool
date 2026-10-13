@@ -140,7 +140,7 @@
         "redux-form": "^7.4.2",
         "reselect": "^4.0.0",
         "style-loader": "^4.0.0",
-        "xlsx": "^0.16.9"
+        "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
     },
     "files": [
         "dist/",
