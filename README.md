@@ -7,7 +7,19 @@
 ## 설치
 
 ```bash
-yarn add entry-tool
+npm i @entrylabs/tool
+```
+
+또는
+
+```bash
+yarn add @entrylabs/tool
+```
+
+또는
+
+```bash
+pnpm install @entrylabs/tool
 ```
 
 ## 개발
@@ -21,9 +33,6 @@ git clone https://github.com/entrylabs/entry-tool
 entry-tool 실행
 
 ```bash
-yarn
-yarn start
-#or
-npm install
-npm run start
+pnpm install
+pnpm start
 ```
