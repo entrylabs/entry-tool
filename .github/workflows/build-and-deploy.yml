@@ -13,10 +13,10 @@ jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v7
             # pnpm 11 은 Node >= 22.13 을 요구한다.
             - name: Use Node.js 24.x
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v7
               env:
                   NODE_OPTIONS: '--max-old-space-size=4096'
                   TOOL_NODE_FLAGS: '--max-old-space-size=4096'
@@ -24,14 +24,14 @@ jobs:
                   node-version: 24
                   registry-url: 'https://registry.npmjs.org'
             # pnpm 버전은 package.json 의 packageManager 를 따른다.
-            - uses: pnpm/action-setup@v4
+            - uses: pnpm/setup@v3
               name: Install pnpm
               with:
                   run_install: true
             - name: Define branch name
               id: target_branch
               shell: bash
-              run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF##*/})"
+              run: echo "branch=$(echo ${GITHUB_REF##*/})" >> $GITHUB_OUTPUT
             - name: Execute build.sh
               run: |
                   sh ./scripts/build.sh
@@ -70,14 +70,15 @@ jobs:
             # 이미 있는 버전이면 액션이 조용히 skip 하므로 master push 마다 돌려도 안전하다.
             - name: publish latest
               if: github.ref == 'refs/heads/master'
-              uses: JS-DevTools/npm-publish@v3
+              uses: JS-DevTools/npm-publish@v4
               with:
                   token: ${{ secrets.NPM_TOKEN }}
             - name: Execute deploy.sh
               run: |
                   sh ./scripts/deploy.sh
+
             - name: Push Changes into build branch
-              uses: ad-m/github-push-action@master
+              uses: ad-m/github-push-action@v1.3.0
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   force: true
