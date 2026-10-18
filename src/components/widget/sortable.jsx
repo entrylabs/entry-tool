@@ -68,6 +68,46 @@ class Sortable extends Component {
         }
     };
 
+    getClosestSortContainer = (el) => {
+        let current = el;
+
+        while (current && current.nodeType === 1) {
+            const matches =
+                current.matches ||
+                current.msMatchesSelector ||
+                current.webkitMatchesSelector ||
+                current.mozMatchesSelector ||
+                current.oMatchesSelector;
+
+            if (matches && matches.call(current, '.rcs-inner-container')) {
+                return current;
+            }
+
+            current = current.parentElement;
+        }
+    };
+
+    setSortableRoot = (el) => {
+        this.sortableRoot = el;
+        if (el && this.resolveSortContainer) {
+            const resolveSortContainer = this.resolveSortContainer;
+            this.resolveSortContainer = undefined;
+            resolveSortContainer(this.getSortContainer());
+        }
+    };
+
+    getSortContainer = () => {
+        const container = this.getClosestSortContainer(this.sortableRoot) || this.sortableRoot;
+
+        if (container) {
+            return container;
+        }
+
+        return new Promise((resolve) => {
+            this.resolveSortContainer = resolve;
+        });
+    };
+
     shouldCancelStart = (e) => {
         const { target } = e;
         const { className = '' } = target;
@@ -95,7 +135,7 @@ class Sortable extends Component {
         }
         return (
             <Scrollbars heightRelativeToParent={height}>
-                <div className={`${this.theme.sortable} ${className}`}>
+                <div ref={this.setSortableRoot} className={`${this.theme.sortable} ${className}`}>
                     <SortableList
                         axis={axis}
                         lockAxis={lockAxis}
@@ -104,6 +144,7 @@ class Sortable extends Component {
                         disabled={disabled}
                         distance={1}
                         shouldCancelStart={shouldCancelStart}
+                        getContainer={this.getSortContainer}
                     />
                 </div>
             </Scrollbars>
