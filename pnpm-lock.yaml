@@ -1775,6 +1775,7 @@ packages:
 
   '@toast-ui/react-grid@4.21.22':
     resolution: {integrity: sha512-jztju1olTFs9tBeWXesNM29tOgjI2KwvcgKfgBjaAcpuZUAfD1FtHnqXSpjp33d1T+hZh3M19Wj8tTu0lRr5kQ==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     peerDependencies:
       react: ^16.7.0 || ^17.0.0
 
@@ -4630,8 +4631,8 @@ packages:
   fast-memoize@2.5.2:
     resolution: {integrity: sha512-Ue0LwpDYErFbmNnZSF0UH6eImUwDmogUO1jyE+JbN2gsQz/jICm1Ve7t9QT0rNSsfJt+Hs4/S3GnsDVjL4HVrw==}
 
-  fast-uri@3.1.8:
-    resolution: {integrity: sha512-GZMtZUTNRpOVIECoXwLNZS5xUGE+mVNbTB8h/7Rwh2TFWcBQiPzTgyZi05BF9UMZKkLJv8XBRJTlU7zg8+ZfMg==}
+  fast-uri@3.1.9:
+    resolution: {integrity: sha512-hS/0Wt3Ya043oKXs0sIxrMpKQITXhMLIrVAKKXi4gozGC9v7YRWVnXIZzjNPTO02M9BdxLCWqK1yRXgNziVyJQ==}
 
   fastest-levenshtein@1.0.16:
     resolution: {integrity: sha512-eRnCtTTtGZFpQCwhJiUOuxPQWRXVKYDn0b2PeHfXL6/Zi53SLAzAHfVhVWK2AryC/WH05kGfxhFIPvTF0SXQzg==}
@@ -7983,6 +7984,7 @@ packages:
 
   safe-umd-webpack-plugin@4.0.0:
     resolution: {integrity: sha512-XrVmT7CIfQ3ysFszgFwg0r5HDD2ElhLaMpI+iYAFYprf9Mws9qHmM0ka338VZS/6G1Z46ifgQrJHwlZgNojatQ==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
@@ -8735,15 +8737,19 @@ packages:
 
   tui-date-picker@4.3.3:
     resolution: {integrity: sha512-/2YoLnj5c1e+Ag1ZZYOgzEs2o0v7Ol7c5UAnBj438zGlkwkMxyH0HwP2pVqqIYX05WE7K0+6nTWVMybS8otBgw==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   tui-grid@4.21.22:
     resolution: {integrity: sha512-RxkFcveR2tWf3QrtuW9/zejXjeXL3SdrQPK89DbrrM6N7TlyUcb5HAf0U3MBn/hYT1p5kt5wyOwHPCQJuIBrsA==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   tui-pagination@3.4.1:
     resolution: {integrity: sha512-W09L0wPMSFstthBhQjcLNDnN1yuCEDn/tIXmaKdTpNFYa11eNrNo/rOwXzrugXvP2arZ60KmVhkFzoAOEuV0Sg==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   tui-time-picker@2.1.6:
     resolution: {integrity: sha512-4Jmo3wjGS+Ii4/qQgt5DaFEohHpB3U6BzWeTODVVFHD9sx3NOsbomY9K0xMobSLODi+tQEH7wfOtNU0IJmcQ6Q==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -11918,7 +11924,7 @@ snapshots:
   ajv@8.20.0:
     dependencies:
       fast-deep-equal: 3.1.3
-      fast-uri: 3.1.8
+      fast-uri: 3.1.9
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
@@ -15331,7 +15337,7 @@ snapshots:
 
   fast-memoize@2.5.2: {}
 
-  fast-uri@3.1.8: {}
+  fast-uri@3.1.9: {}
 
   fastest-levenshtein@1.0.16: {}
 
