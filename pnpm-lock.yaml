@@ -1775,6 +1775,7 @@ packages:
 
   '@toast-ui/react-grid@4.21.22':
     resolution: {integrity: sha512-jztju1olTFs9tBeWXesNM29tOgjI2KwvcgKfgBjaAcpuZUAfD1FtHnqXSpjp33d1T+hZh3M19Wj8tTu0lRr5kQ==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     peerDependencies:
       react: ^16.7.0 || ^17.0.0
 
@@ -4749,8 +4750,8 @@ packages:
   flush-write-stream@1.1.1:
     resolution: {integrity: sha512-3Z4XhFZ3992uIq0XOqb9AreonueSYphE6oYbpt5+3u06JWklbsPkNv3ZKkP9Bz/r+1MWCaMoSQ28P85+1Yc77w==}
 
-  follow-redirects@1.16.0:
-    resolution: {integrity: sha512-y5rN/uOsadFT/JfYwhxRS5R7Qce+g3zG97+JrtFZlC9klX/W5hD7iiLzScI4nZqUS7DNUdhPgw4xI8W2LuXlUw==}
+  follow-redirects@1.16.3:
+    resolution: {integrity: sha512-toOSoqN6d51Wjf1aOFJYcoVv1aND9rj/CwjLU0Vz40oDuSpWDayCeKe4JpL5NL0WdFvoOOCI3BRo69HahjbR1A==}
     engines: {node: '>=4.0'}
     peerDependencies:
       debug: '*'
@@ -7983,6 +7984,7 @@ packages:
 
   safe-umd-webpack-plugin@4.0.0:
     resolution: {integrity: sha512-XrVmT7CIfQ3ysFszgFwg0r5HDD2ElhLaMpI+iYAFYprf9Mws9qHmM0ka338VZS/6G1Z46ifgQrJHwlZgNojatQ==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
@@ -8735,15 +8737,19 @@ packages:
 
   tui-date-picker@4.3.3:
     resolution: {integrity: sha512-/2YoLnj5c1e+Ag1ZZYOgzEs2o0v7Ol7c5UAnBj438zGlkwkMxyH0HwP2pVqqIYX05WE7K0+6nTWVMybS8otBgw==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   tui-grid@4.21.22:
     resolution: {integrity: sha512-RxkFcveR2tWf3QrtuW9/zejXjeXL3SdrQPK89DbrrM6N7TlyUcb5HAf0U3MBn/hYT1p5kt5wyOwHPCQJuIBrsA==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   tui-pagination@3.4.1:
     resolution: {integrity: sha512-W09L0wPMSFstthBhQjcLNDnN1yuCEDn/tIXmaKdTpNFYa11eNrNo/rOwXzrugXvP2arZ60KmVhkFzoAOEuV0Sg==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   tui-time-picker@2.1.6:
     resolution: {integrity: sha512-4Jmo3wjGS+Ii4/qQgt5DaFEohHpB3U6BzWeTODVVFHD9sx3NOsbomY9K0xMobSLODi+tQEH7wfOtNU0IJmcQ6Q==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -12214,7 +12220,7 @@ snapshots:
 
   axios@0.34.0(debug@4.4.3(supports-color@8.1.1)):
     dependencies:
-      follow-redirects: 1.16.0(debug@4.4.3(supports-color@8.1.1))
+      follow-redirects: 1.16.3(debug@4.4.3(supports-color@8.1.1))
       form-data: 4.0.6
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -15476,7 +15482,7 @@ snapshots:
       inherits: 2.0.4
       readable-stream: 2.3.8
 
-  follow-redirects@1.16.0(debug@4.4.3(supports-color@8.1.1)):
+  follow-redirects@1.16.3(debug@4.4.3(supports-color@8.1.1)):
     optionalDependencies:
       debug: 4.4.3(supports-color@8.1.1)
 
@@ -16170,7 +16176,7 @@ snapshots:
   http-proxy@1.18.1(debug@4.4.3(supports-color@8.1.1)):
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.16.0(debug@4.4.3(supports-color@8.1.1))
+      follow-redirects: 1.16.3(debug@4.4.3(supports-color@8.1.1))
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
