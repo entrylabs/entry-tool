@@ -1,6 +1,6 @@
 {
     "name": "@entrylabs/tool",
-    "version": "2.0.10",
+    "version": "2.0.11",
     "packageManager": "pnpm@11.26.0",
     "license": "MIT",
     "repository": {
