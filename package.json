@@ -115,7 +115,8 @@
         "webpack-cli": "^5.1.4",
         "webpack-dev-server": "^5.2.6",
         "whatwg-fetch": "2.0.3",
-        "window-or-global": "^1.0.1"
+        "window-or-global": "^1.0.1",
+        "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
     },
     "dependencies": {
         "@babel/runtime": "^7.29.7",
@@ -139,8 +140,7 @@
         "react-slick": "^0.23.2",
         "redux-form": "^7.4.2",
         "reselect": "^4.0.0",
-        "style-loader": "^4.0.0",
-        "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+        "style-loader": "^4.0.0"
     },
     "files": [
         "dist/",
